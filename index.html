@@ -320,12 +320,20 @@
           </li>
           <li>
             <a href="#authentication" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
-          </li>
-          <li>
-            <a href="#kittens" class="toc-h1 toc-link" data-title="Kittens">Kittens</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#get-all-kittens" class="toc-h2 toc-link" data-title="Get All Kittens">Get All Kittens</a>
+                    <a href="#headers" class="toc-h2 toc-link" data-title="Headers">Headers</a>
+                  </li>
+                  <li>
+                    <a href="#body-parameters" class="toc-h2 toc-link" data-title="Body Parameters">Body Parameters</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#upsert-project" class="toc-h1 toc-link" data-title="Upsert Project">Upsert Project</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#post-upsert-project" class="toc-h2 toc-link" data-title="POST UPSERT PROJECT">POST UPSERT PROJECT</a>
                   </li>
                   <li>
                     <a href="#get-a-specific-kitten" class="toc-h2 toc-link" data-title="Get a Specific Kitten">Get a Specific Kitten</a>
@@ -364,12 +372,30 @@
 </code></pre></div><div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
 curl <span class="s2">"api_endpoint_here"</span> <span class="se">\</span>
   <span class="nt">-H</span> <span class="s2">"Authorization: ApiKey"</span>
-</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">ezus</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">kittn</span><span class="dl">"</span><span class="p">);</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">axios</span><span class="dl">"</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">baseUrl</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1</span><span class="dl">"</span><span class="p">;</span>
 
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">ezus</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="dl">"</span><span class="s2">ApiKey</span><span class="dl">"</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">body</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">login</span><span class="p">:</span> <span class="dl">"</span><span class="s2">xxx</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">password</span><span class="p">:</span> <span class="dl">"</span><span class="s2">xx</span><span class="dl">"</span><span class="p">,</span>
+<span class="p">};</span>
+<span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span> <span class="dl">"</span><span class="s2">X-API-KEY</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">ApiKey</span><span class="dl">"</span> <span class="p">};</span>
+
+<span class="nx">axios</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="nx">baseUrl</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">/login</span><span class="dl">"</span><span class="p">,</span> <span class="nx">body</span><span class="p">,</span> <span class="nx">headers</span><span class="p">);</span>
 </code></pre></div>
 <blockquote>
-<p>Make sure to replace <code>ApiKey</code> with your API key.</p>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ok"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"erreur"</span><span class="p">:</span><span class="w"> </span><span class="s2">"false"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"YOUR TOKEN"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>Make sure to replace <code>YOUR TOKEN</code> to use our API in the next steps</p>
 </blockquote>
 
 <p>EZUS uses API keys to allow access to the API. If you don&#39;t have an Ezus account, you can ask for a Demo on our <a href="https://ezus.io/">Website</a>.</p>
@@ -379,39 +405,39 @@ curl <span class="s2">"api_endpoint_here"</span> <span class="se">\</span>
 <p><code>Authorization: ApiKey</code></p>
 
 <p>To get your API key, you have to ask to your Account Manager</p>
-
+<h3 id='headers'>Headers</h3>
 <table><thead>
 <tr>
-<th>Request Headers</th>
+<th>Parameter</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>X_API-KEY</td>
-<td>edVWJpyt6z3czzBhxPpLb6hKRdx2qRQ25v6iq8SI</td>
+<td>X-API-KEY</td>
+<td>API Key given by your account manager</td>
 </tr>
 </tbody></table>
-
+<h3 id='body-parameters'>Body Parameters</h3>
 <table><thead>
 <tr>
-<th>Query Params</th>
+<th>Parameter</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>X_API-KEY</td>
-<td>edVWJpyt6z3czzBhxPpLb6hKRdx2qRQ25v6iq8SI</td>
+<td>email</td>
+<td>Your account email</td>
 </tr>
 <tr>
-<td>Body</td>
-<td>{ &quot;email&quot;: &quot;youremail@email.com&quot;, &quot;password&quot;: &quot;yourpassword&quot;,}</td>
+<td>password</td>
+<td>Your account password</td>
 </tr>
 </tbody></table>
 
 <aside class="notice">
 You must replace <code>ApiKey</code> with your personal API key.
 </aside>
-<h1 id='kittens'>Kittens</h1><h2 id='get-all-kittens'>Get All Kittens</h2><div class="highlight"><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
+<h1 id='upsert-project'>Upsert Project</h1><h2 id='post-upsert-project'>POST UPSERT PROJECT</h2><div class="highlight"><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
 
 <span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
 <span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span>
@@ -421,56 +447,83 @@ You must replace <code>ApiKey</code> with your personal API key.
 <span class="n">api</span><span class="p">.</span><span class="n">kittens</span><span class="p">.</span><span class="n">get</span><span class="p">()</span>
 </code></pre></div><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens"</span> <span class="se">\</span>
   <span class="nt">-H</span> <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">kittn</span><span class="dl">"</span><span class="p">);</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">axios</span><span class="dl">"</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">baseUrl</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1</span><span class="dl">"</span><span class="p">;</span>
 
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="dl">"</span><span class="s2">meowmeowmeow</span><span class="dl">"</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">kittens</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="kd">get</span><span class="p">();</span>
+<span class="kd">const</span> <span class="nx">body</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">reference</span><span class="p">:</span> <span class="dl">"</span><span class="s2">test-ezus</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">info_title</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Ezus test</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">trip_people</span><span class="p">:</span> <span class="dl">"</span><span class="s2">18</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">trip_budget</span><span class="p">:</span> <span class="dl">"</span><span class="s2">300</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">trip_date_in</span><span class="p">:</span> <span class="dl">"</span><span class="s2">2022-07-31</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">trip_date_out</span><span class="p">:</span> <span class="dl">"</span><span class="s2">2022-08-02</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">custom_fields</span><span class="p">:</span> <span class="p">{</span> <span class="na">custom</span><span class="p">:</span> <span class="dl">"</span><span class="s2">I'm custom</span><span class="dl">"</span> <span class="p">},</span>
+<span class="p">};</span>
+<span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span> <span class="dl">"</span><span class="s2">X-API-KEY</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">ApiKey</span><span class="dl">"</span> <span class="p">};</span>
+
+<span class="nx">axios</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="nx">baseUrl</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">/projects-upsert</span><span class="dl">"</span><span class="p">,</span> <span class="nx">body</span><span class="p">,</span> <span class="nx">headers</span><span class="p">);</span>
 </code></pre></div>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fluffums"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"calico"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
+    </span><span class="nl">"erreur"</span><span class="p">:</span><span class="w"> </span><span class="s2">"false"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ok"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"89e48bb3-26ef-4b1e-aa60-b86ce714253d"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
 <p>This endpoint retrieves all kittens.</p>
 <h3 id='http-request'>HTTP Request</h3>
-<p><code>GET http://example.com/api/kittens</code></p>
-<h3 id='query-parameters'>Query Parameters</h3>
+<p><code>POST http://example.com/api/kittens</code></p>
+<h3 id='body-parameters-2'>Body Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
-<th>Default</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>include_cats</td>
-<td>false</td>
-<td>If set to true, the result will also include cats.</td>
+<td>reference</td>
+<td>String</td>
+<td>The project Reference</td>
 </tr>
 <tr>
-<td>available</td>
-<td>true</td>
-<td>If set to false, the result will include kittens that have already been adopted.</td>
+<td>info_title</td>
+<td>String</td>
+<td>Title of your project</td>
+</tr>
+<tr>
+<td>trip_people</td>
+<td>Number</td>
+<td>Number of people in your project</td>
+</tr>
+<tr>
+<td>trip_budget</td>
+<td>Number</td>
+<td>Budget of your project</td>
+</tr>
+<tr>
+<td>trip_date_in</td>
+<td>Date</td>
+<td>Date of the beginning of your project</td>
+</tr>
+<tr>
+<td>trip_date_out</td>
+<td>Date</td>
+<td>Date of the end of your project</td>
+</tr>
+<tr>
+<td>custom_field</td>
+<td>JSON</td>
+<td>If you want you can specified some custom Fiels (They have to be created in ezus and called exactly the same)</td>
 </tr>
 </tbody></table>
 
 <aside class="success">
-Remember — a happy kitten is an authenticated kitten!
+Remember — You have to be authenticated to call this API with your Baerer TOKEN
 </aside>
 <h2 id='get-a-specific-kitten'>Get a Specific Kitten</h2><div class="highlight"><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
 
