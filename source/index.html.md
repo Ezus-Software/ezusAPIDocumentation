@@ -166,7 +166,7 @@ axios.post(baseUrl + "/projects-documents-create", body, headers);
 ]
 ```
 
-This endpoint upsert a Project.
+This endpoint insert a document in a Project.
 
 ### HTTP Request
 
