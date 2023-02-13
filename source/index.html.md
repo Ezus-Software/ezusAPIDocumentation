@@ -2,14 +2,11 @@
 title: API Reference
 
 language_tabs: # must be one of https://github.com/rouge-ruby/rouge/wiki/List-of-supported-languages-and-lexers
-  - shell
-  - ruby
-  - python
   - javascript
 
 toc_footers:
   - <a href='#'>Sign Up for a Developer Key</a>
-  - <a href='https://github.com/slatedocs/slate'>Documentation Powered by Slate</a>
+  - <a href='https://ezus.io/'>Documentation Powered by Ezus</a>
 
 includes:
   - errors
@@ -20,7 +17,7 @@ code_clipboard: true
 
 meta:
   - name: description
-    content: Documentation for the Kittn API
+    content: Documentation for the Ezus API
 ---
 
 # Introduction
@@ -32,24 +29,6 @@ We have language bindings in Shell, Ruby, Python, and JavaScript! You can view c
 # Authentication
 
 > To authorize, use this code:
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('ApiKey')
-```
-
-```python
-import kittn
-
-api = kittn.authorize('ApiKey')
-```
-
-```shell
-# With shell, you can just pass the correct header with each request
-curl "api_endpoint_here" \
-  -H "Authorization: ApiKey"
-```
 
 ```javascript
 const axios = require("axios");
@@ -105,26 +84,7 @@ You must replace <code>ApiKey</code> with your personal API key.
 
 # Upsert Project
 
-## POST UPSERT PROJECT
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get()
-```
-
-```shell
-curl "http://example.com/api/kittens" \
-  -H "Authorization: meowmeowmeow"
-```
+## Post Upsert Project
 
 ```javascript
 const axios = require("axios");
@@ -178,7 +138,7 @@ This endpoint retrieves all kittens.
 Remember — You have to be authenticated to call this API with your Baerer TOKEN
 </aside>
 
-## Get a Specific Kitten
+<!-- ## Get a Specific Kitten
 
 ```ruby
 require 'kittn'
@@ -280,4 +240,4 @@ This endpoint deletes a specific kitten.
 
 | Parameter | Description                    |
 | --------- | ------------------------------ |
-| ID        | The ID of the kitten to delete |
+| ID        | The ID of the kitten to delete | -->
