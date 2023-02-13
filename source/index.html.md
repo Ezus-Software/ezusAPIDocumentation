@@ -116,11 +116,11 @@ axios.post(baseUrl + "/projects-upsert", body, headers);
 ]
 ```
 
-This endpoint retrieves all kittens.
+This endpoint upsert a Project.
 
 ### HTTP Request
 
-`POST http://example.com/api/kittens`
+`POST https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/projects-upsert`
 
 ### Body Parameters
 
@@ -138,106 +138,48 @@ This endpoint retrieves all kittens.
 Remember — You have to be authenticated to call this API with your Baerer TOKEN
 </aside>
 
-<!-- ## Get a Specific Kitten
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```shell
-curl "http://example.com/api/kittens/2" \
-  -H "Authorization: meowmeowmeow"
-```
+## Post Upsert Document Create
 
 ```javascript
-const kittn = require("kittn");
+const axios = require("axios");
+const baseUrl = "https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1";
 
-let api = kittn.authorize("meowmeowmeow");
-let max = api.kittens.get(2);
+const body = {
+  reference: "test-ezus",
+  title: "Ezus test",
+  link: "https://www.linktothedocument.pdf",
+};
+const headers = { "X-API-KEY": "ApiKey" };
+
+axios.post(baseUrl + "/projects-documents-create", body, headers);
 ```
 
 > The above command returns JSON structured like this:
 
 ```json
-{
-  "id": 2,
-  "name": "Max",
-  "breed": "unknown",
-  "fluffiness": 5,
-  "cuteness": 10
-}
+[
+  {
+    "erreur": "false",
+    "message": "ok",
+    "id": "89e48bb3-26ef-4b1e-aa60-b86ce714253d"
+  }
+]
 ```
 
-This endpoint retrieves a specific kitten.
-
-<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
+This endpoint upsert a Project.
 
 ### HTTP Request
 
-`GET http://example.com/kittens/<ID>`
+`POST https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/projects-documents-create`
 
-### URL Parameters
+### Body Parameters
 
-| Parameter | Description                      |
-| --------- | -------------------------------- |
-| ID        | The ID of the kitten to retrieve |
+| Parameter | Type   | Description                  |
+| --------- | ------ | ---------------------------- |
+| reference | String | The project Reference        |
+| title     | String | Title of your document       |
+| link      | Link   | Link to the desired Document |
 
-## Delete a Specific Kitten
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.delete(2)
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.delete(2)
-```
-
-```shell
-curl "http://example.com/api/kittens/2" \
-  -X DELETE \
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require("kittn");
-
-let api = kittn.authorize("meowmeowmeow");
-let max = api.kittens.delete(2);
-```
-
-> The above command returns JSON structured like this:
-
-```json
-{
-  "id": 2,
-  "deleted": ":("
-}
-```
-
-This endpoint deletes a specific kitten.
-
-### HTTP Request
-
-`DELETE http://example.com/kittens/<ID>`
-
-### URL Parameters
-
-| Parameter | Description                    |
-| --------- | ------------------------------ |
-| ID        | The ID of the kitten to delete | -->
+<aside class="success">
+Remember — You have to be authenticated to call this API with your Baerer TOKEN
+</aside>
