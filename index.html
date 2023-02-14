@@ -335,6 +335,9 @@
                   <li>
                     <a href="#post-upsert-document-create" class="toc-h2 toc-link" data-title="Post Upsert Document Create">Post Upsert Document Create</a>
                   </li>
+                  <li>
+                    <a href="#post-upsert-client" class="toc-h2 toc-link" data-title="Post Upsert Client">Post Upsert Client</a>
+                  </li>
               </ul>
           </li>
           <li>
@@ -433,6 +436,8 @@ You must replace <code>ApiKey</code> with your personal API key.
   <span class="na">trip_date_in</span><span class="p">:</span> <span class="dl">"</span><span class="s2">2022-07-31</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">trip_date_out</span><span class="p">:</span> <span class="dl">"</span><span class="s2">2022-08-02</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">custom_fields</span><span class="p">:</span> <span class="p">{</span> <span class="na">custom</span><span class="p">:</span> <span class="dl">"</span><span class="s2">I'm custom</span><span class="dl">"</span> <span class="p">},</span>
+  <span class="na">sales_manager_mail</span><span class="p">:</span> <span class="dl">"</span><span class="s2">mailofthesales@mail.com</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">client_mail</span><span class="p">:</span> <span class="dl">"</span><span class="s2">mailoftheclient@mail.com</span><span class="dl">"</span><span class="p">,</span>
 <span class="p">};</span>
 <span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span> <span class="dl">"</span><span class="s2">X-API-KEY</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">ApiKey</span><span class="dl">"</span> <span class="p">};</span>
 
@@ -495,6 +500,16 @@ You must replace <code>ApiKey</code> with your personal API key.
 <td>JSON</td>
 <td>If you want you can specified some custom Fiels (They have to be created in ezus and called exactly the same)</td>
 </tr>
+<tr>
+<td>sales_manager_mail</td>
+<td>Email</td>
+<td>Email of the Sales Manager, if the email don&#39;t match with a sales manager, the default sales manager will be you</td>
+</tr>
+<tr>
+<td>client_email</td>
+<td>Email</td>
+<td>Email of the Client, if the email don&#39;t match with a client, No clients will be assigned</td>
+</tr>
 </tbody></table>
 
 <aside class="success">
@@ -554,12 +569,164 @@ Remember — You have to be authenticated to call this API with your Baerer TOKE
 <aside class="success">
 Remember — You have to be authenticated to call this API with your Baerer TOKEN
 </aside>
+<h2 id='post-upsert-client'>Post Upsert Client</h2><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">axios</span><span class="dl">"</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">baseUrl</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">body</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">company_name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">test-ezus</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">contact</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">firstname</span><span class="p">:</span> <span class="dl">"</span><span class="s2">firstname</span><span class="dl">"</span><span class="p">,</span>
+    <span class="na">lastname</span><span class="p">:</span> <span class="dl">"</span><span class="s2">lastname</span><span class="dl">"</span><span class="p">,</span>
+    <span class="na">gender</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="na">email</span><span class="p">:</span> <span class="dl">"</span><span class="s2">email@email.email</span><span class="dl">"</span><span class="p">,</span>
+    <span class="na">phone</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0606060606</span><span class="dl">"</span><span class="p">,</span>
+    <span class="na">birthdate</span><span class="p">:</span> <span class="dl">"</span><span class="s2">01-01-2023</span><span class="dl">"</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">address</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">label</span><span class="p">:</span> <span class="dl">"</span><span class="s2">58 Rue de Paradis</span><span class="dl">"</span><span class="p">,</span>
+    <span class="na">city</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Paris</span><span class="dl">"</span><span class="p">,</span>
+    <span class="na">country</span><span class="p">:</span> <span class="dl">"</span><span class="s2">France</span><span class="dl">"</span><span class="p">,</span>
+    <span class="na">zip</span><span class="p">:</span> <span class="dl">"</span><span class="s2">75009</span><span class="dl">"</span><span class="p">,</span>
+  <span class="p">},</span>
+<span class="p">};</span>
+<span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span> <span class="dl">"</span><span class="s2">X-API-KEY</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">ApiKey</span><span class="dl">"</span> <span class="p">};</span>
+
+<span class="nx">axios</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="nx">baseUrl</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">/clients-upsert</span><span class="dl">"</span><span class="p">,</span> <span class="nx">body</span><span class="p">,</span> <span class="nx">headers</span><span class="p">);</span>
+</code></pre></div>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"erreur"</span><span class="p">:</span><span class="w"> </span><span class="s2">"false"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Client created Successfully"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"client"</span><span class="p">:</span><span class="w"> </span><span class="s2">"email@email.email"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div>
+<p>This endpoint Upsert a Client. The email params is used as a Primary Key for your clients If you have multiple clients with the same email, the first client will be taken. If a client with this email already exist, <code>this one will be updated with the new Params Given here.</code></p>
+<h3 id='http-request-3'>HTTP Request</h3>
+<p><code>POST https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/clients-upsert</code></p>
+<h3 id='body-parameters-4'>Body Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>company_name</td>
+<td>String</td>
+<td>Set a company name - If company name is empty, the client will be set as an Individual</td>
+</tr>
+<tr>
+<td>contact</td>
+<td>JSON</td>
+<td>Contact is a JSON and email is needed</td>
+</tr>
+<tr>
+<td>address</td>
+<td>JSON</td>
+<td>Address is a JSON and label is needed</td>
+</tr>
+</tbody></table>
+<h4 id='contact-parameters'>Contact Parameters</h4>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>email</td>
+<td>String</td>
+<td>Email will be used to identify which client will be updated or create a new client if no email found</td>
+</tr>
+<tr>
+<td>firstname</td>
+<td>String</td>
+<td>Firstname of the client as a string</td>
+</tr>
+<tr>
+<td>lastname</td>
+<td>String</td>
+<td>Lastname of the client as a string</td>
+</tr>
+<tr>
+<td>gender</td>
+<td>int</td>
+<td>1 = Men, 2 = Women, 0 = None</td>
+</tr>
+<tr>
+<td>phone</td>
+<td>String</td>
+<td>Phone of the client as a string</td>
+</tr>
+<tr>
+<td>birthdate</td>
+<td>String</td>
+<td>Birthdate of the client formated like: DD-MM-YYYY</td>
+</tr>
+</tbody></table>
+<h4 id='address-parameters'>Address Parameters</h4>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>label</td>
+<td>String</td>
+<td>Label of the address</td>
+</tr>
+<tr>
+<td>city</td>
+<td>String</td>
+<td>Name of the City</td>
+</tr>
+<tr>
+<td>country</td>
+<td>String</td>
+<td>Name of the country</td>
+</tr>
+<tr>
+<td>zip</td>
+<td>String</td>
+<td>Post Code</td>
+</tr>
+</tbody></table>
+
+<aside class="success">
+Remember — You have to be authenticated to call this API with your Baerer TOKEN
+</aside>
 <h1 id='errors'>Errors</h1>
 <aside class="notice">
-This error section is stored in a separate file in <code>includes/_errors.md</code>. Slate allows you to optionally separate out your docs into many files...just save them to the <code>includes</code> folder and add them to the top of your <code>index.md</code>'s frontmatter. Files are included in the order listed.
+If the API Return a Success Code 200 with erreur=true, Error messages Explained Here
 </aside>
 
-<p>The Kittn API uses the following error codes:</p>
+<table><thead>
+<tr>
+<th>Route</th>
+<th>Error Message</th>
+<th>Meaning</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>clients_upsert</td>
+<td>You need at least contact username and email</td>
+<td>These two params are needed to create a Contact (firstname, email)</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">
+Classics Error codes
+</aside>
+
+<p>The Ezus API uses the following error codes:</p>
 
 <table><thead>
 <tr>
