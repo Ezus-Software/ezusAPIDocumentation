@@ -7,6 +7,7 @@ If the API Return a Success Code 200 with erreur=true, Error messages Explained 
 | Route          | Error Message                                | Meaning                                                            |
 | -------------- | -------------------------------------------- | ------------------------------------------------------------------ |
 | clients_upsert | You need at least contact username and email | These two params are needed to create a Contact (firstname, email) |
+| ALL            | Your Identification Token is Incorrect       | Your Token is not Valid Anymore Please Authenticate you to the API |
 
 <aside class="notice">
 Classics Error codes
