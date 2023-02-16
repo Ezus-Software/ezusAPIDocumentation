@@ -24,7 +24,7 @@ meta:
 
 Welcome to the EZUS API! You can use our API to access Ezus API endpoints, which can get information on various users data or clients in our database.
 
-We have language bindings in Shell, Ruby, Python, and JavaScript! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
+We have language bindings in JavaScript! You can view code examples in the dark area to the right.
 
 # Authentication
 
@@ -82,9 +82,9 @@ To get your API key, you have to ask to your Account Manager
 You must replace <code>ApiKey</code> with your personal API key.
 </aside>
 
-# Upsert Project
+# Projects
 
-## Post Upsert Project
+## POST projects-upsert
 
 ```javascript
 const axios = require("axios");
@@ -118,7 +118,7 @@ axios.post(baseUrl + "/projects-upsert", body, headers);
 ]
 ```
 
-This endpoint upsert a Project.
+This endpoint upsert a Project. This endpoint take the reference as a Primary key, if the reference already exist, the project linked to the account will be updated, if the référence doesn't exist, a new project will be created with all the Given Params.
 
 ### HTTP Request
 
@@ -126,23 +126,27 @@ This endpoint upsert a Project.
 
 ### Body Parameters
 
-| Parameter          | Type   | Description                                                                                                      |
-| ------------------ | ------ | ---------------------------------------------------------------------------------------------------------------- |
-| reference          | String | The project Reference                                                                                            |
-| info_title         | String | Title of your project                                                                                            |
-| trip_people        | Number | Number of people in your project                                                                                 |
-| trip_budget        | Number | Budget of your project                                                                                           |
-| trip_date_in       | Date   | Date of the beginning of your project                                                                            |
-| trip_date_out      | Date   | Date of the end of your project                                                                                  |
-| custom_field       | JSON   | If you want you can specified some custom Fiels (They have to be created in ezus and called exactly the same)    |
-| sales_manager_mail | Email  | Email of the Sales Manager, if the email don't match with a sales manager, the default sales manager will be you |
-| client_email       | Email  | Email of the Client, if the email don't match with a client, No clients will be assigned                         |
+<aside class="comment">
+If you do not add an Optionnal parameter, it will be empty for a creation or simply not updated for an update. If the parameter is empty (""), same behaviour
+</aside>
+
+| Parameter          | Type   | Optionnal  | Description                                                                                                                                                                                   |
+| ------------------ | ------ | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| reference          | String | False      | The project Reference used as a primary key to check if the project already exist and UPDATE it or to create a new Project so be sure to use a unique Esus Référence for each of your project |
+| info_title         | String | True/False | Title of your project, mandatory if you create a New Project                                                                                                                                  |
+| trip_people        | Number | True       | Number of people in your project                                                                                                                                                              |
+| trip_budget        | Number | True       | Budget of your project                                                                                                                                                                        |
+| trip_date_in       | Date   | True       | Date of the beginning of your project formated like YYYY-MM-DD                                                                                                                                |
+| trip_date_out      | Date   | True       | Date of the end of your project formated like YYYY-MM-DD                                                                                                                                      |
+| custom_field       | JSON   | True       | If you want you can specified some custom Fiels (They have to be created in ezus and called exactly the same)                                                                                 |
+| sales_manager_mail | Email  | True       | Email of the Sales Manager, if the email don't match with a sales manager, the default sales manager will be you                                                                              |
+| client_email       | Email  | True       | Email of the Client, if the email don't match with a client, No clients will be assigned                                                                                                      |
 
 <aside class="success">
 Remember — You have to be authenticated to call this API with your Baerer TOKEN
 </aside>
 
-## Post Upsert Document Create
+## POST projects-documents-create
 
 ```javascript
 const axios = require("axios");
@@ -178,17 +182,19 @@ This endpoint insert a document in a Project.
 
 ### Body Parameters
 
-| Parameter | Type   | Description                  |
-| --------- | ------ | ---------------------------- |
-| reference | String | The project Reference        |
-| title     | String | Title of your document       |
-| link      | Link   | Link to the desired Document |
+| Parameter | Type   | Optionnal | Description                  |
+| --------- | ------ | --------- | ---------------------------- |
+| reference | String | False     | The project Reference        |
+| title     | String | False     | Title of your document       |
+| link      | Link   | False     | Link to the desired Document |
 
 <aside class="success">
 Remember — You have to be authenticated to call this API with your Baerer TOKEN
 </aside>
 
-## Post Upsert Client
+# Clients
+
+## POST clients-upsert
 
 ```javascript
 const axios = require("axios");
@@ -202,7 +208,7 @@ const body = {
     gender: 1,
     email: "email@email.email",
     phone: "0606060606",
-    birthdate: "01-01-2023",
+    birthdate: "2023-01-01",
   },
   address: {
     label: "58 Rue de Paradis",
@@ -236,31 +242,34 @@ This endpoint Upsert a Client. The email params is used as a Primary Key for you
 
 ### Body Parameters
 
-| Parameter    | Type   | Description                                                                            |
-| ------------ | ------ | -------------------------------------------------------------------------------------- |
-| company_name | String | Set a company name - If company name is empty, the client will be set as an Individual |
-| contact      | JSON   | Contact is a JSON and email is needed                                                  |
-| address      | JSON   | Address is a JSON and label is needed                                                  |
+<aside class="comment">
+If you do not add an Optionnal parameter, it will be empty for a creation or simply not updated for an update. If the parameter is empty (""), same behaviour
+</aside>
+| Parameter    | Type   | Optionnal | Description                                                                                                     |
+| ------------ | ------ | --------- | --------------------------------------------------------------------------------------------------------------- |
+| company_name | String | True      | Set a company name - If company name is empty, the client will be set as an Individual                          |
+| contact      | JSON   | False     | Contact is a JSON and email is needed                                                                           |
+| address      | JSON   | True      | Address is a JSON and label is needed if you want to add or update the adresse of your client but not mandatory |
 
 #### Contact Parameters
 
-| Parameter | Type   | Description                                                                                          |
-| --------- | ------ | ---------------------------------------------------------------------------------------------------- |
-| email     | String | Email will be used to identify which client will be updated or create a new client if no email found |
-| firstname | String | Firstname of the client as a string                                                                  |
-| lastname  | String | Lastname of the client as a string                                                                   |
-| gender    | int    | 1 = Men, 2 = Women, 0 = None                                                                         |
-| phone     | String | Phone of the client as a string                                                                      |
-| birthdate | String | Birthdate of the client formated like: DD-MM-YYYY                                                    |
+| Parameter | Type   | Optionnal | Description                                                                                          |
+| --------- | ------ | --------- | ---------------------------------------------------------------------------------------------------- |
+| email     | String | False     | Email will be used to identify which client will be updated or create a new client if no email found |
+| firstname | String | False     | Firstname of the client as a string                                                                  |
+| lastname  | String | True      | Lastname of the client as a string                                                                   |
+| gender    | int    | True      | 1 = Men, 2 = Women, 0 = None                                                                         |
+| phone     | String | True      | Phone of the client as a string                                                                      |
+| birthdate | String | True      | Birthdate of the client formated like: YYYY-MM-DD                                                    |
 
 #### Address Parameters
 
-| Parameter | Type   | Description          |
-| --------- | ------ | -------------------- |
-| label     | String | Label of the address |
-| city      | String | Name of the City     |
-| country   | String | Name of the country  |
-| zip       | String | Post Code            |
+| Parameter | Type   | Optionnal | Description          |
+| --------- | ------ | --------- | -------------------- |
+| label     | String | False     | Label of the address |
+| city      | String | True      | Name of the City     |
+| country   | String | True      | Name of the country  |
+| zip       | String | True      | Post Code            |
 
 <aside class="success">
 Remember — You have to be authenticated to call this API with your Baerer TOKEN

@@ -4,11 +4,13 @@
 If the API Return a Success Code 200 with erreur=true, Error messages Explained Here
 </aside>
 
-| Route          | Error Message                                | Meaning                                                            |
-| -------------- | -------------------------------------------- | ------------------------------------------------------------------ |
-| clients_upsert | You need at least contact username and email | These two params are needed to create a Contact (firstname, email) |
-| ALL            | Your Identification Token is Incorrect       | Your Token is not Valid Anymore Please Authenticate you to the API |
+| Route           | Error Message                                | Meaning                                                                        |
+| --------------- | -------------------------------------------- | ------------------------------------------------------------------------------ |
+| clients_upsert  | You need at least contact username and email | These two params are needed to create a Contact (firstname, email)             |
+| ALL             | Your Identification Token is Incorrect       | Your Token is not Valid Anymore Please Authenticate you to the API             |
+| projects_upsert | reference is mandatory                       | The Esus Reference is mandatory, the API use it to update or create a new user |
 
+<!--
 <aside class="notice">
 Classics Error codes
 </aside>
@@ -26,4 +28,4 @@ The Ezus API uses the following error codes:
 | 418        | I'm a teapot.                                                                             |
 | 429        | Too Many Requests -- You're requesting too many kittens! Slow down!                       |
 | 500        | Internal Server Error -- We had a problem with our server. Try again later.               |
-| 503        | Service Unavailable -- We're temporarily offline for maintenance. Please try again later. |
+| 503        | Service Unavailable -- We're temporarily offline for maintenance. Please try again later. | -->
