@@ -201,6 +201,7 @@ const axios = require("axios");
 const baseUrl = "https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1";
 
 const body = {
+  reference: "client_reference",
   company_name: "test-ezus",
   contact: {
     firstname: "firstname",
@@ -216,6 +217,10 @@ const body = {
     country: "France",
     zip: "75009",
   },
+  custom_fields: {
+    field1: "value",
+    field2: "value",
+  },
 };
 const headers = { "X-API-KEY": "ApiKey" };
 
@@ -229,12 +234,12 @@ axios.post(baseUrl + "/clients-upsert", body, headers);
   {
     "erreur": "false",
     "message": "Client created Successfully",
-    "client": "email@email.email"
+    "reference": "clientReference"
   }
 ]
 ```
 
-This endpoint Upsert a Client. The email params is used as a Primary Key for your clients If you have multiple clients with the same email, the first client will be taken. If a client with this email already exist, `this one will be updated with the new Params Given here.`
+This endpoint Upsert a Client. The reference should be unique and permit to update an existing client or Create a new Client. If reference is not given, the email params is used as a Primary Key for your clients If you have multiple clients with the same email, the first client will be taken. If a client with this email already exist. An Esus Reference will be returned you must have to save it for your next uses. `this one will be updated with the new Params Given here.`
 
 ### HTTP Request
 
@@ -250,6 +255,7 @@ If you do not add an Optionnal parameter, it will be empty for a creation or sim
 | company_name | String | True      | Set a company name - If company name is empty, the client will be set as an Individual                          |
 | contact      | JSON   | False     | Contact is a JSON and email is needed                                                                           |
 | address      | JSON   | True      | Address is a JSON and label is needed if you want to add or update the adresse of your client but not mandatory |
+| custom_fields      | JSON   | True      | You can add Custom Fields for your client, this custom fields should be in your Ezus params and Write Exactly as they are wrote in your params ex: <code>custom_fields: {"field1" : "value1", "field2" : "value2"}</code>|
 
 #### Contact Parameters
 
