@@ -596,6 +596,7 @@ Remember — You have to be authenticated to call this API with your Baerer TOKE
 <span class="kd">const</span> <span class="nx">baseUrl</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1</span><span class="dl">"</span><span class="p">;</span>
 
 <span class="kd">const</span> <span class="nx">body</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">reference</span><span class="p">:</span> <span class="dl">"</span><span class="s2">client_reference</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">company_name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">test-ezus</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">contact</span><span class="p">:</span> <span class="p">{</span>
     <span class="na">firstname</span><span class="p">:</span> <span class="dl">"</span><span class="s2">firstname</span><span class="dl">"</span><span class="p">,</span>
@@ -611,6 +612,10 @@ Remember — You have to be authenticated to call this API with your Baerer TOKE
     <span class="na">country</span><span class="p">:</span> <span class="dl">"</span><span class="s2">France</span><span class="dl">"</span><span class="p">,</span>
     <span class="na">zip</span><span class="p">:</span> <span class="dl">"</span><span class="s2">75009</span><span class="dl">"</span><span class="p">,</span>
   <span class="p">},</span>
+  <span class="na">custom_fields</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">field1</span><span class="p">:</span> <span class="dl">"</span><span class="s2">value</span><span class="dl">"</span><span class="p">,</span>
+    <span class="na">field2</span><span class="p">:</span> <span class="dl">"</span><span class="s2">value</span><span class="dl">"</span><span class="p">,</span>
+  <span class="p">},</span>
 <span class="p">};</span>
 <span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span> <span class="dl">"</span><span class="s2">X-API-KEY</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">ApiKey</span><span class="dl">"</span> <span class="p">};</span>
 
@@ -623,11 +628,11 @@ Remember — You have to be authenticated to call this API with your Baerer TOKE
   </span><span class="p">{</span><span class="w">
     </span><span class="nl">"erreur"</span><span class="p">:</span><span class="w"> </span><span class="s2">"false"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Client created Successfully"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"client"</span><span class="p">:</span><span class="w"> </span><span class="s2">"email@email.email"</span><span class="w">
+    </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"clientReference"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
-<p>This endpoint Upsert a Client. The email params is used as a Primary Key for your clients If you have multiple clients with the same email, the first client will be taken. If a client with this email already exist, <code>this one will be updated with the new Params Given here.</code></p>
+<p>This endpoint Upsert a Client. The reference should be unique and permit to update an existing client or Create a new Client. If reference is not given, the email params is used as a Primary Key for your clients If you have multiple clients with the same email, the first client will be taken. If a client with this email already exist. An Esus Reference will be returned you must have to save it for your next uses. <code>this one will be updated with the new Params Given here.</code></p>
 <h3 id='http-request-3'>HTTP Request</h3>
 <p><code>POST https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/clients-upsert</code></p>
 <h3 id='body-parameters-4'>Body Parameters</h3>
@@ -660,6 +665,12 @@ If you do not add an Optionnal parameter, it will be empty for a creation or sim
 <td>JSON</td>
 <td>True</td>
 <td>Address is a JSON and label is needed if you want to add or update the adresse of your client but not mandatory</td>
+</tr>
+<tr>
+<td>custom_fields</td>
+<td>JSON</td>
+<td>True</td>
+<td>You can add Custom Fields for your client, this custom fields should be in your Ezus params and Write Exactly as they are wrote in your params ex: <code>custom_fields: {&quot;field1&quot; : &quot;value1&quot;, &quot;field2&quot; : &quot;value2&quot;}</code></td>
 </tr>
 </tbody></table>
 <h4 id='contact-parameters'>Contact Parameters</h4>
