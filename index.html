@@ -327,16 +327,21 @@
               </ul>
           </li>
           <li>
-            <a href="#upsert-project" class="toc-h1 toc-link" data-title="Upsert Project">Upsert Project</a>
+            <a href="#projects" class="toc-h1 toc-link" data-title="Projects">Projects</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#post-upsert-project" class="toc-h2 toc-link" data-title="Post Upsert Project">Post Upsert Project</a>
+                    <a href="#post-projects-upsert" class="toc-h2 toc-link" data-title="POST projects-upsert">POST projects-upsert</a>
                   </li>
                   <li>
-                    <a href="#post-upsert-document-create" class="toc-h2 toc-link" data-title="Post Upsert Document Create">Post Upsert Document Create</a>
+                    <a href="#post-projects-documents-create" class="toc-h2 toc-link" data-title="POST projects-documents-create">POST projects-documents-create</a>
                   </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#clients" class="toc-h1 toc-link" data-title="Clients">Clients</a>
+              <ul class="toc-list-h2">
                   <li>
-                    <a href="#post-upsert-client" class="toc-h2 toc-link" data-title="Post Upsert Client">Post Upsert Client</a>
+                    <a href="#post-clients-upsert" class="toc-h2 toc-link" data-title="POST clients-upsert">POST clients-upsert</a>
                   </li>
               </ul>
           </li>
@@ -355,7 +360,7 @@
         <h1 id='introduction'>Introduction</h1>
 <p>Welcome to the EZUS API! You can use our API to access Ezus API endpoints, which can get information on various users data or clients in our database.</p>
 
-<p>We have language bindings in Shell, Ruby, Python, and JavaScript! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.</p>
+<p>We have language bindings in JavaScript! You can view code examples in the dark area to the right.</p>
 <h1 id='authentication'>Authentication</h1>
 <blockquote>
 <p>To authorize, use this code:</p>
@@ -425,7 +430,7 @@
 <aside class="notice">
 You must replace <code>ApiKey</code> with your personal API key.
 </aside>
-<h1 id='upsert-project'>Upsert Project</h1><h2 id='post-upsert-project'>Post Upsert Project</h2><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">axios</span><span class="dl">"</span><span class="p">);</span>
+<h1 id='projects'>Projects</h1><h2 id='post-projects-upsert'>POST projects-upsert</h2><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">axios</span><span class="dl">"</span><span class="p">);</span>
 <span class="kd">const</span> <span class="nx">baseUrl</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1</span><span class="dl">"</span><span class="p">;</span>
 
 <span class="kd">const</span> <span class="nx">body</span> <span class="o">=</span> <span class="p">{</span>
@@ -454,60 +459,74 @@ You must replace <code>ApiKey</code> with your personal API key.
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
-<p>This endpoint upsert a Project.</p>
+<p>This endpoint upsert a Project. This endpoint take the reference as a Primary key, if the reference already exist, the project linked to the account will be updated, if the référence doesn&#39;t exist, a new project will be created with all the Given Params.</p>
 <h3 id='http-request'>HTTP Request</h3>
 <p><code>POST https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/projects-upsert</code></p>
 <h3 id='body-parameters-2'>Body Parameters</h3>
+<aside class="comment">
+If you do not add an Optionnal parameter, it will be empty for a creation or simply not updated for an update. If the parameter is empty (""), same behaviour
+</aside>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
 <th>Type</th>
+<th>Optionnal</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>reference</td>
 <td>String</td>
-<td>The project Reference</td>
+<td>False</td>
+<td>The project Reference used as a primary key to check if the project already exist and UPDATE it or to create a new Project so be sure to use a unique Esus Référence for each of your project</td>
 </tr>
 <tr>
 <td>info_title</td>
 <td>String</td>
-<td>Title of your project</td>
+<td>True/False</td>
+<td>Title of your project, mandatory if you create a New Project</td>
 </tr>
 <tr>
 <td>trip_people</td>
 <td>Number</td>
+<td>True</td>
 <td>Number of people in your project</td>
 </tr>
 <tr>
 <td>trip_budget</td>
 <td>Number</td>
+<td>True</td>
 <td>Budget of your project</td>
 </tr>
 <tr>
 <td>trip_date_in</td>
 <td>Date</td>
-<td>Date of the beginning of your project</td>
+<td>True</td>
+<td>Date of the beginning of your project formated like YYYY-MM-DD</td>
 </tr>
 <tr>
 <td>trip_date_out</td>
 <td>Date</td>
-<td>Date of the end of your project</td>
+<td>True</td>
+<td>Date of the end of your project formated like YYYY-MM-DD</td>
 </tr>
 <tr>
 <td>custom_field</td>
 <td>JSON</td>
+<td>True</td>
 <td>If you want you can specified some custom Fiels (They have to be created in ezus and called exactly the same)</td>
 </tr>
 <tr>
 <td>sales_manager_mail</td>
 <td>Email</td>
+<td>True</td>
 <td>Email of the Sales Manager, if the email don&#39;t match with a sales manager, the default sales manager will be you</td>
 </tr>
 <tr>
 <td>client_email</td>
 <td>Email</td>
+<td>True</td>
 <td>Email of the Client, if the email don&#39;t match with a client, No clients will be assigned</td>
 </tr>
 </tbody></table>
@@ -515,7 +534,7 @@ You must replace <code>ApiKey</code> with your personal API key.
 <aside class="success">
 Remember — You have to be authenticated to call this API with your Baerer TOKEN
 </aside>
-<h2 id='post-upsert-document-create'>Post Upsert Document Create</h2><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">axios</span><span class="dl">"</span><span class="p">);</span>
+<h2 id='post-projects-documents-create'>POST projects-documents-create</h2><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">axios</span><span class="dl">"</span><span class="p">);</span>
 <span class="kd">const</span> <span class="nx">baseUrl</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1</span><span class="dl">"</span><span class="p">;</span>
 
 <span class="kd">const</span> <span class="nx">body</span> <span class="o">=</span> <span class="p">{</span>
@@ -546,22 +565,26 @@ Remember — You have to be authenticated to call this API with your Baerer TOKE
 <tr>
 <th>Parameter</th>
 <th>Type</th>
+<th>Optionnal</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>reference</td>
 <td>String</td>
+<td>False</td>
 <td>The project Reference</td>
 </tr>
 <tr>
 <td>title</td>
 <td>String</td>
+<td>False</td>
 <td>Title of your document</td>
 </tr>
 <tr>
 <td>link</td>
 <td>Link</td>
+<td>False</td>
 <td>Link to the desired Document</td>
 </tr>
 </tbody></table>
@@ -569,7 +592,7 @@ Remember — You have to be authenticated to call this API with your Baerer TOKE
 <aside class="success">
 Remember — You have to be authenticated to call this API with your Baerer TOKEN
 </aside>
-<h2 id='post-upsert-client'>Post Upsert Client</h2><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">axios</span><span class="dl">"</span><span class="p">);</span>
+<h1 id='clients'>Clients</h1><h2 id='post-clients-upsert'>POST clients-upsert</h2><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">axios</span><span class="dl">"</span><span class="p">);</span>
 <span class="kd">const</span> <span class="nx">baseUrl</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1</span><span class="dl">"</span><span class="p">;</span>
 
 <span class="kd">const</span> <span class="nx">body</span> <span class="o">=</span> <span class="p">{</span>
@@ -580,7 +603,7 @@ Remember — You have to be authenticated to call this API with your Baerer TOKE
     <span class="na">gender</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
     <span class="na">email</span><span class="p">:</span> <span class="dl">"</span><span class="s2">email@email.email</span><span class="dl">"</span><span class="p">,</span>
     <span class="na">phone</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0606060606</span><span class="dl">"</span><span class="p">,</span>
-    <span class="na">birthdate</span><span class="p">:</span> <span class="dl">"</span><span class="s2">01-01-2023</span><span class="dl">"</span><span class="p">,</span>
+    <span class="na">birthdate</span><span class="p">:</span> <span class="dl">"</span><span class="s2">2023-01-01</span><span class="dl">"</span><span class="p">,</span>
   <span class="p">},</span>
   <span class="na">address</span><span class="p">:</span> <span class="p">{</span>
     <span class="na">label</span><span class="p">:</span> <span class="dl">"</span><span class="s2">58 Rue de Paradis</span><span class="dl">"</span><span class="p">,</span>
@@ -608,27 +631,35 @@ Remember — You have to be authenticated to call this API with your Baerer TOKE
 <h3 id='http-request-3'>HTTP Request</h3>
 <p><code>POST https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/clients-upsert</code></p>
 <h3 id='body-parameters-4'>Body Parameters</h3>
+<aside class="comment">
+If you do not add an Optionnal parameter, it will be empty for a creation or simply not updated for an update. If the parameter is empty (""), same behaviour
+</aside>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
 <th>Type</th>
+<th>Optionnal</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>company_name</td>
 <td>String</td>
+<td>True</td>
 <td>Set a company name - If company name is empty, the client will be set as an Individual</td>
 </tr>
 <tr>
 <td>contact</td>
 <td>JSON</td>
+<td>False</td>
 <td>Contact is a JSON and email is needed</td>
 </tr>
 <tr>
 <td>address</td>
 <td>JSON</td>
-<td>Address is a JSON and label is needed</td>
+<td>True</td>
+<td>Address is a JSON and label is needed if you want to add or update the adresse of your client but not mandatory</td>
 </tr>
 </tbody></table>
 <h4 id='contact-parameters'>Contact Parameters</h4>
@@ -636,38 +667,45 @@ Remember — You have to be authenticated to call this API with your Baerer TOKE
 <tr>
 <th>Parameter</th>
 <th>Type</th>
+<th>Optionnal</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>email</td>
 <td>String</td>
+<td>False</td>
 <td>Email will be used to identify which client will be updated or create a new client if no email found</td>
 </tr>
 <tr>
 <td>firstname</td>
 <td>String</td>
+<td>False</td>
 <td>Firstname of the client as a string</td>
 </tr>
 <tr>
 <td>lastname</td>
 <td>String</td>
+<td>True</td>
 <td>Lastname of the client as a string</td>
 </tr>
 <tr>
 <td>gender</td>
 <td>int</td>
+<td>True</td>
 <td>1 = Men, 2 = Women, 0 = None</td>
 </tr>
 <tr>
 <td>phone</td>
 <td>String</td>
+<td>True</td>
 <td>Phone of the client as a string</td>
 </tr>
 <tr>
 <td>birthdate</td>
 <td>String</td>
-<td>Birthdate of the client formated like: DD-MM-YYYY</td>
+<td>True</td>
+<td>Birthdate of the client formated like: YYYY-MM-DD</td>
 </tr>
 </tbody></table>
 <h4 id='address-parameters'>Address Parameters</h4>
@@ -675,27 +713,32 @@ Remember — You have to be authenticated to call this API with your Baerer TOKE
 <tr>
 <th>Parameter</th>
 <th>Type</th>
+<th>Optionnal</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>label</td>
 <td>String</td>
+<td>False</td>
 <td>Label of the address</td>
 </tr>
 <tr>
 <td>city</td>
 <td>String</td>
+<td>True</td>
 <td>Name of the City</td>
 </tr>
 <tr>
 <td>country</td>
 <td>String</td>
+<td>True</td>
 <td>Name of the country</td>
 </tr>
 <tr>
 <td>zip</td>
 <td>String</td>
+<td>True</td>
 <td>Post Code</td>
 </tr>
 </tbody></table>
@@ -725,65 +768,32 @@ If the API Return a Success Code 200 with erreur=true, Error messages Explained 
 <td>Your Identification Token is Incorrect</td>
 <td>Your Token is not Valid Anymore Please Authenticate you to the API</td>
 </tr>
+<tr>
+<td>projects_upsert</td>
+<td>reference is mandatory</td>
+<td>The Esus Reference is mandatory, the API use it to update or create a new user</td>
+</tr>
 </tbody></table>
 
+<!--
 <aside class="notice">
 Classics Error codes
 </aside>
+The Ezus API uses the following error codes:
 
-<p>The Ezus API uses the following error codes:</p>
-
-<table><thead>
-<tr>
-<th>Error Code</th>
-<th>Meaning</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>400</td>
-<td>Bad Request -- Your request is invalid.</td>
-</tr>
-<tr>
-<td>401</td>
-<td>Unauthorized -- Your API key is wrong.</td>
-</tr>
-<tr>
-<td>403</td>
-<td>Forbidden -- The kitten requested is hidden for administrators only.</td>
-</tr>
-<tr>
-<td>404</td>
-<td>Not Found -- The specified kitten could not be found.</td>
-</tr>
-<tr>
-<td>405</td>
-<td>Method Not Allowed -- You tried to access a kitten with an invalid method.</td>
-</tr>
-<tr>
-<td>406</td>
-<td>Not Acceptable -- You requested a format that isn&#39;t json.</td>
-</tr>
-<tr>
-<td>410</td>
-<td>Gone -- The kitten requested has been removed from our servers.</td>
-</tr>
-<tr>
-<td>418</td>
-<td>I&#39;m a teapot.</td>
-</tr>
-<tr>
-<td>429</td>
-<td>Too Many Requests -- You&#39;re requesting too many kittens! Slow down!</td>
-</tr>
-<tr>
-<td>500</td>
-<td>Internal Server Error -- We had a problem with our server. Try again later.</td>
-</tr>
-<tr>
-<td>503</td>
-<td>Service Unavailable -- We&#39;re temporarily offline for maintenance. Please try again later.</td>
-</tr>
-</tbody></table>
+| Error Code | Meaning                                                                                   |
+| ---------- | ----------------------------------------------------------------------------------------- |
+| 400        | Bad Request -- Your request is invalid.                                                   |
+| 401        | Unauthorized -- Your API key is wrong.                                                    |
+| 403        | Forbidden -- The kitten requested is hidden for administrators only.                      |
+| 404        | Not Found -- The specified kitten could not be found.                                     |
+| 405        | Method Not Allowed -- You tried to access a kitten with an invalid method.                |
+| 406        | Not Acceptable -- You requested a format that isn't json.                                 |
+| 410        | Gone -- The kitten requested has been removed from our servers.                           |
+| 418        | I'm a teapot.                                                                             |
+| 429        | Too Many Requests -- You're requesting too many kittens! Slow down!                       |
+| 500        | Internal Server Error -- We had a problem with our server. Try again later.               |
+| 503        | Service Unavailable -- We're temporarily offline for maintenance. Please try again later. | -->
 
       </div>
       <div class="dark-box">
