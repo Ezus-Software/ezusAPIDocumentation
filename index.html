@@ -346,6 +346,14 @@
               </ul>
           </li>
           <li>
+            <a href="#products" class="toc-h1 toc-link" data-title="Products">Products</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#post-products-upsert" class="toc-h2 toc-link" data-title="POST products-upsert">POST products-upsert</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
             <a href="#errors" class="toc-h1 toc-link" data-title="Errors">Errors</a>
           </li>
       </ul>
@@ -649,6 +657,12 @@ If you do not add an Optionnal parameter, it will be empty for a creation or sim
 </tr>
 </thead><tbody>
 <tr>
+<td>reference</td>
+<td>String</td>
+<td>True/False</td>
+<td>Used as a primary Key in the Database, if no Reference, the Reference will be Generated automatically</td>
+</tr>
+<tr>
 <td>company_name</td>
 <td>String</td>
 <td>True</td>
@@ -751,6 +765,145 @@ If you do not add an Optionnal parameter, it will be empty for a creation or sim
 <td>String</td>
 <td>True</td>
 <td>Post Code</td>
+</tr>
+</tbody></table>
+
+<aside class="success">
+Remember — You have to be authenticated to call this API with your Baerer TOKEN
+</aside>
+<h1 id='products'>Products</h1><h2 id='post-products-upsert'>POST products-upsert</h2><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">axios</span><span class="dl">"</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">baseUrl</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">body</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">reference</span><span class="p">:</span> <span class="dl">"</span><span class="s2">product_reference</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">title</span><span class="p">:</span> <span class="dl">"</span><span class="s2">produt_title</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">quantity</span><span class="p">:</span> <span class="dl">"</span><span class="s2">3</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">supplier_reference</span><span class="p">:</span> <span class="dl">"</span><span class="s2">supplier_reference</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">package_reference</span><span class="p">:</span> <span class="dl">"</span><span class="s2">package_reference</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">purchase_price</span><span class="p">:</span> <span class="mf">42.42</span><span class="p">,</span>
+  <span class="na">sales_price</span><span class="p">:</span> <span class="mf">84.84</span><span class="p">,</span>
+  <span class="na">vat_regime</span><span class="p">:</span> <span class="dl">"</span><span class="s2">none</span><span class="dl">"</span><span class="p">,</span>
+  <span class="nx">vat_rate</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span>
+  <span class="na">commission_regime</span><span class="p">:</span> <span class="dl">'</span><span class="s1">%</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">commission_mode</span><span class="p">:</span> <span class="dl">'</span><span class="s1">default</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">commission</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+  <span class="na">currency</span><span class="p">:</span> <span class="dl">'</span><span class="s1">$</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">custom_fields</span><span class="p">:</span> <span class="p">{</span> <span class="na">custom1</span><span class="p">:</span> <span class="dl">"</span><span class="s2">field1</span><span class="dl">"</span><span class="p">,</span> <span class="na">custom2</span><span class="p">:</span> <span class="dl">"</span><span class="s2">field2</span><span class="dl">"</span> <span class="p">}</span>
+<span class="p">};</span>
+<span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span> <span class="dl">"</span><span class="s2">X-API-KEY</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">ApiKey</span><span class="dl">"</span> <span class="p">};</span>
+
+<span class="nx">axios</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="nx">baseUrl</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">/products-upsert</span><span class="dl">"</span><span class="p">,</span> <span class="nx">body</span><span class="p">,</span> <span class="nx">headers</span><span class="p">);</span>
+</code></pre></div>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"erreur"</span><span class="p">:</span><span class="w"> </span><span class="s2">"false"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Produc created Successfully"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"productReference"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div>
+<p>This endpoint Upsert a Product. The reference should be unique and permit to update an existing product or Create a new Product. If reference is not given, the product will be created. An Esus Reference will be returned you must have to save it for your next updates of this product. <code>this one will be updated with the new Params Given here.</code></p>
+<h3 id='http-request-4'>HTTP Request</h3>
+<p><code>POST https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/products-upsert</code></p>
+<h3 id='body-parameters-5'>Body Parameters</h3>
+<aside class="comment">
+If you do not add an Optionnal parameter, it will be empty for a creation or simply not updated for an update. If the parameter is empty (""), same behaviour
+</aside>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Optionnal</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>reference</td>
+<td>String</td>
+<td>True/False</td>
+<td>To Update a Product, Reference is mandatory, the Reference will be used as a Primary Key, in case of creation, a unique Reference will be returned</td>
+</tr>
+<tr>
+<td>title</td>
+<td>String</td>
+<td>True/False</td>
+<td>If no reference or reference not found, the title is mandatory</td>
+</tr>
+<tr>
+<td>quantity</td>
+<td>Number</td>
+<td>True</td>
+<td>quantity is the default number of this product at his creation</td>
+</tr>
+<tr>
+<td>supplier_reference</td>
+<td>String</td>
+<td>True</td>
+<td>The reference to the Supplier, if you give a reference, the product will be added in the supplier</td>
+</tr>
+<tr>
+<td>package_reference</td>
+<td>String</td>
+<td>True</td>
+<td>The reference to the Package, if you give a reference, the product will be added in the package</td>
+</tr>
+<tr>
+<td>purchase_price</td>
+<td>String</td>
+<td>True</td>
+<td>Birthdate of the client formated like: YYYY-MM-DD</td>
+</tr>
+<tr>
+<td>sales_price</td>
+<td>Number</td>
+<td>True</td>
+<td>Sales price, the margin Rate will be calculated in function of this price.</td>
+</tr>
+<tr>
+<td>vat_regime</td>
+<td>Options</td>
+<td>True</td>
+<td>&#39;classic&#39;, &#39;margin&#39;, &#39;none&#39;, Thoses options permit to choose your VAT Regime, in margin mode, VAT will be calculated on your margin. Classic mode, VAT will be calculated on your selling price. In none mode, no VAT will be applied. If empty will be set at your default account values</td>
+</tr>
+<tr>
+<td>vat_rate</td>
+<td>Number</td>
+<td>True</td>
+<td>Default Vat Rate, if empty will be set at your default account VAT rate</td>
+</tr>
+<tr>
+<td>commission_regime</td>
+<td>Options</td>
+<td>True</td>
+<td>&#39;%&#39; OR &#39;€&#39; in percent mode, the amount will be a % of the total price, in euro mode, the amount will be an exact amount undepently of the total price. If empty, will be set at your default account values</td>
+</tr>
+<tr>
+<td>commission_mode</td>
+<td>Option</td>
+<td>True</td>
+<td>&#39;default&#39;, &#39;purchase&#39; or &#39;sales&#39;, sales mode mean the commission will be calculated on the selling price, purchase on the buying price if empty, the commission_mode will be set on your account default value.</td>
+</tr>
+<tr>
+<td>commission</td>
+<td>Number</td>
+<td>True</td>
+<td>Number represent the % Or the amount of the commission</td>
+</tr>
+<tr>
+<td>currency</td>
+<td>Symbol</td>
+<td>True</td>
+<td>&#39;$&#39;, &#39;€&#39;... Symbol who represent the currency you use</td>
+</tr>
+<tr>
+<td>custom_fields</td>
+<td>JSON</td>
+<td>True</td>
+<td>You can add Custom Fields for your product, this custom fields should be in your Ezus params and Write Exactly as they are wrote in your params ex: <code>custom_fields: {&quot;field1&quot; : &quot;value1&quot;, &quot;field2&quot; : &quot;value2&quot;}</code></td>
 </tr>
 </tbody></table>
 
