@@ -252,7 +252,8 @@ If you do not add an Optionnal parameter, it will be empty for a creation or sim
 </aside>
 | Parameter    | Type   | Optionnal | Description                                                                                                     |
 | ------------ | ------ | --------- | --------------------------------------------------------------------------------------------------------------- |
-| company_name | String | True      | Set a company name - If company name is empty, the client will be set as an Individual                          |
+| reference     | String | True/False| Used as a primary Key in the Database, if no Reference, the Reference will be Generated automatically|
+| company_name | String | True      | Set a company name - If company name is empty, the client will be set as an Individual |                         |
 | contact      | JSON   | False     | Contact is a JSON and email is needed                                                                           |
 | address      | JSON   | True      | Address is a JSON and label is needed if you want to add or update the adresse of your client but not mandatory |
 | custom_fields      | JSON   | True      | You can add Custom Fields for your client, this custom fields should be in your Ezus params and Write Exactly as they are wrote in your params ex: <code>custom_fields: {"field1" : "value1", "field2" : "value2"}</code>|
@@ -276,6 +277,80 @@ If you do not add an Optionnal parameter, it will be empty for a creation or sim
 | city      | String | True      | Name of the City     |
 | country   | String | True      | Name of the country  |
 | zip       | String | True      | Post Code            |
+
+<aside class="success">
+Remember — You have to be authenticated to call this API with your Baerer TOKEN
+</aside>
+
+# Products
+
+## POST products-upsert
+
+```javascript
+const axios = require("axios");
+const baseUrl = "https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1";
+
+const body = {
+  reference: "product_reference",
+  title: "produt_title",
+  quantity: "3",
+  supplier_reference: "supplier_reference",
+  package_reference: "package_reference",
+  purchase_price: 42.42,
+  sales_price: 84.84,
+  vat_regime: "none",
+  vat_rate = 20,
+  commission_regime: '%',
+  commission_mode: 'default',
+  commission: 20,
+  currency: '$',
+  custom_fields: { custom1: "field1", custom2: "field2" }
+};
+const headers = { "X-API-KEY": "ApiKey" };
+
+axios.post(baseUrl + "/products-upsert", body, headers);
+```
+
+> The above command returns JSON structured like this:
+
+```json
+[
+  {
+    "erreur": "false",
+    "message": "Produc created Successfully",
+    "reference": "productReference"
+  }
+]
+```
+
+This endpoint Upsert a Product. The reference should be unique and permit to update an existing product or Create a new Product. If reference is not given, the product will be created. An Esus Reference will be returned you must have to save it for your next updates of this product. `this one will be updated with the new Params Given here.`
+
+### HTTP Request
+
+`POST https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/products-upsert`
+
+### Body Parameters
+
+<aside class="comment">
+If you do not add an Optionnal parameter, it will be empty for a creation or simply not updated for an update. If the parameter is empty (""), same behaviour
+</aside>
+
+| Parameter          | Type    | Optionnal  | Description                                                                                                                                                                                                                                                                                |
+| ------------------ | ------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| reference          | String  | True/False | To Update a Product, Reference is mandatory, the Reference will be used as a Primary Key, in case of creation, a unique Reference will be returned                                                                                                                                         |
+| title              | String  | True/False | If no reference or reference not found, the title is mandatory                                                                                                                                                                                                                             |
+| quantity           | Number  | True       | quantity is the default number of this product at his creation                                                                                                                                                                                                                             |
+| supplier_reference | String  | True       | The reference to the Supplier, if you give a reference, the product will be added in the supplier                                                                                                                                                                                          |
+| package_reference  | String  | True       | The reference to the Package, if you give a reference, the product will be added in the package                                                                                                                                                                                            |
+| purchase_price     | String  | True       | Birthdate of the client formated like: YYYY-MM-DD                                                                                                                                                                                                                                          |
+| sales_price        | Number  | True       | Sales price, the margin Rate will be calculated in function of this price.                                                                                                                                                                                                                 |
+| vat_regime         | Options | True       | 'classic', 'margin', 'none', Thoses options permit to choose your VAT Regime, in margin mode, VAT will be calculated on your margin. Classic mode, VAT will be calculated on your selling price. In none mode, no VAT will be applied. If empty will be set at your default account values |
+| vat_rate           | Number  | True       | Default Vat Rate, if empty will be set at your default account VAT rate                                                                                                                                                                                                                    |
+| commission_regime  | Options | True       | '%' OR '€' in percent mode, the amount will be a % of the total price, in euro mode, the amount will be an exact amount undepently of the total price. If empty, will be set at your default account values                                                                                |
+| commission_mode    | Option  | True       | 'default', 'purchase' or 'sales', sales mode mean the commission will be calculated on the selling price, purchase on the buying price if empty, the commission_mode will be set on your account default value.                                                                            |
+| commission         | Number  | True       | Number represent the % Or the amount of the commission                                                                                                                                                                                                                                     |
+| currency           | Symbol  | True       | '$', '€'... Symbol who represent the currency you use                                                                                                                                                                                                                                      |
+| custom_fields      | JSON    | True       | You can add Custom Fields for your product, this custom fields should be in your Ezus params and Write Exactly as they are wrote in your params ex: <code>custom_fields: {"field1" : "value1", "field2" : "value2"}</code>                                                                 |
 
 <aside class="success">
 Remember — You have to be authenticated to call this API with your Baerer TOKEN
