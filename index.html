@@ -981,7 +981,7 @@ Remember — You have to be authenticated to call this API with your Baerer TOKE
   <span class="na">commission_regime</span><span class="p">:</span> <span class="dl">'</span><span class="s1">percent</span><span class="dl">'</span><span class="p">,</span>
   <span class="na">commission_mode</span><span class="p">:</span> <span class="dl">'</span><span class="s1">default</span><span class="dl">'</span><span class="p">,</span>
   <span class="na">commission</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
-  <span class="na">currency</span><span class="p">:</span> <span class="dl">'</span><span class="s1">$</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">currency</span><span class="p">:</span> <span class="dl">'</span><span class="s1">USD</span><span class="dl">'</span><span class="p">,</span>
   <span class="na">custom_fields</span><span class="p">:</span> <span class="p">{</span> <span class="na">custom1</span><span class="p">:</span> <span class="dl">"</span><span class="s2">field1</span><span class="dl">"</span><span class="p">,</span> <span class="na">custom2</span><span class="p">:</span> <span class="dl">"</span><span class="s2">field2</span><span class="dl">"</span> <span class="p">}</span>
 <span class="p">};</span>
 <span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span> <span class="dl">"</span><span class="s2">X-API-KEY</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">ApiKey</span><span class="dl">"</span> <span class="p">};</span>
@@ -1091,7 +1091,7 @@ If you do not add an Optionnal parameter, it will be empty for a creation or sim
 <td>currency</td>
 <td>Symbol</td>
 <td>True</td>
-<td>&#39;$&#39;, &#39;€&#39;... Symbol who represent the currency you use</td>
+<td>The ISO 4217 code who represent the currency you use (<a href="https://docs.google.com/spreadsheets/d/1b7BNOwKyN1hMOouve6xhFZ2R2zrH4Sj1L-646j755fU/edit?usp=sharing" target="_blank">Link to Doc</a>)</td>
 </tr>
 <tr>
 <td>custom_fields</td>
@@ -1110,6 +1110,7 @@ Remember — You have to be authenticated to call this API with your Baerer TOKE
 <span class="kd">const</span> <span class="nx">body</span> <span class="o">=</span> <span class="p">{</span>
   <span class="na">reference</span><span class="p">:</span> <span class="dl">"</span><span class="s2">package_reference</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">title</span><span class="p">:</span> <span class="dl">"</span><span class="s2">package_title</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">supplier_reference</span><span class="p">:</span> <span class="dl">"</span><span class="s2">supplier_reference</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">capacity</span><span class="p">:</span> <span class="dl">"</span><span class="s2">3</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">custom_fields</span><span class="p">:</span> <span class="p">{</span> <span class="na">custom1</span><span class="p">:</span> <span class="dl">"</span><span class="s2">field1</span><span class="dl">"</span><span class="p">,</span> <span class="na">custom2</span><span class="p">:</span> <span class="dl">"</span><span class="s2">field2</span><span class="dl">"</span> <span class="p">},</span>
 <span class="p">};</span>
@@ -1155,6 +1156,12 @@ If you do not add an Optionnal parameter, it will be empty for a creation or sim
 <td>String</td>
 <td>True/False</td>
 <td>If no reference or reference not found, the title is mandatory</td>
+</tr>
+<tr>
+<td>supplier_reference</td>
+<td>String</td>
+<td>True</td>
+<td>If supplier_reference given, the package will be associated to a supplier</td>
 </tr>
 <tr>
 <td>capacity</td>
