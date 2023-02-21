@@ -394,7 +394,7 @@ const body = {
   commission_regime: 'percent',
   commission_mode: 'default',
   commission: 20,
-  currency: '$',
+  currency: 'USD',
   custom_fields: { custom1: "field1", custom2: "field2" }
 };
 const headers = { "X-API-KEY": "ApiKey" };
@@ -440,7 +440,7 @@ If you do not add an Optionnal parameter, it will be empty for a creation or sim
 | commission_regime  | Options | True       | 'percent' OR 'flat' in percent mode, the amount will be a % of the total price, in euro mode, the amount will be an exact amount undepently of the total price. If empty, will be set at your default account values                                                                       |
 | commission_mode    | Option  | True       | 'default', 'purchase' or 'sales', sales mode mean the commission will be calculated on the selling price, purchase on the buying price if empty, the commission_mode will be set on your account default value.                                                                            |
 | commission         | Number  | True       | Number represent the % Or the amount of the commission                                                                                                                                                                                                                                     |
-| currency           | Symbol  | True       | '$', '€'... Symbol who represent the currency you use                                                                                                                                                                                                                                      |
+| currency           | Symbol  | True       | The ISO 4217 code who represent the currency you use (<a href="https://docs.google.com/spreadsheets/d/1b7BNOwKyN1hMOouve6xhFZ2R2zrH4Sj1L-646j755fU/edit?usp=sharing" target="_blank">Link to Doc</a>)                                                                                      |
 | custom_fields      | JSON    | True       | You can add Custom Fields for your product, this custom fields should be in your Ezus params and Write Exactly as they are wrote in your params ex: <code>custom_fields: {"field1" : "value1", "field2" : "value2"}</code>                                                                 |
 
 <aside class="success">
@@ -458,6 +458,7 @@ const baseUrl = "https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1";
 const body = {
   reference: "package_reference",
   title: "package_title",
+  supplier_reference: "supplier_reference",
   capacity: "3",
   custom_fields: { custom1: "field1", custom2: "field2" },
 };
@@ -490,12 +491,13 @@ This endpoint Upsert a Package. The reference should be unique and permit to upd
 If you do not add an Optionnal parameter, it will be empty for a creation or simply not updated for an update. If the parameter is empty (""), same behaviour
 </aside>
 
-| Parameter     | Type   | Optionnal  | Description                                                                                                                                                                                                                |
-| ------------- | ------ | ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --- |
-| reference     | String | True/False | To Update a Package, Reference is mandatory, the Reference will be used as a Primary Key, in case of creation, a unique Reference will be returned                                                                         |
-| title         | String | True/False | If no reference or reference not found, the title is mandatory                                                                                                                                                             |
-| capacity      | Number | True       | capacity is the default number of this package at his creation                                                                                                                                                             |     |
-| custom_fields | JSON   | True       | You can add Custom Fields for your package, this custom fields should be in your Ezus params and Write Exactly as they are wrote in your params ex: <code>custom_fields: {"field1" : "value1", "field2" : "value2"}</code> |
+| Parameter          | Type   | Optionnal  | Description                                                                                                                                                                                                                |
+| ------------------ | ------ | ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --- |
+| reference          | String | True/False | To Update a Package, Reference is mandatory, the Reference will be used as a Primary Key, in case of creation, a unique Reference will be returned                                                                         |
+| title              | String | True/False | If no reference or reference not found, the title is mandatory                                                                                                                                                             |
+| supplier_reference | String | True       | If supplier_reference given, the package will be associated to a supplier                                                                                                                                                  |
+| capacity           | Number | True       | capacity is the default number of this package at his creation                                                                                                                                                             |     |
+| custom_fields      | JSON   | True       | You can add Custom Fields for your package, this custom fields should be in your Ezus params and Write Exactly as they are wrote in your params ex: <code>custom_fields: {"field1" : "value1", "field2" : "value2"}</code> |
 
 <aside class="success">
 Remember — You have to be authenticated to call this API with your Baerer TOKEN
