@@ -464,8 +464,12 @@ You must replace <code>ApiKey</code> with your personal API key.
   <span class="na">trip_budget</span><span class="p">:</span> <span class="dl">"</span><span class="s2">300</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">trip_date_in</span><span class="p">:</span> <span class="dl">"</span><span class="s2">2022-07-31</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">trip_date_out</span><span class="p">:</span> <span class="dl">"</span><span class="s2">2022-08-02</span><span class="dl">"</span><span class="p">,</span>
-  <span class="na">custom_fields</span><span class="p">:</span> <span class="p">{</span> <span class="na">custom</span><span class="p">:</span> <span class="dl">"</span><span class="s2">I'm custom</span><span class="dl">"</span> <span class="p">},</span>
+  <span class="na">custom_fields</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">field1</span><span class="dl">"</span><span class="p">,</span> <span class="na">value</span><span class="p">:</span> <span class="dl">"</span><span class="s2">field1Value</span><span class="dl">"</span> <span class="p">},</span>
+    <span class="p">{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">field2</span><span class="dl">"</span><span class="p">,</span> <span class="na">value</span><span class="p">:</span> <span class="dl">"</span><span class="s2">field2Value</span><span class="dl">"</span> <span class="p">},</span>
+  <span class="p">],</span>
   <span class="na">sales_manager_email</span><span class="p">:</span> <span class="dl">"</span><span class="s2">emailofthesales@mail.com</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">client_reference</span><span class="p">:</span> <span class="dl">"</span><span class="s2">client_reference</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">client_email</span><span class="p">:</span> <span class="dl">"</span><span class="s2">emailoftheclient@mail.com</span><span class="dl">"</span><span class="p">,</span>
 <span class="p">};</span>
 <span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span> <span class="dl">"</span><span class="s2">X-API-KEY</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">ApiKey</span><span class="dl">"</span> <span class="p">};</span>
@@ -536,16 +540,22 @@ If you do not add an Optionnal parameter, it will be empty for a creation or sim
 <td>Date of the end of your project formated like YYYY-MM-DD</td>
 </tr>
 <tr>
-<td>custom_field</td>
+<td>custom_fields</td>
 <td>JSON</td>
 <td>True</td>
-<td>If you want you can specified some custom Fiels (They have to be created in ezus and called exactly the same)</td>
+<td>You can add Custom Fields for your client, this custom fields should be in your Ezus params and Write Exactly as they are wrote in your params Technical Name</td>
 </tr>
 <tr>
-<td>sales_manager_mail</td>
+<td>sales_manager_email</td>
 <td>Email</td>
 <td>True</td>
-<td>Email of the Sales Manager, if the email don&#39;t match with a sales manager, the default sales manager will be you</td>
+<td>Email of the Sales Manager, by default if no sales_manager or not found will be assignated to nobody</td>
+</tr>
+<tr>
+<td>client_reference</td>
+<td>String</td>
+<td>True</td>
+<td>Esus Reference of the Client, if the reference don&#39;t match with a client, No clients will be assigned</td>
 </tr>
 <tr>
 <td>client_email</td>
@@ -636,10 +646,10 @@ Remember — You have to be authenticated to call this API with your Baerer TOKE
     <span class="na">country</span><span class="p">:</span> <span class="dl">"</span><span class="s2">France</span><span class="dl">"</span><span class="p">,</span>
     <span class="na">zip</span><span class="p">:</span> <span class="dl">"</span><span class="s2">75009</span><span class="dl">"</span><span class="p">,</span>
   <span class="p">},</span>
-  <span class="na">custom_fields</span><span class="p">:</span> <span class="p">{</span>
-    <span class="na">field1</span><span class="p">:</span> <span class="dl">"</span><span class="s2">value</span><span class="dl">"</span><span class="p">,</span>
-    <span class="na">field2</span><span class="p">:</span> <span class="dl">"</span><span class="s2">value</span><span class="dl">"</span><span class="p">,</span>
-  <span class="p">},</span>
+  <span class="na">custom_fields</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">field1</span><span class="dl">"</span><span class="p">,</span> <span class="na">value</span><span class="p">:</span> <span class="dl">"</span><span class="s2">field1Value</span><span class="dl">"</span> <span class="p">},</span>
+    <span class="p">{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">field2</span><span class="dl">"</span><span class="p">,</span> <span class="na">value</span><span class="p">:</span> <span class="dl">"</span><span class="s2">field2Value</span><span class="dl">"</span> <span class="p">},</span>
+  <span class="p">],</span>
 <span class="p">};</span>
 <span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span> <span class="dl">"</span><span class="s2">X-API-KEY</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">ApiKey</span><span class="dl">"</span> <span class="p">};</span>
 
@@ -676,13 +686,13 @@ If you do not add an Optionnal parameter, it will be empty for a creation or sim
 <td>reference</td>
 <td>String</td>
 <td>True/False</td>
-<td>Used as a primary Key in the Database, if no Reference, the Reference will be Generated automatically</td>
+<td>Used as a primary Key in the Database, if no Reference, the Reference will be Generated automatically and returned</td>
 </tr>
 <tr>
 <td>company_name</td>
 <td>String</td>
 <td>True</td>
-<td>Set a company name - If company name is empty, the client will be set as an Individual</td>
+<td>Set a company name - If company name is empty, the client will be set as an Individual and the name of the client = name of the contact</td>
 </tr>
 <tr>
 <td>contact</td>
@@ -700,7 +710,7 @@ If you do not add an Optionnal parameter, it will be empty for a creation or sim
 <td>custom_fields</td>
 <td>JSON</td>
 <td>True</td>
-<td>You can add Custom Fields for your client, this custom fields should be in your Ezus params and Write Exactly as they are wrote in your params ex: <code>custom_fields: {&quot;field1&quot; : &quot;value1&quot;, &quot;field2&quot; : &quot;value2&quot;}</code></td>
+<td>You can add Custom Fields for your client, this custom fields should be in your Ezus params and Write Exactly as they are wrote in your params Technical Name</td>
 </tr>
 </tbody></table>
 <h4 id='contact-parameters'>Contact Parameters</h4>
@@ -746,7 +756,7 @@ If you do not add an Optionnal parameter, it will be empty for a creation or sim
 <td>birthdate</td>
 <td>String</td>
 <td>True</td>
-<td>Birthdate of the client formated like: YYYY-MM-DD</td>
+<td>Birthdate of the client formated like: YYYY-MM-DD if not formated correctly = NULL</td>
 </tr>
 </tbody></table>
 <h4 id='address-parameters'>Address Parameters</h4>
@@ -808,10 +818,10 @@ Remember — You have to be authenticated to call this API with your Baerer TOKE
     <span class="na">country</span><span class="p">:</span> <span class="dl">"</span><span class="s2">France</span><span class="dl">"</span><span class="p">,</span>
     <span class="na">zip</span><span class="p">:</span> <span class="dl">"</span><span class="s2">75009</span><span class="dl">"</span><span class="p">,</span>
   <span class="p">},</span>
-  <span class="na">custom_fields</span><span class="p">:</span> <span class="p">{</span>
-    <span class="na">field1</span><span class="p">:</span> <span class="dl">"</span><span class="s2">value</span><span class="dl">"</span><span class="p">,</span>
-    <span class="na">field2</span><span class="p">:</span> <span class="dl">"</span><span class="s2">value</span><span class="dl">"</span><span class="p">,</span>
-  <span class="p">},</span>
+  <span class="na">custom_fields</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">field1</span><span class="dl">"</span><span class="p">,</span> <span class="na">value</span><span class="p">:</span> <span class="dl">"</span><span class="s2">field1Value</span><span class="dl">"</span> <span class="p">},</span>
+    <span class="p">{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">field2</span><span class="dl">"</span><span class="p">,</span> <span class="na">value</span><span class="p">:</span> <span class="dl">"</span><span class="s2">field2Value</span><span class="dl">"</span> <span class="p">},</span>
+  <span class="p">],</span>
 <span class="p">};</span>
 <span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span> <span class="dl">"</span><span class="s2">X-API-KEY</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">ApiKey</span><span class="dl">"</span> <span class="p">};</span>
 
@@ -878,7 +888,7 @@ If you do not add an Optionnal parameter, it will be empty for a creation or sim
 <td>custom_fields</td>
 <td>JSON</td>
 <td>True</td>
-<td>You can add Custom Fields for your supplier, this custom fields should be in your Ezus params and Write Exactly as they are wrote in your params ex: <code>custom_fields: {&quot;field1&quot; : &quot;value1&quot;, &quot;field2&quot; : &quot;value2&quot;}</code></td>
+<td>You can add Custom Fields for your client, this custom fields should be in your Ezus params and Write Exactly as they are wrote in your params Technical Name</td>
 </tr>
 </tbody></table>
 <h4 id='contact-parameters-2'>Contact Parameters</h4>
@@ -924,7 +934,7 @@ If you do not add an Optionnal parameter, it will be empty for a creation or sim
 <td>birthdate</td>
 <td>String</td>
 <td>True</td>
-<td>Birthdate of the supplier formated like: YYYY-MM-DD</td>
+<td>Birthdate of the supplier formated like: YYYY-MM-DD if not formatted correctly = NULL</td>
 </tr>
 </tbody></table>
 <h4 id='address-parameters-2'>Address Parameters</h4>
@@ -970,19 +980,22 @@ Remember — You have to be authenticated to call this API with your Baerer TOKE
 
 <span class="kd">const</span> <span class="nx">body</span> <span class="o">=</span> <span class="p">{</span>
   <span class="na">reference</span><span class="p">:</span> <span class="dl">"</span><span class="s2">product_reference</span><span class="dl">"</span><span class="p">,</span>
-  <span class="na">title</span><span class="p">:</span> <span class="dl">"</span><span class="s2">produt_title</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">title</span><span class="p">:</span> <span class="dl">"</span><span class="s2">product_title</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">quantity</span><span class="p">:</span> <span class="dl">"</span><span class="s2">3</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">supplier_reference</span><span class="p">:</span> <span class="dl">"</span><span class="s2">supplier_reference</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">package_reference</span><span class="p">:</span> <span class="dl">"</span><span class="s2">package_reference</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">purchase_price</span><span class="p">:</span> <span class="mf">42.42</span><span class="p">,</span>
   <span class="na">sales_price</span><span class="p">:</span> <span class="mf">84.84</span><span class="p">,</span>
   <span class="na">vat_regime</span><span class="p">:</span> <span class="dl">"</span><span class="s2">none</span><span class="dl">"</span><span class="p">,</span>
-  <span class="nx">vat_rate</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span>
-  <span class="na">commission_regime</span><span class="p">:</span> <span class="dl">'</span><span class="s1">percent</span><span class="dl">'</span><span class="p">,</span>
-  <span class="na">commission_mode</span><span class="p">:</span> <span class="dl">'</span><span class="s1">default</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">vat_rate</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+  <span class="na">commission_regime</span><span class="p">:</span> <span class="dl">"</span><span class="s2">percent</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">commission_mode</span><span class="p">:</span> <span class="dl">"</span><span class="s2">default</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">commission</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
-  <span class="na">currency</span><span class="p">:</span> <span class="dl">'</span><span class="s1">USD</span><span class="dl">'</span><span class="p">,</span>
-  <span class="na">custom_fields</span><span class="p">:</span> <span class="p">{</span> <span class="na">custom1</span><span class="p">:</span> <span class="dl">"</span><span class="s2">field1</span><span class="dl">"</span><span class="p">,</span> <span class="na">custom2</span><span class="p">:</span> <span class="dl">"</span><span class="s2">field2</span><span class="dl">"</span> <span class="p">}</span>
+  <span class="na">currency</span><span class="p">:</span> <span class="dl">"</span><span class="s2">USD</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">custom_fields</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">field1</span><span class="dl">"</span><span class="p">,</span> <span class="na">value</span><span class="p">:</span> <span class="dl">"</span><span class="s2">field1Value</span><span class="dl">"</span> <span class="p">},</span>
+    <span class="p">{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">field2</span><span class="dl">"</span><span class="p">,</span> <span class="na">value</span><span class="p">:</span> <span class="dl">"</span><span class="s2">field2Value</span><span class="dl">"</span> <span class="p">},</span>
+  <span class="p">],</span>
 <span class="p">};</span>
 <span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span> <span class="dl">"</span><span class="s2">X-API-KEY</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">ApiKey</span><span class="dl">"</span> <span class="p">};</span>
 
@@ -1097,7 +1110,7 @@ If you do not add an Optionnal parameter, it will be empty for a creation or sim
 <td>custom_fields</td>
 <td>JSON</td>
 <td>True</td>
-<td>You can add Custom Fields for your product, this custom fields should be in your Ezus params and Write Exactly as they are wrote in your params ex: <code>custom_fields: {&quot;field1&quot; : &quot;value1&quot;, &quot;field2&quot; : &quot;value2&quot;}</code></td>
+<td>You can add Custom Fields for your client, this custom fields should be in your Ezus params and Write Exactly as they are wrote in your params Technical Name</td>
 </tr>
 </tbody></table>
 
@@ -1112,7 +1125,10 @@ Remember — You have to be authenticated to call this API with your Baerer TOKE
   <span class="na">title</span><span class="p">:</span> <span class="dl">"</span><span class="s2">package_title</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">supplier_reference</span><span class="p">:</span> <span class="dl">"</span><span class="s2">supplier_reference</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">capacity</span><span class="p">:</span> <span class="dl">"</span><span class="s2">3</span><span class="dl">"</span><span class="p">,</span>
-  <span class="na">custom_fields</span><span class="p">:</span> <span class="p">{</span> <span class="na">custom1</span><span class="p">:</span> <span class="dl">"</span><span class="s2">field1</span><span class="dl">"</span><span class="p">,</span> <span class="na">custom2</span><span class="p">:</span> <span class="dl">"</span><span class="s2">field2</span><span class="dl">"</span> <span class="p">},</span>
+  <span class="na">custom_fields</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">field1</span><span class="dl">"</span><span class="p">,</span> <span class="na">value</span><span class="p">:</span> <span class="dl">"</span><span class="s2">field1Value</span><span class="dl">"</span> <span class="p">},</span>
+    <span class="p">{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">field2</span><span class="dl">"</span><span class="p">,</span> <span class="na">value</span><span class="p">:</span> <span class="dl">"</span><span class="s2">field2Value</span><span class="dl">"</span> <span class="p">},</span>
+  <span class="p">],</span>
 <span class="p">};</span>
 <span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span> <span class="dl">"</span><span class="s2">X-API-KEY</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">ApiKey</span><span class="dl">"</span> <span class="p">};</span>
 
@@ -1173,7 +1189,7 @@ If you do not add an Optionnal parameter, it will be empty for a creation or sim
 <td>custom_fields</td>
 <td>JSON</td>
 <td>True</td>
-<td>You can add Custom Fields for your package, this custom fields should be in your Ezus params and Write Exactly as they are wrote in your params ex: <code>custom_fields: {&quot;field1&quot; : &quot;value1&quot;, &quot;field2&quot; : &quot;value2&quot;}</code></td>
+<td>You can add Custom Fields for your client, this custom fields should be in your Ezus params and Write Exactly as they are wrote in your params Technical Name</td>
 </tr>
 </tbody></table>
 
