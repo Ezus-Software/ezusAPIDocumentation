@@ -144,7 +144,7 @@ If you do not add an Optionnal parameter, it will be empty for a creation or sim
 | trip_date_out       | Date   | True       | Date of the end of your project formated like YYYY-MM-DD                                                                                                                                      |
 | custom_fields       | JSON   | True       | You can add Custom Fields for your client, this custom fields should be in your Ezus params and Write Exactly as they are wrote in your params Technical Name                                 |
 | sales_manager_email | Email  | True       | Email of the Sales Manager, by default if no sales_manager or not found will be assignated to nobody                                                                                          |
-| client_reference    | String | True       | Esus Reference of the Client, if the reference don't match with a client, No clients will be assigned                                                                                         |
+| client_reference    | String | True       | Esus Reference of the Client, if the reference don't match with a client, API will try with client_email if setted else, No clients will be assigned                                          |
 | client_email        | Email  | True       | Email of the Client, if the email don't match with a client, No clients will be assigned                                                                                                      |
 
 <aside class="success">
