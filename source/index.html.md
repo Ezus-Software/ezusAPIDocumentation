@@ -97,8 +97,12 @@ const body = {
   trip_budget: "300",
   trip_date_in: "2022-07-31",
   trip_date_out: "2022-08-02",
-  custom_fields: { custom: "I'm custom" },
+  custom_fields: [
+    { name: "field1", value: "field1Value" },
+    { name: "field2", value: "field2Value" },
+  ],
   sales_manager_email: "emailofthesales@mail.com",
+  client_reference: "client_reference",
   client_email: "emailoftheclient@mail.com",
 };
 const headers = { "X-API-KEY": "ApiKey" };
@@ -130,17 +134,18 @@ This endpoint upsert a Project. This endpoint take the reference as a Primary ke
 If you do not add an Optionnal parameter, it will be empty for a creation or simply not updated for an update. If the parameter is empty (""), same behaviour
 </aside>
 
-| Parameter          | Type   | Optionnal  | Description                                                                                                                                                                                   |
-| ------------------ | ------ | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| reference          | String | False      | The project Reference used as a primary key to check if the project already exist and UPDATE it or to create a new Project so be sure to use a unique Esus Référence for each of your project |
-| info_title         | String | True/False | Title of your project, mandatory if you create a New Project                                                                                                                                  |
-| trip_people        | Number | True       | Number of people in your project                                                                                                                                                              |
-| trip_budget        | Number | True       | Budget of your project                                                                                                                                                                        |
-| trip_date_in       | Date   | True       | Date of the beginning of your project formated like YYYY-MM-DD                                                                                                                                |
-| trip_date_out      | Date   | True       | Date of the end of your project formated like YYYY-MM-DD                                                                                                                                      |
-| custom_field       | JSON   | True       | If you want you can specified some custom Fiels (They have to be created in ezus and called exactly the same)                                                                                 |
-| sales_manager_mail | Email  | True       | Email of the Sales Manager, if the email don't match with a sales manager, the default sales manager will be you                                                                              |
-| client_email       | Email  | True       | Email of the Client, if the email don't match with a client, No clients will be assigned                                                                                                      |
+| Parameter           | Type   | Optionnal  | Description                                                                                                                                                                                   |
+| ------------------- | ------ | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| reference           | String | False      | The project Reference used as a primary key to check if the project already exist and UPDATE it or to create a new Project so be sure to use a unique Esus Référence for each of your project |
+| info_title          | String | True/False | Title of your project, mandatory if you create a New Project                                                                                                                                  |
+| trip_people         | Number | True       | Number of people in your project                                                                                                                                                              |
+| trip_budget         | Number | True       | Budget of your project                                                                                                                                                                        |
+| trip_date_in        | Date   | True       | Date of the beginning of your project formated like YYYY-MM-DD                                                                                                                                |
+| trip_date_out       | Date   | True       | Date of the end of your project formated like YYYY-MM-DD                                                                                                                                      |
+| custom_fields       | JSON   | True       | You can add Custom Fields for your client, this custom fields should be in your Ezus params and Write Exactly as they are wrote in your params Technical Name                                 |
+| sales_manager_email | Email  | True       | Email of the Sales Manager, by default if no sales_manager or not found will be assignated to nobody                                                                                          |
+| client_reference    | String | True       | Esus Reference of the Client, if the reference don't match with a client, No clients will be assigned                                                                                         |
+| client_email        | Email  | True       | Email of the Client, if the email don't match with a client, No clients will be assigned                                                                                                      |
 
 <aside class="success">
 Remember — You have to be authenticated to call this API with your Baerer TOKEN
@@ -217,10 +222,10 @@ const body = {
     country: "France",
     zip: "75009",
   },
-  custom_fields: {
-    field1: "value",
-    field2: "value",
-  },
+  custom_fields: [
+    { name: "field1", value: "field1Value" },
+    { name: "field2", value: "field2Value" },
+  ],
 };
 const headers = { "X-API-KEY": "ApiKey" };
 
@@ -252,11 +257,11 @@ If you do not add an Optionnal parameter, it will be empty for a creation or sim
 </aside>
 | Parameter    | Type   | Optionnal | Description                                                                                                     |
 | ------------ | ------ | --------- | --------------------------------------------------------------------------------------------------------------- |
-| reference     | String | True/False| Used as a primary Key in the Database, if no Reference, the Reference will be Generated automatically|
-| company_name | String | True      | Set a company name - If company name is empty, the client will be set as an Individual |                         |
+| reference     | String | True/False| Used as a primary Key in the Database, if no Reference, the Reference will be Generated automatically and returned|
+| company_name | String | True      | Set a company name - If company name is empty, the client will be set as an Individual and the name of the client = name of the contact |                         |
 | contact      | JSON   | False     | Contact is a JSON and email is needed                                                                           |
 | address      | JSON   | True      | Address is a JSON and label is needed if you want to add or update the adresse of your client but not mandatory |
-| custom_fields      | JSON   | True      | You can add Custom Fields for your client, this custom fields should be in your Ezus params and Write Exactly as they are wrote in your params ex: <code>custom_fields: {"field1" : "value1", "field2" : "value2"}</code>|
+| custom_fields      | JSON   | True      | You can add Custom Fields for your client, this custom fields should be in your Ezus params and Write Exactly as they are wrote in your params Technical Name|
 
 #### Contact Parameters
 
@@ -267,7 +272,7 @@ If you do not add an Optionnal parameter, it will be empty for a creation or sim
 | lastname  | String | True      | Lastname of the client as a string                                                                   |
 | gender    | int    | True      | 1 = Men, 2 = Women, 0 = None                                                                         |
 | phone     | String | True      | Phone of the client as a string                                                                      |
-| birthdate | String | True      | Birthdate of the client formated like: YYYY-MM-DD                                                    |
+| birthdate | String | True      | Birthdate of the client formated like: YYYY-MM-DD if not formated correctly = NULL                   |
 
 #### Address Parameters
 
@@ -308,10 +313,10 @@ const body = {
     country: "France",
     zip: "75009",
   },
-  custom_fields: {
-    field1: "value",
-    field2: "value",
-  },
+  custom_fields: [
+    { name: "field1", value: "field1Value" },
+    { name: "field2", value: "field2Value" },
+  ],
 };
 const headers = { "X-API-KEY": "ApiKey" };
 
@@ -348,7 +353,7 @@ If you do not add an Optionnal parameter, it will be empty for a creation or sim
 | company_name | String | True      | Set a company name - If company name is empty, the supplier will be set as an Individual |                         |
 | contact      | JSON   | False     | Contact is a JSON and email is needed                                                                           |
 | address      | JSON   | True      | Address is a JSON and label is needed if you want to add or update the adresse of your supplier but not mandatory |
-| custom_fields      | JSON   | True      | You can add Custom Fields for your supplier, this custom fields should be in your Ezus params and Write Exactly as they are wrote in your params ex: <code>custom_fields: {"field1" : "value1", "field2" : "value2"}</code>|
+| custom_fields      | JSON   | True      | You can add Custom Fields for your client, this custom fields should be in your Ezus params and Write Exactly as they are wrote in your params Technical Name|
 
 #### Contact Parameters
 
@@ -359,7 +364,7 @@ If you do not add an Optionnal parameter, it will be empty for a creation or sim
 | lastname  | String | True      | Lastname of the supplier as a string                                                                     |
 | gender    | int    | True      | 1 = Men, 2 = Women, 0 = None                                                                             |
 | phone     | String | True      | Phone of the supplier as a string                                                                        |
-| birthdate | String | True      | Birthdate of the supplier formated like: YYYY-MM-DD                                                      |
+| birthdate | String | True      | Birthdate of the supplier formated like: YYYY-MM-DD if not formatted correctly = NULL                    |
 
 #### Address Parameters
 
@@ -383,19 +388,22 @@ const baseUrl = "https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1";
 
 const body = {
   reference: "product_reference",
-  title: "produt_title",
+  title: "product_title",
   quantity: "3",
   supplier_reference: "supplier_reference",
   package_reference: "package_reference",
   purchase_price: 42.42,
   sales_price: 84.84,
   vat_regime: "none",
-  vat_rate = 20,
-  commission_regime: 'percent',
-  commission_mode: 'default',
+  vat_rate: 20,
+  commission_regime: "percent",
+  commission_mode: "default",
   commission: 20,
-  currency: 'USD',
-  custom_fields: { custom1: "field1", custom2: "field2" }
+  currency: "USD",
+  custom_fields: [
+    { name: "field1", value: "field1Value" },
+    { name: "field2", value: "field2Value" },
+  ],
 };
 const headers = { "X-API-KEY": "ApiKey" };
 
@@ -441,7 +449,7 @@ If you do not add an Optionnal parameter, it will be empty for a creation or sim
 | commission_mode    | Option  | True       | 'default', 'purchase' or 'sales', sales mode mean the commission will be calculated on the selling price, purchase on the buying price if empty, the commission_mode will be set on your account default value.                                                                            |
 | commission         | Number  | True       | Number represent the % Or the amount of the commission                                                                                                                                                                                                                                     |
 | currency           | Symbol  | True       | The ISO 4217 code who represent the currency you use (<a href="https://docs.google.com/spreadsheets/d/1b7BNOwKyN1hMOouve6xhFZ2R2zrH4Sj1L-646j755fU/edit?usp=sharing" target="_blank">Link to Doc</a>)                                                                                      |
-| custom_fields      | JSON    | True       | You can add Custom Fields for your product, this custom fields should be in your Ezus params and Write Exactly as they are wrote in your params ex: <code>custom_fields: {"field1" : "value1", "field2" : "value2"}</code>                                                                 |
+| custom_fields      | JSON    | True       | You can add Custom Fields for your client, this custom fields should be in your Ezus params and Write Exactly as they are wrote in your params Technical Name                                                                                                                              |
 
 <aside class="success">
 Remember — You have to be authenticated to call this API with your Baerer TOKEN
@@ -460,7 +468,10 @@ const body = {
   title: "package_title",
   supplier_reference: "supplier_reference",
   capacity: "3",
-  custom_fields: { custom1: "field1", custom2: "field2" },
+  custom_fields: [
+    { name: "field1", value: "field1Value" },
+    { name: "field2", value: "field2Value" },
+  ],
 };
 const headers = { "X-API-KEY": "ApiKey" };
 
@@ -491,13 +502,13 @@ This endpoint Upsert a Package. The reference should be unique and permit to upd
 If you do not add an Optionnal parameter, it will be empty for a creation or simply not updated for an update. If the parameter is empty (""), same behaviour
 </aside>
 
-| Parameter          | Type   | Optionnal  | Description                                                                                                                                                                                                                |
-| ------------------ | ------ | ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --- |
-| reference          | String | True/False | To Update a Package, Reference is mandatory, the Reference will be used as a Primary Key, in case of creation, a unique Reference will be returned                                                                         |
-| title              | String | True/False | If no reference or reference not found, the title is mandatory                                                                                                                                                             |
-| supplier_reference | String | True       | If supplier_reference given, the package will be associated to a supplier                                                                                                                                                  |
-| capacity           | Number | True       | capacity is the default number of this package at his creation                                                                                                                                                             |     |
-| custom_fields      | JSON   | True       | You can add Custom Fields for your package, this custom fields should be in your Ezus params and Write Exactly as they are wrote in your params ex: <code>custom_fields: {"field1" : "value1", "field2" : "value2"}</code> |
+| Parameter          | Type   | Optionnal  | Description                                                                                                                                                   |
+| ------------------ | ------ | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- | --- |
+| reference          | String | True/False | To Update a Package, Reference is mandatory, the Reference will be used as a Primary Key, in case of creation, a unique Reference will be returned            |
+| title              | String | True/False | If no reference or reference not found, the title is mandatory                                                                                                |
+| supplier_reference | String | True       | If supplier_reference given, the package will be associated to a supplier                                                                                     |
+| capacity           | Number | True       | capacity is the default number of this package at his creation                                                                                                |     |
+| custom_fields      | JSON   | True       | You can add Custom Fields for your client, this custom fields should be in your Ezus params and Write Exactly as they are wrote in your params Technical Name |
 
 <aside class="success">
 Remember — You have to be authenticated to call this API with your Baerer TOKEN
