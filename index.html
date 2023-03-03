@@ -630,7 +630,15 @@ Remember — You have to be authenticated to call this API with your Baerer TOKE
       </span><span class="nl">"trip_date_out"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-08-02"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"destination"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Destination"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"subdestination"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Subdestination"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"trip_duration"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2 days, 0:00:00"</span><span class="w">
+      </span><span class="nl">"trip_duration"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2 days"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"client"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Client reference"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"entreprise"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"company_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Client Company Name"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Client First Name"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Client Last Name"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"melchiorbengtsson@gmail.com"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="p">{</span><span class="w">
       </span><span class="nl">"alternative_title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Main Alternative"</span><span class="p">,</span><span class="w">
@@ -640,7 +648,15 @@ Remember — You have to be authenticated to call this API with your Baerer TOKE
       </span><span class="nl">"trip_date_out"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-08-02"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"destination"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Destination"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"subdestination"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Subdestination"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"trip_duration"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2 days, 0:00:00"</span><span class="w">
+      </span><span class="nl">"trip_duration"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2 days"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"client"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Client Reference"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"individual"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"company_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Client Company Name"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Client First Name"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Client Last Name"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"melchiorbengtsson@gmail.com"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">],</span><span class="w">
   </span><span class="nl">"custom_fields"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
@@ -755,6 +771,11 @@ Remember — You have to be authenticated to call this API with your Baerer TOKE
 <td>trip_duration</td>
 <td>String</td>
 <td>Number of days</td>
+</tr>
+<tr>
+<td>client</td>
+<td>JSON</td>
+<td>Json that contain : &quot;reference&quot;, &quot;type&quot; (entreprise or individual), &quot;company_name&quot;, &quot;first_name&quot;, &quot;last_name&quot; and &quot;email&quot;</td>
 </tr>
 </tbody></table>
 
