@@ -151,6 +151,104 @@ If you do not add an Optionnal parameter, it will be empty for a creation or sim
 Remember — You have to be authenticated to call this API with your Baerer TOKEN
 </aside>
 
+## GET project
+
+```javascript
+const axios = require("axios");
+const baseUrl = "https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1";
+
+const headers = { "X-API-KEY": "ApiKey" };
+
+axios.post(baseUrl + "/project?reference=reference", {}, headers);
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "erreur": "false",
+  "reference": "esus-reference",
+  "info_title": "Project Title",
+  "info_stage": "Confirmed",
+  "info_notes": "Notes on the project",
+  "info_reference": "202302061-P",
+  "traveler_designer": {
+    "email": "traveldesigner@email.com",
+    "first_name": "FirstName",
+    "last_name": "LastName"
+  },
+  "project_manager": {
+    "email": "projectmanager@email.com",
+    "first_name": "FirstName",
+    "last_name": "LastName"
+  },
+  "alternatives": [
+    {
+      "alternative_title": "Alternative 1",
+      "trip_people": "15",
+      "trip_budget": 0,
+      "trip_date_in": "2022-07-31",
+      "trip_date_out": "2022-08-02",
+      "destination": "Destination",
+      "subdestination": "Subdestination",
+      "trip_duration": "2 days, 0:00:00"
+    },
+    {
+      "alternative_title": "Main Alternative",
+      "trip_people": "15",
+      "trip_budget": 300,
+      "trip_date_in": "2022-07-31",
+      "trip_date_out": "2022-08-02",
+      "destination": "Destination",
+      "subdestination": "Subdestination",
+      "trip_duration": "2 days, 0:00:00"
+    }
+  ],
+  "custom_fields": [
+    {
+      "name": "CustomField",
+      "value": "Value"
+    }
+  ]
+}
+```
+
+This endpoint get a Project
+
+### HTTP Request
+
+`POST https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/project?reference=reference`
+
+### Returned Values
+
+| Name              | Type   | Value                                                                  |
+| ----------------- | ------ | ---------------------------------------------------------------------- |
+| reference         | String | The Reference of the given project - The one you gave                  |
+| info_title        | String | The Title of your project                                              |
+| info_stage        | String | The Stage of your project (Confirmed, Received, Paid...)               |
+| info_notes        | String | Notes on your project                                                  |
+| info_reference    | String | Reference of your Project ex: "202208019-P"                            |
+| traveler_designer | JSON   | Travel designer is a Json that contain email, first_name and last_name |
+| project_manager   | JSON   | Project Manager is a Json that contain email, first_name and last_name |
+| alternatives      | Array  | An Array of Alternatives                                               |
+| custom_fields     | Array  | Array of custom Fields that contain name and value as String           |
+
+### alternatives
+
+| Name              | Type   | Value                                                                |
+| ----------------- | ------ | -------------------------------------------------------------------- |
+| alternative_title | String | Title of the Alternative                                             |
+| trip_people       | String | Number of people                                                     |
+| trip_budget       | Number | Budget of the Alternative                                            |
+| trip_date_in      | String | Date of the begining of this alternative, formated like : YYYY-MM-DD |
+| trip_date_out     | String | Date of the end of this alternative, formated like : YYYY-MM-DD      |
+| destination       | String | Destination of the alternative                                       |
+| subdestination    | String | Subdestination of the Alternative                                    |
+| trip_duration     | String | Number of days                                                       |
+
+<aside class="success">
+Remember — You have to be authenticated to call this API with your Baerer TOKEN
+</aside>
 ## POST projects-documents-create
 
 ```javascript
@@ -287,6 +385,100 @@ If you do not add an Optionnal parameter, it will be empty for a creation or sim
 Remember — You have to be authenticated to call this API with your Baerer TOKEN
 </aside>
 
+## GET client
+
+```javascript
+const axios = require("axios");
+const baseUrl = "https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1";
+
+const headers = { "X-API-KEY": "ApiKey" };
+
+axios.post(baseUrl + "/client?reference=reference", {}, headers);
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "erreur": "false",
+  "reference": "esus-reference",
+  "type": "entreprise",
+  "company_name": "Company Name",
+  "first_name": "Fistname",
+  "last_name": "Lastname",
+  "email": "client@email.com",
+  "activity": "Client Activity",
+  "vat_number": "Client VAT Number",
+  "siret": "Client Siret",
+  "info_profile": "Client",
+  "info_origin": "Client Source",
+  "info_notes": "Notes on the client",
+  "info_reference": "Reference of the Client",
+  "user": {
+    "email": "user@email.com",
+    "first_name": "FirstName",
+    "last_name": "LastName"
+  },
+  "address": {
+    "label": "58 Rue de Paradis",
+    "zip": "75009",
+    "city": "Paris",
+    "country": "France"
+  },
+  "contacts": [
+    {
+      "first_name": "Firstname",
+      "last_name": "Lastname",
+      "email": "contact@email.com"
+    }
+  ],
+  "projects": [
+    {
+      "reference": "reference",
+      "info_title": "Project Title"
+    }
+  ],
+  "custom_fields": [
+    {
+      "name": "CustomField",
+      "value": "Value"
+    }
+  ]
+}
+```
+
+This endpoint get a Client
+
+### HTTP Request
+
+`POST https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/client?reference=reference`
+
+### Returned Values
+
+| Name           | Type   | Value                                                                       |
+| -------------- | ------ | --------------------------------------------------------------------------- |
+| reference      | String | The Reference of the given client - The one you gave                        |
+| type           | String | The type of the client ["entreprise", "individual"]                         |
+| company_name   | String | Name of the company of your client                                          |
+| first_name     | String | First Name of the client                                                    |
+| last_name      | String | Last Name of the Client                                                     |
+| email          | String | Email of the Client                                                         |
+| activity       | String | Activity Of the Client                                                      |
+| vat_number     | String | VAT number of the Client                                                    |
+| siret          | String | Siret Number of the Client                                                  |
+| info_profile   | String | info_profile of the Client                                                  |
+| info_origin    | String | Source of the client                                                        |
+| info_notes     | String | Notes on the Client                                                         |
+| info_reference | String | Reference of the Client                                                     |
+| address        | JSON   | Address of the client JSON who contain "label", "zip", "city" and "country" |
+| contacts       | Array  | Array of Json who contains "first_name", "last_name", "email"               |
+| projects       | Array  | Array of Json who contains "reference", "info_title"                        |
+| custom_fields  | Array  | Array of Json who contains "name", "value"                                  |
+
+<aside class="success">
+Remember — You have to be authenticated to call this API with your Baerer TOKEN
+</aside>
+
 # Suppliers
 
 ## POST suppliers-upserts
@@ -299,7 +491,7 @@ const body = {
   reference: "suppliers_reference",
   company_name: "test-ezus",
   type: "accom, activity"
-  contact: {
+  contact: {q
     firstname: "firstname",
     lastname: "lastname",
     gender: 1,
@@ -374,6 +566,102 @@ If you do not add an Optionnal parameter, it will be empty for a creation or sim
 | city      | String | True      | Name of the City     |
 | country   | String | True      | Name of the country  |
 | zip       | String | True      | Post Code            |
+
+<aside class="success">
+Remember — You have to be authenticated to call this API with your Baerer TOKEN
+</aside>
+## GET supplier
+
+```javascript
+const axios = require("axios");
+const baseUrl = "https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1";
+
+const headers = { "X-API-KEY": "ApiKey" };
+
+axios.post(baseUrl + "/supplier?reference=reference", {}, headers);
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "erreur": "false",
+  "reference": "esus-reference",
+  "company_name": "Company Name",
+  "capacity": "Capacity",
+  "info_notes": "Notes on the client",
+  "info_reference": "Reference of the Client",
+  "visual_url": "urlofthevisual.com",
+  "user": {
+    "email": "user@email.com",
+    "first_name": "FirstName",
+    "last_name": "LastName"
+  },
+  "langs": [
+    {
+      "lang": "american",
+      "name": "American Name",
+      "short_description": "Short American Description",
+      "long_description": "Short American Description"
+    }
+  ],
+  "medias": [
+    {
+      "media_name": "name.jpeg",
+      "path_full": "https://ezus-cmtyhfgfzxdnjtahdgpfmgfj.s3.amazonaws.com/media/name.jpeg"
+    }
+  ],
+  "address": {
+    "label": "58 Rue de Paradis",
+    "zip": "75009",
+    "city": "Paris",
+    "country": "France"
+  },
+  "contacts": [
+    {
+      "first_name": "Firstname",
+      "last_name": "Lastname",
+      "email": "contact@email.com"
+    }
+  ],
+  "products": [
+    {
+      "esus_reference": "product-reference",
+      "title": "Product Title"
+    }
+  ],
+  "custom_fields": [
+    {
+      "name": "CustomField",
+      "value": "Value"
+    }
+  ]
+}
+```
+
+This endpoint get a Supplier
+
+### HTTP Request
+
+`POST https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/supplier?reference=reference`
+
+### Returned Values
+
+| Name           | Type   | Value                                                                                                          |
+| -------------- | ------ | -------------------------------------------------------------------------------------------------------------- |
+| reference      | String | The Reference of the given supplier - The one you gave                                                         |
+| company_name   | String | Name of the company of your supplier                                                                           |
+| capacity       | String | Capacity of the supplier                                                                                       |
+| info_notes     | String | Notes on the Supplier                                                                                          |
+| info_reference | String | Reference of the Supplier                                                                                      |
+| visual_url     | String | Link to the Slides of the Supplier                                                                             |
+| user           | JSON   | user Assigned to the Supplier JSON who contain "email", "first_name", "last_name"                              |
+| langs          | JSON   | Array of Json who contains "lang", "name", "short_description" and "long_description"                          |
+| medias         | JSON   | Array of Json who contains "media_name", "path_full"                                                           |
+| address        | JSON   | Address of the supplier JSON who contain "label", "zip", "city" and "country"                                  |
+| contacts       | Array  | Contacts Assigned to the supplier formated in an Array of Json who contains "first_name", "last_name", "email" |
+| projects       | Array  | Projects assigned to the supplier formated in an Array of Json who contains "reference", "info_title"          |
+| custom_fields  | Array  | Array of Json who contains "name", "value"                                                                     |
 
 <aside class="success">
 Remember — You have to be authenticated to call this API with your Baerer TOKEN
@@ -455,6 +743,123 @@ If you do not add an Optionnal parameter, it will be empty for a creation or sim
 Remember — You have to be authenticated to call this API with your Baerer TOKEN
 </aside>
 
+## GET product
+
+```javascript
+const axios = require("axios");
+const baseUrl = "https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1";
+
+const headers = { "X-API-KEY": "ApiKey" };
+
+axios.post(baseUrl + "/product?reference=reference", {}, headers);
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "erreur": "false",
+  "reference": "esus-reference",
+  "title": "Product Title",
+  "capacity": "Capacity",
+  "quantity": "Quantity of this Product",
+  "vat_regime": "margin",
+  "vat_rate": 15.0,
+  "commission_mode": "default",
+  "commission_regime": "%",
+  "commission": "0",
+  "currency": "0",
+  "budget_text": "Option",
+  "budget_form": "Important",
+  "budget_variable": "Do not Diplay",
+  "visual_url": "urloftheproduct.com",
+  "langs": [
+    {
+      "lang": "french",
+      "name": "ProductName in French",
+      "short_description": "french Short Description",
+      "long_description": "french Long Description"
+    }
+  ],
+  "medias": [
+    {
+      "media_name": "imgname.jpeg",
+      "path_full": "https://ezus-cmtyhfgfzxdnjtahdgpfmgfj.s3.amazonaws.com/media/imgname.jpeg"
+    }
+  ],
+  "supplier": {
+    "reference": "190e4c0e-b298-11ed-8c48-0aaafac61d09",
+    "company_name": "Company Name"
+  },
+  "package": {
+    "reference": "e2a428dc-b293-11ed-8c48-0aaafac61d09",
+    "title": "Package Name"
+  },
+  "rates": [
+    {
+      "reference": null,
+      "type": "default",
+      "name": "",
+      "purchase_price_pretax": 0.0,
+      "margin_rate": 0.0,
+      "sale_price_pretax": 0.0,
+      "child": [
+        {
+          "reference": null,
+          "type": "custom",
+          "name": null,
+          "purchase_price_pretax": 0.0,
+          "margin_rate": 0.0,
+          "sale_price_pretax": 0.0
+        }
+      ]
+    }
+  ],
+  "custom_fields": [
+    {
+      "name": "CustomField",
+      "value": "Value"
+    }
+  ]
+}
+```
+
+This endpoint get a product
+
+### HTTP Request
+
+`POST https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/product?reference=reference`
+
+### Returned Values
+
+| Name              | Type   | Value                                                                                                                                                                                                                                                                                                                         |
+| ----------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| reference         | String | The Reference of the given product - The one you gave                                                                                                                                                                                                                                                                         |
+| title             | String | Name of the product                                                                                                                                                                                                                                                                                                           |
+| capacity          | String | Capacity of the product                                                                                                                                                                                                                                                                                                       |
+| quantity          | String | Quantity available of the product                                                                                                                                                                                                                                                                                             |
+| vat_regime        | String | VAT regime of the product - 3 options: VAT on margin ("margin"), Common law ("classic") or VAT non applicable ("none")                                                                                                                                                                                                        |
+| vat_rate          | String | Default % of the VAT on the product                                                                                                                                                                                                                                                                                           |
+| commission_mode   | String | "default" or "purchase" Default mode is base on the buying price, Purchase mode based on the selling price                                                                                                                                                                                                                    |
+| commission_regime | String | The commission regime can be "%" (Commission is a percent of the Buying/Selling price) OR "currency" (Commission is a Fix Value)                                                                                                                                                                                              |
+| commission        | String | Commission as Number                                                                                                                                                                                                                                                                                                          |
+| currency          | Number | Address of the product JSON who contain "label", "zip", "city" and "country"                                                                                                                                                                                                                                                  |
+| budget_text       | String | "Option", "On Demand" or NULL, If it's Option/On demand, by default the product will be an Option/On demand                                                                                                                                                                                                                   |
+| buget_form        | String | "Important", "Normal", "Low" represent how the product will be highlight on the budget By Default                                                                                                                                                                                                                             |
+| budget_variable   | String | "Display", "Do not Display", This option tells if the product will be displayed or not in the budget                                                                                                                                                                                                                          |
+| visual_url        | String | URL of the slide of this product                                                                                                                                                                                                                                                                                              |
+| langs             | Array  | Array of Json who contains "lang":"language name", "name":"product name in this language", "short_description", "long_description"                                                                                                                                                                                            |
+| medias            | Array  | Array of Json who contains "media_name", "path_full": Full path to the image                                                                                                                                                                                                                                                  |
+| supplier          | Array  | Array of Json who contains "reference", "company_name"                                                                                                                                                                                                                                                                        |
+| package           | Array  | Array of Json who contains "name", "value"                                                                                                                                                                                                                                                                                    |
+| rates             | Array  | Array of Json who contains "reference", "type", "name", "purchase_price_pretax", "margin_rate", "sale_price_pretax", "child" - Childs are tariffs contains in the rates tariff, a product can have multiple tariffs and multiple seasons, a season can have multiple tariffs levels also. "type" can be "default" OR "season" |
+| custom_fields     | Array  | Array of Json who contains "name", "value"                                                                                                                                                                                                                                                                                    |
+
+<aside class="success">
+Remember — You have to be authenticated to call this API with your Baerer TOKEN
+</aside>
+                                                                                                                    |
+
 # Package
 
 ## POST package_upsert
@@ -509,6 +914,145 @@ If you do not add an Optionnal parameter, it will be empty for a creation or sim
 | supplier_reference | String | True       | If supplier_reference given, the package will be associated to a supplier                                                                                     |
 | capacity           | Number | True       | capacity is the default number of this package at his creation                                                                                                |     |
 | custom_fields      | JSON   | True       | You can add Custom Fields for your client, this custom fields should be in your Ezus params and Write Exactly as they are wrote in your params Technical Name |
+
+<aside class="success">
+Remember — You have to be authenticated to call this API with your Baerer TOKEN
+</aside>
+
+## GET package
+
+```javascript
+const axios = require("axios");
+const baseUrl = "https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1";
+
+const headers = { "X-API-KEY": "ApiKey" };
+
+axios.post(baseUrl + "/package?reference=reference", {}, headers);
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "erreur": "false",
+  "reference": "esus-reference",
+  "title": "package Title",
+  "capacity": "Capacity",
+  "info_notes": "Notes on the Package",
+  "visual_url": "urlofthepackage.com",
+  "langs": [
+    {
+      "lang": "french",
+      "name": "packageName in French",
+      "short_description": "french Short Description",
+      "long_description": "french Long Description"
+    }
+  ],
+  "medias": [
+    {
+      "media_name": "imgname.jpeg",
+      "path_full": "https://ezus-cmtyhfgfzxdnjtahdgpfmgfj.s3.amazonaws.com/media/imgname.jpeg"
+    }
+  ],
+  "supplier": {
+    "reference": "190e4c0e-b298-11ed-8c48-0aaafac61d09",
+    "company_name": "Company Name"
+  },
+  "product": {
+    "reference": "e2a428dc-b293-11ed-8c48-0aaafac61d09",
+    "title": "Product Name"
+  },
+  "custom_fields": [
+    {
+      "name": "CustomField",
+      "value": "Value"
+    }
+  ]
+}
+```
+
+This endpoint get a package
+
+### HTTP Request
+
+`POST https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/package?reference=reference`
+
+### Returned Values
+
+| Name          | Type   | Value                                                                                                                              |
+| ------------- | ------ | ---------------------------------------------------------------------------------------------------------------------------------- |
+| reference     | String | The Reference of the given package - The one you gave                                                                              |
+| title         | String | Name of the package                                                                                                                |
+| capacity      | String | Capacity of the package                                                                                                            |
+| info_notes    | String | Notes on the package budget                                                                                                        |
+| visual_url    | String | URL of the google slide of this package                                                                                            |
+| langs         | Array  | Array of Json who contains "lang":"language name", "name":"package name in this language", "short_description", "long_description" |
+| medias        | Array  | Array of Json who contains "media_name", "path_full": Full path to the image                                                       |
+| supplier      | Array  | Array of Json who contains "reference", "company_name"                                                                             |
+| products      | Array  | Array of Json who contains "name", "value"                                                                                         |
+| custom_fields | Array  | Array of Json who contains "name", "value"                                                                                         |
+
+<aside class="success">
+Remember — You have to be authenticated to call this API with your Baerer TOKEN
+</aside>
+
+# OPTION custom_fields
+
+```json
+  "custom_fields": [
+    {
+      "name": "Text",
+      "value": "Value"
+    },
+    {
+      "name": "Number",
+      "value": 42
+    },
+    {
+      "name": "Text area",
+      "value": "Value of the text Area"
+    },
+    {
+      "name": "Date",
+      "value": "2012-12-21"
+    },
+    {
+      "name": "Time",
+      "value": "2006-10-07T12:06:56.568+01:00"
+    },
+    {
+      "name": "URL link",
+      "value": "urlLink.com"
+    },
+    {
+      "name": "Dropdown",
+      "value": "ExactOption"
+    }
+  ]
+}
+```
+
+### Custom Fields
+
+<aside class="success">
+The cusotm_fields must be called with their technical_name which you can find in your custom field settings, and must respect the given formatting, if they do not respect this formatting, they will not be updated or updated with their default settings.
+</aside>
+
+<aside class="warning">
+Warning: the custom_fields of the projects route must have their real name and not their technical_name in "name"
+</aside>
+
+### Options
+
+| Options  | Type          | Value                                                                        |
+| -------- | ------------- | ---------------------------------------------------------------------------- |
+| Text     | String        | Simple String like Text Area                                                 |
+| Dropdown | Options       | The option must be written exactly as in the parameters, respecting the case |
+| Date     | String        | The date must be written exactly in YYYY-MM-DD format                        |
+| Time     | String        | The time must be written exactly in the format: YYYY-MM-DDTHH:MM:SS+01:00    |
+| Checkbox | String        | A String must contain "true" (checked) OR "false" (unchecked)                |
+| Number   | Number        | Number type should be a Number without other character                       |
+| File     | Not Supported | Actually we can't upload files with the API                                  |
 
 <aside class="success">
 Remember — You have to be authenticated to call this API with your Baerer TOKEN
