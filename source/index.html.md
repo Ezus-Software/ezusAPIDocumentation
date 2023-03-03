@@ -191,7 +191,15 @@ axios.post(baseUrl + "/project?reference=reference", {}, headers);
       "trip_date_out": "2022-08-02",
       "destination": "Destination",
       "subdestination": "Subdestination",
-      "trip_duration": "2 days, 0:00:00"
+      "trip_duration": "2 days",
+      "client": {
+        "reference": "Client reference",
+        "type": "entreprise",
+        "company_name": "Client Company Name",
+        "first_name": "Client First Name",
+        "last_name": "Client Last Name",
+        "email": "melchiorbengtsson@gmail.com"
+      }
     },
     {
       "alternative_title": "Main Alternative",
@@ -201,7 +209,15 @@ axios.post(baseUrl + "/project?reference=reference", {}, headers);
       "trip_date_out": "2022-08-02",
       "destination": "Destination",
       "subdestination": "Subdestination",
-      "trip_duration": "2 days, 0:00:00"
+      "trip_duration": "2 days",
+      "client": {
+        "reference": "Client Reference",
+        "type": "individual",
+        "company_name": "Client Company Name",
+        "first_name": "Client First Name",
+        "last_name": "Client Last Name",
+        "email": "melchiorbengtsson@gmail.com"
+      }
     }
   ],
   "custom_fields": [
@@ -235,16 +251,17 @@ This endpoint get a Project
 
 ### alternatives
 
-| Name              | Type   | Value                                                                |
-| ----------------- | ------ | -------------------------------------------------------------------- |
-| alternative_title | String | Title of the Alternative                                             |
-| trip_people       | String | Number of people                                                     |
-| trip_budget       | Number | Budget of the Alternative                                            |
-| trip_date_in      | String | Date of the begining of this alternative, formated like : YYYY-MM-DD |
-| trip_date_out     | String | Date of the end of this alternative, formated like : YYYY-MM-DD      |
-| destination       | String | Destination of the alternative                                       |
-| subdestination    | String | Subdestination of the Alternative                                    |
-| trip_duration     | String | Number of days                                                       |
+| Name              | Type   | Value                                                                                                                     |
+| ----------------- | ------ | ------------------------------------------------------------------------------------------------------------------------- |
+| alternative_title | String | Title of the Alternative                                                                                                  |
+| trip_people       | String | Number of people                                                                                                          |
+| trip_budget       | Number | Budget of the Alternative                                                                                                 |
+| trip_date_in      | String | Date of the begining of this alternative, formated like : YYYY-MM-DD                                                      |
+| trip_date_out     | String | Date of the end of this alternative, formated like : YYYY-MM-DD                                                           |
+| destination       | String | Destination of the alternative                                                                                            |
+| subdestination    | String | Subdestination of the Alternative                                                                                         |
+| trip_duration     | String | Number of days                                                                                                            |
+| client            | JSON   | Json that contain : "reference", "type" (entreprise or individual), "company_name", "first_name", "last_name" and "email" |
 
 <aside class="success">
 Remember — You have to be authenticated to call this API with your Baerer TOKEN
