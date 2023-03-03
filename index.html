@@ -286,7 +286,7 @@
   color: #859900;
 }
     </style>
-    <link href="stylesheets/screen-b2a02bb0.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/screen-07cc00e8.css" rel="stylesheet" media="screen" />
     <link href="stylesheets/print-966d6edc.css" rel="stylesheet" media="print" />
       <script src="javascripts/all-ebb2dba6.js"></script>
 
@@ -333,6 +333,9 @@
                     <a href="#post-projects-upsert" class="toc-h2 toc-link" data-title="POST projects-upsert">POST projects-upsert</a>
                   </li>
                   <li>
+                    <a href="#get-project" class="toc-h2 toc-link" data-title="GET project">GET project</a>
+                  </li>
+                  <li>
                     <a href="#post-projects-documents-create" class="toc-h2 toc-link" data-title="POST projects-documents-create">POST projects-documents-create</a>
                   </li>
               </ul>
@@ -343,6 +346,9 @@
                   <li>
                     <a href="#post-clients-upsert" class="toc-h2 toc-link" data-title="POST clients-upsert">POST clients-upsert</a>
                   </li>
+                  <li>
+                    <a href="#get-client" class="toc-h2 toc-link" data-title="GET client">GET client</a>
+                  </li>
               </ul>
           </li>
           <li>
@@ -350,6 +356,9 @@
               <ul class="toc-list-h2">
                   <li>
                     <a href="#post-suppliers-upserts" class="toc-h2 toc-link" data-title="POST suppliers-upserts">POST suppliers-upserts</a>
+                  </li>
+                  <li>
+                    <a href="#get-supplier" class="toc-h2 toc-link" data-title="GET supplier">GET supplier</a>
                   </li>
               </ul>
           </li>
@@ -359,6 +368,9 @@
                   <li>
                     <a href="#post-products-upsert" class="toc-h2 toc-link" data-title="POST products-upsert">POST products-upsert</a>
                   </li>
+                  <li>
+                    <a href="#get-product" class="toc-h2 toc-link" data-title="GET product">GET product</a>
+                  </li>
               </ul>
           </li>
           <li>
@@ -366,6 +378,20 @@
               <ul class="toc-list-h2">
                   <li>
                     <a href="#post-package_upsert" class="toc-h2 toc-link" data-title="POST package_upsert">POST package_upsert</a>
+                  </li>
+                  <li>
+                    <a href="#get-package" class="toc-h2 toc-link" data-title="GET package">GET package</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#option-custom_fields" class="toc-h1 toc-link" data-title="OPTION custom_fields">OPTION custom_fields</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#custom-fields" class="toc-h2 toc-link" data-title="Custom Fields">Custom Fields</a>
+                  </li>
+                  <li>
+                    <a href="#options" class="toc-h2 toc-link" data-title="Options">Options</a>
                   </li>
               </ul>
           </li>
@@ -568,6 +594,173 @@ If you do not add an Optionnal parameter, it will be empty for a creation or sim
 <aside class="success">
 Remember — You have to be authenticated to call this API with your Baerer TOKEN
 </aside>
+<h2 id='get-project'>GET project</h2><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">axios</span><span class="dl">"</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">baseUrl</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span> <span class="dl">"</span><span class="s2">X-API-KEY</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">ApiKey</span><span class="dl">"</span> <span class="p">};</span>
+
+<span class="nx">axios</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="nx">baseUrl</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">/project?reference=reference</span><span class="dl">"</span><span class="p">,</span> <span class="p">{},</span> <span class="nx">headers</span><span class="p">);</span>
+</code></pre></div>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"erreur"</span><span class="p">:</span><span class="w"> </span><span class="s2">"false"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"esus-reference"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"info_title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Project Title"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"info_stage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Confirmed"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"info_notes"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Notes on the project"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"info_reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"202302061-P"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"traveler_designer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"traveldesigner@email.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FirstName"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LastName"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"project_manager"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"projectmanager@email.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FirstName"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LastName"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"alternatives"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"alternative_title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Alternative 1"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"trip_people"</span><span class="p">:</span><span class="w"> </span><span class="s2">"15"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"trip_budget"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"trip_date_in"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-07-31"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"trip_date_out"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-08-02"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"destination"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Destination"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"subdestination"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Subdestination"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"trip_duration"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2 days, 0:00:00"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"alternative_title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Main Alternative"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"trip_people"</span><span class="p">:</span><span class="w"> </span><span class="s2">"15"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"trip_budget"</span><span class="p">:</span><span class="w"> </span><span class="mi">300</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"trip_date_in"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-07-31"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"trip_date_out"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-08-02"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"destination"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Destination"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"subdestination"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Subdestination"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"trip_duration"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2 days, 0:00:00"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"custom_fields"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CustomField"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Value"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>This endpoint get a Project</p>
+<h3 id='http-request-2'>HTTP Request</h3>
+<p><code>POST https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/project?reference=reference</code></p>
+<h3 id='returned-values'>Returned Values</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>reference</td>
+<td>String</td>
+<td>The Reference of the given project - The one you gave</td>
+</tr>
+<tr>
+<td>info_title</td>
+<td>String</td>
+<td>The Title of your project</td>
+</tr>
+<tr>
+<td>info_stage</td>
+<td>String</td>
+<td>The Stage of your project (Confirmed, Received, Paid...)</td>
+</tr>
+<tr>
+<td>info_notes</td>
+<td>String</td>
+<td>Notes on your project</td>
+</tr>
+<tr>
+<td>info_reference</td>
+<td>String</td>
+<td>Reference of your Project ex: &quot;202208019-P&quot;</td>
+</tr>
+<tr>
+<td>traveler_designer</td>
+<td>JSON</td>
+<td>Travel designer is a Json that contain email, first_name and last_name</td>
+</tr>
+<tr>
+<td>project_manager</td>
+<td>JSON</td>
+<td>Project Manager is a Json that contain email, first_name and last_name</td>
+</tr>
+<tr>
+<td>alternatives</td>
+<td>Array</td>
+<td>An Array of Alternatives</td>
+</tr>
+<tr>
+<td>custom_fields</td>
+<td>Array</td>
+<td>Array of custom Fields that contain name and value as String</td>
+</tr>
+</tbody></table>
+<h3 id='alternatives'>alternatives</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>alternative_title</td>
+<td>String</td>
+<td>Title of the Alternative</td>
+</tr>
+<tr>
+<td>trip_people</td>
+<td>String</td>
+<td>Number of people</td>
+</tr>
+<tr>
+<td>trip_budget</td>
+<td>Number</td>
+<td>Budget of the Alternative</td>
+</tr>
+<tr>
+<td>trip_date_in</td>
+<td>String</td>
+<td>Date of the begining of this alternative, formated like : YYYY-MM-DD</td>
+</tr>
+<tr>
+<td>trip_date_out</td>
+<td>String</td>
+<td>Date of the end of this alternative, formated like : YYYY-MM-DD</td>
+</tr>
+<tr>
+<td>destination</td>
+<td>String</td>
+<td>Destination of the alternative</td>
+</tr>
+<tr>
+<td>subdestination</td>
+<td>String</td>
+<td>Subdestination of the Alternative</td>
+</tr>
+<tr>
+<td>trip_duration</td>
+<td>String</td>
+<td>Number of days</td>
+</tr>
+</tbody></table>
+
+<aside class="success">
+Remember — You have to be authenticated to call this API with your Baerer TOKEN
+</aside>
 <h2 id='post-projects-documents-create'>POST projects-documents-create</h2><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">axios</span><span class="dl">"</span><span class="p">);</span>
 <span class="kd">const</span> <span class="nx">baseUrl</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1</span><span class="dl">"</span><span class="p">;</span>
 
@@ -592,7 +785,7 @@ Remember — You have to be authenticated to call this API with your Baerer TOKE
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
 <p>This endpoint insert a document in a Project.</p>
-<h3 id='http-request-2'>HTTP Request</h3>
+<h3 id='http-request-3'>HTTP Request</h3>
 <p><code>POST https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/projects-documents-create</code></p>
 <h3 id='body-parameters-3'>Body Parameters</h3>
 <table><thead>
@@ -667,7 +860,7 @@ Remember — You have to be authenticated to call this API with your Baerer TOKE
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
 <p>This endpoint Upsert a Client. The reference should be unique and permit to update an existing client or Create a new Client. If reference is not given, the email params is used as a Primary Key for your clients If you have multiple clients with the same email, the first client will be taken. If a client with this email already exist. An Esus Reference will be returned you must have to save it for your next uses. <code>this one will be updated with the new Params Given here.</code></p>
-<h3 id='http-request-3'>HTTP Request</h3>
+<h3 id='http-request-4'>HTTP Request</h3>
 <p><code>POST https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/clients-upsert</code></p>
 <h3 id='body-parameters-4'>Body Parameters</h3>
 <aside class="comment">
@@ -797,6 +990,164 @@ If you do not add an Optionnal parameter, it will be empty for a creation or sim
 <aside class="success">
 Remember — You have to be authenticated to call this API with your Baerer TOKEN
 </aside>
+<h2 id='get-client'>GET client</h2><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">axios</span><span class="dl">"</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">baseUrl</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span> <span class="dl">"</span><span class="s2">X-API-KEY</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">ApiKey</span><span class="dl">"</span> <span class="p">};</span>
+
+<span class="nx">axios</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="nx">baseUrl</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">/client?reference=reference</span><span class="dl">"</span><span class="p">,</span> <span class="p">{},</span> <span class="nx">headers</span><span class="p">);</span>
+</code></pre></div>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"erreur"</span><span class="p">:</span><span class="w"> </span><span class="s2">"false"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"esus-reference"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"entreprise"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"company_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Company Name"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fistname"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Lastname"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"client@email.com"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"activity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Client Activity"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"vat_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Client VAT Number"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"siret"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Client Siret"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"info_profile"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Client"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"info_origin"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Client Source"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"info_notes"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Notes on the client"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"info_reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Reference of the Client"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user@email.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FirstName"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LastName"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"58 Rue de Paradis"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"zip"</span><span class="p">:</span><span class="w"> </span><span class="s2">"75009"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Paris"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"France"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"contacts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Firstname"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Lastname"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"contact@email.com"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"projects"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"reference"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"info_title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Project Title"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"custom_fields"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CustomField"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Value"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>This endpoint get a Client</p>
+<h3 id='http-request-5'>HTTP Request</h3>
+<p><code>POST https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/client?reference=reference</code></p>
+<h3 id='returned-values-2'>Returned Values</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>reference</td>
+<td>String</td>
+<td>The Reference of the given client - The one you gave</td>
+</tr>
+<tr>
+<td>type</td>
+<td>String</td>
+<td>The type of the client [&quot;entreprise&quot;, &quot;individual&quot;]</td>
+</tr>
+<tr>
+<td>company_name</td>
+<td>String</td>
+<td>Name of the company of your client</td>
+</tr>
+<tr>
+<td>first_name</td>
+<td>String</td>
+<td>First Name of the client</td>
+</tr>
+<tr>
+<td>last_name</td>
+<td>String</td>
+<td>Last Name of the Client</td>
+</tr>
+<tr>
+<td>email</td>
+<td>String</td>
+<td>Email of the Client</td>
+</tr>
+<tr>
+<td>activity</td>
+<td>String</td>
+<td>Activity Of the Client</td>
+</tr>
+<tr>
+<td>vat_number</td>
+<td>String</td>
+<td>VAT number of the Client</td>
+</tr>
+<tr>
+<td>siret</td>
+<td>String</td>
+<td>Siret Number of the Client</td>
+</tr>
+<tr>
+<td>info_profile</td>
+<td>String</td>
+<td>info_profile of the Client</td>
+</tr>
+<tr>
+<td>info_origin</td>
+<td>String</td>
+<td>Source of the client</td>
+</tr>
+<tr>
+<td>info_notes</td>
+<td>String</td>
+<td>Notes on the Client</td>
+</tr>
+<tr>
+<td>info_reference</td>
+<td>String</td>
+<td>Reference of the Client</td>
+</tr>
+<tr>
+<td>address</td>
+<td>JSON</td>
+<td>Address of the client JSON who contain &quot;label&quot;, &quot;zip&quot;, &quot;city&quot; and &quot;country&quot;</td>
+</tr>
+<tr>
+<td>contacts</td>
+<td>Array</td>
+<td>Array of Json who contains &quot;first_name&quot;, &quot;last_name&quot;, &quot;email&quot;</td>
+</tr>
+<tr>
+<td>projects</td>
+<td>Array</td>
+<td>Array of Json who contains &quot;reference&quot;, &quot;info_title&quot;</td>
+</tr>
+<tr>
+<td>custom_fields</td>
+<td>Array</td>
+<td>Array of Json who contains &quot;name&quot;, &quot;value&quot;</td>
+</tr>
+</tbody></table>
+
+<aside class="success">
+Remember — You have to be authenticated to call this API with your Baerer TOKEN
+</aside>
 <h1 id='suppliers'>Suppliers</h1><h2 id='post-suppliers-upserts'>POST suppliers-upserts</h2><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">axios</span><span class="dl">"</span><span class="p">);</span>
 <span class="kd">const</span> <span class="nx">baseUrl</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1</span><span class="dl">"</span><span class="p">;</span>
 
@@ -804,7 +1155,7 @@ Remember — You have to be authenticated to call this API with your Baerer TOKE
   <span class="na">reference</span><span class="p">:</span> <span class="dl">"</span><span class="s2">suppliers_reference</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">company_name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">test-ezus</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">type</span><span class="p">:</span> <span class="dl">"</span><span class="s2">accom, activity</span><span class="dl">"</span>
-  <span class="na">contact</span><span class="p">:</span> <span class="p">{</span>
+  <span class="na">contact</span><span class="p">:</span> <span class="p">{</span><span class="nx">q</span>
     <span class="na">firstname</span><span class="p">:</span> <span class="dl">"</span><span class="s2">firstname</span><span class="dl">"</span><span class="p">,</span>
     <span class="na">lastname</span><span class="p">:</span> <span class="dl">"</span><span class="s2">lastname</span><span class="dl">"</span><span class="p">,</span>
     <span class="na">gender</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
@@ -839,7 +1190,7 @@ Remember — You have to be authenticated to call this API with your Baerer TOKE
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
 <p>This endpoint Upsert a Supplier. The reference should be unique and permit to update an existing supplier or Create a new supplier. If reference is not given, the email params is used as a Primary Key for your suppliers If you have multiple suppliers with the same email, the first supplier will be taken. If a supplier with this email already exist. An Esus Reference will be returned you must have to save it for your next uses. <code>this one will be updated with the new Params Given here.</code></p>
-<h3 id='http-request-4'>HTTP Request</h3>
+<h3 id='http-request-6'>HTTP Request</h3>
 <p><code>POST https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/suppliers-upsert</code></p>
 <h3 id='body-parameters-5'>Body Parameters</h3>
 <aside class="comment">
@@ -975,6 +1326,151 @@ If you do not add an Optionnal parameter, it will be empty for a creation or sim
 <aside class="success">
 Remember — You have to be authenticated to call this API with your Baerer TOKEN
 </aside>
+<h2 id='get-supplier'>GET supplier</h2><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">axios</span><span class="dl">"</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">baseUrl</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span> <span class="dl">"</span><span class="s2">X-API-KEY</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">ApiKey</span><span class="dl">"</span> <span class="p">};</span>
+
+<span class="nx">axios</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="nx">baseUrl</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">/supplier?reference=reference</span><span class="dl">"</span><span class="p">,</span> <span class="p">{},</span> <span class="nx">headers</span><span class="p">);</span>
+</code></pre></div>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"erreur"</span><span class="p">:</span><span class="w"> </span><span class="s2">"false"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"esus-reference"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"company_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Company Name"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"capacity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Capacity"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"info_notes"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Notes on the client"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"info_reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Reference of the Client"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"visual_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"urlofthevisual.com"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user@email.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FirstName"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LastName"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"langs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"lang"</span><span class="p">:</span><span class="w"> </span><span class="s2">"american"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"American Name"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"short_description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Short American Description"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"long_description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Short American Description"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"medias"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"media_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"name.jpeg"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"path_full"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ezus-cmtyhfgfzxdnjtahdgpfmgfj.s3.amazonaws.com/media/name.jpeg"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"58 Rue de Paradis"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"zip"</span><span class="p">:</span><span class="w"> </span><span class="s2">"75009"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Paris"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"France"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"contacts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Firstname"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Lastname"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"contact@email.com"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"products"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"esus_reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"product-reference"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Product Title"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"custom_fields"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CustomField"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Value"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>This endpoint get a Supplier</p>
+<h3 id='http-request-7'>HTTP Request</h3>
+<p><code>POST https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/supplier?reference=reference</code></p>
+<h3 id='returned-values-3'>Returned Values</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>reference</td>
+<td>String</td>
+<td>The Reference of the given supplier - The one you gave</td>
+</tr>
+<tr>
+<td>company_name</td>
+<td>String</td>
+<td>Name of the company of your supplier</td>
+</tr>
+<tr>
+<td>capacity</td>
+<td>String</td>
+<td>Capacity of the supplier</td>
+</tr>
+<tr>
+<td>info_notes</td>
+<td>String</td>
+<td>Notes on the Supplier</td>
+</tr>
+<tr>
+<td>info_reference</td>
+<td>String</td>
+<td>Reference of the Supplier</td>
+</tr>
+<tr>
+<td>visual_url</td>
+<td>String</td>
+<td>Link to the Slides of the Supplier</td>
+</tr>
+<tr>
+<td>user</td>
+<td>JSON</td>
+<td>user Assigned to the Supplier JSON who contain &quot;email&quot;, &quot;first_name&quot;, &quot;last_name&quot;</td>
+</tr>
+<tr>
+<td>langs</td>
+<td>JSON</td>
+<td>Array of Json who contains &quot;lang&quot;, &quot;name&quot;, &quot;short_description&quot; and &quot;long_description&quot;</td>
+</tr>
+<tr>
+<td>medias</td>
+<td>JSON</td>
+<td>Array of Json who contains &quot;media_name&quot;, &quot;path_full&quot;</td>
+</tr>
+<tr>
+<td>address</td>
+<td>JSON</td>
+<td>Address of the supplier JSON who contain &quot;label&quot;, &quot;zip&quot;, &quot;city&quot; and &quot;country&quot;</td>
+</tr>
+<tr>
+<td>contacts</td>
+<td>Array</td>
+<td>Contacts Assigned to the supplier formated in an Array of Json who contains &quot;first_name&quot;, &quot;last_name&quot;, &quot;email&quot;</td>
+</tr>
+<tr>
+<td>projects</td>
+<td>Array</td>
+<td>Projects assigned to the supplier formated in an Array of Json who contains &quot;reference&quot;, &quot;info_title&quot;</td>
+</tr>
+<tr>
+<td>custom_fields</td>
+<td>Array</td>
+<td>Array of Json who contains &quot;name&quot;, &quot;value&quot;</td>
+</tr>
+</tbody></table>
+
+<aside class="success">
+Remember — You have to be authenticated to call this API with your Baerer TOKEN
+</aside>
 <h1 id='products'>Products</h1><h2 id='post-products-upsert'>POST products-upsert</h2><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">axios</span><span class="dl">"</span><span class="p">);</span>
 <span class="kd">const</span> <span class="nx">baseUrl</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1</span><span class="dl">"</span><span class="p">;</span>
 
@@ -1013,7 +1509,7 @@ Remember — You have to be authenticated to call this API with your Baerer TOKE
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
 <p>This endpoint Upsert a Product. The reference should be unique and permit to update an existing product or Create a new Product. If reference is not given, the product will be created. An Esus Reference will be returned you must have to save it for your next updates of this product. <code>this one will be updated with the new Params Given here.</code></p>
-<h3 id='http-request-5'>HTTP Request</h3>
+<h3 id='http-request-8'>HTTP Request</h3>
 <p><code>POST https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/products-upsert</code></p>
 <h3 id='body-parameters-6'>Body Parameters</h3>
 <aside class="comment">
@@ -1117,6 +1613,200 @@ If you do not add an Optionnal parameter, it will be empty for a creation or sim
 <aside class="success">
 Remember — You have to be authenticated to call this API with your Baerer TOKEN
 </aside>
+<h2 id='get-product'>GET product</h2><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">axios</span><span class="dl">"</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">baseUrl</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span> <span class="dl">"</span><span class="s2">X-API-KEY</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">ApiKey</span><span class="dl">"</span> <span class="p">};</span>
+
+<span class="nx">axios</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="nx">baseUrl</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">/product?reference=reference</span><span class="dl">"</span><span class="p">,</span> <span class="p">{},</span> <span class="nx">headers</span><span class="p">);</span>
+</code></pre></div>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"erreur"</span><span class="p">:</span><span class="w"> </span><span class="s2">"false"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"esus-reference"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Product Title"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"capacity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Capacity"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Quantity of this Product"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"vat_regime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"margin"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"vat_rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">15.0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"commission_mode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"default"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"commission_regime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"%"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"commission"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"budget_text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Option"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"budget_form"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Important"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"budget_variable"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Do not Diplay"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"visual_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"urloftheproduct.com"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"langs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"lang"</span><span class="p">:</span><span class="w"> </span><span class="s2">"french"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ProductName in French"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"short_description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"french Short Description"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"long_description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"french Long Description"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"medias"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"media_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"imgname.jpeg"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"path_full"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ezus-cmtyhfgfzxdnjtahdgpfmgfj.s3.amazonaws.com/media/imgname.jpeg"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"supplier"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"190e4c0e-b298-11ed-8c48-0aaafac61d09"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"company_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Company Name"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"package"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"e2a428dc-b293-11ed-8c48-0aaafac61d09"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Package Name"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"rates"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"default"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"purchase_price_pretax"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"margin_rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"sale_price_pretax"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"child"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"custom"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"purchase_price_pretax"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"margin_rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"sale_price_pretax"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"custom_fields"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CustomField"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Value"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>This endpoint get a product</p>
+<h3 id='http-request-9'>HTTP Request</h3>
+<p><code>POST https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/product?reference=reference</code></p>
+<h3 id='returned-values-4'>Returned Values</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>reference</td>
+<td>String</td>
+<td>The Reference of the given product - The one you gave</td>
+</tr>
+<tr>
+<td>title</td>
+<td>String</td>
+<td>Name of the product</td>
+</tr>
+<tr>
+<td>capacity</td>
+<td>String</td>
+<td>Capacity of the product</td>
+</tr>
+<tr>
+<td>quantity</td>
+<td>String</td>
+<td>Quantity available of the product</td>
+</tr>
+<tr>
+<td>vat_regime</td>
+<td>String</td>
+<td>VAT regime of the product - 3 options: VAT on margin (&quot;margin&quot;), Common law (&quot;classic&quot;) or VAT non applicable (&quot;none&quot;)</td>
+</tr>
+<tr>
+<td>vat_rate</td>
+<td>String</td>
+<td>Default % of the VAT on the product</td>
+</tr>
+<tr>
+<td>commission_mode</td>
+<td>String</td>
+<td>&quot;default&quot; or &quot;purchase&quot; Default mode is base on the buying price, Purchase mode based on the selling price</td>
+</tr>
+<tr>
+<td>commission_regime</td>
+<td>String</td>
+<td>The commission regime can be &quot;%&quot; (Commission is a percent of the Buying/Selling price) OR &quot;currency&quot; (Commission is a Fix Value)</td>
+</tr>
+<tr>
+<td>commission</td>
+<td>String</td>
+<td>Commission as Number</td>
+</tr>
+<tr>
+<td>currency</td>
+<td>Number</td>
+<td>Address of the product JSON who contain &quot;label&quot;, &quot;zip&quot;, &quot;city&quot; and &quot;country&quot;</td>
+</tr>
+<tr>
+<td>budget_text</td>
+<td>String</td>
+<td>&quot;Option&quot;, &quot;On Demand&quot; or NULL, If it&#39;s Option/On demand, by default the product will be an Option/On demand</td>
+</tr>
+<tr>
+<td>buget_form</td>
+<td>String</td>
+<td>&quot;Important&quot;, &quot;Normal&quot;, &quot;Low&quot; represent how the product will be highlight on the budget By Default</td>
+</tr>
+<tr>
+<td>budget_variable</td>
+<td>String</td>
+<td>&quot;Display&quot;, &quot;Do not Display&quot;, This option tells if the product will be displayed or not in the budget</td>
+</tr>
+<tr>
+<td>visual_url</td>
+<td>String</td>
+<td>URL of the slide of this product</td>
+</tr>
+<tr>
+<td>langs</td>
+<td>Array</td>
+<td>Array of Json who contains &quot;lang&quot;:&quot;language name&quot;, &quot;name&quot;:&quot;product name in this language&quot;, &quot;short_description&quot;, &quot;long_description&quot;</td>
+</tr>
+<tr>
+<td>medias</td>
+<td>Array</td>
+<td>Array of Json who contains &quot;media_name&quot;, &quot;path_full&quot;: Full path to the image</td>
+</tr>
+<tr>
+<td>supplier</td>
+<td>Array</td>
+<td>Array of Json who contains &quot;reference&quot;, &quot;company_name&quot;</td>
+</tr>
+<tr>
+<td>package</td>
+<td>Array</td>
+<td>Array of Json who contains &quot;name&quot;, &quot;value&quot;</td>
+</tr>
+<tr>
+<td>rates</td>
+<td>Array</td>
+<td>Array of Json who contains &quot;reference&quot;, &quot;type&quot;, &quot;name&quot;, &quot;purchase_price_pretax&quot;, &quot;margin_rate&quot;, &quot;sale_price_pretax&quot;, &quot;child&quot; - Childs are tariffs contains in the rates tariff, a product can have multiple tariffs and multiple seasons, a season can have multiple tariffs levels also. &quot;type&quot; can be &quot;default&quot; OR &quot;season&quot;</td>
+</tr>
+<tr>
+<td>custom_fields</td>
+<td>Array</td>
+<td>Array of Json who contains &quot;name&quot;, &quot;value&quot;</td>
+</tr>
+</tbody></table>
+
+<aside class="success">
+Remember — You have to be authenticated to call this API with your Baerer TOKEN
+</aside>
+
+<p>|</p>
 <h1 id='package'>Package</h1><h2 id='post-package_upsert'>POST package_upsert</h2><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">axios</span><span class="dl">"</span><span class="p">);</span>
 <span class="kd">const</span> <span class="nx">baseUrl</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1</span><span class="dl">"</span><span class="p">;</span>
 
@@ -1146,7 +1836,7 @@ Remember — You have to be authenticated to call this API with your Baerer TOKE
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
 <p>This endpoint Upsert a Package. The reference should be unique and permit to update an existing package or Create a new Package. If reference is not given, the package will be created. An Esus Reference will be returned you must have to save it for your next updates of this package. <code>this one will be updated with the new Params Given here.</code></p>
-<h3 id='http-request-6'>HTTP Request</h3>
+<h3 id='http-request-10'>HTTP Request</h3>
 <p><code>POST https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/products-upsert</code></p>
 <h3 id='body-parameters-7'>Body Parameters</h3>
 <aside class="comment">
@@ -1190,6 +1880,206 @@ If you do not add an Optionnal parameter, it will be empty for a creation or sim
 <td>JSON</td>
 <td>True</td>
 <td>You can add Custom Fields for your client, this custom fields should be in your Ezus params and Write Exactly as they are wrote in your params Technical Name</td>
+</tr>
+</tbody></table>
+
+<aside class="success">
+Remember — You have to be authenticated to call this API with your Baerer TOKEN
+</aside>
+<h2 id='get-package'>GET package</h2><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">axios</span><span class="dl">"</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">baseUrl</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span> <span class="dl">"</span><span class="s2">X-API-KEY</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">ApiKey</span><span class="dl">"</span> <span class="p">};</span>
+
+<span class="nx">axios</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="nx">baseUrl</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">/package?reference=reference</span><span class="dl">"</span><span class="p">,</span> <span class="p">{},</span> <span class="nx">headers</span><span class="p">);</span>
+</code></pre></div>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"erreur"</span><span class="p">:</span><span class="w"> </span><span class="s2">"false"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"esus-reference"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"package Title"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"capacity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Capacity"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"info_notes"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Notes on the Package"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"visual_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"urlofthepackage.com"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"langs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"lang"</span><span class="p">:</span><span class="w"> </span><span class="s2">"french"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"packageName in French"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"short_description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"french Short Description"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"long_description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"french Long Description"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"medias"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"media_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"imgname.jpeg"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"path_full"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ezus-cmtyhfgfzxdnjtahdgpfmgfj.s3.amazonaws.com/media/imgname.jpeg"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"supplier"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"190e4c0e-b298-11ed-8c48-0aaafac61d09"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"company_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Company Name"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"product"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"e2a428dc-b293-11ed-8c48-0aaafac61d09"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Product Name"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"custom_fields"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CustomField"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Value"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>This endpoint get a package</p>
+<h3 id='http-request-11'>HTTP Request</h3>
+<p><code>POST https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/package?reference=reference</code></p>
+<h3 id='returned-values-5'>Returned Values</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>reference</td>
+<td>String</td>
+<td>The Reference of the given package - The one you gave</td>
+</tr>
+<tr>
+<td>title</td>
+<td>String</td>
+<td>Name of the package</td>
+</tr>
+<tr>
+<td>capacity</td>
+<td>String</td>
+<td>Capacity of the package</td>
+</tr>
+<tr>
+<td>info_notes</td>
+<td>String</td>
+<td>Notes on the package budget</td>
+</tr>
+<tr>
+<td>visual_url</td>
+<td>String</td>
+<td>URL of the google slide of this package</td>
+</tr>
+<tr>
+<td>langs</td>
+<td>Array</td>
+<td>Array of Json who contains &quot;lang&quot;:&quot;language name&quot;, &quot;name&quot;:&quot;package name in this language&quot;, &quot;short_description&quot;, &quot;long_description&quot;</td>
+</tr>
+<tr>
+<td>medias</td>
+<td>Array</td>
+<td>Array of Json who contains &quot;media_name&quot;, &quot;path_full&quot;: Full path to the image</td>
+</tr>
+<tr>
+<td>supplier</td>
+<td>Array</td>
+<td>Array of Json who contains &quot;reference&quot;, &quot;company_name&quot;</td>
+</tr>
+<tr>
+<td>products</td>
+<td>Array</td>
+<td>Array of Json who contains &quot;name&quot;, &quot;value&quot;</td>
+</tr>
+<tr>
+<td>custom_fields</td>
+<td>Array</td>
+<td>Array of Json who contains &quot;name&quot;, &quot;value&quot;</td>
+</tr>
+</tbody></table>
+
+<aside class="success">
+Remember — You have to be authenticated to call this API with your Baerer TOKEN
+</aside>
+<h1 id='option-custom_fields'>OPTION custom_fields</h1><div class="highlight"><pre class="highlight json tab-json"><code><span class="w">  </span><span class="nl">"custom_fields"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Text"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Value"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Number"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="mi">42</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Text area"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Value of the text Area"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Date"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2012-12-21"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Time"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2006-10-07T12:06:56.568+01:00"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"URL link"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"urlLink.com"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Dropdown"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ExactOption"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='custom-fields'>Custom Fields</h3>
+<aside class="success">
+The cusotm_fields must be called with their technical_name which you can find in your custom field settings, and must respect the given formatting, if they do not respect this formatting, they will not be updated or updated with their default settings.
+</aside>
+
+<aside class="warning">
+Warning: the custom_fields of the projects route must have their real name and not their technical_name in "name"
+</aside>
+<h3 id='options'>Options</h3>
+<table><thead>
+<tr>
+<th>Options</th>
+<th>Type</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Text</td>
+<td>String</td>
+<td>Simple String like Text Area</td>
+</tr>
+<tr>
+<td>Dropdown</td>
+<td>Options</td>
+<td>The option must be written exactly as in the parameters, respecting the case</td>
+</tr>
+<tr>
+<td>Date</td>
+<td>String</td>
+<td>The date must be written exactly in YYYY-MM-DD format</td>
+</tr>
+<tr>
+<td>Time</td>
+<td>String</td>
+<td>The time must be written exactly in the format: YYYY-MM-DDTHH:MM:SS+01:00</td>
+</tr>
+<tr>
+<td>Checkbox</td>
+<td>String</td>
+<td>A String must contain &quot;true&quot; (checked) OR &quot;false&quot; (unchecked)</td>
+</tr>
+<tr>
+<td>Number</td>
+<td>Number</td>
+<td>Number type should be a Number without other character</td>
+</tr>
+<tr>
+<td>File</td>
+<td>Not Supported</td>
+<td>Actually we can&#39;t upload files with the API</td>
 </tr>
 </tbody></table>
 
