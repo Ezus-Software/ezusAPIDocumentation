@@ -557,13 +557,13 @@ If you do not add an Optionnal parameter, it will be empty for a creation or sim
 <td>trip_date_in</td>
 <td>Date</td>
 <td>True</td>
-<td>Date of the beginning of your project formated like YYYY-MM-DD</td>
+<td>Date of the beginning of your project formated like YYYY-MM-DD if not formatted correctly, or if duration &gt; 40 days or if trip_date_in &gt; trip_date_out, project will be set as 1day and date = today</td>
 </tr>
 <tr>
 <td>trip_date_out</td>
 <td>Date</td>
 <td>True</td>
-<td>Date of the end of your project formated like YYYY-MM-DD</td>
+<td>Date of the end of your project formated like YYYY-MM-DD if not formatted correctly, or if duration &gt; 40 days or if trip_date_in &gt; trip_date_out, project will be set as 1day and date = today</td>
 </tr>
 <tr>
 <td>custom_fields</td>
