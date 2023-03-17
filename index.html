@@ -509,7 +509,9 @@ You must replace <code>ApiKey</code> with your personal API key.
   </span><span class="p">{</span><span class="w">
     </span><span class="nl">"erreur"</span><span class="p">:</span><span class="w"> </span><span class="s2">"false"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ok"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"89e48bb3-26ef-4b1e-aa60-b86ce714253d"</span><span class="w">
+    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"89e48bb3-26ef-4b1e-aa60-b86ce714253d"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Project Updated Successfuly"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"89e48bb3-26ef-4b1e-aa60-b86ce714253d"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
@@ -569,7 +571,7 @@ If you do not add an Optionnal parameter, it will be empty for a creation or sim
 <td>custom_fields</td>
 <td>JSON</td>
 <td>True</td>
-<td>You can add Custom Fields for your client, this custom fields should be in your Ezus params and Write Exactly as they are wrote in your params Technical Name</td>
+<td>You can add Custom Fields for your client, this custom fields should be in your Ezus params and Write Exactly as they are written in your params Technical Name</td>
 </tr>
 <tr>
 <td>sales_manager_email</td>
@@ -875,7 +877,8 @@ Remember — You have to be authenticated to call this API with your Baerer TOKE
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
     </span><span class="nl">"erreur"</span><span class="p">:</span><span class="w"> </span><span class="s2">"false"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Client created Successfully"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ok"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Product updated Successfully"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"clientReference"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
@@ -906,7 +909,7 @@ If you do not add an Optionnal parameter, it will be empty for a creation or sim
 <td>company_name</td>
 <td>String</td>
 <td>True</td>
-<td>Set a company name - If company name is empty, the client will be set as an Individual and the name of the client = name of the contact</td>
+<td>Set a company name - If company name is empty, the client will be set as an Individual and the name of the client = name of the contact and if the company name is not empty, the name of the client will be the company name</td>
 </tr>
 <tr>
 <td>contact</td>
@@ -924,7 +927,7 @@ If you do not add an Optionnal parameter, it will be empty for a creation or sim
 <td>custom_fields</td>
 <td>JSON</td>
 <td>True</td>
-<td>You can add Custom Fields for your client, this custom fields should be in your Ezus params and Write Exactly as they are wrote in your params Technical Name</td>
+<td>You can add Custom Fields for your client, this custom fields should be in your Ezus params and Write Exactly as they are written in your params Technical Name</td>
 </tr>
 </tbody></table>
 <h4 id='contact-parameters'>Contact Parameters</h4>
@@ -1112,17 +1115,17 @@ Remember — You have to be authenticated to call this API with your Baerer TOKE
 <tr>
 <td>activity</td>
 <td>String</td>
-<td>Activity Of the Client</td>
+<td>Activity Of the Client (Only for Entreprise)</td>
 </tr>
 <tr>
 <td>vat_number</td>
 <td>String</td>
-<td>VAT number of the Client</td>
+<td>VAT number of the Client (Only for Entreprise)</td>
 </tr>
 <tr>
 <td>siret</td>
 <td>String</td>
-<td>Siret Number of the Client</td>
+<td>Siret Number of the Client (Only for Entreprise)</td>
 </tr>
 <tr>
 <td>info_profile</td>
@@ -1260,7 +1263,7 @@ If you do not add an Optionnal parameter, it will be empty for a creation or sim
 <td>custom_fields</td>
 <td>JSON</td>
 <td>True</td>
-<td>You can add Custom Fields for your client, this custom fields should be in your Ezus params and Write Exactly as they are wrote in your params Technical Name</td>
+<td>You can add Custom Fields for your client, this custom fields should be in your Ezus params and Write Exactly as they are written in your params Technical Name</td>
 </tr>
 </tbody></table>
 <h4 id='contact-parameters-2'>Contact Parameters</h4>
@@ -1382,6 +1385,9 @@ Remember — You have to be authenticated to call this API with your Baerer TOKE
     </span><span class="p">{</span><span class="w">
       </span><span class="nl">"media_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"name.jpeg"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"path_full"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ezus-cmtyhfgfzxdnjtahdgpfmgfj.s3.amazonaws.com/media/name.jpeg"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="s2">"number of Medias"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">],</span><span class="w">
   </span><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -1465,7 +1471,7 @@ Remember — You have to be authenticated to call this API with your Baerer TOKE
 <tr>
 <td>medias</td>
 <td>JSON</td>
-<td>Array of Json who contains &quot;media_name&quot;, &quot;path_full&quot;</td>
+<td>Array of Json who contains &quot;media_name&quot;, &quot;path_full&quot; and a size = number of medias</td>
 </tr>
 <tr>
 <td>address</td>
@@ -1627,7 +1633,7 @@ If you do not add an Optionnal parameter, it will be empty for a creation or sim
 <td>custom_fields</td>
 <td>JSON</td>
 <td>True</td>
-<td>You can add Custom Fields for your client, this custom fields should be in your Ezus params and Write Exactly as they are wrote in your params Technical Name</td>
+<td>You can add Custom Fields for your client, this custom fields should be in your Ezus params and Write Exactly as they are written in your params Technical Name</td>
 </tr>
 </tbody></table>
 
@@ -1769,7 +1775,7 @@ Remember — You have to be authenticated to call this API with your Baerer TOKE
 <tr>
 <td>currency</td>
 <td>Number</td>
-<td>Address of the product JSON who contain &quot;label&quot;, &quot;zip&quot;, &quot;city&quot; and &quot;country&quot;</td>
+<td>The ISO 4217 code who represent the currency you use (<a href="https://docs.google.com/spreadsheets/d/1b7BNOwKyN1hMOouve6xhFZ2R2zrH4Sj1L-646j755fU/edit?usp=sharing" target="_blank">Link to Doc</a>)</td>
 </tr>
 <tr>
 <td>budget_text</td>
@@ -1900,7 +1906,7 @@ If you do not add an Optionnal parameter, it will be empty for a creation or sim
 <td>custom_fields</td>
 <td>JSON</td>
 <td>True</td>
-<td>You can add Custom Fields for your client, this custom fields should be in your Ezus params and Write Exactly as they are wrote in your params Technical Name</td>
+<td>You can add Custom Fields for your client, this custom fields should be in your Ezus params and Write Exactly as they are written in your params Technical Name</td>
 </tr>
 </tbody></table>
 
@@ -2046,6 +2052,10 @@ Remember — You have to be authenticated to call this API with your Baerer TOKE
       </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"urlLink.com"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Checkbox"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
       </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Dropdown"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ExactOption"</span><span class="w">
     </span><span class="p">}</span><span class="w">
@@ -2053,7 +2063,7 @@ Remember — You have to be authenticated to call this API with your Baerer TOKE
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h3 id='custom-fields'>Custom Fields</h3>
 <aside class="success">
-The cusotm_fields must be called with their technical_name which you can find in your custom field settings, and must respect the given formatting, if they do not respect this formatting, they will not be updated or updated with their default settings.
+The cusotm_fields must be called with their technical_name which you can find in your custom field settings, and should respect the given formatting, if they do not respect this formatting, they will not be updated or updated with their default settings.
 </aside>
 
 <aside class="warning">
