@@ -117,7 +117,9 @@ axios.post(baseUrl + "/projects-upsert", body, headers);
   {
     "erreur": "false",
     "message": "ok",
-    "id": "89e48bb3-26ef-4b1e-aa60-b86ce714253d"
+    "id": "89e48bb3-26ef-4b1e-aa60-b86ce714253d",
+    "action": "Project Updated Successfuly",
+    "reference": "89e48bb3-26ef-4b1e-aa60-b86ce714253d"
   }
 ]
 ```
@@ -142,7 +144,7 @@ If you do not add an Optionnal parameter, it will be empty for a creation or sim
 | trip_budget         | Number | True       | Budget of your project                                                                                                                                                                               |
 | trip_date_in        | Date   | True       | Date of the beginning of your project formated like YYYY-MM-DD if not formatted correctly, or if duration > 40 days or if trip_date_in > trip_date_out, project will be set as 1day and date = today |
 | trip_date_out       | Date   | True       | Date of the end of your project formated like YYYY-MM-DD if not formatted correctly, or if duration > 40 days or if trip_date_in > trip_date_out, project will be set as 1day and date = today       |
-| custom_fields       | JSON   | True       | You can add Custom Fields for your client, this custom fields should be in your Ezus params and Write Exactly as they are wrote in your params Technical Name                                        |
+| custom_fields       | JSON   | True       | You can add Custom Fields for your client, this custom fields should be in your Ezus params and Write Exactly as they are written in your params Technical Name                                      |
 | sales_manager_email | Email  | True       | Email of the Sales Manager, by default if no sales_manager or not found will be assignated to nobody                                                                                                 |
 | client_reference    | String | True       | Esus Reference of the Client, if the reference don't match with a client, API will try with client_email if setted else, No clients will be assigned                                                 |
 | client_email        | Email  | True       | Email of the Client, if the email don't match with a client, No clients will be assigned                                                                                                             |
@@ -353,7 +355,8 @@ axios.post(baseUrl + "/clients-upsert", body, headers);
 [
   {
     "erreur": "false",
-    "message": "Client created Successfully",
+    "message": "ok",
+    "action": "Product updated Successfully",
     "reference": "clientReference"
   }
 ]
@@ -373,10 +376,10 @@ If you do not add an Optionnal parameter, it will be empty for a creation or sim
 | Parameter    | Type   | Optionnal | Description                                                                                                     |
 | ------------ | ------ | --------- | --------------------------------------------------------------------------------------------------------------- |
 | reference     | String | True/False| Used as a primary Key in the Database, if no Reference, the Reference will be Generated automatically and returned|
-| company_name | String | True      | Set a company name - If company name is empty, the client will be set as an Individual and the name of the client = name of the contact |                         |
+| company_name | String | True      | Set a company name - If company name is empty, the client will be set as an Individual and the name of the client = name of the contact and if the company name is not empty, the name of the client will be the company name |                         |
 | contact      | JSON   | False     | Contact is a JSON and email is needed                                                                           |
 | address      | JSON   | True      | Address is a JSON and label is needed if you want to add or update the adresse of your client but not mandatory |
-| custom_fields      | JSON   | True      | You can add Custom Fields for your client, this custom fields should be in your Ezus params and Write Exactly as they are wrote in your params Technical Name|
+| custom_fields      | JSON   | True      | You can add Custom Fields for your client, this custom fields should be in your Ezus params and Write Exactly as they are written in your params Technical Name|
 
 #### Contact Parameters
 
@@ -480,9 +483,9 @@ This endpoint get a Client
 | first_name     | String | First Name of the client                                                    |
 | last_name      | String | Last Name of the Client                                                     |
 | email          | String | Email of the Client                                                         |
-| activity       | String | Activity Of the Client                                                      |
-| vat_number     | String | VAT number of the Client                                                    |
-| siret          | String | Siret Number of the Client                                                  |
+| activity       | String | Activity Of the Client (Only for Entreprise)                                |
+| vat_number     | String | VAT number of the Client (Only for Entreprise)                              |
+| siret          | String | Siret Number of the Client (Only for Entreprise)                            |
 | info_profile   | String | info_profile of the Client                                                  |
 | info_origin    | String | Source of the client                                                        |
 | info_notes     | String | Notes on the Client                                                         |
@@ -562,7 +565,7 @@ If you do not add an Optionnal parameter, it will be empty for a creation or sim
 | company_name | String | True      | Set a company name - If company name is empty, the supplier will be set as an Individual |                         |
 | contact      | JSON   | False     | Contact is a JSON and email is needed                                                                           |
 | address      | JSON   | True      | Address is a JSON and label is needed if you want to add or update the adresse of your supplier but not mandatory |
-| custom_fields      | JSON   | True      | You can add Custom Fields for your client, this custom fields should be in your Ezus params and Write Exactly as they are wrote in your params Technical Name|
+| custom_fields      | JSON   | True      | You can add Custom Fields for your client, this custom fields should be in your Ezus params and Write Exactly as they are written in your params Technical Name|
 
 #### Contact Parameters
 
@@ -626,6 +629,9 @@ axios.post(baseUrl + "/supplier?reference=reference", {}, headers);
     {
       "media_name": "name.jpeg",
       "path_full": "https://ezus-cmtyhfgfzxdnjtahdgpfmgfj.s3.amazonaws.com/media/name.jpeg"
+    },
+    {
+      "size": "number of Medias"
     }
   ],
   "address": {
@@ -674,7 +680,7 @@ This endpoint get a Supplier
 | visual_url     | String | Link to the Slides of the Supplier                                                                             |
 | user           | JSON   | user Assigned to the Supplier JSON who contain "email", "first_name", "last_name"                              |
 | langs          | JSON   | Array of Json who contains "lang", "name", "short_description" and "long_description"                          |
-| medias         | JSON   | Array of Json who contains "media_name", "path_full"                                                           |
+| medias         | JSON   | Array of Json who contains "media_name", "path_full" and a size = number of medias                             |
 | address        | JSON   | Address of the supplier JSON who contain "label", "zip", "city" and "country"                                  |
 | contacts       | Array  | Contacts Assigned to the supplier formated in an Array of Json who contains "first_name", "last_name", "email" |
 | projects       | Array  | Projects assigned to the supplier formated in an Array of Json who contains "reference", "info_title"          |
@@ -754,7 +760,7 @@ If you do not add an Optionnal parameter, it will be empty for a creation or sim
 | commission_mode    | Option  | True       | 'default', 'purchase' or 'sales', sales mode mean the commission will be calculated on the selling price, purchase on the buying price if empty, the commission_mode will be set on your account default value.                                                                            |
 | commission         | Number  | True       | Number represent the % Or the amount of the commission                                                                                                                                                                                                                                     |
 | currency           | Symbol  | True       | The ISO 4217 code who represent the currency you use (<a href="https://docs.google.com/spreadsheets/d/1b7BNOwKyN1hMOouve6xhFZ2R2zrH4Sj1L-646j755fU/edit?usp=sharing" target="_blank">Link to Doc</a>)                                                                                      |
-| custom_fields      | JSON    | True       | You can add Custom Fields for your client, this custom fields should be in your Ezus params and Write Exactly as they are wrote in your params Technical Name                                                                                                                              |
+| custom_fields      | JSON    | True       | You can add Custom Fields for your client, this custom fields should be in your Ezus params and Write Exactly as they are written in your params Technical Name                                                                                                                            |
 
 <aside class="success">
 Remember — You have to be authenticated to call this API with your Baerer TOKEN
@@ -860,7 +866,7 @@ This endpoint get a product
 | commission_mode   | String | "default" or "purchase" Default mode is base on the buying price, Purchase mode based on the selling price                                                                                                                                                                                                                    |
 | commission_regime | String | The commission regime can be "%" (Commission is a percent of the Buying/Selling price) OR "currency" (Commission is a Fix Value)                                                                                                                                                                                              |
 | commission        | String | Commission as Number                                                                                                                                                                                                                                                                                                          |
-| currency          | Number | Address of the product JSON who contain "label", "zip", "city" and "country"                                                                                                                                                                                                                                                  |
+| currency          | Number | The ISO 4217 code who represent the currency you use (<a href="https://docs.google.com/spreadsheets/d/1b7BNOwKyN1hMOouve6xhFZ2R2zrH4Sj1L-646j755fU/edit?usp=sharing" target="_blank">Link to Doc</a>)                                                                                                                         |
 | budget_text       | String | "Option", "On Demand" or NULL, If it's Option/On demand, by default the product will be an Option/On demand                                                                                                                                                                                                                   |
 | buget_form        | String | "Important", "Normal", "Low" represent how the product will be highlight on the budget By Default                                                                                                                                                                                                                             |
 | budget_variable   | String | "Display", "Do not Display", This option tells if the product will be displayed or not in the budget                                                                                                                                                                                                                          |
@@ -924,13 +930,13 @@ This endpoint Upsert a Package. The reference should be unique and permit to upd
 If you do not add an Optionnal parameter, it will be empty for a creation or simply not updated for an update. If the parameter is empty (""), same behaviour
 </aside>
 
-| Parameter          | Type   | Optionnal  | Description                                                                                                                                                   |
-| ------------------ | ------ | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- | --- |
-| reference          | String | True/False | To Update a Package, Reference is mandatory, the Reference will be used as a Primary Key, in case of creation, a unique Reference will be returned            |
-| title              | String | True/False | If no reference or reference not found, the title is mandatory                                                                                                |
-| supplier_reference | String | True       | If supplier_reference given, the package will be associated to a supplier                                                                                     |
-| capacity           | Number | True       | capacity is the default number of this package at his creation                                                                                                |     |
-| custom_fields      | JSON   | True       | You can add Custom Fields for your client, this custom fields should be in your Ezus params and Write Exactly as they are wrote in your params Technical Name |
+| Parameter          | Type   | Optionnal  | Description                                                                                                                                                     |
+| ------------------ | ------ | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | --- |
+| reference          | String | True/False | To Update a Package, Reference is mandatory, the Reference will be used as a Primary Key, in case of creation, a unique Reference will be returned              |
+| title              | String | True/False | If no reference or reference not found, the title is mandatory                                                                                                  |
+| supplier_reference | String | True       | If supplier_reference given, the package will be associated to a supplier                                                                                       |
+| capacity           | Number | True       | capacity is the default number of this package at his creation                                                                                                  |     |
+| custom_fields      | JSON   | True       | You can add Custom Fields for your client, this custom fields should be in your Ezus params and Write Exactly as they are written in your params Technical Name |
 
 <aside class="success">
 Remember — You have to be authenticated to call this API with your Baerer TOKEN
@@ -1042,6 +1048,10 @@ Remember — You have to be authenticated to call this API with your Baerer TOKE
       "value": "urlLink.com"
     },
     {
+      "name": "Checkbox",
+      "value": true
+    },
+    {
       "name": "Dropdown",
       "value": "ExactOption"
     }
@@ -1052,7 +1062,7 @@ Remember — You have to be authenticated to call this API with your Baerer TOKE
 ### Custom Fields
 
 <aside class="success">
-The cusotm_fields must be called with their technical_name which you can find in your custom field settings, and must respect the given formatting, if they do not respect this formatting, they will not be updated or updated with their default settings.
+The cusotm_fields must be called with their technical_name which you can find in your custom field settings, and should respect the given formatting, if they do not respect this formatting, they will not be updated or updated with their default settings.
 </aside>
 
 <aside class="warning">
