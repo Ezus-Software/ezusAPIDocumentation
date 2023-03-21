@@ -1179,7 +1179,7 @@ Remember — You have to be authenticated to call this API with your Baerer TOKE
   <span class="na">reference</span><span class="p">:</span> <span class="dl">"</span><span class="s2">suppliers_reference</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">company_name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">test-ezus</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">type</span><span class="p">:</span> <span class="dl">"</span><span class="s2">accom, activity</span><span class="dl">"</span>
-  <span class="na">contact</span><span class="p">:</span> <span class="p">{</span><span class="nx">q</span>
+  <span class="na">contact</span><span class="p">:</span> <span class="p">{</span>
     <span class="na">firstname</span><span class="p">:</span> <span class="dl">"</span><span class="s2">firstname</span><span class="dl">"</span><span class="p">,</span>
     <span class="na">lastname</span><span class="p">:</span> <span class="dl">"</span><span class="s2">lastname</span><span class="dl">"</span><span class="p">,</span>
     <span class="na">gender</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
@@ -2058,6 +2058,10 @@ Remember — You have to be authenticated to call this API with your Baerer TOKE
     </span><span class="p">{</span><span class="w">
       </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Dropdown"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ExactOption"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MultipleDropdown"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ExactOption1/-/ExactOption2"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -2086,6 +2090,11 @@ Warning: the custom_fields of the projects route must have their real name and n
 <td>Dropdown</td>
 <td>Options</td>
 <td>The option must be written exactly as in the parameters, respecting the case</td>
+</tr>
+<tr>
+<td>Multiple Dropdown</td>
+<td>Options</td>
+<td>The option must be written exactly as in the parameters, respecting the case, for Multiple Answer you should enter Option1/-/Option2/-/Option3 in a string, &quot;/-/&quot; should separate each options</td>
 </tr>
 <tr>
 <td>Date</td>
