@@ -235,7 +235,7 @@ This endpoint get a Project
 
 ### HTTP Request
 
-`POST https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/project?reference=reference`
+`GET https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/project?reference=reference`
 
 ### Returned Values
 
@@ -471,7 +471,7 @@ This endpoint get a Client
 
 ### HTTP Request
 
-`POST https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/client?reference=reference`
+`GET https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/client?reference=reference`
 
 ### Returned Values
 
@@ -590,6 +590,7 @@ If you do not add an Optionnal parameter, it will be empty for a creation or sim
 <aside class="success">
 Remember — You have to be authenticated to call this API with your Baerer TOKEN
 </aside>
+
 ## GET supplier
 
 ```javascript
@@ -666,7 +667,7 @@ This endpoint get a Supplier
 
 ### HTTP Request
 
-`POST https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/supplier?reference=reference`
+`GET https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/supplier?reference=reference`
 
 ### Returned Values
 
@@ -851,32 +852,32 @@ This endpoint get a product
 
 ### HTTP Request
 
-`POST https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/product?reference=reference`
+`GET https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/product?reference=reference`
 
 ### Returned Values
 
-| Name              | Type   | Value                                                                                                                                                                                                                                                                                                                         |
-| ----------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| reference         | String | The Reference of the given product - The one you gave                                                                                                                                                                                                                                                                         |
-| title             | String | Name of the product                                                                                                                                                                                                                                                                                                           |
-| capacity          | String | Capacity of the product                                                                                                                                                                                                                                                                                                       |
-| quantity          | String | Quantity available of the product                                                                                                                                                                                                                                                                                             |
-| vat_regime        | String | VAT regime of the product - 3 options: VAT on margin ("margin"), Common law ("classic") or VAT non applicable ("none")                                                                                                                                                                                                        |
-| vat_rate          | String | Default % of the VAT on the product                                                                                                                                                                                                                                                                                           |
-| commission_mode   | String | "default" or "purchase" Default mode is base on the buying price, Purchase mode based on the selling price                                                                                                                                                                                                                    |
-| commission_regime | String | The commission regime can be "%" (Commission is a percent of the Buying/Selling price) OR "currency" (Commission is a Fix Value)                                                                                                                                                                                              |
-| commission        | String | Commission as Number                                                                                                                                                                                                                                                                                                          |
-| currency          | Number | The ISO 4217 code who represent the currency you use (<a href="https://docs.google.com/spreadsheets/d/1b7BNOwKyN1hMOouve6xhFZ2R2zrH4Sj1L-646j755fU/edit?usp=sharing" target="_blank">Link to Doc</a>)                                                                                                                         |
-| budget_text       | String | "Option", "On Demand" or NULL, If it's Option/On demand, by default the product will be an Option/On demand                                                                                                                                                                                                                   |
-| buget_form        | String | "Important", "Normal", "Low" represent how the product will be highlight on the budget By Default                                                                                                                                                                                                                             |
-| budget_variable   | String | "Display", "Do not Display", This option tells if the product will be displayed or not in the budget                                                                                                                                                                                                                          |
-| visual_url        | String | URL of the slide of this product                                                                                                                                                                                                                                                                                              |
-| langs             | Array  | Array of Json who contains "lang":"language name", "name":"product name in this language", "short_description", "long_description"                                                                                                                                                                                            |
-| medias            | Array  | Array of Json who contains "media_name", "path_full": Full path to the image                                                                                                                                                                                                                                                  |
-| supplier          | Array  | Array of Json who contains "reference", "company_name"                                                                                                                                                                                                                                                                        |
-| package           | Array  | Array of Json who contains "name", "value"                                                                                                                                                                                                                                                                                    |
-| rates             | Array  | Array of Json who contains "reference", "type", "name", "purchase_price_pretax", "margin_rate", "sale_price_pretax", "child" - Childs are tariffs contains in the rates tariff, a product can have multiple tariffs and multiple seasons, a season can have multiple tariffs levels also. "type" can be "default" OR "season" |
-| custom_fields     | Array  | Array of Json who contains "name", "value"                                                                                                                                                                                                                                                                                    |
+| Name              | Type   | Value                                                                                                                                                                                                                                                                                                                                                                                    |
+| ----------------- | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| reference         | String | The Reference of the given product - The one you gave                                                                                                                                                                                                                                                                                                                                    |
+| title             | String | Name of the product                                                                                                                                                                                                                                                                                                                                                                      |
+| capacity          | String | Capacity of the product                                                                                                                                                                                                                                                                                                                                                                  |
+| quantity          | String | Quantity available of the product                                                                                                                                                                                                                                                                                                                                                        |
+| vat_regime        | String | VAT regime of the product - 3 options: VAT on margin ("margin"), Common law ("classic") or VAT non applicable ("none")                                                                                                                                                                                                                                                                   |
+| vat_rate          | String | Default % of the VAT on the product                                                                                                                                                                                                                                                                                                                                                      |
+| commission_mode   | String | "default" or "purchase" Default mode is base on the buying price, Purchase mode based on the selling price                                                                                                                                                                                                                                                                               |
+| commission_regime | String | The commission regime can be "%" (Commission is a percent of the Buying/Selling price) OR "currency" (Commission is a Fix Value)                                                                                                                                                                                                                                                         |
+| commission        | String | Commission as Number                                                                                                                                                                                                                                                                                                                                                                     |
+| currency          | Number | The ISO 4217 code who represent the currency you use (<a href="https://docs.google.com/spreadsheets/d/1b7BNOwKyN1hMOouve6xhFZ2R2zrH4Sj1L-646j755fU/edit?usp=sharing" target="_blank">Link to Doc</a>)                                                                                                                                                                                    |
+| budget_text       | String | "Option", "On Demand" or NULL, If it's Option/On demand, by default the product will be an Option/On demand                                                                                                                                                                                                                                                                              |
+| buget_form        | String | "Important", "Normal", "Low" represent how the product will be highlight on the budget By Default                                                                                                                                                                                                                                                                                        |
+| budget_variable   | String | "Display", "Do not Display", This option tells if the product will be displayed or not in the budget                                                                                                                                                                                                                                                                                     |
+| visual_url        | String | URL of the slide of this product                                                                                                                                                                                                                                                                                                                                                         |
+| langs             | Array  | Array of Json who contains "lang":"language name", "name":"product name in this language", "short_description", "long_description"                                                                                                                                                                                                                                                       |
+| medias            | Array  | Array of Json who contains "media_name", "path_full": Full path to the image                                                                                                                                                                                                                                                                                                             |
+| supplier          | Array  | Array of Json who contains "reference", "company_name"                                                                                                                                                                                                                                                                                                                                   |
+| package           | Array  | Array of Json who contains "name", "value"                                                                                                                                                                                                                                                                                                                                               |
+| rates             | Array  | Array of Json who contains "reference", "type", "name", "purchase_price_pretax", "margin_rate", "sale_price_pretax", "child" - Childs are tariffs contains in the rates tariff, a product can have multiple tariffs and multiple seasons, a season can have multiple tariffs levels also. "type" can be "default" OR "season". Margin rates are calculated according to the sales price. |
+| custom_fields     | Array  | Array of Json who contains "name", "value"                                                                                                                                                                                                                                                                                                                                               |
 
 <aside class="success">
 Remember — You have to be authenticated to call this API with your Baerer TOKEN
@@ -998,7 +999,7 @@ This endpoint get a package
 
 ### HTTP Request
 
-`POST https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/package?reference=reference`
+`GET https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/package?reference=reference`
 
 ### Returned Values
 
