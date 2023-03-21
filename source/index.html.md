@@ -511,7 +511,7 @@ const body = {
   reference: "suppliers_reference",
   company_name: "test-ezus",
   type: "accom, activity"
-  contact: {q
+  contact: {
     firstname: "firstname",
     lastname: "lastname",
     gender: 1,
@@ -1055,6 +1055,10 @@ Remember — You have to be authenticated to call this API with your Baerer TOKE
     {
       "name": "Dropdown",
       "value": "ExactOption"
+    },
+    {
+      "name": "MultipleDropdown",
+      "value": "ExactOption1/-/ExactOption2"
     }
   ]
 }
@@ -1072,15 +1076,16 @@ Warning: the custom_fields of the projects route must have their real name and n
 
 ### Options
 
-| Options  | Type          | Value                                                                        |
-| -------- | ------------- | ---------------------------------------------------------------------------- |
-| Text     | String        | Simple String like Text Area                                                 |
-| Dropdown | Options       | The option must be written exactly as in the parameters, respecting the case |
-| Date     | String        | The date must be written exactly in YYYY-MM-DD format                        |
-| Time     | String        | The time must be written exactly in the format: YYYY-MM-DDTHH:MM:SS+01:00    |
-| Checkbox | String        | A String must contain "true" (checked) OR "false" (unchecked)                |
-| Number   | Number        | Number type should be a Number without other character                       |
-| File     | Not Supported | Actually we can't upload files with the API                                  |
+| Options           | Type          | Value                                                                                                                                                                                          |
+| ----------------- | ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Text              | String        | Simple String like Text Area                                                                                                                                                                   |
+| Dropdown          | Options       | The option must be written exactly as in the parameters, respecting the case                                                                                                                   |
+| Multiple Dropdown | Options       | The option must be written exactly as in the parameters, respecting the case, for Multiple Answer you should enter Option1/-/Option2/-/Option3 in a string, "/-/" should separate each options |
+| Date              | String        | The date must be written exactly in YYYY-MM-DD format                                                                                                                                          |
+| Time              | String        | The time must be written exactly in the format: YYYY-MM-DDTHH:MM:SS+01:00                                                                                                                      |
+| Checkbox          | String        | A String must contain "true" (checked) OR "false" (unchecked)                                                                                                                                  |
+| Number            | Number        | Number type should be a Number without other character                                                                                                                                         |
+| File              | Not Supported | Actually we can't upload files with the API                                                                                                                                                    |
 
 <aside class="success">
 Remember — You have to be authenticated to call this API with your Baerer TOKEN
