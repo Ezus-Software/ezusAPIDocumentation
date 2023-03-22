@@ -1840,7 +1840,6 @@ Remember — You have to be authenticated to call this API with your Baerer TOKE
 <span class="kd">const</span> <span class="nx">body</span> <span class="o">=</span> <span class="p">{</span>
   <span class="na">reference</span><span class="p">:</span> <span class="dl">"</span><span class="s2">package_reference</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">title</span><span class="p">:</span> <span class="dl">"</span><span class="s2">package_title</span><span class="dl">"</span><span class="p">,</span>
-  <span class="na">supplier_reference</span><span class="p">:</span> <span class="dl">"</span><span class="s2">supplier_reference</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">capacity</span><span class="p">:</span> <span class="dl">"</span><span class="s2">3</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">custom_fields</span><span class="p">:</span> <span class="p">[</span>
     <span class="p">{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">field1</span><span class="dl">"</span><span class="p">,</span> <span class="na">value</span><span class="p">:</span> <span class="dl">"</span><span class="s2">field1Value</span><span class="dl">"</span> <span class="p">},</span>
@@ -1889,12 +1888,6 @@ If you do not add an Optionnal parameter, it will be empty for a creation or sim
 <td>String</td>
 <td>True/False</td>
 <td>If no reference or reference not found, the title is mandatory</td>
-</tr>
-<tr>
-<td>supplier_reference</td>
-<td>String</td>
-<td>True</td>
-<td>If supplier_reference given, the package will be associated to a supplier</td>
 </tr>
 <tr>
 <td>capacity</td>
