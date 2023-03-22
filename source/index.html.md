@@ -895,7 +895,6 @@ const baseUrl = "https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1";
 const body = {
   reference: "package_reference",
   title: "package_title",
-  supplier_reference: "supplier_reference",
   capacity: "3",
   custom_fields: [
     { name: "field1", value: "field1Value" },
@@ -931,13 +930,12 @@ This endpoint Upsert a Package. The reference should be unique and permit to upd
 If you do not add an Optionnal parameter, it will be empty for a creation or simply not updated for an update. If the parameter is empty (""), same behaviour
 </aside>
 
-| Parameter          | Type   | Optionnal  | Description                                                                                                                                                     |
-| ------------------ | ------ | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | --- |
-| reference          | String | True/False | To Update a Package, Reference is mandatory, the Reference will be used as a Primary Key, in case of creation, a unique Reference will be returned              |
-| title              | String | True/False | If no reference or reference not found, the title is mandatory                                                                                                  |
-| supplier_reference | String | True       | If supplier_reference given, the package will be associated to a supplier                                                                                       |
-| capacity           | Number | True       | capacity is the default number of this package at his creation                                                                                                  |     |
-| custom_fields      | JSON   | True       | You can add Custom Fields for your client, this custom fields should be in your Ezus params and Write Exactly as they are written in your params Technical Name |
+| Parameter     | Type   | Optionnal  | Description                                                                                                                                                     |
+| ------------- | ------ | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | --- |
+| reference     | String | True/False | To Update a Package, Reference is mandatory, the Reference will be used as a Primary Key, in case of creation, a unique Reference will be returned              |
+| title         | String | True/False | If no reference or reference not found, the title is mandatory                                                                                                  |
+| capacity      | Number | True       | capacity is the default number of this package at his creation                                                                                                  |     |
+| custom_fields | JSON   | True       | You can add Custom Fields for your client, this custom fields should be in your Ezus params and Write Exactly as they are written in your params Technical Name |
 
 <aside class="success">
 Remember — You have to be authenticated to call this API with your Baerer TOKEN
