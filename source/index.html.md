@@ -5,7 +5,6 @@ language_tabs: # must be one of https://github.com/rouge-ruby/rouge/wiki/List-of
   - javascript
 
 toc_footers:
-  - <a href='#'>Sign Up for a Developer Key</a>
   - <a href='https://ezus.io/'>Documentation Powered by Ezus</a>
 
 includes:
@@ -146,18 +145,18 @@ This endpoint upsert a project. This endpoint take the reference as a primary ke
 If you do not add an optionnal parameter, it will be empty for a creation or simply not updated for an update. If the parameter is empty (""), same behaviour
 </aside>
 
-| Parameter           | Type   | Optionnal  | Description                                                                                                                                                                                          |
-| ------------------- | ------ | ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| reference           | String | False      | The project Reference used as a primary key to check if the project already exist and UPDATE it or to create a new Project so be sure to use a unique Ezus Reference for each of your project        |
-| info_title          | String | True/False | Title of your project, mandatory if you create a New Project                                                                                                                                         |
-| trip_people         | Number | True       | Number of people in your project                                                                                                                                                                     |
-| trip_budget         | Number | True       | Budget of your project                                                                                                                                                                               |
-| trip_date_in        | Date   | True       | Date of the beginning of your project formated like YYYY-MM-DD if not formatted correctly, or if duration > 40 days or if trip_date_in > trip_date_out, project will be set as 1day and date = today |
-| trip_date_out       | Date   | True       | Date of the end of your project formated like YYYY-MM-DD if not formatted correctly, or if duration > 40 days or if trip_date_in > trip_date_out, project will be set as 1day and date = today       |
-| custom_fields       | JSON   | True       | You can add Custom Fields for your client, this custom fields should be in your Ezus params and Write Exactly as they are written in your params Technical Name                                      |
-| sales_manager_email | Email  | True       | Email of the Sales Manager, by default if no sales_manager or not found will be assignated to nobody                                                                                                 |
-| client_reference    | String | True       | Ezus Reference of the Client, if the reference don't match with a client, API will try with client_email if setted else, No clients will be assigned                                                 |
-| client_email        | Email  | True       | Email of the Client, if the email don't match with a client, No clients will be assigned                                                                                                             |
+| Parameter           | Type   | Optionnal  | Description                                                                                                                                                                                                                         |
+| ------------------- | ------ | ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| reference           | String | True       | The project Reference used as a primary key to check if the project already exist and UPDATE it or to create a new Project so be sure to use a unique Ezus Reference for each of your project                                       |
+| info_title          | String | True/False | Title of your project, mandatory if you create a New Project                                                                                                                                                                        |
+| trip_people         | Number | True       | Number of people in your project                                                                                                                                                                                                    |
+| trip_budget         | Number | True       | Budget of your project                                                                                                                                                                                                              |
+| trip_date_in        | Date   | True       | Date of the beginning of your project formated like YYYY-MM-DD if not formatted correctly, or if duration > 40 days or if trip_date_in > trip_date_out, project will be set as 1day and date = today                                |
+| trip_date_out       | Date   | True       | Date of the end of your project formated like YYYY-MM-DD if not formatted correctly, or if duration > 40 days or if trip_date_in > trip_date_out, project will be set as 1day and date = today                                      |
+| custom_fields       | JSON   | True       | You can add Custom Fields for your client, this custom fields should be in your Ezus params and Write Exactly as they are written in your params technical name (<a href="#option-custom_fields" target="_blank">Custom fields</a>) |
+| sales_manager_email | Email  | True       | Email of the Sales Manager, by default if no sales_manager or not found will be assignated to nobody                                                                                                                                |
+| client_reference    | String | True       | Ezus Reference of the Client, if the reference don't match with a client, API will try with client_email if setted else, No clients will be assigned                                                                                |
+| client_email        | Email  | True       | Email of the Client, if the email don't match with a client, No clients will be assigned                                                                                                                                            |
 
 <aside class="success">
 Remember — You have to be authenticated to call this API with your bearer token
@@ -249,17 +248,17 @@ This endpoint get a project
 
 ### Returned Values
 
-| Name              | Type   | Value                                                                  |
-| ----------------- | ------ | ---------------------------------------------------------------------- |
-| reference         | String | The Reference of the given project - The one you gave                  |
-| info_title        | String | The title of your project                                              |
-| info_stage        | String | The stage of your project (Confirmed, Received, Paid...)               |
-| info_notes        | String | Notes on your project                                                  |
-| info_reference    | String | Reference of your project ex: "202208019-P"                            |
-| traveler_designer | JSON   | Travel designer is a Json that contain email, first_name and last_name |
-| project_manager   | JSON   | Project manager is a Json that contain email, first_name and last_name |
-| alternatives      | Array  | An array of alternatives                                               |
-| custom_fields     | Array  | Array of custom fields that contain name and value as string           |
+| Name              | Type   | Value                                                                                                                            |
+| ----------------- | ------ | -------------------------------------------------------------------------------------------------------------------------------- |
+| reference         | String | The Reference of the given project - The one you gave                                                                            |
+| info_title        | String | The title of your project                                                                                                        |
+| info_stage        | String | The stage of your project (Confirmed, Received, Paid...)                                                                         |
+| info_notes        | String | Notes on your project                                                                                                            |
+| info_reference    | String | Reference of your project ex: "202208019-P"                                                                                      |
+| traveler_designer | JSON   | Travel designer is a Json that contain email, first_name and last_name                                                           |
+| project_manager   | JSON   | Project manager is a Json that contain email, first_name and last_name                                                           |
+| alternatives      | Array  | An array of alternatives                                                                                                         |
+| custom_fields     | Array  | Array of custom fields that contain name and value as string (<a href="#option-custom_fields" target="_blank">Custom fields</a>) |
 
 ### alternatives
 
@@ -391,7 +390,7 @@ If you do not add an optionnal parameter, it will be empty for a creation or sim
 | company_name | String | True      | Set a company name - If company name is empty, the client will be set as an individual and the name of the client = name of the contact and if the company name is not empty, the name of the client will be the company name |                         |
 | contact      | JSON   | False     | Contact is a JSON and email is needed                                                                           |
 | address      | JSON   | True      | Address is a JSON and label is needed if you want to add or update the adresse of your client but not mandatory |
-| custom_fields      | JSON   | True      | You can add custom fields for your client, this custom fields should be in your Ezus params and Write exactly as they are written in your params technical name|
+| custom_fields      | JSON   | True      | You can add custom fields for your client, this custom fields should be in your Ezus params and Write exactly as they are written in your params technical name (<a href="#option-custom_fields" target="_blank">Custom fields</a>)   |
 
 #### Contact Parameters
 
@@ -487,25 +486,25 @@ This endpoint get a Client
 
 ### Returned Values
 
-| Name           | Type   | Value                                                                       |
-| -------------- | ------ | --------------------------------------------------------------------------- |
-| reference      | String | The reference of the given client - The one you gave                        |
-| type           | String | The type of the client ["entreprise", "individual"]                         |
-| company_name   | String | Name of the company of your client                                          |
-| first_name     | String | First name of the client                                                    |
-| last_name      | String | Last name of the client                                                     |
-| email          | String | Email of the client                                                         |
-| activity       | String | Activity of the client (Only for entreprise)                                |
-| vat_number     | String | VAT number of the client (Only for entreprise)                              |
-| siret          | String | Siret number of the client (Only for entreprise)                            |
-| info_profile   | String | info_profile of the client                                                  |
-| info_origin    | String | Source of the client                                                        |
-| info_notes     | String | Notes on the client                                                         |
-| info_reference | String | Reference of the client                                                     |
-| address        | JSON   | Address of the client JSON who contain "label", "zip", "city" and "country" |
-| contacts       | Array  | Array of json who contains "first_name", "last_name", "email"               |
-| projects       | Array  | Array of json who contains "reference", "info_title"                        |
-| custom_fields  | Array  | Array of json who contains "name", "value"                                  |
+| Name           | Type   | Value                                                                                                          |
+| -------------- | ------ | -------------------------------------------------------------------------------------------------------------- |
+| reference      | String | The reference of the given client - The one you gave                                                           |
+| type           | String | The type of the client ["entreprise", "individual"]                                                            |
+| company_name   | String | Name of the company of your client                                                                             |
+| first_name     | String | First name of the client                                                                                       |
+| last_name      | String | Last name of the client                                                                                        |
+| email          | String | Email of the client                                                                                            |
+| activity       | String | Activity of the client (Only for entreprise)                                                                   |
+| vat_number     | String | VAT number of the client (Only for entreprise)                                                                 |
+| siret          | String | Siret number of the client (Only for entreprise)                                                               |
+| info_profile   | String | info_profile of the client                                                                                     |
+| info_origin    | String | Source of the client                                                                                           |
+| info_notes     | String | Notes on the client                                                                                            |
+| info_reference | String | Reference of the client                                                                                        |
+| address        | JSON   | Address of the client JSON who contain "label", "zip", "city" and "country"                                    |
+| contacts       | Array  | Array of json who contains "first_name", "last_name", "email"                                                  |
+| projects       | Array  | Array of json who contains "reference", "info_title"                                                           |
+| custom_fields  | Array  | Array of json who contains "name", "value" (<a href="#option-custom_fields" target="_blank">Custom fields</a>) |
 
 <aside class="success">
 Remember — You have to be authenticated to call this API with your bearer token
@@ -579,7 +578,7 @@ If you do not add an Optionnal parameter, it will be empty for a creation or sim
 | company_name | String | True      | Set a company name - If company name is empty, the supplier will be set as an individual |                         |
 | contact      | JSON   | False     | Contact is a JSON and email is needed                                                                           |
 | address      | JSON   | True      | Address is a JSON and label is needed if you want to add or update the adresse of your supplier but not mandatory |
-| custom_fields      | JSON   | True      | You can add custom fields for your client, this custom fields should be in your Ezus params and Write Exactly as they are written in your params technical name|
+| custom_fields      | JSON   | True      | You can add custom fields for your client, this custom fields should be in your Ezus params and Write Exactly as they are written in your params technical name (<a href="#option-custom_fields" target="_blank">Custom fields</a>)   |
 
 #### Contact Parameters
 
@@ -623,7 +622,7 @@ axios.post(baseUrl + "/supplier?reference=reference", {}, headers);
   "erreur": "false",
   "reference": "ezus-reference",
   "company_name": "Company Name",
-  "capacity": "Capacity",
+  "capacity": "3",
   "info_notes": "Notes on the client",
   "info_reference": "Reference of the Client",
   "visual_url": "urlofthevisual.com",
@@ -699,7 +698,7 @@ This endpoint get a Supplier
 | address        | JSON   | Address of the supplier JSON who contain "label", "zip", "city" and "country"                                  |
 | contacts       | Array  | Contacts Assigned to the supplier formated in an Array of Json who contains "first_name", "last_name", "email" |
 | projects       | Array  | Projects assigned to the supplier formated in an Array of Json who contains "reference", "info_title"          |
-| custom_fields  | Array  | Array of Json who contains "name", "value"                                                                     |
+| custom_fields  | Array  | Array of Json who contains "name", "value" (<a href="#option-custom_fields" target="_blank">Custom fields</a>) |
 
 <aside class="success">
 Remember — You have to be authenticated to call this API with your bearer token
@@ -777,7 +776,7 @@ If you do not add an optionnal parameter, it will be empty for a creation or sim
 | commission_mode    | Option  | True       | 'default', 'purchase' or 'sales', sales mode mean the commission will be calculated on the selling price, purchase on the buying price if empty, the commission_mode will be set on your account default value.                                                                            |
 | commission         | Number  | True       | Number represent the % or the amount of the commission                                                                                                                                                                                                                                     |
 | currency           | Symbol  | True       | The ISO 4217 code who represent the currency you use (<a href="https://docs.google.com/spreadsheets/d/1b7BNOwKyN1hMOouve6xhFZ2R2zrH4Sj1L-646j755fU/edit?usp=sharing" target="_blank">Link to Doc</a>)                                                                                      |
-| custom_fields      | JSON    | True       | You can add Custom Fields for your client, this custom fields should be in your Ezus params and Write Exactly as they are written in your params Technical Name                                                                                                                            |
+| custom_fields      | JSON    | True       | You can add Custom Fields for your client, this custom fields should be in your Ezus params and Write Exactly as they are written in your params technical name (<a href="#option-custom_fields" target="_blank">Custom fields</a>)                                                        |
 
 <aside class="success">
 Remember — You have to be authenticated to call this API with your bearer token
@@ -801,8 +800,8 @@ axios.post(baseUrl + "/product?reference=reference", {}, headers);
   "erreur": "false",
   "reference": "ezus-reference",
   "title": "Product Title",
-  "capacity": "Capacity",
-  "quantity": "Quantity of this Product",
+  "capacity": "3",
+  "quantity": "2",
   "vat_regime": "margin",
   "vat_rate": 15.0,
   "commission_mode": "default",
@@ -837,17 +836,15 @@ axios.post(baseUrl + "/product?reference=reference", {}, headers);
   },
   "rates": [
     {
-      "reference": null,
+      "reference": "ezus_reference",
       "type": "default",
-      "name": "",
       "purchase_price_pretax": 0.0,
       "margin_rate": 0.0,
       "sale_price_pretax": 0.0,
       "child": [
         {
-          "reference": null,
+          "reference": "ezus_reference",
           "type": "custom",
-          "name": null,
           "purchase_price_pretax": 0.0,
           "margin_rate": 0.0,
           "sale_price_pretax": 0.0
@@ -893,7 +890,7 @@ This endpoint get a product
 | supplier          | Array  | Array of json who contains "reference", "company_name"                                                                                                                                                                                                                                                                                                                                   |
 | package           | Array  | Array of json who contains "name", "value"                                                                                                                                                                                                                                                                                                                                               |
 | rates             | Array  | Array of json who contains "reference", "type", "name", "purchase_price_pretax", "margin_rate", "sale_price_pretax", "child" - Childs are tariffs contains in the rates tariff, a product can have multiple tariffs and multiple seasons, a season can have multiple tariffs levels also. "type" can be "default" OR "season". Margin rates are calculated according to the sales price. |
-| custom_fields     | Array  | Array of json who contains "name", "value"                                                                                                                                                                                                                                                                                                                                               |
+| custom_fields     | Array  | Array of json who contains "name", "value" (<a href="#option-custom_fields" target="_blank">Custom fields</a>)                                                                                                                                                                                                                                                                           |
 
 <aside class="success">
 Remember — You have to be authenticated to call this API with your bearer token
@@ -948,12 +945,12 @@ This endpoint upsert a package. The reference should be unique and allows to upd
 If you do not add an Optionnal parameter, it will be empty for a creation or simply not updated for an update. If the parameter is empty (""), same behaviour
 </aside>
 
-| Parameter     | Type   | Optionnal  | Description                                                                                                                                                     |
-| ------------- | ------ | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | --- |
-| reference     | String | True/False | To update a package, Reference is mandatory, the reference will be used as a primary key, in case of creation, a unique reference will be returned              |
-| title         | String | True/False | If no reference or reference not found, the title is mandatory                                                                                                  |
-| capacity      | Number | True       | capacity is the default number of this package at his creation                                                                                                  |     |
-| custom_fields | JSON   | True       | You can add custom fields for your client, this custom fields should be in your Ezus params and Write exactly as they are written in your params technical name |
+| Parameter     | Type   | Optionnal  | Description                                                                                                                                                                                                                         |
+| ------------- | ------ | ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --- |
+| reference     | String | True/False | To update a package, Reference is mandatory, the reference will be used as a primary key, in case of creation, a unique reference will be returned                                                                                  |
+| title         | String | True/False | If no reference or reference not found, the title is mandatory                                                                                                                                                                      |
+| capacity      | Number | True       | capacity is the default number of this package at his creation                                                                                                                                                                      |     |
+| custom_fields | JSON   | True       | You can add custom fields for your client, this custom fields should be in your Ezus params and Write exactly as they are written in your params technical name (<a href="#option-custom_fields" target="_blank">Custom fields</a>) |
 
 <aside class="success">
 Remember — You have to be authenticated to call this API with your bearer token
@@ -977,7 +974,7 @@ axios.post(baseUrl + "/package?reference=reference", {}, headers);
   "erreur": "false",
   "reference": "ezus-reference",
   "title": "package Title",
-  "capacity": "Capacity",
+  "capacity": "3",
   "info_notes": "Notes on the Package",
   "visual_url": "urlofthepackage.com",
   "langs": [
@@ -994,14 +991,18 @@ axios.post(baseUrl + "/package?reference=reference", {}, headers);
       "path_full": "https://ezus-cmtyhfgfzxdnjtahdgpfmgfj.s3.amazonaws.com/media/imgname.jpeg"
     }
   ],
-  "supplier": {
-    "reference": "190e4c0e-b298-11ed-8c48-0aaafac61d09",
-    "company_name": "Company Name"
-  },
-  "product": {
-    "reference": "e2a428dc-b293-11ed-8c48-0aaafac61d09",
-    "title": "Product Name"
-  },
+  "suppliers": [
+    {
+      "reference": "190e4c0e-b298-11ed-8c48-0aaafac61d09",
+      "company_name": "Company name"
+    }
+  ],
+  "product": [
+    {
+      "reference": "e2a428dc-b293-11ed-8c48-0aaafac61d09",
+      "title": "Product name"
+    }
+  ],
   "custom_fields": [
     {
       "name": "CustomField",
@@ -1028,9 +1029,9 @@ This endpoint get a package
 | visual_url    | String | URL of the google slide of this package                                                                                            |
 | langs         | Array  | Array of json who contains "lang":"language name", "name":"package name in this language", "short_description", "long_description" |
 | medias        | Array  | Array of json who contains "media_name", "path_full": Full path to the image                                                       |
-| supplier      | Array  | Array of json who contains "reference", "company_name"                                                                             |
+| supplier      | Array  | Array of json {"reference", "company_name"} who contains the suppliers linked to the products of the package                       |
 | products      | Array  | Array of json who contains "name", "value"                                                                                         |
-| custom_fields | Array  | Array of json who contains "name", "value"                                                                                         |
+| custom_fields | Array  | Array of json who contains "name", "value" (<a href="#option-custom_fields" target="_blank">Custom fields</a>)                     |
 
 <aside class="success">
 Remember — You have to be authenticated to call this API with your bearer token
@@ -1092,16 +1093,16 @@ Warning: the custom_fields of the projects route must have their real name and n
 
 ### Options
 
-| Options           | Type    | Value                                                                                                                                                                                          |
-| ----------------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Text              | String  | Simple string like Text Area                                                                                                                                                                   |
-| Dropdown          | Options | The option must be written exactly as in the parameters, respecting the case                                                                                                                   |
-| Multiple Dropdown | Options | The option must be written exactly as in the parameters, respecting the case, for Multiple Answer you should enter Option1/-/Option2/-/Option3 in a string, "/-/" should separate each options |
-| Date              | String  | The date must be written exactly in YYYY-MM-DD format                                                                                                                                          |
-| Time              | String  | The time must be written exactly in the format: YYYY-MM-DDTHH:MM:SS+01:00                                                                                                                      |
-| Checkbox          | String  | A string must contain "true" (checked) OR "false" (unchecked)                                                                                                                                  |
-| Number            | Number  | Number type should be a Number without other character                                                                                                                                         |
-| File              | File    | Not supported yet                                                                                                                                                                              |
+| Options           | Type   | Value                                                                                                                                                                                          |
+| ----------------- | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Text              | String | Simple string like Text Area                                                                                                                                                                   |
+| Dropdown          | String | The option must be written exactly as in the parameters, respecting the case                                                                                                                   |
+| Multiple Dropdown | String | The option must be written exactly as in the parameters, respecting the case, for Multiple Answer you should enter Option1/-/Option2/-/Option3 in a string, "/-/" should separate each options |
+| Date              | String | The date must be written exactly in YYYY-MM-DD format                                                                                                                                          |
+| Time              | String | The time must be written exactly in the format: YYYY-MM-DDTHH:MM:SS+01:00                                                                                                                      |
+| Checkbox          | String | A string must contain "true" (checked) OR "false" (unchecked)                                                                                                                                  |
+| Number            | String | Number type should be a Number without other character                                                                                                                                         |
+| File              | File   | Not supported yet                                                                                                                                                                              |
 
 <aside class="success">
 Remember — You have to be authenticated to call this API with your bearer token
