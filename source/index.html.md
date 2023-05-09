@@ -94,6 +94,8 @@ You must replace <code>ApiKey</code> with your personal API key.
 
 ## POST projects-upsert
 
+In Ezus, a project is a travel or event project, with or without destination, dates, budget and a number of people. It contains prestations, transportation and accommodation.
+
 ```javascript
 const axios = require("axios");
 const baseUrl = "https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1";
@@ -326,6 +328,8 @@ Remember — You have to be authenticated to call this API with your Baerer TOKE
 
 ## POST clients-upsert
 
+In Ezus, a client is a person or a company to whom you will sell your projects
+
 ```javascript
 const axios = require("axios");
 const baseUrl = "https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1";
@@ -510,6 +514,8 @@ Remember — You have to be authenticated to call this API with your Baerer TOKE
 # Suppliers
 
 ## POST suppliers-upserts
+
+In Ezus, a supplier is a company, which will charge you for prestations. It can be a hotel, an airline or a kanoe club
 
 ```javascript
 const axios = require("axios");
@@ -701,6 +707,8 @@ Remember — You have to be authenticated to call this API with your Baerer TOKE
 # Products
 
 ## POST products-upsert
+
+In Ezus, a product is an element that can be included in a project or a step, like a night in a hotel, a flight from Paris to Tokyo or a parachute jump
 
 ```javascript
 const axios = require("axios");
@@ -895,6 +903,8 @@ Remember — You have to be authenticated to call this API with your Baerer TOKE
 # Package
 
 ## POST package_upsert
+
+In Ezus, a package is a group of products and is intended to be added more easily to a project
 
 ```javascript
 const axios = require("axios");
