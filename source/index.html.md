@@ -197,12 +197,12 @@ axios.post(baseUrl + "/project?reference=reference", {}, headers);
     {
       "alternative_title": "Alternative 1",
       "trip_people": "15",
-      "trip_budget": 0,
+      "trip_budget": "0",
       "trip_date_in": "2022-07-31",
       "trip_date_out": "2022-08-02",
       "destination": "Destination",
       "subdestination": "Subdestination",
-      "trip_duration": "2 days",
+      "trip_duration": "2",
       "client": {
         "reference": "Client reference",
         "type": "entreprise",
@@ -215,12 +215,12 @@ axios.post(baseUrl + "/project?reference=reference", {}, headers);
     {
       "alternative_title": "Main Alternative",
       "trip_people": "15",
-      "trip_budget": 300,
+      "trip_budget": "300",
       "trip_date_in": "2022-07-31",
       "trip_date_out": "2022-08-02",
       "destination": "Destination",
       "subdestination": "Subdestination",
-      "trip_duration": "2 days",
+      "trip_duration": "2",
       "client": {
         "reference": "Client Reference",
         "type": "individual",
@@ -399,7 +399,7 @@ If you do not add an optionnal parameter, it will be empty for a creation or sim
 | email     | String | False     | Email will be used to identify which client will be updated or create a new client if no email found |
 | firstname | String | False     | Firstname of the client as a string                                                                  |
 | lastname  | String | True      | Lastname of the client as a string                                                                   |
-| gender    | int    | True      | 1 = Men, 2 = Women, 0 = None                                                                         |
+| gender    | Number | True      | 1 = Men, 2 = Women, 0 = None                                                                         |
 | phone     | String | True      | Phone of the client as a string                                                                      |
 | birthdate | String | True      | Birthdate of the client formated like: YYYY-MM-DD if not formated correctly = NULL                   |
 
@@ -527,7 +527,7 @@ const body = {
   contact: {
     firstname: "firstname",
     lastname: "lastname",
-    gender: 1,
+    gender: "1",
     email: "email@email.email",
     phone: "0606060606",
     birthdate: "2023-01-01",
@@ -587,7 +587,7 @@ If you do not add an Optionnal parameter, it will be empty for a creation or sim
 | email     | String | False     | Email will be used to identify which supplier will be updated or create a new supplier if no email found |
 | firstname | String | False     | Firstname of the supplier as a string                                                                    |
 | lastname  | String | True      | Lastname of the supplier as a string                                                                     |
-| gender    | int    | True      | 1 = Men, 2 = Women, 0 = None                                                                             |
+| gender    | Number | True      | 1 = Men, 2 = Women, 0 = None                                                                             |
 | phone     | String | True      | Phone of the supplier as a string                                                                        |
 | birthdate | String | True      | Birthdate of the supplier formated like: YYYY-MM-DD if not formatted correctly = NULL                    |
 
@@ -719,13 +719,13 @@ const body = {
   quantity: "3",
   supplier_reference: "supplier_reference",
   package_reference: "package_reference",
-  purchase_price: 42.42,
-  sales_price: 84.84,
+  purchase_price: "42.42",
+  sales_price: "84.84",
   vat_regime: "none",
-  vat_rate: 20,
+  vat_rate: "20",
   commission_regime: "percent",
   commission_mode: "default",
-  commission: 20,
+  commission: "20",
   currency: "USD",
   custom_fields: [
     { name: "field1", value: "field1Value" },
@@ -803,7 +803,7 @@ axios.post(baseUrl + "/product?reference=reference", {}, headers);
   "capacity": "3",
   "quantity": "2",
   "vat_regime": "margin",
-  "vat_rate": 15.0,
+  "vat_rate": "15.0",
   "commission_mode": "default",
   "commission_regime": "%",
   "commission": "0",
@@ -838,16 +838,16 @@ axios.post(baseUrl + "/product?reference=reference", {}, headers);
     {
       "reference": "ezus_reference",
       "type": "default",
-      "purchase_price_pretax": 0.0,
-      "margin_rate": 0.0,
-      "sale_price_pretax": 0.0,
+      "purchase_price_pretax": "10",
+      "margin_rate": "10",
+      "sale_price_pretax": "11",
       "child": [
         {
           "reference": "ezus_reference",
           "type": "custom",
-          "purchase_price_pretax": 0.0,
-          "margin_rate": 0.0,
-          "sale_price_pretax": 0.0
+          "purchase_price_pretax": "10",
+          "margin_rate": "10",
+          "sale_price_pretax": "11"
         }
       ]
     }
@@ -1047,7 +1047,7 @@ Remember — You have to be authenticated to call this API with your bearer toke
     },
     {
       "name": "Number",
-      "value": 42
+      "value": "42"
     },
     {
       "name": "Text area",
@@ -1067,7 +1067,7 @@ Remember — You have to be authenticated to call this API with your bearer toke
     },
     {
       "name": "Checkbox",
-      "value": true
+      "value": "true"
     },
     {
       "name": "Dropdown",
@@ -1078,7 +1078,6 @@ Remember — You have to be authenticated to call this API with your bearer toke
       "value": "ExactOption1/-/ExactOption2"
     }
   ]
-}
 ```
 
 ### Custom Fields
