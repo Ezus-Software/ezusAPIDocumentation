@@ -319,6 +319,9 @@
             <a href="#authentication" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#http-request" class="toc-h2 toc-link" data-title="HTTP Request">HTTP Request</a>
+                  </li>
+                  <li>
                     <a href="#headers" class="toc-h2 toc-link" data-title="Headers">Headers</a>
                   </li>
                   <li>
@@ -445,9 +448,15 @@
 
 <p>Ezus expects for the API key to be included in all API requests to the server in a header that looks like the following:</p>
 
-<p><code>Authorization: ApiKey</code></p>
+<p><code>X-API-KEY: ApiKey</code></p>
 
 <p>To get your API key, you have to ask to your Account Manager</p>
+
+<p>After calling the login route, a bearer token will be returned to you, it must be included in the header of all your calls to the Ezus API</p>
+
+<p><code>Authorization: YOUR TOKEN</code></p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code>POST https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/login</code></p>
 <h3 id='headers'>Headers</h3>
 <table><thead>
 <tr>
@@ -480,7 +489,9 @@
 <aside class="notice">
 You must replace <code>ApiKey</code> with your personal API key.
 </aside>
-<h1 id='projects'>Projects</h1><h2 id='post-projects-upsert'>POST projects-upsert</h2><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">axios</span><span class="dl">"</span><span class="p">);</span>
+<h1 id='projects'>Projects</h1><h2 id='post-projects-upsert'>POST projects-upsert</h2>
+<p>In Ezus, a project is a travel or event project, with or without destination, dates, budget and a number of people. It contains prestations, transportation and accommodation.</p>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">axios</span><span class="dl">"</span><span class="p">);</span>
 <span class="kd">const</span> <span class="nx">baseUrl</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1</span><span class="dl">"</span><span class="p">;</span>
 
 <span class="kd">const</span> <span class="nx">body</span> <span class="o">=</span> <span class="p">{</span>
@@ -498,7 +509,7 @@ You must replace <code>ApiKey</code> with your personal API key.
   <span class="na">client_reference</span><span class="p">:</span> <span class="dl">"</span><span class="s2">client_reference</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">client_email</span><span class="p">:</span> <span class="dl">"</span><span class="s2">emailoftheclient@mail.com</span><span class="dl">"</span><span class="p">,</span>
 <span class="p">};</span>
-<span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span> <span class="dl">"</span><span class="s2">X-API-KEY</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">ApiKey</span><span class="dl">"</span> <span class="p">};</span>
+<span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span> <span class="dl">"</span><span class="s2">X-API-KEY</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">ApiKey</span><span class="dl">"</span><span class="p">,</span> <span class="na">Authorization</span><span class="p">:</span> <span class="dl">"</span><span class="s2">YOUR TOKEN</span><span class="dl">"</span> <span class="p">};</span>
 
 <span class="nx">axios</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="nx">baseUrl</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">/projects-upsert</span><span class="dl">"</span><span class="p">,</span> <span class="nx">body</span><span class="p">,</span> <span class="nx">headers</span><span class="p">);</span>
 </code></pre></div>
@@ -515,8 +526,8 @@ You must replace <code>ApiKey</code> with your personal API key.
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
-<p>This endpoint upsert a Project. This endpoint take the reference as a Primary key, if the reference already exist, the project linked to the account will be updated, if the référence doesn&#39;t exist, a new project will be created with all the Given Params.</p>
-<h3 id='http-request'>HTTP Request</h3>
+<p>This endpoint upsert a Project. This endpoint take the reference as a Primary key, if the reference already exist, the project linked to the account will be updated, if the reference doesn&#39;t exist, a new project will be created with all the given params.</p>
+<h3 id='http-request-2'>HTTP Request</h3>
 <p><code>POST https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/projects-upsert</code></p>
 <h3 id='body-parameters-2'>Body Parameters</h3>
 <aside class="comment">
@@ -535,7 +546,7 @@ If you do not add an Optionnal parameter, it will be empty for a creation or sim
 <td>reference</td>
 <td>String</td>
 <td>False</td>
-<td>The project Reference used as a primary key to check if the project already exist and UPDATE it or to create a new Project so be sure to use a unique Esus Référence for each of your project</td>
+<td>The project Reference used as a primary key to check if the project already exist and UPDATE it or to create a new Project so be sure to use a unique Ezus Reference for each of your project</td>
 </tr>
 <tr>
 <td>info_title</td>
@@ -583,7 +594,7 @@ If you do not add an Optionnal parameter, it will be empty for a creation or sim
 <td>client_reference</td>
 <td>String</td>
 <td>True</td>
-<td>Esus Reference of the Client, if the reference don&#39;t match with a client, API will try with client_email if setted else, No clients will be assigned</td>
+<td>Ezus Reference of the Client, if the reference don&#39;t match with a client, API will try with client_email if setted else, No clients will be assigned</td>
 </tr>
 <tr>
 <td>client_email</td>
@@ -599,7 +610,7 @@ Remember — You have to be authenticated to call this API with your Baerer TOKE
 <h2 id='get-project'>GET project</h2><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">axios</span><span class="dl">"</span><span class="p">);</span>
 <span class="kd">const</span> <span class="nx">baseUrl</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1</span><span class="dl">"</span><span class="p">;</span>
 
-<span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span> <span class="dl">"</span><span class="s2">X-API-KEY</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">ApiKey</span><span class="dl">"</span> <span class="p">};</span>
+<span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span> <span class="dl">"</span><span class="s2">X-API-KEY</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">ApiKey</span><span class="dl">"</span><span class="p">,</span> <span class="na">Authorization</span><span class="p">:</span> <span class="dl">"</span><span class="s2">YOUR TOKEN</span><span class="dl">"</span> <span class="p">};</span>
 
 <span class="nx">axios</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="nx">baseUrl</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">/project?reference=reference</span><span class="dl">"</span><span class="p">,</span> <span class="p">{},</span> <span class="nx">headers</span><span class="p">);</span>
 </code></pre></div>
@@ -608,7 +619,7 @@ Remember — You have to be authenticated to call this API with your Baerer TOKE
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"erreur"</span><span class="p">:</span><span class="w"> </span><span class="s2">"false"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"esus-reference"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ezus-reference"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"info_title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Project Title"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"info_stage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Confirmed"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"info_notes"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Notes on the project"</span><span class="p">,</span><span class="w">
@@ -670,7 +681,7 @@ Remember — You have to be authenticated to call this API with your Baerer TOKE
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p>This endpoint get a Project</p>
-<h3 id='http-request-2'>HTTP Request</h3>
+<h3 id='http-request-3'>HTTP Request</h3>
 <p><code>GET https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/project?reference=reference</code></p>
 <h3 id='returned-values'>Returned Values</h3>
 <table><thead>
@@ -792,7 +803,7 @@ Remember — You have to be authenticated to call this API with your Baerer TOKE
   <span class="na">title</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Ezus test</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">link</span><span class="p">:</span> <span class="dl">"</span><span class="s2">https://www.linktothedocument.pdf</span><span class="dl">"</span><span class="p">,</span>
 <span class="p">};</span>
-<span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span> <span class="dl">"</span><span class="s2">X-API-KEY</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">ApiKey</span><span class="dl">"</span> <span class="p">};</span>
+<span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span> <span class="dl">"</span><span class="s2">X-API-KEY</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">ApiKey</span><span class="dl">"</span><span class="p">,</span> <span class="na">Authorization</span><span class="p">:</span> <span class="dl">"</span><span class="s2">YOUR TOKEN</span><span class="dl">"</span> <span class="p">};</span>
 
 <span class="nx">axios</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="nx">baseUrl</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">/projects-documents-create</span><span class="dl">"</span><span class="p">,</span> <span class="nx">body</span><span class="p">,</span> <span class="nx">headers</span><span class="p">);</span>
 </code></pre></div>
@@ -808,7 +819,7 @@ Remember — You have to be authenticated to call this API with your Baerer TOKE
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
 <p>This endpoint insert a document in a Project.</p>
-<h3 id='http-request-3'>HTTP Request</h3>
+<h3 id='http-request-4'>HTTP Request</h3>
 <p><code>POST https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/projects-documents-create</code></p>
 <h3 id='body-parameters-3'>Body Parameters</h3>
 <table><thead>
@@ -842,7 +853,9 @@ Remember — You have to be authenticated to call this API with your Baerer TOKE
 <aside class="success">
 Remember — You have to be authenticated to call this API with your Baerer TOKEN
 </aside>
-<h1 id='clients'>Clients</h1><h2 id='post-clients-upsert'>POST clients-upsert</h2><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">axios</span><span class="dl">"</span><span class="p">);</span>
+<h1 id='clients'>Clients</h1><h2 id='post-clients-upsert'>POST clients-upsert</h2>
+<p>In Ezus, a client is a person or a company to whom you will sell your projects</p>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">axios</span><span class="dl">"</span><span class="p">);</span>
 <span class="kd">const</span> <span class="nx">baseUrl</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1</span><span class="dl">"</span><span class="p">;</span>
 
 <span class="kd">const</span> <span class="nx">body</span> <span class="o">=</span> <span class="p">{</span>
@@ -867,7 +880,7 @@ Remember — You have to be authenticated to call this API with your Baerer TOKE
     <span class="p">{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">field2</span><span class="dl">"</span><span class="p">,</span> <span class="na">value</span><span class="p">:</span> <span class="dl">"</span><span class="s2">field2Value</span><span class="dl">"</span> <span class="p">},</span>
   <span class="p">],</span>
 <span class="p">};</span>
-<span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span> <span class="dl">"</span><span class="s2">X-API-KEY</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">ApiKey</span><span class="dl">"</span> <span class="p">};</span>
+<span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span> <span class="dl">"</span><span class="s2">X-API-KEY</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">ApiKey</span><span class="dl">"</span><span class="p">,</span> <span class="na">Authorization</span><span class="p">:</span> <span class="dl">"</span><span class="s2">YOUR TOKEN</span><span class="dl">"</span> <span class="p">};</span>
 
 <span class="nx">axios</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="nx">baseUrl</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">/clients-upsert</span><span class="dl">"</span><span class="p">,</span> <span class="nx">body</span><span class="p">,</span> <span class="nx">headers</span><span class="p">);</span>
 </code></pre></div>
@@ -883,8 +896,8 @@ Remember — You have to be authenticated to call this API with your Baerer TOKE
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
-<p>This endpoint Upsert a Client. The reference should be unique and permit to update an existing client or Create a new Client. If reference is not given, the email params is used as a Primary Key for your clients If you have multiple clients with the same email, the first client will be taken. If a client with this email already exist. An Esus Reference will be returned you must have to save it for your next uses. <code>this one will be updated with the new Params Given here.</code></p>
-<h3 id='http-request-4'>HTTP Request</h3>
+<p>This endpoint Upsert a Client. The reference should be unique and allows to update an existing client or Create a new Client. If reference is not given, the email params is used as a Primary Key for your clients If you have multiple clients with the same email, the first client will be taken. If a client with this email already exist. An Ezus Reference will be returned you must have to save it for your next uses. <code>this one will be updated with the new Params Given here.</code></p>
+<h3 id='http-request-5'>HTTP Request</h3>
 <p><code>POST https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/clients-upsert</code></p>
 <h3 id='body-parameters-4'>Body Parameters</h3>
 <aside class="comment">
@@ -1017,7 +1030,7 @@ Remember — You have to be authenticated to call this API with your Baerer TOKE
 <h2 id='get-client'>GET client</h2><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">axios</span><span class="dl">"</span><span class="p">);</span>
 <span class="kd">const</span> <span class="nx">baseUrl</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1</span><span class="dl">"</span><span class="p">;</span>
 
-<span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span> <span class="dl">"</span><span class="s2">X-API-KEY</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">ApiKey</span><span class="dl">"</span> <span class="p">};</span>
+<span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span> <span class="dl">"</span><span class="s2">X-API-KEY</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">ApiKey</span><span class="dl">"</span><span class="p">,</span> <span class="na">Authorization</span><span class="p">:</span> <span class="dl">"</span><span class="s2">YOUR TOKEN</span><span class="dl">"</span> <span class="p">};</span>
 
 <span class="nx">axios</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="nx">baseUrl</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">/client?reference=reference</span><span class="dl">"</span><span class="p">,</span> <span class="p">{},</span> <span class="nx">headers</span><span class="p">);</span>
 </code></pre></div>
@@ -1026,7 +1039,7 @@ Remember — You have to be authenticated to call this API with your Baerer TOKE
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"erreur"</span><span class="p">:</span><span class="w"> </span><span class="s2">"false"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"esus-reference"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ezus-reference"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"entreprise"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"company_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Company Name"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fistname"</span><span class="p">,</span><span class="w">
@@ -1072,7 +1085,7 @@ Remember — You have to be authenticated to call this API with your Baerer TOKE
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p>This endpoint get a Client</p>
-<h3 id='http-request-5'>HTTP Request</h3>
+<h3 id='http-request-6'>HTTP Request</h3>
 <p><code>GET https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/client?reference=reference</code></p>
 <h3 id='returned-values-2'>Returned Values</h3>
 <table><thead>
@@ -1172,7 +1185,9 @@ Remember — You have to be authenticated to call this API with your Baerer TOKE
 <aside class="success">
 Remember — You have to be authenticated to call this API with your Baerer TOKEN
 </aside>
-<h1 id='suppliers'>Suppliers</h1><h2 id='post-suppliers-upserts'>POST suppliers-upserts</h2><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">axios</span><span class="dl">"</span><span class="p">);</span>
+<h1 id='suppliers'>Suppliers</h1><h2 id='post-suppliers-upserts'>POST suppliers-upserts</h2>
+<p>In Ezus, a supplier is a company, which will charge you for prestations. It can be a hotel, an airline or a kanoe club</p>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">axios</span><span class="dl">"</span><span class="p">);</span>
 <span class="kd">const</span> <span class="nx">baseUrl</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1</span><span class="dl">"</span><span class="p">;</span>
 
 <span class="kd">const</span> <span class="nx">body</span> <span class="o">=</span> <span class="p">{</span>
@@ -1198,7 +1213,7 @@ Remember — You have to be authenticated to call this API with your Baerer TOKE
     <span class="p">{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">field2</span><span class="dl">"</span><span class="p">,</span> <span class="na">value</span><span class="p">:</span> <span class="dl">"</span><span class="s2">field2Value</span><span class="dl">"</span> <span class="p">},</span>
   <span class="p">],</span>
 <span class="p">};</span>
-<span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span> <span class="dl">"</span><span class="s2">X-API-KEY</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">ApiKey</span><span class="dl">"</span> <span class="p">};</span>
+<span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span> <span class="dl">"</span><span class="s2">X-API-KEY</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">ApiKey</span><span class="dl">"</span><span class="p">,</span> <span class="na">Authorization</span><span class="p">:</span> <span class="dl">"</span><span class="s2">YOUR TOKEN</span><span class="dl">"</span> <span class="p">};</span>
 
 <span class="nx">axios</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="nx">baseUrl</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">/suppliers-upsert</span><span class="dl">"</span><span class="p">,</span> <span class="nx">body</span><span class="p">,</span> <span class="nx">headers</span><span class="p">);</span>
 </code></pre></div>
@@ -1213,8 +1228,8 @@ Remember — You have to be authenticated to call this API with your Baerer TOKE
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
-<p>This endpoint Upsert a Supplier. The reference should be unique and permit to update an existing supplier or Create a new supplier. If reference is not given, the email params is used as a Primary Key for your suppliers If you have multiple suppliers with the same email, the first supplier will be taken. If a supplier with this email already exist. An Esus Reference will be returned you must have to save it for your next uses. <code>this one will be updated with the new Params Given here.</code></p>
-<h3 id='http-request-6'>HTTP Request</h3>
+<p>This endpoint Upsert a Supplier. The reference should be unique and allows to update an existing supplier or Create a new supplier. If reference is not given, the email params is used as a Primary Key for your suppliers If you have multiple suppliers with the same email, the first supplier will be taken. If a supplier with this email already exist. An Ezus Reference will be returned you must have to save it for your next uses. <code>this one will be updated with the new Params Given here.</code></p>
+<h3 id='http-request-7'>HTTP Request</h3>
 <p><code>POST https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/suppliers-upsert</code></p>
 <h3 id='body-parameters-5'>Body Parameters</h3>
 <aside class="comment">
@@ -1353,7 +1368,7 @@ Remember — You have to be authenticated to call this API with your Baerer TOKE
 <h2 id='get-supplier'>GET supplier</h2><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">axios</span><span class="dl">"</span><span class="p">);</span>
 <span class="kd">const</span> <span class="nx">baseUrl</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1</span><span class="dl">"</span><span class="p">;</span>
 
-<span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span> <span class="dl">"</span><span class="s2">X-API-KEY</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">ApiKey</span><span class="dl">"</span> <span class="p">};</span>
+<span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span> <span class="dl">"</span><span class="s2">X-API-KEY</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">ApiKey</span><span class="dl">"</span><span class="p">,</span> <span class="na">Authorization</span><span class="p">:</span> <span class="dl">"</span><span class="s2">YOUR TOKEN</span><span class="dl">"</span> <span class="p">};</span>
 
 <span class="nx">axios</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="nx">baseUrl</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">/supplier?reference=reference</span><span class="dl">"</span><span class="p">,</span> <span class="p">{},</span> <span class="nx">headers</span><span class="p">);</span>
 </code></pre></div>
@@ -1362,7 +1377,7 @@ Remember — You have to be authenticated to call this API with your Baerer TOKE
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"erreur"</span><span class="p">:</span><span class="w"> </span><span class="s2">"false"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"esus-reference"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ezus-reference"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"company_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Company Name"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"capacity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Capacity"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"info_notes"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Notes on the client"</span><span class="p">,</span><span class="w">
@@ -1405,7 +1420,7 @@ Remember — You have to be authenticated to call this API with your Baerer TOKE
   </span><span class="p">],</span><span class="w">
   </span><span class="nl">"products"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"esus_reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"product-reference"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"ezus_reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"product-reference"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Product Title"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">],</span><span class="w">
@@ -1418,7 +1433,7 @@ Remember — You have to be authenticated to call this API with your Baerer TOKE
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p>This endpoint get a Supplier</p>
-<h3 id='http-request-7'>HTTP Request</h3>
+<h3 id='http-request-8'>HTTP Request</h3>
 <p><code>GET https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/supplier?reference=reference</code></p>
 <h3 id='returned-values-3'>Returned Values</h3>
 <table><thead>
@@ -1498,7 +1513,9 @@ Remember — You have to be authenticated to call this API with your Baerer TOKE
 <aside class="success">
 Remember — You have to be authenticated to call this API with your Baerer TOKEN
 </aside>
-<h1 id='products'>Products</h1><h2 id='post-products-upsert'>POST products-upsert</h2><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">axios</span><span class="dl">"</span><span class="p">);</span>
+<h1 id='products'>Products</h1><h2 id='post-products-upsert'>POST products-upsert</h2>
+<p>In Ezus, a product is an element that can be included in a project or a step, like a night in a hotel, a flight from Paris to Tokyo or a parachute jump</p>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">axios</span><span class="dl">"</span><span class="p">);</span>
 <span class="kd">const</span> <span class="nx">baseUrl</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1</span><span class="dl">"</span><span class="p">;</span>
 
 <span class="kd">const</span> <span class="nx">body</span> <span class="o">=</span> <span class="p">{</span>
@@ -1520,7 +1537,7 @@ Remember — You have to be authenticated to call this API with your Baerer TOKE
     <span class="p">{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">field2</span><span class="dl">"</span><span class="p">,</span> <span class="na">value</span><span class="p">:</span> <span class="dl">"</span><span class="s2">field2Value</span><span class="dl">"</span> <span class="p">},</span>
   <span class="p">],</span>
 <span class="p">};</span>
-<span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span> <span class="dl">"</span><span class="s2">X-API-KEY</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">ApiKey</span><span class="dl">"</span> <span class="p">};</span>
+<span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span> <span class="dl">"</span><span class="s2">X-API-KEY</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">ApiKey</span><span class="dl">"</span><span class="p">,</span> <span class="na">Authorization</span><span class="p">:</span> <span class="dl">"</span><span class="s2">YOUR TOKEN</span><span class="dl">"</span> <span class="p">};</span>
 
 <span class="nx">axios</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="nx">baseUrl</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">/products-upsert</span><span class="dl">"</span><span class="p">,</span> <span class="nx">body</span><span class="p">,</span> <span class="nx">headers</span><span class="p">);</span>
 </code></pre></div>
@@ -1535,8 +1552,8 @@ Remember — You have to be authenticated to call this API with your Baerer TOKE
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
-<p>This endpoint Upsert a Product. The reference should be unique and permit to update an existing product or Create a new Product. If reference is not given, the product will be created. An Esus Reference will be returned you must have to save it for your next updates of this product. <code>this one will be updated with the new Params Given here.</code></p>
-<h3 id='http-request-8'>HTTP Request</h3>
+<p>This endpoint Upsert a Product. The reference should be unique and allows to update an existing product or Create a new Product. If reference is not given, the product will be created. An Ezus Reference will be returned you must have to save it for your next updates of this product. <code>this one will be updated with the new Params Given here.</code></p>
+<h3 id='http-request-9'>HTTP Request</h3>
 <p><code>POST https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/products-upsert</code></p>
 <h3 id='body-parameters-6'>Body Parameters</h3>
 <aside class="comment">
@@ -1597,7 +1614,7 @@ If you do not add an Optionnal parameter, it will be empty for a creation or sim
 <td>vat_regime</td>
 <td>Options</td>
 <td>True</td>
-<td>&#39;classic&#39;, &#39;margin&#39;, &#39;none&#39;, Thoses options permit to choose your VAT Regime, in margin mode, VAT will be calculated on your margin. Classic mode, VAT will be calculated on your selling price. In none mode, no VAT will be applied. If empty will be set at your default account values</td>
+<td>&#39;classic&#39;, &#39;margin&#39;, &#39;none&#39;, Thoses options allows to choose your VAT Regime, in margin mode, VAT will be calculated on your margin. Classic mode, VAT will be calculated on your selling price. In none mode, no VAT will be applied. If empty will be set at your default account values</td>
 </tr>
 <tr>
 <td>vat_rate</td>
@@ -1643,7 +1660,7 @@ Remember — You have to be authenticated to call this API with your Baerer TOKE
 <h2 id='get-product'>GET product</h2><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">axios</span><span class="dl">"</span><span class="p">);</span>
 <span class="kd">const</span> <span class="nx">baseUrl</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1</span><span class="dl">"</span><span class="p">;</span>
 
-<span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span> <span class="dl">"</span><span class="s2">X-API-KEY</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">ApiKey</span><span class="dl">"</span> <span class="p">};</span>
+<span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span> <span class="dl">"</span><span class="s2">X-API-KEY</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">ApiKey</span><span class="dl">"</span><span class="p">,</span> <span class="na">Authorization</span><span class="p">:</span> <span class="dl">"</span><span class="s2">YOUR TOKEN</span><span class="dl">"</span> <span class="p">};</span>
 
 <span class="nx">axios</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="nx">baseUrl</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">/product?reference=reference</span><span class="dl">"</span><span class="p">,</span> <span class="p">{},</span> <span class="nx">headers</span><span class="p">);</span>
 </code></pre></div>
@@ -1652,7 +1669,7 @@ Remember — You have to be authenticated to call this API with your Baerer TOKE
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"erreur"</span><span class="p">:</span><span class="w"> </span><span class="s2">"false"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"esus-reference"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ezus-reference"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Product Title"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"capacity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Capacity"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Quantity of this Product"</span><span class="p">,</span><span class="w">
@@ -1717,7 +1734,7 @@ Remember — You have to be authenticated to call this API with your Baerer TOKE
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p>This endpoint get a product</p>
-<h3 id='http-request-9'>HTTP Request</h3>
+<h3 id='http-request-10'>HTTP Request</h3>
 <p><code>GET https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/product?reference=reference</code></p>
 <h3 id='returned-values-4'>Returned Values</h3>
 <table><thead>
@@ -1834,7 +1851,9 @@ Remember — You have to be authenticated to call this API with your Baerer TOKE
 </aside>
 
 <p>|</p>
-<h1 id='package'>Package</h1><h2 id='post-package_upsert'>POST package_upsert</h2><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">axios</span><span class="dl">"</span><span class="p">);</span>
+<h1 id='package'>Package</h1><h2 id='post-package_upsert'>POST package_upsert</h2>
+<p>In Ezus, a package is a group of products and is intended to be added more easily to a project</p>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">axios</span><span class="dl">"</span><span class="p">);</span>
 <span class="kd">const</span> <span class="nx">baseUrl</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1</span><span class="dl">"</span><span class="p">;</span>
 
 <span class="kd">const</span> <span class="nx">body</span> <span class="o">=</span> <span class="p">{</span>
@@ -1846,7 +1865,7 @@ Remember — You have to be authenticated to call this API with your Baerer TOKE
     <span class="p">{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">field2</span><span class="dl">"</span><span class="p">,</span> <span class="na">value</span><span class="p">:</span> <span class="dl">"</span><span class="s2">field2Value</span><span class="dl">"</span> <span class="p">},</span>
   <span class="p">],</span>
 <span class="p">};</span>
-<span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span> <span class="dl">"</span><span class="s2">X-API-KEY</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">ApiKey</span><span class="dl">"</span> <span class="p">};</span>
+<span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span> <span class="dl">"</span><span class="s2">X-API-KEY</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">ApiKey</span><span class="dl">"</span><span class="p">,</span> <span class="na">Authorization</span><span class="p">:</span> <span class="dl">"</span><span class="s2">YOUR TOKEN</span><span class="dl">"</span> <span class="p">};</span>
 
 <span class="nx">axios</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="nx">baseUrl</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">/package-upsert</span><span class="dl">"</span><span class="p">,</span> <span class="nx">body</span><span class="p">,</span> <span class="nx">headers</span><span class="p">);</span>
 </code></pre></div>
@@ -1861,8 +1880,8 @@ Remember — You have to be authenticated to call this API with your Baerer TOKE
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
-<p>This endpoint Upsert a Package. The reference should be unique and permit to update an existing package or Create a new Package. If reference is not given, the package will be created. An Esus Reference will be returned you must have to save it for your next updates of this package. <code>this one will be updated with the new Params Given here.</code></p>
-<h3 id='http-request-10'>HTTP Request</h3>
+<p>This endpoint Upsert a Package. The reference should be unique and allows to update an existing package or Create a new Package. If reference is not given, the package will be created. An Ezus Reference will be returned you must have to save it for your next updates of this package. <code>this one will be updated with the new Params Given here.</code></p>
+<h3 id='http-request-11'>HTTP Request</h3>
 <p><code>POST https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/products-upsert</code></p>
 <h3 id='body-parameters-7'>Body Parameters</h3>
 <aside class="comment">
@@ -1909,7 +1928,7 @@ Remember — You have to be authenticated to call this API with your Baerer TOKE
 <h2 id='get-package'>GET package</h2><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">axios</span><span class="dl">"</span><span class="p">);</span>
 <span class="kd">const</span> <span class="nx">baseUrl</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1</span><span class="dl">"</span><span class="p">;</span>
 
-<span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span> <span class="dl">"</span><span class="s2">X-API-KEY</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">ApiKey</span><span class="dl">"</span> <span class="p">};</span>
+<span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span> <span class="dl">"</span><span class="s2">X-API-KEY</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">ApiKey</span><span class="dl">"</span><span class="p">,</span> <span class="na">Authorization</span><span class="p">:</span> <span class="dl">"</span><span class="s2">YOUR TOKEN</span><span class="dl">"</span> <span class="p">};</span>
 
 <span class="nx">axios</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="nx">baseUrl</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">/package?reference=reference</span><span class="dl">"</span><span class="p">,</span> <span class="p">{},</span> <span class="nx">headers</span><span class="p">);</span>
 </code></pre></div>
@@ -1918,7 +1937,7 @@ Remember — You have to be authenticated to call this API with your Baerer TOKE
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"erreur"</span><span class="p">:</span><span class="w"> </span><span class="s2">"false"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"esus-reference"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ezus-reference"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"package Title"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"capacity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Capacity"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"info_notes"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Notes on the Package"</span><span class="p">,</span><span class="w">
@@ -1954,7 +1973,7 @@ Remember — You have to be authenticated to call this API with your Baerer TOKE
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p>This endpoint get a package</p>
-<h3 id='http-request-11'>HTTP Request</h3>
+<h3 id='http-request-12'>HTTP Request</h3>
 <p><code>GET https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/package?reference=reference</code></p>
 <h3 id='returned-values-5'>Returned Values</h3>
 <table><thead>
@@ -2111,8 +2130,8 @@ Warning: the custom_fields of the projects route must have their real name and n
 </tr>
 <tr>
 <td>File</td>
-<td>Not Supported</td>
-<td>Actually we can&#39;t upload files with the API</td>
+<td>File</td>
+<td>Not supported yet</td>
 </tr>
 </tbody></table>
 
@@ -2144,7 +2163,7 @@ If the API Return a Success Code 200 with erreur=true, Error messages Explained 
 <tr>
 <td>projects_upsert</td>
 <td>reference is mandatory</td>
-<td>The Esus Reference is mandatory, the API use it to update or create a new user</td>
+<td>The Ezus Reference is mandatory, the API use it to update or create a new user</td>
 </tr>
 </tbody></table>
 
