@@ -8,7 +8,7 @@ If the API Return a Success Code 200 with erreur=true, Error messages Explained 
 | --------------- | -------------------------------------------- | ------------------------------------------------------------------------------ |
 | clients_upsert  | You need at least contact username and email | These two params are needed to create a Contact (firstname, email)             |
 | ALL             | Your Identification Token is Incorrect       | Your Token is not Valid Anymore Please Authenticate you to the API             |
-| projects_upsert | reference is mandatory                       | The Esus Reference is mandatory, the API use it to update or create a new user |
+| projects_upsert | reference is mandatory                       | The Ezus Reference is mandatory, the API use it to update or create a new user |
 
 <!--
 <aside class="notice">

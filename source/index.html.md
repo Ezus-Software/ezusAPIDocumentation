@@ -61,9 +61,17 @@ EZUS uses API keys to allow access to the API. If you don't have an Ezus account
 
 Ezus expects for the API key to be included in all API requests to the server in a header that looks like the following:
 
-`Authorization: ApiKey`
+`X-API-KEY: ApiKey`
 
 To get your API key, you have to ask to your Account Manager
+
+After calling the login route, a bearer token will be returned to you, it must be included in the header of all your calls to the Ezus API
+
+`Authorization: YOUR TOKEN`
+
+### HTTP Request
+
+`POST https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/login`
 
 ### Headers
 
@@ -105,7 +113,7 @@ const body = {
   client_reference: "client_reference",
   client_email: "emailoftheclient@mail.com",
 };
-const headers = { "X-API-KEY": "ApiKey" };
+const headers = { "X-API-KEY": "ApiKey", Authorization: "YOUR TOKEN" };
 
 axios.post(baseUrl + "/projects-upsert", body, headers);
 ```
@@ -124,7 +132,7 @@ axios.post(baseUrl + "/projects-upsert", body, headers);
 ]
 ```
 
-This endpoint upsert a Project. This endpoint take the reference as a Primary key, if the reference already exist, the project linked to the account will be updated, if the référence doesn't exist, a new project will be created with all the Given Params.
+This endpoint upsert a Project. This endpoint take the reference as a Primary key, if the reference already exist, the project linked to the account will be updated, if the reference doesn't exist, a new project will be created with all the given params.
 
 ### HTTP Request
 
@@ -138,7 +146,7 @@ If you do not add an Optionnal parameter, it will be empty for a creation or sim
 
 | Parameter           | Type   | Optionnal  | Description                                                                                                                                                                                          |
 | ------------------- | ------ | ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| reference           | String | False      | The project Reference used as a primary key to check if the project already exist and UPDATE it or to create a new Project so be sure to use a unique Esus Référence for each of your project        |
+| reference           | String | False      | The project Reference used as a primary key to check if the project already exist and UPDATE it or to create a new Project so be sure to use a unique Ezus Reference for each of your project        |
 | info_title          | String | True/False | Title of your project, mandatory if you create a New Project                                                                                                                                         |
 | trip_people         | Number | True       | Number of people in your project                                                                                                                                                                     |
 | trip_budget         | Number | True       | Budget of your project                                                                                                                                                                               |
@@ -146,7 +154,7 @@ If you do not add an Optionnal parameter, it will be empty for a creation or sim
 | trip_date_out       | Date   | True       | Date of the end of your project formated like YYYY-MM-DD if not formatted correctly, or if duration > 40 days or if trip_date_in > trip_date_out, project will be set as 1day and date = today       |
 | custom_fields       | JSON   | True       | You can add Custom Fields for your client, this custom fields should be in your Ezus params and Write Exactly as they are written in your params Technical Name                                      |
 | sales_manager_email | Email  | True       | Email of the Sales Manager, by default if no sales_manager or not found will be assignated to nobody                                                                                                 |
-| client_reference    | String | True       | Esus Reference of the Client, if the reference don't match with a client, API will try with client_email if setted else, No clients will be assigned                                                 |
+| client_reference    | String | True       | Ezus Reference of the Client, if the reference don't match with a client, API will try with client_email if setted else, No clients will be assigned                                                 |
 | client_email        | Email  | True       | Email of the Client, if the email don't match with a client, No clients will be assigned                                                                                                             |
 
 <aside class="success">
@@ -159,7 +167,7 @@ Remember — You have to be authenticated to call this API with your Baerer TOKE
 const axios = require("axios");
 const baseUrl = "https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1";
 
-const headers = { "X-API-KEY": "ApiKey" };
+const headers = { "X-API-KEY": "ApiKey", Authorization: "YOUR TOKEN" };
 
 axios.post(baseUrl + "/project?reference=reference", {}, headers);
 ```
@@ -169,7 +177,7 @@ axios.post(baseUrl + "/project?reference=reference", {}, headers);
 ```json
 {
   "erreur": "false",
-  "reference": "esus-reference",
+  "reference": "ezus-reference",
   "info_title": "Project Title",
   "info_stage": "Confirmed",
   "info_notes": "Notes on the project",
@@ -279,7 +287,7 @@ const body = {
   title: "Ezus test",
   link: "https://www.linktothedocument.pdf",
 };
-const headers = { "X-API-KEY": "ApiKey" };
+const headers = { "X-API-KEY": "ApiKey", Authorization: "YOUR TOKEN" };
 
 axios.post(baseUrl + "/projects-documents-create", body, headers);
 ```
@@ -344,7 +352,7 @@ const body = {
     { name: "field2", value: "field2Value" },
   ],
 };
-const headers = { "X-API-KEY": "ApiKey" };
+const headers = { "X-API-KEY": "ApiKey", Authorization: "YOUR TOKEN" };
 
 axios.post(baseUrl + "/clients-upsert", body, headers);
 ```
@@ -362,7 +370,7 @@ axios.post(baseUrl + "/clients-upsert", body, headers);
 ]
 ```
 
-This endpoint Upsert a Client. The reference should be unique and permit to update an existing client or Create a new Client. If reference is not given, the email params is used as a Primary Key for your clients If you have multiple clients with the same email, the first client will be taken. If a client with this email already exist. An Esus Reference will be returned you must have to save it for your next uses. `this one will be updated with the new Params Given here.`
+This endpoint Upsert a Client. The reference should be unique and allows to update an existing client or Create a new Client. If reference is not given, the email params is used as a Primary Key for your clients If you have multiple clients with the same email, the first client will be taken. If a client with this email already exist. An Ezus Reference will be returned you must have to save it for your next uses. `this one will be updated with the new Params Given here.`
 
 ### HTTP Request
 
@@ -411,7 +419,7 @@ Remember — You have to be authenticated to call this API with your Baerer TOKE
 const axios = require("axios");
 const baseUrl = "https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1";
 
-const headers = { "X-API-KEY": "ApiKey" };
+const headers = { "X-API-KEY": "ApiKey", Authorization: "YOUR TOKEN" };
 
 axios.post(baseUrl + "/client?reference=reference", {}, headers);
 ```
@@ -421,7 +429,7 @@ axios.post(baseUrl + "/client?reference=reference", {}, headers);
 ```json
 {
   "erreur": "false",
-  "reference": "esus-reference",
+  "reference": "ezus-reference",
   "type": "entreprise",
   "company_name": "Company Name",
   "first_name": "Fistname",
@@ -530,7 +538,7 @@ const body = {
     { name: "field2", value: "field2Value" },
   ],
 };
-const headers = { "X-API-KEY": "ApiKey" };
+const headers = { "X-API-KEY": "ApiKey", Authorization: "YOUR TOKEN" };
 
 axios.post(baseUrl + "/suppliers-upsert", body, headers);
 ```
@@ -547,7 +555,7 @@ axios.post(baseUrl + "/suppliers-upsert", body, headers);
 ]
 ```
 
-This endpoint Upsert a Supplier. The reference should be unique and permit to update an existing supplier or Create a new supplier. If reference is not given, the email params is used as a Primary Key for your suppliers If you have multiple suppliers with the same email, the first supplier will be taken. If a supplier with this email already exist. An Esus Reference will be returned you must have to save it for your next uses. `this one will be updated with the new Params Given here.`
+This endpoint Upsert a Supplier. The reference should be unique and allows to update an existing supplier or Create a new supplier. If reference is not given, the email params is used as a Primary Key for your suppliers If you have multiple suppliers with the same email, the first supplier will be taken. If a supplier with this email already exist. An Ezus Reference will be returned you must have to save it for your next uses. `this one will be updated with the new Params Given here.`
 
 ### HTTP Request
 
@@ -597,7 +605,7 @@ Remember — You have to be authenticated to call this API with your Baerer TOKE
 const axios = require("axios");
 const baseUrl = "https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1";
 
-const headers = { "X-API-KEY": "ApiKey" };
+const headers = { "X-API-KEY": "ApiKey", Authorization: "YOUR TOKEN" };
 
 axios.post(baseUrl + "/supplier?reference=reference", {}, headers);
 ```
@@ -607,7 +615,7 @@ axios.post(baseUrl + "/supplier?reference=reference", {}, headers);
 ```json
 {
   "erreur": "false",
-  "reference": "esus-reference",
+  "reference": "ezus-reference",
   "company_name": "Company Name",
   "capacity": "Capacity",
   "info_notes": "Notes on the client",
@@ -650,7 +658,7 @@ axios.post(baseUrl + "/supplier?reference=reference", {}, headers);
   ],
   "products": [
     {
-      "esus_reference": "product-reference",
+      "ezus_reference": "product-reference",
       "title": "Product Title"
     }
   ],
@@ -717,7 +725,7 @@ const body = {
     { name: "field2", value: "field2Value" },
   ],
 };
-const headers = { "X-API-KEY": "ApiKey" };
+const headers = { "X-API-KEY": "ApiKey", Authorization: "YOUR TOKEN" };
 
 axios.post(baseUrl + "/products-upsert", body, headers);
 ```
@@ -734,7 +742,7 @@ axios.post(baseUrl + "/products-upsert", body, headers);
 ]
 ```
 
-This endpoint Upsert a Product. The reference should be unique and permit to update an existing product or Create a new Product. If reference is not given, the product will be created. An Esus Reference will be returned you must have to save it for your next updates of this product. `this one will be updated with the new Params Given here.`
+This endpoint Upsert a Product. The reference should be unique and allows to update an existing product or Create a new Product. If reference is not given, the product will be created. An Ezus Reference will be returned you must have to save it for your next updates of this product. `this one will be updated with the new Params Given here.`
 
 ### HTTP Request
 
@@ -755,7 +763,7 @@ If you do not add an Optionnal parameter, it will be empty for a creation or sim
 | package_reference  | String  | True       | The reference to the Package, if you give a reference, the product will be added in the package                                                                                                                                                                                            |
 | purchase_price     | Number  | True       | Purchase price as Number                                                                                                                                                                                                                                                                   |
 | sales_price        | Number  | True       | Sales price, the margin Rate will be calculated in function of this price.                                                                                                                                                                                                                 |
-| vat_regime         | Options | True       | 'classic', 'margin', 'none', Thoses options permit to choose your VAT Regime, in margin mode, VAT will be calculated on your margin. Classic mode, VAT will be calculated on your selling price. In none mode, no VAT will be applied. If empty will be set at your default account values |
+| vat_regime         | Options | True       | 'classic', 'margin', 'none', Thoses options allows to choose your VAT Regime, in margin mode, VAT will be calculated on your margin. Classic mode, VAT will be calculated on your selling price. In none mode, no VAT will be applied. If empty will be set at your default account values |
 | vat_rate           | Number  | True       | Default Vat Rate, if empty will be set at your default account VAT rate                                                                                                                                                                                                                    |
 | commission_regime  | Options | True       | 'percent' OR 'flat' in percent mode, the amount will be a % of the total price, in euro mode, the amount will be an exact amount undepently of the total price. If empty, will be set at your default account values                                                                       |
 | commission_mode    | Option  | True       | 'default', 'purchase' or 'sales', sales mode mean the commission will be calculated on the selling price, purchase on the buying price if empty, the commission_mode will be set on your account default value.                                                                            |
@@ -773,7 +781,7 @@ Remember — You have to be authenticated to call this API with your Baerer TOKE
 const axios = require("axios");
 const baseUrl = "https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1";
 
-const headers = { "X-API-KEY": "ApiKey" };
+const headers = { "X-API-KEY": "ApiKey", Authorization: "YOUR TOKEN" };
 
 axios.post(baseUrl + "/product?reference=reference", {}, headers);
 ```
@@ -783,7 +791,7 @@ axios.post(baseUrl + "/product?reference=reference", {}, headers);
 ```json
 {
   "erreur": "false",
-  "reference": "esus-reference",
+  "reference": "ezus-reference",
   "title": "Product Title",
   "capacity": "Capacity",
   "quantity": "Quantity of this Product",
@@ -901,7 +909,7 @@ const body = {
     { name: "field2", value: "field2Value" },
   ],
 };
-const headers = { "X-API-KEY": "ApiKey" };
+const headers = { "X-API-KEY": "ApiKey", Authorization: "YOUR TOKEN" };
 
 axios.post(baseUrl + "/package-upsert", body, headers);
 ```
@@ -918,7 +926,7 @@ axios.post(baseUrl + "/package-upsert", body, headers);
 ]
 ```
 
-This endpoint Upsert a Package. The reference should be unique and permit to update an existing package or Create a new Package. If reference is not given, the package will be created. An Esus Reference will be returned you must have to save it for your next updates of this package. `this one will be updated with the new Params Given here.`
+This endpoint Upsert a Package. The reference should be unique and allows to update an existing package or Create a new Package. If reference is not given, the package will be created. An Ezus Reference will be returned you must have to save it for your next updates of this package. `this one will be updated with the new Params Given here.`
 
 ### HTTP Request
 
@@ -947,7 +955,7 @@ Remember — You have to be authenticated to call this API with your Baerer TOKE
 const axios = require("axios");
 const baseUrl = "https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1";
 
-const headers = { "X-API-KEY": "ApiKey" };
+const headers = { "X-API-KEY": "ApiKey", Authorization: "YOUR TOKEN" };
 
 axios.post(baseUrl + "/package?reference=reference", {}, headers);
 ```
@@ -957,7 +965,7 @@ axios.post(baseUrl + "/package?reference=reference", {}, headers);
 ```json
 {
   "erreur": "false",
-  "reference": "esus-reference",
+  "reference": "ezus-reference",
   "title": "package Title",
   "capacity": "Capacity",
   "info_notes": "Notes on the Package",
@@ -1074,16 +1082,16 @@ Warning: the custom_fields of the projects route must have their real name and n
 
 ### Options
 
-| Options           | Type          | Value                                                                                                                                                                                          |
-| ----------------- | ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Text              | String        | Simple String like Text Area                                                                                                                                                                   |
-| Dropdown          | Options       | The option must be written exactly as in the parameters, respecting the case                                                                                                                   |
-| Multiple Dropdown | Options       | The option must be written exactly as in the parameters, respecting the case, for Multiple Answer you should enter Option1/-/Option2/-/Option3 in a string, "/-/" should separate each options |
-| Date              | String        | The date must be written exactly in YYYY-MM-DD format                                                                                                                                          |
-| Time              | String        | The time must be written exactly in the format: YYYY-MM-DDTHH:MM:SS+01:00                                                                                                                      |
-| Checkbox          | String        | A String must contain "true" (checked) OR "false" (unchecked)                                                                                                                                  |
-| Number            | Number        | Number type should be a Number without other character                                                                                                                                         |
-| File              | Not Supported | Actually we can't upload files with the API                                                                                                                                                    |
+| Options           | Type    | Value                                                                                                                                                                                          |
+| ----------------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Text              | String  | Simple String like Text Area                                                                                                                                                                   |
+| Dropdown          | Options | The option must be written exactly as in the parameters, respecting the case                                                                                                                   |
+| Multiple Dropdown | Options | The option must be written exactly as in the parameters, respecting the case, for Multiple Answer you should enter Option1/-/Option2/-/Option3 in a string, "/-/" should separate each options |
+| Date              | String  | The date must be written exactly in YYYY-MM-DD format                                                                                                                                          |
+| Time              | String  | The time must be written exactly in the format: YYYY-MM-DDTHH:MM:SS+01:00                                                                                                                      |
+| Checkbox          | String  | A String must contain "true" (checked) OR "false" (unchecked)                                                                                                                                  |
+| Number            | Number  | Number type should be a Number without other character                                                                                                                                         |
+| File              | File    | Not supported yet                                                                                                                                                                              |
 
 <aside class="success">
 Remember — You have to be authenticated to call this API with your Baerer TOKEN
