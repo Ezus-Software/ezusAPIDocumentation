@@ -57,13 +57,13 @@ axios.post(baseUrl + "/login", body, headers);
 
 > Make sure to replace `YOUR TOKEN` to use our API in the next steps
 
-EZUS uses API keys to allow access to the API. If you don't have an Ezus account, you can ask for a Demo on our [Website](https://ezus.io/).
+EZUS uses API keys to allow access to the API. If you don't have an Ezus account, you can ask for a demo on our [Website](https://ezus.io/).
 
 Ezus expects for the API key to be included in all API requests to the server in a header that looks like the following:
 
 `X-API-KEY: ApiKey`
 
-To get your API key, you have to ask to your Account Manager
+To get your API key, you have to ask to your account manager
 
 After calling the login route, a bearer token will be returned to you, it must be included in the header of all your calls to the Ezus API
 
@@ -77,7 +77,7 @@ After calling the login route, a bearer token will be returned to you, it must b
 
 | Parameter | Description                           |
 | --------- | ------------------------------------- |
-| X-API-KEY | API Key given by your account manager |
+| X-API-KEY | API key given by your account manager |
 
 ### Body Parameters
 
@@ -134,7 +134,7 @@ axios.post(baseUrl + "/projects-upsert", body, headers);
 ]
 ```
 
-This endpoint upsert a Project. This endpoint take the reference as a Primary key, if the reference already exist, the project linked to the account will be updated, if the reference doesn't exist, a new project will be created with all the given params.
+This endpoint upsert a project. This endpoint take the reference as a primary key, if the reference already exist, the project linked to the account will be updated, if the reference doesn't exist, a new project will be created with all the given params.
 
 ### HTTP Request
 
@@ -143,7 +143,7 @@ This endpoint upsert a Project. This endpoint take the reference as a Primary ke
 ### Body Parameters
 
 <aside class="comment">
-If you do not add an Optionnal parameter, it will be empty for a creation or simply not updated for an update. If the parameter is empty (""), same behaviour
+If you do not add an optionnal parameter, it will be empty for a creation or simply not updated for an update. If the parameter is empty (""), same behaviour
 </aside>
 
 | Parameter           | Type   | Optionnal  | Description                                                                                                                                                                                          |
@@ -160,7 +160,7 @@ If you do not add an Optionnal parameter, it will be empty for a creation or sim
 | client_email        | Email  | True       | Email of the Client, if the email don't match with a client, No clients will be assigned                                                                                                             |
 
 <aside class="success">
-Remember — You have to be authenticated to call this API with your Baerer TOKEN
+Remember — You have to be authenticated to call this API with your bearer token
 </aside>
 
 ## GET project
@@ -241,7 +241,7 @@ axios.post(baseUrl + "/project?reference=reference", {}, headers);
 }
 ```
 
-This endpoint get a Project
+This endpoint get a project
 
 ### HTTP Request
 
@@ -252,31 +252,31 @@ This endpoint get a Project
 | Name              | Type   | Value                                                                  |
 | ----------------- | ------ | ---------------------------------------------------------------------- |
 | reference         | String | The Reference of the given project - The one you gave                  |
-| info_title        | String | The Title of your project                                              |
-| info_stage        | String | The Stage of your project (Confirmed, Received, Paid...)               |
+| info_title        | String | The title of your project                                              |
+| info_stage        | String | The stage of your project (Confirmed, Received, Paid...)               |
 | info_notes        | String | Notes on your project                                                  |
-| info_reference    | String | Reference of your Project ex: "202208019-P"                            |
+| info_reference    | String | Reference of your project ex: "202208019-P"                            |
 | traveler_designer | JSON   | Travel designer is a Json that contain email, first_name and last_name |
-| project_manager   | JSON   | Project Manager is a Json that contain email, first_name and last_name |
-| alternatives      | Array  | An Array of Alternatives                                               |
-| custom_fields     | Array  | Array of custom Fields that contain name and value as String           |
+| project_manager   | JSON   | Project manager is a Json that contain email, first_name and last_name |
+| alternatives      | Array  | An array of alternatives                                               |
+| custom_fields     | Array  | Array of custom fields that contain name and value as string           |
 
 ### alternatives
 
 | Name              | Type   | Value                                                                                                                     |
 | ----------------- | ------ | ------------------------------------------------------------------------------------------------------------------------- |
-| alternative_title | String | Title of the Alternative                                                                                                  |
+| alternative_title | String | Title of the alternative                                                                                                  |
 | trip_people       | String | Number of people                                                                                                          |
-| trip_budget       | Number | Budget of the Alternative                                                                                                 |
+| trip_budget       | Number | Budget of the alternative                                                                                                 |
 | trip_date_in      | String | Date of the begining of this alternative, formated like : YYYY-MM-DD                                                      |
 | trip_date_out     | String | Date of the end of this alternative, formated like : YYYY-MM-DD                                                           |
 | destination       | String | Destination of the alternative                                                                                            |
-| subdestination    | String | Subdestination of the Alternative                                                                                         |
+| subdestination    | String | Subdestination of the alternative                                                                                         |
 | trip_duration     | String | Number of days                                                                                                            |
 | client            | JSON   | Json that contain : "reference", "type" (entreprise or individual), "company_name", "first_name", "last_name" and "email" |
 
 <aside class="success">
-Remember — You have to be authenticated to call this API with your Baerer TOKEN
+Remember — You have to be authenticated to call this API with your bearer token
 </aside>
 ## POST projects-documents-create
 
@@ -306,7 +306,7 @@ axios.post(baseUrl + "/projects-documents-create", body, headers);
 ]
 ```
 
-This endpoint insert a document in a Project.
+This endpoint insert a document in a project.
 
 ### HTTP Request
 
@@ -316,12 +316,12 @@ This endpoint insert a document in a Project.
 
 | Parameter | Type   | Optionnal | Description                  |
 | --------- | ------ | --------- | ---------------------------- |
-| reference | String | False     | The project Reference        |
+| reference | String | False     | The project reference        |
 | title     | String | False     | Title of your document       |
-| link      | Link   | False     | Link to the desired Document |
+| link      | Link   | False     | Link to the desired document |
 
 <aside class="success">
-Remember — You have to be authenticated to call this API with your Baerer TOKEN
+Remember — You have to be authenticated to call this API with your bearer token
 </aside>
 
 # Clients
@@ -374,7 +374,7 @@ axios.post(baseUrl + "/clients-upsert", body, headers);
 ]
 ```
 
-This endpoint Upsert a Client. The reference should be unique and allows to update an existing client or Create a new Client. If reference is not given, the email params is used as a Primary Key for your clients If you have multiple clients with the same email, the first client will be taken. If a client with this email already exist. An Ezus Reference will be returned you must have to save it for your next uses. `this one will be updated with the new Params Given here.`
+This endpoint Upsert a Client. The reference should be unique and allows to update an existing client or create a new client. If reference is not given, the email params is used as a primary key for your clients If you have multiple clients with the same email, the first client will be taken. If a client with this email already exist. An Ezus reference will be returned you must have to save it for your next uses. `this one will be updated with the new Params Given here.`
 
 ### HTTP Request
 
@@ -383,15 +383,15 @@ This endpoint Upsert a Client. The reference should be unique and allows to upda
 ### Body Parameters
 
 <aside class="comment">
-If you do not add an Optionnal parameter, it will be empty for a creation or simply not updated for an update. If the parameter is empty (""), same behaviour
+If you do not add an optionnal parameter, it will be empty for a creation or simply not updated for an update. If the parameter is empty (""), same behaviour
 </aside>
 | Parameter    | Type   | Optionnal | Description                                                                                                     |
 | ------------ | ------ | --------- | --------------------------------------------------------------------------------------------------------------- |
-| reference     | String | True/False| Used as a primary Key in the Database, if no Reference, the Reference will be Generated automatically and returned|
-| company_name | String | True      | Set a company name - If company name is empty, the client will be set as an Individual and the name of the client = name of the contact and if the company name is not empty, the name of the client will be the company name |                         |
+| reference     | String | True/False| Used as a primary key in the database, if no reference, the reference will be generated automatically and returned|
+| company_name | String | True      | Set a company name - If company name is empty, the client will be set as an individual and the name of the client = name of the contact and if the company name is not empty, the name of the client will be the company name |                         |
 | contact      | JSON   | False     | Contact is a JSON and email is needed                                                                           |
 | address      | JSON   | True      | Address is a JSON and label is needed if you want to add or update the adresse of your client but not mandatory |
-| custom_fields      | JSON   | True      | You can add Custom Fields for your client, this custom fields should be in your Ezus params and Write Exactly as they are written in your params Technical Name|
+| custom_fields      | JSON   | True      | You can add custom fields for your client, this custom fields should be in your Ezus params and Write exactly as they are written in your params technical name|
 
 #### Contact Parameters
 
@@ -409,12 +409,12 @@ If you do not add an Optionnal parameter, it will be empty for a creation or sim
 | Parameter | Type   | Optionnal | Description          |
 | --------- | ------ | --------- | -------------------- |
 | label     | String | False     | Label of the address |
-| city      | String | True      | Name of the City     |
+| city      | String | True      | Name of the city     |
 | country   | String | True      | Name of the country  |
-| zip       | String | True      | Post Code            |
+| zip       | String | True      | Post code            |
 
 <aside class="success">
-Remember — You have to be authenticated to call this API with your Baerer TOKEN
+Remember — You have to be authenticated to call this API with your bearer token
 </aside>
 
 ## GET client
@@ -489,26 +489,26 @@ This endpoint get a Client
 
 | Name           | Type   | Value                                                                       |
 | -------------- | ------ | --------------------------------------------------------------------------- |
-| reference      | String | The Reference of the given client - The one you gave                        |
+| reference      | String | The reference of the given client - The one you gave                        |
 | type           | String | The type of the client ["entreprise", "individual"]                         |
 | company_name   | String | Name of the company of your client                                          |
-| first_name     | String | First Name of the client                                                    |
-| last_name      | String | Last Name of the Client                                                     |
-| email          | String | Email of the Client                                                         |
-| activity       | String | Activity Of the Client (Only for Entreprise)                                |
-| vat_number     | String | VAT number of the Client (Only for Entreprise)                              |
-| siret          | String | Siret Number of the Client (Only for Entreprise)                            |
-| info_profile   | String | info_profile of the Client                                                  |
+| first_name     | String | First name of the client                                                    |
+| last_name      | String | Last name of the client                                                     |
+| email          | String | Email of the client                                                         |
+| activity       | String | Activity of the client (Only for entreprise)                                |
+| vat_number     | String | VAT number of the client (Only for entreprise)                              |
+| siret          | String | Siret number of the client (Only for entreprise)                            |
+| info_profile   | String | info_profile of the client                                                  |
 | info_origin    | String | Source of the client                                                        |
-| info_notes     | String | Notes on the Client                                                         |
-| info_reference | String | Reference of the Client                                                     |
+| info_notes     | String | Notes on the client                                                         |
+| info_reference | String | Reference of the client                                                     |
 | address        | JSON   | Address of the client JSON who contain "label", "zip", "city" and "country" |
-| contacts       | Array  | Array of Json who contains "first_name", "last_name", "email"               |
-| projects       | Array  | Array of Json who contains "reference", "info_title"                        |
-| custom_fields  | Array  | Array of Json who contains "name", "value"                                  |
+| contacts       | Array  | Array of json who contains "first_name", "last_name", "email"               |
+| projects       | Array  | Array of json who contains "reference", "info_title"                        |
+| custom_fields  | Array  | Array of json who contains "name", "value"                                  |
 
 <aside class="success">
-Remember — You have to be authenticated to call this API with your Baerer TOKEN
+Remember — You have to be authenticated to call this API with your bearer token
 </aside>
 
 # Suppliers
@@ -561,7 +561,7 @@ axios.post(baseUrl + "/suppliers-upsert", body, headers);
 ]
 ```
 
-This endpoint Upsert a Supplier. The reference should be unique and allows to update an existing supplier or Create a new supplier. If reference is not given, the email params is used as a Primary Key for your suppliers If you have multiple suppliers with the same email, the first supplier will be taken. If a supplier with this email already exist. An Ezus Reference will be returned you must have to save it for your next uses. `this one will be updated with the new Params Given here.`
+This endpoint upsert a supplier. The reference should be unique and allows to update an existing supplier or Create a new supplier. If reference is not given, the email params is used as a primary key for your suppliers If you have multiple suppliers with the same email, the first supplier will be taken. If a supplier with this email already exist. An Ezus reference will be returned you must have to save it for your next uses. `this one will be updated with the new Params Given here.`
 
 ### HTTP Request
 
@@ -574,12 +574,12 @@ If you do not add an Optionnal parameter, it will be empty for a creation or sim
 </aside>
 | Parameter    | Type   | Optionnal | Description                                                                                                     |
 | ------------ | ------ | --------- | --------------------------------------------------------------------------------------------------------------- |
-| reference     | String | True/False| Used as a primary Key in the Database, if no Reference, the Reference will be Generated automatically|
+| reference     | String | True/False| Used as a primary key in the database, if no reference, the reference will be generated automatically|
 | type     | String | True| 3 Option : "accom", "activity", "transport". You can select multiple options by typing "accom, activity" for exemple, the new data will erase old data.|
-| company_name | String | True      | Set a company name - If company name is empty, the supplier will be set as an Individual |                         |
+| company_name | String | True      | Set a company name - If company name is empty, the supplier will be set as an individual |                         |
 | contact      | JSON   | False     | Contact is a JSON and email is needed                                                                           |
 | address      | JSON   | True      | Address is a JSON and label is needed if you want to add or update the adresse of your supplier but not mandatory |
-| custom_fields      | JSON   | True      | You can add Custom Fields for your client, this custom fields should be in your Ezus params and Write Exactly as they are written in your params Technical Name|
+| custom_fields      | JSON   | True      | You can add custom fields for your client, this custom fields should be in your Ezus params and Write Exactly as they are written in your params technical name|
 
 #### Contact Parameters
 
@@ -599,10 +599,10 @@ If you do not add an Optionnal parameter, it will be empty for a creation or sim
 | label     | String | False     | Label of the address |
 | city      | String | True      | Name of the City     |
 | country   | String | True      | Name of the country  |
-| zip       | String | True      | Post Code            |
+| zip       | String | True      | Post code            |
 
 <aside class="success">
-Remember — You have to be authenticated to call this API with your Baerer TOKEN
+Remember — You have to be authenticated to call this API with your bearer token
 </aside>
 
 ## GET supplier
@@ -690,10 +690,10 @@ This endpoint get a Supplier
 | reference      | String | The Reference of the given supplier - The one you gave                                                         |
 | company_name   | String | Name of the company of your supplier                                                                           |
 | capacity       | String | Capacity of the supplier                                                                                       |
-| info_notes     | String | Notes on the Supplier                                                                                          |
-| info_reference | String | Reference of the Supplier                                                                                      |
-| visual_url     | String | Link to the Slides of the Supplier                                                                             |
-| user           | JSON   | user Assigned to the Supplier JSON who contain "email", "first_name", "last_name"                              |
+| info_notes     | String | Notes on the supplier                                                                                          |
+| info_reference | String | Reference of the supplier                                                                                      |
+| visual_url     | String | Link to the slides of the supplier                                                                             |
+| user           | JSON   | User assigned to the supplier JSON who contain "email", "first_name", "last_name"                              |
 | langs          | JSON   | Array of Json who contains "lang", "name", "short_description" and "long_description"                          |
 | medias         | JSON   | Array of Json who contains "media_name", "path_full" and a size = number of medias                             |
 | address        | JSON   | Address of the supplier JSON who contain "label", "zip", "city" and "country"                                  |
@@ -702,7 +702,7 @@ This endpoint get a Supplier
 | custom_fields  | Array  | Array of Json who contains "name", "value"                                                                     |
 
 <aside class="success">
-Remember — You have to be authenticated to call this API with your Baerer TOKEN
+Remember — You have to be authenticated to call this API with your bearer token
 </aside>
 # Products
 
@@ -750,7 +750,7 @@ axios.post(baseUrl + "/products-upsert", body, headers);
 ]
 ```
 
-This endpoint Upsert a Product. The reference should be unique and allows to update an existing product or Create a new Product. If reference is not given, the product will be created. An Ezus Reference will be returned you must have to save it for your next updates of this product. `this one will be updated with the new Params Given here.`
+This endpoint upsert a product. The reference should be unique and allows to update an existing product or create a new product. If reference is not given, the product will be created. An Ezus reference will be returned you must have to save it for your next updates of this product. `this one will be updated with the new Params Given here.`
 
 ### HTTP Request
 
@@ -759,28 +759,28 @@ This endpoint Upsert a Product. The reference should be unique and allows to upd
 ### Body Parameters
 
 <aside class="comment">
-If you do not add an Optionnal parameter, it will be empty for a creation or simply not updated for an update. If the parameter is empty (""), same behaviour
+If you do not add an optionnal parameter, it will be empty for a creation or simply not updated for an update. If the parameter is empty (""), same behaviour
 </aside>
 
 | Parameter          | Type    | Optionnal  | Description                                                                                                                                                                                                                                                                                |
 | ------------------ | ------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| reference          | String  | True/False | To Update a Product, Reference is mandatory, the Reference will be used as a Primary Key, in case of creation, a unique Reference will be returned if you create a new product you can give a unique reference this one will be used as Ezus Reference                                     |
+| reference          | String  | True/False | To update a product, reference is mandatory, the reference will be used as a Primary Key, in case of creation, a unique reference will be returned if you create a new product you can give a unique reference this one will be used as Ezus reference                                     |
 | title              | String  | True/False | If no reference or reference not found, the title is mandatory                                                                                                                                                                                                                             |
-| quantity           | Number  | True       | quantity is the default number of this product at his creation                                                                                                                                                                                                                             |
-| supplier_reference | String  | True       | The reference to the Supplier, if you give a reference, the product will be added in the supplier                                                                                                                                                                                          |
-| package_reference  | String  | True       | The reference to the Package, if you give a reference, the product will be added in the package                                                                                                                                                                                            |
-| purchase_price     | Number  | True       | Purchase price as Number                                                                                                                                                                                                                                                                   |
-| sales_price        | Number  | True       | Sales price, the margin Rate will be calculated in function of this price.                                                                                                                                                                                                                 |
+| quantity           | Number  | True       | Quantity is the default number of this product at his creation                                                                                                                                                                                                                             |
+| supplier_reference | String  | True       | The reference to the supplier, if you give a reference, the product will be added in the supplier                                                                                                                                                                                          |
+| package_reference  | String  | True       | The reference to the package, if you give a reference, the product will be added in the package                                                                                                                                                                                            |
+| purchase_price     | Number  | True       | Purchase price as number                                                                                                                                                                                                                                                                   |
+| sales_price        | Number  | True       | Sales price, the margin rate will be calculated in function of this price.                                                                                                                                                                                                                 |
 | vat_regime         | Options | True       | 'classic', 'margin', 'none', Thoses options allows to choose your VAT Regime, in margin mode, VAT will be calculated on your margin. Classic mode, VAT will be calculated on your selling price. In none mode, no VAT will be applied. If empty will be set at your default account values |
-| vat_rate           | Number  | True       | Default Vat Rate, if empty will be set at your default account VAT rate                                                                                                                                                                                                                    |
+| vat_rate           | Number  | True       | Default VAT rate, if empty will be set at your default account VAT rate                                                                                                                                                                                                                    |
 | commission_regime  | Options | True       | 'percent' OR 'flat' in percent mode, the amount will be a % of the total price, in euro mode, the amount will be an exact amount undepently of the total price. If empty, will be set at your default account values                                                                       |
 | commission_mode    | Option  | True       | 'default', 'purchase' or 'sales', sales mode mean the commission will be calculated on the selling price, purchase on the buying price if empty, the commission_mode will be set on your account default value.                                                                            |
-| commission         | Number  | True       | Number represent the % Or the amount of the commission                                                                                                                                                                                                                                     |
+| commission         | Number  | True       | Number represent the % or the amount of the commission                                                                                                                                                                                                                                     |
 | currency           | Symbol  | True       | The ISO 4217 code who represent the currency you use (<a href="https://docs.google.com/spreadsheets/d/1b7BNOwKyN1hMOouve6xhFZ2R2zrH4Sj1L-646j755fU/edit?usp=sharing" target="_blank">Link to Doc</a>)                                                                                      |
 | custom_fields      | JSON    | True       | You can add Custom Fields for your client, this custom fields should be in your Ezus params and Write Exactly as they are written in your params Technical Name                                                                                                                            |
 
 <aside class="success">
-Remember — You have to be authenticated to call this API with your Baerer TOKEN
+Remember — You have to be authenticated to call this API with your bearer token
 </aside>
 
 ## GET product
@@ -874,29 +874,29 @@ This endpoint get a product
 
 | Name              | Type   | Value                                                                                                                                                                                                                                                                                                                                                                                    |
 | ----------------- | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| reference         | String | The Reference of the given product - The one you gave                                                                                                                                                                                                                                                                                                                                    |
+| reference         | String | The reference of the given product - The one you gave                                                                                                                                                                                                                                                                                                                                    |
 | title             | String | Name of the product                                                                                                                                                                                                                                                                                                                                                                      |
 | capacity          | String | Capacity of the product                                                                                                                                                                                                                                                                                                                                                                  |
 | quantity          | String | Quantity available of the product                                                                                                                                                                                                                                                                                                                                                        |
 | vat_regime        | String | VAT regime of the product - 3 options: VAT on margin ("margin"), Common law ("classic") or VAT non applicable ("none")                                                                                                                                                                                                                                                                   |
 | vat_rate          | String | Default % of the VAT on the product                                                                                                                                                                                                                                                                                                                                                      |
-| commission_mode   | String | "default" or "purchase" Default mode is base on the buying price, Purchase mode based on the selling price                                                                                                                                                                                                                                                                               |
-| commission_regime | String | The commission regime can be "%" (Commission is a percent of the Buying/Selling price) OR "currency" (Commission is a Fix Value)                                                                                                                                                                                                                                                         |
-| commission        | String | Commission as Number                                                                                                                                                                                                                                                                                                                                                                     |
-| currency          | Number | The ISO 4217 code who represent the currency you use (<a href="https://docs.google.com/spreadsheets/d/1b7BNOwKyN1hMOouve6xhFZ2R2zrH4Sj1L-646j755fU/edit?usp=sharing" target="_blank">Link to Doc</a>)                                                                                                                                                                                    |
-| budget_text       | String | "Option", "On Demand" or NULL, If it's Option/On demand, by default the product will be an Option/On demand                                                                                                                                                                                                                                                                              |
+| commission_mode   | String | "default" or "purchase" default mode is base on the buying price, purchase mode based on the selling price                                                                                                                                                                                                                                                                               |
+| commission_regime | String | The commission regime can be "%" (commission is a percent of the buying/selling price) or "currency" (commission is a fix value)                                                                                                                                                                                                                                                         |
+| commission        | String | Commission as number                                                                                                                                                                                                                                                                                                                                                                     |
+| currency          | Number | The ISO 4217 code who represent the currency you use (<a href="https://docs.google.com/spreadsheets/d/1b7BNOwKyN1hMOouve6xhFZ2R2zrH4Sj1L-646j755fU/edit?usp=sharing" target="_blank">Link to doc</a>)                                                                                                                                                                                    |
+| budget_text       | String | "Option", "On Demand" or NULL, if it's Option/On demand, by default the product will be an Option/On demand                                                                                                                                                                                                                                                                              |
 | buget_form        | String | "Important", "Normal", "Low" represent how the product will be highlight on the budget By Default                                                                                                                                                                                                                                                                                        |
-| budget_variable   | String | "Display", "Do not Display", This option tells if the product will be displayed or not in the budget                                                                                                                                                                                                                                                                                     |
+| budget_variable   | String | "Display", "Do not Display", this option tells if the product will be displayed or not in the budget                                                                                                                                                                                                                                                                                     |
 | visual_url        | String | URL of the slide of this product                                                                                                                                                                                                                                                                                                                                                         |
-| langs             | Array  | Array of Json who contains "lang":"language name", "name":"product name in this language", "short_description", "long_description"                                                                                                                                                                                                                                                       |
-| medias            | Array  | Array of Json who contains "media_name", "path_full": Full path to the image                                                                                                                                                                                                                                                                                                             |
-| supplier          | Array  | Array of Json who contains "reference", "company_name"                                                                                                                                                                                                                                                                                                                                   |
-| package           | Array  | Array of Json who contains "name", "value"                                                                                                                                                                                                                                                                                                                                               |
-| rates             | Array  | Array of Json who contains "reference", "type", "name", "purchase_price_pretax", "margin_rate", "sale_price_pretax", "child" - Childs are tariffs contains in the rates tariff, a product can have multiple tariffs and multiple seasons, a season can have multiple tariffs levels also. "type" can be "default" OR "season". Margin rates are calculated according to the sales price. |
-| custom_fields     | Array  | Array of Json who contains "name", "value"                                                                                                                                                                                                                                                                                                                                               |
+| langs             | Array  | Array of json who contains "lang":"language name", "name":"product name in this language", "short_description", "long_description"                                                                                                                                                                                                                                                       |
+| medias            | Array  | Array of json who contains "media_name", "path_full": full path to the image                                                                                                                                                                                                                                                                                                             |
+| supplier          | Array  | Array of json who contains "reference", "company_name"                                                                                                                                                                                                                                                                                                                                   |
+| package           | Array  | Array of json who contains "name", "value"                                                                                                                                                                                                                                                                                                                                               |
+| rates             | Array  | Array of json who contains "reference", "type", "name", "purchase_price_pretax", "margin_rate", "sale_price_pretax", "child" - Childs are tariffs contains in the rates tariff, a product can have multiple tariffs and multiple seasons, a season can have multiple tariffs levels also. "type" can be "default" OR "season". Margin rates are calculated according to the sales price. |
+| custom_fields     | Array  | Array of json who contains "name", "value"                                                                                                                                                                                                                                                                                                                                               |
 
 <aside class="success">
-Remember — You have to be authenticated to call this API with your Baerer TOKEN
+Remember — You have to be authenticated to call this API with your bearer token
 </aside>
                                                                                                                     |
 
@@ -936,7 +936,7 @@ axios.post(baseUrl + "/package-upsert", body, headers);
 ]
 ```
 
-This endpoint Upsert a Package. The reference should be unique and allows to update an existing package or Create a new Package. If reference is not given, the package will be created. An Ezus Reference will be returned you must have to save it for your next updates of this package. `this one will be updated with the new Params Given here.`
+This endpoint upsert a package. The reference should be unique and allows to update an existing package or create a new package. If reference is not given, the package will be created. An Ezus reference will be returned you must have to save it for your next updates of this package. `this one will be updated with the new Params Given here.`
 
 ### HTTP Request
 
@@ -950,13 +950,13 @@ If you do not add an Optionnal parameter, it will be empty for a creation or sim
 
 | Parameter     | Type   | Optionnal  | Description                                                                                                                                                     |
 | ------------- | ------ | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | --- |
-| reference     | String | True/False | To Update a Package, Reference is mandatory, the Reference will be used as a Primary Key, in case of creation, a unique Reference will be returned              |
+| reference     | String | True/False | To update a package, Reference is mandatory, the reference will be used as a primary key, in case of creation, a unique reference will be returned              |
 | title         | String | True/False | If no reference or reference not found, the title is mandatory                                                                                                  |
 | capacity      | Number | True       | capacity is the default number of this package at his creation                                                                                                  |     |
-| custom_fields | JSON   | True       | You can add Custom Fields for your client, this custom fields should be in your Ezus params and Write Exactly as they are written in your params Technical Name |
+| custom_fields | JSON   | True       | You can add custom fields for your client, this custom fields should be in your Ezus params and Write exactly as they are written in your params technical name |
 
 <aside class="success">
-Remember — You have to be authenticated to call this API with your Baerer TOKEN
+Remember — You have to be authenticated to call this API with your bearer token
 </aside>
 
 ## GET package
@@ -1021,19 +1021,19 @@ This endpoint get a package
 
 | Name          | Type   | Value                                                                                                                              |
 | ------------- | ------ | ---------------------------------------------------------------------------------------------------------------------------------- |
-| reference     | String | The Reference of the given package - The one you gave                                                                              |
+| reference     | String | The reference of the given package - The one you gave                                                                              |
 | title         | String | Name of the package                                                                                                                |
 | capacity      | String | Capacity of the package                                                                                                            |
 | info_notes    | String | Notes on the package budget                                                                                                        |
 | visual_url    | String | URL of the google slide of this package                                                                                            |
-| langs         | Array  | Array of Json who contains "lang":"language name", "name":"package name in this language", "short_description", "long_description" |
-| medias        | Array  | Array of Json who contains "media_name", "path_full": Full path to the image                                                       |
-| supplier      | Array  | Array of Json who contains "reference", "company_name"                                                                             |
-| products      | Array  | Array of Json who contains "name", "value"                                                                                         |
-| custom_fields | Array  | Array of Json who contains "name", "value"                                                                                         |
+| langs         | Array  | Array of json who contains "lang":"language name", "name":"package name in this language", "short_description", "long_description" |
+| medias        | Array  | Array of json who contains "media_name", "path_full": Full path to the image                                                       |
+| supplier      | Array  | Array of json who contains "reference", "company_name"                                                                             |
+| products      | Array  | Array of json who contains "name", "value"                                                                                         |
+| custom_fields | Array  | Array of json who contains "name", "value"                                                                                         |
 
 <aside class="success">
-Remember — You have to be authenticated to call this API with your Baerer TOKEN
+Remember — You have to be authenticated to call this API with your bearer token
 </aside>
 
 # OPTION custom_fields
@@ -1083,7 +1083,7 @@ Remember — You have to be authenticated to call this API with your Baerer TOKE
 ### Custom Fields
 
 <aside class="success">
-The cusotm_fields must be called with their technical_name which you can find in your custom field settings, and should respect the given formatting, if they do not respect this formatting, they will not be updated or updated with their default settings.
+The custom_fields must be called with their technical_name which you can find in your custom field settings, and should respect the given formatting, if they do not respect this formatting, they will not be updated or updated with their default settings.
 </aside>
 
 <aside class="warning">
@@ -1094,15 +1094,15 @@ Warning: the custom_fields of the projects route must have their real name and n
 
 | Options           | Type    | Value                                                                                                                                                                                          |
 | ----------------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Text              | String  | Simple String like Text Area                                                                                                                                                                   |
+| Text              | String  | Simple string like Text Area                                                                                                                                                                   |
 | Dropdown          | Options | The option must be written exactly as in the parameters, respecting the case                                                                                                                   |
 | Multiple Dropdown | Options | The option must be written exactly as in the parameters, respecting the case, for Multiple Answer you should enter Option1/-/Option2/-/Option3 in a string, "/-/" should separate each options |
 | Date              | String  | The date must be written exactly in YYYY-MM-DD format                                                                                                                                          |
 | Time              | String  | The time must be written exactly in the format: YYYY-MM-DDTHH:MM:SS+01:00                                                                                                                      |
-| Checkbox          | String  | A String must contain "true" (checked) OR "false" (unchecked)                                                                                                                                  |
+| Checkbox          | String  | A string must contain "true" (checked) OR "false" (unchecked)                                                                                                                                  |
 | Number            | Number  | Number type should be a Number without other character                                                                                                                                         |
 | File              | File    | Not supported yet                                                                                                                                                                              |
 
 <aside class="success">
-Remember — You have to be authenticated to call this API with your Baerer TOKEN
+Remember — You have to be authenticated to call this API with your bearer token
 </aside>
