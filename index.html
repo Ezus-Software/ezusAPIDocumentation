@@ -389,13 +389,19 @@
               </ul>
           </li>
           <li>
-            <a href="#custom_fields" class="toc-h1 toc-link" data-title="custom_fields">custom_fields</a>
+            <a href="#nested-resource" class="toc-h1 toc-link" data-title="Nested Resource">Nested Resource</a>
               <ul class="toc-list-h2">
                   <li>
                     <a href="#custom-fields" class="toc-h2 toc-link" data-title="Custom Fields">Custom Fields</a>
                   </li>
                   <li>
-                    <a href="#options" class="toc-h2 toc-link" data-title="Options">Options</a>
+                    <a href="#address" class="toc-h2 toc-link" data-title="Address">Address</a>
+                  </li>
+                  <li>
+                    <a href="#contact" class="toc-h2 toc-link" data-title="Contact">Contact</a>
+                  </li>
+                  <li>
+                    <a href="#rates" class="toc-h2 toc-link" data-title="Rates">Rates</a>
                   </li>
               </ul>
           </li>
@@ -586,7 +592,7 @@ If you do not add an optionnal parameter, it will be empty for a creation or sim
 <tr>
 <td>custom_fields</td>
 <td>JSON</td>
-<td>You can add Custom Fields for your client, this custom fields should be in your Ezus params and Write Exactly as they are written in your params technical name (<a href="#option-custom_fields" target="_blank">Custom fields</a>)</td>
+<td>You can add Custom Fields for your client, this custom fields should be in your Ezus params and Write Exactly as they are written in your params technical name (<a href="#custom-fields">Custom fields</a>)</td>
 </tr>
 </tbody></table>
 
@@ -718,7 +724,7 @@ Remember — You have to be authenticated to call this API with your bearer toke
 <tr>
 <td>custom_fields</td>
 <td>Array</td>
-<td>Array of custom fields that contain name and value as string (<a href="#option-custom_fields" target="_blank">Custom fields</a>)</td>
+<td>Array of custom fields that contain name and value as string (<a href="#custom-fields">Custom fields</a>)</td>
 </tr>
 </tbody></table>
 <h3 id='alternatives'>alternatives</h3>
@@ -904,85 +910,17 @@ If you do not add an optionnal parameter, it will be empty for a creation or sim
 <tr>
 <td>contact</td>
 <td>JSON</td>
-<td>Contact is a JSON and email is needed</td>
+<td>Contact is a JSON and email is needed (<a href="#contact">Contact</a>)</td>
 </tr>
 <tr>
 <td>address</td>
 <td>JSON</td>
-<td>Address is a JSON and label is needed if you want to add or update the adresse of your client but not mandatory</td>
+<td>Address is a JSON and label is needed if you want to add or update the adresse of your client but not mandatory (<a href="#address">Address</a>)</td>
 </tr>
 <tr>
 <td>custom_fields</td>
 <td>JSON</td>
-<td>You can add custom fields for your client, this custom fields should be in your Ezus params and Write exactly as they are written in your params technical name (<a href="#option-custom_fields" target="_blank">Custom fields</a>)</td>
-</tr>
-</tbody></table>
-<h4 id='contact-parameters'>Contact Parameters</h4>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>email</td>
-<td>String</td>
-<td>Email will be used to identify which client will be updated or create a new client if no email found</td>
-</tr>
-<tr>
-<td>firstname</td>
-<td>String</td>
-<td>Firstname of the client as a string</td>
-</tr>
-<tr>
-<td>lastname</td>
-<td>String</td>
-<td>Lastname of the client as a string</td>
-</tr>
-<tr>
-<td>gender</td>
-<td>String</td>
-<td>3 Options : <code>Mr</code>, <code>Ms</code> or <code>Undefined</code></td>
-</tr>
-<tr>
-<td>phone</td>
-<td>String</td>
-<td>Phone of the client as a string</td>
-</tr>
-<tr>
-<td>birthdate</td>
-<td>String</td>
-<td>Birthdate of the client formated like: YYYY-MM-DD if not formated correctly = NULL</td>
-</tr>
-</tbody></table>
-<h4 id='address-parameters'>Address Parameters</h4>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>label</td>
-<td>String</td>
-<td>Label of the address</td>
-</tr>
-<tr>
-<td>city</td>
-<td>String</td>
-<td>Name of the city</td>
-</tr>
-<tr>
-<td>country</td>
-<td>String</td>
-<td>Name of the country</td>
-</tr>
-<tr>
-<td>zip</td>
-<td>String</td>
-<td>Post code</td>
+<td>You can add custom fields for your client, this custom fields should be in your Ezus params and Write exactly as they are written in your params technical name (<a href="#custom-fields">Custom fields</a>)</td>
 </tr>
 </tbody></table>
 
@@ -1131,7 +1069,7 @@ Remember — You have to be authenticated to call this API with your bearer toke
 <tr>
 <td>address</td>
 <td>JSON</td>
-<td>Address of the client JSON who contain <code>label</code>, <code>zip</code>, <code>city</code> and <code>country</code></td>
+<td>Address of the client JSON who contain <code>label</code>, <code>zip</code>, <code>city</code> and <code>country</code> (<a href="#address">Address</a>)</td>
 </tr>
 <tr>
 <td>projects</td>
@@ -1146,7 +1084,7 @@ Remember — You have to be authenticated to call this API with your bearer toke
 <tr>
 <td>custom_fields</td>
 <td>Array</td>
-<td>Array of json who contains <code>name</code>, <code>value</code> (<a href="#option-custom_fields" target="_blank">Custom fields</a>)</td>
+<td>Array of json who contains <code>name</code>, <code>value</code> (<a href="#custom-fields">Custom fields</a>)</td>
 </tr>
 </tbody></table>
 
@@ -1236,90 +1174,17 @@ If you do not add an Optionnal parameter, it will be empty for a creation or sim
 <tr>
 <td>contact</td>
 <td>JSON</td>
-<td>Contact is a JSON and email is needed</td>
+<td>Contact is a JSON and email is needed (<a href="#contact">Contact</a>)</td>
 </tr>
 <tr>
 <td>address</td>
 <td>JSON</td>
-<td>Address is a JSON and label is needed if you want to add or update the adresse of your supplier but not mandatory</td>
+<td>Address is a JSON and label is needed if you want to add or update the adresse of your supplier but not mandatory (<a href="#address">Address</a>)</td>
 </tr>
 <tr>
 <td>custom_fields</td>
 <td>JSON</td>
-<td>You can add custom fields for your client, this custom fields should be in your Ezus params and Write Exactly as they are written in your params technical name (<a href="#option-custom_fields" target="_blank">Custom fields</a>)</td>
-</tr>
-</tbody></table>
-<h4 id='contact-parameters-2'>Contact Parameters</h4>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>email</td>
-<td>String</td>
-<td>Email will be used to identify which supplier will be updated or create a new supplier if no email found</td>
-</tr>
-<tr>
-<td>firstname</td>
-<td>String</td>
-<td>Firstname of the supplier as a string</td>
-</tr>
-<tr>
-<td>lastname</td>
-<td>String</td>
-<td>Lastname of the supplier as a string</td>
-</tr>
-<tr>
-<td>gender</td>
-<td>String</td>
-<td>3 Options : <code>Mr</code>, <code>Ms</code> or <code>Undefined</code></td>
-</tr>
-<tr>
-<td>phone</td>
-<td>String</td>
-<td>Phone of the supplier as a string</td>
-</tr>
-<tr>
-<td>birthdate</td>
-<td>String</td>
-<td>Birthdate of the supplier formated like: YYYY-MM-DD if not formatted correctly = NULL</td>
-</tr>
-</tbody></table>
-<h4 id='address-parameters-2'>Address Parameters</h4>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-<th>Optionnal</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>label</td>
-<td>String</td>
-<td>False</td>
-<td>Label of the address</td>
-</tr>
-<tr>
-<td>city</td>
-<td>String</td>
-<td>True</td>
-<td>Name of the City</td>
-</tr>
-<tr>
-<td>country</td>
-<td>String</td>
-<td>True</td>
-<td>Name of the country</td>
-</tr>
-<tr>
-<td>zip</td>
-<td>String</td>
-<td>True</td>
-<td>Post code</td>
+<td>You can add custom fields for your client, this custom fields should be in your Ezus params and Write Exactly as they are written in your params technical name (<a href="#custom-fields">Custom fields</a>)</td>
 </tr>
 </tbody></table>
 
@@ -1454,7 +1319,7 @@ Remember — You have to be authenticated to call this API with your bearer toke
 <tr>
 <td>address</td>
 <td>JSON</td>
-<td>Address of the supplier JSON who contain <code>label</code>, <code>zip</code>, <code>city</code> and <code>country</code></td>
+<td>Address of the supplier JSON who contain <code>label</code>, <code>zip</code>, <code>city</code> and <code>country</code> (<a href="#address">Address</a>)</td>
 </tr>
 <tr>
 <td>products</td>
@@ -1474,7 +1339,7 @@ Remember — You have to be authenticated to call this API with your bearer toke
 <tr>
 <td>custom_fields</td>
 <td>Array</td>
-<td>Array of Json who contains <code>name</code>, <code>value</code> (<a href="#option-custom_fields" target="_blank">Custom fields</a>)</td>
+<td>Array of Json who contains <code>name</code>, <code>value</code> (<a href="#custom-fields">Custom fields</a>)</td>
 </tr>
 </tbody></table>
 
@@ -1601,7 +1466,7 @@ If you do not add an optionnal parameter, it will be empty for a creation or sim
 <tr>
 <td>custom_fields</td>
 <td>JSON</td>
-<td>You can add Custom Fields for your client, this custom fields should be in your Ezus params and Write Exactly as they are written in your params technical name (<a href="#option-custom_fields" target="_blank">Custom fields</a>)</td>
+<td>You can add Custom Fields for your client, this custom fields should be in your Ezus params and Write Exactly as they are written in your params technical name (<a href="#custom-fields">Custom fields</a>)</td>
 </tr>
 </tbody></table>
 
@@ -1775,12 +1640,12 @@ Remember — You have to be authenticated to call this API with your bearer toke
 <tr>
 <td>rates</td>
 <td>Array</td>
-<td>Array of json who contains <code>reference</code>, <code>type</code>, <code>name</code>, <code>purchase_price_pretax</code>, <code>margin_rate</code>, <code>sale_price_pretax</code>, <code>child</code> - Childs are tariffs contains in the rates tariff, a product can have multiple tariffs and multiple seasons, a season can have multiple tariffs levels also. <code>type</code> can be <code>default</code> OR <code>season</code>. Margin rates are calculated according to the sales price.</td>
+<td>Array of json who contains <code>reference</code>, <code>type</code>, <code>name</code>, <code>purchase_price_pretax</code>, <code>margin_rate</code>, <code>sale_price_pretax</code>, <code>child</code> (<a href="#rates">Rates</a>)</td>
 </tr>
 <tr>
 <td>custom_fields</td>
 <td>Array</td>
-<td>Array of json who contains <code>name</code>, <code>value</code> (<a href="#option-custom_fields" target="_blank">Custom fields</a>)</td>
+<td>Array of json who contains <code>name</code>, <code>value</code> (<a href="#custom-fields">Custom fields</a>)</td>
 </tr>
 </tbody></table>
 
@@ -1852,7 +1717,7 @@ If you do not add an Optionnal parameter, it will be empty for a creation or sim
 <tr>
 <td>custom_fields</td>
 <td>JSON</td>
-<td>You can add custom fields for your client, this custom fields should be in your Ezus params and Write exactly as they are written in your params technical name (<a href="#option-custom_fields" target="_blank">Custom fields</a>)</td>
+<td>You can add custom fields for your client, this custom fields should be in your Ezus params and Write exactly as they are written in your params technical name (<a href="#custom-fields">Custom fields</a>)</td>
 </tr>
 </tbody></table>
 
@@ -1982,14 +1847,14 @@ Remember — You have to be authenticated to call this API with your bearer toke
 <tr>
 <td>custom_fields</td>
 <td>Array</td>
-<td>Array of json who contains <code>name</code>, <code>value</code> <a href="#custom_fields">Custom fields</a></td>
+<td>Array of json who contains <code>name</code>, <code>value</code> <a href="#custom-fields">Custom fields</a></td>
 </tr>
 </tbody></table>
 
 <aside class="success">
 Remember — You have to be authenticated to call this API with your bearer token
 </aside>
-<h1 id='custom_fields'>custom_fields</h1><div class="highlight"><pre class="highlight json tab-json"><code><span class="w">  </span><span class="nl">"custom_fields"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+<h1 id='nested-resource'>Nested Resource</h1><div class="highlight"><pre class="highlight json tab-json"><code><span class="w">  </span><span class="nl">"custom_fields"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
       </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Text"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Value"</span><span class="w">
@@ -2035,7 +1900,7 @@ The custom_fields must be called with their technical_name which you can find in
 <aside class="warning">
 Warning: the custom_fields of the projects route must have their real name and not their technical_name in "name"
 </aside>
-<h3 id='options'>Options</h3>
+
 <table><thead>
 <tr>
 <th>Options</th>
@@ -2082,6 +1947,133 @@ Warning: the custom_fields of the projects route must have their real name and n
 <td>File</td>
 <td>File</td>
 <td>Not supported yet</td>
+</tr>
+</tbody></table>
+<h3 id='address'>Address</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>label</td>
+<td>String</td>
+<td>Label of the address</td>
+</tr>
+<tr>
+<td>city</td>
+<td>String</td>
+<td>Name of the city</td>
+</tr>
+<tr>
+<td>country</td>
+<td>String</td>
+<td>Name of the country</td>
+</tr>
+<tr>
+<td>zip</td>
+<td>String</td>
+<td>Post code</td>
+</tr>
+</tbody></table>
+<h3 id='contact'>Contact</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>email</td>
+<td>String</td>
+<td>Email will be used to identify which client will be updated or create a new client if no email found</td>
+</tr>
+<tr>
+<td>firstname</td>
+<td>String</td>
+<td>Firstname of the client as a string</td>
+</tr>
+<tr>
+<td>lastname</td>
+<td>String</td>
+<td>Lastname of the client as a string</td>
+</tr>
+<tr>
+<td>gender</td>
+<td>String</td>
+<td>3 Options : <code>Mr</code>, <code>Ms</code> or <code>Undefined</code></td>
+</tr>
+<tr>
+<td>phone</td>
+<td>String</td>
+<td>Phone of the client as a string</td>
+</tr>
+<tr>
+<td>birthdate</td>
+<td>String</td>
+<td>Birthdate of the client formated like: YYYY-MM-DD if not formated correctly = NULL</td>
+</tr>
+</tbody></table>
+<h3 id='rates'>Rates</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>String</td>
+<td>id of the rates</td>
+</tr>
+<tr>
+<td>reference</td>
+<td>String</td>
+<td>reference refer to the rates reference</td>
+</tr>
+<tr>
+<td>type</td>
+<td>String</td>
+<td><code>type</code> can be <code>default</code> OR <code>season</code> If it&#39;s season, it means this rates is based on some seasons so on special dates</td>
+</tr>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>Name of the prestation</td>
+</tr>
+<tr>
+<td>purchase_price_pretax</td>
+<td>Number</td>
+<td>Purchase price before taxes of the prestation</td>
+</tr>
+<tr>
+<td>margin_rate</td>
+<td>Number</td>
+<td>The margin Rates is calculated depend to the sales price</td>
+</tr>
+<tr>
+<td>sale_price_pretax</td>
+<td>Number</td>
+<td>Sales price before taxes as a Number</td>
+</tr>
+<tr>
+<td>prestation_id</td>
+<td>String</td>
+<td>id of the prestations who have this rates</td>
+</tr>
+<tr>
+<td>tariff_id</td>
+<td>String</td>
+<td>If reference to a special tarif, reference to the tarif Id</td>
+</tr>
+<tr>
+<td>child</td>
+<td>Array</td>
+<td>Childs are tariffs contains in the rates tariff</td>
 </tr>
 </tbody></table>
 
