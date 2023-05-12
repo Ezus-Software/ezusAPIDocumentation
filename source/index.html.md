@@ -179,7 +179,7 @@ axios.post(baseUrl + "/project?reference=reference", {}, headers);
 ```json
 {
   "erreur": "false",
-  "reference": "ezus-reference",
+  "reference": "project-reference",
   "info_title": "Project Title",
   "info_stage": "Confirmed",
   "info_notes": "Notes on the project",
@@ -283,8 +283,8 @@ const axios = require("axios");
 const baseUrl = "https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1";
 
 const body = {
-  reference: "test-ezus",
-  title: "Ezus test",
+  reference: "document_reference",
+  title: "Document test",
   link: "https://www.linktothedocument.pdf",
 };
 const headers = { "X-API-KEY": "ApiKey", Authorization: "YOUR TOKEN" };
@@ -334,7 +334,7 @@ const baseUrl = "https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1";
 
 const body = {
   reference: "client_reference",
-  company_name: "test-ezus",
+  company_name: "client_company_name",
   contact: {
     firstname: "firstname",
     lastname: "lastname",
@@ -411,7 +411,7 @@ axios.post(baseUrl + "/client?reference=reference", {}, headers);
 ```json
 {
   "erreur": "false",
-  "reference": "ezus-reference",
+  "reference": "client_reference",
   "type": "entreprise",
   "company_name": "Company Name",
   "first_name": "Fistname",
@@ -503,7 +503,7 @@ const baseUrl = "https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1";
 
 const body = {
   reference: "suppliers_reference",
-  company_name: "test-ezus",
+  company_name: "supplier_company_name",
   capacity: 2,
   type: "accom, activity"
   contact: {
@@ -584,7 +584,7 @@ axios.post(baseUrl + "/supplier?reference=reference", {}, headers);
 ```json
 {
   "erreur": "false",
-  "reference": "ezus-reference",
+  "reference": "supplier_reference",
   "company_name": "Company Name",
   "capacity": "3",
   "type": "accom, activity",
@@ -664,7 +664,7 @@ axios.post(baseUrl + "/supplier?reference=reference", {}, headers);
 | address        | JSON   | Address of the supplier JSON who contain `label`, `zip`, `city` and `country` ([Address](#address))                                              |
 | products       | JSON   | `data` contain Array of json who contains `reference`, `title` and `size`. Return only the 10 first products                                     |
 | contacts       | Array  | Contacts Assigned to the supplier formated in an Array of Json who contains `first_name`, `last_name`, `email`                                   |
-| langs          | Array  | Array of Json who contains `lang`, `name`, `short_description` and `long_description`                                                            |
+| langs          | Array  | Array of Json who contains `lang`, `name`, `short_description` and `long_description` ([Langs](#langs))                                          |
 | custom_fields  | Array  | Array of Json who contains `name`, `value` ([Custom fields](#custom-fields))                                                                     |
 
 <aside class="success">
@@ -713,7 +713,8 @@ axios.post(baseUrl + "/products-upsert", body, headers);
 [
   {
     "erreur": "false",
-    "message": "Product created Successfully",
+    "message": "ok",
+    "action": "Product Created Successfully",
     "reference": "productReference"
   }
 ]
@@ -854,7 +855,7 @@ axios.post(baseUrl + "/product?reference=reference", {}, headers);
 | supplier        | JSON   | JSON who contains `reference`, `company_name`                                                                                                                                                                                                                                                                                             |
 | package         | JSON   | JSON who contains `reference`, `title`                                                                                                                                                                                                                                                                                                    |
 | commission      | JSON   | JSON who contain: `value`: Commission as number, `commission_regime` : The commission regime can be "%" (commission is a percent of the buying/selling price) or "currency" (commission is a fix value) and `commission_mode`: "default" or "purchase" default mode is base on the buying price, purchase mode based on the selling price |
-| langs           | Array  | Array of json who contains `lang`, `name`, `short_description`, `long_description`                                                                                                                                                                                                                                                        |
+| langs           | Array  | Array of json who contains `lang`, `name`, `short_description`, `long_description` ([Langs](#langs))                                                                                                                                                                                                                                      |
 | rates           | Array  | Array of json who contains `reference`, `type`, `name`, `purchase_price_pretax`, `margin_rate`, `sale_price_pretax`, `child` ([Rates](#rates))                                                                                                                                                                                            |
 | custom_fields   | Array  | Array of json who contains `name`, `value` ([Custom fields](#custom-fields))                                                                                                                                                                                                                                                              |
 
@@ -1010,7 +1011,7 @@ axios.post(baseUrl + "/package?reference=reference", {}, headers);
 | medias        | JSON   | Medias linked to the package `data` contain Array of json who contains {`media_name`, `path_full`} and `size`. Return only the 10 first images |
 | suppliers     | JSON   | `data` contain Array of json who contains {`reference`, `company_name`} and `size`. Return only the 10 first suppliers                         |
 | products      | JSON   | `data` contain Array of json who contains {`reference`, `title`} and `size`. Return only the 10 first products                                 |
-| langs         | Array  | Array of json who contains `lang`, `name`, `short_description`, `long_description`                                                             |
+| langs         | Array  | Array of json who contains `lang`, `name`, `short_description`, `long_description` ([Langs](#langs))                                           |
 | custom_fields | Array  | Array of json who contains `name`, `value` [Custom fields](#custom-fields)                                                                     |
 
 <aside class="success">
@@ -1083,6 +1084,15 @@ Warning: the custom_fields of the projects route must have their real name and n
 
 ### Address
 
+```json
+   "address": {
+    "label": "58 Rue de Paradis",
+    "zip": "75009",
+    "city": "Paris",
+    "country": "France"
+  },
+```
+
 | Parameter | Type   | Description          |
 | --------- | ------ | -------------------- |
 | label     | String | Label of the address |
@@ -1091,6 +1101,18 @@ Warning: the custom_fields of the projects route must have their real name and n
 | zip       | String | Post code            |
 
 ### Contact
+
+```json
+"contact": {
+  "firstname": "firstname",
+  "lastname": "lastname",
+  "gender": "Ms",
+  "email": "email@email.email",
+  "phone": "0606060606",
+  "birthdate": "2023-01-01",
+},
+
+```
 
 | Parameter | Type   | Description                                                                                          |
 | --------- | ------ | ---------------------------------------------------------------------------------------------------- |
@@ -1103,6 +1125,23 @@ Warning: the custom_fields of the projects route must have their real name and n
 
 ### Rates
 
+```json
+  "rates": [
+    {
+      "id": "fbb69d5a-bebb-45bd-a8ad-d6a18ac36109",
+      "reference": null,
+      "type": "default",
+      "name": "",
+      "purchase_price_pretax": 100.0,
+      "margin_rate": 50.0,
+      "sale_price_pretax": 200.0,
+      "prestation_id": "48b25fd1-bb7b-4c49-a774-214ffa22fbb6",
+      "tariff_id": null,
+      "child": []
+    }
+  ],
+```
+
 | Parameter             | Type   | Description                                                                                                          |
 | --------------------- | ------ | -------------------------------------------------------------------------------------------------------------------- |
 | id                    | String | id of the rates                                                                                                      |
@@ -1113,8 +1152,28 @@ Warning: the custom_fields of the projects route must have their real name and n
 | margin_rate           | Number | The margin Rates is calculated depend to the sales price                                                             |
 | sale_price_pretax     | Number | Sales price before taxes as a Number                                                                                 |
 | prestation_id         | String | id of the prestations who have this rates                                                                            |
-| tariff_id             | String | If reference to a special tarif, reference to the tarif Id                                                           |
+| tariff_id             | String | If reference to a special tarif, reference to the parent tarif Id                                                    |
 | child                 | Array  | Childs are tariffs contains in the rates tariff                                                                      |
+
+### Langs
+
+```json
+"langs": [
+  {
+    "lang": "american",
+    "name": "American Name",
+    "short_description": "Short American Description",
+    "long_description": "Short American Description"
+  }
+],
+```
+
+| Parameter         | Type   | Description                                      |
+| ----------------- | ------ | ------------------------------------------------ |
+| lang              | String | Language name in lower case                      |
+| name              | String | language name                                    |
+| short_description | String | Short description of the object in this language |
+| long_description  | String | Long description of the object in ths language   |
 
 <aside class="success">
 Remember — You have to be authenticated to call this API with your bearer token
