@@ -403,6 +403,9 @@
                   <li>
                     <a href="#rates" class="toc-h2 toc-link" data-title="Rates">Rates</a>
                   </li>
+                  <li>
+                    <a href="#langs" class="toc-h2 toc-link" data-title="Langs">Langs</a>
+                  </li>
               </ul>
           </li>
           <li>
@@ -611,7 +614,7 @@ Remember — You have to be authenticated to call this API with your bearer toke
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"erreur"</span><span class="p">:</span><span class="w"> </span><span class="s2">"false"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ezus-reference"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"project-reference"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"info_title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Project Title"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"info_stage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Confirmed"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"info_notes"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Notes on the project"</span><span class="p">,</span><span class="w">
@@ -789,8 +792,8 @@ Remember — You have to be authenticated to call this API with your bearer toke
 <span class="kd">const</span> <span class="nx">baseUrl</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1</span><span class="dl">"</span><span class="p">;</span>
 
 <span class="kd">const</span> <span class="nx">body</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="na">reference</span><span class="p">:</span> <span class="dl">"</span><span class="s2">test-ezus</span><span class="dl">"</span><span class="p">,</span>
-  <span class="na">title</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Ezus test</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">reference</span><span class="p">:</span> <span class="dl">"</span><span class="s2">document_reference</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">title</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Document test</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">link</span><span class="p">:</span> <span class="dl">"</span><span class="s2">https://www.linktothedocument.pdf</span><span class="dl">"</span><span class="p">,</span>
 <span class="p">};</span>
 <span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span> <span class="dl">"</span><span class="s2">X-API-KEY</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">ApiKey</span><span class="dl">"</span><span class="p">,</span> <span class="na">Authorization</span><span class="p">:</span> <span class="dl">"</span><span class="s2">YOUR TOKEN</span><span class="dl">"</span> <span class="p">};</span>
@@ -846,7 +849,7 @@ Remember — You have to be authenticated to call this API with your bearer toke
 
 <span class="kd">const</span> <span class="nx">body</span> <span class="o">=</span> <span class="p">{</span>
   <span class="na">reference</span><span class="p">:</span> <span class="dl">"</span><span class="s2">client_reference</span><span class="dl">"</span><span class="p">,</span>
-  <span class="na">company_name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">test-ezus</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">company_name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">client_company_name</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">contact</span><span class="p">:</span> <span class="p">{</span>
     <span class="na">firstname</span><span class="p">:</span> <span class="dl">"</span><span class="s2">firstname</span><span class="dl">"</span><span class="p">,</span>
     <span class="na">lastname</span><span class="p">:</span> <span class="dl">"</span><span class="s2">lastname</span><span class="dl">"</span><span class="p">,</span>
@@ -939,7 +942,7 @@ Remember — You have to be authenticated to call this API with your bearer toke
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"erreur"</span><span class="p">:</span><span class="w"> </span><span class="s2">"false"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ezus-reference"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"client_reference"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"entreprise"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"company_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Company Name"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fistname"</span><span class="p">,</span><span class="w">
@@ -1098,7 +1101,7 @@ Remember — You have to be authenticated to call this API with your bearer toke
 
 <span class="kd">const</span> <span class="nx">body</span> <span class="o">=</span> <span class="p">{</span>
   <span class="na">reference</span><span class="p">:</span> <span class="dl">"</span><span class="s2">suppliers_reference</span><span class="dl">"</span><span class="p">,</span>
-  <span class="na">company_name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">test-ezus</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">company_name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">supplier_company_name</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">capacity</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
   <span class="na">type</span><span class="p">:</span> <span class="dl">"</span><span class="s2">accom, activity</span><span class="dl">"</span>
   <span class="na">contact</span><span class="p">:</span> <span class="p">{</span>
@@ -1203,7 +1206,7 @@ Remember — You have to be authenticated to call this API with your bearer toke
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"erreur"</span><span class="p">:</span><span class="w"> </span><span class="s2">"false"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ezus-reference"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"supplier_reference"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"company_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Company Name"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"capacity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"accom, activity"</span><span class="p">,</span><span class="w">
@@ -1334,7 +1337,7 @@ Remember — You have to be authenticated to call this API with your bearer toke
 <tr>
 <td>langs</td>
 <td>Array</td>
-<td>Array of Json who contains <code>lang</code>, <code>name</code>, <code>short_description</code> and <code>long_description</code></td>
+<td>Array of Json who contains <code>lang</code>, <code>name</code>, <code>short_description</code> and <code>long_description</code> (<a href="#langs">Langs</a>)</td>
 </tr>
 <tr>
 <td>custom_fields</td>
@@ -1383,7 +1386,8 @@ Remember — You have to be authenticated to call this API with your bearer toke
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
     </span><span class="nl">"erreur"</span><span class="p">:</span><span class="w"> </span><span class="s2">"false"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Product created Successfully"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ok"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Product Created Successfully"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"productReference"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
@@ -1635,7 +1639,7 @@ Remember — You have to be authenticated to call this API with your bearer toke
 <tr>
 <td>langs</td>
 <td>Array</td>
-<td>Array of json who contains <code>lang</code>, <code>name</code>, <code>short_description</code>, <code>long_description</code></td>
+<td>Array of json who contains <code>lang</code>, <code>name</code>, <code>short_description</code>, <code>long_description</code> (<a href="#langs">Langs</a>)</td>
 </tr>
 <tr>
 <td>rates</td>
@@ -1842,7 +1846,7 @@ Remember — You have to be authenticated to call this API with your bearer toke
 <tr>
 <td>langs</td>
 <td>Array</td>
-<td>Array of json who contains <code>lang</code>, <code>name</code>, <code>short_description</code>, <code>long_description</code></td>
+<td>Array of json who contains <code>lang</code>, <code>name</code>, <code>short_description</code>, <code>long_description</code> (<a href="#langs">Langs</a>)</td>
 </tr>
 <tr>
 <td>custom_fields</td>
@@ -1949,7 +1953,13 @@ Warning: the custom_fields of the projects route must have their real name and n
 <td>Not supported yet</td>
 </tr>
 </tbody></table>
-<h3 id='address'>Address</h3>
+<h3 id='address'>Address</h3><div class="highlight"><pre class="highlight json tab-json"><code><span class="w">   </span><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"58 Rue de Paradis"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"zip"</span><span class="p">:</span><span class="w"> </span><span class="s2">"75009"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Paris"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"France"</span><span class="w">
+  </span><span class="p">}</span><span class="err">,</span><span class="w">
+</span></code></pre></div>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -1978,7 +1988,16 @@ Warning: the custom_fields of the projects route must have their real name and n
 <td>Post code</td>
 </tr>
 </tbody></table>
-<h3 id='contact'>Contact</h3>
+<h3 id='contact'>Contact</h3><div class="highlight"><pre class="highlight json tab-json"><code><span class="nl">"contact"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="nl">"firstname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"firstname"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"lastname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"lastname"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"gender"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Ms"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"email@email.email"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0606060606"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"birthdate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2023-01-01"</span><span class="p">,</span><span class="w">
+</span><span class="p">}</span><span class="err">,</span><span class="w">
+
+</span></code></pre></div>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -2017,7 +2036,21 @@ Warning: the custom_fields of the projects route must have their real name and n
 <td>Birthdate of the client formated like: YYYY-MM-DD if not formated correctly = NULL</td>
 </tr>
 </tbody></table>
-<h3 id='rates'>Rates</h3>
+<h3 id='rates'>Rates</h3><div class="highlight"><pre class="highlight json tab-json"><code><span class="w">  </span><span class="nl">"rates"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fbb69d5a-bebb-45bd-a8ad-d6a18ac36109"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"default"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"purchase_price_pretax"</span><span class="p">:</span><span class="w"> </span><span class="mf">100.0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"margin_rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">50.0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"sale_price_pretax"</span><span class="p">:</span><span class="w"> </span><span class="mf">200.0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"prestation_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"48b25fd1-bb7b-4c49-a774-214ffa22fbb6"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"tariff_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"child"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="err">,</span><span class="w">
+</span></code></pre></div>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -2068,12 +2101,49 @@ Warning: the custom_fields of the projects route must have their real name and n
 <tr>
 <td>tariff_id</td>
 <td>String</td>
-<td>If reference to a special tarif, reference to the tarif Id</td>
+<td>If reference to a special tarif, reference to the parent tarif Id</td>
 </tr>
 <tr>
 <td>child</td>
 <td>Array</td>
 <td>Childs are tariffs contains in the rates tariff</td>
+</tr>
+</tbody></table>
+<h3 id='langs'>Langs</h3><div class="highlight"><pre class="highlight json tab-json"><code><span class="nl">"langs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"lang"</span><span class="p">:</span><span class="w"> </span><span class="s2">"american"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"American Name"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"short_description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Short American Description"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"long_description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Short American Description"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="err">,</span><span class="w">
+</span></code></pre></div>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>lang</td>
+<td>String</td>
+<td>Language name in lower case</td>
+</tr>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>language name</td>
+</tr>
+<tr>
+<td>short_description</td>
+<td>String</td>
+<td>Short description of the object in this language</td>
+</tr>
+<tr>
+<td>long_description</td>
+<td>String</td>
+<td>Long description of the object in ths language</td>
 </tr>
 </tbody></table>
 
