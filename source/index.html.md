@@ -270,7 +270,7 @@ axios.post(baseUrl + "/project?reference=reference", {}, headers);
 | trip_date_out     | String | Date of the end of this alternative, formated like : YYYY-MM-DD if it's empty, the project have no dates                  |
 | destination       | String | Destination of the alternative                                                                                            |
 | subdestination    | String | Subdestination of the alternative                                                                                         |
-| trip_duration     | String | Number of days                                                                                                            |
+| trip_duration     | String | Number of nights                                                                                                          |
 | client            | JSON   | Json that contain : `reference`, `type` (entreprise or individual), `company_name`, `first_name`, `last_name` and `email` |
 
 <aside class="success">
