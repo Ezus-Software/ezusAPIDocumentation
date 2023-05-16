@@ -66,7 +66,7 @@ To get your API key, you have to ask to your account manager
 
 After calling the login route, a bearer token will be returned to you, it must be included in the header of all your calls to the Ezus API
 
-`Authorization: YOUR TOKEN`
+`Authorization: Bearer YOUR TOKEN`
 
 ### HTTP Request
 
@@ -116,7 +116,7 @@ const body = {
     { name: "Checkbox", value: "true" },
   ],
 };
-const headers = { "X-API-KEY": "ApiKey", Authorization: "YOUR TOKEN" };
+const headers = { "X-API-KEY": "ApiKey", Authorization: "Bearer YOURTOKEN" };
 
 axios.post(baseUrl + "/projects-upsert", body, headers);
 ```
@@ -169,7 +169,7 @@ Remember — You have to be authenticated to call this API with your bearer toke
 const axios = require("axios");
 const baseUrl = "https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1";
 
-const headers = { "X-API-KEY": "ApiKey", Authorization: "YOUR TOKEN" };
+const headers = { "X-API-KEY": "ApiKey", Authorization: "Bearer YOURTOKEN" };
 
 axios.post(baseUrl + "/project?reference=reference", {}, headers);
 ```
@@ -287,7 +287,7 @@ const body = {
   title: "Document test",
   link: "https://www.linktothedocument.pdf",
 };
-const headers = { "X-API-KEY": "ApiKey", Authorization: "YOUR TOKEN" };
+const headers = { "X-API-KEY": "ApiKey", Authorization: "Bearer YOURTOKEN" };
 
 axios.post(baseUrl + "/projects-documents-create", body, headers);
 ```
@@ -354,7 +354,7 @@ const body = {
     { name: "field2", value: "field2Value" },
   ],
 };
-const headers = { "X-API-KEY": "ApiKey", Authorization: "YOUR TOKEN" };
+const headers = { "X-API-KEY": "ApiKey", Authorization: "Bearer YOURTOKEN" };
 
 axios.post(baseUrl + "/clients-upsert", body, headers);
 ```
@@ -401,7 +401,7 @@ Remember — You have to be authenticated to call this API with your bearer toke
 const axios = require("axios");
 const baseUrl = "https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1";
 
-const headers = { "X-API-KEY": "ApiKey", Authorization: "YOUR TOKEN" };
+const headers = { "X-API-KEY": "ApiKey", Authorization: "Bearer YOURTOKEN" };
 
 axios.post(baseUrl + "/client?reference=reference", {}, headers);
 ```
@@ -525,7 +525,7 @@ const body = {
     { name: "field2", value: "field2Value" },
   ],
 };
-const headers = { "X-API-KEY": "ApiKey", Authorization: "YOUR TOKEN" };
+const headers = { "X-API-KEY": "ApiKey", Authorization: "Bearer YOURTOKEN" };
 
 axios.post(baseUrl + "/suppliers-upsert", body, headers);
 ```
@@ -574,7 +574,7 @@ Remember — You have to be authenticated to call this API with your bearer toke
 const axios = require("axios");
 const baseUrl = "https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1";
 
-const headers = { "X-API-KEY": "ApiKey", Authorization: "YOUR TOKEN" };
+const headers = { "X-API-KEY": "ApiKey", Authorization: "Bearer YOURTOKEN" };
 
 axios.post(baseUrl + "/supplier?reference=reference", {}, headers);
 ```
@@ -702,7 +702,10 @@ const body = {
     { name: "field2", value: "field2Value" },
   ],
 };
-const headers = { "X-API-KEY": "ApiKey", Authorization: "YOUR TOKEN" };
+const headers = {
+  "X-API-KEY": "ApiKey",
+  Authorization: "Bearer YOURTOKEN",
+};
 
 axios.post(baseUrl + "/products-upsert", body, headers);
 ```
@@ -758,7 +761,7 @@ Remember — You have to be authenticated to call this API with your bearer toke
 const axios = require("axios");
 const baseUrl = "https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1";
 
-const headers = { "X-API-KEY": "ApiKey", Authorization: "YOUR TOKEN" };
+const headers = { "X-API-KEY": "ApiKey", Authorization: "Bearer YOURTOKEN" };
 
 axios.post(baseUrl + "/product?reference=reference", {}, headers);
 ```
@@ -883,7 +886,7 @@ const body = {
     { name: "field2", value: "field2Value" },
   ],
 };
-const headers = { "X-API-KEY": "ApiKey", Authorization: "YOUR TOKEN" };
+const headers = { "X-API-KEY": "ApiKey", Authorization: "Bearer YOURTOKEN" };
 
 axios.post(baseUrl + "/package-upsert", body, headers);
 ```
@@ -930,7 +933,7 @@ Remember — You have to be authenticated to call this API with your bearer toke
 const axios = require("axios");
 const baseUrl = "https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1";
 
-const headers = { "X-API-KEY": "ApiKey", Authorization: "YOUR TOKEN" };
+const headers = { "X-API-KEY": "ApiKey", Authorization: "Bearer YOURTOKEN" };
 
 axios.post(baseUrl + "/package?reference=reference", {}, headers);
 ```
