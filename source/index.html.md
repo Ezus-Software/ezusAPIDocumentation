@@ -42,7 +42,7 @@ const axios = require("axios");
 const baseUrl = "https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1";
 
 const body = {
-  login: "xxx",
+  email: "xxx",
   password: "xx",
 };
 const headers = { "X-API-KEY": "ApiKey" };
@@ -72,7 +72,7 @@ Ezus expects for the API key to be included in all API requests to the server in
 
 To get your API key, you have to ask to your account manager
 
-After calling the login route, a bearer token will be returned to you, it must be included in the header of all your calls to the Ezus API
+After calling the login route, a bearer token will be returned to you, it must be included in the header of all your calls to the Ezus APIBody Parameters (JSON)
 
 `Authorization: Bearer YOUR TOKEN`
 
@@ -86,7 +86,7 @@ After calling the login route, a bearer token will be returned to you, it must b
 | --------- | ------------------------------------- |
 | X-API-KEY | API key given by your account manager |
 
-### Body Parameters
+### Body Parameters (JSON)
 
 | Parameter | Description           |
 | --------- | --------------------- |
@@ -149,7 +149,7 @@ This endpoint upsert a project. This endpoint take the reference as a primary ke
 
 `POST https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/projects-upsert`
 
-### Body Parameters
+### Body Parameters (JSON)
 
 <aside class="comment">
 If you do not add an optionnal parameter, it will be empty for a creation or simply not updated for an update. If the parameter is empty (""), same behaviour
@@ -318,7 +318,7 @@ This endpoint insert a document in a project.
 
 `POST https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/projects-documents-create`
 
-### Body Parameters
+### Body Parameters (JSON)
 
 | Parameter | Type   | Description                             |
 | --------- | ------ | --------------------------------------- |
@@ -386,7 +386,7 @@ This endpoint Upsert a Client. The reference should be unique and allows to upda
 
 `POST https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/clients-upsert`
 
-### Body Parameters
+### Body Parameters (JSON)
 
 <aside class="comment">
 If you do not add an optionnal parameter, it will be empty for a creation or simply not updated for an update. If the parameter is empty (""), same behaviour
@@ -557,7 +557,7 @@ This endpoint upsert a supplier. The reference should be unique and allows to up
 
 `POST https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/suppliers-upsert`
 
-### Body Parameters
+### Body Parameters (JSON)
 
 <aside class="comment">
 If you do not add an Optionnal parameter, it will be empty for a creation or simply not updated for an update. If the parameter is empty (""), same behaviour
@@ -737,7 +737,7 @@ This endpoint upsert a product. The reference should be unique and allows to upd
 
 `POST https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/products-upsert`
 
-### Body Parameters
+### Body Parameters (JSON)
 
 <aside class="comment">
 If you do not add an optionnal parameter, it will be empty for a creation or simply not updated for an update. If the parameter is empty (""), same behaviour
@@ -918,7 +918,7 @@ This endpoint upsert a package. The reference should be unique and allows to upd
 
 `POST https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/products-upsert`
 
-### Body Parameters
+### Body Parameters (JSON)
 
 <aside class="comment">
 If you do not add an Optionnal parameter, it will be empty for a creation or simply not updated for an update. If the parameter is empty (""), same behaviour
