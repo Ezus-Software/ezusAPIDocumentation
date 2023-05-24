@@ -916,7 +916,7 @@ This endpoint upsert a package. The reference should be unique and allows to upd
 
 ### HTTP Request
 
-`POST https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/products-upsert`
+`POST https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/package-upsert`
 
 ### Body Parameters (JSON)
 
