@@ -19,11 +19,19 @@ meta:
     content: Documentation for the Ezus API
 ---
 
+<aside class="success">
+The api is not yet online, it will be released in the coming weeks
+</aside>
+
 # Introduction
 
 Welcome to the EZUS API! You can use our API to access Ezus API endpoints, which can get information on various users data or clients in our database.
 
 We have language bindings in JavaScript! You can view code examples in the dark area to the right.
+
+<aside class="success">
+You can find here a (<a href="https://ezus-team.postman.co/workspace/Ezus-APIs~523409cf-e5b3-429b-8b49-0eb1e1273aa6/collection/24284707-8922dc39-5057-49b9-b6e8-bdfc13dec333?action=share&creator=24284707" target="_blank"> Postman Collection</a>) with all the API routes with a test account
+</aside>
 
 # Authentication
 
@@ -312,11 +320,11 @@ This endpoint insert a document in a project.
 
 ### Body Parameters
 
-| Parameter | Type   | Description                  |
-| --------- | ------ | ---------------------------- |
-| reference | String | The project reference        |
-| title     | String | Title of your document       |
-| link      | Link   | Link to the desired document |
+| Parameter | Type   | Description                             |
+| --------- | ------ | --------------------------------------- |
+| reference | String | The project reference                   |
+| title     | String | Title of your document                  |
+| link      | Link   | Link to the desired document (ONLY PDF) |
 
 <aside class="success">
 Remember — You have to be authenticated to call this API with your bearer token
@@ -557,7 +565,7 @@ If you do not add an Optionnal parameter, it will be empty for a creation or sim
 | Parameter    | Type    | Description                                                                                                     |
 | ------------ | ------  | --------------------------------------------------------------------------------------------------------------- |
 | reference     | String | Used as a primary key in the database, if no reference, the reference will be generated automatically|
-| company_name | String       | Set a company name - If company name is empty, the supplier will be set as an individual |                         |
+| company_name | String       | Set a company name - If company name is empty, the supplier will be set as an individual and the name of the supplier will be the name of the contact |                         |
 | capacity     | Number | Capacity of the Supplier|
 | type     | String | 3 Option : `accom`, `activity`, `transport`. You can select multiple options by typing "accom, activity" for exemple, the new data will erase old data. To add multiple options they must be separated by a comma|
 | contact      | JSON        | Contact is a JSON and email is needed ([Contact](#contact))                                                                          |
@@ -614,7 +622,7 @@ axios.post(baseUrl + "/supplier?reference=reference", {}, headers);
   "products": {
     "data": [
       {
-        "esus_reference": "products_reference",
+        "reference": "products_reference",
         "title": "product_title"
       }
     ],
@@ -687,8 +695,8 @@ const body = {
   capacity: 3,
   supplier_reference: "supplier_reference",
   package_reference: "package_reference",
-  purchase_price: "42.42",
-  sales_price: "84.84",
+  purchase_price: "42",
+  sales_price: "84",
   vat_regime: "none",
   vat_rate: "20",
   currency: "USD",
@@ -740,13 +748,13 @@ If you do not add an optionnal parameter, it will be empty for a creation or sim
 | reference          | String  | To update a product, reference is mandatory, the reference will be used as a Primary Key, in case of creation, a unique reference will be returned if you create a new product you can give a unique reference this one will be used as Ezus reference                                                                                    |
 | title              | String  | If no reference or reference not found, the title is mandatory                                                                                                                                                                                                                                                                            |
 | quantity           | String  | Quantity is the default number of this product at his creation (P = Number of people in the project, D = Number of days in the project, N = Number of nights in the project)                                                                                                                                                              |
-| capacity           | Number  | Capacity is the default capacity of the product                                                                                                                                                                                                                                                                                           |
+| capacity           | Int     | Capacity is the default capacity of the product                                                                                                                                                                                                                                                                                           |
 | supplier_reference | String  | The reference to the supplier, if you give a reference, the product will be added in the supplier                                                                                                                                                                                                                                         |
 | package_reference  | String  | The reference to the package, if you give a reference, the product will be added in the package                                                                                                                                                                                                                                           |
-| purchase_price     | Number  | Purchase price as number                                                                                                                                                                                                                                                                                                                  |
-| sales_price        | Number  | Sales price, the margin rate will be calculated in function of this price.                                                                                                                                                                                                                                                                |
+| purchase_price     | float   | Purchase price as number                                                                                                                                                                                                                                                                                                                  |
+| sales_price        | float   | Sales price, the margin rate will be calculated in function of this price.                                                                                                                                                                                                                                                                |
 | vat_regime         | Options | 'classic', 'margin', 'none', Thoses options allows to choose your VAT Regime, in margin mode, VAT will be calculated on your margin. Classic mode, VAT will be calculated on your selling price. In none mode, no VAT will be applied. If empty will be set at your default account values                                                |
-| vat_rate           | Number  | Default VAT rate, if empty will be set at your default account VAT rate                                                                                                                                                                                                                                                                   |
+| vat_rate           | float   | Default VAT rate, if empty will be set at your default account VAT rate                                                                                                                                                                                                                                                                   |
 | currency           | String  | The ISO 4217 code who represent the currency you use (<a href="https://docs.google.com/spreadsheets/d/1b7BNOwKyN1hMOouve6xhFZ2R2zrH4Sj1L-646j755fU/edit?usp=sharing" target="_blank">Link to Doc</a>)                                                                                                                                     |
 | commission         | JSON    | JSON who contain: `value`: Commission as number, `commission_regime` : The commission regime can be "%" (commission is a percent of the buying/selling price) or "currency" (commission is a fix value) and `commission_mode`: "default" or "purchase" default mode is base on the buying price, purchase mode based on the selling price |
 | custom_fields      | JSON    | You can add Custom Fields for your client, this custom fields should be in your Ezus params and Write Exactly as they are written in your params technical name ([Custom fields](#custom-fields))                                                                                                                                         |
@@ -969,7 +977,7 @@ axios.post(baseUrl + "/package?reference=reference", {}, headers);
   "products": {
     "data": [
       {
-        "esus_reference": "products_reference",
+        "reference": "products_reference",
         "title": "product_title"
       }
     ],
