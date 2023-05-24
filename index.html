@@ -326,7 +326,7 @@
                     <a href="#headers" class="toc-h2 toc-link" data-title="Headers">Headers</a>
                   </li>
                   <li>
-                    <a href="#body-parameters" class="toc-h2 toc-link" data-title="Body Parameters">Body Parameters</a>
+                    <a href="#body-parameters-json" class="toc-h2 toc-link" data-title="Body Parameters (JSON)">Body Parameters (JSON)</a>
                   </li>
               </ul>
           </li>
@@ -438,7 +438,7 @@ You can find here a (<a href="https://ezus-team.postman.co/workspace/Ezus-APIs~5
 <span class="kd">const</span> <span class="nx">baseUrl</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1</span><span class="dl">"</span><span class="p">;</span>
 
 <span class="kd">const</span> <span class="nx">body</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="na">login</span><span class="p">:</span> <span class="dl">"</span><span class="s2">xxx</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">email</span><span class="p">:</span> <span class="dl">"</span><span class="s2">xxx</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">password</span><span class="p">:</span> <span class="dl">"</span><span class="s2">xx</span><span class="dl">"</span><span class="p">,</span>
 <span class="p">};</span>
 <span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span> <span class="dl">"</span><span class="s2">X-API-KEY</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">ApiKey</span><span class="dl">"</span> <span class="p">};</span>
@@ -468,7 +468,7 @@ You can find here a (<a href="https://ezus-team.postman.co/workspace/Ezus-APIs~5
 
 <p>To get your API key, you have to ask to your account manager</p>
 
-<p>After calling the login route, a bearer token will be returned to you, it must be included in the header of all your calls to the Ezus API</p>
+<p>After calling the login route, a bearer token will be returned to you, it must be included in the header of all your calls to the Ezus APIBody Parameters (JSON)</p>
 
 <p><code>Authorization: Bearer YOUR TOKEN</code></p>
 <h3 id='http-request'>HTTP Request</h3>
@@ -485,7 +485,7 @@ You can find here a (<a href="https://ezus-team.postman.co/workspace/Ezus-APIs~5
 <td>API key given by your account manager</td>
 </tr>
 </tbody></table>
-<h3 id='body-parameters'>Body Parameters</h3>
+<h3 id='body-parameters-json'>Body Parameters (JSON)</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -547,7 +547,7 @@ You must replace <code>ApiKey</code> with your personal API key.
 <p>This endpoint upsert a project. This endpoint take the reference as a primary key, if the reference already exist, the project linked to the account will be updated, if the reference doesn&#39;t exist, a new project will be created with all the given params.</p>
 <h3 id='http-request-2'>HTTP Request</h3>
 <p><code>POST https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/projects-upsert</code></p>
-<h3 id='body-parameters-2'>Body Parameters</h3>
+<h3 id='body-parameters-json-2'>Body Parameters (JSON)</h3>
 <aside class="comment">
 If you do not add an optionnal parameter, it will be empty for a creation or simply not updated for an update. If the parameter is empty (""), same behaviour
 </aside>
@@ -821,7 +821,7 @@ Remember — You have to be authenticated to call this API with your bearer toke
 <p>This endpoint insert a document in a project.</p>
 <h3 id='http-request-4'>HTTP Request</h3>
 <p><code>POST https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/projects-documents-create</code></p>
-<h3 id='body-parameters-3'>Body Parameters</h3>
+<h3 id='body-parameters-json-3'>Body Parameters (JSON)</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -895,7 +895,7 @@ Remember — You have to be authenticated to call this API with your bearer toke
 <p>This endpoint Upsert a Client. The reference should be unique and allows to update an existing client or create a new client. If reference is not given, the email params is used as a primary key for your clients If you have multiple clients with the same email, the first client will be taken. If a client with this email already exist. An Ezus reference will be returned you must have to save it for your next uses. <code>this one will be updated with the new Params Given here.</code></p>
 <h3 id='http-request-5'>HTTP Request</h3>
 <p><code>POST https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/clients-upsert</code></p>
-<h3 id='body-parameters-4'>Body Parameters</h3>
+<h3 id='body-parameters-json-4'>Body Parameters (JSON)</h3>
 <aside class="comment">
 If you do not add an optionnal parameter, it will be empty for a creation or simply not updated for an update. If the parameter is empty (""), same behaviour
 </aside>
@@ -1149,7 +1149,7 @@ Remember — You have to be authenticated to call this API with your bearer toke
 <p>This endpoint upsert a supplier. The reference should be unique and allows to update an existing supplier or Create a new supplier. If reference is not given, the email params is used as a primary key for your suppliers If you have multiple suppliers with the same email, the first supplier will be taken. If a supplier with this email already exist. An Ezus reference will be returned you must have to save it for your next uses. <code>this one will be updated with the new Params Given here.</code></p>
 <h3 id='http-request-7'>HTTP Request</h3>
 <p><code>POST https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/suppliers-upsert</code></p>
-<h3 id='body-parameters-5'>Body Parameters</h3>
+<h3 id='body-parameters-json-5'>Body Parameters (JSON)</h3>
 <aside class="comment">
 If you do not add an Optionnal parameter, it will be empty for a creation or simply not updated for an update. If the parameter is empty (""), same behaviour
 </aside>
@@ -1405,7 +1405,7 @@ Remember — You have to be authenticated to call this API with your bearer toke
 <p>This endpoint upsert a product. The reference should be unique and allows to update an existing product or create a new product. If reference is not given, the product will be created. An Ezus reference will be returned you must have to save it for your next updates of this product. <code>this one will be updated with the new Params Given here.</code></p>
 <h3 id='http-request-9'>HTTP Request</h3>
 <p><code>POST https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/products-upsert</code></p>
-<h3 id='body-parameters-6'>Body Parameters</h3>
+<h3 id='body-parameters-json-6'>Body Parameters (JSON)</h3>
 <aside class="comment">
 If you do not add an optionnal parameter, it will be empty for a creation or simply not updated for an update. If the parameter is empty (""), same behaviour
 </aside>
@@ -1701,7 +1701,7 @@ Remember — You have to be authenticated to call this API with your bearer toke
 <p>This endpoint upsert a package. The reference should be unique and allows to update an existing package or create a new package. If reference is not given, the package will be created. An Ezus reference will be returned you must have to save it for your next updates of this package. <code>this one will be updated with the new Params Given here.</code></p>
 <h3 id='http-request-11'>HTTP Request</h3>
 <p><code>POST https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/products-upsert</code></p>
-<h3 id='body-parameters-7'>Body Parameters</h3>
+<h3 id='body-parameters-json-7'>Body Parameters (JSON)</h3>
 <aside class="comment">
 If you do not add an Optionnal parameter, it will be empty for a creation or simply not updated for an update. If the parameter is empty (""), same behaviour
 </aside>
