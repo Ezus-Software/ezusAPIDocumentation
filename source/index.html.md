@@ -30,7 +30,7 @@ Welcome to the EZUS API! You can use our API to access Ezus API endpoints, which
 We have language bindings in JavaScript! You can view code examples in the dark area to the right.
 
 <aside class="success">
-You can find here a (<a href="https://ezus-team.postman.co/workspace/Ezus-APIs~523409cf-e5b3-429b-8b49-0eb1e1273aa6/collection/24284707-8922dc39-5057-49b9-b6e8-bdfc13dec333?action=share&creator=24284707" target="_blank"> Postman Collection</a>) with all the API routes with a test account
+You can find here a (<a href="https://ezus-team.postman.co/workspace/Ezus-APIs~523409cf-e5b3-429b-8b49-0eb1e1273aa6/collection/24284707-8922dc39-5057-49b9-b6e8-bdfc13dec333?action=share&creator=24284707" target="_blank"> Postman Collection</a>) with all the API routes with test data
 </aside>
 
 # Authentication
