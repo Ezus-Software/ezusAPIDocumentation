@@ -419,10 +419,17 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='introduction'>Introduction</h1>
+        <aside class="success">
+The api is not yet online, it will be released in the coming weeks
+</aside>
+<h1 id='introduction'>Introduction</h1>
 <p>Welcome to the EZUS API! You can use our API to access Ezus API endpoints, which can get information on various users data or clients in our database.</p>
 
 <p>We have language bindings in JavaScript! You can view code examples in the dark area to the right.</p>
+
+<aside class="success">
+You can find here a (<a href="https://ezus-team.postman.co/workspace/Ezus-APIs~523409cf-e5b3-429b-8b49-0eb1e1273aa6/collection/24284707-8922dc39-5057-49b9-b6e8-bdfc13dec333?action=share&creator=24284707" target="_blank"> Postman Collection</a>) with all the API routes with a test account
+</aside>
 <h1 id='authentication'>Authentication</h1>
 <blockquote>
 <p>To authorize, use this code:</p>
@@ -835,7 +842,7 @@ Remember — You have to be authenticated to call this API with your bearer toke
 <tr>
 <td>link</td>
 <td>Link</td>
-<td>Link to the desired document</td>
+<td>Link to the desired document (ONLY PDF)</td>
 </tr>
 </tbody></table>
 
@@ -1162,7 +1169,7 @@ If you do not add an Optionnal parameter, it will be empty for a creation or sim
 <tr>
 <td>company_name</td>
 <td>String</td>
-<td>Set a company name - If company name is empty, the supplier will be set as an individual</td>
+<td>Set a company name - If company name is empty, the supplier will be set as an individual and the name of the supplier will be the name of the contact</td>
 </tr>
 <tr>
 <td>capacity</td>
@@ -1236,7 +1243,7 @@ Remember — You have to be authenticated to call this API with your bearer toke
   </span><span class="nl">"products"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
       </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"esus_reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"products_reference"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"products_reference"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"product_title"</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">],</span><span class="w">
@@ -1361,8 +1368,8 @@ Remember — You have to be authenticated to call this API with your bearer toke
   <span class="na">capacity</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
   <span class="na">supplier_reference</span><span class="p">:</span> <span class="dl">"</span><span class="s2">supplier_reference</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">package_reference</span><span class="p">:</span> <span class="dl">"</span><span class="s2">package_reference</span><span class="dl">"</span><span class="p">,</span>
-  <span class="na">purchase_price</span><span class="p">:</span> <span class="dl">"</span><span class="s2">42.42</span><span class="dl">"</span><span class="p">,</span>
-  <span class="na">sales_price</span><span class="p">:</span> <span class="dl">"</span><span class="s2">84.84</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">purchase_price</span><span class="p">:</span> <span class="dl">"</span><span class="s2">42</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">sales_price</span><span class="p">:</span> <span class="dl">"</span><span class="s2">84</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">vat_regime</span><span class="p">:</span> <span class="dl">"</span><span class="s2">none</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">vat_rate</span><span class="p">:</span> <span class="dl">"</span><span class="s2">20</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">currency</span><span class="p">:</span> <span class="dl">"</span><span class="s2">USD</span><span class="dl">"</span><span class="p">,</span>
@@ -1427,7 +1434,7 @@ If you do not add an optionnal parameter, it will be empty for a creation or sim
 </tr>
 <tr>
 <td>capacity</td>
-<td>Number</td>
+<td>Int</td>
 <td>Capacity is the default capacity of the product</td>
 </tr>
 <tr>
@@ -1442,12 +1449,12 @@ If you do not add an optionnal parameter, it will be empty for a creation or sim
 </tr>
 <tr>
 <td>purchase_price</td>
-<td>Number</td>
+<td>float</td>
 <td>Purchase price as number</td>
 </tr>
 <tr>
 <td>sales_price</td>
-<td>Number</td>
+<td>float</td>
 <td>Sales price, the margin rate will be calculated in function of this price.</td>
 </tr>
 <tr>
@@ -1457,7 +1464,7 @@ If you do not add an optionnal parameter, it will be empty for a creation or sim
 </tr>
 <tr>
 <td>vat_rate</td>
-<td>Number</td>
+<td>float</td>
 <td>Default VAT rate, if empty will be set at your default account VAT rate</td>
 </tr>
 <tr>
@@ -1769,7 +1776,7 @@ Remember — You have to be authenticated to call this API with your bearer toke
   </span><span class="nl">"products"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
       </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"esus_reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"products_reference"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"products_reference"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"product_title"</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">],</span><span class="w">
