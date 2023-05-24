@@ -667,7 +667,7 @@ axios.post(baseUrl + "/supplier?reference=reference", {}, headers);
 | info_notes     | String | Notes on the supplier                                                                                                                            |
 | info_reference | String | Reference of the supplier (It is a supplier number that appears at the bottom of the supplier file. Not to be confused with reference)           |
 | visual_url     | String | Link to the google Slides linked to the supplier in Ezus                                                                                         |
-| user           | JSON   | User assigned to the supplier JSON who contain `email`, `first_name`, `last_name`                                                                |
+| user           | JSON   | `Everyone`, `User Group` OR User assigned to the supplier JSON who contain `email`, `first_name`, `last_name`                                    |
 | medias         | JSON   | Medias linked to the supplier, `data` contain Array of json who contains {`media_name`, `path_full`} and `size`. Return only the 10 first images |
 | address        | JSON   | Address of the supplier JSON who contain `label`, `zip`, `city` and `country` ([Address](#address))                                              |
 | products       | JSON   | `data` contain Array of json who contains `reference`, `title` and `size`. Return only the 10 first products                                     |
