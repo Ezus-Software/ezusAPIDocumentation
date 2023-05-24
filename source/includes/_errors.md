@@ -1,7 +1,7 @@
 # Errors
 
 <aside class="notice">
-Classics Error codes
+Classic Error codes
 </aside>
 The Ezus API uses the following error codes:
 
