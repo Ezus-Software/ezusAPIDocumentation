@@ -562,7 +562,7 @@ If you do not add an optionnal parameter, it will be empty for a creation or sim
 <tr>
 <td>reference</td>
 <td>String</td>
-<td>The project Reference used as a primary key to check if the project already exist and UPDATE it or to create a new Project so be sure to use a unique Ezus Reference for each of your project</td>
+<td><span style="color:red">(Required)</span> The project Reference used as a primary key to check if the project already exist and UPDATE it or to create a new Project so be sure to use a unique Ezus Reference for each of your project</td>
 </tr>
 <tr>
 <td>info_title</td>
@@ -832,17 +832,17 @@ Remember — You have to be authenticated to call this API with your bearer toke
 <tr>
 <td>reference</td>
 <td>String</td>
-<td>The project reference</td>
+<td><span style="color:red">(Required)</span> The project reference</td>
 </tr>
 <tr>
 <td>title</td>
 <td>String</td>
-<td>Title of your document</td>
+<td><span style="color:red">(Required)</span> Title of your document</td>
 </tr>
 <tr>
 <td>link</td>
 <td>Link</td>
-<td>Link to the desired document (ONLY PDF)</td>
+<td><span style="color:red">(Required)</span> Link to the desired document (ONLY PDF)</td>
 </tr>
 </tbody></table>
 
@@ -910,12 +910,12 @@ If you do not add an optionnal parameter, it will be empty for a creation or sim
 <tr>
 <td>reference</td>
 <td>String</td>
-<td>Used as a primary key in the database, if no reference, the reference will be generated automatically and returned</td>
+<td><span style="color:red">(Required)</span> Used as a primary key in the database, if no reference, the reference will be generated automatically and returned</td>
 </tr>
 <tr>
 <td>company_name</td>
 <td>String</td>
-<td>Set a company name - If company name is empty, the client will be set as an individual and the name of the client = name of the contact and if the company name is not empty, the name of the client will be the company name</td>
+<td><span style="color:red">(Required)</span> Set a company name - If company name is empty, the client will be set as an individual and the name of the client = name of the contact and if the company name is not empty, the name of the client will be the company name</td>
 </tr>
 <tr>
 <td>contact</td>
@@ -1164,7 +1164,7 @@ If you do not add an Optionnal parameter, it will be empty for a creation or sim
 <tr>
 <td>reference</td>
 <td>String</td>
-<td>Used as a primary key in the database, if no reference, the reference will be generated automatically</td>
+<td><span style="color:red">(Required)</span> Used as a primary key in the database, if no reference, the reference will be generated automatically</td>
 </tr>
 <tr>
 <td>company_name</td>
@@ -1420,7 +1420,7 @@ If you do not add an optionnal parameter, it will be empty for a creation or sim
 <tr>
 <td>reference</td>
 <td>String</td>
-<td>To update a product, reference is mandatory, the reference will be used as a Primary Key, in case of creation, a unique reference will be returned if you create a new product you can give a unique reference this one will be used as Ezus reference</td>
+<td><span style="color:red">(Required)</span> To update a product, reference is mandatory, the reference will be used as a Primary Key, in case of creation, a unique reference will be returned if you create a new product you can give a unique reference this one will be used as Ezus reference</td>
 </tr>
 <tr>
 <td>title</td>
@@ -1716,7 +1716,7 @@ If you do not add an Optionnal parameter, it will be empty for a creation or sim
 <tr>
 <td>reference</td>
 <td>String</td>
-<td>To update a package, Reference is mandatory, the reference will be used as a primary key, in case of creation, a unique reference will be returned</td>
+<td><span style="color:red">(Required)</span> To update a package, Reference is mandatory, the reference will be used as a primary key, in case of creation, a unique reference will be returned</td>
 </tr>
 <tr>
 <td>title</td>
@@ -2081,7 +2081,7 @@ Warning: the custom_fields of the projects route must have their real name and n
 <tr>
 <td>type</td>
 <td>String</td>
-<td><code>type</code> can be <code>default</code> OR <code>season</code> If it&#39;s season, it means this rates is based on some seasons so on special dates</td>
+<td><code>type</code> can be <code>custom</code>, <code>default</code> OR <code>season</code> If it&#39;s season, it means this rates is based on some seasons so on special dates custom is a child of a parents rate</td>
 </tr>
 <tr>
 <td>name</td>
