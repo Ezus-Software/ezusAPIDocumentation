@@ -157,7 +157,7 @@ If you do not add an optionnal parameter, it will be empty for a creation or sim
 
 | Parameter           | Type   | Description                                                                                                                                                                                                                                              |
 | ------------------- | ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| reference           | String | The project Reference used as a primary key to check if the project already exist and UPDATE it or to create a new Project so be sure to use a unique Ezus Reference for each of your project                                                            |
+| reference           | String | <span style="color:red">(Required)</span> The project Reference used as a primary key to check if the project already exist and UPDATE it or to create a new Project so be sure to use a unique Ezus Reference for each of your project                  |
 | info_title          | String | Title of your project, mandatory if you create a New Project                                                                                                                                                                                             |
 | trip_people         | Number | Number of people in your project                                                                                                                                                                                                                         |
 | trip_budget         | Number | Budget of your project                                                                                                                                                                                                                                   |
@@ -320,11 +320,11 @@ This endpoint insert a document in a project.
 
 ### Body Parameters (JSON)
 
-| Parameter | Type   | Description                             |
-| --------- | ------ | --------------------------------------- |
-| reference | String | The project reference                   |
-| title     | String | Title of your document                  |
-| link      | Link   | Link to the desired document (ONLY PDF) |
+| Parameter | Type   | Description                                                                       |
+| --------- | ------ | --------------------------------------------------------------------------------- |
+| reference | String | <span style="color:red">(Required)</span> The project reference                   |
+| title     | String | <span style="color:red">(Required)</span> Title of your document                  |
+| link      | Link   | <span style="color:red">(Required)</span> Link to the desired document (ONLY PDF) |
 
 <aside class="success">
 Remember — You have to be authenticated to call this API with your bearer token
@@ -393,8 +393,8 @@ If you do not add an optionnal parameter, it will be empty for a creation or sim
 </aside>
 | Parameter    | Type    | Description                                                                                                     |
 | ------------ | ------  | --------------------------------------------------------------------------------------------------------------- |
-| reference     | String | Used as a primary key in the database, if no reference, the reference will be generated automatically and returned|
-| company_name | String       | Set a company name - If company name is empty, the client will be set as an individual and the name of the client = name of the contact and if the company name is not empty, the name of the client will be the company name |                         |
+| reference     | String | <span style="color:red">(Required)</span> Used as a primary key in the database, if no reference, the reference will be generated automatically and returned|
+| company_name | String       | <span style="color:red">(Required)</span> Set a company name - If company name is empty, the client will be set as an individual and the name of the client = name of the contact and if the company name is not empty, the name of the client will be the company name |                         |
 | contact      | JSON        | Contact is a JSON and email is needed ([Contact](#contact))                                                                            |
 | address      | JSON         | Address is a JSON and label is needed if you want to add or update the adresse of your client but not mandatory ([Address](#address)) |
 | custom_fields      | JSON         | You can add custom fields for your client, this custom fields should be in your Ezus params and Write exactly as they are written in your params technical name ([Custom fields](#custom-fields))   |
@@ -564,7 +564,7 @@ If you do not add an Optionnal parameter, it will be empty for a creation or sim
 </aside>
 | Parameter    | Type    | Description                                                                                                     |
 | ------------ | ------  | --------------------------------------------------------------------------------------------------------------- |
-| reference     | String | Used as a primary key in the database, if no reference, the reference will be generated automatically|
+| reference     | String | <span style="color:red">(Required)</span> Used as a primary key in the database, if no reference, the reference will be generated automatically|
 | company_name | String       | Set a company name - If company name is empty, the supplier will be set as an individual and the name of the supplier will be the name of the contact |                         |
 | capacity     | Number | Capacity of the Supplier|
 | type     | String | 3 Option : `accom`, `activity`, `transport`. You can select multiple options by typing "accom, activity" for exemple, the new data will erase old data. To add multiple options they must be separated by a comma|
@@ -745,7 +745,7 @@ If you do not add an optionnal parameter, it will be empty for a creation or sim
 
 | Parameter          | Type    | Description                                                                                                                                                                                                                                                                                                                                 |
 | ------------------ | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| reference          | String  | To update a product, reference is mandatory, the reference will be used as a Primary Key, in case of creation, a unique reference will be returned if you create a new product you can give a unique reference this one will be used as Ezus reference                                                                                      |
+| reference          | String  | <span style="color:red">(Required)</span> To update a product, reference is mandatory, the reference will be used as a Primary Key, in case of creation, a unique reference will be returned if you create a new product you can give a unique reference this one will be used as Ezus reference                                            |
 | title              | String  | If no reference or reference not found, the title is mandatory                                                                                                                                                                                                                                                                              |
 | quantity           | String  | Quantity is the default number of this product at his creation (P = Number of people in the project, D = Number of days in the project, N = Number of nights in the project)                                                                                                                                                                |
 | capacity           | Int     | Capacity is the default capacity of the product                                                                                                                                                                                                                                                                                             |
@@ -926,7 +926,7 @@ If you do not add an Optionnal parameter, it will be empty for a creation or sim
 
 | Parameter     | Type   | Description                                                                                                                                                                                       |
 | ------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --- |
-| reference     | String | To update a package, Reference is mandatory, the reference will be used as a primary key, in case of creation, a unique reference will be returned                                                |
+| reference     | String | <span style="color:red">(Required)</span> To update a package, Reference is mandatory, the reference will be used as a primary key, in case of creation, a unique reference will be returned      |
 | title         | String | If no reference or reference not found, the title is mandatory                                                                                                                                    |
 | capacity      | Number | capacity is the default number of this package at his creation                                                                                                                                    |     |
 | custom_fields | JSON   | You can add custom fields for your client, this custom fields should be in your Ezus params and Write exactly as they are written in your params technical name ([Custom fields](#custom-fields)) |
@@ -1153,18 +1153,18 @@ Warning: the custom_fields of the projects route must have their real name and n
   ],
 ```
 
-| Parameter             | Type   | Description                                                                                                          |
-| --------------------- | ------ | -------------------------------------------------------------------------------------------------------------------- |
-| id                    | String | id of the rates                                                                                                      |
-| reference             | String | reference refer to the rates reference                                                                               |
-| type                  | String | `type` can be `default` OR `season` If it's season, it means this rates is based on some seasons so on special dates |
-| name                  | String | Name of the prestation                                                                                               |
-| purchase_price_pretax | Number | Purchase price before taxes of the prestation                                                                        |
-| margin_rate           | Number | The margin Rates is calculated depend to the sales price                                                             |
-| sale_price_pretax     | Number | Sales price before taxes as a Number                                                                                 |
-| prestation_id         | String | id of the prestations who have this rates                                                                            |
-| tariff_id             | String | If reference to a special tarif, reference to the parent tarif Id                                                    |
-| child                 | Array  | Childs are tariffs contains in the rates tariff                                                                      |
+| Parameter             | Type   | Description                                                                                                                                                        |
+| --------------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| id                    | String | id of the rates                                                                                                                                                    |
+| reference             | String | reference refer to the rates reference                                                                                                                             |
+| type                  | String | `type` can be `custom`, `default` OR `season` If it's season, it means this rates is based on some seasons so on special dates custom is a child of a parents rate |
+| name                  | String | Name of the prestation                                                                                                                                             |
+| purchase_price_pretax | Number | Purchase price before taxes of the prestation                                                                                                                      |
+| margin_rate           | Number | The margin Rates is calculated depend to the sales price                                                                                                           |
+| sale_price_pretax     | Number | Sales price before taxes as a Number                                                                                                                               |
+| prestation_id         | String | id of the prestations who have this rates                                                                                                                          |
+| tariff_id             | String | If reference to a special tarif, reference to the parent tarif Id                                                                                                  |
+| child                 | Array  | Childs are tariffs contains in the rates tariff                                                                                                                    |
 
 ### Langs
 
