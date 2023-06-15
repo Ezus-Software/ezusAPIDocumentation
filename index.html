@@ -1375,7 +1375,7 @@ Remember — You have to be authenticated to call this API with your bearer toke
   <span class="na">currency</span><span class="p">:</span> <span class="dl">"</span><span class="s2">USD</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">commission</span><span class="p">:</span> <span class="p">{</span>
     <span class="na">commission_mode</span><span class="p">:</span> <span class="dl">"</span><span class="s2">purchase</span><span class="dl">"</span><span class="p">,</span>
-    <span class="na">commission_regime</span><span class="p">:</span> <span class="dl">"</span><span class="s2">%</span><span class="dl">"</span><span class="p">,</span>
+    <span class="na">commission_regime</span><span class="p">:</span> <span class="dl">"</span><span class="s2">percent</span><span class="dl">"</span><span class="p">,</span>
     <span class="na">value</span><span class="p">:</span> <span class="dl">"</span><span class="s2">10</span><span class="dl">"</span><span class="p">,</span>
   <span class="p">},</span>
   <span class="na">custom_fields</span><span class="p">:</span> <span class="p">[</span>
@@ -1475,7 +1475,7 @@ If you do not add an optionnal parameter, it will be empty for a creation or sim
 <tr>
 <td>commission</td>
 <td>JSON</td>
-<td>JSON who contain: <code>value</code>: Commission as number, <code>commission_regime</code> : The commission regime can be &quot;percent&quot; (commission is a percent of the buying/selling price) or &quot;flat&quot; (commission is a fix value) and <code>commission_mode</code>: &quot;default&quot; or &quot;purchase&quot; default mode is base on the buying price, purchase mode based on the selling price</td>
+<td>JSON who contain: <code>value</code>: Commission as number, <code>commission_regime</code> : The commission regime can be &quot;percent&quot; (commission is a percent of the buying/selling price) or &quot;currency&quot; (commission is a fix value) and <code>commission_mode</code>: &quot;default&quot; or &quot;purchase&quot; default mode is base on the buying price, purchase mode based on the selling price</td>
 </tr>
 <tr>
 <td>custom_fields</td>
@@ -1529,7 +1529,7 @@ Remember — You have to be authenticated to call this API with your bearer toke
   </span><span class="p">},</span><span class="w">
   </span><span class="nl">"commission"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"commission_mode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"purchase"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"commission_regime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"%"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"commission_regime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"percent"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="nl">"langs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
@@ -1644,7 +1644,7 @@ Remember — You have to be authenticated to call this API with your bearer toke
 <tr>
 <td>commission</td>
 <td>JSON</td>
-<td>JSON who contain: <code>value</code>: Commission as number, <code>commission_regime</code> : The commission regime can be &quot;%&quot; (commission is a percent of the buying/selling price) or &quot;currency&quot; (commission is a fix value) and <code>commission_mode</code>: &quot;default&quot; or &quot;purchase&quot; default mode is base on the buying price, purchase mode based on the selling price</td>
+<td>JSON who contain: <code>value</code>: Commission as number, <code>commission_regime</code> : The commission regime can be &quot;percent&quot; (commission is a percent of the buying/selling price) or &quot;currency&quot; (commission is a fix value) and <code>commission_mode</code>: &quot;default&quot; or &quot;purchase&quot; default mode is base on the buying price, purchase mode based on the selling price</td>
 </tr>
 <tr>
 <td>langs</td>
