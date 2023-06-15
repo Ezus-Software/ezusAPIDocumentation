@@ -381,7 +381,7 @@
             <a href="#package" class="toc-h1 toc-link" data-title="Package">Package</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#post-package_upsert" class="toc-h2 toc-link" data-title="POST package_upsert">POST package_upsert</a>
+                    <a href="#post-packages_upsert" class="toc-h2 toc-link" data-title="POST packages_upsert">POST packages_upsert</a>
                   </li>
                   <li>
                     <a href="#get-package" class="toc-h2 toc-link" data-title="GET package">GET package</a>
@@ -1668,7 +1668,7 @@ Remember — You have to be authenticated to call this API with your bearer toke
 </aside>
 
 <p>|</p>
-<h1 id='package'>Package</h1><h2 id='post-package_upsert'>POST package_upsert</h2>
+<h1 id='package'>Package</h1><h2 id='post-packages_upsert'>POST packages_upsert</h2>
 <p>In Ezus, a package is a group of products and is intended to be added more easily to a project</p>
 <div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">axios</span><span class="dl">"</span><span class="p">);</span>
 <span class="kd">const</span> <span class="nx">baseUrl</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1</span><span class="dl">"</span><span class="p">;</span>
@@ -1684,7 +1684,7 @@ Remember — You have to be authenticated to call this API with your bearer toke
 <span class="p">};</span>
 <span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span> <span class="dl">"</span><span class="s2">X-API-KEY</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">ApiKey</span><span class="dl">"</span><span class="p">,</span> <span class="na">Authorization</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Bearer &lt;YOUR_TOKEN&gt;</span><span class="dl">"</span> <span class="p">};</span>
 
-<span class="nx">axios</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="nx">baseUrl</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">/package-upsert</span><span class="dl">"</span><span class="p">,</span> <span class="nx">body</span><span class="p">,</span> <span class="nx">headers</span><span class="p">);</span>
+<span class="nx">axios</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="nx">baseUrl</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">/packages-upsert</span><span class="dl">"</span><span class="p">,</span> <span class="nx">body</span><span class="p">,</span> <span class="nx">headers</span><span class="p">);</span>
 </code></pre></div>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
@@ -1700,7 +1700,7 @@ Remember — You have to be authenticated to call this API with your bearer toke
 </span></code></pre></div>
 <p>This endpoint upsert a package. The reference should be unique and allows to update an existing package or create a new package. If reference is not given, the package will be created. An Ezus reference will be returned you must have to save it for your next updates of this package. <code>this one will be updated with the new Params Given here.</code></p>
 <h3 id='http-request-11'>HTTP Request</h3>
-<p><code>POST https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/package-upsert</code></p>
+<p><code>POST https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/packages-upsert</code></p>
 <h3 id='body-parameters-json-7'>Body Parameters (JSON)</h3>
 <aside class="comment">
 If you do not add an Optionnal parameter, it will be empty for a creation or simply not updated for an update. If the parameter is empty (""), same behaviour
