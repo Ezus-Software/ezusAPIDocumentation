@@ -877,7 +877,7 @@ Remember — You have to be authenticated to call this API with your bearer toke
 
 # Package
 
-## POST package_upsert
+## POST packages_upsert
 
 In Ezus, a package is a group of products and is intended to be added more easily to a project
 
@@ -896,7 +896,7 @@ const body = {
 };
 const headers = { "X-API-KEY": "ApiKey", Authorization: "Bearer <YOUR_TOKEN>" };
 
-axios.post(baseUrl + "/package-upsert", body, headers);
+axios.post(baseUrl + "/packages-upsert", body, headers);
 ```
 
 > The above command returns JSON structured like this:
@@ -916,7 +916,7 @@ This endpoint upsert a package. The reference should be unique and allows to upd
 
 ### HTTP Request
 
-`POST https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/package-upsert`
+`POST https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/packages-upsert`
 
 ### Body Parameters (JSON)
 
