@@ -1153,18 +1153,18 @@ Warning: the custom_fields of the projects route must have their real name and n
   ],
 ```
 
-| Parameter             | Type   | Description                                                                                                                                                        |
-| --------------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| id                    | String | id of the rates                                                                                                                                                    |
-| reference             | String | reference refer to the rates reference                                                                                                                             |
-| type                  | String | `type` can be `custom`, `default` OR `season` If it's season, it means this rates is based on some seasons so on special dates custom is a child of a parents rate |
-| name                  | String | Name of the prestation                                                                                                                                             |
-| purchase_price_pretax | Number | Purchase price before taxes of the prestation                                                                                                                      |
-| margin_rate           | Number | The margin Rates is calculated depend to the sales price                                                                                                           |
-| sale_price_pretax     | Number | Sales price before taxes as a Number                                                                                                                               |
-| prestation_id         | String | id of the prestations who have this rates                                                                                                                          |
-| tariff_id             | String | If reference to a special tarif, reference to the parent tarif Id                                                                                                  |
-| child                 | Array  | Childs are tariffs contains in the rates tariff                                                                                                                    |
+| Parameter             | Type   | Description                                                                                                                                                                                                                      |
+| --------------------- | ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| id                    | String | id of the rates                                                                                                                                                                                                                  |
+| reference             | String | reference refer to the rates reference                                                                                                                                                                                           |
+| type                  | String | `type` can be `custom`, `default` OR `season` If it's season, it means this rates is based on some seasons so on special dates custom is a child of a parents rate. If it's not a special rates, the default tarif will be taken |
+| name                  | String | Name of the prestation                                                                                                                                                                                                           |
+| purchase_price_pretax | Number | Purchase price before taxes of the prestation                                                                                                                                                                                    |
+| margin_rate           | Number | The margin Rates is calculated depend to the sales price                                                                                                                                                                         |
+| sale_price_pretax     | Number | Sales price before taxes as a Number                                                                                                                                                                                             |
+| prestation_id         | String | id of the prestations who have this rates                                                                                                                                                                                        |
+| tariff_id             | String | If reference to a special tarif, reference to the parent tarif Id                                                                                                                                                                |
+| child                 | Array  | Childs are tariffs contains in the rates tariff                                                                                                                                                                                  |
 
 ### Langs
 
