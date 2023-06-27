@@ -21,27 +21,29 @@ meta:
 
 # Introduction
 
-Welcome to the EZUS API! You can use our API to access Ezus API endpoints, which can get information on various users data or clients in our database.
+Welcome to the Ezus API! The Ezus API is organized around <a href='https://en.wikipedia.org/wiki/Representational_state_transfer'>REST</a>. It supplies a collection of HTTP methods that underpin Ezus main functionalities : project, client, catalog (product/supplier/package) management.
 
-We have language bindings in JavaScript! You can view code examples in the dark area to the right.
+If you need an overview of some common use cases that you can setup with our API you can look at our help center section <a href='https://help.ezus.io/en/collections/3016686-integrations'>"Integrations"</a>
+
+If you want to dive into the list of available methods, you've come to the right place. This documentation provides a technical description (reference) for each method in the left-hand section, as well as code examples in the right-hand section.
 
 <aside class="success">
-You can find here a (<a href="https://drive.google.com/file/d/1LENvfWI4ZeiPD24mgG6aZb_iMfuVLC8c/view?usp=sharing" target="_blank"> Postman Collection</a>) with all the API routes with moke data to test it
+You can find here a <a href="https://drive.google.com/file/d/1LENvfWI4ZeiPD24mgG6aZb_iMfuVLC8c/view?usp=sharing" target="_blank"> Postman Collection</a> of our endpoints containing moke data to directly test it
 </aside>
 
 # Authentication
 
-> To authorize, use this code:
+> To authenticate, you will need first to call our /login endpoint:
 
 ```javascript
 const axios = require("axios");
 const baseUrl = "https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1";
 
 const body = {
-  email: "xxx",
-  password: "xx",
+  email: "<YOUR_EZUS_EMAIL>",
+  password: "<YOUR_EZUS_PASSWORD>",
 };
-const headers = { "X-API-KEY": "ApiKey" };
+const headers = { "X-API-KEY": "<YOUR_API_KEY>" };
 
 axios.post(baseUrl + "/login", body, headers);
 ```
@@ -58,18 +60,21 @@ axios.post(baseUrl + "/login", body, headers);
 ]
 ```
 
-> Make sure to replace `<YOUR_TOKEN>` in the Authorization Header to use our API in the next steps
+> In subsequent requests, make sure to replace `<YOUR_TOKEN>` in the Authorization Header with the token returned to you here.
 
-EZUS uses API keys to allow access to the API. If you don't have an Ezus account, you can ask for a demo on our [Website](https://ezus.io/).
+Ezus authentication scheme is based on <a href='https://swagger.io/docs/specification/authentication/api-keys/'>API Keys</a> and <a href='https://swagger.io/docs/specification/authentication/bearer-authentication/'>Bearer authentication</a>. So, you will need 2 things to be able to interact with our API :
 
-Ezus expects for the API key to be included in all API requests to the server in a header that looks like the following:
+- An Ezus API key
+- User credentials of an Ezus account
 
-`X-API-KEY: ApiKey`
+API key
+Ezus uses API keys to control access to its API. To get your API key, ask your account manager.
+The Ezus API expects for the API key to be included in the X-API-KEY header of all your requests:
+`X-API-KEY: <YOUR_API_KEY>`
 
-To get your API key, you have to ask to your account manager
-
-After calling the login route, a bearer token will be returned to you, it must be included in the header of all your calls to the Ezus APIBody Parameters (JSON)
-
+Bearer authentication
+After calling the /login endpoint with valid credentials, a bearer token will be returned to you : <YOUR_TOKEN>. This token is then valid for 12 hours.
+The Ezus API expects for the Bearer Token to be included in the Authorization header of all your subsequent requests.
 `Authorization: Bearer <YOUR_TOKEN>`
 
 ### HTTP Request
@@ -78,9 +83,9 @@ After calling the login route, a bearer token will be returned to you, it must b
 
 ### Headers
 
-| Parameter | Description                           |
-| --------- | ------------------------------------- |
-| X-API-KEY | API key given by your account manager |
+| Parameter | Description       |
+| --------- | ----------------- |
+| X-API-KEY | Your Ezus API key |
 
 ### Body Parameters (JSON)
 
@@ -90,7 +95,7 @@ After calling the login route, a bearer token will be returned to you, it must b
 | password  | Your account password |
 
 <aside class="notice">
-You must replace <code>ApiKey</code> with your personal API key.
+You must replace <code><YOUR_API_KEY></code> with your own Ezus API key.
 </aside>
 
 # Projects
@@ -101,7 +106,10 @@ You must replace <code>ApiKey</code> with your personal API key.
 const axios = require("axios");
 const baseUrl = "https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1";
 
-const headers = { "X-API-KEY": "ApiKey", Authorization: "Bearer <YOUR_TOKEN>" };
+const headers = {
+  "X-API-KEY": "<YOUR_API_KEY>",
+  Authorization: "Bearer <YOUR_TOKEN>",
+};
 
 axios.post(baseUrl + "/project?reference=reference", {}, headers);
 ```
@@ -234,7 +242,10 @@ const body = {
     { name: "Checkbox", value: "true" },
   ],
 };
-const headers = { "X-API-KEY": "ApiKey", Authorization: "Bearer <YOUR_TOKEN>" };
+const headers = {
+  "X-API-KEY": "<YOUR_API_KEY>",
+  Authorization: "Bearer <YOUR_TOKEN>",
+};
 
 axios.post(baseUrl + "/projects-upsert", body, headers);
 ```
@@ -292,7 +303,10 @@ const body = {
   title: "Document test",
   link: "https://www.linktothedocument.pdf",
 };
-const headers = { "X-API-KEY": "ApiKey", Authorization: "Bearer <YOUR_TOKEN>" };
+const headers = {
+  "X-API-KEY": "<YOUR_API_KEY>",
+  Authorization: "Bearer <YOUR_TOKEN>",
+};
 
 axios.post(baseUrl + "/projects-documents-create", body, headers);
 ```
@@ -335,7 +349,10 @@ Remember — You have to be authenticated to call this API with your bearer toke
 const axios = require("axios");
 const baseUrl = "https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1";
 
-const headers = { "X-API-KEY": "ApiKey", Authorization: "Bearer <YOUR_TOKEN>" };
+const headers = {
+  "X-API-KEY": "<YOUR_API_KEY>",
+  Authorization: "Bearer <YOUR_TOKEN>",
+};
 
 axios.post(baseUrl + "/client?reference=reference", {}, headers);
 ```
@@ -455,7 +472,10 @@ const body = {
     { name: "field2", value: "field2Value" },
   ],
 };
-const headers = { "X-API-KEY": "ApiKey", Authorization: "Bearer <YOUR_TOKEN>" };
+const headers = {
+  "X-API-KEY": "<YOUR_API_KEY>",
+  Authorization: "Bearer <YOUR_TOKEN>",
+};
 
 axios.post(baseUrl + "/clients-upsert", body, headers);
 ```
@@ -504,7 +524,10 @@ Remember — You have to be authenticated to call this API with your bearer toke
 const axios = require("axios");
 const baseUrl = "https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1";
 
-const headers = { "X-API-KEY": "ApiKey", Authorization: "Bearer <YOUR_TOKEN>" };
+const headers = {
+  "X-API-KEY": "<YOUR_API_KEY>",
+  Authorization: "Bearer <YOUR_TOKEN>",
+};
 
 axios.post(baseUrl + "/supplier?reference=reference", {}, headers);
 ```
@@ -633,7 +656,7 @@ const body = {
     { name: "field2", value: "field2Value" },
   ],
 };
-const headers = { "X-API-KEY": "ApiKey", Authorization: "Bearer <YOUR_TOKEN>" };
+const headers = { "X-API-KEY": "<YOUR_API_KEY>", Authorization: "Bearer <YOUR_TOKEN>" };
 
 axios.post(baseUrl + "/suppliers-upsert", body, headers);
 ```
@@ -684,7 +707,10 @@ Remember — You have to be authenticated to call this API with your bearer toke
 const axios = require("axios");
 const baseUrl = "https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1";
 
-const headers = { "X-API-KEY": "ApiKey", Authorization: "Bearer <YOUR_TOKEN>" };
+const headers = {
+  "X-API-KEY": "<YOUR_API_KEY>",
+  Authorization: "Bearer <YOUR_TOKEN>",
+};
 
 axios.post(baseUrl + "/product?reference=reference", {}, headers);
 ```
@@ -820,7 +846,7 @@ const body = {
   ],
 };
 const headers = {
-  "X-API-KEY": "ApiKey",
+  "X-API-KEY": "<YOUR_API_KEY>",
   Authorization: "Bearer <YOUR_TOKEN>",
 };
 
@@ -880,7 +906,10 @@ Remember — You have to be authenticated to call this API with your bearer toke
 const axios = require("axios");
 const baseUrl = "https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1";
 
-const headers = { "X-API-KEY": "ApiKey", Authorization: "Bearer <YOUR_TOKEN>" };
+const headers = {
+  "X-API-KEY": "<YOUR_API_KEY>",
+  Authorization: "Bearer <YOUR_TOKEN>",
+};
 
 axios.post(baseUrl + "/package?reference=reference", {}, headers);
 ```
@@ -985,7 +1014,10 @@ const body = {
     { name: "field2", value: "field2Value" },
   ],
 };
-const headers = { "X-API-KEY": "ApiKey", Authorization: "Bearer <YOUR_TOKEN>" };
+const headers = {
+  "X-API-KEY": "<YOUR_API_KEY>",
+  Authorization: "Bearer <YOUR_TOKEN>",
+};
 
 axios.post(baseUrl + "/packages-upsert", body, headers);
 ```
@@ -1076,7 +1108,7 @@ The custom_fields must be called with their technical_name which you can find in
 </aside>
 
 <aside class="warning">
-Warning: the custom_fields of the projects route must have their real name and not their technical_name in "name"
+Warning: the custom_fields of the projects endpoint must have their real name and not their technical_name in "name"
 </aside>
 
 | Options           | Type   | Value                                                                                                                                                                                          |
