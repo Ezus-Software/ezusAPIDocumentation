@@ -21,9 +21,9 @@ meta:
 
 # Introduction
 
-Welcome to the Ezus API! The Ezus API is organized around <a href='https://en.wikipedia.org/wiki/Representational_state_transfer'>REST</a>. It supplies a collection of HTTP methods that underpin Ezus main functionalities : project, client, catalog (product/supplier/package) management.
+Welcome to the Ezus API! The Ezus API is organized around <a href='https://en.wikipedia.org/wiki/Representational_state_transfer' target="_blank">REST</a>. It supplies a collection of HTTP methods that underpin Ezus main functionalities : project, client, catalog (product/supplier/package) management.
 
-If you need an overview of some common use cases that you can setup with our API you can look at our help center section <a href='https://help.ezus.io/en/collections/3016686-integrations'>"Integrations"</a>
+If you need an overview of some common use cases that you can setup with our API you can look at our help center section <a href='https://help.ezus.io/en/collections/3016686-integrations' target="_blank">"Integrations"</a>
 
 If you want to dive into the list of available methods, you've come to the right place. This documentation provides a technical description (reference) for each method in the left-hand section, as well as code examples in the right-hand section.
 
@@ -62,19 +62,21 @@ axios.post(baseUrl + "/login", body, headers);
 
 > In subsequent requests, make sure to replace `<YOUR_TOKEN>` in the Authorization Header with the token returned to you here.
 
-Ezus authentication scheme is based on <a href='https://swagger.io/docs/specification/authentication/api-keys/'>API Keys</a> and <a href='https://swagger.io/docs/specification/authentication/bearer-authentication/'>Bearer authentication</a>. So, you will need 2 things to be able to interact with our API :
+Ezus authentication scheme is based on <a href='https://swagger.io/docs/specification/authentication/api-keys/' target="_blank">API Keys</a> and <a href='https://swagger.io/docs/specification/authentication/bearer-authentication/' target="_blank">Bearer authentication</a>. So, you will need 2 things to be able to interact with our API :
 
 - An Ezus API key
 - User credentials of an Ezus account
 
 API key
-Ezus uses API keys to control access to its API. To get your API key, ask your account manager.
-The Ezus API expects for the API key to be included in the X-API-KEY header of all your requests:
+
+Ezus uses API keys to control access to its API. To get your API key, ask your account manager. The Ezus API expects for the API key to be included in the X-API-KEY header of all your requests.
+
 `X-API-KEY: <YOUR_API_KEY>`
 
 Bearer authentication
-After calling the /login endpoint with valid credentials, a bearer token will be returned to you : <YOUR_TOKEN>. This token is then valid for 12 hours.
-The Ezus API expects for the Bearer Token to be included in the Authorization header of all your subsequent requests.
+
+After calling the /login endpoint with valid credentials, a bearer token will be returned to you : <YOUR_TOKEN>. This token is then valid for 12 hours. The Ezus API expects for the bearer token to be included in the Authorization header of all your subsequent requests.
+
 `Authorization: Bearer <YOUR_TOKEN>`
 
 ### HTTP Request
