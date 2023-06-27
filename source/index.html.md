@@ -21,14 +21,14 @@ meta:
 
 # Introduction
 
-Welcome to the Ezus API. The Ezus API is organized around <a href='https://en.wikipedia.org/wiki/Representational_state_transfer' target="_blank">REST</a>. It supplies a collection of HTTP methods that underpin Ezus main functionalities : project, client, catalog (product/supplier/package) management.
+Welcome to the Ezus API. The Ezus API is organized around <a href='https://en.wikipedia.org/wiki/Representational_state_transfer' target="_blank">REST</a>. It supplies a collection of HTTP methods that underpin Ezus main functionalities: project, client, catalog (product/supplier/package) management.
 
 If you need an overview of some common use cases that you can setup with our API you can look at our help center section <a href='https://help.ezus.io/en/collections/3016686-integrations' target="_blank">Integrations</a>
 
 If you want to dive into the list of available methods, you've come to the right place. This documentation provides a technical description (reference) for each method in the left-hand section, as well as code examples in the right-hand section.
 
 <aside class="success">
-You can find here a <a href="https://drive.google.com/file/d/1LENvfWI4ZeiPD24mgG6aZb_iMfuVLC8c/view?usp=sharing" target="_blank"> Postman Collection</a> of our endpoints containing moke data to directly test it
+You can find here a <a href="#" target="_blank"> Postman Collection</a> of our endpoints containing moke data to directly test it
 </aside>
 
 # Authentication
@@ -51,13 +51,11 @@ axios.post(baseUrl + "/login", body, headers);
 > This method returns JSON structured like this:
 
 ```json
-[
-  {
-    "message": "ok",
-    "erreur": "false",
-    "token": "<YOUR_TOKEN>"
-  }
-]
+{
+  "message": "ok",
+  "erreur": "false",
+  "token": "<YOUR_TOKEN>"
+}
 ```
 
 > In subsequent requests, make sure to replace `<YOUR_TOKEN>` in the Authorization Header with the token that is returned to you here.
@@ -75,7 +73,7 @@ Ezus uses API keys to control access to its API. To get your API key, ask your a
 
 Bearer authentication
 
-After calling the /login endpoint with valid credentials, a bearer token will be returned to you : `<YOUR_TOKEN>`. This token is then valid for 12 hours. The Ezus API needs the bearer token to be included in the Authorization header of all your subsequent requests.
+After calling the /login endpoint with valid credentials, a bearer token will be returned to you: `<YOUR_TOKEN>`. This token is then valid for 12 hours. The Ezus API needs the bearer token to be included in the Authorization header of all your subsequent requests.
 
 `Authorization: Bearer <YOUR_TOKEN>`
 
@@ -96,6 +94,10 @@ After calling the /login endpoint with valid credentials, a bearer token will be
 | email     | Your account email    |
 | password  | Your account password |
 
+### Response
+
+JSON object indicating whether an error has occured during the process and its associated message. If no error, it also returns `<YOUR_TOKEN>`: you will need to store this token for your next API requests.
+
 # Projects
 
 ## GET project
@@ -109,7 +111,7 @@ const headers = {
   Authorization: "Bearer <YOUR_TOKEN>",
 };
 
-axios.post(baseUrl + "/project?reference=reference", {}, headers);
+axios.post(baseUrl + "/project?reference=project_reference_1234", {}, headers);
 ```
 
 > This method returns JSON structured like this:
@@ -163,13 +165,13 @@ axios.post(baseUrl + "/project?reference=reference", {}, headers);
 
 ### HTTP Request
 
-`GET https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/project?reference=reference`
+`GET https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/project`
 
-### Request Parameters
+### Query Parameters
 
-| Parameter | Type   | Description                                       |
-| --------- | ------ | ------------------------------------------------- |
-| reference | String | The reference of the project you want to retrieve |
+| Parameter | Type   | Description                                                                                 |
+| --------- | ------ | ------------------------------------------------------------------------------------------- |
+| reference | String | <span style="color:red">(Required)</span> The reference of the project you want to retrieve |
 
 ### Response
 
@@ -242,15 +244,19 @@ axios.post(baseUrl + "/projects-upsert", body, headers);
 
 | Parameter           | Type   | Description                                                                                                                                                                                                                                              |
 | ------------------- | ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| reference           | String | <span style="color:red">(Required)</span> The project Reference used as a primary key to check if the project already exist and UPDATE it or to create a new Project so be sure to use a unique Ezus Reference for each of your project                  |
+| reference           | String | If provided, the unique Ezus reference associated to the project you want to update or insert (in case the one you provided has never been used). If not provided, a project will be inserted with a random one.                                         |
 | info_title          | String | Title of your project, mandatory if you create a New Project                                                                                                                                                                                             |
 | trip_people         | Number | Number of people in your project                                                                                                                                                                                                                         |
 | trip_budget         | Number | Budget of your project                                                                                                                                                                                                                                   |
 | trip_date_in        | Date   | Date of the beginning of your project formated like YYYY-MM-DD if not formatted correctly, or if duration > 40 days or if trip_date_in > trip_date_out, project will be set as 1day and date = today. If project is without Date, no date will be setted |
 | trip_date_out       | Date   | Date of the end of your project formated like YYYY-MM-DD if not formatted correctly, or if duration > 40 days or if trip_date_in > trip_date_out, project will be set as 1day and date = today. If project is without Date, no date will be setted       |
 | sales_manager_email | Email  | Email of the Sales Manager, by default if no sales_manager or not found will be assignated to nobody                                                                                                                                                     |
-| client_reference    | String | Ezus Reference or Email of the Client, if the reference don't match with a client, API will try with client_email if setted else, No clients will be assigned                                                                                            |
+| client_reference    | String | Ezus reference or Email of the Client, if the reference don't match with a client, API will try with client_email if setted else, No clients will be assigned                                                                                            |
 | custom_fields       | JSON   | You can add Custom Fields for your project, this custom fields should be in your Ezus params and Write Exactly as they are written in your params technical name ([Custom fields](#custom-fields))                                                       |
+
+### Response
+
+JSON object indicating whether an error has occured during the process and its associated message. If no error, it also returns a `reference`: you will need to store this Ezus reference if you need to update or retrieve the project later on.
 
 ## POST projects-documents-create
 
@@ -291,11 +297,15 @@ axios.post(baseUrl + "/projects-documents-create", body, headers);
 
 ### Request Parameters
 
-| Parameter | Type   | Description                                                                       |
-| --------- | ------ | --------------------------------------------------------------------------------- |
-| reference | String | <span style="color:red">(Required)</span> The project reference                   |
-| title     | String | <span style="color:red">(Required)</span> Title of your document                  |
-| link      | Link   | <span style="color:red">(Required)</span> Link to the desired document (ONLY PDF) |
+| Parameter | Type   | Description                                                                                            |
+| --------- | ------ | ------------------------------------------------------------------------------------------------------ |
+| reference | String | <span style="color:red">(Required)</span> The project reference in which you want to insert a document |
+| title     | String | <span style="color:red">(Required)</span> Title of your document                                       |
+| link      | Link   | <span style="color:red">(Required)</span> HTTP link of your document (only PDF)                        |
+
+### Response
+
+JSON object indicating whether an error has occured during the process and its associated message.
 
 # Clients
 
@@ -312,7 +322,7 @@ const headers = {
   Authorization: "Bearer <YOUR_TOKEN>",
 };
 
-axios.post(baseUrl + "/client?reference=reference", {}, headers);
+axios.post(baseUrl + "/client?reference=client_reference_1234", {}, headers);
 ```
 
 > This method returns JSON structured like this:
@@ -371,13 +381,13 @@ axios.post(baseUrl + "/client?reference=reference", {}, headers);
 
 ### HTTP Request
 
-`GET https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/client?reference=reference`
+`GET https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/client`
 
-### Request Parameters
+### Query Parameters
 
-| Parameter | Type   | Description                                      |
-| --------- | ------ | ------------------------------------------------ |
-| reference | String | The reference of the client you want to retrieve |
+| Parameter | Type   | Description                                                                                |
+| --------- | ------ | ------------------------------------------------------------------------------------------ |
+| reference | String | <span style="color:red">(Required)</span> The reference of the client you want to retrieve |
 
 ### Response
 
@@ -463,11 +473,15 @@ axios.post(baseUrl + "/clients-upsert", body, headers);
 
 | Parameter     | Type   | Description                                                                                                                                                                                                                                                             |
 | ------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --- |
-| reference     | String | <span style="color:red">(Required)</span> Used as a primary key in the database, if no reference, the reference will be generated automatically and returned                                                                                                            |
+| reference     | String | If provided, the unique Ezus reference associated to the client you want to update or insert (in case the one you provided has never been used). If not provided, a client will be inserted with a random one.                                                          |
 | company_name  | String | <span style="color:red">(Required)</span> Set a company name - If company name is empty, the client will be set as an individual and the name of the client = name of the contact and if the company name is not empty, the name of the client will be the company name |     |
 | contact       | JSON   | Contact is a JSON and email is needed ([Contact](#contact))                                                                                                                                                                                                             |
 | address       | JSON   | Address is a JSON and label is needed if you want to add or update the adresse of your client but not mandatory ([Address](#address))                                                                                                                                   |
 | custom_fields | JSON   | You can add custom fields for your client, this custom fields should be in your Ezus params and Write exactly as they are written in your params technical name ([Custom fields](#custom-fields))                                                                       |
+
+### Response
+
+JSON object indicating whether an error has occured during the process and its associated message. If no error, it also returns a `reference`: you will need to store this Ezus reference if you need to update or retrieve the client later on.
 
 # Suppliers
 
@@ -484,7 +498,11 @@ const headers = {
   Authorization: "Bearer <YOUR_TOKEN>",
 };
 
-axios.post(baseUrl + "/supplier?reference=reference", {}, headers);
+axios.post(
+  baseUrl + "/supplier?reference=supplier_reference_1234",
+  {},
+  headers
+);
 ```
 
 > This method returns JSON structured like this:
@@ -554,36 +572,36 @@ axios.post(baseUrl + "/supplier?reference=reference", {}, headers);
 
 ### HTTP Request
 
-`GET https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/supplier?reference=reference`
+`GET https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/supplier`
 
-### Request Parameters
+### Query Parameters
 
-| Parameter | Type   | Description                                        |
-| --------- | ------ | -------------------------------------------------- |
-| reference | String | The reference of the supplier you want to retrieve |
+| Parameter | Type   | Description                                                                                  |
+| --------- | ------ | -------------------------------------------------------------------------------------------- |
+| reference | String | <span style="color:red">(Required)</span> The reference of the supplier you want to retrieve |
 
 ### Response
 
 JSON object containing the supplier information.
 
-| Name           | Type   | Description                                                                                                                                            |
-| -------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| reference      | String | The reference of the supplier you want to retrieve                                                                                                     |
-| company_name   | String | Name of the company of your supplier                                                                                                                   |
-| capacity       | String | Capacity of the supplier                                                                                                                               |
-| type           | String | Type of the supplier, the different types are separated by commas                                                                                      |
-| info_notes     | String | Notes on the supplier                                                                                                                                  |
-| info_reference | String | Reference of the supplier (It is a supplier number that appears at the bottom of the supplier record. Not to be confused with reference)               |
-| visual_url     | String | Link to the google Slides linked to the supplier in Ezus                                                                                               |
-| user           | JSON   | One of the following option : `Everyone`, `User Group`, the User assigned to this supplier (JSON object containing `email`, `first_name`, `last_name`) |
-| medias         | JSON   | JSON object medias ([Medias](#medias))                                                                                                                 |
-| address        | JSON   | JSON object address ([Address](#address))                                                                                                              |
-| products       | JSON   | JSON object products ([Products](#products))                                                                                                           |
-| contacts       | Array  | Array of JSON contacts ([Contacts](#contacts))                                                                                                         |
-| langs          | Array  | Array of JSON langs ([Langs](#langs))                                                                                                                  |
-| custom_fields  | Array  | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                          |
+| Name           | Type   | Description                                                                                                                                           |
+| -------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| reference      | String | The reference of the supplier you want to retrieve                                                                                                    |
+| company_name   | String | Name of the company of your supplier                                                                                                                  |
+| capacity       | String | Capacity of the supplier                                                                                                                              |
+| type           | String | Type of the supplier, the different types are separated by commas                                                                                     |
+| info_notes     | String | Notes on the supplier                                                                                                                                 |
+| info_reference | String | Reference of the supplier (It is a supplier number that appears at the bottom of the supplier record. Not to be confused with reference)              |
+| visual_url     | String | Link to the google Slides linked to the supplier in Ezus                                                                                              |
+| user           | JSON   | One of the following option: `Everyone`, `User Group`, the User assigned to this supplier (JSON object containing `email`, `first_name`, `last_name`) |
+| medias         | JSON   | JSON object medias ([Medias](#medias))                                                                                                                |
+| address        | JSON   | JSON object address ([Address](#address))                                                                                                             |
+| products       | JSON   | JSON object products ([Products](#products))                                                                                                          |
+| contacts       | Array  | Array of JSON contacts ([Contacts](#contacts))                                                                                                        |
+| langs          | Array  | Array of JSON langs ([Langs](#langs))                                                                                                                 |
+| custom_fields  | Array  | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                         |
 
-## POST suppliers-upserts
+## POST suppliers-upsert
 
 Update a supplier record if the provided Ezus reference do matches one of the supplier references in your account, otherwise create a new supplier record with the provided Ezus reference (or with a random one if no reference is provided).
 
@@ -639,15 +657,19 @@ axios.post(baseUrl + "/suppliers-upsert", body, headers);
 
 ### Request Parameters
 
-| Parameter     | Type   | Description                                                                                                                                                                                                       |
-| ------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --- |
-| reference     | String | <span style="color:red">(Required)</span> Used as a primary key in the database, if no reference, the reference will be generated automatically                                                                   |
-| company_name  | String | Set a company name - If company name is empty, the supplier will be set as an individual and the name of the supplier will be the name of the contact                                                             |     |
-| capacity      | Number | Capacity of the Supplier                                                                                                                                                                                          |
-| type          | String | 3 Option : `accom`, `activity`, `transport`. You can select multiple options by typing "accom, activity" for exemple, the new data will erase old data. To add multiple options they must be separated by a comma |
-| contact       | JSON   | Contact is a JSON and email is needed ([Contact](#contact))                                                                                                                                                       |
-| address       | JSON   | Address is a JSON and label is needed if you want to add or update the adresse of your supplier but not mandatory ([Address](#address))                                                                           |
-| custom_fields | JSON   | You can add custom fields for your supplier, this custom fields should be in your Ezus params and Write Exactly as they are written in your params technical name ([Custom fields](#custom-fields))               |
+| Parameter     | Type   | Description                                                                                                                                                                                                        |
+| ------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --- |
+| reference     | String | If provided, the unique Ezus reference associated to the supplier you want to update or insert (in case the one you provided has never been used). If not provided, a supplier will be inserted with a random one. |
+| company_name  | String | Set a company name - If company name is empty, the supplier will be set as an individual and the name of the supplier will be the name of the contact                                                              |     |
+| capacity      | Number | Capacity of the Supplier                                                                                                                                                                                           |
+| type          | String | 3 Options: `accom`, `activity`, `transport`. You can select multiple options by typing "accom, activity" for exemple, the new data will erase old data. To add multiple options they must be separated by a comma  |
+| contact       | JSON   | Contact is a JSON and email is needed ([Contact](#contact))                                                                                                                                                        |
+| address       | JSON   | Address is a JSON and label is needed if you want to add or update the adresse of your supplier but not mandatory ([Address](#address))                                                                            |
+| custom_fields | JSON   | You can add custom fields for your supplier, this custom fields should be in your Ezus params and Write Exactly as they are written in your params technical name ([Custom fields](#custom-fields))                |
+
+### Response
+
+JSON object indicating whether an error has occured during the process and its associated message. If no error, it also returns a `reference`: you will need to store this Ezus reference if you need to update or retrieve the supplier later on.
 
 # Products
 
@@ -664,7 +686,7 @@ const headers = {
   Authorization: "Bearer <YOUR_TOKEN>",
 };
 
-axios.post(baseUrl + "/product?reference=reference", {}, headers);
+axios.post(baseUrl + "/product?reference=product_reference_1234", {}, headers);
 ```
 
 > This method returns JSON structured like this:
@@ -713,18 +735,15 @@ axios.post(baseUrl + "/product?reference=reference", {}, headers);
       "long_description": ""
     }
   ],
-  "rates": [
+  "tariffs": [
     {
-      "id": "fbb69d5a-bebb-45bd-a8ad-d6a18ac36109",
       "reference": null,
       "type": "default",
       "name": "",
-      "purchase_price_pretax": 100.0,
+      "purchase_price": 100.0,
       "margin_rate": 50.0,
-      "sale_price_pretax": 200.0,
-      "prestation_id": "48b25fd1-bb7b-4c49-a774-214ffa22fbb6",
-      "tariff_id": null,
-      "child": []
+      "sales_price": 200.0,
+      "childs": []
     }
   ],
   "custom_fields": [
@@ -738,13 +757,13 @@ axios.post(baseUrl + "/product?reference=reference", {}, headers);
 
 ### HTTP Request
 
-`GET https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/product?reference=reference`
+`GET https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/product`
 
-### Request Parameters
+### Query Parameters
 
-| Parameter | Type   | Description                                       |
-| --------- | ------ | ------------------------------------------------- |
-| reference | String | The reference of the product you want to retrieve |
+| Parameter | Type   | Description                                                                                 |
+| --------- | ------ | ------------------------------------------------------------------------------------------- |
+| reference | String | <span style="color:red">(Required)</span> The reference of the product you want to retrieve |
 
 ### Response
 
@@ -768,7 +787,7 @@ JSON object containing the product information.
 | package         | JSON   | JSON object containing `reference`, `title`                                                                                                                                                                      |
 | commission      | JSON   | JSON object containing `value`, `commission_regime`, `commission_mode`                                                                                                                                           |
 | langs           | Array  | Array of JSON langs ([Langs](#langs))                                                                                                                                                                            |
-| rates           | Array  | Array of JSON rates ([Rates](#rates))                                                                                                                                                                            |
+| tariffs         | Array  | Array of JSON tariffs ([Tariffs](#tariffs))                                                                                                                                                                      |
 | custom_fields   | Array  | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                                                                    |
 
 ## POST products-upsert
@@ -828,21 +847,25 @@ axios.post(baseUrl + "/products-upsert", body, headers);
 
 ### Request Parameters
 
-| Parameter          | Type    | Description                                                                                                                                                                                                                                                                                                                                          |
-| ------------------ | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| reference          | String  | <span style="color:red">(Required)</span> To update a product, reference is mandatory, the reference will be used as a Primary Key, in case of creation, a unique reference will be returned if you create a new product you can give a unique reference this one will be used as Ezus reference                                                     |
-| title              | String  | If no reference or reference not found, the title is mandatory                                                                                                                                                                                                                                                                                       |
-| quantity           | String  | Quantity is the default number of this product at his creation (P = Number of people in the project, D = Number of days in the project, N = Number of nights in the project)                                                                                                                                                                         |
-| capacity           | Int     | Capacity is the default capacity of the product                                                                                                                                                                                                                                                                                                      |
-| supplier_reference | String  | The reference to the supplier, if you give a reference, the product will be added in the supplier                                                                                                                                                                                                                                                    |
-| package_reference  | String  | The reference to the package, if you give a reference, the product will be added in the package                                                                                                                                                                                                                                                      |
-| purchase_price     | float   | Purchase price as number                                                                                                                                                                                                                                                                                                                             |
-| sales_price        | float   | Sales price, the margin rate will be calculated in function of this price.                                                                                                                                                                                                                                                                           |
-| vat_regime         | Options | 'classic', 'margin', 'none', Thoses options allows to choose your VAT Regime, in margin mode, VAT will be calculated on your margin. Classic mode, VAT will be calculated on your selling price. In none mode, no VAT will be applied. If empty will be set at your default account values                                                           |
-| vat_rate           | float   | Default VAT rate, if empty will be set at your default account VAT rate                                                                                                                                                                                                                                                                              |
-| currency           | String  | The ISO 4217 code who represent the currency you use (<a href="https://docs.google.com/spreadsheets/d/1b7BNOwKyN1hMOouve6xhFZ2R2zrH4Sj1L-646j755fU/edit?usp=sharing" target="_blank">Link to Doc</a>) If the currency is not set in your account, your default currency will be set                                                                  |
-| commission         | JSON    | JSON object containing `value`: Commission as number, `commission_regime` : The commission regime can be "percent" (commission is a percent of the buying/selling price) or "currency" (commission is a fix value) and `commission_mode`: "default" or "purchase" default mode is base on the buying price, purchase mode based on the selling price |
-| custom_fields      | JSON    | You can add Custom Fields for your product, this custom fields should be in your Ezus params and Write Exactly as they are written in your params technical name ([Custom fields](#custom-fields))                                                                                                                                                   |
+| Parameter          | Type    | Description                                                                                                                                                                                                                                                                                                                                         |
+| ------------------ | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| reference          | String  | If provided, the unique Ezus reference associated to the product you want to update or insert (in case the one you provided has never been used). If not provided, a product will be inserted with a random one.                                                                                                                                    |
+| title              | String  | If no reference or reference not found, the title is mandatory                                                                                                                                                                                                                                                                                      |
+| quantity           | String  | Quantity is the default number of this product at his creation (P = Number of people in the project, D = Number of days in the project, N = Number of nights in the project)                                                                                                                                                                        |
+| capacity           | Int     | Capacity is the default capacity of the product                                                                                                                                                                                                                                                                                                     |
+| supplier_reference | String  | The reference to the supplier, if you give a reference, the product will be added in the supplier                                                                                                                                                                                                                                                   |
+| package_reference  | String  | The reference to the package, if you give a reference, the product will be added in the package                                                                                                                                                                                                                                                     |
+| purchase_price     | float   | Purchase price as number                                                                                                                                                                                                                                                                                                                            |
+| sales_price        | float   | Sales price as number                                                                                                                                                                                                                                                                                                                               |
+| vat_regime         | Options | 'classic', 'margin', 'none', Thoses options allows to choose your VAT Regime, in margin mode, VAT will be calculated on your margin. Classic mode, VAT will be calculated on your selling price. In none mode, no VAT will be applied. If empty will be set at your default account values                                                          |
+| vat_rate           | float   | Default VAT rate, if empty will be set at your default account VAT rate                                                                                                                                                                                                                                                                             |
+| currency           | String  | The ISO 4217 code who represent the currency you use (<a href="https://docs.google.com/spreadsheets/d/1b7BNOwKyN1hMOouve6xhFZ2R2zrH4Sj1L-646j755fU/edit?usp=sharing" target="_blank">Link to Doc</a>) If the currency is not set in your account, your default currency will be set                                                                 |
+| commission         | JSON    | JSON object containing `value`: Commission as number, `commission_regime`: The commission regime can be "percent" (commission is a percent of the buying/selling price) or "currency" (commission is a fix value) and `commission_mode`: "default" or "purchase" default mode is base on the buying price, purchase mode based on the selling price |
+| custom_fields      | JSON    | You can add Custom Fields for your product, this custom fields should be in your Ezus params and Write Exactly as they are written in your params technical name ([Custom fields](#custom-fields))                                                                                                                                                  |
+
+### Response
+
+JSON object indicating whether an error has occured during the process and its associated message. If no error, it also returns a `reference`: you will need to store this Ezus reference if you need to update or retrieve the product later on.
 
 # Package
 
@@ -859,7 +882,7 @@ const headers = {
   Authorization: "Bearer <YOUR_TOKEN>",
 };
 
-axios.post(baseUrl + "/package?reference=reference", {}, headers);
+axios.post(baseUrl + "/package?reference=package_reference_1234", {}, headers);
 ```
 
 > This method returns JSON structured like this:
@@ -924,13 +947,13 @@ axios.post(baseUrl + "/package?reference=reference", {}, headers);
 
 ### HTTP Request
 
-`GET https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/package?reference=reference`
+`GET https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/package`
 
-### Request Parameters
+### Query Parameters
 
-| Parameter | Type   | Description                                       |
-| --------- | ------ | ------------------------------------------------- |
-| reference | String | The reference of the package you want to retrieve |
+| Parameter | Type   | Description                                                                                 |
+| --------- | ------ | ------------------------------------------------------------------------------------------- |
+| reference | String | <span style="color:red">(Required)</span> The reference of the package you want to retrieve |
 
 ### Response
 
@@ -993,12 +1016,16 @@ axios.post(baseUrl + "/packages-upsert", body, headers);
 
 ### Request Parameters
 
-| Parameter     | Type   | Description                                                                                                                                                                                       |
-| ------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --- |
-| reference     | String | <span style="color:red">(Required)</span> To update a package, Reference is mandatory, the reference will be used as a primary key, in case of creation, a unique reference will be returned      |
-| title         | String | If no reference or reference not found, the title is mandatory                                                                                                                                    |
-| capacity      | Number | capacity is the default number of this package at his creation                                                                                                                                    |     |
-| custom_fields | JSON   | You can add custom fields for your client, this custom fields should be in your Ezus params and Write exactly as they are written in your params technical name ([Custom fields](#custom-fields)) |
+| Parameter     | Type   | Description                                                                                                                                                                                                      |
+| ------------- | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --- |
+| reference     | String | If provided, the unique Ezus Reference associated to the package you want to update or insert (in case the one you provided has never been used). If not provided, a package will be inserted with a random one. |
+| title         | String | If no reference or reference not found, the title is mandatory                                                                                                                                                   |
+| capacity      | Number | capacity is the default number of this package at his creation                                                                                                                                                   |     |
+| custom_fields | JSON   | You can add custom fields for your client, this custom fields should be in your Ezus params and Write exactly as they are written in your params technical name ([Custom fields](#custom-fields))                |
+
+### Response
+
+JSON object indicating whether an error has occured during the process and its associated message. If no error, it also returns a `reference`: you will need to store this Ezus reference if you need to update or retrieve the package later on.
 
 # Nested Resource
 
@@ -1046,11 +1073,7 @@ axios.post(baseUrl + "/packages-upsert", body, headers);
 ### Custom Fields
 
 <aside class="success">
-The custom_fields must be called with their technical_name which you can find in your custom field settings, and should respect the given formatting, if they do not respect this formatting, they will be updated with their default values.
-</aside>
-
-<aside class="warning">
-Warning: the custom_fields of the projects endpoint must have their real name and not their technical_name in "name"
+In an upsert, the custom_fields must be called with their technical_name which you can find in your custom field settings
 </aside>
 
 | Options           | Type   | Description                                                                                                                                                                                    |
@@ -1089,17 +1112,17 @@ Warning: the custom_fields of the projects endpoint must have their real name an
   ]
 ```
 
-| Name              | Type   | Description                                                                                                               |
-| ----------------- | ------ | ------------------------------------------------------------------------------------------------------------------------- |
-| alternative_title | String | Title of the alternative                                                                                                  |
-| trip_people       | String | Number of people                                                                                                          |
-| trip_budget       | Number | Budget of the alternative                                                                                                 |
-| trip_date_in      | String | Date of the begining of this alternative, formated like : YYYY-MM-DD if it's empty, the project have no dates             |
-| trip_date_out     | String | Date of the end of this alternative, formated like : YYYY-MM-DD if it's empty, the project have no dates                  |
-| destination       | String | Destination of the alternative                                                                                            |
-| subdestination    | String | Subdestination of the alternative                                                                                         |
-| trip_duration     | String | Number of days                                                                                                            |
-| client            | JSON   | JSON that contain : `reference`, `type` (entreprise or individual), `company_name`, `first_name`, `last_name` and `email` |
+| Name              | Type   | Description                                                                                                              |
+| ----------------- | ------ | ------------------------------------------------------------------------------------------------------------------------ |
+| alternative_title | String | Title of the alternative                                                                                                 |
+| trip_people       | String | Number of people                                                                                                         |
+| trip_budget       | Number | Budget of the alternative                                                                                                |
+| trip_date_in      | String | Date of the begining of this alternative, formated like: YYYY-MM-DD if it's empty, the project have no dates             |
+| trip_date_out     | String | Date of the end of this alternative, formated like: YYYY-MM-DD if it's empty, the project have no dates                  |
+| destination       | String | Destination of the alternative                                                                                           |
+| subdestination    | String | Subdestination of the alternative                                                                                        |
+| trip_duration     | String | Number of days                                                                                                           |
+| client            | JSON   | JSON that contain: `reference`, `type` (entreprise or individual), `company_name`, `first_name`, `last_name` and `email` |
 
 ### Address
 
@@ -1137,42 +1160,36 @@ Warning: the custom_fields of the projects endpoint must have their real name an
 | ---------- | ------ | ------------------------------------------------------------------------------------ |
 | email      | String | Email of the contact                                                                 |
 | first_name | String | First name of the contact as a string                                                |
-| last_name  | String | Lastn ame of the contact as a string                                                 |
+| last_name  | String | Last name of the contact as a string                                                 |
 | gender     | String | `Mr`, `Ms` or `Undefined`                                                            |
 | phone      | String | Phone of the contact as a string                                                     |
 | birth_date | String | Birth date of the contact formated like: YYYY-MM-DD if not formated correctly = NULL |
 
-### Rates
+### Tariffs
 
 ```json
-  "rates": [
+  "tariffs": [
     {
-      "id": "fbb69d5a-bebb-45bd-a8ad-d6a18ac36109",
-      "reference": null,
+      "reference": "tariff_1234",
       "type": "default",
       "name": "",
-      "purchase_price_pretax": 100.0,
+      "purchase_price": 100.0,
       "margin_rate": 50.0,
-      "sale_price_pretax": 200.0,
-      "prestation_id": "48b25fd1-bb7b-4c49-a774-214ffa22fbb6",
-      "tariff_id": null,
-      "child": []
+      "sales_price": 200.0,
+      "childs": []
     }
   ],
 ```
 
-| Parameter             | Type   | Description                                                                                                                                                                                                                      |
-| --------------------- | ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| id                    | String | id of the rates                                                                                                                                                                                                                  |
-| reference             | String | reference refer to the rates reference                                                                                                                                                                                           |
-| type                  | String | `type` can be `custom`, `default` OR `season` If it's season, it means this rates is based on some seasons so on special dates custom is a child of a parents rate. If it's not a special rates, the default tarif will be taken |
-| name                  | String | Name of the prestation                                                                                                                                                                                                           |
-| purchase_price_pretax | Number | Purchase price before taxes of the prestation                                                                                                                                                                                    |
-| margin_rate           | Number | The margin Rates is calculated depend to the sales price                                                                                                                                                                         |
-| sale_price_pretax     | Number | Sales price before taxes as a Number                                                                                                                                                                                             |
-| prestation_id         | String | id of the prestations who have this rates                                                                                                                                                                                        |
-| tariff_id             | String | If reference to a special tarif, reference to the parent tarif Id                                                                                                                                                                |
-| child                 | Array  | Childs are tariffs contains in the rates tariff                                                                                                                                                                                  |
+| Parameter      | Type   | Description                                                                           |
+| -------------- | ------ | ------------------------------------------------------------------------------------- |
+| reference      | String | An unique Ezus reference of this tariff                                               |
+| type           | String | A tariff can be `default`, `custom` OR `season`.                                      |
+| name           | String | Name of the tariff (only season tariffs can have a name)                              |
+| purchase_price | Number | Purchase price incl taxes                                                             |
+| margin_rate    | Number | The margin rate is based on the sales price                                           |
+| sales_price    | Number | Sales price incl taxes                                                                |
+| childs         | Array  | Childs are sub-tariffs contained by this tariff (only season tariffs can have childs) |
 
 ### Langs
 
@@ -1180,9 +1197,9 @@ Warning: the custom_fields of the projects endpoint must have their real name an
 "langs": [
   {
     "lang": "american",
-    "name": "American Name",
+    "name": "My American product version",
     "short_description": "Short American Description",
-    "long_description": "Short American Description"
+    "long_description": "Long American Description"
   }
 ],
 ```
@@ -1190,6 +1207,6 @@ Warning: the custom_fields of the projects endpoint must have their real name an
 | Parameter         | Type   | Description                                      |
 | ----------------- | ------ | ------------------------------------------------ |
 | lang              | String | Language name in lower case                      |
-| name              | String | language name                                    |
+| name              | String | Title of the object in this language             |
 | short_description | String | Short description of the object in this language |
-| long_description  | String | Long description of the object in ths language   |
+| long_description  | String | Long description of the object in this language  |
