@@ -19,33 +19,31 @@ meta:
     content: Documentation for the Ezus API
 ---
 
-<aside class="success">
-The api is not yet online, it will be released in the coming weeks
-</aside>
-
 # Introduction
 
-Welcome to the EZUS API! You can use our API to access Ezus API endpoints, which can get information on various users data or clients in our database.
+Welcome to the Ezus API! The Ezus API is organized around <a href='https://en.wikipedia.org/wiki/Representational_state_transfer'>REST</a>. It supplies a collection of HTTP methods that underpin Ezus main functionalities : project, client, catalog (product/supplier/package) management.
 
-We have language bindings in JavaScript! You can view code examples in the dark area to the right.
+If you need an overview of some common use cases that you can setup with our API you can look at our help center section <a href='https://help.ezus.io/en/collections/3016686-integrations'>"Integrations"</a>
+
+If you want to dive into the list of available methods, you've come to the right place. This documentation provides a technical description (reference) for each method in the left-hand section, as well as code examples in the right-hand section.
 
 <aside class="success">
-You can find here a (<a href="https://ezus-team.postman.co/workspace/Ezus-APIs~523409cf-e5b3-429b-8b49-0eb1e1273aa6/collection/24284707-8922dc39-5057-49b9-b6e8-bdfc13dec333?action=share&creator=24284707" target="_blank"> Postman Collection</a>) with all the API routes with test data
+You can find here a <a href="https://drive.google.com/file/d/1LENvfWI4ZeiPD24mgG6aZb_iMfuVLC8c/view?usp=sharing" target="_blank"> Postman Collection</a> of our endpoints containing moke data to directly test it
 </aside>
 
 # Authentication
 
-> To authorize, use this code:
+> To authenticate, you will need first to call our /login endpoint:
 
 ```javascript
 const axios = require("axios");
 const baseUrl = "https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1";
 
 const body = {
-  email: "xxx",
-  password: "xx",
+  email: "<YOUR_EZUS_EMAIL>",
+  password: "<YOUR_EZUS_PASSWORD>",
 };
-const headers = { "X-API-KEY": "ApiKey" };
+const headers = { "X-API-KEY": "<YOUR_API_KEY>" };
 
 axios.post(baseUrl + "/login", body, headers);
 ```
@@ -62,18 +60,21 @@ axios.post(baseUrl + "/login", body, headers);
 ]
 ```
 
-> Make sure to replace `<YOUR_TOKEN>` in the Authorization Header to use our API in the next steps
+> In subsequent requests, make sure to replace `<YOUR_TOKEN>` in the Authorization Header with the token returned to you here.
 
-EZUS uses API keys to allow access to the API. If you don't have an Ezus account, you can ask for a demo on our [Website](https://ezus.io/).
+Ezus authentication scheme is based on <a href='https://swagger.io/docs/specification/authentication/api-keys/'>API Keys</a> and <a href='https://swagger.io/docs/specification/authentication/bearer-authentication/'>Bearer authentication</a>. So, you will need 2 things to be able to interact with our API :
 
-Ezus expects for the API key to be included in all API requests to the server in a header that looks like the following:
+- An Ezus API key
+- User credentials of an Ezus account
 
-`X-API-KEY: ApiKey`
+API key
+Ezus uses API keys to control access to its API. To get your API key, ask your account manager.
+The Ezus API expects for the API key to be included in the X-API-KEY header of all your requests:
+`X-API-KEY: <YOUR_API_KEY>`
 
-To get your API key, you have to ask to your account manager
-
-After calling the login route, a bearer token will be returned to you, it must be included in the header of all your calls to the Ezus APIBody Parameters (JSON)
-
+Bearer authentication
+After calling the /login endpoint with valid credentials, a bearer token will be returned to you : <YOUR_TOKEN>. This token is then valid for 12 hours.
+The Ezus API expects for the Bearer Token to be included in the Authorization header of all your subsequent requests.
 `Authorization: Bearer <YOUR_TOKEN>`
 
 ### HTTP Request
@@ -82,9 +83,9 @@ After calling the login route, a bearer token will be returned to you, it must b
 
 ### Headers
 
-| Parameter | Description                           |
-| --------- | ------------------------------------- |
-| X-API-KEY | API key given by your account manager |
+| Parameter | Description       |
+| --------- | ----------------- |
+| X-API-KEY | Your Ezus API key |
 
 ### Body Parameters (JSON)
 
@@ -94,82 +95,10 @@ After calling the login route, a bearer token will be returned to you, it must b
 | password  | Your account password |
 
 <aside class="notice">
-You must replace <code>ApiKey</code> with your personal API key.
+You must replace <code><YOUR_API_KEY></code> with your own Ezus API key.
 </aside>
 
 # Projects
-
-## POST projects-upsert
-
-In Ezus, a project is a travel or event project, with or without destination, dates, budget and a number of people. It contains prestations, transportation and accommodation.
-
-```javascript
-const axios = require("axios");
-const baseUrl = "https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1";
-
-const body = {
-  reference: "projects_reference",
-  info_title: "project_title",
-  trip_people: "15",
-  trip_budget: "3000",
-  trip_date_in: "2022-07-31",
-  trip_date_out: "2022-08-02",
-  sales_manager_email: "emailofthesales@mail.com",
-  client_reference: "client_reference",
-  custom_fields: [
-    { name: "Text", value: "I am not a text" },
-    { name: "Dropdown", value: "nameOption2" },
-    { name: "Date", value: "2012-11-24" },
-    { name: "Time", value: "2006-10-07T12:06:56.568+01:00" },
-    { name: "Checkbox", value: "true" },
-  ],
-};
-const headers = { "X-API-KEY": "ApiKey", Authorization: "Bearer <YOUR_TOKEN>" };
-
-axios.post(baseUrl + "/projects-upsert", body, headers);
-```
-
-> The above command returns JSON structured like this:
-
-```json
-[
-  {
-    "erreur": "false",
-    "message": "ok",
-    "id": "89e48bb3-26ef-4b1e-aa60-b86ce714253d",
-    "action": "Project Updated Successfuly",
-    "reference": "89e48bb3-26ef-4b1e-aa60-b86ce714253d"
-  }
-]
-```
-
-This endpoint upsert a project. This endpoint take the reference as a primary key, if the reference already exist, the project linked to the account will be updated, if the reference doesn't exist, a new project will be created with all the given params.
-
-### HTTP Request
-
-`POST https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/projects-upsert`
-
-### Body Parameters (JSON)
-
-<aside class="comment">
-If you do not add an optionnal parameter, it will be empty for a creation or simply not updated for an update. If the parameter is empty (""), same behaviour
-</aside>
-
-| Parameter           | Type   | Description                                                                                                                                                                                                                                              |
-| ------------------- | ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| reference           | String | <span style="color:red">(Required)</span> The project Reference used as a primary key to check if the project already exist and UPDATE it or to create a new Project so be sure to use a unique Ezus Reference for each of your project                  |
-| info_title          | String | Title of your project, mandatory if you create a New Project                                                                                                                                                                                             |
-| trip_people         | Number | Number of people in your project                                                                                                                                                                                                                         |
-| trip_budget         | Number | Budget of your project                                                                                                                                                                                                                                   |
-| trip_date_in        | Date   | Date of the beginning of your project formated like YYYY-MM-DD if not formatted correctly, or if duration > 40 days or if trip_date_in > trip_date_out, project will be set as 1day and date = today. If project is without Date, no date will be setted |
-| trip_date_out       | Date   | Date of the end of your project formated like YYYY-MM-DD if not formatted correctly, or if duration > 40 days or if trip_date_in > trip_date_out, project will be set as 1day and date = today. If project is without Date, no date will be setted       |
-| sales_manager_email | Email  | Email of the Sales Manager, by default if no sales_manager or not found will be assignated to nobody                                                                                                                                                     |
-| client_reference    | String | Ezus Reference or Email of the Client, if the reference don't match with a client, API will try with client_email if setted else, No clients will be assigned                                                                                            |
-| custom_fields       | JSON   | You can add Custom Fields for your client, this custom fields should be in your Ezus params and Write Exactly as they are written in your params technical name ([Custom fields](#custom-fields))                                                        |
-
-<aside class="success">
-Remember — You have to be authenticated to call this API with your bearer token
-</aside>
 
 ## GET project
 
@@ -177,7 +106,10 @@ Remember — You have to be authenticated to call this API with your bearer toke
 const axios = require("axios");
 const baseUrl = "https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1";
 
-const headers = { "X-API-KEY": "ApiKey", Authorization: "Bearer <YOUR_TOKEN>" };
+const headers = {
+  "X-API-KEY": "<YOUR_API_KEY>",
+  Authorization: "Bearer <YOUR_TOKEN>",
+};
 
 axios.post(baseUrl + "/project?reference=reference", {}, headers);
 ```
@@ -284,6 +216,82 @@ axios.post(baseUrl + "/project?reference=reference", {}, headers);
 <aside class="success">
 Remember — You have to be authenticated to call this API with your bearer token
 </aside>
+
+## POST projects-upsert
+
+In Ezus, a project is a travel or event project, with or without destination, dates, budget and a number of people. It contains prestations, transportation and accommodation.
+
+```javascript
+const axios = require("axios");
+const baseUrl = "https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1";
+
+const body = {
+  reference: "projects_reference",
+  info_title: "project_title",
+  trip_people: "15",
+  trip_budget: "3000",
+  trip_date_in: "2022-07-31",
+  trip_date_out: "2022-08-02",
+  sales_manager_email: "emailofthesales@mail.com",
+  client_reference: "client_reference",
+  custom_fields: [
+    { name: "Text", value: "I am not a text" },
+    { name: "Dropdown", value: "nameOption2" },
+    { name: "Date", value: "2012-11-24" },
+    { name: "Time", value: "2006-10-07T12:06:56.568+01:00" },
+    { name: "Checkbox", value: "true" },
+  ],
+};
+const headers = {
+  "X-API-KEY": "<YOUR_API_KEY>",
+  Authorization: "Bearer <YOUR_TOKEN>",
+};
+
+axios.post(baseUrl + "/projects-upsert", body, headers);
+```
+
+> The above command returns JSON structured like this:
+
+```json
+[
+  {
+    "erreur": "false",
+    "message": "ok",
+    "id": "89e48bb3-26ef-4b1e-aa60-b86ce714253d",
+    "action": "Project Updated Successfuly",
+    "reference": "89e48bb3-26ef-4b1e-aa60-b86ce714253d"
+  }
+]
+```
+
+This endpoint upsert a project. This endpoint take the reference as a primary key, if the reference already exist, the project linked to the account will be updated, if the reference doesn't exist, a new project will be created with all the given params.
+
+### HTTP Request
+
+`POST https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/projects-upsert`
+
+### Body Parameters (JSON)
+
+<aside class="comment">
+If you do not add an optionnal parameter, it will be empty for a creation or simply not updated for an update. If the parameter is empty (""), same behaviour
+</aside>
+
+| Parameter           | Type   | Description                                                                                                                                                                                                                                              |
+| ------------------- | ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| reference           | String | <span style="color:red">(Required)</span> The project Reference used as a primary key to check if the project already exist and UPDATE it or to create a new Project so be sure to use a unique Ezus Reference for each of your project                  |
+| info_title          | String | Title of your project, mandatory if you create a New Project                                                                                                                                                                                             |
+| trip_people         | Number | Number of people in your project                                                                                                                                                                                                                         |
+| trip_budget         | Number | Budget of your project                                                                                                                                                                                                                                   |
+| trip_date_in        | Date   | Date of the beginning of your project formated like YYYY-MM-DD if not formatted correctly, or if duration > 40 days or if trip_date_in > trip_date_out, project will be set as 1day and date = today. If project is without Date, no date will be setted |
+| trip_date_out       | Date   | Date of the end of your project formated like YYYY-MM-DD if not formatted correctly, or if duration > 40 days or if trip_date_in > trip_date_out, project will be set as 1day and date = today. If project is without Date, no date will be setted       |
+| sales_manager_email | Email  | Email of the Sales Manager, by default if no sales_manager or not found will be assignated to nobody                                                                                                                                                     |
+| client_reference    | String | Ezus Reference or Email of the Client, if the reference don't match with a client, API will try with client_email if setted else, No clients will be assigned                                                                                            |
+| custom_fields       | JSON   | You can add Custom Fields for your client, this custom fields should be in your Ezus params and Write Exactly as they are written in your params technical name ([Custom fields](#custom-fields))                                                        |
+
+<aside class="success">
+Remember — You have to be authenticated to call this API with your bearer token
+</aside>
+
 ## POST projects-documents-create
 
 ```javascript
@@ -295,7 +303,10 @@ const body = {
   title: "Document test",
   link: "https://www.linktothedocument.pdf",
 };
-const headers = { "X-API-KEY": "ApiKey", Authorization: "Bearer <YOUR_TOKEN>" };
+const headers = {
+  "X-API-KEY": "<YOUR_API_KEY>",
+  Authorization: "Bearer <YOUR_TOKEN>",
+};
 
 axios.post(baseUrl + "/projects-documents-create", body, headers);
 ```
@@ -332,84 +343,16 @@ Remember — You have to be authenticated to call this API with your bearer toke
 
 # Clients
 
-## POST clients-upsert
-
-In Ezus, a client is a person or a company to whom you will sell your projects
-
-```javascript
-const axios = require("axios");
-const baseUrl = "https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1";
-
-const body = {
-  reference: "client_reference",
-  company_name: "client_company_name",
-  contact: {
-    firstname: "firstname",
-    lastname: "lastname",
-    gender: "Mr",
-    email: "email@email.email",
-    phone: "0606060606",
-    birthdate: "2023-01-01",
-  },
-  address: {
-    label: "58 Rue de Paradis",
-    city: "Paris",
-    country: "France",
-    zip: "75009",
-  },
-  custom_fields: [
-    { name: "field1", value: "field1Value" },
-    { name: "field2", value: "field2Value" },
-  ],
-};
-const headers = { "X-API-KEY": "ApiKey", Authorization: "Bearer <YOUR_TOKEN>" };
-
-axios.post(baseUrl + "/clients-upsert", body, headers);
-```
-
-> The above command returns JSON structured like this:
-
-```json
-[
-  {
-    "erreur": "false",
-    "message": "ok",
-    "action": "Client updated Successfully",
-    "reference": "clientReference"
-  }
-]
-```
-
-This endpoint Upsert a Client. The reference should be unique and allows to update an existing client or create a new client. If reference is not given, the email params is used as a primary key for your clients If you have multiple clients with the same email, the first client will be taken. If a client with this email already exist. An Ezus reference will be returned you must have to save it for your next uses. `this one will be updated with the new Params Given here.`
-
-### HTTP Request
-
-`POST https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/clients-upsert`
-
-### Body Parameters (JSON)
-
-<aside class="comment">
-If you do not add an optionnal parameter, it will be empty for a creation or simply not updated for an update. If the parameter is empty (""), same behaviour
-</aside>
-| Parameter    | Type    | Description                                                                                                     |
-| ------------ | ------  | --------------------------------------------------------------------------------------------------------------- |
-| reference     | String | <span style="color:red">(Required)</span> Used as a primary key in the database, if no reference, the reference will be generated automatically and returned|
-| company_name | String       | <span style="color:red">(Required)</span> Set a company name - If company name is empty, the client will be set as an individual and the name of the client = name of the contact and if the company name is not empty, the name of the client will be the company name |                         |
-| contact      | JSON        | Contact is a JSON and email is needed ([Contact](#contact))                                                                            |
-| address      | JSON         | Address is a JSON and label is needed if you want to add or update the adresse of your client but not mandatory ([Address](#address)) |
-| custom_fields      | JSON         | You can add custom fields for your client, this custom fields should be in your Ezus params and Write exactly as they are written in your params technical name ([Custom fields](#custom-fields))   |
-
-<aside class="success">
-Remember — You have to be authenticated to call this API with your bearer token
-</aside>
-
 ## GET client
 
 ```javascript
 const axios = require("axios");
 const baseUrl = "https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1";
 
-const headers = { "X-API-KEY": "ApiKey", Authorization: "Bearer <YOUR_TOKEN>" };
+const headers = {
+  "X-API-KEY": "<YOUR_API_KEY>",
+  Authorization: "Bearer <YOUR_TOKEN>",
+};
 
 axios.post(baseUrl + "/client?reference=reference", {}, headers);
 ```
@@ -499,25 +442,21 @@ axios.post(baseUrl + "/client?reference=reference", {}, headers);
 Remember — You have to be authenticated to call this API with your bearer token
 </aside>
 
-# Suppliers
+## POST clients-upsert
 
-## POST suppliers-upserts
-
-In Ezus, a supplier is a company, which will charge you for prestations. It can be a hotel, an airline or a kanoe club
+In Ezus, a client is a person or a company to whom you will sell your projects
 
 ```javascript
 const axios = require("axios");
 const baseUrl = "https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1";
 
 const body = {
-  reference: "suppliers_reference",
-  company_name: "supplier_company_name",
-  capacity: 2,
-  type: "accom, activity"
+  reference: "client_reference",
+  company_name: "client_company_name",
   contact: {
     firstname: "firstname",
     lastname: "lastname",
-    gender: "Ms",
+    gender: "Mr",
     email: "email@email.email",
     phone: "0606060606",
     birthdate: "2023-01-01",
@@ -533,9 +472,12 @@ const body = {
     { name: "field2", value: "field2Value" },
   ],
 };
-const headers = { "X-API-KEY": "ApiKey", Authorization: "Bearer <YOUR_TOKEN>" };
+const headers = {
+  "X-API-KEY": "<YOUR_API_KEY>",
+  Authorization: "Bearer <YOUR_TOKEN>",
+};
 
-axios.post(baseUrl + "/suppliers-upsert", body, headers);
+axios.post(baseUrl + "/clients-upsert", body, headers);
 ```
 
 > The above command returns JSON structured like this:
@@ -545,36 +487,36 @@ axios.post(baseUrl + "/suppliers-upsert", body, headers);
   {
     "erreur": "false",
     "message": "ok",
-    "action": "Supplier created Successfully",
-    "reference": "SupplierReference"
+    "action": "Client updated Successfully",
+    "reference": "clientReference"
   }
 ]
 ```
 
-This endpoint upsert a supplier. The reference should be unique and allows to update an existing supplier or Create a new supplier. If reference is not given, the email params is used as a primary key for your suppliers If you have multiple suppliers with the same email, the first supplier will be taken. If a supplier with this email already exist. An Ezus reference will be returned you must have to save it for your next uses. `this one will be updated with the new Params Given here.`
+This endpoint Upsert a Client. The reference should be unique and allows to update an existing client or create a new client. If reference is not given, the email params is used as a primary key for your clients If you have multiple clients with the same email, the first client will be taken. If a client with this email already exist. An Ezus reference will be returned you must have to save it for your next uses. `this one will be updated with the new Params Given here.`
 
 ### HTTP Request
 
-`POST https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/suppliers-upsert`
+`POST https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/clients-upsert`
 
 ### Body Parameters (JSON)
 
 <aside class="comment">
-If you do not add an Optionnal parameter, it will be empty for a creation or simply not updated for an update. If the parameter is empty (""), same behaviour
+If you do not add an optionnal parameter, it will be empty for a creation or simply not updated for an update. If the parameter is empty (""), same behaviour
 </aside>
 | Parameter    | Type    | Description                                                                                                     |
 | ------------ | ------  | --------------------------------------------------------------------------------------------------------------- |
-| reference     | String | <span style="color:red">(Required)</span> Used as a primary key in the database, if no reference, the reference will be generated automatically|
-| company_name | String       | Set a company name - If company name is empty, the supplier will be set as an individual and the name of the supplier will be the name of the contact |                         |
-| capacity     | Number | Capacity of the Supplier|
-| type     | String | 3 Option : `accom`, `activity`, `transport`. You can select multiple options by typing "accom, activity" for exemple, the new data will erase old data. To add multiple options they must be separated by a comma|
-| contact      | JSON        | Contact is a JSON and email is needed ([Contact](#contact))                                                                          |
-| address      | JSON         | Address is a JSON and label is needed if you want to add or update the adresse of your supplier but not mandatory ([Address](#address))|
-| custom_fields      | JSON         | You can add custom fields for your client, this custom fields should be in your Ezus params and Write Exactly as they are written in your params technical name ([Custom fields](#custom-fields))   |
+| reference     | String | <span style="color:red">(Required)</span> Used as a primary key in the database, if no reference, the reference will be generated automatically and returned|
+| company_name | String       | <span style="color:red">(Required)</span> Set a company name - If company name is empty, the client will be set as an individual and the name of the client = name of the contact and if the company name is not empty, the name of the client will be the company name |                         |
+| contact      | JSON        | Contact is a JSON and email is needed ([Contact](#contact))                                                                            |
+| address      | JSON         | Address is a JSON and label is needed if you want to add or update the adresse of your client but not mandatory ([Address](#address)) |
+| custom_fields      | JSON         | You can add custom fields for your client, this custom fields should be in your Ezus params and Write exactly as they are written in your params technical name ([Custom fields](#custom-fields))   |
 
 <aside class="success">
 Remember — You have to be authenticated to call this API with your bearer token
 </aside>
+
+# Suppliers
 
 ## GET supplier
 
@@ -582,7 +524,10 @@ Remember — You have to be authenticated to call this API with your bearer toke
 const axios = require("axios");
 const baseUrl = "https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1";
 
-const headers = { "X-API-KEY": "ApiKey", Authorization: "Bearer <YOUR_TOKEN>" };
+const headers = {
+  "X-API-KEY": "<YOUR_API_KEY>",
+  Authorization: "Bearer <YOUR_TOKEN>",
+};
 
 axios.post(baseUrl + "/supplier?reference=reference", {}, headers);
 ```
@@ -678,44 +623,42 @@ axios.post(baseUrl + "/supplier?reference=reference", {}, headers);
 <aside class="success">
 Remember — You have to be authenticated to call this API with your bearer token
 </aside>
-# Products
 
-## POST products-upsert
+## POST suppliers-upserts
 
-In Ezus, a product is an element that can be included in a project or a step, like a night in a hotel, a flight from Paris to Tokyo or a parachute jump
+In Ezus, a supplier is a company, which will charge you for prestations. It can be a hotel, an airline or a kanoe club
 
 ```javascript
 const axios = require("axios");
 const baseUrl = "https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1";
 
 const body = {
-  reference: "product_reference",
-  title: "product_title",
-  quantity: "3",
-  capacity: 3,
-  supplier_reference: "supplier_reference",
-  package_reference: "package_reference",
-  purchase_price: "42",
-  sales_price: "84",
-  vat_regime: "none",
-  vat_rate: "20",
-  currency: "USD",
-  commission: {
-    commission_mode: "purchase",
-    commission_regime: "percent",
-    value: "10",
+  reference: "suppliers_reference",
+  company_name: "supplier_company_name",
+  capacity: 2,
+  type: "accom, activity"
+  contact: {
+    firstname: "firstname",
+    lastname: "lastname",
+    gender: "Ms",
+    email: "email@email.email",
+    phone: "0606060606",
+    birthdate: "2023-01-01",
+  },
+  address: {
+    label: "58 Rue de Paradis",
+    city: "Paris",
+    country: "France",
+    zip: "75009",
   },
   custom_fields: [
     { name: "field1", value: "field1Value" },
     { name: "field2", value: "field2Value" },
   ],
 };
-const headers = {
-  "X-API-KEY": "ApiKey",
-  Authorization: "Bearer <YOUR_TOKEN>",
-};
+const headers = { "X-API-KEY": "<YOUR_API_KEY>", Authorization: "Bearer <YOUR_TOKEN>" };
 
-axios.post(baseUrl + "/products-upsert", body, headers);
+axios.post(baseUrl + "/suppliers-upsert", body, headers);
 ```
 
 > The above command returns JSON structured like this:
@@ -725,43 +668,38 @@ axios.post(baseUrl + "/products-upsert", body, headers);
   {
     "erreur": "false",
     "message": "ok",
-    "action": "Product Created Successfully",
-    "reference": "productReference"
+    "action": "Supplier created Successfully",
+    "reference": "SupplierReference"
   }
 ]
 ```
 
-This endpoint upsert a product. The reference should be unique and allows to update an existing product or create a new product. If reference is not given, the product will be created. An Ezus reference will be returned you must have to save it for your next updates of this product. `this one will be updated with the new Params Given here.`
+This endpoint upsert a supplier. The reference should be unique and allows to update an existing supplier or Create a new supplier. If reference is not given, the email params is used as a primary key for your suppliers If you have multiple suppliers with the same email, the first supplier will be taken. If a supplier with this email already exist. An Ezus reference will be returned you must have to save it for your next uses. `this one will be updated with the new Params Given here.`
 
 ### HTTP Request
 
-`POST https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/products-upsert`
+`POST https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/suppliers-upsert`
 
 ### Body Parameters (JSON)
 
 <aside class="comment">
-If you do not add an optionnal parameter, it will be empty for a creation or simply not updated for an update. If the parameter is empty (""), same behaviour
+If you do not add an Optionnal parameter, it will be empty for a creation or simply not updated for an update. If the parameter is empty (""), same behaviour
 </aside>
-
-| Parameter          | Type    | Description                                                                                                                                                                                                                                                                                                                                     |
-| ------------------ | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| reference          | String  | <span style="color:red">(Required)</span> To update a product, reference is mandatory, the reference will be used as a Primary Key, in case of creation, a unique reference will be returned if you create a new product you can give a unique reference this one will be used as Ezus reference                                                |
-| title              | String  | If no reference or reference not found, the title is mandatory                                                                                                                                                                                                                                                                                  |
-| quantity           | String  | Quantity is the default number of this product at his creation (P = Number of people in the project, D = Number of days in the project, N = Number of nights in the project)                                                                                                                                                                    |
-| capacity           | Int     | Capacity is the default capacity of the product                                                                                                                                                                                                                                                                                                 |
-| supplier_reference | String  | The reference to the supplier, if you give a reference, the product will be added in the supplier                                                                                                                                                                                                                                               |
-| package_reference  | String  | The reference to the package, if you give a reference, the product will be added in the package                                                                                                                                                                                                                                                 |
-| purchase_price     | float   | Purchase price as number                                                                                                                                                                                                                                                                                                                        |
-| sales_price        | float   | Sales price, the margin rate will be calculated in function of this price.                                                                                                                                                                                                                                                                      |
-| vat_regime         | Options | 'classic', 'margin', 'none', Thoses options allows to choose your VAT Regime, in margin mode, VAT will be calculated on your margin. Classic mode, VAT will be calculated on your selling price. In none mode, no VAT will be applied. If empty will be set at your default account values                                                      |
-| vat_rate           | float   | Default VAT rate, if empty will be set at your default account VAT rate                                                                                                                                                                                                                                                                         |
-| currency           | String  | The ISO 4217 code who represent the currency you use (<a href="https://docs.google.com/spreadsheets/d/1b7BNOwKyN1hMOouve6xhFZ2R2zrH4Sj1L-646j755fU/edit?usp=sharing" target="_blank">Link to Doc</a>) If the currency is not set in your account, your default currency will be set                                                             |
-| commission         | JSON    | JSON who contain: `value`: Commission as number, `commission_regime` : The commission regime can be "percent" (commission is a percent of the buying/selling price) or "currency" (commission is a fix value) and `commission_mode`: "default" or "purchase" default mode is base on the buying price, purchase mode based on the selling price |
-| custom_fields      | JSON    | You can add Custom Fields for your client, this custom fields should be in your Ezus params and Write Exactly as they are written in your params technical name ([Custom fields](#custom-fields))                                                                                                                                               |
+| Parameter    | Type    | Description                                                                                                     |
+| ------------ | ------  | --------------------------------------------------------------------------------------------------------------- |
+| reference     | String | <span style="color:red">(Required)</span> Used as a primary key in the database, if no reference, the reference will be generated automatically|
+| company_name | String       | Set a company name - If company name is empty, the supplier will be set as an individual and the name of the supplier will be the name of the contact |                         |
+| capacity     | Number | Capacity of the Supplier|
+| type     | String | 3 Option : `accom`, `activity`, `transport`. You can select multiple options by typing "accom, activity" for exemple, the new data will erase old data. To add multiple options they must be separated by a comma|
+| contact      | JSON        | Contact is a JSON and email is needed ([Contact](#contact))                                                                          |
+| address      | JSON         | Address is a JSON and label is needed if you want to add or update the adresse of your supplier but not mandatory ([Address](#address))|
+| custom_fields      | JSON         | You can add custom fields for your client, this custom fields should be in your Ezus params and Write Exactly as they are written in your params technical name ([Custom fields](#custom-fields))   |
 
 <aside class="success">
 Remember — You have to be authenticated to call this API with your bearer token
 </aside>
+
+# Products
 
 ## GET product
 
@@ -769,7 +707,10 @@ Remember — You have to be authenticated to call this API with your bearer toke
 const axios = require("axios");
 const baseUrl = "https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1";
 
-const headers = { "X-API-KEY": "ApiKey", Authorization: "Bearer <YOUR_TOKEN>" };
+const headers = {
+  "X-API-KEY": "<YOUR_API_KEY>",
+  Authorization: "Bearer <YOUR_TOKEN>",
+};
 
 axios.post(baseUrl + "/product?reference=reference", {}, headers);
 ```
@@ -873,30 +814,43 @@ axios.post(baseUrl + "/product?reference=reference", {}, headers);
 <aside class="success">
 Remember — You have to be authenticated to call this API with your bearer token
 </aside>
-                                                                                                                    |
 
-# Package
+## POST products-upsert
 
-## POST packages_upsert
-
-In Ezus, a package is a group of products and is intended to be added more easily to a project
+In Ezus, a product is an element that can be included in a project or a step, like a night in a hotel, a flight from Paris to Tokyo or a parachute jump
 
 ```javascript
 const axios = require("axios");
 const baseUrl = "https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1";
 
 const body = {
-  reference: "package_reference",
-  title: "package_title",
-  capacity: "3",
+  reference: "product_reference",
+  title: "product_title",
+  quantity: "3",
+  capacity: 3,
+  supplier_reference: "supplier_reference",
+  package_reference: "package_reference",
+  purchase_price: "42",
+  sales_price: "84",
+  vat_regime: "none",
+  vat_rate: "20",
+  currency: "USD",
+  commission: {
+    commission_mode: "purchase",
+    commission_regime: "percent",
+    value: "10",
+  },
   custom_fields: [
     { name: "field1", value: "field1Value" },
     { name: "field2", value: "field2Value" },
   ],
 };
-const headers = { "X-API-KEY": "ApiKey", Authorization: "Bearer <YOUR_TOKEN>" };
+const headers = {
+  "X-API-KEY": "<YOUR_API_KEY>",
+  Authorization: "Bearer <YOUR_TOKEN>",
+};
 
-axios.post(baseUrl + "/packages-upsert", body, headers);
+axios.post(baseUrl + "/products-upsert", body, headers);
 ```
 
 > The above command returns JSON structured like this:
@@ -906,34 +860,45 @@ axios.post(baseUrl + "/packages-upsert", body, headers);
   {
     "erreur": "false",
     "message": "ok",
-    "action": "Package Created Successfully",
-    "reference": "packageReference"
+    "action": "Product Created Successfully",
+    "reference": "productReference"
   }
 ]
 ```
 
-This endpoint upsert a package. The reference should be unique and allows to update an existing package or create a new package. If reference is not given, the package will be created. An Ezus reference will be returned you must have to save it for your next updates of this package. `this one will be updated with the new Params Given here.`
+This endpoint upsert a product. The reference should be unique and allows to update an existing product or create a new product. If reference is not given, the product will be created. An Ezus reference will be returned you must have to save it for your next updates of this product. `this one will be updated with the new Params Given here.`
 
 ### HTTP Request
 
-`POST https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/packages-upsert`
+`POST https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/products-upsert`
 
 ### Body Parameters (JSON)
 
 <aside class="comment">
-If you do not add an Optionnal parameter, it will be empty for a creation or simply not updated for an update. If the parameter is empty (""), same behaviour
+If you do not add an optionnal parameter, it will be empty for a creation or simply not updated for an update. If the parameter is empty (""), same behaviour
 </aside>
 
-| Parameter     | Type   | Description                                                                                                                                                                                       |
-| ------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --- |
-| reference     | String | <span style="color:red">(Required)</span> To update a package, Reference is mandatory, the reference will be used as a primary key, in case of creation, a unique reference will be returned      |
-| title         | String | If no reference or reference not found, the title is mandatory                                                                                                                                    |
-| capacity      | Number | capacity is the default number of this package at his creation                                                                                                                                    |     |
-| custom_fields | JSON   | You can add custom fields for your client, this custom fields should be in your Ezus params and Write exactly as they are written in your params technical name ([Custom fields](#custom-fields)) |
+| Parameter          | Type    | Description                                                                                                                                                                                                                                                                                                                                     |
+| ------------------ | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| reference          | String  | <span style="color:red">(Required)</span> To update a product, reference is mandatory, the reference will be used as a Primary Key, in case of creation, a unique reference will be returned if you create a new product you can give a unique reference this one will be used as Ezus reference                                                |
+| title              | String  | If no reference or reference not found, the title is mandatory                                                                                                                                                                                                                                                                                  |
+| quantity           | String  | Quantity is the default number of this product at his creation (P = Number of people in the project, D = Number of days in the project, N = Number of nights in the project)                                                                                                                                                                    |
+| capacity           | Int     | Capacity is the default capacity of the product                                                                                                                                                                                                                                                                                                 |
+| supplier_reference | String  | The reference to the supplier, if you give a reference, the product will be added in the supplier                                                                                                                                                                                                                                               |
+| package_reference  | String  | The reference to the package, if you give a reference, the product will be added in the package                                                                                                                                                                                                                                                 |
+| purchase_price     | float   | Purchase price as number                                                                                                                                                                                                                                                                                                                        |
+| sales_price        | float   | Sales price, the margin rate will be calculated in function of this price.                                                                                                                                                                                                                                                                      |
+| vat_regime         | Options | 'classic', 'margin', 'none', Thoses options allows to choose your VAT Regime, in margin mode, VAT will be calculated on your margin. Classic mode, VAT will be calculated on your selling price. In none mode, no VAT will be applied. If empty will be set at your default account values                                                      |
+| vat_rate           | float   | Default VAT rate, if empty will be set at your default account VAT rate                                                                                                                                                                                                                                                                         |
+| currency           | String  | The ISO 4217 code who represent the currency you use (<a href="https://docs.google.com/spreadsheets/d/1b7BNOwKyN1hMOouve6xhFZ2R2zrH4Sj1L-646j755fU/edit?usp=sharing" target="_blank">Link to Doc</a>) If the currency is not set in your account, your default currency will be set                                                             |
+| commission         | JSON    | JSON who contain: `value`: Commission as number, `commission_regime` : The commission regime can be "percent" (commission is a percent of the buying/selling price) or "currency" (commission is a fix value) and `commission_mode`: "default" or "purchase" default mode is base on the buying price, purchase mode based on the selling price |
+| custom_fields      | JSON    | You can add Custom Fields for your client, this custom fields should be in your Ezus params and Write Exactly as they are written in your params technical name ([Custom fields](#custom-fields))                                                                                                                                               |
 
 <aside class="success">
 Remember — You have to be authenticated to call this API with your bearer token
-</aside>
+</aside>                                                                                                                    |
+
+# Package
 
 ## GET package
 
@@ -941,7 +906,10 @@ Remember — You have to be authenticated to call this API with your bearer toke
 const axios = require("axios");
 const baseUrl = "https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1";
 
-const headers = { "X-API-KEY": "ApiKey", Authorization: "Bearer <YOUR_TOKEN>" };
+const headers = {
+  "X-API-KEY": "<YOUR_API_KEY>",
+  Authorization: "Bearer <YOUR_TOKEN>",
+};
 
 axios.post(baseUrl + "/package?reference=reference", {}, headers);
 ```
@@ -1029,6 +997,67 @@ axios.post(baseUrl + "/package?reference=reference", {}, headers);
 Remember — You have to be authenticated to call this API with your bearer token
 </aside>
 
+## POST packages_upsert
+
+In Ezus, a package is a group of products and is intended to be added more easily to a project
+
+```javascript
+const axios = require("axios");
+const baseUrl = "https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1";
+
+const body = {
+  reference: "package_reference",
+  title: "package_title",
+  capacity: "3",
+  custom_fields: [
+    { name: "field1", value: "field1Value" },
+    { name: "field2", value: "field2Value" },
+  ],
+};
+const headers = {
+  "X-API-KEY": "<YOUR_API_KEY>",
+  Authorization: "Bearer <YOUR_TOKEN>",
+};
+
+axios.post(baseUrl + "/packages-upsert", body, headers);
+```
+
+> The above command returns JSON structured like this:
+
+```json
+[
+  {
+    "erreur": "false",
+    "message": "ok",
+    "action": "Package Created Successfully",
+    "reference": "packageReference"
+  }
+]
+```
+
+This endpoint upsert a package. The reference should be unique and allows to update an existing package or create a new package. If reference is not given, the package will be created. An Ezus reference will be returned you must have to save it for your next updates of this package. `this one will be updated with the new Params Given here.`
+
+### HTTP Request
+
+`POST https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/packages-upsert`
+
+### Body Parameters (JSON)
+
+<aside class="comment">
+If you do not add an Optionnal parameter, it will be empty for a creation or simply not updated for an update. If the parameter is empty (""), same behaviour
+</aside>
+
+| Parameter     | Type   | Description                                                                                                                                                                                       |
+| ------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --- |
+| reference     | String | <span style="color:red">(Required)</span> To update a package, Reference is mandatory, the reference will be used as a primary key, in case of creation, a unique reference will be returned      |
+| title         | String | If no reference or reference not found, the title is mandatory                                                                                                                                    |
+| capacity      | Number | capacity is the default number of this package at his creation                                                                                                                                    |     |
+| custom_fields | JSON   | You can add custom fields for your client, this custom fields should be in your Ezus params and Write exactly as they are written in your params technical name ([Custom fields](#custom-fields)) |
+
+<aside class="success">
+Remember — You have to be authenticated to call this API with your bearer token
+</aside>
+
 # Nested Resource
 
 ```json
@@ -1079,7 +1108,7 @@ The custom_fields must be called with their technical_name which you can find in
 </aside>
 
 <aside class="warning">
-Warning: the custom_fields of the projects route must have their real name and not their technical_name in "name"
+Warning: the custom_fields of the projects endpoint must have their real name and not their technical_name in "name"
 </aside>
 
 | Options           | Type   | Value                                                                                                                                                                                          |
@@ -1185,7 +1214,3 @@ Warning: the custom_fields of the projects route must have their real name and n
 | name              | String | language name                                    |
 | short_description | String | Short description of the object in this language |
 | long_description  | String | Long description of the object in ths language   |
-
-<aside class="success">
-Remember — You have to be authenticated to call this API with your bearer token
-</aside>
