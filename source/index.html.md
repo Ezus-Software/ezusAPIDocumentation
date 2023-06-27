@@ -75,7 +75,7 @@ Ezus uses API keys to control access to its API. To get your API key, ask your a
 
 Bearer authentication
 
-After calling the /login endpoint with valid credentials, a bearer token will be returned to you : <YOUR_TOKEN>. This token is then valid for 12 hours. The Ezus API expects for the bearer token to be included in the Authorization header of all your subsequent requests.
+After calling the /login endpoint with valid credentials, a bearer token will be returned to you : `<YOUR_TOKEN>`. This token is then valid for 12 hours. The Ezus API expects for the bearer token to be included in the Authorization header of all your subsequent requests.
 
 `Authorization: Bearer <YOUR_TOKEN>`
 
@@ -95,10 +95,6 @@ After calling the /login endpoint with valid credentials, a bearer token will be
 | --------- | --------------------- |
 | email     | Your account email    |
 | password  | Your account password |
-
-<aside class="notice">
-You must replace <code><YOUR_API_KEY></code> with your own Ezus API key.
-</aside>
 
 # Projects
 
