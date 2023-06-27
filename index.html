@@ -326,7 +326,7 @@
                     <a href="#headers" class="toc-h2 toc-link" data-title="Headers">Headers</a>
                   </li>
                   <li>
-                    <a href="#body-parameters-json" class="toc-h2 toc-link" data-title="Body Parameters (JSON)">Body Parameters (JSON)</a>
+                    <a href="#request-parameters" class="toc-h2 toc-link" data-title="Request Parameters">Request Parameters</a>
                   </li>
               </ul>
           </li>
@@ -375,6 +375,14 @@
                   <li>
                     <a href="#post-products-upsert" class="toc-h2 toc-link" data-title="POST products-upsert">POST products-upsert</a>
                   </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#package" class="toc-h1 toc-link" data-title="Package">Package</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#get-package" class="toc-h2 toc-link" data-title="GET package">GET package</a>
+                  </li>
                   <li>
                     <a href="#post-packages_upsert" class="toc-h2 toc-link" data-title="POST packages_upsert">POST packages_upsert</a>
                   </li>
@@ -385,6 +393,9 @@
               <ul class="toc-list-h2">
                   <li>
                     <a href="#custom-fields" class="toc-h2 toc-link" data-title="Custom Fields">Custom Fields</a>
+                  </li>
+                  <li>
+                    <a href="#alternatives" class="toc-h2 toc-link" data-title="Alternatives">Alternatives</a>
                   </li>
                   <li>
                     <a href="#address" class="toc-h2 toc-link" data-title="Address">Address</a>
@@ -412,9 +423,9 @@
       <div class="dark-box"></div>
       <div class="content">
         <h1 id='introduction'>Introduction</h1>
-<p>Welcome to the Ezus API! The Ezus API is organized around <a href='https://en.wikipedia.org/wiki/Representational_state_transfer' target="_blank">REST</a>. It supplies a collection of HTTP methods that underpin Ezus main functionalities : project, client, catalog (product/supplier/package) management.</p>
+<p>Welcome to the Ezus API. The Ezus API is organized around <a href='https://en.wikipedia.org/wiki/Representational_state_transfer' target="_blank">REST</a>. It supplies a collection of HTTP methods that underpin Ezus main functionalities : project, client, catalog (product/supplier/package) management.</p>
 
-<p>If you need an overview of some common use cases that you can setup with our API you can look at our help center section <a href='https://help.ezus.io/en/collections/3016686-integrations' target="_blank">&quot;Integrations&quot;</a></p>
+<p>If you need an overview of some common use cases that you can setup with our API you can look at our help center section <a href='https://help.ezus.io/en/collections/3016686-integrations' target="_blank">Integrations</a></p>
 
 <p>If you want to dive into the list of available methods, you&#39;ve come to the right place. This documentation provides a technical description (reference) for each method in the left-hand section, as well as code examples in the right-hand section.</p>
 
@@ -437,7 +448,7 @@ You can find here a <a href="https://drive.google.com/file/d/1LENvfWI4ZeiPD24mgG
 <span class="nx">axios</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="nx">baseUrl</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">/login</span><span class="dl">"</span><span class="p">,</span> <span class="nx">body</span><span class="p">,</span> <span class="nx">headers</span><span class="p">);</span>
 </code></pre></div>
 <blockquote>
-<p>The above command returns JSON structured like this:</p>
+<p>This method returns JSON structured like this:</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
@@ -448,10 +459,10 @@ You can find here a <a href="https://drive.google.com/file/d/1LENvfWI4ZeiPD24mgG
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
 <blockquote>
-<p>In subsequent requests, make sure to replace <code>&lt;YOUR_TOKEN&gt;</code> in the Authorization Header with the token returned to you here.</p>
+<p>In subsequent requests, make sure to replace <code>&lt;YOUR_TOKEN&gt;</code> in the Authorization Header with the token that is returned to you here.</p>
 </blockquote>
 
-<p>Ezus authentication scheme is based on <a href='https://swagger.io/docs/specification/authentication/api-keys/' target="_blank">API Keys</a> and <a href='https://swagger.io/docs/specification/authentication/bearer-authentication/' target="_blank">Bearer authentication</a>. So, you will need 2 things to be able to interact with our API :</p>
+<p>Ezus authentication scheme is based on <a href='https://swagger.io/docs/specification/authentication/api-keys/' target="_blank">API Keys</a> and <a href='https://swagger.io/docs/specification/authentication/bearer-authentication/' target="_blank">Bearer authentication</a>. So, you will need 2 things to be able to interact with our API:</p>
 
 <ul>
 <li>An Ezus API key</li>
@@ -460,13 +471,13 @@ You can find here a <a href="https://drive.google.com/file/d/1LENvfWI4ZeiPD24mgG
 
 <p>API key</p>
 
-<p>Ezus uses API keys to control access to its API. To get your API key, ask your account manager. The Ezus API expects for the API key to be included in the X-API-KEY header of all your requests.</p>
+<p>Ezus uses API keys to control access to its API. To get your API key, ask your account manager. The Ezus API needs the API key to be included in the X-API-KEY header of all your requests.</p>
 
 <p><code>X-API-KEY: &lt;YOUR_API_KEY&gt;</code></p>
 
 <p>Bearer authentication</p>
 
-<p>After calling the /login endpoint with valid credentials, a bearer token will be returned to you : <code>&lt;YOUR_TOKEN&gt;</code>. This token is then valid for 12 hours. The Ezus API expects for the bearer token to be included in the Authorization header of all your subsequent requests.</p>
+<p>After calling the /login endpoint with valid credentials, a bearer token will be returned to you : <code>&lt;YOUR_TOKEN&gt;</code>. This token is then valid for 12 hours. The Ezus API needs the bearer token to be included in the Authorization header of all your subsequent requests.</p>
 
 <p><code>Authorization: Bearer &lt;YOUR_TOKEN&gt;</code></p>
 <h3 id='http-request'>HTTP Request</h3>
@@ -483,7 +494,7 @@ You can find here a <a href="https://drive.google.com/file/d/1LENvfWI4ZeiPD24mgG
 <td>Your Ezus API key</td>
 </tr>
 </tbody></table>
-<h3 id='body-parameters-json'>Body Parameters (JSON)</h3>
+<h3 id='request-parameters'>Request Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -510,7 +521,7 @@ You can find here a <a href="https://drive.google.com/file/d/1LENvfWI4ZeiPD24mgG
 <span class="nx">axios</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="nx">baseUrl</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">/project?reference=reference</span><span class="dl">"</span><span class="p">,</span> <span class="p">{},</span> <span class="nx">headers</span><span class="p">);</span>
 </code></pre></div>
 <blockquote>
-<p>The above command returns JSON structured like this:</p>
+<p>This method returns JSON structured like this:</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"erreur"</span><span class="p">:</span><span class="w"> </span><span class="s2">"false"</span><span class="p">,</span><span class="w">
@@ -547,24 +558,6 @@ You can find here a <a href="https://drive.google.com/file/d/1LENvfWI4ZeiPD24mgG
         </span><span class="nl">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Client Last Name"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"melchiorbengtsson@gmail.com"</span><span class="w">
       </span><span class="p">}</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"alternative_title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Main Alternative"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"trip_people"</span><span class="p">:</span><span class="w"> </span><span class="s2">"15"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"trip_budget"</span><span class="p">:</span><span class="w"> </span><span class="s2">"300"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"trip_date_in"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-07-31"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"trip_date_out"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-08-02"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"destination"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Destination"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"subdestination"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Subdestination"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"trip_duration"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"client"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Client Reference"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"individual"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"company_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Client Company Name"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Client First Name"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Client Last Name"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"melchiorbengtsson@gmail.com"</span><span class="w">
-      </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">],</span><span class="w">
   </span><span class="nl">"custom_fields"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
@@ -576,18 +569,34 @@ You can find here a <a href="https://drive.google.com/file/d/1LENvfWI4ZeiPD24mgG
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h3 id='http-request-2'>HTTP Request</h3>
 <p><code>GET https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/project?reference=reference</code></p>
-<h3 id='returned-values'>Returned Values</h3>
+<h3 id='request-parameters-2'>Request Parameters</h3>
 <table><thead>
 <tr>
-<th>Name</th>
+<th>Parameter</th>
 <th>Type</th>
-<th>Value</th>
+<th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>reference</td>
 <td>String</td>
-<td>The Reference of the given project - The one you gave</td>
+<td>The reference of the project you want to retrieve</td>
+</tr>
+</tbody></table>
+<h3 id='response'>Response</h3>
+<p>JSON object containing the project information.</p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>reference</td>
+<td>String</td>
+<td>The reference of the project you want to retrieve</td>
 </tr>
 <tr>
 <td>info_title</td>
@@ -607,89 +616,31 @@ You can find here a <a href="https://drive.google.com/file/d/1LENvfWI4ZeiPD24mgG
 <tr>
 <td>info_reference</td>
 <td>String</td>
-<td>Reference of your project ex: &quot;202208019-P&quot; (It is a project number that appears at the bottom of the project file. Not to be confused with reference)</td>
+<td>Reference of your project ex: &quot;202208019-P&quot; (It is a project number that appears at the bottom of the project record. Not to be confused with reference)</td>
 </tr>
 <tr>
 <td>traveler_designer</td>
 <td>JSON</td>
-<td>Travel designer is a Json that contain <code>email</code>, <code>first_name</code> and <code>last_name</code></td>
+<td>JSON object containing <code>email</code>, <code>first_name</code> and <code>last_name</code></td>
 </tr>
 <tr>
 <td>project_manager</td>
 <td>JSON</td>
-<td>Project manager is a Json that contain <code>email</code>, <code>first_name</code> and <code>last_name</code></td>
+<td>JSON object containing <code>email</code>, <code>first_name</code> and <code>last_name</code></td>
 </tr>
 <tr>
 <td>alternatives</td>
 <td>Array</td>
-<td>An array of alternatives</td>
+<td>Array of JSON alternatives (<a href="#alternatives">Alternatives</a>)</td>
 </tr>
 <tr>
 <td>custom_fields</td>
 <td>Array</td>
-<td>Array of custom fields that contain name and value as string (<a href="#custom-fields">Custom fields</a>)</td>
+<td>Array of JSON custom fields (<a href="#custom-fields">Custom fields</a>)</td>
 </tr>
 </tbody></table>
-<h3 id='alternatives'>alternatives</h3>
-<table><thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Value</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>alternative_title</td>
-<td>String</td>
-<td>Title of the alternative</td>
-</tr>
-<tr>
-<td>trip_people</td>
-<td>String</td>
-<td>Number of people</td>
-</tr>
-<tr>
-<td>trip_budget</td>
-<td>Number</td>
-<td>Budget of the alternative</td>
-</tr>
-<tr>
-<td>trip_date_in</td>
-<td>String</td>
-<td>Date of the begining of this alternative, formated like : YYYY-MM-DD if it&#39;s empty, the project have no dates</td>
-</tr>
-<tr>
-<td>trip_date_out</td>
-<td>String</td>
-<td>Date of the end of this alternative, formated like : YYYY-MM-DD if it&#39;s empty, the project have no dates</td>
-</tr>
-<tr>
-<td>destination</td>
-<td>String</td>
-<td>Destination of the alternative</td>
-</tr>
-<tr>
-<td>subdestination</td>
-<td>String</td>
-<td>Subdestination of the alternative</td>
-</tr>
-<tr>
-<td>trip_duration</td>
-<td>String</td>
-<td>Number of days</td>
-</tr>
-<tr>
-<td>client</td>
-<td>JSON</td>
-<td>Json that contain : <code>reference</code>, <code>type</code> (entreprise or individual), <code>company_name</code>, <code>first_name</code>, <code>last_name</code> and <code>email</code></td>
-</tr>
-</tbody></table>
-
-<aside class="success">
-Remember — You have to be authenticated to call this API with your bearer token
-</aside>
 <h2 id='post-projects-upsert'>POST projects-upsert</h2>
-<p>In Ezus, a project is a travel or event project, with or without destination, dates, budget and a number of people. It contains prestations, transportation and accommodation.</p>
+<p>Update a project record if the provided Ezus reference do matches one of the project references in your account, otherwise create a new project record with the provided Ezus reference (or with a random one if no reference is provided).</p>
 <div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">axios</span><span class="dl">"</span><span class="p">);</span>
 <span class="kd">const</span> <span class="nx">baseUrl</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1</span><span class="dl">"</span><span class="p">;</span>
 
@@ -718,7 +669,7 @@ Remember — You have to be authenticated to call this API with your bearer toke
 <span class="nx">axios</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="nx">baseUrl</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">/projects-upsert</span><span class="dl">"</span><span class="p">,</span> <span class="nx">body</span><span class="p">,</span> <span class="nx">headers</span><span class="p">);</span>
 </code></pre></div>
 <blockquote>
-<p>The above command returns JSON structured like this:</p>
+<p>This method returns JSON structured like this:</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
@@ -729,15 +680,9 @@ Remember — You have to be authenticated to call this API with your bearer toke
     </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"89e48bb3-26ef-4b1e-aa60-b86ce714253d"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
-</span></code></pre></div>
-<p>This endpoint upsert a project. This endpoint take the reference as a primary key, if the reference already exist, the project linked to the account will be updated, if the reference doesn&#39;t exist, a new project will be created with all the given params.</p>
-<h3 id='http-request-3'>HTTP Request</h3>
+</span></code></pre></div><h3 id='http-request-3'>HTTP Request</h3>
 <p><code>POST https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/projects-upsert</code></p>
-<h3 id='body-parameters-json-2'>Body Parameters (JSON)</h3>
-<aside class="comment">
-If you do not add an optionnal parameter, it will be empty for a creation or simply not updated for an update. If the parameter is empty (""), same behaviour
-</aside>
-
+<h3 id='request-parameters-3'>Request Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -788,14 +733,12 @@ If you do not add an optionnal parameter, it will be empty for a creation or sim
 <tr>
 <td>custom_fields</td>
 <td>JSON</td>
-<td>You can add Custom Fields for your client, this custom fields should be in your Ezus params and Write Exactly as they are written in your params technical name (<a href="#custom-fields">Custom fields</a>)</td>
+<td>You can add Custom Fields for your project, this custom fields should be in your Ezus params and Write Exactly as they are written in your params technical name (<a href="#custom-fields">Custom fields</a>)</td>
 </tr>
 </tbody></table>
-
-<aside class="success">
-Remember — You have to be authenticated to call this API with your bearer token
-</aside>
-<h2 id='post-projects-documents-create'>POST projects-documents-create</h2><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">axios</span><span class="dl">"</span><span class="p">);</span>
+<h2 id='post-projects-documents-create'>POST projects-documents-create</h2>
+<p>Create a document within a specific project based on its url</p>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">axios</span><span class="dl">"</span><span class="p">);</span>
 <span class="kd">const</span> <span class="nx">baseUrl</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1</span><span class="dl">"</span><span class="p">;</span>
 
 <span class="kd">const</span> <span class="nx">body</span> <span class="o">=</span> <span class="p">{</span>
@@ -811,7 +754,7 @@ Remember — You have to be authenticated to call this API with your bearer toke
 <span class="nx">axios</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="nx">baseUrl</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">/projects-documents-create</span><span class="dl">"</span><span class="p">,</span> <span class="nx">body</span><span class="p">,</span> <span class="nx">headers</span><span class="p">);</span>
 </code></pre></div>
 <blockquote>
-<p>The above command returns JSON structured like this:</p>
+<p>This method returns JSON structured like this:</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
@@ -820,11 +763,9 @@ Remember — You have to be authenticated to call this API with your bearer toke
     </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"89e48bb3-26ef-4b1e-aa60-b86ce714253d"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
-</span></code></pre></div>
-<p>This endpoint insert a document in a project.</p>
-<h3 id='http-request-4'>HTTP Request</h3>
+</span></code></pre></div><h3 id='http-request-4'>HTTP Request</h3>
 <p><code>POST https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/projects-documents-create</code></p>
-<h3 id='body-parameters-json-3'>Body Parameters (JSON)</h3>
+<h3 id='request-parameters-4'>Request Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -848,11 +789,9 @@ Remember — You have to be authenticated to call this API with your bearer toke
 <td><span style="color:red">(Required)</span> Link to the desired document (ONLY PDF)</td>
 </tr>
 </tbody></table>
-
-<aside class="success">
-Remember — You have to be authenticated to call this API with your bearer token
-</aside>
-<h1 id='clients'>Clients</h1><h2 id='get-client'>GET client</h2><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">axios</span><span class="dl">"</span><span class="p">);</span>
+<h1 id='clients'>Clients</h1><h2 id='get-client'>GET client</h2>
+<p>Retrieve information for a client record in Ezus. You need to specify to the Ezus API which client you want to retrieve by giving the adequate Ezus reference.</p>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">axios</span><span class="dl">"</span><span class="p">);</span>
 <span class="kd">const</span> <span class="nx">baseUrl</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1</span><span class="dl">"</span><span class="p">;</span>
 
 <span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
@@ -863,7 +802,7 @@ Remember — You have to be authenticated to call this API with your bearer toke
 <span class="nx">axios</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="nx">baseUrl</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">/client?reference=reference</span><span class="dl">"</span><span class="p">,</span> <span class="p">{},</span> <span class="nx">headers</span><span class="p">);</span>
 </code></pre></div>
 <blockquote>
-<p>The above command returns JSON structured like this:</p>
+<p>This method returns JSON structured like this:</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"erreur"</span><span class="p">:</span><span class="w"> </span><span class="s2">"false"</span><span class="p">,</span><span class="w">
@@ -916,18 +855,34 @@ Remember — You have to be authenticated to call this API with your bearer toke
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h3 id='http-request-5'>HTTP Request</h3>
 <p><code>GET https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/client?reference=reference</code></p>
-<h3 id='returned-values-2'>Returned Values</h3>
+<h3 id='request-parameters-5'>Request Parameters</h3>
 <table><thead>
 <tr>
-<th>Name</th>
+<th>Parameter</th>
 <th>Type</th>
-<th>Value</th>
+<th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>reference</td>
 <td>String</td>
-<td>The reference of the given client - The one you gave</td>
+<td>The reference of the client you want to retrieve</td>
+</tr>
+</tbody></table>
+<h3 id='response-2'>Response</h3>
+<p>JSON object containing the client information.</p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>reference</td>
+<td>String</td>
+<td>The reference of the client you want to retrieve</td>
 </tr>
 <tr>
 <td>type</td>
@@ -972,7 +927,7 @@ Remember — You have to be authenticated to call this API with your bearer toke
 <tr>
 <td>info_profile</td>
 <td>String</td>
-<td>info_profile of the client</td>
+<td>Profile of the client</td>
 </tr>
 <tr>
 <td>info_origin</td>
@@ -987,40 +942,36 @@ Remember — You have to be authenticated to call this API with your bearer toke
 <tr>
 <td>info_reference</td>
 <td>String</td>
-<td>Reference of the client (It is a client number that appears at the bottom of the client file. Not to be confused with reference)</td>
+<td>Reference of the client (It is a client number that appears at the bottom of the client record. Not to be confused with reference)</td>
 </tr>
 <tr>
 <td>user</td>
 <td>JSON</td>
-<td>User assigned to the client is a JSON who contain <code>email</code>, <code>first_name</code> and <code>last_name</code></td>
+<td>JSON object containing <code>email</code>, <code>first_name</code> and <code>last_name</code></td>
 </tr>
 <tr>
 <td>address</td>
 <td>JSON</td>
-<td>Address of the client JSON who contain <code>label</code>, <code>zip</code>, <code>city</code> and <code>country</code> (<a href="#address">Address</a>)</td>
+<td>JSON object containing <code>label</code>, <code>zip</code>, <code>city</code> and <code>country</code> (<a href="#address">Address</a>)</td>
 </tr>
 <tr>
 <td>projects</td>
 <td>JSON</td>
-<td>&quot;data&quot;: Array of json who contains {<code>reference</code>, <code>info_title</code>} Only 10 projects returned, &quot;size&quot;: Contain number of projects where the client is present</td>
+<td>Projects linked to the client (return only the 10 first projects). JSON object containing <code>data</code> (Array of JSON objects containing <code>reference</code>, <code>info_title</code>), <code>size</code></td>
 </tr>
 <tr>
 <td>contacts</td>
 <td>Array</td>
-<td>Array of json who contains <code>first_name</code>, <code>last_name</code>, <code>email</code></td>
+<td>Array of JSON contacts (<a href="#contacts">Contacts</a>)</td>
 </tr>
 <tr>
 <td>custom_fields</td>
 <td>Array</td>
-<td>Array of json who contains <code>name</code>, <code>value</code> (<a href="#custom-fields">Custom fields</a>)</td>
+<td>Array of JSON custom fields (<a href="#custom-fields">Custom fields</a>)</td>
 </tr>
 </tbody></table>
-
-<aside class="success">
-Remember — You have to be authenticated to call this API with your bearer token
-</aside>
 <h2 id='post-clients-upsert'>POST clients-upsert</h2>
-<p>In Ezus, a client is a person or a company to whom you will sell your projects</p>
+<p>Update a client record if the provided Ezus reference (or the email) do matches one of the client references in your account, otherwise create a new client record with the provided Ezus reference (or with a random one if no reference is provided). Note that for this endpoint, the email of the client can also be used as a primary key for the upsert.</p>
 <div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">axios</span><span class="dl">"</span><span class="p">);</span>
 <span class="kd">const</span> <span class="nx">baseUrl</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1</span><span class="dl">"</span><span class="p">;</span>
 
@@ -1054,7 +1005,7 @@ Remember — You have to be authenticated to call this API with your bearer toke
 <span class="nx">axios</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="nx">baseUrl</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">/clients-upsert</span><span class="dl">"</span><span class="p">,</span> <span class="nx">body</span><span class="p">,</span> <span class="nx">headers</span><span class="p">);</span>
 </code></pre></div>
 <blockquote>
-<p>The above command returns JSON structured like this:</p>
+<p>This method returns JSON structured like this:</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
@@ -1064,15 +1015,9 @@ Remember — You have to be authenticated to call this API with your bearer toke
     </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"clientReference"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
-</span></code></pre></div>
-<p>This endpoint Upsert a Client. The reference should be unique and allows to update an existing client or create a new client. If reference is not given, the email params is used as a primary key for your clients If you have multiple clients with the same email, the first client will be taken. If a client with this email already exist. An Ezus reference will be returned you must have to save it for your next uses. <code>this one will be updated with the new Params Given here.</code></p>
-<h3 id='http-request-6'>HTTP Request</h3>
+</span></code></pre></div><h3 id='http-request-6'>HTTP Request</h3>
 <p><code>POST https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/clients-upsert</code></p>
-<h3 id='body-parameters-json-4'>Body Parameters (JSON)</h3>
-<aside class="comment">
-If you do not add an optionnal parameter, it will be empty for a creation or simply not updated for an update. If the parameter is empty (""), same behaviour
-</aside>
-
+<h3 id='request-parameters-6'>Request Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -1106,11 +1051,9 @@ If you do not add an optionnal parameter, it will be empty for a creation or sim
 <td>You can add custom fields for your client, this custom fields should be in your Ezus params and Write exactly as they are written in your params technical name (<a href="#custom-fields">Custom fields</a>)</td>
 </tr>
 </tbody></table>
-
-<aside class="success">
-Remember — You have to be authenticated to call this API with your bearer token
-</aside>
-<h1 id='suppliers'>Suppliers</h1><h2 id='get-supplier'>GET supplier</h2><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">axios</span><span class="dl">"</span><span class="p">);</span>
+<h1 id='suppliers'>Suppliers</h1><h2 id='get-supplier'>GET supplier</h2>
+<p>Retrieve information for a supplier record in Ezus. You need to specify to the Ezus API which supplier you want to retrieve by giving the adequate Ezus reference.</p>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">axios</span><span class="dl">"</span><span class="p">);</span>
 <span class="kd">const</span> <span class="nx">baseUrl</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1</span><span class="dl">"</span><span class="p">;</span>
 
 <span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
@@ -1121,7 +1064,7 @@ Remember — You have to be authenticated to call this API with your bearer toke
 <span class="nx">axios</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="nx">baseUrl</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">/supplier?reference=reference</span><span class="dl">"</span><span class="p">,</span> <span class="p">{},</span> <span class="nx">headers</span><span class="p">);</span>
 </code></pre></div>
 <blockquote>
-<p>The above command returns JSON structured like this:</p>
+<p>This method returns JSON structured like this:</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"erreur"</span><span class="p">:</span><span class="w"> </span><span class="s2">"false"</span><span class="p">,</span><span class="w">
@@ -1185,18 +1128,34 @@ Remember — You have to be authenticated to call this API with your bearer toke
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h3 id='http-request-7'>HTTP Request</h3>
 <p><code>GET https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/supplier?reference=reference</code></p>
-<h3 id='returned-values-3'>Returned Values</h3>
+<h3 id='request-parameters-7'>Request Parameters</h3>
 <table><thead>
 <tr>
-<th>Name</th>
+<th>Parameter</th>
 <th>Type</th>
-<th>Value</th>
+<th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>reference</td>
 <td>String</td>
-<td>The Reference of the given supplier - The one you gave</td>
+<td>The reference of the supplier you want to retrieve</td>
+</tr>
+</tbody></table>
+<h3 id='response-3'>Response</h3>
+<p>JSON object containing the supplier information.</p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>reference</td>
+<td>String</td>
+<td>The reference of the supplier you want to retrieve</td>
 </tr>
 <tr>
 <td>company_name</td>
@@ -1221,7 +1180,7 @@ Remember — You have to be authenticated to call this API with your bearer toke
 <tr>
 <td>info_reference</td>
 <td>String</td>
-<td>Reference of the supplier (It is a supplier number that appears at the bottom of the supplier file. Not to be confused with reference)</td>
+<td>Reference of the supplier (It is a supplier number that appears at the bottom of the supplier record. Not to be confused with reference)</td>
 </tr>
 <tr>
 <td>visual_url</td>
@@ -1231,45 +1190,41 @@ Remember — You have to be authenticated to call this API with your bearer toke
 <tr>
 <td>user</td>
 <td>JSON</td>
-<td><code>Everyone</code>, <code>User Group</code> OR User assigned to the supplier JSON who contain <code>email</code>, <code>first_name</code>, <code>last_name</code></td>
+<td>One of the following option : <code>Everyone</code>, <code>User Group</code>, the User assigned to this supplier (JSON object containing <code>email</code>, <code>first_name</code>, <code>last_name</code>)</td>
 </tr>
 <tr>
 <td>medias</td>
 <td>JSON</td>
-<td>Medias linked to the supplier, <code>data</code> contain Array of json who contains {<code>media_name</code>, <code>path_full</code>} and <code>size</code>. Return only the 10 first images</td>
+<td>JSON object medias (<a href="#medias">Medias</a>)</td>
 </tr>
 <tr>
 <td>address</td>
 <td>JSON</td>
-<td>Address of the supplier JSON who contain <code>label</code>, <code>zip</code>, <code>city</code> and <code>country</code> (<a href="#address">Address</a>)</td>
+<td>JSON object address (<a href="#address">Address</a>)</td>
 </tr>
 <tr>
 <td>products</td>
 <td>JSON</td>
-<td><code>data</code> contain Array of json who contains <code>reference</code>, <code>title</code> and <code>size</code>. Return only the 10 first products</td>
+<td>JSON object products (<a href="#products">Products</a>)</td>
 </tr>
 <tr>
 <td>contacts</td>
 <td>Array</td>
-<td>Contacts Assigned to the supplier formated in an Array of Json who contains <code>first_name</code>, <code>last_name</code>, <code>email</code></td>
+<td>Array of JSON contacts (<a href="#contacts">Contacts</a>)</td>
 </tr>
 <tr>
 <td>langs</td>
 <td>Array</td>
-<td>Array of Json who contains <code>lang</code>, <code>name</code>, <code>short_description</code> and <code>long_description</code> (<a href="#langs">Langs</a>)</td>
+<td>Array of JSON langs (<a href="#langs">Langs</a>)</td>
 </tr>
 <tr>
 <td>custom_fields</td>
 <td>Array</td>
-<td>Array of Json who contains <code>name</code>, <code>value</code> (<a href="#custom-fields">Custom fields</a>)</td>
+<td>Array of JSON custom fields (<a href="#custom-fields">Custom fields</a>)</td>
 </tr>
 </tbody></table>
-
-<aside class="success">
-Remember — You have to be authenticated to call this API with your bearer token
-</aside>
 <h2 id='post-suppliers-upserts'>POST suppliers-upserts</h2>
-<p>In Ezus, a supplier is a company, which will charge you for prestations. It can be a hotel, an airline or a kanoe club</p>
+<p>Update a supplier record if the provided Ezus reference do matches one of the supplier references in your account, otherwise create a new supplier record with the provided Ezus reference (or with a random one if no reference is provided).</p>
 <div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">axios</span><span class="dl">"</span><span class="p">);</span>
 <span class="kd">const</span> <span class="nx">baseUrl</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1</span><span class="dl">"</span><span class="p">;</span>
 
@@ -1302,7 +1257,7 @@ Remember — You have to be authenticated to call this API with your bearer toke
 <span class="nx">axios</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="nx">baseUrl</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">/suppliers-upsert</span><span class="dl">"</span><span class="p">,</span> <span class="nx">body</span><span class="p">,</span> <span class="nx">headers</span><span class="p">);</span>
 </code></pre></div>
 <blockquote>
-<p>The above command returns JSON structured like this:</p>
+<p>This method returns JSON structured like this:</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
@@ -1312,15 +1267,9 @@ Remember — You have to be authenticated to call this API with your bearer toke
     </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SupplierReference"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
-</span></code></pre></div>
-<p>This endpoint upsert a supplier. The reference should be unique and allows to update an existing supplier or Create a new supplier. If reference is not given, the email params is used as a primary key for your suppliers If you have multiple suppliers with the same email, the first supplier will be taken. If a supplier with this email already exist. An Ezus reference will be returned you must have to save it for your next uses. <code>this one will be updated with the new Params Given here.</code></p>
-<h3 id='http-request-8'>HTTP Request</h3>
+</span></code></pre></div><h3 id='http-request-8'>HTTP Request</h3>
 <p><code>POST https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/suppliers-upsert</code></p>
-<h3 id='body-parameters-json-5'>Body Parameters (JSON)</h3>
-<aside class="comment">
-If you do not add an Optionnal parameter, it will be empty for a creation or simply not updated for an update. If the parameter is empty (""), same behaviour
-</aside>
-
+<h3 id='request-parameters-8'>Request Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -1361,14 +1310,12 @@ If you do not add an Optionnal parameter, it will be empty for a creation or sim
 <tr>
 <td>custom_fields</td>
 <td>JSON</td>
-<td>You can add custom fields for your client, this custom fields should be in your Ezus params and Write Exactly as they are written in your params technical name (<a href="#custom-fields">Custom fields</a>)</td>
+<td>You can add custom fields for your supplier, this custom fields should be in your Ezus params and Write Exactly as they are written in your params technical name (<a href="#custom-fields">Custom fields</a>)</td>
 </tr>
 </tbody></table>
-
-<aside class="success">
-Remember — You have to be authenticated to call this API with your bearer token
-</aside>
-<h1 id='products'>Products</h1><h2 id='get-product'>GET product</h2><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">axios</span><span class="dl">"</span><span class="p">);</span>
+<h1 id='products'>Products</h1><h2 id='get-product'>GET product</h2>
+<p>Retrieve information for a product record in Ezus. You need to specify to the Ezus API which product you want to retrieve by giving the adequate Ezus reference.</p>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">axios</span><span class="dl">"</span><span class="p">);</span>
 <span class="kd">const</span> <span class="nx">baseUrl</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1</span><span class="dl">"</span><span class="p">;</span>
 
 <span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
@@ -1379,7 +1326,7 @@ Remember — You have to be authenticated to call this API with your bearer toke
 <span class="nx">axios</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="nx">baseUrl</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">/product?reference=reference</span><span class="dl">"</span><span class="p">,</span> <span class="p">{},</span> <span class="nx">headers</span><span class="p">);</span>
 </code></pre></div>
 <blockquote>
-<p>The above command returns JSON structured like this:</p>
+<p>This method returns JSON structured like this:</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"erreur"</span><span class="p">:</span><span class="w"> </span><span class="s2">"false"</span><span class="p">,</span><span class="w">
@@ -1447,18 +1394,34 @@ Remember — You have to be authenticated to call this API with your bearer toke
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h3 id='http-request-9'>HTTP Request</h3>
 <p><code>GET https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/product?reference=reference</code></p>
-<h3 id='returned-values-4'>Returned Values</h3>
+<h3 id='request-parameters-9'>Request Parameters</h3>
 <table><thead>
 <tr>
-<th>Name</th>
+<th>Parameter</th>
 <th>Type</th>
-<th>Value</th>
+<th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>reference</td>
 <td>String</td>
-<td>The reference of the given product - The one you gave</td>
+<td>The reference of the product you want to retrieve</td>
+</tr>
+</tbody></table>
+<h3 id='response-4'>Response</h3>
+<p>JSON object containing the product information.</p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>reference</td>
+<td>String</td>
+<td>The reference of the product you want to retrieve</td>
 </tr>
 <tr>
 <td>title</td>
@@ -1513,45 +1476,41 @@ Remember — You have to be authenticated to call this API with your bearer toke
 <tr>
 <td>medias</td>
 <td>JSON</td>
-<td>Medias linked to the product, <code>data</code> contain Array of json who contains {<code>media_name</code>, <code>path_full</code>} and <code>size</code>. Return only the 10 first images</td>
+<td>JSON object medias (<a href="#medias">Medias</a>)</td>
 </tr>
 <tr>
 <td>supplier</td>
 <td>JSON</td>
-<td>JSON who contains <code>reference</code>, <code>company_name</code></td>
+<td>JSON object containing <code>reference</code>, <code>company_name</code></td>
 </tr>
 <tr>
 <td>package</td>
 <td>JSON</td>
-<td>JSON who contains <code>reference</code>, <code>title</code></td>
+<td>JSON object containing <code>reference</code>, <code>title</code></td>
 </tr>
 <tr>
 <td>commission</td>
 <td>JSON</td>
-<td>JSON who contain: <code>value</code>: Commission as number, <code>commission_regime</code> : The commission regime can be &quot;percent&quot; (commission is a percent of the buying/selling price) or &quot;currency&quot; (commission is a fix value) and <code>commission_mode</code>: &quot;default&quot; or &quot;purchase&quot; default mode is base on the buying price, purchase mode based on the selling price</td>
+<td>JSON object containing <code>value</code>, <code>commission_regime</code>, <code>commission_mode</code></td>
 </tr>
 <tr>
 <td>langs</td>
 <td>Array</td>
-<td>Array of json who contains <code>lang</code>, <code>name</code>, <code>short_description</code>, <code>long_description</code> (<a href="#langs">Langs</a>)</td>
+<td>Array of JSON langs (<a href="#langs">Langs</a>)</td>
 </tr>
 <tr>
 <td>rates</td>
 <td>Array</td>
-<td>Array of json who contains <code>reference</code>, <code>type</code>, <code>name</code>, <code>purchase_price_pretax</code>, <code>margin_rate</code>, <code>sale_price_pretax</code>, <code>child</code> (<a href="#rates">Rates</a>)</td>
+<td>Array of JSON rates (<a href="#rates">Rates</a>)</td>
 </tr>
 <tr>
 <td>custom_fields</td>
 <td>Array</td>
-<td>Array of json who contains <code>name</code>, <code>value</code> (<a href="#custom-fields">Custom fields</a>)</td>
+<td>Array of JSON custom fields (<a href="#custom-fields">Custom fields</a>)</td>
 </tr>
 </tbody></table>
-
-<aside class="success">
-Remember — You have to be authenticated to call this API with your bearer token
-</aside>
 <h2 id='post-products-upsert'>POST products-upsert</h2>
-<p>In Ezus, a product is an element that can be included in a project or a step, like a night in a hotel, a flight from Paris to Tokyo or a parachute jump</p>
+<p>Update a product record if the provided Ezus reference do matches one of the product references in your account, otherwise create a new product record with the provided Ezus reference (or with a random one if no reference is provided).</p>
 <div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">axios</span><span class="dl">"</span><span class="p">);</span>
 <span class="kd">const</span> <span class="nx">baseUrl</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1</span><span class="dl">"</span><span class="p">;</span>
 
@@ -1585,7 +1544,7 @@ Remember — You have to be authenticated to call this API with your bearer toke
 <span class="nx">axios</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="nx">baseUrl</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">/products-upsert</span><span class="dl">"</span><span class="p">,</span> <span class="nx">body</span><span class="p">,</span> <span class="nx">headers</span><span class="p">);</span>
 </code></pre></div>
 <blockquote>
-<p>The above command returns JSON structured like this:</p>
+<p>This method returns JSON structured like this:</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
@@ -1595,15 +1554,9 @@ Remember — You have to be authenticated to call this API with your bearer toke
     </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"productReference"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
-</span></code></pre></div>
-<p>This endpoint upsert a product. The reference should be unique and allows to update an existing product or create a new product. If reference is not given, the product will be created. An Ezus reference will be returned you must have to save it for your next updates of this product. <code>this one will be updated with the new Params Given here.</code></p>
-<h3 id='http-request-10'>HTTP Request</h3>
+</span></code></pre></div><h3 id='http-request-10'>HTTP Request</h3>
 <p><code>POST https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/products-upsert</code></p>
-<h3 id='body-parameters-json-6'>Body Parameters (JSON)</h3>
-<aside class="comment">
-If you do not add an optionnal parameter, it will be empty for a creation or simply not updated for an update. If the parameter is empty (""), same behaviour
-</aside>
-
+<h3 id='request-parameters-10'>Request Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -1669,119 +1622,163 @@ If you do not add an optionnal parameter, it will be empty for a creation or sim
 <tr>
 <td>commission</td>
 <td>JSON</td>
-<td>JSON who contain: <code>value</code>: Commission as number, <code>commission_regime</code> : The commission regime can be &quot;percent&quot; (commission is a percent of the buying/selling price) or &quot;currency&quot; (commission is a fix value) and <code>commission_mode</code>: &quot;default&quot; or &quot;purchase&quot; default mode is base on the buying price, purchase mode based on the selling price</td>
+<td>JSON object containing <code>value</code>: Commission as number, <code>commission_regime</code> : The commission regime can be &quot;percent&quot; (commission is a percent of the buying/selling price) or &quot;currency&quot; (commission is a fix value) and <code>commission_mode</code>: &quot;default&quot; or &quot;purchase&quot; default mode is base on the buying price, purchase mode based on the selling price</td>
 </tr>
 <tr>
 <td>custom_fields</td>
 <td>JSON</td>
-<td>You can add Custom Fields for your client, this custom fields should be in your Ezus params and Write Exactly as they are written in your params technical name (<a href="#custom-fields">Custom fields</a>)</td>
+<td>You can add Custom Fields for your product, this custom fields should be in your Ezus params and Write Exactly as they are written in your params technical name (<a href="#custom-fields">Custom fields</a>)</td>
 </tr>
 </tbody></table>
+<h1 id='package'>Package</h1><h2 id='get-package'>GET package</h2>
+<p>Retrieve information for a package record in Ezus. You need to specify to the Ezus API which package you want to retrieve by giving the adequate Ezus reference.</p>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">axios</span><span class="dl">"</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">baseUrl</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1</span><span class="dl">"</span><span class="p">;</span>
 
-<aside class="success">
-Remember — You have to be authenticated to call this API with your bearer token
-</aside>                                                                                                                    |
+<span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="dl">"</span><span class="s2">X-API-KEY</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">&lt;YOUR_API_KEY&gt;</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">Authorization</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Bearer &lt;YOUR_TOKEN&gt;</span><span class="dl">"</span><span class="p">,</span>
+<span class="p">};</span>
 
-# Package
+<span class="nx">axios</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="nx">baseUrl</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">/package?reference=reference</span><span class="dl">"</span><span class="p">,</span> <span class="p">{},</span> <span class="nx">headers</span><span class="p">);</span>
+</code></pre></div>
+<blockquote>
+<p>This method returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"erreur"</span><span class="p">:</span><span class="w"> </span><span class="s2">"false"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"packages_reference"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"packages_title"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"capacity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"info_notes"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Notes on the Package"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"visual_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"urlofthepackage.com"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"medias"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"media_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"img.jpeg"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"path_full"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://link-img.jpeg"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"suppliers"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"suppliers_reference"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"company_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"supplier_company"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"products"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"products_reference"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"product_title"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"langs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"lang"</span><span class="p">:</span><span class="w"> </span><span class="s2">"french"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"packages_title (FR)"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"short_description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"short_description (FR)"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"long_description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"long_description (FR)"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"lang"</span><span class="p">:</span><span class="w"> </span><span class="s2">"english"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"packages_title (GB)"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"short_description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"short_description (GB)"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"long_description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"long_description (GB)"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"custom_fields"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CustomField"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Value"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='http-request-11'>HTTP Request</h3>
+<p><code>GET https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/package?reference=reference</code></p>
+<h3 id='request-parameters-11'>Request Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>reference</td>
+<td>String</td>
+<td>The reference of the package you want to retrieve</td>
+</tr>
+</tbody></table>
+<h3 id='response-5'>Response</h3>
+<p>JSON object containing the package information.</p>
 
-## GET package
-
-```javascript
-const axios = require("axios");
-const baseUrl = "https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1";
-
-const headers = {
-  "X-API-KEY": "<YOUR_API_KEY>",
-  Authorization: "Bearer <YOUR_TOKEN>",
-};
-
-axios.post(baseUrl + "/package?reference=reference", {}, headers);
-```
-
-> The above command returns JSON structured like this:
-
-```json
-{
-  "erreur": "false",
-  "reference": "packages_reference",
-  "title": "packages_title",
-  "capacity": "3",
-  "info_notes": "Notes on the Package",
-  "visual_url": "urlofthepackage.com",
-  "medias": {
-    "data": [
-      {
-        "media_name": "img.jpeg",
-        "path_full": "https://link-img.jpeg"
-      }
-    ],
-    "size": 1
-  },
-  "suppliers": {
-    "data": [
-      {
-        "reference": "suppliers_reference",
-        "company_name": "supplier_company"
-      }
-    ],
-    "size": 1
-  },
-  "products": {
-    "data": [
-      {
-        "reference": "products_reference",
-        "title": "product_title"
-      }
-    ],
-    "size": 1
-  },
-  "langs": [
-    {
-      "lang": "french",
-      "name": "packages_title (FR)",
-      "short_description": "short_description (FR)",
-      "long_description": "long_description (FR)"
-    },
-    {
-      "lang": "english",
-      "name": "packages_title (GB)",
-      "short_description": "short_description (GB)",
-      "long_description": "long_description (GB)"
-    }
-  ],
-  "custom_fields": [
-    {
-      "name": "CustomField",
-      "value": "Value"
-    }
-  ]
-}
-```
-
-### HTTP Request
-
-`GET https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/package?reference=reference`
-
-### Returned Values
-
-| Name          | Type   | Value                                                                                                                                          |
-| ------------- | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------- |
-| reference     | String | The reference of the given package - The one you gave                                                                                          |
-| title         | String | Name of the package                                                                                                                            |
-| capacity      | String | Capacity of the package                                                                                                                        |
-| info_notes    | String | Notes on the package budget                                                                                                                    |
-| visual_url    | String | URL of the google slides linked to this package                                                                                                |
-| medias        | JSON   | Medias linked to the package `data` contain Array of json who contains {`media_name`, `path_full`} and `size`. Return only the 10 first images |
-| suppliers     | JSON   | `data` contain Array of json who contains {`reference`, `company_name`} and `size`. Return only the 10 first suppliers                         |
-| products      | JSON   | `data` contain Array of json who contains {`reference`, `title`} and `size`. Return only the 10 first products                                 |
-| langs         | Array  | Array of json who contains `lang`, `name`, `short_description`, `long_description` ([Langs](#langs))                                           |
-| custom_fields | Array  | Array of json who contains `name`, `value` [Custom fields](#custom-fields)                                                                     |
-
-<aside class="success">
-Remember — You have to be authenticated to call this API with your bearer token
-</aside>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>reference</td>
+<td>String</td>
+<td>The reference of the package you want to retrieve</td>
+</tr>
+<tr>
+<td>title</td>
+<td>String</td>
+<td>Name of the package</td>
+</tr>
+<tr>
+<td>capacity</td>
+<td>String</td>
+<td>Capacity of the package</td>
+</tr>
+<tr>
+<td>info_notes</td>
+<td>String</td>
+<td>Notes on the package budget</td>
+</tr>
+<tr>
+<td>visual_url</td>
+<td>String</td>
+<td>URL of the google slides linked to this package</td>
+</tr>
+<tr>
+<td>medias</td>
+<td>JSON</td>
+<td>JSON object medias (<a href="#medias">Medias</a>)</td>
+</tr>
+<tr>
+<td>suppliers</td>
+<td>JSON</td>
+<td>JSON object suppliers (<a href="#suppliers">Suppliers</a>)</td>
+</tr>
+<tr>
+<td>products</td>
+<td>JSON</td>
+<td>JSON object products (<a href="#products">Products</a>)</td>
+</tr>
+<tr>
+<td>langs</td>
+<td>Array</td>
+<td>Array of JSON langs (<a href="#langs">Langs</a>)</td>
+</tr>
+<tr>
+<td>custom_fields</td>
+<td>Array</td>
+<td>Array of JSON custom fields <a href="#custom-fields">Custom fields</a></td>
+</tr>
+</tbody></table>
 <h2 id='post-packages_upsert'>POST packages_upsert</h2>
-<p>In Ezus, a package is a group of products and is intended to be added more easily to a project</p>
+<p>Update a package record if the provided Ezus reference do matches one of the package references in your account, otherwise create a new package record with the provided Ezus reference (or with a random one if no reference is provided).</p>
 <div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">axios</span><span class="dl">"</span><span class="p">);</span>
 <span class="kd">const</span> <span class="nx">baseUrl</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1</span><span class="dl">"</span><span class="p">;</span>
 
@@ -1802,7 +1799,7 @@ Remember — You have to be authenticated to call this API with your bearer toke
 <span class="nx">axios</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="nx">baseUrl</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">/packages-upsert</span><span class="dl">"</span><span class="p">,</span> <span class="nx">body</span><span class="p">,</span> <span class="nx">headers</span><span class="p">);</span>
 </code></pre></div>
 <blockquote>
-<p>The above command returns JSON structured like this:</p>
+<p>This method returns JSON structured like this:</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
@@ -1812,15 +1809,9 @@ Remember — You have to be authenticated to call this API with your bearer toke
     </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"packageReference"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
-</span></code></pre></div>
-<p>This endpoint upsert a package. The reference should be unique and allows to update an existing package or create a new package. If reference is not given, the package will be created. An Ezus reference will be returned you must have to save it for your next updates of this package. <code>this one will be updated with the new Params Given here.</code></p>
-<h3 id='http-request-11'>HTTP Request</h3>
+</span></code></pre></div><h3 id='http-request-12'>HTTP Request</h3>
 <p><code>POST https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/packages-upsert</code></p>
-<h3 id='body-parameters-json-7'>Body Parameters (JSON)</h3>
-<aside class="comment">
-If you do not add an Optionnal parameter, it will be empty for a creation or simply not updated for an update. If the parameter is empty (""), same behaviour
-</aside>
-
+<h3 id='request-parameters-12'>Request Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -1849,10 +1840,6 @@ If you do not add an Optionnal parameter, it will be empty for a creation or sim
 <td>You can add custom fields for your client, this custom fields should be in your Ezus params and Write exactly as they are written in your params technical name (<a href="#custom-fields">Custom fields</a>)</td>
 </tr>
 </tbody></table>
-
-<aside class="success">
-Remember — You have to be authenticated to call this API with your bearer token
-</aside>
 <h1 id='nested-resource'>Nested Resource</h1><div class="highlight"><pre class="highlight json tab-json"><code><span class="w">  </span><span class="nl">"custom_fields"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
       </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Text"</span><span class="p">,</span><span class="w">
@@ -1904,7 +1891,7 @@ Warning: the custom_fields of the projects endpoint must have their real name an
 <tr>
 <th>Options</th>
 <th>Type</th>
-<th>Value</th>
+<th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
@@ -1948,6 +1935,80 @@ Warning: the custom_fields of the projects endpoint must have their real name an
 <td>Not supported yet</td>
 </tr>
 </tbody></table>
+<h3 id='alternatives'>Alternatives</h3><div class="highlight"><pre class="highlight json tab-json"><code><span class="w">  </span><span class="nl">"alternatives"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"alternative_title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Alternative 1"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"trip_people"</span><span class="p">:</span><span class="w"> </span><span class="s2">"15"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"trip_budget"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"trip_date_in"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-07-31"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"trip_date_out"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-08-02"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"destination"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Destination"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"subdestination"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Subdestination"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"trip_duration"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"client"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Client reference"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"entreprise"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"company_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Client Company Name"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Client First Name"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Client Last Name"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"melchiorbengtsson@gmail.com"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span></code></pre></div>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>alternative_title</td>
+<td>String</td>
+<td>Title of the alternative</td>
+</tr>
+<tr>
+<td>trip_people</td>
+<td>String</td>
+<td>Number of people</td>
+</tr>
+<tr>
+<td>trip_budget</td>
+<td>Number</td>
+<td>Budget of the alternative</td>
+</tr>
+<tr>
+<td>trip_date_in</td>
+<td>String</td>
+<td>Date of the begining of this alternative, formated like : YYYY-MM-DD if it&#39;s empty, the project have no dates</td>
+</tr>
+<tr>
+<td>trip_date_out</td>
+<td>String</td>
+<td>Date of the end of this alternative, formated like : YYYY-MM-DD if it&#39;s empty, the project have no dates</td>
+</tr>
+<tr>
+<td>destination</td>
+<td>String</td>
+<td>Destination of the alternative</td>
+</tr>
+<tr>
+<td>subdestination</td>
+<td>String</td>
+<td>Subdestination of the alternative</td>
+</tr>
+<tr>
+<td>trip_duration</td>
+<td>String</td>
+<td>Number of days</td>
+</tr>
+<tr>
+<td>client</td>
+<td>JSON</td>
+<td>JSON that contain : <code>reference</code>, <code>type</code> (entreprise or individual), <code>company_name</code>, <code>first_name</code>, <code>last_name</code> and <code>email</code></td>
+</tr>
+</tbody></table>
 <h3 id='address'>Address</h3><div class="highlight"><pre class="highlight json tab-json"><code><span class="w">   </span><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"58 Rue de Paradis"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"zip"</span><span class="p">:</span><span class="w"> </span><span class="s2">"75009"</span><span class="p">,</span><span class="w">
@@ -1984,12 +2045,12 @@ Warning: the custom_fields of the projects endpoint must have their real name an
 </tr>
 </tbody></table>
 <h3 id='contact'>Contact</h3><div class="highlight"><pre class="highlight json tab-json"><code><span class="nl">"contact"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-  </span><span class="nl">"firstname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"firstname"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"lastname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"lastname"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"first_name"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"last_name"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"gender"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Ms"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"email@email.email"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0606060606"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"birthdate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2023-01-01"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"birth_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2023-01-01"</span><span class="p">,</span><span class="w">
 </span><span class="p">}</span><span class="err">,</span><span class="w">
 
 </span></code></pre></div>
@@ -2003,32 +2064,32 @@ Warning: the custom_fields of the projects endpoint must have their real name an
 <tr>
 <td>email</td>
 <td>String</td>
-<td>Email will be used to identify which client will be updated or create a new client if no email found</td>
+<td>Email of the contact</td>
 </tr>
 <tr>
-<td>firstname</td>
+<td>first_name</td>
 <td>String</td>
-<td>Firstname of the client as a string</td>
+<td>First name of the contact as a string</td>
 </tr>
 <tr>
-<td>lastname</td>
+<td>last_name</td>
 <td>String</td>
-<td>Lastname of the client as a string</td>
+<td>Lastn ame of the contact as a string</td>
 </tr>
 <tr>
 <td>gender</td>
 <td>String</td>
-<td>3 Options : <code>Mr</code>, <code>Ms</code> or <code>Undefined</code></td>
+<td><code>Mr</code>, <code>Ms</code> or <code>Undefined</code></td>
 </tr>
 <tr>
 <td>phone</td>
 <td>String</td>
-<td>Phone of the client as a string</td>
+<td>Phone of the contact as a string</td>
 </tr>
 <tr>
-<td>birthdate</td>
+<td>birth_date</td>
 <td>String</td>
-<td>Birthdate of the client formated like: YYYY-MM-DD if not formated correctly = NULL</td>
+<td>Birth date of the contact formated like: YYYY-MM-DD if not formated correctly = NULL</td>
 </tr>
 </tbody></table>
 <h3 id='rates'>Rates</h3><div class="highlight"><pre class="highlight json tab-json"><code><span class="w">  </span><span class="nl">"rates"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
