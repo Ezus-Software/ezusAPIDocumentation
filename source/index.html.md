@@ -130,37 +130,37 @@ axios.post(baseUrl + "/project?reference=project_reference_1234", {}, headers);
 {
   "erreur": "false",
   "reference": "project_reference_1234",
-  "info_title": "Project Title",
+  "info_title": "Paris fashion week 2024",
   "info_stage": "Confirmed",
-  "info_notes": "The notes about this project",
+  "info_notes": "Jane has verbally confirmed our latest quotation, but we need to check the availability of our best supplier before sending her the contract",
   "info_number": "202306001-P",
   "sales_manager": {
-    "email": "traveldesigner@email.com",
-    "first_name": "FirstName",
-    "last_name": "LastName"
+    "email": "travel-design@e-corp.com",
+    "first_name": "Alice",
+    "last_name": "Tate"
   },
   "project_manager": {
-    "email": "projectmanager@email.com",
-    "first_name": "FirstName",
-    "last_name": "LastName"
+    "email": "no-reply@e-corp.com",
+    "first_name": "Joe",
+    "last_name": "Shmoe"
   },
   "alternatives": [
     {
-      "alternative_title": "Alternative 1",
+      "alternative_title": "Main Alternative",
       "trip_people": "15",
-      "trip_budget": "0",
-      "trip_date_in": "2022-07-31",
-      "trip_date_out": "2022-08-02",
-      "trip_duration": "2",
+      "trip_budget": "90000",
+      "trip_date_in": "2024-03-01",
+      "trip_date_out": "2024-03-09",
+      "trip_duration": "9",
       "trip_destination": "France",
       "trip_subdestination": "Paris",
       "client": {
         "reference": "client_reference_1234",
         "type": "entreprise",
-        "company_name": "Client Company Name",
-        "first_name": "Client First Name",
-        "last_name": "Client Last Name",
-        "email": "client@email.com"
+        "company_name": "MOKE INTERNATIONAL LIMITED",
+        "first_name": "Jane",
+        "last_name": "Doe",
+        "email": "contact@moke-international.com"
       }
     }
   ],
@@ -201,8 +201,8 @@ JSON object containing the project information.
 | info_stage      | String | The stage of your project (Confirmed, Received, Paid...)                                         |
 | info_notes      | String | Notes on your project                                                                            |
 | info_number     | String | File number that appears at the bottom of the project record. Not to be confused with reference! |
-| sales_manager   | JSON   | JSON object containing `email`, `first_name` and `last_name`                                     |
-| project_manager | JSON   | JSON object containing `email`, `first_name` and `last_name`                                     |
+| sales_manager   | JSON   | JSON object user ([User](#user))                                                                 |
+| project_manager | JSON   | JSON object user ([User](#user))                                                                 |
 | alternatives    | Array  | Array of JSON alternatives ([Alternatives](#alternatives))                                       |
 | custom_fields   | Array  | Array of JSON custom fields ([Custom fields](#custom-fields))                                    |
 
@@ -216,20 +216,14 @@ const baseUrl = "https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1";
 
 const body = {
   reference: "project_reference_1234",
-  info_title: "project_title",
+  info_title: "Paris fashion week 2024",
   trip_people: "15",
-  trip_budget: "3000",
-  trip_date_in: "2022-07-31",
-  trip_date_out: "2022-08-02",
-  sales_manager_email: "emailofthesales@mail.com",
+  trip_budget: "90000",
+  trip_date_in: "2023-03-01",
+  trip_date_out: "2023-03-09",
+  sales_manager_email: "travel-design@e-corp.com",
   client_reference: "client_reference_1234",
-  custom_fields: [
-    { name: "Text", value: "I am a text" },
-    { name: "Dropdown", value: "nameOption2" },
-    { name: "Date", value: "2012-11-24" },
-    { name: "Time", value: "2006-10-07T12:06:56.568+01:00" },
-    { name: "Checkbox", value: "true" },
-  ],
+  custom_fields: [{ name: "CustomField", value: "I need value" }],
 };
 const headers = {
   "X-API-KEY": "<YOUR_API_KEY>",
@@ -263,17 +257,17 @@ axios.post(baseUrl + "/projects-upsert", body, headers);
 
 ### Body parameters (application/json)
 
-| Parameter           | Type   | Description                                                                                                                                                                                                                                              |
-| ------------------- | ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| reference           | String | If provided, the unique reference associated to the project you want to update or insert (in case the one you provided has never been used). If not provided, a project will be inserted with a random one.                                              |
-| info_title          | String | Title of your project, mandatory if you create a new project                                                                                                                                                                                             |
-| trip_people         | Number | Number of people in your project                                                                                                                                                                                                                         |
-| trip_budget         | Number | Budget of your project                                                                                                                                                                                                                                   |
-| trip_date_in        | Date   | Date of the beginning of your project formated like YYYY-MM-DD if not formatted correctly, or if duration > 40 days or if trip_date_in > trip_date_out, project will be set as 1day and date = today. If project is without Date, no date will be setted |
-| trip_date_out       | Date   | Date of the end of your project formated like YYYY-MM-DD if not formatted correctly, or if duration > 40 days or if trip_date_in > trip_date_out, project will be set as 1day and date = today. If project is without Date, no date will be setted       |
-| sales_manager_email | Email  | Email of the Sales Manager, by default if no sales_manager or not found will be assignated to nobody                                                                                                                                                     |
-| client_reference    | String | reference or Email of the Client, if the reference don't match with a client, API will try with client_email if setted else, No clients will be assigned                                                                                                 |
-| custom_fields       | JSON   | You can add Custom Fields for your project, this custom fields should be in your Ezus params and Write Exactly as they are written in your params technical name ([Custom fields](#custom-fields))                                                       |
+| Parameter           | Type   | Description                                                                                                                                                                                                                                                                      |
+| ------------------- | ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| reference           | String | If provided, the unique reference associated to the project you want to update or insert (in case the one you provided has never been used). If not provided, a project will be inserted with a random one.                                                                      |
+| info_title          | String | Title of your project, mandatory if you create a new project                                                                                                                                                                                                                     |
+| trip_people         | Number | Number of people in your project                                                                                                                                                                                                                                                 |
+| trip_budget         | Number | Forecasted budget of your project                                                                                                                                                                                                                                                |
+| trip_date_in        | Date   | Date of the beginning of your project in a "YYYY-MM-DD" format string. If not formatted correctly, or if duration > 40 days or if trip_date_in > trip_date_out, project will be set as 1 day and date = today. If project is without Date, no date will be setted                |
+| trip_date_out       | Date   | Date of the end of your project in a "YYYY-MM-DD" format string. If not formatted correctly, or if duration > 40 days or if trip_date_in > trip_date_out, project will be set as 1 day and date = today. If project is without sate, no date will be setted                      |
+| sales_manager_email | Email  | Email of the Ezus user that will be set as the sales manager of the project. By default, if no sales manager is provided or the provided email do not match any user on this account, the project will be assignated to None                                                     |
+| client_reference    | String | This can be a reference or the email of a client already created in this Ezus account. By default, if no client is provided, or if the reference/email provided does not correspond to any client reference/email in this account, the project will not be linked to any client. |
+| custom_fields       | JSON   | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                                                                                                                                    |
 
 ### Response
 
@@ -288,9 +282,9 @@ const axios = require("axios");
 const baseUrl = "https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1";
 
 const body = {
-  reference: "document_reference",
-  title: "Document test",
-  link: "https://www.linktothedocument.pdf",
+  project_reference: "project_reference_1234",
+  title: "Document PDF",
+  link: "https://www.website.com/my_document.pdf",
 };
 const headers = {
   "X-API-KEY": "<YOUR_API_KEY>",
@@ -322,11 +316,11 @@ axios.post(baseUrl + "/projects-documents-create", body, headers);
 
 ### Body parameters (application/json)
 
-| Parameter | Type   | Description                                                                                            |
-| --------- | ------ | ------------------------------------------------------------------------------------------------------ |
-| reference | String | <span style="color:red">(Required)</span> The project reference in which you want to insert a document |
-| title     | String | <span style="color:red">(Required)</span> Title of your document                                       |
-| link      | Link   | <span style="color:red">(Required)</span> HTTP link of your document (only PDF)                        |
+| Parameter         | Type   | Description                                                                                            |
+| ----------------- | ------ | ------------------------------------------------------------------------------------------------------ |
+| project_reference | String | <span style="color:red">(Required)</span> The project reference in which you want to insert a document |
+| title             | String | <span style="color:red">(Required)</span> Title of your document                                       |
+| link              | Link   | <span style="color:red">(Required)</span> HTTP link of your document (only PDF)                        |
 
 ### Response
 
@@ -357,25 +351,25 @@ axios.post(baseUrl + "/client?reference=client_reference_1234", {}, headers);
   "erreur": "false",
   "reference": "client_reference_1234",
   "type": "entreprise",
-  "company_name": "Company Name",
-  "first_name": "Fistname",
-  "last_name": "Lastname",
-  "email": "client@email.com",
-  "activity": "Client Activity",
-  "vat_number": "Client VAT Number",
-  "siret": "Client Siret",
-  "info_profile": "Client",
-  "info_origin": "Client Source",
-  "info_notes": "Notes on the client",
+  "company_name": "MOKE INTERNATIONAL LIMITED",
+  "first_name": "Jane",
+  "last_name": "Doe",
+  "email": "contact@moke-international.com",
+  "activity": "Sofware",
+  "vat_number": "GB 240-635-038",
+  "siret": "09728676",
+  "info_profile": "Prospect",
+  "info_origin": "Adwords",
+  "info_notes": "This prospect looks interesting to follow",
   "info_number": "202306001-C",
   "user": {
-    "email": "user@email.com",
-    "first_name": "FirstName",
-    "last_name": "LastName"
+    "email": "tommy@e-corp.com",
+    "first_name": "Tommy",
+    "last_name": "Atkins"
   },
   "address": {
     "label": "58 Rue de Paradis",
-    "zip": "75009",
+    "zip": "75010",
     "city": "Paris",
     "country": "France"
   },
@@ -390,9 +384,12 @@ axios.post(baseUrl + "/client?reference=client_reference_1234", {}, headers);
   },
   "contacts": [
     {
-      "first_name": "Firstname",
-      "last_name": "Lastname",
-      "email": "contact@email.com"
+      "first_name": "Jane",
+      "last_name": "Doe",
+      "email": "contact@moke-international.com",
+      "gender": "Ms",
+      "phone": "0606060606",
+      "birth_date": "1986-09-17"
     }
   ],
   "custom_fields": [
@@ -428,20 +425,20 @@ JSON object containing the client information.
 | Property      | Type   | Description                                                                                                                                                           |
 | ------------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | reference     | String | The reference of the client you wish to retrieve                                                                                                                      |
-| type          | String | The type of the client ["entreprise", "individual"]                                                                                                                   |
+| type          | String | The type of the client can be either "entreprise" or "individual"                                                                                                     |
 | company_name  | String | Name of the company of your client                                                                                                                                    |
-| first_name    | String | First name of the client                                                                                                                                              |
-| last_name     | String | Last name of the client                                                                                                                                               |
-| email         | String | Email of the client                                                                                                                                                   |
-| activity      | String | Activity of the client (Only for entreprise)                                                                                                                          |
-| vat_number    | String | VAT number of the client (Only for entreprise)                                                                                                                        |
-| siret         | String | Siret number of the client (Only for entreprise)                                                                                                                      |
+| first_name    | String | Frist name of the main contact of the client                                                                                                                          |
+| last_name     | String | Last name of the main contact of the client                                                                                                                           |
+| email         | String | Email of the main contact of the client                                                                                                                               |
+| activity      | String | Activity of the client (only for entreprise)                                                                                                                          |
+| vat_number    | String | VAT number of the client (only for entreprise)                                                                                                                        |
+| siret         | String | Siret number of the client (only for entreprise)                                                                                                                      |
 | info_profile  | String | Profile of the client                                                                                                                                                 |
 | info_origin   | String | Source of the client                                                                                                                                                  |
 | info_notes    | String | Notes on the client                                                                                                                                                   |
 | info_number   | String | File number that appears at the bottom of the client record. Not to be confused with reference!                                                                       |
-| user          | JSON   | JSON object containing `email`, `first_name` and `last_name`                                                                                                          |
-| address       | JSON   | JSON object containing `label`, `zip`, `city` and `country` ([Address](#address))                                                                                     |
+| user          | JSON   | JSON object user ([User](#user))                                                                                                                                      |
+| address       | JSON   | JSON object address` ([Address](#address))                                                                                                                            |
 | projects      | JSON   | Projects linked to the client (return only the 10 first projects). JSON object containing `data` (Array of JSON objects containing `reference`, `info_title`), `size` |
 | contacts      | Array  | Array of JSON contacts ([Contacts](#contacts))                                                                                                                        |
 | custom_fields | Array  | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                         |
@@ -458,18 +455,18 @@ const body = {
   reference: "client_reference",
   company_name: "client_company_name",
   contact: {
-    firstname: "firstname",
-    lastname: "lastname",
+    first_name: "first_name",
+    last_name: "last_name",
     gender: "Mr",
     email: "email@email.email",
     phone: "0606060606",
-    birthdate: "2023-01-01",
+    birth_date: "2023-01-01",
   },
   address: {
     label: "58 Rue de Paradis",
     city: "Paris",
     country: "France",
-    zip: "75009",
+    zip: "75010",
   },
   custom_fields: [
     { name: "field1", value: "field1Value" },
@@ -548,29 +545,30 @@ axios.post(
 {
   "erreur": "false",
   "reference": "supplier_reference_1234",
-  "company_name": "Company Name",
-  "capacity": "3",
+  "company_name": "The best hotel",
+  "website": "www.the_best_hotel.com",
+  "capacity": 200,
   "type": "accom, activity",
-  "info_notes": "Notes on the supplier",
+  "info_notes": "Emily confirmed: this hotel really is the best in town.",
   "info_number": "202306001-S",
-  "visual_url": "urlofthevisual.com",
+  "visual_url": "",
   "user": {
-    "email": "user@email.com",
-    "first_name": "FirstName",
-    "last_name": "LastName"
+    "email": "travel-design@e-corp.com",
+    "first_name": "Alice",
+    "last_name": "Tate"
   },
   "medias": {
     "data": [
       {
-        "media_name": "img.jpeg",
-        "path_full": "https://link-img.jpeg"
+        "media_name": "The lobby",
+        "path_full": "www.the_best_hotel.com/media/loby.jpg"
       }
     ],
     "size": 1
   },
   "address": {
     "label": "58 Rue de Paradis",
-    "zip": "75009",
+    "zip": "75010",
     "city": "Paris",
     "country": "France"
   },
@@ -578,30 +576,39 @@ axios.post(
     "data": [
       {
         "reference": "product_reference_1234",
-        "title": "product_title"
+        "title": "2-bed room with breakfast"
       }
     ],
     "size": 1
   },
   "contacts": [
     {
-      "first_name": "Firstname",
-      "last_name": "Lastname",
-      "email": "contact@email.com"
+      "first_name": "Bob",
+      "last_name": "Morane",
+      "email": "bob@proton.me",
+      "gender": "Mr",
+      "phone": "0606060606",
+      "birth_date": "1986-09-17"
     }
   ],
   "langs": [
     {
       "lang": "american",
-      "name": "American Name",
-      "short_description": "Short American Description",
-      "long_description": "Short American Description"
+      "name": "The best hotel",
+      "short_description": "The best hotel: Parisian luxury redefined.",
+      "long_description": "Welcome to The best hotel, a luxurious Parisian hotel nestled in the heart of the City of Lights. Indulge in timeless elegance, where opulent suites, Michelin-starred dining, and breathtaking views of the Eiffel Tower create an unforgettable experience. Immerse yourself in the rich history and artistry of Paris, while our impeccable service caters to your every desire. Discover the epitome of sophistication at The best hotel where dreams become reality."
+    },
+    {
+      "lang": "spanish",
+      "name": "The best hotel",
+      "short_description": "Luz y lujo en París: The best hotel.",
+      "long_description": "Bienvenido a The best hotel, un lujoso hotel parisino ubicado en el corazón de la Ciudad de las Luces. Disfruta de la elegancia atemporal, donde suites opulentas, gastronomía de estrella Michelin y vistas impresionantes de la Torre Eiffel crean una experiencia inolvidable. Sumérgete en la rica historia y artesanía de París, mientras nuestro servicio impecable atiende cada uno de tus deseos. Descubre la cúspide de la sofisticación en The best hotel donde los sueños se hacen realidad."
     }
   ],
   "custom_fields": [
     {
-      "name": "CustomField",
-      "value": "Value"
+      "name": "Stars",
+      "value": "5"
     }
   ]
 }
@@ -628,22 +635,22 @@ axios.post(
 
 JSON object containing the supplier information.
 
-| Property      | Type   | Description                                                                                                                                           |
-| ------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
-| reference     | String | The reference of the supplier you wish to retrieve                                                                                                    |
-| company_name  | String | Name of the company of your supplier                                                                                                                  |
-| capacity      | String | Capacity of the supplier                                                                                                                              |
-| type          | String | Type of the supplier, the different types are separated by commas                                                                                     |
-| info_notes    | String | Notes on the supplier                                                                                                                                 |
-| info_number   | String | File number that appears at the bottom of the supplier record. Not to be confused with reference!                                                     |
-| visual_url    | String | Link to the google Slides linked to the supplier in Ezus                                                                                              |
-| user          | JSON   | One of the following option: `Everyone`, `User Group`, the User assigned to this supplier (JSON object containing `email`, `first_name`, `last_name`) |
-| medias        | JSON   | JSON object medias ([Medias](#medias))                                                                                                                |
-| address       | JSON   | JSON object address ([Address](#address))                                                                                                             |
-| products      | JSON   | JSON object products ([Products](#products))                                                                                                          |
-| contacts      | Array  | Array of JSON contacts ([Contacts](#contacts))                                                                                                        |
-| langs         | Array  | Array of JSON langs ([Langs](#langs))                                                                                                                 |
-| custom_fields | Array  | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                         |
+| Property      | Type   | Description                                                                                       |
+| ------------- | ------ | ------------------------------------------------------------------------------------------------- |
+| reference     | String | The reference of the supplier you wish to retrieve                                                |
+| company_name  | String | Name of the company of your supplier                                                              |
+| capacity      | String | Capacity of the supplier                                                                          |
+| type          | String | Type of the supplier, the different types are separated by commas                                 |
+| info_notes    | String | Notes on the supplier                                                                             |
+| info_number   | String | File number that appears at the bottom of the supplier record. Not to be confused with reference! |
+| visual_url    | String | Link to the google Slides linked to the supplier in Ezus                                          |
+| user          | JSON   | JSON object user ([User](#user))                                                                  |
+| medias        | JSON   | JSON object medias ([Medias](#medias))                                                            |
+| address       | JSON   | JSON object address ([Address](#address))                                                         |
+| products      | JSON   | JSON object products ([Products](#products))                                                      |
+| contacts      | Array  | Array of JSON contacts ([Contacts](#contacts))                                                    |
+| langs         | Array  | Array of JSON langs ([Langs](#langs))                                                             |
+| custom_fields | Array  | Array of JSON custom fields ([Custom fields](#custom-fields))                                     |
 
 ## POST suppliers-upsert
 
@@ -655,26 +662,25 @@ const baseUrl = "https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1";
 
 const body = {
   reference: "supplier_reference_1234",
-  company_name: "supplier_company_name",
-  capacity: 2,
+  company_name: "The best hotel",
+  capacity: 200,
   type: "accom, activity"
   contact: {
-    firstname: "firstname",
-    lastname: "lastname",
-    gender: "Ms",
-    email: "email@email.email",
-    phone: "0606060606",
-    birthdate: "2023-01-01",
-  },
+      first_name: "Bob",
+      last_name: "Morane",
+      email: "bob@proton.me",
+      gender: "Mr",
+      phone: "0606060606",
+      birth_date: "1986-09-17"
+    },
   address: {
     label: "58 Rue de Paradis",
     city: "Paris",
     country: "France",
-    zip: "75009",
+    zip: "75010",
   },
   custom_fields: [
-    { name: "field1", value: "field1Value" },
-    { name: "field2", value: "field2Value" },
+    { name: "Star", value: "5" }
   ],
 };
 const headers = { "X-API-KEY": "<YOUR_API_KEY>", "Authorization": "Bearer <YOUR_TOKEN>" };
@@ -744,9 +750,9 @@ axios.post(baseUrl + "/product?reference=product_reference_1234", {}, headers);
 {
   "erreur": "false",
   "reference": "product_reference_1234",
-  "title": "product_title",
-  "capacity": 5,
-  "quantity": "P",
+  "title": "2-bed room with breakfast",
+  "capacity": 2,
+  "quantity": "1",
   "vat_regime": "margin",
   "vat_rate": 20.0,
   "currency": "EUR",
@@ -765,7 +771,7 @@ axios.post(baseUrl + "/product?reference=product_reference_1234", {}, headers);
   },
   "supplier": {
     "reference": "supplier_reference_1234",
-    "company_name": "supplier_company"
+    "company_name": "The best hotel"
   },
   "package": {
     "reference": "package_reference_1234",
@@ -779,7 +785,7 @@ axios.post(baseUrl + "/product?reference=product_reference_1234", {}, headers);
   "langs": [
     {
       "lang": "french",
-      "name": "product_title",
+      "name": "Chambre à 2 lits avec petit déjeuner",
       "short_description": "",
       "long_description": ""
     }
@@ -797,8 +803,8 @@ axios.post(baseUrl + "/product?reference=product_reference_1234", {}, headers);
   ],
   "custom_fields": [
     {
-      "name": "CustomField",
-      "value": "Value"
+      "name": "View",
+      "value": "Parking"
     }
   ]
 }
@@ -856,9 +862,9 @@ const baseUrl = "https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1";
 
 const body = {
   reference: "product_reference_1234",
-  title: "product_title",
-  quantity: "3",
-  capacity: 3,
+  title: "2-bed room with breakfast",
+  quantity: "1",
+  capacity: 2,
   supplier_reference: "supplier_reference",
   package_reference: "package_reference",
   purchase_price: "42",
@@ -952,24 +958,19 @@ axios.post(baseUrl + "/package?reference=package_reference_1234", {}, headers);
 {
   "erreur": "false",
   "reference": "package_reference_1234",
-  "title": "packages_title",
-  "capacity": "3",
-  "info_notes": "Notes on the Package",
-  "visual_url": "urlofthepackage.com",
+  "title": "The best package",
+  "capacity": 2,
+  "info_notes": "A classical day in Paris",
+  "visual_url": "",
   "medias": {
-    "data": [
-      {
-        "media_name": "img.jpeg",
-        "path_full": "https://link-img.jpeg"
-      }
-    ],
-    "size": 1
+    "data": [],
+    "size": 0
   },
   "suppliers": {
     "data": [
       {
         "reference": "supplier_reference_1234",
-        "company_name": "supplier_company"
+        "company_name": "The best hotel"
       }
     ],
     "size": 1
@@ -978,29 +979,33 @@ axios.post(baseUrl + "/package?reference=package_reference_1234", {}, headers);
     "data": [
       {
         "reference": "product_reference_1234",
-        "title": "product_title"
+        "title": "2-bed room with breakfast"
+      },
+      {
+        "reference": "product_reference_1235",
+        "title": "A gourmet menu for 2"
       }
     ],
-    "size": 1
+    "size": 2
   },
   "langs": [
     {
-      "lang": "french",
-      "name": "packages_title (FR)",
-      "short_description": "short_description (FR)",
-      "long_description": "long_description (FR)"
+      "lang": "american",
+      "name": "The best package",
+      "short_description": "A classical day in Paris",
+      "long_description": "Immerse yourself in the romance and elegance of a classical Parisian day, as our hotel and restaurant capture the essence of this magical city."
     },
     {
-      "lang": "english",
-      "name": "packages_title (GB)",
-      "short_description": "short_description (GB)",
-      "long_description": "long_description (GB)"
+      "lang": "french",
+      "name": "Le meilleur package",
+      "short_description": "Une journée classique à Paris",
+      "long_description": "Plongez dans le romantisme et l'élégance d'une journée parisienne classique, car notre hôtel et notre restaurant capturent l'essence de cette ville magique."
     }
   ],
   "custom_fields": [
     {
-      "name": "CustomField",
-      "value": "Value"
+      "name": "Is for children?",
+      "value": "False"
     }
   ]
 }
@@ -1049,13 +1054,10 @@ const axios = require("axios");
 const baseUrl = "https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1";
 
 const body = {
-  reference: "package_reference",
-  title: "package_title",
-  capacity: "3",
-  custom_fields: [
-    { name: "field1", value: "field1Value" },
-    { name: "field2", value: "field2Value" },
-  ],
+  reference: "package_reference_1234",
+  title: "The best package",
+  capacity: "2",
+  custom_fields: [{ name: "Is for children?", value: "False" }],
 };
 const headers = {
   "X-API-KEY": "<YOUR_API_KEY>",
@@ -1102,6 +1104,86 @@ JSON object indicating whether an error has occured during the process and, if s
 
 # Nested Resource
 
+### Address
+
+```json
+   "address": {
+    "label": "58 Rue de Paradis",
+    "zip": "75010",
+    "city": "Paris",
+    "country": "France"
+  },
+```
+
+| Property | Type   | Description          |
+| -------- | ------ | -------------------- |
+| label    | String | Label of the address |
+| city     | String | Name of the city     |
+| country  | String | Name of the country  |
+| zip      | String | Post code            |
+
+### Alternatives
+
+```json
+  "alternatives": [
+    {
+      "alternative_title": "Main Alternative",
+      "trip_people": "15",
+      "trip_budget": "0",
+      "trip_date_in": "2024-03-01",
+      "trip_date_out": "2024-03-09",
+      "trip_duration": "9",
+      "trip_destination": "France",
+      "trip_subdestination": "Paris",
+      "client": {
+        "reference": "client_reference_1234",
+        "type": "entreprise",
+        "company_name": "MOKE INTERNATIONAL LIMITED",
+        "first_name": "Jane",
+        "last_name": "Doe",
+        "email": "contact@moke-international.com"
+      }
+    }
+  ]
+```
+
+| Property            | Type   | Description                                                                                                              |
+| ------------------- | ------ | ------------------------------------------------------------------------------------------------------------------------ |
+| alternative_title   | String | Title of the alternative                                                                                                 |
+| trip_people         | String | Number of people                                                                                                         |
+| trip_budget         | Number | Forecasted budget of the alternative (the one that is entered manually not the actual one)                               |
+| trip_date_in        | String | Date of the begining of this alternative, in a "YYYY-MM-DD" format string. If it's empty, the project have no dates      |
+| trip_date_out       | String | Date of the end of this alternative, in a "YYYY-MM-DD" format string. If it's empty, the project have no dates           |
+| trip_duration       | String | Number of days this alternative last                                                                                     |
+| trip_destination    | String | Destination of the alternative                                                                                           |
+| trip_subdestination | String | Subdestination of the alternative                                                                                        |
+| client              | JSON   | JSON that contain: `reference`, `type` (entreprise or individual), `company_name`, `first_name`, `last_name` and `email` |
+
+### Contacts
+
+```json
+"contact": {
+  "first_name": "Elliot",
+  "last_name": "Alderson",
+  "gender": "Mr",
+  "email": "elliot@fsociety.org",
+  "phone": "",
+  "birth_date": "1986-09-17",
+},
+
+```
+
+| Property   | Type   | Description                                             |
+| ---------- | ------ | ------------------------------------------------------- |
+| email      | String | Email of the contact                                    |
+| first_name | String | First name of the contact as a string                   |
+| last_name  | String | Last name of the contact as a string                    |
+| gender     | String | `Mr`, `Ms` or `Undefined`                               |
+| phone      | String | Phone of the contact as a string                        |
+| birth_date | String | Contact's date of birth in a "YYYY-MM-DD" format string |
+
+### Custom Fields
+
 ```json
   "custom_fields": [
     {
@@ -1143,8 +1225,6 @@ JSON object indicating whether an error has occured during the process and, if s
   ]
 ```
 
-### Custom Fields
-
 <aside class="success">
 In an upsert, the custom_fields must be called with their technical_name which you can find in your custom field settings
 </aside>
@@ -1160,83 +1240,88 @@ In an upsert, the custom_fields must be called with their technical_name which y
 | Number            | String | Number type should be a Number without other character                                                                                                                                         |
 | File              | File   | Not supported yet                                                                                                                                                                              |
 
-### Alternatives
+### Langs
 
 ```json
-  "alternatives": [
-    {
-      "alternative_title": "Alternative 1",
-      "trip_people": "15",
-      "trip_budget": "0",
-      "trip_date_in": "2022-07-31",
-      "trip_date_out": "2022-08-02",
-      "trip_duration": "2",
-      "trip_destination": "France",
-      "trip_subdestination": "Paris",
-      "client": {
-        "reference": "client_reference_1234",
-        "type": "entreprise",
-        "company_name": "Client Company Name",
-        "first_name": "Client First Name",
-        "last_name": "Client Last Name",
-        "email": "client@email.com"
-      }
-    }
-  ]
+"langs": [
+  {
+    "lang": "american",
+    "name": "My American product version",
+    "short_description": "Short American Description",
+    "long_description": "Long American Description"
+  }
+],
 ```
 
-| Property            | Type   | Description                                                                                                              |
-| ------------------- | ------ | ------------------------------------------------------------------------------------------------------------------------ |
-| alternative_title   | String | Title of the alternative                                                                                                 |
-| trip_people         | String | Number of people                                                                                                         |
-| trip_budget         | Number | Forecasted budget of the alternative (the one that is entered manually not the actual one)                               |
-| trip_date_in        | String | Date of the begining of this alternative, in a "YYYY-MM-DD" format string. If it's empty, the project have no dates      |
-| trip_date_out       | String | Date of the end of this alternative, in a "YYYY-MM-DD" format string. If it's empty, the project have no dates           |
-| trip_duration       | String | Number of days this alternative last                                                                                     |
-| trip_destination    | String | Destination of the alternative                                                                                           |
-| trip_subdestination | String | Subdestination of the alternative                                                                                        |
-| client              | JSON   | JSON that contain: `reference`, `type` (entreprise or individual), `company_name`, `first_name`, `last_name` and `email` |
+| Property          | Type   | Description                                      |
+| ----------------- | ------ | ------------------------------------------------ |
+| lang              | String | Language name in lower case                      |
+| name              | String | Title of the object in this language             |
+| short_description | String | Short description of the object in this language |
+| long_description  | String | Long description of the object in this language  |
 
-### Address
+### Medias
+
+Only the 10 last medias are returned in this object.
 
 ```json
-   "address": {
-    "label": "58 Rue de Paradis",
-    "zip": "75009",
-    "city": "Paris",
-    "country": "France"
+"medias": {
+    "data": [
+      {
+        "media_name": "img.jpeg",
+        "path_full": "https://link-img.jpeg"
+      }
+    ],
+    "size": 1
   },
 ```
 
-| Property | Type   | Description          |
-| -------- | ------ | -------------------- |
-| label    | String | Label of the address |
-| city     | String | Name of the city     |
-| country  | String | Name of the country  |
-| zip      | String | Post code            |
+| Property   | Type   | Description                                                       |
+| ---------- | ------ | ----------------------------------------------------------------- |
+| media_name | String | Title of the media                                                |
+| path_full  | String | Media URL. This is a pre-signed URL that expires after 30 minutes |
 
-### Contact
+### Products
+
+Only the 10 last products are returned in this object.
 
 ```json
-"contact": {
-  "first_name": "first_name",
-  "last_name": "last_name",
-  "gender": "Ms",
-  "email": "contact@email.com",
-  "phone": "0606060606",
-  "birth_date": "2023-01-01",
-},
-
+"products": {
+    "data": [
+      {
+        "reference": "product_reference_1234",
+        "title": "2-bed room with breakfast"
+      }
+    ],
+    "size": 1
+  },
 ```
 
-| Property   | Type   | Description                                             |
-| ---------- | ------ | ------------------------------------------------------- |
-| email      | String | Email of the contact                                    |
-| first_name | String | First name of the contact as a string                   |
-| last_name  | String | Last name of the contact as a string                    |
-| gender     | String | `Mr`, `Ms` or `Undefined`                               |
-| phone      | String | Phone of the contact as a string                        |
-| birth_date | String | Contact's date of birth in a "YYYY-MM-DD" format string |
+| Property  | Type   | Description                  |
+| --------- | ------ | ---------------------------- |
+| reference | String | The reference of the product |
+| title     | String | The title of the product     |
+
+### Suppliers
+
+Only the 10 last suppliers are returned in this object.
+
+```json
+ "suppliers": {
+    "data": [
+      {
+        "reference": "supplier_reference_1234",
+        "company_name": "The best hotel"
+      }
+    ],
+    "size": 1
+  }
+```
+
+| Property     | Type   | Description                      |
+| ------------ | ------ | -------------------------------- |
+| reference    | String | The reference of the supplier    |
+| company_name | String | The company name of the supplier |
 
 ### Tariffs
 
@@ -1264,22 +1349,20 @@ In an upsert, the custom_fields must be called with their technical_name which y
 | sales_price    | Number | Sales price incl taxes                                                                |
 | childs         | Array  | Childs are sub-tariffs contained by this tariff (only season tariffs can have childs) |
 
-### Langs
+### User
+
+One of the following options: `None`, `Everyone`, `User Group` or the following JSON object corresponding to an active Ezus user of this account
 
 ```json
-"langs": [
-  {
-    "lang": "american",
-    "name": "My American product version",
-    "short_description": "Short American Description",
-    "long_description": "Long American Description"
-  }
-],
+"user":{
+    "email": "tommy@e-corp.com",
+    "first_name": "Tommy",
+    "last_name": "Atkins"
+  },
 ```
 
-| Property          | Type   | Description                                      |
-| ----------------- | ------ | ------------------------------------------------ |
-| lang              | String | Language name in lower case                      |
-| name              | String | Title of the object in this language             |
-| short_description | String | Short description of the object in this language |
-| long_description  | String | Long description of the object in this language  |
+| Property   | Type   | Description            |
+| ---------- | ------ | ---------------------- |
+| email      | String | Email of the user      |
+| first_name | String | First name of the user |
+| last_name  | String | Last_name of the user  |
