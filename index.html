@@ -10,7 +10,7 @@
             name="description"
             content="Documentation for the Ezus API"
         >
-    <title>API Reference</title>
+    <title>Ezus API Reference</title>
 
     <style media="screen">
       .highlight table td { padding: 5px; }
@@ -287,7 +287,7 @@
   color: #859900;
 }
     </style>
-    <link href="stylesheets/screen-242e4ec6.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/screen-d8e1a0c1.css" rel="stylesheet" media="screen" />
     <link href="stylesheets/print-966d6edc.css" rel="stylesheet" media="print" />
       <script src="javascripts/all-ebb2dba6.js"></script>
 
@@ -320,13 +320,13 @@
             <a href="#authentication" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#http-request" class="toc-h2 toc-link" data-title="HTTP Request">HTTP Request</a>
+                    <a href="#http-endpoint" class="toc-h2 toc-link" data-title="HTTP Endpoint">HTTP Endpoint</a>
                   </li>
                   <li>
-                    <a href="#headers" class="toc-h2 toc-link" data-title="Headers">Headers</a>
+                    <a href="#header-parameters" class="toc-h2 toc-link" data-title="Header parameters">Header parameters</a>
                   </li>
                   <li>
-                    <a href="#request-parameters" class="toc-h2 toc-link" data-title="Request Parameters">Request Parameters</a>
+                    <a href="#body-parameters-application-json" class="toc-h2 toc-link" data-title="Body parameters (application/json)">Body parameters (application/json)</a>
                   </li>
                   <li>
                     <a href="#response" class="toc-h2 toc-link" data-title="Response">Response</a>
@@ -419,14 +419,14 @@
           </li>
       </ul>
         <ul class="toc-footer">
-            <li><a href='https://ezus.io/'>Documentation Powered by Ezus</a></li>
+            <li><a href='https://ezus.io/' target="_blank">Documentation Powered by Ezus</a></li>
         </ul>
     </div>
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
         <h1 id='introduction'>Introduction</h1>
-<p>Welcome to the Ezus API. The Ezus API is organized around <a href='https://en.wikipedia.org/wiki/Representational_state_transfer' target="_blank">REST</a>. It supplies a collection of HTTP methods that underpin Ezus main functionalities: project, client, catalog (product/supplier/package) management.</p>
+<p>Welcome to the Ezus API. The Ezus API is organized around <a href='https://en.wikipedia.org/wiki/Representational_state_transfer' target="_blank">REST</a>. It supplies a collection of HTTP methods that underpin Ezus main functionalities. Its main objective is to enable you to manage your Ezus projects, customers and catalog (suppliers/products/packages) programmatically.</p>
 
 <p>If you need an overview of some common use cases that you can setup with our API you can look at our help center section <a href='https://help.ezus.io/en/collections/3016686-integrations' target="_blank">Integrations</a></p>
 
@@ -435,6 +435,14 @@
 <aside class="success">
 You can find here a <a href="#" target="_blank"> Postman Collection</a> of our endpoints containing moke data to directly test it
 </aside>
+
+<p>Each method has its own specification, but as a general rule :</p>
+
+<p>For any request, you must provide <a href='https://swagger.io/docs/specification/describing-parameters/#header-parameters' target="_blank">header parameters</a></p>
+
+<p>For GET requests, you must also provide provide <a href='https://swagger.io/docs/specification/describing-parameters/#query-parameters'>querry parameters</a></p>
+
+<p>For POST requests, you must also provide provide <a href='https://swagger.io/docs/specification/2-0/describing-request-body'>body parameters</a> structured in a JSON payload (application/json)</p>
 <h1 id='authentication'>Authentication</h1>
 <blockquote>
 <p>To authenticate, you will need first to call our /login endpoint:</p>
@@ -443,15 +451,15 @@ You can find here a <a href="#" target="_blank"> Postman Collection</a> of our e
 <span class="kd">const</span> <span class="nx">baseUrl</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1</span><span class="dl">"</span><span class="p">;</span>
 
 <span class="kd">const</span> <span class="nx">body</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="na">email</span><span class="p">:</span> <span class="dl">"</span><span class="s2">&lt;YOUR_EZUS_EMAIL&gt;</span><span class="dl">"</span><span class="p">,</span>
-  <span class="na">password</span><span class="p">:</span> <span class="dl">"</span><span class="s2">&lt;YOUR_EZUS_PASSWORD&gt;</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">email</span><span class="p">:</span> <span class="dl">"</span><span class="s2">&lt;YOUR_EMAIL&gt;</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">password</span><span class="p">:</span> <span class="dl">"</span><span class="s2">&lt;YOUR_PASSWORD&gt;</span><span class="dl">"</span><span class="p">,</span>
 <span class="p">};</span>
 <span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span> <span class="dl">"</span><span class="s2">X-API-KEY</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">&lt;YOUR_API_KEY&gt;</span><span class="dl">"</span> <span class="p">};</span>
 
 <span class="nx">axios</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="nx">baseUrl</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">/login</span><span class="dl">"</span><span class="p">,</span> <span class="nx">body</span><span class="p">,</span> <span class="nx">headers</span><span class="p">);</span>
 </code></pre></div>
 <blockquote>
-<p>This method returns JSON structured like this:</p>
+<p>It returns a JSON object structured like this:</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ok"</span><span class="p">,</span><span class="w">
@@ -460,7 +468,7 @@ You can find here a <a href="#" target="_blank"> Postman Collection</a> of our e
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <blockquote>
-<p>In subsequent requests, make sure to replace <code>&lt;YOUR_TOKEN&gt;</code> in the Authorization Header with the token that is returned to you here.</p>
+<p>In subsequent requests, be sure to replace <code>&lt;YOUR_TOKEN&gt;</code> in the Authorization header parameter with the token returned to you here.</p>
 </blockquote>
 
 <p>Ezus authentication scheme is based on <a href='https://swagger.io/docs/specification/authentication/api-keys/' target="_blank">API Keys</a> and <a href='https://swagger.io/docs/specification/authentication/bearer-authentication/' target="_blank">Bearer authentication</a>. So, you will need 2 things to be able to interact with our API:</p>
@@ -470,20 +478,20 @@ You can find here a <a href="#" target="_blank"> Postman Collection</a> of our e
 <li>User credentials of an Ezus account</li>
 </ul>
 
-<p>API key</p>
+<p><span style="text-decoration:underline">API key</span></p>
 
-<p>Ezus uses API keys to control access to its API. To get your API key, ask your account manager. The Ezus API needs the API key to be included in the X-API-KEY header of all your requests.</p>
+<p>Ezus uses API keys to control access to its API. To get <code>&lt;YOUR_API_KEY&gt;</code>, ask your account manager. The Ezus API requires this API key to be included in the X-API-KEY header parameter of all your requests.</p>
 
 <p><code>X-API-KEY: &lt;YOUR_API_KEY&gt;</code></p>
 
-<p>Bearer authentication</p>
+<p><span style="text-decoration:underline">Bearer authentication</span></p>
 
-<p>After calling the /login endpoint with valid credentials, a bearer token will be returned to you: <code>&lt;YOUR_TOKEN&gt;</code>. This token is then valid for 12 hours. The Ezus API needs the bearer token to be included in the Authorization header of all your subsequent requests.</p>
+<p>After calling the /login endpoint with valid credentials, a bearer token will be returned to you: <code>&lt;YOUR_TOKEN&gt;</code>. This token is then valid for 12 hours. The Ezus API requires this bearer token to be included in the Authorization header parameter of all subsequent requests.</p>
 
 <p><code>Authorization: Bearer &lt;YOUR_TOKEN&gt;</code></p>
-<h3 id='http-request'>HTTP Request</h3>
+<h3 id='http-endpoint'>HTTP Endpoint</h3>
 <p><code>POST https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/login</code></p>
-<h3 id='headers'>Headers</h3>
+<h3 id='header-parameters'>Header parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -492,10 +500,10 @@ You can find here a <a href="#" target="_blank"> Postman Collection</a> of our e
 </thead><tbody>
 <tr>
 <td>X-API-KEY</td>
-<td>Your Ezus API key</td>
+<td><span style="color:red">(Required)</span> Your Ezus API key</td>
 </tr>
 </tbody></table>
-<h3 id='request-parameters'>Request Parameters</h3>
+<h3 id='body-parameters-application-json'>Body parameters (application/json)</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -504,16 +512,18 @@ You can find here a <a href="#" target="_blank"> Postman Collection</a> of our e
 </thead><tbody>
 <tr>
 <td>email</td>
-<td>Your account email</td>
+<td><span style="color:red">(Required)</span> Your account email</td>
 </tr>
 <tr>
 <td>password</td>
-<td>Your account password</td>
+<td><span style="color:red">(Required)</span> Your account password</td>
 </tr>
 </tbody></table>
 <h3 id='response'>Response</h3>
-<p>JSON object indicating whether an error has occured during the process and its associated message. If no error, it also returns <code>&lt;YOUR_TOKEN&gt;</code>: you will need to store this token for your next API requests.</p>
-<h1 id='projects'>Projects</h1><h2 id='get-project'>GET project</h2><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">axios</span><span class="dl">"</span><span class="p">);</span>
+<p>JSON object indicating whether an error has occured during the process and, if so, the associated message. If there is no error, it also returns a <code>token</code>: you will need to store this token for future API requests.</p>
+<h1 id='projects'>Projects</h1><h2 id='get-project'>GET project</h2>
+<p>Retrieve information for a project record in Ezus. You must specify to the Ezus API which project you wish to retrieve, by indicating the appropriate reference in your query parameter.</p>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">axios</span><span class="dl">"</span><span class="p">);</span>
 <span class="kd">const</span> <span class="nx">baseUrl</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1</span><span class="dl">"</span><span class="p">;</span>
 
 <span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
@@ -524,16 +534,16 @@ You can find here a <a href="#" target="_blank"> Postman Collection</a> of our e
 <span class="nx">axios</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="nx">baseUrl</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">/project?reference=project_reference_1234</span><span class="dl">"</span><span class="p">,</span> <span class="p">{},</span> <span class="nx">headers</span><span class="p">);</span>
 </code></pre></div>
 <blockquote>
-<p>This method returns JSON structured like this:</p>
+<p>It returns a JSON object structured like this:</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"erreur"</span><span class="p">:</span><span class="w"> </span><span class="s2">"false"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"project-reference"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"project_reference_1234"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"info_title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Project Title"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"info_stage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Confirmed"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"info_notes"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Notes on the project"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"info_reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"202302061-P"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"traveler_designer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="nl">"info_notes"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The notes about this project"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"info_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"202306001-P"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"sales_manager"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"traveldesigner@email.com"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FirstName"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LastName"</span><span class="w">
@@ -550,16 +560,16 @@ You can find here a <a href="#" target="_blank"> Postman Collection</a> of our e
       </span><span class="nl">"trip_budget"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"trip_date_in"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-07-31"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"trip_date_out"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-08-02"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"destination"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Destination"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"subdestination"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Subdestination"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"trip_duration"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"trip_destination"</span><span class="p">:</span><span class="w"> </span><span class="s2">"France"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"trip_subdestination"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Paris"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"client"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Client reference"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"client_reference_1234"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"entreprise"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"company_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Client Company Name"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Client First Name"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Client Last Name"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"melchiorbengtsson@gmail.com"</span><span class="w">
+        </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"client@email.com"</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">],</span><span class="w">
@@ -570,9 +580,25 @@ You can find here a <a href="#" target="_blank"> Postman Collection</a> of our e
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='http-request-2'>HTTP Request</h3>
+</span></code></pre></div><h3 id='http-endpoint-2'>HTTP Endpoint</h3>
 <p><code>GET https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/project</code></p>
-<h3 id='query-parameters'>Query Parameters</h3>
+<h3 id='header-parameters-2'>Header parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>X-API-KEY</td>
+<td><span style="color:red">(Required)</span> Your Ezus API key</td>
+</tr>
+<tr>
+<td>Authorization</td>
+<td><span style="color:red">(Required)</span> Your Bearer token</td>
+</tr>
+</tbody></table>
+<h3 id='query-parameters'>Query parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -583,7 +609,7 @@ You can find here a <a href="#" target="_blank"> Postman Collection</a> of our e
 <tr>
 <td>reference</td>
 <td>String</td>
-<td><span style="color:red">(Required)</span> The reference of the project you want to retrieve</td>
+<td><span style="color:red">(Required)</span> The reference of the project you wish to retrieve</td>
 </tr>
 </tbody></table>
 <h3 id='response-2'>Response</h3>
@@ -591,7 +617,7 @@ You can find here a <a href="#" target="_blank"> Postman Collection</a> of our e
 
 <table><thead>
 <tr>
-<th>Name</th>
+<th>Property</th>
 <th>Type</th>
 <th>Description</th>
 </tr>
@@ -599,7 +625,7 @@ You can find here a <a href="#" target="_blank"> Postman Collection</a> of our e
 <tr>
 <td>reference</td>
 <td>String</td>
-<td>The reference of the project you want to retrieve</td>
+<td>The reference of the project you wish to retrieve</td>
 </tr>
 <tr>
 <td>info_title</td>
@@ -617,12 +643,12 @@ You can find here a <a href="#" target="_blank"> Postman Collection</a> of our e
 <td>Notes on your project</td>
 </tr>
 <tr>
-<td>info_reference</td>
+<td>info_number</td>
 <td>String</td>
-<td>Reference of your project ex: &quot;202208019-P&quot; (It is a project number that appears at the bottom of the project record. Not to be confused with reference)</td>
+<td>File number that appears at the bottom of the project record. Not to be confused with reference!</td>
 </tr>
 <tr>
-<td>traveler_designer</td>
+<td>sales_manager</td>
 <td>JSON</td>
 <td>JSON object containing <code>email</code>, <code>first_name</code> and <code>last_name</code></td>
 </tr>
@@ -643,21 +669,21 @@ You can find here a <a href="#" target="_blank"> Postman Collection</a> of our e
 </tr>
 </tbody></table>
 <h2 id='post-projects-upsert'>POST projects-upsert</h2>
-<p>Update a project record if the provided Ezus reference do matches one of the project references in your account, otherwise create a new project record with the provided Ezus reference (or with a random one if no reference is provided).</p>
+<p>Update a project record if the provided reference do matches one of the project references in your account, otherwise create a new project record with the provided reference (or with a random one if no reference is provided).</p>
 <div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">axios</span><span class="dl">"</span><span class="p">);</span>
 <span class="kd">const</span> <span class="nx">baseUrl</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1</span><span class="dl">"</span><span class="p">;</span>
 
 <span class="kd">const</span> <span class="nx">body</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="na">reference</span><span class="p">:</span> <span class="dl">"</span><span class="s2">projects_reference</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">reference</span><span class="p">:</span> <span class="dl">"</span><span class="s2">project_reference_1234</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">info_title</span><span class="p">:</span> <span class="dl">"</span><span class="s2">project_title</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">trip_people</span><span class="p">:</span> <span class="dl">"</span><span class="s2">15</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">trip_budget</span><span class="p">:</span> <span class="dl">"</span><span class="s2">3000</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">trip_date_in</span><span class="p">:</span> <span class="dl">"</span><span class="s2">2022-07-31</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">trip_date_out</span><span class="p">:</span> <span class="dl">"</span><span class="s2">2022-08-02</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">sales_manager_email</span><span class="p">:</span> <span class="dl">"</span><span class="s2">emailofthesales@mail.com</span><span class="dl">"</span><span class="p">,</span>
-  <span class="na">client_reference</span><span class="p">:</span> <span class="dl">"</span><span class="s2">client_reference</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">client_reference</span><span class="p">:</span> <span class="dl">"</span><span class="s2">client_reference_1234</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">custom_fields</span><span class="p">:</span> <span class="p">[</span>
-    <span class="p">{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Text</span><span class="dl">"</span><span class="p">,</span> <span class="na">value</span><span class="p">:</span> <span class="dl">"</span><span class="s2">I am not a text</span><span class="dl">"</span> <span class="p">},</span>
+    <span class="p">{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Text</span><span class="dl">"</span><span class="p">,</span> <span class="na">value</span><span class="p">:</span> <span class="dl">"</span><span class="s2">I am a text</span><span class="dl">"</span> <span class="p">},</span>
     <span class="p">{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Dropdown</span><span class="dl">"</span><span class="p">,</span> <span class="na">value</span><span class="p">:</span> <span class="dl">"</span><span class="s2">nameOption2</span><span class="dl">"</span> <span class="p">},</span>
     <span class="p">{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Date</span><span class="dl">"</span><span class="p">,</span> <span class="na">value</span><span class="p">:</span> <span class="dl">"</span><span class="s2">2012-11-24</span><span class="dl">"</span> <span class="p">},</span>
     <span class="p">{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Time</span><span class="dl">"</span><span class="p">,</span> <span class="na">value</span><span class="p">:</span> <span class="dl">"</span><span class="s2">2006-10-07T12:06:56.568+01:00</span><span class="dl">"</span> <span class="p">},</span>
@@ -672,20 +698,33 @@ You can find here a <a href="#" target="_blank"> Postman Collection</a> of our e
 <span class="nx">axios</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="nx">baseUrl</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">/projects-upsert</span><span class="dl">"</span><span class="p">,</span> <span class="nx">body</span><span class="p">,</span> <span class="nx">headers</span><span class="p">);</span>
 </code></pre></div>
 <blockquote>
-<p>This method returns JSON structured like this:</p>
+<p>It returns a JSON object structured like this:</p>
 </blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"erreur"</span><span class="p">:</span><span class="w"> </span><span class="s2">"false"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ok"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"89e48bb3-26ef-4b1e-aa60-b86ce714253d"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Project Updated Successfuly"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"89e48bb3-26ef-4b1e-aa60-b86ce714253d"</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="w">
-</span></code></pre></div><h3 id='http-request-3'>HTTP Request</h3>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"erreur"</span><span class="p">:</span><span class="w"> </span><span class="s2">"false"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ok"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Project Updated Successfuly"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"project_reference_1234"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='http-endpoint-3'>HTTP Endpoint</h3>
 <p><code>POST https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/projects-upsert</code></p>
-<h3 id='request-parameters-2'>Request Parameters</h3>
+<h3 id='header-parameters-3'>Header parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>X-API-KEY</td>
+<td><span style="color:red">(Required)</span> Your Ezus API key</td>
+</tr>
+<tr>
+<td>Authorization</td>
+<td><span style="color:red">(Required)</span> Your Bearer token</td>
+</tr>
+</tbody></table>
+<h3 id='body-parameters-application-json-2'>Body parameters (application/json)</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -696,12 +735,12 @@ You can find here a <a href="#" target="_blank"> Postman Collection</a> of our e
 <tr>
 <td>reference</td>
 <td>String</td>
-<td>If provided, the unique Ezus reference associated to the project you want to update or insert (in case the one you provided has never been used). If not provided, a project will be inserted with a random one.</td>
+<td>If provided, the unique reference associated to the project you want to update or insert (in case the one you provided has never been used). If not provided, a project will be inserted with a random one.</td>
 </tr>
 <tr>
 <td>info_title</td>
 <td>String</td>
-<td>Title of your project, mandatory if you create a New Project</td>
+<td>Title of your project, mandatory if you create a new project</td>
 </tr>
 <tr>
 <td>trip_people</td>
@@ -731,7 +770,7 @@ You can find here a <a href="#" target="_blank"> Postman Collection</a> of our e
 <tr>
 <td>client_reference</td>
 <td>String</td>
-<td>Ezus reference or Email of the Client, if the reference don&#39;t match with a client, API will try with client_email if setted else, No clients will be assigned</td>
+<td>reference or Email of the Client, if the reference don&#39;t match with a client, API will try with client_email if setted else, No clients will be assigned</td>
 </tr>
 <tr>
 <td>custom_fields</td>
@@ -740,7 +779,7 @@ You can find here a <a href="#" target="_blank"> Postman Collection</a> of our e
 </tr>
 </tbody></table>
 <h3 id='response-3'>Response</h3>
-<p>JSON object indicating whether an error has occured during the process and its associated message. If no error, it also returns a <code>reference</code>: you will need to store this Ezus reference if you need to update or retrieve the project later on.</p>
+<p>JSON object indicating whether an error has occured during the process and, if so, the associated message. If there is no error, it also returns a <code>reference</code>: you will need to store this reference if you need to update or retrieve the project later on.</p>
 <h2 id='post-projects-documents-create'>POST projects-documents-create</h2>
 <p>Create a document within a specific project based on its url</p>
 <div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">axios</span><span class="dl">"</span><span class="p">);</span>
@@ -759,18 +798,31 @@ You can find here a <a href="#" target="_blank"> Postman Collection</a> of our e
 <span class="nx">axios</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="nx">baseUrl</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">/projects-documents-create</span><span class="dl">"</span><span class="p">,</span> <span class="nx">body</span><span class="p">,</span> <span class="nx">headers</span><span class="p">);</span>
 </code></pre></div>
 <blockquote>
-<p>This method returns JSON structured like this:</p>
+<p>It returns a JSON object structured like this:</p>
 </blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"erreur"</span><span class="p">:</span><span class="w"> </span><span class="s2">"false"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ok"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"89e48bb3-26ef-4b1e-aa60-b86ce714253d"</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="w">
-</span></code></pre></div><h3 id='http-request-4'>HTTP Request</h3>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"erreur"</span><span class="p">:</span><span class="w"> </span><span class="s2">"false"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ok"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='http-endpoint-4'>HTTP Endpoint</h3>
 <p><code>POST https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/projects-documents-create</code></p>
-<h3 id='request-parameters-3'>Request Parameters</h3>
+<h3 id='header-parameters-4'>Header parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>X-API-KEY</td>
+<td><span style="color:red">(Required)</span> Your Ezus API key</td>
+</tr>
+<tr>
+<td>Authorization</td>
+<td><span style="color:red">(Required)</span> Your Bearer token</td>
+</tr>
+</tbody></table>
+<h3 id='body-parameters-application-json-3'>Body parameters (application/json)</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -795,9 +847,9 @@ You can find here a <a href="#" target="_blank"> Postman Collection</a> of our e
 </tr>
 </tbody></table>
 <h3 id='response-4'>Response</h3>
-<p>JSON object indicating whether an error has occured during the process and its associated message.</p>
+<p>JSON object indicating whether an error has occured during the process and, if so, the associated message.</p>
 <h1 id='clients'>Clients</h1><h2 id='get-client'>GET client</h2>
-<p>Retrieve information for a client record in Ezus. You need to specify to the Ezus API which client you want to retrieve by giving the adequate Ezus reference.</p>
+<p>Retrieve information for a client record in Ezus. You must specify to the Ezus API which client you wish to retrieve, by indicating the appropriate reference in your query parameter.</p>
 <div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">axios</span><span class="dl">"</span><span class="p">);</span>
 <span class="kd">const</span> <span class="nx">baseUrl</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1</span><span class="dl">"</span><span class="p">;</span>
 
@@ -809,11 +861,11 @@ You can find here a <a href="#" target="_blank"> Postman Collection</a> of our e
 <span class="nx">axios</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="nx">baseUrl</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">/client?reference=client_reference_1234</span><span class="dl">"</span><span class="p">,</span> <span class="p">{},</span> <span class="nx">headers</span><span class="p">);</span>
 </code></pre></div>
 <blockquote>
-<p>This method returns JSON structured like this:</p>
+<p>It returns a JSON object structured like this:</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"erreur"</span><span class="p">:</span><span class="w"> </span><span class="s2">"false"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"client_reference"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"client_reference_1234"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"entreprise"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"company_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Company Name"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fistname"</span><span class="p">,</span><span class="w">
@@ -825,7 +877,7 @@ You can find here a <a href="#" target="_blank"> Postman Collection</a> of our e
   </span><span class="nl">"info_profile"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Client"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"info_origin"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Client Source"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"info_notes"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Notes on the client"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"info_reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Reference of the Client"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"info_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"202306001-C"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user@email.com"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FirstName"</span><span class="p">,</span><span class="w">
@@ -840,7 +892,7 @@ You can find here a <a href="#" target="_blank"> Postman Collection</a> of our e
   </span><span class="nl">"projects"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
       </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"project_reference"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"project_reference_1234"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"info_title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Project title"</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">],</span><span class="w">
@@ -860,9 +912,25 @@ You can find here a <a href="#" target="_blank"> Postman Collection</a> of our e
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='http-request-5'>HTTP Request</h3>
+</span></code></pre></div><h3 id='http-endpoint-5'>HTTP Endpoint</h3>
 <p><code>GET https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/client</code></p>
-<h3 id='query-parameters-2'>Query Parameters</h3>
+<h3 id='header-parameters-5'>Header parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>X-API-KEY</td>
+<td><span style="color:red">(Required)</span> Your Ezus API key</td>
+</tr>
+<tr>
+<td>Authorization</td>
+<td><span style="color:red">(Required)</span> Your Bearer token</td>
+</tr>
+</tbody></table>
+<h3 id='query-parameters-2'>Query parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -873,7 +941,7 @@ You can find here a <a href="#" target="_blank"> Postman Collection</a> of our e
 <tr>
 <td>reference</td>
 <td>String</td>
-<td><span style="color:red">(Required)</span> The reference of the client you want to retrieve</td>
+<td><span style="color:red">(Required)</span> The reference of the client you wish to retrieve</td>
 </tr>
 </tbody></table>
 <h3 id='response-5'>Response</h3>
@@ -881,7 +949,7 @@ You can find here a <a href="#" target="_blank"> Postman Collection</a> of our e
 
 <table><thead>
 <tr>
-<th>Name</th>
+<th>Property</th>
 <th>Type</th>
 <th>Description</th>
 </tr>
@@ -889,7 +957,7 @@ You can find here a <a href="#" target="_blank"> Postman Collection</a> of our e
 <tr>
 <td>reference</td>
 <td>String</td>
-<td>The reference of the client you want to retrieve</td>
+<td>The reference of the client you wish to retrieve</td>
 </tr>
 <tr>
 <td>type</td>
@@ -947,9 +1015,9 @@ You can find here a <a href="#" target="_blank"> Postman Collection</a> of our e
 <td>Notes on the client</td>
 </tr>
 <tr>
-<td>info_reference</td>
+<td>info_number</td>
 <td>String</td>
-<td>Reference of the client (It is a client number that appears at the bottom of the client record. Not to be confused with reference)</td>
+<td>File number that appears at the bottom of the client record. Not to be confused with reference!</td>
 </tr>
 <tr>
 <td>user</td>
@@ -978,7 +1046,7 @@ You can find here a <a href="#" target="_blank"> Postman Collection</a> of our e
 </tr>
 </tbody></table>
 <h2 id='post-clients-upsert'>POST clients-upsert</h2>
-<p>Update a client record if the provided Ezus reference (or the email) do matches one of the client references in your account, otherwise create a new client record with the provided Ezus reference (or with a random one if no reference is provided). Note that for this endpoint, the email of the client can also be used as a primary key for the upsert.</p>
+<p>Update a client record if the provided reference (or the email) do matches one of the client references in your account, otherwise create a new client record with the provided reference (or with a random one if no reference is provided). Note that for this endpoint, the email of the client can also be used as a primary key for the upsert.</p>
 <div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">axios</span><span class="dl">"</span><span class="p">);</span>
 <span class="kd">const</span> <span class="nx">baseUrl</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1</span><span class="dl">"</span><span class="p">;</span>
 
@@ -1012,19 +1080,33 @@ You can find here a <a href="#" target="_blank"> Postman Collection</a> of our e
 <span class="nx">axios</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="nx">baseUrl</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">/clients-upsert</span><span class="dl">"</span><span class="p">,</span> <span class="nx">body</span><span class="p">,</span> <span class="nx">headers</span><span class="p">);</span>
 </code></pre></div>
 <blockquote>
-<p>This method returns JSON structured like this:</p>
+<p>It returns a JSON object structured like this:</p>
 </blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"erreur"</span><span class="p">:</span><span class="w"> </span><span class="s2">"false"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ok"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Client updated Successfully"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"clientReference"</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="w">
-</span></code></pre></div><h3 id='http-request-6'>HTTP Request</h3>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"erreur"</span><span class="p">:</span><span class="w"> </span><span class="s2">"false"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ok"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Client updated Successfully"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"client_reference_1234"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='http-endpoint-6'>HTTP Endpoint</h3>
 <p><code>POST https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/clients-upsert</code></p>
-<h3 id='request-parameters-4'>Request Parameters</h3>
+<h3 id='header-parameters-6'>Header parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>X-API-KEY</td>
+<td><span style="color:red">(Required)</span> Your Ezus API key</td>
+</tr>
+<tr>
+<td>Authorization</td>
+<td><span style="color:red">(Required)</span> Your Bearer token</td>
+</tr>
+</tbody></table>
+<h3 id='body-parameters-application-json-4'>Body parameters (application/json)</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -1035,7 +1117,7 @@ You can find here a <a href="#" target="_blank"> Postman Collection</a> of our e
 <tr>
 <td>reference</td>
 <td>String</td>
-<td>If provided, the unique Ezus reference associated to the client you want to update or insert (in case the one you provided has never been used). If not provided, a client will be inserted with a random one.</td>
+<td>If provided, the unique reference associated to the client you want to update or insert (in case the one you provided has never been used). If not provided, a client will be inserted with a random one.</td>
 </tr>
 <tr>
 <td>company_name</td>
@@ -1059,9 +1141,9 @@ You can find here a <a href="#" target="_blank"> Postman Collection</a> of our e
 </tr>
 </tbody></table>
 <h3 id='response-6'>Response</h3>
-<p>JSON object indicating whether an error has occured during the process and its associated message. If no error, it also returns a <code>reference</code>: you will need to store this Ezus reference if you need to update or retrieve the client later on.</p>
+<p>JSON object indicating whether an error has occured during the process and, if so, the associated message. If there is no error, it also returns a <code>reference</code>: you will need to store this reference if you need to update or retrieve the client later on.</p>
 <h1 id='suppliers'>Suppliers</h1><h2 id='get-supplier'>GET supplier</h2>
-<p>Retrieve information for a supplier record in Ezus. You need to specify to the Ezus API which supplier you want to retrieve by giving the adequate Ezus reference.</p>
+<p>Retrieve information for a supplier record in Ezus. You must specify to the Ezus API which supplier you wish to retrieve, by indicating the appropriate reference in your query parameter.</p>
 <div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">axios</span><span class="dl">"</span><span class="p">);</span>
 <span class="kd">const</span> <span class="nx">baseUrl</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1</span><span class="dl">"</span><span class="p">;</span>
 
@@ -1077,16 +1159,16 @@ You can find here a <a href="#" target="_blank"> Postman Collection</a> of our e
 <span class="p">);</span>
 </code></pre></div>
 <blockquote>
-<p>This method returns JSON structured like this:</p>
+<p>It returns a JSON object structured like this:</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"erreur"</span><span class="p">:</span><span class="w"> </span><span class="s2">"false"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"supplier_reference"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"supplier_reference_1234"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"company_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Company Name"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"capacity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"accom, activity"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"info_notes"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Notes on the supplier"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"info_reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Reference of the Supplier"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"info_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"202306001-S"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"visual_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"urlofthevisual.com"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user@email.com"</span><span class="p">,</span><span class="w">
@@ -1111,7 +1193,7 @@ You can find here a <a href="#" target="_blank"> Postman Collection</a> of our e
   </span><span class="nl">"products"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
       </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"products_reference"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"product_reference_1234"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"product_title"</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">],</span><span class="w">
@@ -1139,9 +1221,25 @@ You can find here a <a href="#" target="_blank"> Postman Collection</a> of our e
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='http-request-7'>HTTP Request</h3>
+</span></code></pre></div><h3 id='http-endpoint-7'>HTTP Endpoint</h3>
 <p><code>GET https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/supplier</code></p>
-<h3 id='query-parameters-3'>Query Parameters</h3>
+<h3 id='header-parameters-7'>Header parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>X-API-KEY</td>
+<td><span style="color:red">(Required)</span> Your Ezus API key</td>
+</tr>
+<tr>
+<td>Authorization</td>
+<td><span style="color:red">(Required)</span> Your Bearer token</td>
+</tr>
+</tbody></table>
+<h3 id='query-parameters-3'>Query parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -1152,7 +1250,7 @@ You can find here a <a href="#" target="_blank"> Postman Collection</a> of our e
 <tr>
 <td>reference</td>
 <td>String</td>
-<td><span style="color:red">(Required)</span> The reference of the supplier you want to retrieve</td>
+<td><span style="color:red">(Required)</span> The reference of the supplier you wish to retrieve</td>
 </tr>
 </tbody></table>
 <h3 id='response-7'>Response</h3>
@@ -1160,7 +1258,7 @@ You can find here a <a href="#" target="_blank"> Postman Collection</a> of our e
 
 <table><thead>
 <tr>
-<th>Name</th>
+<th>Property</th>
 <th>Type</th>
 <th>Description</th>
 </tr>
@@ -1168,7 +1266,7 @@ You can find here a <a href="#" target="_blank"> Postman Collection</a> of our e
 <tr>
 <td>reference</td>
 <td>String</td>
-<td>The reference of the supplier you want to retrieve</td>
+<td>The reference of the supplier you wish to retrieve</td>
 </tr>
 <tr>
 <td>company_name</td>
@@ -1191,9 +1289,9 @@ You can find here a <a href="#" target="_blank"> Postman Collection</a> of our e
 <td>Notes on the supplier</td>
 </tr>
 <tr>
-<td>info_reference</td>
+<td>info_number</td>
 <td>String</td>
-<td>Reference of the supplier (It is a supplier number that appears at the bottom of the supplier record. Not to be confused with reference)</td>
+<td>File number that appears at the bottom of the supplier record. Not to be confused with reference!</td>
 </tr>
 <tr>
 <td>visual_url</td>
@@ -1237,12 +1335,12 @@ You can find here a <a href="#" target="_blank"> Postman Collection</a> of our e
 </tr>
 </tbody></table>
 <h2 id='post-suppliers-upsert'>POST suppliers-upsert</h2>
-<p>Update a supplier record if the provided Ezus reference do matches one of the supplier references in your account, otherwise create a new supplier record with the provided Ezus reference (or with a random one if no reference is provided).</p>
+<p>Update a supplier record if the provided reference do matches one of the supplier references in your account, otherwise create a new supplier record with the provided reference (or with a random one if no reference is provided).</p>
 <div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">axios</span><span class="dl">"</span><span class="p">);</span>
 <span class="kd">const</span> <span class="nx">baseUrl</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1</span><span class="dl">"</span><span class="p">;</span>
 
 <span class="kd">const</span> <span class="nx">body</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="na">reference</span><span class="p">:</span> <span class="dl">"</span><span class="s2">suppliers_reference</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">reference</span><span class="p">:</span> <span class="dl">"</span><span class="s2">supplier_reference_1234</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">company_name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">supplier_company_name</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">capacity</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
   <span class="na">type</span><span class="p">:</span> <span class="dl">"</span><span class="s2">accom, activity</span><span class="dl">"</span>
@@ -1265,24 +1363,38 @@ You can find here a <a href="#" target="_blank"> Postman Collection</a> of our e
     <span class="p">{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">field2</span><span class="dl">"</span><span class="p">,</span> <span class="na">value</span><span class="p">:</span> <span class="dl">"</span><span class="s2">field2Value</span><span class="dl">"</span> <span class="p">},</span>
   <span class="p">],</span>
 <span class="p">};</span>
-<span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span> <span class="dl">"</span><span class="s2">X-API-KEY</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">&lt;YOUR_API_KEY&gt;</span><span class="dl">"</span><span class="p">,</span> <span class="na">Authorization</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Bearer &lt;YOUR_TOKEN&gt;</span><span class="dl">"</span> <span class="p">};</span>
+<span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span> <span class="dl">"</span><span class="s2">X-API-KEY</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">&lt;YOUR_API_KEY&gt;</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Authorization</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Bearer &lt;YOUR_TOKEN&gt;</span><span class="dl">"</span> <span class="p">};</span>
 
 <span class="nx">axios</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="nx">baseUrl</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">/suppliers-upsert</span><span class="dl">"</span><span class="p">,</span> <span class="nx">body</span><span class="p">,</span> <span class="nx">headers</span><span class="p">);</span>
 </code></pre></div>
 <blockquote>
-<p>This method returns JSON structured like this:</p>
+<p>It returns a JSON object structured like this:</p>
 </blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"erreur"</span><span class="p">:</span><span class="w"> </span><span class="s2">"false"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ok"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Supplier created Successfully"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SupplierReference"</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="w">
-</span></code></pre></div><h3 id='http-request-8'>HTTP Request</h3>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"erreur"</span><span class="p">:</span><span class="w"> </span><span class="s2">"false"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ok"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Supplier created Successfully"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"supplier_reference_1234"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='http-endpoint-8'>HTTP Endpoint</h3>
 <p><code>POST https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/suppliers-upsert</code></p>
-<h3 id='request-parameters-5'>Request Parameters</h3>
+<h3 id='header-parameters-8'>Header parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>X-API-KEY</td>
+<td><span style="color:red">(Required)</span> Your Ezus API key</td>
+</tr>
+<tr>
+<td>Authorization</td>
+<td><span style="color:red">(Required)</span> Your Bearer token</td>
+</tr>
+</tbody></table>
+<h3 id='body-parameters-application-json-5'>Body parameters (application/json)</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -1293,7 +1405,7 @@ You can find here a <a href="#" target="_blank"> Postman Collection</a> of our e
 <tr>
 <td>reference</td>
 <td>String</td>
-<td>If provided, the unique Ezus reference associated to the supplier you want to update or insert (in case the one you provided has never been used). If not provided, a supplier will be inserted with a random one.</td>
+<td>If provided, the unique reference associated to the supplier you want to update or insert (in case the one you provided has never been used). If not provided, a supplier will be inserted with a random one.</td>
 </tr>
 <tr>
 <td>company_name</td>
@@ -1327,9 +1439,9 @@ You can find here a <a href="#" target="_blank"> Postman Collection</a> of our e
 </tr>
 </tbody></table>
 <h3 id='response-8'>Response</h3>
-<p>JSON object indicating whether an error has occured during the process and its associated message. If no error, it also returns a <code>reference</code>: you will need to store this Ezus reference if you need to update or retrieve the supplier later on.</p>
+<p>JSON object indicating whether an error has occured during the process and, if so, the associated message. If there is no error, it also returns a <code>reference</code>: you will need to store this reference if you need to update or retrieve the supplier later on.</p>
 <h1 id='products'>Products</h1><h2 id='get-product'>GET product</h2>
-<p>Retrieve information for a product record in Ezus. You need to specify to the Ezus API which product you want to retrieve by giving the adequate Ezus reference.</p>
+<p>Retrieve information for a product record in Ezus. You must specify to the Ezus API which product you wish to retrieve, by indicating the appropriate reference in your query parameter.</p>
 <div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">axios</span><span class="dl">"</span><span class="p">);</span>
 <span class="kd">const</span> <span class="nx">baseUrl</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1</span><span class="dl">"</span><span class="p">;</span>
 
@@ -1341,11 +1453,11 @@ You can find here a <a href="#" target="_blank"> Postman Collection</a> of our e
 <span class="nx">axios</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="nx">baseUrl</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">/product?reference=product_reference_1234</span><span class="dl">"</span><span class="p">,</span> <span class="p">{},</span> <span class="nx">headers</span><span class="p">);</span>
 </code></pre></div>
 <blockquote>
-<p>This method returns JSON structured like this:</p>
+<p>It returns a JSON object structured like this:</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"erreur"</span><span class="p">:</span><span class="w"> </span><span class="s2">"false"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"products_reference"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"product_reference_1234"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"product_title"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"capacity"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
   </span><span class="nl">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"P"</span><span class="p">,</span><span class="w">
@@ -1366,11 +1478,11 @@ You can find here a <a href="#" target="_blank"> Postman Collection</a> of our e
     </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="nl">"supplier"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"suppliers_reference"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"supplier_reference_1234"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"company_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"supplier_company"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="nl">"package"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"packages_reference"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"package_reference_1234"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"packages_title"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="nl">"commission"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -1388,7 +1500,7 @@ You can find here a <a href="#" target="_blank"> Postman Collection</a> of our e
   </span><span class="p">],</span><span class="w">
   </span><span class="nl">"tariffs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tariff_reference_1234"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"default"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
       </span><span class="nl">"purchase_price"</span><span class="p">:</span><span class="w"> </span><span class="mf">100.0</span><span class="p">,</span><span class="w">
@@ -1404,9 +1516,25 @@ You can find here a <a href="#" target="_blank"> Postman Collection</a> of our e
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='http-request-9'>HTTP Request</h3>
+</span></code></pre></div><h3 id='http-endpoint-9'>HTTP Endpoint</h3>
 <p><code>GET https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/product</code></p>
-<h3 id='query-parameters-4'>Query Parameters</h3>
+<h3 id='header-parameters-9'>Header parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>X-API-KEY</td>
+<td><span style="color:red">(Required)</span> Your Ezus API key</td>
+</tr>
+<tr>
+<td>Authorization</td>
+<td><span style="color:red">(Required)</span> Your Bearer token</td>
+</tr>
+</tbody></table>
+<h3 id='query-parameters-4'>Query parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -1417,7 +1545,7 @@ You can find here a <a href="#" target="_blank"> Postman Collection</a> of our e
 <tr>
 <td>reference</td>
 <td>String</td>
-<td><span style="color:red">(Required)</span> The reference of the product you want to retrieve</td>
+<td><span style="color:red">(Required)</span> The reference of the product you wish to retrieve</td>
 </tr>
 </tbody></table>
 <h3 id='response-9'>Response</h3>
@@ -1425,7 +1553,7 @@ You can find here a <a href="#" target="_blank"> Postman Collection</a> of our e
 
 <table><thead>
 <tr>
-<th>Name</th>
+<th>Property</th>
 <th>Type</th>
 <th>Description</th>
 </tr>
@@ -1433,7 +1561,7 @@ You can find here a <a href="#" target="_blank"> Postman Collection</a> of our e
 <tr>
 <td>reference</td>
 <td>String</td>
-<td>The reference of the product you want to retrieve</td>
+<td>The reference of the product you wish to retrieve</td>
 </tr>
 <tr>
 <td>title</td>
@@ -1522,12 +1650,12 @@ You can find here a <a href="#" target="_blank"> Postman Collection</a> of our e
 </tr>
 </tbody></table>
 <h2 id='post-products-upsert'>POST products-upsert</h2>
-<p>Update a product record if the provided Ezus reference do matches one of the product references in your account, otherwise create a new product record with the provided Ezus reference (or with a random one if no reference is provided).</p>
+<p>Update a product record if the provided reference do matches one of the product references in your account, otherwise create a new product record with the provided reference (or with a random one if no reference is provided).</p>
 <div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">axios</span><span class="dl">"</span><span class="p">);</span>
 <span class="kd">const</span> <span class="nx">baseUrl</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1</span><span class="dl">"</span><span class="p">;</span>
 
 <span class="kd">const</span> <span class="nx">body</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="na">reference</span><span class="p">:</span> <span class="dl">"</span><span class="s2">product_reference</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">reference</span><span class="p">:</span> <span class="dl">"</span><span class="s2">product_reference_1234</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">title</span><span class="p">:</span> <span class="dl">"</span><span class="s2">product_title</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">quantity</span><span class="p">:</span> <span class="dl">"</span><span class="s2">3</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">capacity</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
@@ -1556,19 +1684,33 @@ You can find here a <a href="#" target="_blank"> Postman Collection</a> of our e
 <span class="nx">axios</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="nx">baseUrl</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">/products-upsert</span><span class="dl">"</span><span class="p">,</span> <span class="nx">body</span><span class="p">,</span> <span class="nx">headers</span><span class="p">);</span>
 </code></pre></div>
 <blockquote>
-<p>This method returns JSON structured like this:</p>
+<p>It returns a JSON object structured like this:</p>
 </blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"erreur"</span><span class="p">:</span><span class="w"> </span><span class="s2">"false"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ok"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Product Created Successfully"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"productReference"</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="w">
-</span></code></pre></div><h3 id='http-request-10'>HTTP Request</h3>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"erreur"</span><span class="p">:</span><span class="w"> </span><span class="s2">"false"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ok"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Product Created Successfully"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"product_reference_1234"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='http-endpoint-10'>HTTP Endpoint</h3>
 <p><code>POST https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/products-upsert</code></p>
-<h3 id='request-parameters-6'>Request Parameters</h3>
+<h3 id='header-parameters-10'>Header parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>X-API-KEY</td>
+<td><span style="color:red">(Required)</span> Your Ezus API key</td>
+</tr>
+<tr>
+<td>Authorization</td>
+<td><span style="color:red">(Required)</span> Your Bearer token</td>
+</tr>
+</tbody></table>
+<h3 id='body-parameters-application-json-6'>Body parameters (application/json)</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -1579,7 +1721,7 @@ You can find here a <a href="#" target="_blank"> Postman Collection</a> of our e
 <tr>
 <td>reference</td>
 <td>String</td>
-<td>If provided, the unique Ezus reference associated to the product you want to update or insert (in case the one you provided has never been used). If not provided, a product will be inserted with a random one.</td>
+<td>If provided, the unique reference associated to the product you want to update or insert (in case the one you provided has never been used). If not provided, a product will be inserted with a random one.</td>
 </tr>
 <tr>
 <td>title</td>
@@ -1643,9 +1785,9 @@ You can find here a <a href="#" target="_blank"> Postman Collection</a> of our e
 </tr>
 </tbody></table>
 <h3 id='response-10'>Response</h3>
-<p>JSON object indicating whether an error has occured during the process and its associated message. If no error, it also returns a <code>reference</code>: you will need to store this Ezus reference if you need to update or retrieve the product later on.</p>
+<p>JSON object indicating whether an error has occured during the process and, if so, the associated message. If there is no error, it also returns a <code>reference</code>: you will need to store this reference if you need to update or retrieve the product later on.</p>
 <h1 id='package'>Package</h1><h2 id='get-package'>GET package</h2>
-<p>Retrieve information for a package record in Ezus. You need to specify to the Ezus API which package you want to retrieve by giving the adequate Ezus reference.</p>
+<p>Retrieve information for a package record in Ezus. You must specify to the Ezus API which package you wish to retrieve, by indicating the appropriate reference in your query parameter.</p>
 <div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">axios</span><span class="dl">"</span><span class="p">);</span>
 <span class="kd">const</span> <span class="nx">baseUrl</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1</span><span class="dl">"</span><span class="p">;</span>
 
@@ -1657,11 +1799,11 @@ You can find here a <a href="#" target="_blank"> Postman Collection</a> of our e
 <span class="nx">axios</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="nx">baseUrl</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">/package?reference=package_reference_1234</span><span class="dl">"</span><span class="p">,</span> <span class="p">{},</span> <span class="nx">headers</span><span class="p">);</span>
 </code></pre></div>
 <blockquote>
-<p>This method returns JSON structured like this:</p>
+<p>It returns a JSON object structured like this:</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"erreur"</span><span class="p">:</span><span class="w"> </span><span class="s2">"false"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"packages_reference"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"package_reference_1234"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"packages_title"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"capacity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"info_notes"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Notes on the Package"</span><span class="p">,</span><span class="w">
@@ -1678,7 +1820,7 @@ You can find here a <a href="#" target="_blank"> Postman Collection</a> of our e
   </span><span class="nl">"suppliers"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
       </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"suppliers_reference"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"supplier_reference_1234"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"company_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"supplier_company"</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">],</span><span class="w">
@@ -1687,7 +1829,7 @@ You can find here a <a href="#" target="_blank"> Postman Collection</a> of our e
   </span><span class="nl">"products"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
       </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"products_reference"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"product_reference_1234"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"product_title"</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">],</span><span class="w">
@@ -1714,9 +1856,25 @@ You can find here a <a href="#" target="_blank"> Postman Collection</a> of our e
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='http-request-11'>HTTP Request</h3>
+</span></code></pre></div><h3 id='http-endpoint-11'>HTTP Endpoint</h3>
 <p><code>GET https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/package</code></p>
-<h3 id='query-parameters-5'>Query Parameters</h3>
+<h3 id='header-parameters-11'>Header parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>X-API-KEY</td>
+<td><span style="color:red">(Required)</span> Your Ezus API key</td>
+</tr>
+<tr>
+<td>Authorization</td>
+<td><span style="color:red">(Required)</span> Your Bearer token</td>
+</tr>
+</tbody></table>
+<h3 id='query-parameters-5'>Query parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -1727,7 +1885,7 @@ You can find here a <a href="#" target="_blank"> Postman Collection</a> of our e
 <tr>
 <td>reference</td>
 <td>String</td>
-<td><span style="color:red">(Required)</span> The reference of the package you want to retrieve</td>
+<td><span style="color:red">(Required)</span> The reference of the package you wish to retrieve</td>
 </tr>
 </tbody></table>
 <h3 id='response-11'>Response</h3>
@@ -1735,7 +1893,7 @@ You can find here a <a href="#" target="_blank"> Postman Collection</a> of our e
 
 <table><thead>
 <tr>
-<th>Name</th>
+<th>Property</th>
 <th>Type</th>
 <th>Description</th>
 </tr>
@@ -1743,7 +1901,7 @@ You can find here a <a href="#" target="_blank"> Postman Collection</a> of our e
 <tr>
 <td>reference</td>
 <td>String</td>
-<td>The reference of the package you want to retrieve</td>
+<td>The reference of the package you wish to retrieve</td>
 </tr>
 <tr>
 <td>title</td>
@@ -1792,7 +1950,7 @@ You can find here a <a href="#" target="_blank"> Postman Collection</a> of our e
 </tr>
 </tbody></table>
 <h2 id='post-packages_upsert'>POST packages_upsert</h2>
-<p>Update a package record if the provided Ezus reference do matches one of the package references in your account, otherwise create a new package record with the provided Ezus reference (or with a random one if no reference is provided).</p>
+<p>Update a package record if the provided reference do matches one of the package references in your account, otherwise create a new package record with the provided reference (or with a random one if no reference is provided).</p>
 <div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">axios</span><span class="dl">"</span><span class="p">);</span>
 <span class="kd">const</span> <span class="nx">baseUrl</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1</span><span class="dl">"</span><span class="p">;</span>
 
@@ -1813,19 +1971,33 @@ You can find here a <a href="#" target="_blank"> Postman Collection</a> of our e
 <span class="nx">axios</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="nx">baseUrl</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">/packages-upsert</span><span class="dl">"</span><span class="p">,</span> <span class="nx">body</span><span class="p">,</span> <span class="nx">headers</span><span class="p">);</span>
 </code></pre></div>
 <blockquote>
-<p>This method returns JSON structured like this:</p>
+<p>It returns a JSON object structured like this:</p>
 </blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"erreur"</span><span class="p">:</span><span class="w"> </span><span class="s2">"false"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ok"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Package Created Successfully"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"packageReference"</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="w">
-</span></code></pre></div><h3 id='http-request-12'>HTTP Request</h3>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"erreur"</span><span class="p">:</span><span class="w"> </span><span class="s2">"false"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ok"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Package Created Successfully"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"package_reference_1234"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='http-endpoint-12'>HTTP Endpoint</h3>
 <p><code>POST https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/packages-upsert</code></p>
-<h3 id='request-parameters-7'>Request Parameters</h3>
+<h3 id='header-parameters-12'>Header parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>X-API-KEY</td>
+<td><span style="color:red">(Required)</span> Your Ezus API key</td>
+</tr>
+<tr>
+<td>Authorization</td>
+<td><span style="color:red">(Required)</span> Your Bearer token</td>
+</tr>
+</tbody></table>
+<h3 id='body-parameters-application-json-7'>Body parameters (application/json)</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -1855,7 +2027,7 @@ You can find here a <a href="#" target="_blank"> Postman Collection</a> of our e
 </tr>
 </tbody></table>
 <h3 id='response-12'>Response</h3>
-<p>JSON object indicating whether an error has occured during the process and its associated message. If no error, it also returns a <code>reference</code>: you will need to store this Ezus reference if you need to update or retrieve the package later on.</p>
+<p>JSON object indicating whether an error has occured during the process and, if so, the associated message. If there is no error, it also returns a <code>reference</code>: you will need to store this reference if you need to update or retrieve the package later on.</p>
 <h1 id='nested-resource'>Nested Resource</h1><div class="highlight"><pre class="highlight json tab-json"><code><span class="w">  </span><span class="nl">"custom_fields"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
       </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Text"</span><span class="p">,</span><span class="w">
@@ -1924,17 +2096,17 @@ In an upsert, the custom_fields must be called with their technical_name which y
 <tr>
 <td>Date</td>
 <td>String</td>
-<td>The date must be written exactly in YYYY-MM-DD format</td>
+<td>The date must be in a &quot;YYYY-MM-DD&quot; format string</td>
 </tr>
 <tr>
 <td>Time</td>
 <td>String</td>
-<td>The time must be written exactly in the format: YYYY-MM-DDTHH:MM:SS+01:00</td>
+<td>The time must be in a &quot;YYYY-MM-DDTHH:MM:SS+01:00&quot; format string</td>
 </tr>
 <tr>
 <td>Checkbox</td>
 <td>String</td>
-<td>A string must contain &quot;true&quot; (checked) OR &quot;false&quot; (unchecked)</td>
+<td>The checkbox must be a string: &quot;true&quot; (checked) OR &quot;false&quot; (unchecked)</td>
 </tr>
 <tr>
 <td>Number</td>
@@ -1954,23 +2126,23 @@ In an upsert, the custom_fields must be called with their technical_name which y
       </span><span class="nl">"trip_budget"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"trip_date_in"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-07-31"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"trip_date_out"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-08-02"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"destination"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Destination"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"subdestination"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Subdestination"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"trip_duration"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"trip_destination"</span><span class="p">:</span><span class="w"> </span><span class="s2">"France"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"trip_subdestination"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Paris"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"client"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Client reference"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"client_reference_1234"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"entreprise"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"company_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Client Company Name"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Client First Name"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Client Last Name"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"melchiorbengtsson@gmail.com"</span><span class="w">
+        </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"client@email.com"</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
 <table><thead>
 <tr>
-<th>Name</th>
+<th>Property</th>
 <th>Type</th>
 <th>Description</th>
 </tr>
@@ -1988,32 +2160,32 @@ In an upsert, the custom_fields must be called with their technical_name which y
 <tr>
 <td>trip_budget</td>
 <td>Number</td>
-<td>Budget of the alternative</td>
+<td>Forecasted budget of the alternative (the one that is entered manually not the actual one)</td>
 </tr>
 <tr>
 <td>trip_date_in</td>
 <td>String</td>
-<td>Date of the begining of this alternative, formated like: YYYY-MM-DD if it&#39;s empty, the project have no dates</td>
+<td>Date of the begining of this alternative, in a &quot;YYYY-MM-DD&quot; format string. If it&#39;s empty, the project have no dates</td>
 </tr>
 <tr>
 <td>trip_date_out</td>
 <td>String</td>
-<td>Date of the end of this alternative, formated like: YYYY-MM-DD if it&#39;s empty, the project have no dates</td>
-</tr>
-<tr>
-<td>destination</td>
-<td>String</td>
-<td>Destination of the alternative</td>
-</tr>
-<tr>
-<td>subdestination</td>
-<td>String</td>
-<td>Subdestination of the alternative</td>
+<td>Date of the end of this alternative, in a &quot;YYYY-MM-DD&quot; format string. If it&#39;s empty, the project have no dates</td>
 </tr>
 <tr>
 <td>trip_duration</td>
 <td>String</td>
-<td>Number of days</td>
+<td>Number of days this alternative last</td>
+</tr>
+<tr>
+<td>trip_destination</td>
+<td>String</td>
+<td>Destination of the alternative</td>
+</tr>
+<tr>
+<td>trip_subdestination</td>
+<td>String</td>
+<td>Subdestination of the alternative</td>
 </tr>
 <tr>
 <td>client</td>
@@ -2030,7 +2202,7 @@ In an upsert, the custom_fields must be called with their technical_name which y
 </span></code></pre></div>
 <table><thead>
 <tr>
-<th>Parameter</th>
+<th>Property</th>
 <th>Type</th>
 <th>Description</th>
 </tr>
@@ -2060,7 +2232,7 @@ In an upsert, the custom_fields must be called with their technical_name which y
   </span><span class="nl">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"first_name"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"last_name"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"gender"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Ms"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"email@email.email"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"contact@email.com"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0606060606"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"birth_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2023-01-01"</span><span class="p">,</span><span class="w">
 </span><span class="p">}</span><span class="err">,</span><span class="w">
@@ -2068,7 +2240,7 @@ In an upsert, the custom_fields must be called with their technical_name which y
 </span></code></pre></div>
 <table><thead>
 <tr>
-<th>Parameter</th>
+<th>Property</th>
 <th>Type</th>
 <th>Description</th>
 </tr>
@@ -2101,7 +2273,7 @@ In an upsert, the custom_fields must be called with their technical_name which y
 <tr>
 <td>birth_date</td>
 <td>String</td>
-<td>Birth date of the contact formated like: YYYY-MM-DD if not formated correctly = NULL</td>
+<td>Contact&#39;s date of birth in a &quot;YYYY-MM-DD&quot; format string</td>
 </tr>
 </tbody></table>
 <h3 id='tariffs'>Tariffs</h3><div class="highlight"><pre class="highlight json tab-json"><code><span class="w">  </span><span class="nl">"tariffs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
@@ -2118,7 +2290,7 @@ In an upsert, the custom_fields must be called with their technical_name which y
 </span></code></pre></div>
 <table><thead>
 <tr>
-<th>Parameter</th>
+<th>Property</th>
 <th>Type</th>
 <th>Description</th>
 </tr>
@@ -2126,7 +2298,7 @@ In an upsert, the custom_fields must be called with their technical_name which y
 <tr>
 <td>reference</td>
 <td>String</td>
-<td>An unique Ezus reference of this tariff</td>
+<td>An unique reference of this tariff</td>
 </tr>
 <tr>
 <td>type</td>
@@ -2170,7 +2342,7 @@ In an upsert, the custom_fields must be called with their technical_name which y
 </span></code></pre></div>
 <table><thead>
 <tr>
-<th>Parameter</th>
+<th>Property</th>
 <th>Type</th>
 <th>Description</th>
 </tr>
