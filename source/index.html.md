@@ -41,6 +41,25 @@ For POST requests, you must also provide provide <a href='https://swagger.io/doc
 
 # Authentication
 
+Ezus authentication scheme is based on <a href='https://swagger.io/docs/specification/authentication/api-keys/' target="_blank">API Keys</a> and <a href='https://swagger.io/docs/specification/authentication/bearer-authentication/' target="_blank">Bearer authentication</a>. So, you will need 2 things to be able to interact with our API:
+
+- An Ezus API key
+- User credentials of an Ezus account
+
+<span style="text-decoration:underline">API key</span>
+
+Ezus uses API keys to control access to its API. To get `<YOUR_API_KEY>`, ask your account manager. The Ezus API requires this API key to be included in the X-API-KEY header parameter of all your requests.
+
+`X-API-KEY: <YOUR_API_KEY>`
+
+<span style="text-decoration:underline">Bearer authentication</span>
+
+After calling the /login endpoint with valid credentials, a bearer token will be returned to you: `<YOUR_TOKEN>`. This token is then valid for 12 hours. The Ezus API requires this bearer token to be included in the Authorization header parameter of all subsequent requests.
+
+`Authorization: Bearer <YOUR_TOKEN>`
+
+## POST Login
+
 > To authenticate, you will need first to call our /login endpoint:
 
 ```javascript
@@ -67,23 +86,6 @@ axios.post(baseUrl + "/login", body, headers);
 ```
 
 > In subsequent requests, be sure to replace `<YOUR_TOKEN>` in the Authorization header parameter with the token returned to you here.
-
-Ezus authentication scheme is based on <a href='https://swagger.io/docs/specification/authentication/api-keys/' target="_blank">API Keys</a> and <a href='https://swagger.io/docs/specification/authentication/bearer-authentication/' target="_blank">Bearer authentication</a>. So, you will need 2 things to be able to interact with our API:
-
-- An Ezus API key
-- User credentials of an Ezus account
-
-<span style="text-decoration:underline">API key</span>
-
-Ezus uses API keys to control access to its API. To get `<YOUR_API_KEY>`, ask your account manager. The Ezus API requires this API key to be included in the X-API-KEY header parameter of all your requests.
-
-`X-API-KEY: <YOUR_API_KEY>`
-
-<span style="text-decoration:underline">Bearer authentication</span>
-
-After calling the /login endpoint with valid credentials, a bearer token will be returned to you: `<YOUR_TOKEN>`. This token is then valid for 12 hours. The Ezus API requires this bearer token to be included in the Authorization header parameter of all subsequent requests.
-
-`Authorization: Bearer <YOUR_TOKEN>`
 
 ### HTTP Endpoint
 
