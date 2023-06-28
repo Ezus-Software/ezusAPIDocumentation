@@ -1,11 +1,11 @@
 ---
-title: API Reference
+title: Ezus API Reference
 
 language_tabs: # must be one of https://github.com/rouge-ruby/rouge/wiki/List-of-supported-languages-and-lexers
   - javascript
 
 toc_footers:
-  - <a href='https://ezus.io/'>Documentation Powered by Ezus</a>
+  - <a href='https://ezus.io/' target="_blank">Documentation Powered by Ezus</a>
 
 includes:
   - errors
@@ -21,7 +21,7 @@ meta:
 
 # Introduction
 
-Welcome to the Ezus API. The Ezus API is organized around <a href='https://en.wikipedia.org/wiki/Representational_state_transfer' target="_blank">REST</a>. It supplies a collection of HTTP methods that underpin Ezus main functionalities: project, client, catalog (product/supplier/package) management.
+Welcome to the Ezus API. The Ezus API is organized around <a href='https://en.wikipedia.org/wiki/Representational_state_transfer' target="_blank">REST</a>. It supplies a collection of HTTP methods that underpin Ezus main functionalities. Its main objective is to enable you to manage your Ezus projects, customers and catalog (suppliers/products/packages) programmatically.
 
 If you need an overview of some common use cases that you can setup with our API you can look at our help center section <a href='https://help.ezus.io/en/collections/3016686-integrations' target="_blank">Integrations</a>
 
@@ -30,6 +30,14 @@ If you want to dive into the list of available methods, you've come to the right
 <aside class="success">
 You can find here a <a href="#" target="_blank"> Postman Collection</a> of our endpoints containing moke data to directly test it
 </aside>
+
+Each method has its own specification, but as a general rule :
+
+For any request, you must provide <a href='https://swagger.io/docs/specification/describing-parameters/#header-parameters' target="_blank">header parameters</a>
+
+For GET requests, you must also provide provide <a href='https://swagger.io/docs/specification/describing-parameters/#query-parameters'>querry parameters</a>
+
+For POST requests, you must also provide provide <a href='https://swagger.io/docs/specification/2-0/describing-request-body'>body parameters</a> structured in a JSON payload (application/json)
 
 # Authentication
 
@@ -40,15 +48,15 @@ const axios = require("axios");
 const baseUrl = "https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1";
 
 const body = {
-  email: "<YOUR_EZUS_EMAIL>",
-  password: "<YOUR_EZUS_PASSWORD>",
+  email: "<YOUR_EMAIL>",
+  password: "<YOUR_PASSWORD>",
 };
 const headers = { "X-API-KEY": "<YOUR_API_KEY>" };
 
 axios.post(baseUrl + "/login", body, headers);
 ```
 
-> This method returns JSON structured like this:
+> It returns a JSON object structured like this:
 
 ```json
 {
@@ -58,49 +66,51 @@ axios.post(baseUrl + "/login", body, headers);
 }
 ```
 
-> In subsequent requests, make sure to replace `<YOUR_TOKEN>` in the Authorization Header with the token that is returned to you here.
+> In subsequent requests, be sure to replace `<YOUR_TOKEN>` in the Authorization header parameter with the token returned to you here.
 
 Ezus authentication scheme is based on <a href='https://swagger.io/docs/specification/authentication/api-keys/' target="_blank">API Keys</a> and <a href='https://swagger.io/docs/specification/authentication/bearer-authentication/' target="_blank">Bearer authentication</a>. So, you will need 2 things to be able to interact with our API:
 
 - An Ezus API key
 - User credentials of an Ezus account
 
-API key
+<span style="text-decoration:underline">API key</span>
 
-Ezus uses API keys to control access to its API. To get your API key, ask your account manager. The Ezus API needs the API key to be included in the X-API-KEY header of all your requests.
+Ezus uses API keys to control access to its API. To get `<YOUR_API_KEY>`, ask your account manager. The Ezus API requires this API key to be included in the X-API-KEY header parameter of all your requests.
 
 `X-API-KEY: <YOUR_API_KEY>`
 
-Bearer authentication
+<span style="text-decoration:underline">Bearer authentication</span>
 
-After calling the /login endpoint with valid credentials, a bearer token will be returned to you: `<YOUR_TOKEN>`. This token is then valid for 12 hours. The Ezus API needs the bearer token to be included in the Authorization header of all your subsequent requests.
+After calling the /login endpoint with valid credentials, a bearer token will be returned to you: `<YOUR_TOKEN>`. This token is then valid for 12 hours. The Ezus API requires this bearer token to be included in the Authorization header parameter of all subsequent requests.
 
 `Authorization: Bearer <YOUR_TOKEN>`
 
-### HTTP Request
+### HTTP Endpoint
 
 `POST https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/login`
 
-### Headers
+### Header parameters
 
-| Parameter | Description       |
-| --------- | ----------------- |
-| X-API-KEY | Your Ezus API key |
+| Parameter | Description                                                 |
+| --------- | ----------------------------------------------------------- |
+| X-API-KEY | <span style="color:red">(Required)</span> Your Ezus API key |
 
-### Request Parameters
+### Body parameters (application/json)
 
-| Parameter | Description           |
-| --------- | --------------------- |
-| email     | Your account email    |
-| password  | Your account password |
+| Parameter | Description                                                     |
+| --------- | --------------------------------------------------------------- |
+| email     | <span style="color:red">(Required)</span> Your account email    |
+| password  | <span style="color:red">(Required)</span> Your account password |
 
 ### Response
 
-JSON object indicating whether an error has occured during the process and its associated message. If no error, it also returns `<YOUR_TOKEN>`: you will need to store this token for your next API requests.
+JSON object indicating whether an error has occured during the process and, if so, the associated message. If there is no error, it also returns a `token`: you will need to store this token for future API requests.
 
 # Projects
 
 ## GET project
+
+Retrieve information for a project record in Ezus. You must specify to the Ezus API which project you wish to retrieve, by indicating the appropriate reference in your query parameter.
 
 ```javascript
 const axios = require("axios");
@@ -114,17 +124,17 @@ const headers = {
 axios.post(baseUrl + "/project?reference=project_reference_1234", {}, headers);
 ```
 
-> This method returns JSON structured like this:
+> It returns a JSON object structured like this:
 
 ```json
 {
   "erreur": "false",
-  "reference": "project-reference",
+  "reference": "project_reference_1234",
   "info_title": "Project Title",
   "info_stage": "Confirmed",
-  "info_notes": "Notes on the project",
-  "info_reference": "202302061-P",
-  "traveler_designer": {
+  "info_notes": "The notes about this project",
+  "info_number": "202306001-P",
+  "sales_manager": {
     "email": "traveldesigner@email.com",
     "first_name": "FirstName",
     "last_name": "LastName"
@@ -141,16 +151,16 @@ axios.post(baseUrl + "/project?reference=project_reference_1234", {}, headers);
       "trip_budget": "0",
       "trip_date_in": "2022-07-31",
       "trip_date_out": "2022-08-02",
-      "destination": "Destination",
-      "subdestination": "Subdestination",
       "trip_duration": "2",
+      "trip_destination": "France",
+      "trip_subdestination": "Paris",
       "client": {
-        "reference": "Client reference",
+        "reference": "client_reference_1234",
         "type": "entreprise",
         "company_name": "Client Company Name",
         "first_name": "Client First Name",
         "last_name": "Client Last Name",
-        "email": "melchiorbengtsson@gmail.com"
+        "email": "client@email.com"
       }
     }
   ],
@@ -163,51 +173,58 @@ axios.post(baseUrl + "/project?reference=project_reference_1234", {}, headers);
 }
 ```
 
-### HTTP Request
+### HTTP Endpoint
 
 `GET https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/project`
 
-### Query Parameters
+### Header parameters
+
+| Parameter     | Description                                                 |
+| ------------- | ----------------------------------------------------------- |
+| X-API-KEY     | <span style="color:red">(Required)</span> Your Ezus API key |
+| Authorization | <span style="color:red">(Required)</span> Your Bearer token |
+
+### Query parameters
 
 | Parameter | Type   | Description                                                                                 |
 | --------- | ------ | ------------------------------------------------------------------------------------------- |
-| reference | String | <span style="color:red">(Required)</span> The reference of the project you want to retrieve |
+| reference | String | <span style="color:red">(Required)</span> The reference of the project you wish to retrieve |
 
 ### Response
 
 JSON object containing the project information.
 
-| Name              | Type   | Description                                                                                                                                              |
-| ----------------- | ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| reference         | String | The reference of the project you want to retrieve                                                                                                        |
-| info_title        | String | The title of your project                                                                                                                                |
-| info_stage        | String | The stage of your project (Confirmed, Received, Paid...)                                                                                                 |
-| info_notes        | String | Notes on your project                                                                                                                                    |
-| info_reference    | String | Reference of your project ex: "202208019-P" (It is a project number that appears at the bottom of the project record. Not to be confused with reference) |
-| traveler_designer | JSON   | JSON object containing `email`, `first_name` and `last_name`                                                                                             |
-| project_manager   | JSON   | JSON object containing `email`, `first_name` and `last_name`                                                                                             |
-| alternatives      | Array  | Array of JSON alternatives ([Alternatives](#alternatives))                                                                                               |
-| custom_fields     | Array  | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                            |
+| Property        | Type   | Description                                                                                      |
+| --------------- | ------ | ------------------------------------------------------------------------------------------------ |
+| reference       | String | The reference of the project you wish to retrieve                                                |
+| info_title      | String | The title of your project                                                                        |
+| info_stage      | String | The stage of your project (Confirmed, Received, Paid...)                                         |
+| info_notes      | String | Notes on your project                                                                            |
+| info_number     | String | File number that appears at the bottom of the project record. Not to be confused with reference! |
+| sales_manager   | JSON   | JSON object containing `email`, `first_name` and `last_name`                                     |
+| project_manager | JSON   | JSON object containing `email`, `first_name` and `last_name`                                     |
+| alternatives    | Array  | Array of JSON alternatives ([Alternatives](#alternatives))                                       |
+| custom_fields   | Array  | Array of JSON custom fields ([Custom fields](#custom-fields))                                    |
 
 ## POST projects-upsert
 
-Update a project record if the provided Ezus reference do matches one of the project references in your account, otherwise create a new project record with the provided Ezus reference (or with a random one if no reference is provided).
+Update a project record if the provided reference do matches one of the project references in your account, otherwise create a new project record with the provided reference (or with a random one if no reference is provided).
 
 ```javascript
 const axios = require("axios");
 const baseUrl = "https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1";
 
 const body = {
-  reference: "projects_reference",
+  reference: "project_reference_1234",
   info_title: "project_title",
   trip_people: "15",
   trip_budget: "3000",
   trip_date_in: "2022-07-31",
   trip_date_out: "2022-08-02",
   sales_manager_email: "emailofthesales@mail.com",
-  client_reference: "client_reference",
+  client_reference: "client_reference_1234",
   custom_fields: [
-    { name: "Text", value: "I am not a text" },
+    { name: "Text", value: "I am a text" },
     { name: "Dropdown", value: "nameOption2" },
     { name: "Date", value: "2012-11-24" },
     { name: "Time", value: "2006-10-07T12:06:56.568+01:00" },
@@ -222,41 +239,45 @@ const headers = {
 axios.post(baseUrl + "/projects-upsert", body, headers);
 ```
 
-> This method returns JSON structured like this:
+> It returns a JSON object structured like this:
 
 ```json
-[
-  {
-    "erreur": "false",
-    "message": "ok",
-    "id": "89e48bb3-26ef-4b1e-aa60-b86ce714253d",
-    "action": "Project Updated Successfuly",
-    "reference": "89e48bb3-26ef-4b1e-aa60-b86ce714253d"
-  }
-]
+{
+  "erreur": "false",
+  "message": "ok",
+  "action": "Project Updated Successfuly",
+  "reference": "project_reference_1234"
+}
 ```
 
-### HTTP Request
+### HTTP Endpoint
 
 `POST https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/projects-upsert`
 
-### Request Parameters
+### Header parameters
+
+| Parameter     | Description                                                 |
+| ------------- | ----------------------------------------------------------- |
+| X-API-KEY     | <span style="color:red">(Required)</span> Your Ezus API key |
+| Authorization | <span style="color:red">(Required)</span> Your Bearer token |
+
+### Body parameters (application/json)
 
 | Parameter           | Type   | Description                                                                                                                                                                                                                                              |
 | ------------------- | ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| reference           | String | If provided, the unique Ezus reference associated to the project you want to update or insert (in case the one you provided has never been used). If not provided, a project will be inserted with a random one.                                         |
-| info_title          | String | Title of your project, mandatory if you create a New Project                                                                                                                                                                                             |
+| reference           | String | If provided, the unique reference associated to the project you want to update or insert (in case the one you provided has never been used). If not provided, a project will be inserted with a random one.                                              |
+| info_title          | String | Title of your project, mandatory if you create a new project                                                                                                                                                                                             |
 | trip_people         | Number | Number of people in your project                                                                                                                                                                                                                         |
 | trip_budget         | Number | Budget of your project                                                                                                                                                                                                                                   |
 | trip_date_in        | Date   | Date of the beginning of your project formated like YYYY-MM-DD if not formatted correctly, or if duration > 40 days or if trip_date_in > trip_date_out, project will be set as 1day and date = today. If project is without Date, no date will be setted |
 | trip_date_out       | Date   | Date of the end of your project formated like YYYY-MM-DD if not formatted correctly, or if duration > 40 days or if trip_date_in > trip_date_out, project will be set as 1day and date = today. If project is without Date, no date will be setted       |
 | sales_manager_email | Email  | Email of the Sales Manager, by default if no sales_manager or not found will be assignated to nobody                                                                                                                                                     |
-| client_reference    | String | Ezus reference or Email of the Client, if the reference don't match with a client, API will try with client_email if setted else, No clients will be assigned                                                                                            |
+| client_reference    | String | reference or Email of the Client, if the reference don't match with a client, API will try with client_email if setted else, No clients will be assigned                                                                                                 |
 | custom_fields       | JSON   | You can add Custom Fields for your project, this custom fields should be in your Ezus params and Write Exactly as they are written in your params technical name ([Custom fields](#custom-fields))                                                       |
 
 ### Response
 
-JSON object indicating whether an error has occured during the process and its associated message. If no error, it also returns a `reference`: you will need to store this Ezus reference if you need to update or retrieve the project later on.
+JSON object indicating whether an error has occured during the process and, if so, the associated message. If there is no error, it also returns a `reference`: you will need to store this reference if you need to update or retrieve the project later on.
 
 ## POST projects-documents-create
 
@@ -279,23 +300,27 @@ const headers = {
 axios.post(baseUrl + "/projects-documents-create", body, headers);
 ```
 
-> This method returns JSON structured like this:
+> It returns a JSON object structured like this:
 
 ```json
-[
-  {
-    "erreur": "false",
-    "message": "ok",
-    "id": "89e48bb3-26ef-4b1e-aa60-b86ce714253d"
-  }
-]
+{
+  "erreur": "false",
+  "message": "ok"
+}
 ```
 
-### HTTP Request
+### HTTP Endpoint
 
 `POST https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/projects-documents-create`
 
-### Request Parameters
+### Header parameters
+
+| Parameter     | Description                                                 |
+| ------------- | ----------------------------------------------------------- |
+| X-API-KEY     | <span style="color:red">(Required)</span> Your Ezus API key |
+| Authorization | <span style="color:red">(Required)</span> Your Bearer token |
+
+### Body parameters (application/json)
 
 | Parameter | Type   | Description                                                                                            |
 | --------- | ------ | ------------------------------------------------------------------------------------------------------ |
@@ -305,13 +330,13 @@ axios.post(baseUrl + "/projects-documents-create", body, headers);
 
 ### Response
 
-JSON object indicating whether an error has occured during the process and its associated message.
+JSON object indicating whether an error has occured during the process and, if so, the associated message.
 
 # Clients
 
 ## GET client
 
-Retrieve information for a client record in Ezus. You need to specify to the Ezus API which client you want to retrieve by giving the adequate Ezus reference.
+Retrieve information for a client record in Ezus. You must specify to the Ezus API which client you wish to retrieve, by indicating the appropriate reference in your query parameter.
 
 ```javascript
 const axios = require("axios");
@@ -325,12 +350,12 @@ const headers = {
 axios.post(baseUrl + "/client?reference=client_reference_1234", {}, headers);
 ```
 
-> This method returns JSON structured like this:
+> It returns a JSON object structured like this:
 
 ```json
 {
   "erreur": "false",
-  "reference": "client_reference",
+  "reference": "client_reference_1234",
   "type": "entreprise",
   "company_name": "Company Name",
   "first_name": "Fistname",
@@ -342,7 +367,7 @@ axios.post(baseUrl + "/client?reference=client_reference_1234", {}, headers);
   "info_profile": "Client",
   "info_origin": "Client Source",
   "info_notes": "Notes on the client",
-  "info_reference": "Reference of the Client",
+  "info_number": "202306001-C",
   "user": {
     "email": "user@email.com",
     "first_name": "FirstName",
@@ -357,7 +382,7 @@ axios.post(baseUrl + "/client?reference=client_reference_1234", {}, headers);
   "projects": {
     "data": [
       {
-        "reference": "project_reference",
+        "reference": "project_reference_1234",
         "info_title": "Project title"
       }
     ],
@@ -379,44 +404,51 @@ axios.post(baseUrl + "/client?reference=client_reference_1234", {}, headers);
 }
 ```
 
-### HTTP Request
+### HTTP Endpoint
 
 `GET https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/client`
 
-### Query Parameters
+### Header parameters
+
+| Parameter     | Description                                                 |
+| ------------- | ----------------------------------------------------------- |
+| X-API-KEY     | <span style="color:red">(Required)</span> Your Ezus API key |
+| Authorization | <span style="color:red">(Required)</span> Your Bearer token |
+
+### Query parameters
 
 | Parameter | Type   | Description                                                                                |
 | --------- | ------ | ------------------------------------------------------------------------------------------ |
-| reference | String | <span style="color:red">(Required)</span> The reference of the client you want to retrieve |
+| reference | String | <span style="color:red">(Required)</span> The reference of the client you wish to retrieve |
 
 ### Response
 
 JSON object containing the client information.
 
-| Name           | Type   | Description                                                                                                                                                           |
-| -------------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| reference      | String | The reference of the client you want to retrieve                                                                                                                      |
-| type           | String | The type of the client ["entreprise", "individual"]                                                                                                                   |
-| company_name   | String | Name of the company of your client                                                                                                                                    |
-| first_name     | String | First name of the client                                                                                                                                              |
-| last_name      | String | Last name of the client                                                                                                                                               |
-| email          | String | Email of the client                                                                                                                                                   |
-| activity       | String | Activity of the client (Only for entreprise)                                                                                                                          |
-| vat_number     | String | VAT number of the client (Only for entreprise)                                                                                                                        |
-| siret          | String | Siret number of the client (Only for entreprise)                                                                                                                      |
-| info_profile   | String | Profile of the client                                                                                                                                                 |
-| info_origin    | String | Source of the client                                                                                                                                                  |
-| info_notes     | String | Notes on the client                                                                                                                                                   |
-| info_reference | String | Reference of the client (It is a client number that appears at the bottom of the client record. Not to be confused with reference)                                    |
-| user           | JSON   | JSON object containing `email`, `first_name` and `last_name`                                                                                                          |
-| address        | JSON   | JSON object containing `label`, `zip`, `city` and `country` ([Address](#address))                                                                                     |
-| projects       | JSON   | Projects linked to the client (return only the 10 first projects). JSON object containing `data` (Array of JSON objects containing `reference`, `info_title`), `size` |
-| contacts       | Array  | Array of JSON contacts ([Contacts](#contacts))                                                                                                                        |
-| custom_fields  | Array  | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                         |
+| Property      | Type   | Description                                                                                                                                                           |
+| ------------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| reference     | String | The reference of the client you wish to retrieve                                                                                                                      |
+| type          | String | The type of the client ["entreprise", "individual"]                                                                                                                   |
+| company_name  | String | Name of the company of your client                                                                                                                                    |
+| first_name    | String | First name of the client                                                                                                                                              |
+| last_name     | String | Last name of the client                                                                                                                                               |
+| email         | String | Email of the client                                                                                                                                                   |
+| activity      | String | Activity of the client (Only for entreprise)                                                                                                                          |
+| vat_number    | String | VAT number of the client (Only for entreprise)                                                                                                                        |
+| siret         | String | Siret number of the client (Only for entreprise)                                                                                                                      |
+| info_profile  | String | Profile of the client                                                                                                                                                 |
+| info_origin   | String | Source of the client                                                                                                                                                  |
+| info_notes    | String | Notes on the client                                                                                                                                                   |
+| info_number   | String | File number that appears at the bottom of the client record. Not to be confused with reference!                                                                       |
+| user          | JSON   | JSON object containing `email`, `first_name` and `last_name`                                                                                                          |
+| address       | JSON   | JSON object containing `label`, `zip`, `city` and `country` ([Address](#address))                                                                                     |
+| projects      | JSON   | Projects linked to the client (return only the 10 first projects). JSON object containing `data` (Array of JSON objects containing `reference`, `info_title`), `size` |
+| contacts      | Array  | Array of JSON contacts ([Contacts](#contacts))                                                                                                                        |
+| custom_fields | Array  | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                         |
 
 ## POST clients-upsert
 
-Update a client record if the provided Ezus reference (or the email) do matches one of the client references in your account, otherwise create a new client record with the provided Ezus reference (or with a random one if no reference is provided). Note that for this endpoint, the email of the client can also be used as a primary key for the upsert.
+Update a client record if the provided reference (or the email) do matches one of the client references in your account, otherwise create a new client record with the provided reference (or with a random one if no reference is provided). Note that for this endpoint, the email of the client can also be used as a primary key for the upsert.
 
 ```javascript
 const axios = require("axios");
@@ -452,28 +484,33 @@ const headers = {
 axios.post(baseUrl + "/clients-upsert", body, headers);
 ```
 
-> This method returns JSON structured like this:
+> It returns a JSON object structured like this:
 
 ```json
-[
-  {
-    "erreur": "false",
-    "message": "ok",
-    "action": "Client updated Successfully",
-    "reference": "clientReference"
-  }
-]
+{
+  "erreur": "false",
+  "message": "ok",
+  "action": "Client updated Successfully",
+  "reference": "client_reference_1234"
+}
 ```
 
-### HTTP Request
+### HTTP Endpoint
 
 `POST https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/clients-upsert`
 
-### Request Parameters
+### Header parameters
+
+| Parameter     | Description                                                 |
+| ------------- | ----------------------------------------------------------- |
+| X-API-KEY     | <span style="color:red">(Required)</span> Your Ezus API key |
+| Authorization | <span style="color:red">(Required)</span> Your Bearer token |
+
+### Body parameters (application/json)
 
 | Parameter     | Type   | Description                                                                                                                                                                                                                                                             |
 | ------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --- |
-| reference     | String | If provided, the unique Ezus reference associated to the client you want to update or insert (in case the one you provided has never been used). If not provided, a client will be inserted with a random one.                                                          |
+| reference     | String | If provided, the unique reference associated to the client you want to update or insert (in case the one you provided has never been used). If not provided, a client will be inserted with a random one.                                                               |
 | company_name  | String | <span style="color:red">(Required)</span> Set a company name - If company name is empty, the client will be set as an individual and the name of the client = name of the contact and if the company name is not empty, the name of the client will be the company name |     |
 | contact       | JSON   | Contact is a JSON and email is needed ([Contact](#contact))                                                                                                                                                                                                             |
 | address       | JSON   | Address is a JSON and label is needed if you want to add or update the adresse of your client but not mandatory ([Address](#address))                                                                                                                                   |
@@ -481,13 +518,13 @@ axios.post(baseUrl + "/clients-upsert", body, headers);
 
 ### Response
 
-JSON object indicating whether an error has occured during the process and its associated message. If no error, it also returns a `reference`: you will need to store this Ezus reference if you need to update or retrieve the client later on.
+JSON object indicating whether an error has occured during the process and, if so, the associated message. If there is no error, it also returns a `reference`: you will need to store this reference if you need to update or retrieve the client later on.
 
 # Suppliers
 
 ## GET supplier
 
-Retrieve information for a supplier record in Ezus. You need to specify to the Ezus API which supplier you want to retrieve by giving the adequate Ezus reference.
+Retrieve information for a supplier record in Ezus. You must specify to the Ezus API which supplier you wish to retrieve, by indicating the appropriate reference in your query parameter.
 
 ```javascript
 const axios = require("axios");
@@ -505,17 +542,17 @@ axios.post(
 );
 ```
 
-> This method returns JSON structured like this:
+> It returns a JSON object structured like this:
 
 ```json
 {
   "erreur": "false",
-  "reference": "supplier_reference",
+  "reference": "supplier_reference_1234",
   "company_name": "Company Name",
   "capacity": "3",
   "type": "accom, activity",
   "info_notes": "Notes on the supplier",
-  "info_reference": "Reference of the Supplier",
+  "info_number": "202306001-S",
   "visual_url": "urlofthevisual.com",
   "user": {
     "email": "user@email.com",
@@ -540,7 +577,7 @@ axios.post(
   "products": {
     "data": [
       {
-        "reference": "products_reference",
+        "reference": "product_reference_1234",
         "title": "product_title"
       }
     ],
@@ -570,47 +607,54 @@ axios.post(
 }
 ```
 
-### HTTP Request
+### HTTP Endpoint
 
 `GET https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/supplier`
 
-### Query Parameters
+### Header parameters
+
+| Parameter     | Description                                                 |
+| ------------- | ----------------------------------------------------------- |
+| X-API-KEY     | <span style="color:red">(Required)</span> Your Ezus API key |
+| Authorization | <span style="color:red">(Required)</span> Your Bearer token |
+
+### Query parameters
 
 | Parameter | Type   | Description                                                                                  |
 | --------- | ------ | -------------------------------------------------------------------------------------------- |
-| reference | String | <span style="color:red">(Required)</span> The reference of the supplier you want to retrieve |
+| reference | String | <span style="color:red">(Required)</span> The reference of the supplier you wish to retrieve |
 
 ### Response
 
 JSON object containing the supplier information.
 
-| Name           | Type   | Description                                                                                                                                           |
-| -------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
-| reference      | String | The reference of the supplier you want to retrieve                                                                                                    |
-| company_name   | String | Name of the company of your supplier                                                                                                                  |
-| capacity       | String | Capacity of the supplier                                                                                                                              |
-| type           | String | Type of the supplier, the different types are separated by commas                                                                                     |
-| info_notes     | String | Notes on the supplier                                                                                                                                 |
-| info_reference | String | Reference of the supplier (It is a supplier number that appears at the bottom of the supplier record. Not to be confused with reference)              |
-| visual_url     | String | Link to the google Slides linked to the supplier in Ezus                                                                                              |
-| user           | JSON   | One of the following option: `Everyone`, `User Group`, the User assigned to this supplier (JSON object containing `email`, `first_name`, `last_name`) |
-| medias         | JSON   | JSON object medias ([Medias](#medias))                                                                                                                |
-| address        | JSON   | JSON object address ([Address](#address))                                                                                                             |
-| products       | JSON   | JSON object products ([Products](#products))                                                                                                          |
-| contacts       | Array  | Array of JSON contacts ([Contacts](#contacts))                                                                                                        |
-| langs          | Array  | Array of JSON langs ([Langs](#langs))                                                                                                                 |
-| custom_fields  | Array  | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                         |
+| Property      | Type   | Description                                                                                                                                           |
+| ------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| reference     | String | The reference of the supplier you wish to retrieve                                                                                                    |
+| company_name  | String | Name of the company of your supplier                                                                                                                  |
+| capacity      | String | Capacity of the supplier                                                                                                                              |
+| type          | String | Type of the supplier, the different types are separated by commas                                                                                     |
+| info_notes    | String | Notes on the supplier                                                                                                                                 |
+| info_number   | String | File number that appears at the bottom of the supplier record. Not to be confused with reference!                                                     |
+| visual_url    | String | Link to the google Slides linked to the supplier in Ezus                                                                                              |
+| user          | JSON   | One of the following option: `Everyone`, `User Group`, the User assigned to this supplier (JSON object containing `email`, `first_name`, `last_name`) |
+| medias        | JSON   | JSON object medias ([Medias](#medias))                                                                                                                |
+| address       | JSON   | JSON object address ([Address](#address))                                                                                                             |
+| products      | JSON   | JSON object products ([Products](#products))                                                                                                          |
+| contacts      | Array  | Array of JSON contacts ([Contacts](#contacts))                                                                                                        |
+| langs         | Array  | Array of JSON langs ([Langs](#langs))                                                                                                                 |
+| custom_fields | Array  | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                         |
 
 ## POST suppliers-upsert
 
-Update a supplier record if the provided Ezus reference do matches one of the supplier references in your account, otherwise create a new supplier record with the provided Ezus reference (or with a random one if no reference is provided).
+Update a supplier record if the provided reference do matches one of the supplier references in your account, otherwise create a new supplier record with the provided reference (or with a random one if no reference is provided).
 
 ```javascript
 const axios = require("axios");
 const baseUrl = "https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1";
 
 const body = {
-  reference: "suppliers_reference",
+  reference: "supplier_reference_1234",
   company_name: "supplier_company_name",
   capacity: 2,
   type: "accom, activity"
@@ -633,49 +677,54 @@ const body = {
     { name: "field2", value: "field2Value" },
   ],
 };
-const headers = { "X-API-KEY": "<YOUR_API_KEY>", Authorization: "Bearer <YOUR_TOKEN>" };
+const headers = { "X-API-KEY": "<YOUR_API_KEY>", "Authorization": "Bearer <YOUR_TOKEN>" };
 
 axios.post(baseUrl + "/suppliers-upsert", body, headers);
 ```
 
-> This method returns JSON structured like this:
+> It returns a JSON object structured like this:
 
 ```json
-[
-  {
-    "erreur": "false",
-    "message": "ok",
-    "action": "Supplier created Successfully",
-    "reference": "SupplierReference"
-  }
-]
+{
+  "erreur": "false",
+  "message": "ok",
+  "action": "Supplier created Successfully",
+  "reference": "supplier_reference_1234"
+}
 ```
 
-### HTTP Request
+### HTTP Endpoint
 
 `POST https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/suppliers-upsert`
 
-### Request Parameters
+### Header parameters
 
-| Parameter     | Type   | Description                                                                                                                                                                                                        |
-| ------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --- |
-| reference     | String | If provided, the unique Ezus reference associated to the supplier you want to update or insert (in case the one you provided has never been used). If not provided, a supplier will be inserted with a random one. |
-| company_name  | String | Set a company name - If company name is empty, the supplier will be set as an individual and the name of the supplier will be the name of the contact                                                              |     |
-| capacity      | Number | Capacity of the Supplier                                                                                                                                                                                           |
-| type          | String | 3 Options: `accom`, `activity`, `transport`. You can select multiple options by typing "accom, activity" for exemple, the new data will erase old data. To add multiple options they must be separated by a comma  |
-| contact       | JSON   | Contact is a JSON and email is needed ([Contact](#contact))                                                                                                                                                        |
-| address       | JSON   | Address is a JSON and label is needed if you want to add or update the adresse of your supplier but not mandatory ([Address](#address))                                                                            |
-| custom_fields | JSON   | You can add custom fields for your supplier, this custom fields should be in your Ezus params and Write Exactly as they are written in your params technical name ([Custom fields](#custom-fields))                |
+| Parameter     | Description                                                 |
+| ------------- | ----------------------------------------------------------- |
+| X-API-KEY     | <span style="color:red">(Required)</span> Your Ezus API key |
+| Authorization | <span style="color:red">(Required)</span> Your Bearer token |
+
+### Body parameters (application/json)
+
+| Parameter     | Type   | Description                                                                                                                                                                                                       |
+| ------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --- |
+| reference     | String | If provided, the unique reference associated to the supplier you want to update or insert (in case the one you provided has never been used). If not provided, a supplier will be inserted with a random one.     |
+| company_name  | String | Set a company name - If company name is empty, the supplier will be set as an individual and the name of the supplier will be the name of the contact                                                             |     |
+| capacity      | Number | Capacity of the Supplier                                                                                                                                                                                          |
+| type          | String | 3 Options: `accom`, `activity`, `transport`. You can select multiple options by typing "accom, activity" for exemple, the new data will erase old data. To add multiple options they must be separated by a comma |
+| contact       | JSON   | Contact is a JSON and email is needed ([Contact](#contact))                                                                                                                                                       |
+| address       | JSON   | Address is a JSON and label is needed if you want to add or update the adresse of your supplier but not mandatory ([Address](#address))                                                                           |
+| custom_fields | JSON   | You can add custom fields for your supplier, this custom fields should be in your Ezus params and Write Exactly as they are written in your params technical name ([Custom fields](#custom-fields))               |
 
 ### Response
 
-JSON object indicating whether an error has occured during the process and its associated message. If no error, it also returns a `reference`: you will need to store this Ezus reference if you need to update or retrieve the supplier later on.
+JSON object indicating whether an error has occured during the process and, if so, the associated message. If there is no error, it also returns a `reference`: you will need to store this reference if you need to update or retrieve the supplier later on.
 
 # Products
 
 ## GET product
 
-Retrieve information for a product record in Ezus. You need to specify to the Ezus API which product you want to retrieve by giving the adequate Ezus reference.
+Retrieve information for a product record in Ezus. You must specify to the Ezus API which product you wish to retrieve, by indicating the appropriate reference in your query parameter.
 
 ```javascript
 const axios = require("axios");
@@ -689,12 +738,12 @@ const headers = {
 axios.post(baseUrl + "/product?reference=product_reference_1234", {}, headers);
 ```
 
-> This method returns JSON structured like this:
+> It returns a JSON object structured like this:
 
 ```json
 {
   "erreur": "false",
-  "reference": "products_reference",
+  "reference": "product_reference_1234",
   "title": "product_title",
   "capacity": 5,
   "quantity": "P",
@@ -715,11 +764,11 @@ axios.post(baseUrl + "/product?reference=product_reference_1234", {}, headers);
     "size": 1
   },
   "supplier": {
-    "reference": "suppliers_reference",
+    "reference": "supplier_reference_1234",
     "company_name": "supplier_company"
   },
   "package": {
-    "reference": "packages_reference",
+    "reference": "package_reference_1234",
     "title": "packages_title"
   },
   "commission": {
@@ -737,7 +786,7 @@ axios.post(baseUrl + "/product?reference=product_reference_1234", {}, headers);
   ],
   "tariffs": [
     {
-      "reference": null,
+      "reference": "tariff_reference_1234",
       "type": "default",
       "name": "",
       "purchase_price": 100.0,
@@ -755,23 +804,30 @@ axios.post(baseUrl + "/product?reference=product_reference_1234", {}, headers);
 }
 ```
 
-### HTTP Request
+### HTTP Endpoint
 
 `GET https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/product`
 
-### Query Parameters
+### Header parameters
+
+| Parameter     | Description                                                 |
+| ------------- | ----------------------------------------------------------- |
+| X-API-KEY     | <span style="color:red">(Required)</span> Your Ezus API key |
+| Authorization | <span style="color:red">(Required)</span> Your Bearer token |
+
+### Query parameters
 
 | Parameter | Type   | Description                                                                                 |
 | --------- | ------ | ------------------------------------------------------------------------------------------- |
-| reference | String | <span style="color:red">(Required)</span> The reference of the product you want to retrieve |
+| reference | String | <span style="color:red">(Required)</span> The reference of the product you wish to retrieve |
 
 ### Response
 
 JSON object containing the product information.
 
-| Name            | Type   | Description                                                                                                                                                                                                      |
+| Property        | Type   | Description                                                                                                                                                                                                      |
 | --------------- | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| reference       | String | The reference of the product you want to retrieve                                                                                                                                                                |
+| reference       | String | The reference of the product you wish to retrieve                                                                                                                                                                |
 | title           | String | Name of the product                                                                                                                                                                                              |
 | capacity        | Number | Capacity of the product                                                                                                                                                                                          |
 | quantity        | String | Quantity is the default number of this product at his creation (P = Number of people in the project, D = Number of days in the project, N = Number of nights in the project)                                     |
@@ -792,14 +848,14 @@ JSON object containing the product information.
 
 ## POST products-upsert
 
-Update a product record if the provided Ezus reference do matches one of the product references in your account, otherwise create a new product record with the provided Ezus reference (or with a random one if no reference is provided).
+Update a product record if the provided reference do matches one of the product references in your account, otherwise create a new product record with the provided reference (or with a random one if no reference is provided).
 
 ```javascript
 const axios = require("axios");
 const baseUrl = "https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1";
 
 const body = {
-  reference: "product_reference",
+  reference: "product_reference_1234",
   title: "product_title",
   quantity: "3",
   capacity: 3,
@@ -828,28 +884,33 @@ const headers = {
 axios.post(baseUrl + "/products-upsert", body, headers);
 ```
 
-> This method returns JSON structured like this:
+> It returns a JSON object structured like this:
 
 ```json
-[
-  {
-    "erreur": "false",
-    "message": "ok",
-    "action": "Product Created Successfully",
-    "reference": "productReference"
-  }
-]
+{
+  "erreur": "false",
+  "message": "ok",
+  "action": "Product Created Successfully",
+  "reference": "product_reference_1234"
+}
 ```
 
-### HTTP Request
+### HTTP Endpoint
 
 `POST https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/products-upsert`
 
-### Request Parameters
+### Header parameters
+
+| Parameter     | Description                                                 |
+| ------------- | ----------------------------------------------------------- |
+| X-API-KEY     | <span style="color:red">(Required)</span> Your Ezus API key |
+| Authorization | <span style="color:red">(Required)</span> Your Bearer token |
+
+### Body parameters (application/json)
 
 | Parameter          | Type    | Description                                                                                                                                                                                                                                                                                                                                         |
 | ------------------ | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| reference          | String  | If provided, the unique Ezus reference associated to the product you want to update or insert (in case the one you provided has never been used). If not provided, a product will be inserted with a random one.                                                                                                                                    |
+| reference          | String  | If provided, the unique reference associated to the product you want to update or insert (in case the one you provided has never been used). If not provided, a product will be inserted with a random one.                                                                                                                                         |
 | title              | String  | If no reference or reference not found, the title is mandatory                                                                                                                                                                                                                                                                                      |
 | quantity           | String  | Quantity is the default number of this product at his creation (P = Number of people in the project, D = Number of days in the project, N = Number of nights in the project)                                                                                                                                                                        |
 | capacity           | Int     | Capacity is the default capacity of the product                                                                                                                                                                                                                                                                                                     |
@@ -865,13 +926,13 @@ axios.post(baseUrl + "/products-upsert", body, headers);
 
 ### Response
 
-JSON object indicating whether an error has occured during the process and its associated message. If no error, it also returns a `reference`: you will need to store this Ezus reference if you need to update or retrieve the product later on.
+JSON object indicating whether an error has occured during the process and, if so, the associated message. If there is no error, it also returns a `reference`: you will need to store this reference if you need to update or retrieve the product later on.
 
 # Package
 
 ## GET package
 
-Retrieve information for a package record in Ezus. You need to specify to the Ezus API which package you want to retrieve by giving the adequate Ezus reference.
+Retrieve information for a package record in Ezus. You must specify to the Ezus API which package you wish to retrieve, by indicating the appropriate reference in your query parameter.
 
 ```javascript
 const axios = require("axios");
@@ -885,12 +946,12 @@ const headers = {
 axios.post(baseUrl + "/package?reference=package_reference_1234", {}, headers);
 ```
 
-> This method returns JSON structured like this:
+> It returns a JSON object structured like this:
 
 ```json
 {
   "erreur": "false",
-  "reference": "packages_reference",
+  "reference": "package_reference_1234",
   "title": "packages_title",
   "capacity": "3",
   "info_notes": "Notes on the Package",
@@ -907,7 +968,7 @@ axios.post(baseUrl + "/package?reference=package_reference_1234", {}, headers);
   "suppliers": {
     "data": [
       {
-        "reference": "suppliers_reference",
+        "reference": "supplier_reference_1234",
         "company_name": "supplier_company"
       }
     ],
@@ -916,7 +977,7 @@ axios.post(baseUrl + "/package?reference=package_reference_1234", {}, headers);
   "products": {
     "data": [
       {
-        "reference": "products_reference",
+        "reference": "product_reference_1234",
         "title": "product_title"
       }
     ],
@@ -945,23 +1006,30 @@ axios.post(baseUrl + "/package?reference=package_reference_1234", {}, headers);
 }
 ```
 
-### HTTP Request
+### HTTP Endpoint
 
 `GET https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/package`
 
-### Query Parameters
+### Header parameters
+
+| Parameter     | Description                                                 |
+| ------------- | ----------------------------------------------------------- |
+| X-API-KEY     | <span style="color:red">(Required)</span> Your Ezus API key |
+| Authorization | <span style="color:red">(Required)</span> Your Bearer token |
+
+### Query parameters
 
 | Parameter | Type   | Description                                                                                 |
 | --------- | ------ | ------------------------------------------------------------------------------------------- |
-| reference | String | <span style="color:red">(Required)</span> The reference of the package you want to retrieve |
+| reference | String | <span style="color:red">(Required)</span> The reference of the package you wish to retrieve |
 
 ### Response
 
 JSON object containing the package information.
 
-| Name          | Type   | Description                                                 |
+| Property      | Type   | Description                                                 |
 | ------------- | ------ | ----------------------------------------------------------- |
-| reference     | String | The reference of the package you want to retrieve           |
+| reference     | String | The reference of the package you wish to retrieve           |
 | title         | String | Name of the package                                         |
 | capacity      | String | Capacity of the package                                     |
 | info_notes    | String | Notes on the package budget                                 |
@@ -974,7 +1042,7 @@ JSON object containing the package information.
 
 ## POST packages_upsert
 
-Update a package record if the provided Ezus reference do matches one of the package references in your account, otherwise create a new package record with the provided Ezus reference (or with a random one if no reference is provided).
+Update a package record if the provided reference do matches one of the package references in your account, otherwise create a new package record with the provided reference (or with a random one if no reference is provided).
 
 ```javascript
 const axios = require("axios");
@@ -997,24 +1065,29 @@ const headers = {
 axios.post(baseUrl + "/packages-upsert", body, headers);
 ```
 
-> This method returns JSON structured like this:
+> It returns a JSON object structured like this:
 
 ```json
-[
-  {
-    "erreur": "false",
-    "message": "ok",
-    "action": "Package Created Successfully",
-    "reference": "packageReference"
-  }
-]
+{
+  "erreur": "false",
+  "message": "ok",
+  "action": "Package Created Successfully",
+  "reference": "package_reference_1234"
+}
 ```
 
-### HTTP Request
+### HTTP Endpoint
 
 `POST https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/packages-upsert`
 
-### Request Parameters
+### Header parameters
+
+| Parameter     | Description                                                 |
+| ------------- | ----------------------------------------------------------- |
+| X-API-KEY     | <span style="color:red">(Required)</span> Your Ezus API key |
+| Authorization | <span style="color:red">(Required)</span> Your Bearer token |
+
+### Body parameters (application/json)
 
 | Parameter     | Type   | Description                                                                                                                                                                                                      |
 | ------------- | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --- |
@@ -1025,7 +1098,7 @@ axios.post(baseUrl + "/packages-upsert", body, headers);
 
 ### Response
 
-JSON object indicating whether an error has occured during the process and its associated message. If no error, it also returns a `reference`: you will need to store this Ezus reference if you need to update or retrieve the package later on.
+JSON object indicating whether an error has occured during the process and, if so, the associated message. If there is no error, it also returns a `reference`: you will need to store this reference if you need to update or retrieve the package later on.
 
 # Nested Resource
 
@@ -1081,9 +1154,9 @@ In an upsert, the custom_fields must be called with their technical_name which y
 | Text              | String | Simple string like Text Area                                                                                                                                                                   |
 | Dropdown          | String | The option must be written exactly as in the parameters, respecting the case                                                                                                                   |
 | Multiple Dropdown | String | The option must be written exactly as in the parameters, respecting the case, for Multiple Answer you should enter Option1/-/Option2/-/Option3 in a string, "/-/" should separate each options |
-| Date              | String | The date must be written exactly in YYYY-MM-DD format                                                                                                                                          |
-| Time              | String | The time must be written exactly in the format: YYYY-MM-DDTHH:MM:SS+01:00                                                                                                                      |
-| Checkbox          | String | A string must contain "true" (checked) OR "false" (unchecked)                                                                                                                                  |
+| Date              | String | The date must be in a "YYYY-MM-DD" format string                                                                                                                                               |
+| Time              | String | The time must be in a "YYYY-MM-DDTHH:MM:SS+01:00" format string                                                                                                                                |
+| Checkbox          | String | The checkbox must be a string: "true" (checked) OR "false" (unchecked)                                                                                                                         |
 | Number            | String | Number type should be a Number without other character                                                                                                                                         |
 | File              | File   | Not supported yet                                                                                                                                                                              |
 
@@ -1097,32 +1170,32 @@ In an upsert, the custom_fields must be called with their technical_name which y
       "trip_budget": "0",
       "trip_date_in": "2022-07-31",
       "trip_date_out": "2022-08-02",
-      "destination": "Destination",
-      "subdestination": "Subdestination",
       "trip_duration": "2",
+      "trip_destination": "France",
+      "trip_subdestination": "Paris",
       "client": {
-        "reference": "Client reference",
+        "reference": "client_reference_1234",
         "type": "entreprise",
         "company_name": "Client Company Name",
         "first_name": "Client First Name",
         "last_name": "Client Last Name",
-        "email": "melchiorbengtsson@gmail.com"
+        "email": "client@email.com"
       }
     }
   ]
 ```
 
-| Name              | Type   | Description                                                                                                              |
-| ----------------- | ------ | ------------------------------------------------------------------------------------------------------------------------ |
-| alternative_title | String | Title of the alternative                                                                                                 |
-| trip_people       | String | Number of people                                                                                                         |
-| trip_budget       | Number | Budget of the alternative                                                                                                |
-| trip_date_in      | String | Date of the begining of this alternative, formated like: YYYY-MM-DD if it's empty, the project have no dates             |
-| trip_date_out     | String | Date of the end of this alternative, formated like: YYYY-MM-DD if it's empty, the project have no dates                  |
-| destination       | String | Destination of the alternative                                                                                           |
-| subdestination    | String | Subdestination of the alternative                                                                                        |
-| trip_duration     | String | Number of days                                                                                                           |
-| client            | JSON   | JSON that contain: `reference`, `type` (entreprise or individual), `company_name`, `first_name`, `last_name` and `email` |
+| Property            | Type   | Description                                                                                                              |
+| ------------------- | ------ | ------------------------------------------------------------------------------------------------------------------------ |
+| alternative_title   | String | Title of the alternative                                                                                                 |
+| trip_people         | String | Number of people                                                                                                         |
+| trip_budget         | Number | Forecasted budget of the alternative (the one that is entered manually not the actual one)                               |
+| trip_date_in        | String | Date of the begining of this alternative, in a "YYYY-MM-DD" format string. If it's empty, the project have no dates      |
+| trip_date_out       | String | Date of the end of this alternative, in a "YYYY-MM-DD" format string. If it's empty, the project have no dates           |
+| trip_duration       | String | Number of days this alternative last                                                                                     |
+| trip_destination    | String | Destination of the alternative                                                                                           |
+| trip_subdestination | String | Subdestination of the alternative                                                                                        |
+| client              | JSON   | JSON that contain: `reference`, `type` (entreprise or individual), `company_name`, `first_name`, `last_name` and `email` |
 
 ### Address
 
@@ -1135,12 +1208,12 @@ In an upsert, the custom_fields must be called with their technical_name which y
   },
 ```
 
-| Parameter | Type   | Description          |
-| --------- | ------ | -------------------- |
-| label     | String | Label of the address |
-| city      | String | Name of the city     |
-| country   | String | Name of the country  |
-| zip       | String | Post code            |
+| Property | Type   | Description          |
+| -------- | ------ | -------------------- |
+| label    | String | Label of the address |
+| city     | String | Name of the city     |
+| country  | String | Name of the country  |
+| zip      | String | Post code            |
 
 ### Contact
 
@@ -1149,21 +1222,21 @@ In an upsert, the custom_fields must be called with their technical_name which y
   "first_name": "first_name",
   "last_name": "last_name",
   "gender": "Ms",
-  "email": "email@email.email",
+  "email": "contact@email.com",
   "phone": "0606060606",
   "birth_date": "2023-01-01",
 },
 
 ```
 
-| Parameter  | Type   | Description                                                                          |
-| ---------- | ------ | ------------------------------------------------------------------------------------ |
-| email      | String | Email of the contact                                                                 |
-| first_name | String | First name of the contact as a string                                                |
-| last_name  | String | Last name of the contact as a string                                                 |
-| gender     | String | `Mr`, `Ms` or `Undefined`                                                            |
-| phone      | String | Phone of the contact as a string                                                     |
-| birth_date | String | Birth date of the contact formated like: YYYY-MM-DD if not formated correctly = NULL |
+| Property   | Type   | Description                                             |
+| ---------- | ------ | ------------------------------------------------------- |
+| email      | String | Email of the contact                                    |
+| first_name | String | First name of the contact as a string                   |
+| last_name  | String | Last name of the contact as a string                    |
+| gender     | String | `Mr`, `Ms` or `Undefined`                               |
+| phone      | String | Phone of the contact as a string                        |
+| birth_date | String | Contact's date of birth in a "YYYY-MM-DD" format string |
 
 ### Tariffs
 
@@ -1181,9 +1254,9 @@ In an upsert, the custom_fields must be called with their technical_name which y
   ],
 ```
 
-| Parameter      | Type   | Description                                                                           |
+| Property       | Type   | Description                                                                           |
 | -------------- | ------ | ------------------------------------------------------------------------------------- |
-| reference      | String | An unique Ezus reference of this tariff                                               |
+| reference      | String | An unique reference of this tariff                                                    |
 | type           | String | A tariff can be `default`, `custom` OR `season`.                                      |
 | name           | String | Name of the tariff (only season tariffs can have a name)                              |
 | purchase_price | Number | Purchase price incl taxes                                                             |
@@ -1204,7 +1277,7 @@ In an upsert, the custom_fields must be called with their technical_name which y
 ],
 ```
 
-| Parameter         | Type   | Description                                      |
+| Property          | Type   | Description                                      |
 | ----------------- | ------ | ------------------------------------------------ |
 | lang              | String | Language name in lower case                      |
 | name              | String | Title of the object in this language             |
