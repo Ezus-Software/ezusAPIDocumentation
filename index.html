@@ -675,7 +675,7 @@ You can find here a <a href="#" target="_blank"> Postman Collection</a> of our e
 </tr>
 </tbody></table>
 <h2 id='post-projects-upsert'>POST projects-upsert</h2>
-<p>Update a project record if the provided reference do matches one of the project references in your account, otherwise create a new project record with the provided reference (or with a random one if no reference is provided).</p>
+<p>Update a project record if the provided reference does match one of the project references in your account, otherwise create a new project record with the provided reference (or with a random one if no reference is provided).</p>
 <div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">axios</span><span class="dl">"</span><span class="p">);</span>
 <span class="kd">const</span> <span class="nx">baseUrl</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1</span><span class="dl">"</span><span class="p">;</span>
 
@@ -735,12 +735,12 @@ You can find here a <a href="#" target="_blank"> Postman Collection</a> of our e
 <tr>
 <td>reference</td>
 <td>String</td>
-<td>If provided, the unique reference associated to the project you want to update or insert (in case the one you provided has never been used). If not provided, a project will be inserted with a random one.</td>
+<td>If provided, the unique reference associated to the project you want to update or create (in case the one you provided has never been used). If not provided, a project will be created with a random one.</td>
 </tr>
 <tr>
 <td>info_title</td>
 <td>String</td>
-<td>Title of your project, mandatory if you create a new project</td>
+<td>Title of your project. This parameter is required if you create a new project</td>
 </tr>
 <tr>
 <td>trip_people</td>
@@ -755,12 +755,12 @@ You can find here a <a href="#" target="_blank"> Postman Collection</a> of our e
 <tr>
 <td>trip_date_in</td>
 <td>Date</td>
-<td>Date of the beginning of your project in a &quot;YYYY-MM-DD&quot; format string. If not formatted correctly, or if duration &gt; 40 days or if trip_date_in &gt; trip_date_out, project will be set as 1 day and date = today. If project is without Date, no date will be setted</td>
+<td>Date of the beginning of your project in a &quot;YYYY-MM-DD&quot; format string. If not provided or if not formatted correctly, or if duration &gt; 40 days or if trip_date_in &gt; trip_date_out, project will be set as 1 day and trip_date_in as today</td>
 </tr>
 <tr>
 <td>trip_date_out</td>
 <td>Date</td>
-<td>Date of the end of your project in a &quot;YYYY-MM-DD&quot; format string. If not formatted correctly, or if duration &gt; 40 days or if trip_date_in &gt; trip_date_out, project will be set as 1 day and date = today. If project is without sate, no date will be setted</td>
+<td>Date of the end of your project in a &quot;YYYY-MM-DD&quot; format string. If not provided or if not formatted correctly, or if duration &gt; 40 days or if trip_date_in &gt; trip_date_out, project will be set as 1 day and trip_date_out as today</td>
 </tr>
 <tr>
 <td>sales_manager_email</td>
@@ -833,7 +833,7 @@ You can find here a <a href="#" target="_blank"> Postman Collection</a> of our e
 <tr>
 <td>project_reference</td>
 <td>String</td>
-<td><span style="color:red">(Required)</span> The project reference in which you want to insert a document</td>
+<td><span style="color:red">(Required)</span> The project reference in which you want to create a document</td>
 </tr>
 <tr>
 <td>title</td>
@@ -1049,7 +1049,7 @@ You can find here a <a href="#" target="_blank"> Postman Collection</a> of our e
 </tr>
 </tbody></table>
 <h2 id='post-clients-upsert'>POST clients-upsert</h2>
-<p>Update a client record if the provided reference (or the email) do matches one of the client references in your account, otherwise create a new client record with the provided reference (or with a random one if no reference is provided). Note that for this endpoint, the email of the client can also be used as a primary key for the upsert.</p>
+<p>Update a client record if the provided reference (or the email) does match one of the client references in your account, otherwise create a new client record with the provided reference (or with a random one if no reference is provided). Note that for this endpoint, the email of the client can also be used as a primary key for the upsert.</p>
 <div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">axios</span><span class="dl">"</span><span class="p">);</span>
 <span class="kd">const</span> <span class="nx">baseUrl</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1</span><span class="dl">"</span><span class="p">;</span>
 
@@ -1120,7 +1120,7 @@ You can find here a <a href="#" target="_blank"> Postman Collection</a> of our e
 <tr>
 <td>reference</td>
 <td>String</td>
-<td>If provided, the unique reference associated to the client you want to update or insert (in case the one you provided has never been used). If not provided, a client will be inserted with a random one.</td>
+<td>If provided, the unique reference associated to the client you want to update or create (in case the one you provided has never been used). If not provided, a client will be created with a random one.</td>
 </tr>
 <tr>
 <td>company_name</td>
@@ -1135,7 +1135,7 @@ You can find here a <a href="#" target="_blank"> Postman Collection</a> of our e
 <tr>
 <td>address</td>
 <td>JSON</td>
-<td>Address is a JSON and label is needed if you want to add or update the adresse of your client but not mandatory (<a href="#address">Address</a>)</td>
+<td>Address is a JSON and label is needed if you want to add or update the adresse of your client (<a href="#address">Address</a>)</td>
 </tr>
 <tr>
 <td>custom_fields</td>
@@ -1294,7 +1294,7 @@ You can find here a <a href="#" target="_blank"> Postman Collection</a> of our e
 <tr>
 <td>type</td>
 <td>String</td>
-<td>Type of the supplier, the different types are separated by commas</td>
+<td>3 options: <code>accom</code>, <code>activity</code>, <code>transport</code>. A supplier can have no type, 1 type or serval types. In this case, the different types are separated by commas</td>
 </tr>
 <tr>
 <td>info_notes</td>
@@ -1309,7 +1309,7 @@ You can find here a <a href="#" target="_blank"> Postman Collection</a> of our e
 <tr>
 <td>visual_url</td>
 <td>String</td>
-<td>Link to the google Slides linked to the supplier in Ezus</td>
+<td>URL of the Google Slides visual linked to the supplier</td>
 </tr>
 <tr>
 <td>user</td>
@@ -1348,7 +1348,7 @@ You can find here a <a href="#" target="_blank"> Postman Collection</a> of our e
 </tr>
 </tbody></table>
 <h2 id='post-suppliers-upsert'>POST suppliers-upsert</h2>
-<p>Update a supplier record if the provided reference do matches one of the supplier references in your account, otherwise create a new supplier record with the provided reference (or with a random one if no reference is provided).</p>
+<p>Update a supplier record if the provided reference does match one of the supplier references in your account, otherwise create a new supplier record with the provided reference (or with a random one if no reference is provided).</p>
 <div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">axios</span><span class="dl">"</span><span class="p">);</span>
 <span class="kd">const</span> <span class="nx">baseUrl</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1</span><span class="dl">"</span><span class="p">;</span>
 
@@ -1417,12 +1417,12 @@ You can find here a <a href="#" target="_blank"> Postman Collection</a> of our e
 <tr>
 <td>reference</td>
 <td>String</td>
-<td>If provided, the unique reference associated to the supplier you want to update or insert (in case the one you provided has never been used). If not provided, a supplier will be inserted with a random one.</td>
+<td>If provided, the unique reference associated to the supplier you want to update or create (in case the one you provided has never been used). If not provided, a supplier will be created with a random one.</td>
 </tr>
 <tr>
 <td>company_name</td>
 <td>String</td>
-<td>Set a company name - If company name is empty, the supplier will be set as an individual and the name of the supplier will be the name of the contact</td>
+<td>Name of the supplier. This parameter is required if you create a new supplier</td>
 </tr>
 <tr>
 <td>capacity</td>
@@ -1442,7 +1442,7 @@ You can find here a <a href="#" target="_blank"> Postman Collection</a> of our e
 <tr>
 <td>address</td>
 <td>JSON</td>
-<td>Address is a JSON and label is needed if you want to add or update the adresse of your supplier but not mandatory (<a href="#address">Address</a>)</td>
+<td>Address is a JSON and label is needed if you want to add or update the adresse of your supplier (<a href="#address">Address</a>)</td>
 </tr>
 <tr>
 <td>custom_fields</td>
@@ -1623,7 +1623,7 @@ You can find here a <a href="#" target="_blank"> Postman Collection</a> of our e
 <tr>
 <td>visual_url</td>
 <td>String</td>
-<td>URL of the Google slides linked to this product record in Ezus</td>
+<td>URL of the Google Slides visual linked to the product</td>
 </tr>
 <tr>
 <td>medias</td>
@@ -1662,7 +1662,7 @@ You can find here a <a href="#" target="_blank"> Postman Collection</a> of our e
 </tr>
 </tbody></table>
 <h2 id='post-products-upsert'>POST products-upsert</h2>
-<p>Update a product record if the provided reference do matches one of the product references in your account, otherwise create a new product record with the provided reference (or with a random one if no reference is provided).</p>
+<p>Update a product record if the provided reference does match one of the product references in your account, otherwise create a new product record with the provided reference (or with a random one if no reference is provided).</p>
 <div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">axios</span><span class="dl">"</span><span class="p">);</span>
 <span class="kd">const</span> <span class="nx">baseUrl</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1</span><span class="dl">"</span><span class="p">;</span>
 
@@ -1733,67 +1733,67 @@ You can find here a <a href="#" target="_blank"> Postman Collection</a> of our e
 <tr>
 <td>reference</td>
 <td>String</td>
-<td>If provided, the unique reference associated to the product you want to update or insert (in case the one you provided has never been used). If not provided, a product will be inserted with a random one.</td>
+<td>If provided, the unique reference associated to the product you want to update or create (in case the one you provided has never been used). If not provided, a product will be created with a random one.</td>
 </tr>
 <tr>
 <td>title</td>
 <td>String</td>
-<td>If no reference or reference not found, the title is mandatory</td>
+<td>Title of your product. This parameter is required if you create a new product</td>
 </tr>
 <tr>
 <td>quantity</td>
 <td>String</td>
-<td>Quantity is the default number of this product at his creation (P = Number of people in the project, D = Number of days in the project, N = Number of nights in the project)</td>
+<td>Default quantity of this product when you add it into a project. It can either be a number or one of this letter (<code>P</code> = Number of people in the project, <code>D</code> = Number of days in the project, <code>N</code> = Number of nights in the project)</td>
 </tr>
 <tr>
 <td>capacity</td>
-<td>Int</td>
-<td>Capacity is the default capacity of the product</td>
+<td>Number</td>
+<td>The capacity of the product</td>
 </tr>
 <tr>
 <td>supplier_reference</td>
 <td>String</td>
-<td>The reference to the supplier, if you give a reference, the product will be added in the supplier</td>
+<td>If you give an adequate supplier reference, the product will be added in this supplier. Otherwise it won&#39;t belong to any supplier.</td>
 </tr>
 <tr>
 <td>package_reference</td>
 <td>String</td>
-<td>The reference to the package, if you give a reference, the product will be added in the package</td>
+<td>If you give an adequate package reference, the product will be added in this package. Otherwise it won&#39;t belong to any package.</td>
 </tr>
 <tr>
 <td>purchase_price</td>
-<td>float</td>
-<td>Purchase price as number</td>
+<td>Number</td>
+<td>Purchase price as a number</td>
 </tr>
 <tr>
 <td>sales_price</td>
-<td>float</td>
-<td>Sales price as number</td>
+<td>Number</td>
+<td>Sales price as a number</td>
 </tr>
 <tr>
 <td>vat_regime</td>
-<td>Options</td>
-<td>&#39;classic&#39;, &#39;margin&#39;, &#39;none&#39;, Thoses options allows to choose your VAT Regime, in margin mode, VAT will be calculated on your margin. Classic mode, VAT will be calculated on your selling price. In none mode, no VAT will be applied. If empty will be set at your default account values</td>
+<td>String</td>
+<td>Can be either <code>classic</code> (common law VAT), <code>margin</code> (VAT on the margin), <code>none</code> (Non applicable VAT). If empty or not provided, your default account VAT regime will be set</td>
 </tr>
 <tr>
 <td>vat_rate</td>
-<td>float</td>
-<td>Default VAT rate, if empty will be set at your default account VAT rate</td>
+<td>Number</td>
+<td>Default VAT rate. If empty or not provided, your default account VAT rate will be set</td>
 </tr>
 <tr>
 <td>currency</td>
 <td>String</td>
-<td>The ISO 4217 code who represent the currency you use (<a href="https://docs.google.com/spreadsheets/d/1b7BNOwKyN1hMOouve6xhFZ2R2zrH4Sj1L-646j755fU/edit?usp=sharing" target="_blank">Link to Doc</a>) If the currency is not set in your account, your default currency will be set</td>
+<td>The ISO 4217 code of the currency of this product (<a href="https://docs.google.com/spreadsheets/d/1b7BNOwKyN1hMOouve6xhFZ2R2zrH4Sj1L-646j755fU/edit?usp=sharing" target="_blank">Link to Doc</a>). If empty or not provided, your default account currency will be set</td>
 </tr>
 <tr>
 <td>commission</td>
 <td>JSON</td>
-<td>JSON object containing <code>value</code>: Commission as number, <code>commission_regime</code>: The commission regime can be &quot;percent&quot; (commission is a percent of the buying/selling price) or &quot;currency&quot; (commission is a fix value) and <code>commission_mode</code>: &quot;default&quot; or &quot;purchase&quot; default mode is base on the buying price, purchase mode based on the selling price</td>
+<td>JSON object containing <code>value</code>, <code>commission_regime</code> (&quot;percent&quot; or &quot;amount&quot;), <code>commission_mode</code> (&quot;sales&quot; or &quot;purchase&quot;)</td>
 </tr>
 <tr>
 <td>custom_fields</td>
 <td>JSON</td>
-<td>You can add Custom Fields for your product, this custom fields should be in your Ezus params and Write Exactly as they are written in your params technical name (<a href="#custom-fields">Custom fields</a>)</td>
+<td>Array of JSON custom fields (<a href="#custom-fields">Custom fields</a>)</td>
 </tr>
 </tbody></table>
 <h3 id='response-10'>Response</h3>
@@ -1932,7 +1932,7 @@ You can find here a <a href="#" target="_blank"> Postman Collection</a> of our e
 <tr>
 <td>visual_url</td>
 <td>String</td>
-<td>URL of the google slides linked to this package</td>
+<td>URL of the Google Slides visual linked to the package</td>
 </tr>
 <tr>
 <td>medias</td>
@@ -1961,7 +1961,7 @@ You can find here a <a href="#" target="_blank"> Postman Collection</a> of our e
 </tr>
 </tbody></table>
 <h2 id='post-packages_upsert'>POST packages_upsert</h2>
-<p>Update a package record if the provided reference do matches one of the package references in your account, otherwise create a new package record with the provided reference (or with a random one if no reference is provided).</p>
+<p>Update a package record if the provided reference does match one of the package references in your account, otherwise create a new package record with the provided reference (or with a random one if no reference is provided).</p>
 <div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">axios</span><span class="dl">"</span><span class="p">);</span>
 <span class="kd">const</span> <span class="nx">baseUrl</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1</span><span class="dl">"</span><span class="p">;</span>
 
@@ -2016,7 +2016,7 @@ You can find here a <a href="#" target="_blank"> Postman Collection</a> of our e
 <tr>
 <td>reference</td>
 <td>String</td>
-<td>If provided, the unique Ezus Reference associated to the package you want to update or insert (in case the one you provided has never been used). If not provided, a package will be inserted with a random one.</td>
+<td>If provided, the unique Ezus Reference associated to the package you want to update or create (in case the one you provided has never been used). If not provided, a package will be created with a random one.</td>
 </tr>
 <tr>
 <td>title</td>
