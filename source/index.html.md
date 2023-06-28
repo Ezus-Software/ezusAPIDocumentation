@@ -41,6 +41,8 @@ For POST requests, you must also provide provide <a href='https://swagger.io/doc
 
 # Authentication
 
+## Principles
+
 Ezus authentication scheme is based on <a href='https://swagger.io/docs/specification/authentication/api-keys/' target="_blank">API Keys</a> and <a href='https://swagger.io/docs/specification/authentication/bearer-authentication/' target="_blank">Bearer authentication</a>. So, you will need 2 things to be able to interact with our API:
 
 - An Ezus API key
