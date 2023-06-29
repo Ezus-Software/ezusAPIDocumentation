@@ -21,23 +21,19 @@ meta:
 
 # Introduction
 
-Welcome to the Ezus API. The Ezus API is organized around <a href='https://en.wikipedia.org/wiki/Representational_state_transfer' target="_blank">REST</a>. It supplies a collection of HTTP methods that underpin Ezus main functionalities. Its main objective is to enable you to manage your Ezus projects, customers and catalog (suppliers/products/packages) programmatically.
+Welcome to the Ezus API. The Ezus API is organized around <a href='https://en.wikipedia.org/wiki/Representational_state_transfer' target="_blank">REST</a>. It supplies a collection of HTTP methods that underpin Ezus main functionalities. Its main objective is to enable you to manage your Ezus projects, clients and catalog (suppliers/products/packages) programmatically.
 
 If you need an overview of some common use cases that you can setup with our API you can look at our help center section <a href='https://help.ezus.io/en/collections/3016686-integrations' target="_blank">Integrations</a>
 
 If you want to dive into the list of available methods, you've come to the right place. This documentation provides a technical description (reference) for each method in the left-hand section, as well as code examples in the right-hand section.
 
-<aside class="success">
-You can find here a <a href="#" target="_blank"> Postman Collection</a> of our endpoints containing moke data to directly test it
-</aside>
-
 Each method has its own specification, but as a general rule :
 
 For any request, you must provide <a href='https://swagger.io/docs/specification/describing-parameters/#header-parameters' target="_blank">header parameters</a>
 
-For GET requests, you must also provide provide <a href='https://swagger.io/docs/specification/describing-parameters/#query-parameters'>querry parameters</a>
+For GET requests, you must also provide <a href='https://swagger.io/docs/specification/describing-parameters/#query-parameters' target="_blank">querry parameters</a>
 
-For POST requests, you must also provide provide <a href='https://swagger.io/docs/specification/2-0/describing-request-body'>body parameters</a> structured in a JSON payload (application/json)
+For POST requests, you must also provide <a href='https://swagger.io/docs/specification/2-0/describing-request-body' target="_blank">body parameters</a> structured in a JSON payload (application/json)
 
 # Authentication
 
@@ -95,16 +91,16 @@ axios.post(baseUrl + "/login", body, headers);
 
 ### Header parameters
 
-| Parameter | Description                                                 |
-| --------- | ----------------------------------------------------------- |
-| X-API-KEY | <span style="color:red">(Required)</span> Your Ezus API key |
+| Parameter | Type   | Description                                                 |
+| --------- | ------ | ----------------------------------------------------------- |
+| X-API-KEY | String | <span style="color:red">(Required)</span> Your Ezus API key |
 
 ### Body parameters (application/json)
 
-| Parameter | Description                                                     |
-| --------- | --------------------------------------------------------------- |
-| email     | <span style="color:red">(Required)</span> Your account email    |
-| password  | <span style="color:red">(Required)</span> Your account password |
+| Parameter | Type   | Description                                                     |
+| --------- | ------ | --------------------------------------------------------------- |
+| email     | String | <span style="color:red">(Required)</span> Your account email    |
+| password  | String | <span style="color:red">(Required)</span> Your account password |
 
 ### Response
 
@@ -114,7 +110,7 @@ JSON object indicating whether an error has occured during the process and, if s
 
 ## GET project
 
-Retrieve information for a project record in Ezus. You must specify to the Ezus API which project you wish to retrieve, by indicating the appropriate reference in your query parameter.
+Retrieve information for a project record in Ezus. You must specify to the Ezus API which project you wish to retrieve, by indicating its appropriate reference in your query parameter.
 
 ```javascript
 const axios = require("axios");
@@ -183,10 +179,10 @@ axios.post(baseUrl + "/project?reference=project_reference_1234", {}, headers);
 
 ### Header parameters
 
-| Parameter     | Description                                                 |
-| ------------- | ----------------------------------------------------------- |
-| X-API-KEY     | <span style="color:red">(Required)</span> Your Ezus API key |
-| Authorization | <span style="color:red">(Required)</span> Your Bearer token |
+| Parameter     | Type   | Description                                                 |
+| ------------- | ------ | ----------------------------------------------------------- |
+| X-API-KEY     | String | <span style="color:red">(Required)</span> Your Ezus API key |
+| Authorization | String | <span style="color:red">(Required)</span> Your Bearer token |
 
 ### Query parameters
 
@@ -254,10 +250,10 @@ axios.post(baseUrl + "/projects-upsert", body, headers);
 
 ### Header parameters
 
-| Parameter     | Description                                                 |
-| ------------- | ----------------------------------------------------------- |
-| X-API-KEY     | <span style="color:red">(Required)</span> Your Ezus API key |
-| Authorization | <span style="color:red">(Required)</span> Your Bearer token |
+| Parameter     | Type   | Description                                                 |
+| ------------- | ------ | ----------------------------------------------------------- |
+| X-API-KEY     | String | <span style="color:red">(Required)</span> Your Ezus API key |
+| Authorization | String | <span style="color:red">(Required)</span> Your Bearer token |
 
 ### Body parameters (application/json)
 
@@ -313,18 +309,18 @@ axios.post(baseUrl + "/projects-documents-create", body, headers);
 
 ### Header parameters
 
-| Parameter     | Description                                                 |
-| ------------- | ----------------------------------------------------------- |
-| X-API-KEY     | <span style="color:red">(Required)</span> Your Ezus API key |
-| Authorization | <span style="color:red">(Required)</span> Your Bearer token |
+| Parameter     | Type   | Description                                                 |
+| ------------- | ------ | ----------------------------------------------------------- |
+| X-API-KEY     | String | <span style="color:red">(Required)</span> Your Ezus API key |
+| Authorization | String | <span style="color:red">(Required)</span> Your Bearer token |
 
 ### Body parameters (application/json)
 
-| Parameter         | Type   | Description                                                                                            |
-| ----------------- | ------ | ------------------------------------------------------------------------------------------------------ |
-| project_reference | String | <span style="color:red">(Required)</span> The project reference in which you want to create a document |
-| title             | String | <span style="color:red">(Required)</span> Title of your document                                       |
-| link              | Link   | <span style="color:red">(Required)</span> HTTP link of your document (only PDF)                        |
+| Parameter         | Type   | Description                                                                                                           |
+| ----------------- | ------ | --------------------------------------------------------------------------------------------------------------------- |
+| project_reference | String | <span style="color:red">(Required)</span> The project reference in which you want to create a document                |
+| title             | String | <span style="color:red">(Required)</span> Title of your document                                                      |
+| link              | Link   | <span style="color:red">(Required)</span> URL of your document (only PDF). Make sure this link is publicly accessible |
 
 ### Response
 
@@ -334,7 +330,7 @@ JSON object indicating whether an error has occured during the process and, if s
 
 ## GET client
 
-Retrieve information for a client record in Ezus. You must specify to the Ezus API which client you wish to retrieve, by indicating the appropriate reference in your query parameter.
+Retrieve information for a client record in Ezus. You must specify to the Ezus API which client you wish to retrieve, by indicating its appropriate reference in your query parameter.
 
 ```javascript
 const axios = require("axios");
@@ -411,10 +407,10 @@ axios.post(baseUrl + "/client?reference=client_reference_1234", {}, headers);
 
 ### Header parameters
 
-| Parameter     | Description                                                 |
-| ------------- | ----------------------------------------------------------- |
-| X-API-KEY     | <span style="color:red">(Required)</span> Your Ezus API key |
-| Authorization | <span style="color:red">(Required)</span> Your Bearer token |
+| Parameter     | Type   | Description                                                 |
+| ------------- | ------ | ----------------------------------------------------------- |
+| X-API-KEY     | String | <span style="color:red">(Required)</span> Your Ezus API key |
+| Authorization | String | <span style="color:red">(Required)</span> Your Bearer token |
 
 ### Query parameters
 
@@ -436,7 +432,7 @@ JSON object containing the client information.
 | email         | String | Email of the main contact of the client                                                                                                                               |
 | activity      | String | Activity of the client (only for entreprise)                                                                                                                          |
 | vat_number    | String | VAT number of the client (only for entreprise)                                                                                                                        |
-| siret         | String | Siret number of the client (only for entreprise)                                                                                                                      |
+| siret         | String | Company registration number of the client (only for entreprise)                                                                                                       |
 | info_profile  | String | Profile of the client                                                                                                                                                 |
 | info_origin   | String | Source of the client                                                                                                                                                  |
 | info_notes    | String | Notes on the client                                                                                                                                                   |
@@ -456,15 +452,15 @@ const axios = require("axios");
 const baseUrl = "https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1";
 
 const body = {
-  reference: "client_reference",
-  company_name: "client_company_name",
+  reference: "client_reference_1234",
+  company_name: "MOKE INTERNATIONAL LIMITED",
   contact: {
-    first_name: "first_name",
-    last_name: "last_name",
-    gender: "Mr",
-    email: "email@email.email",
+    first_name: "Jane",
+    last_name: "Doe",
+    email: "contact@moke-international.com",
+    gender: "Ms",
     phone: "0606060606",
-    birth_date: "2023-01-01",
+    birth_date: "1986-09-17",
   },
   address: {
     label: "58 Rue de Paradis",
@@ -472,10 +468,7 @@ const body = {
     country: "France",
     zip: "75010",
   },
-  custom_fields: [
-    { name: "field1", value: "field1Value" },
-    { name: "field2", value: "field2Value" },
-  ],
+  custom_fields: [{ name: "field1", value: "field1Value" }],
 };
 const headers = {
   "X-API-KEY": "<YOUR_API_KEY>",
@@ -502,10 +495,10 @@ axios.post(baseUrl + "/clients-upsert", body, headers);
 
 ### Header parameters
 
-| Parameter     | Description                                                 |
-| ------------- | ----------------------------------------------------------- |
-| X-API-KEY     | <span style="color:red">(Required)</span> Your Ezus API key |
-| Authorization | <span style="color:red">(Required)</span> Your Bearer token |
+| Parameter     | Type   | Description                                                 |
+| ------------- | ------ | ----------------------------------------------------------- |
+| X-API-KEY     | String | <span style="color:red">(Required)</span> Your Ezus API key |
+| Authorization | String | <span style="color:red">(Required)</span> Your Bearer token |
 
 ### Body parameters (application/json)
 
@@ -513,9 +506,9 @@ axios.post(baseUrl + "/clients-upsert", body, headers);
 | ------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --- |
 | reference     | String | If provided, the unique reference associated to the client you want to update or create (in case the one you provided has never been used). If not provided, a client will be created with a random one.                                                                |
 | company_name  | String | <span style="color:red">(Required)</span> Set a company name - If company name is empty, the client will be set as an individual and the name of the client = name of the contact and if the company name is not empty, the name of the client will be the company name |     |
-| contact       | JSON   | Contact is a JSON and email is needed ([Contact](#contact))                                                                                                                                                                                                             |
-| address       | JSON   | Address is a JSON and label is needed if you want to add or update the adresse of your client ([Address](#address))                                                                                                                                                     |
-| custom_fields | JSON   | You can add custom fields for your client, this custom fields should be in your Ezus params and Write exactly as they are written in your params technical name ([Custom fields](#custom-fields))                                                                       |
+| contact       | JSON   | Contact is a JSON and email is needed ([Contacts](#contact))                                                                                                                                                                                                            |
+| address       | JSON   | JSON object address` ([Address](#address))                                                                                                                                                                                                                              |
+| custom_fields | JSON   | Array of JSON custom fields ([Custom fields] [Custom fields](#custom-fields))                                                                                                                                                                                           |
 
 ### Response
 
@@ -525,7 +518,7 @@ JSON object indicating whether an error has occured during the process and, if s
 
 ## GET supplier
 
-Retrieve information for a supplier record in Ezus. You must specify to the Ezus API which supplier you wish to retrieve, by indicating the appropriate reference in your query parameter.
+Retrieve information for a supplier record in Ezus. You must specify to the Ezus API which supplier you wish to retrieve, by indicating its appropriate reference in your query parameter.
 
 ```javascript
 const axios = require("axios");
@@ -624,10 +617,10 @@ axios.post(
 
 ### Header parameters
 
-| Parameter     | Description                                                 |
-| ------------- | ----------------------------------------------------------- |
-| X-API-KEY     | <span style="color:red">(Required)</span> Your Ezus API key |
-| Authorization | <span style="color:red">(Required)</span> Your Bearer token |
+| Parameter     | Type   | Description                                                 |
+| ------------- | ------ | ----------------------------------------------------------- |
+| X-API-KEY     | String | <span style="color:red">(Required)</span> Your Ezus API key |
+| Authorization | String | <span style="color:red">(Required)</span> Your Bearer token |
 
 ### Query parameters
 
@@ -709,10 +702,10 @@ axios.post(baseUrl + "/suppliers-upsert", body, headers);
 
 ### Header parameters
 
-| Parameter     | Description                                                 |
-| ------------- | ----------------------------------------------------------- |
-| X-API-KEY     | <span style="color:red">(Required)</span> Your Ezus API key |
-| Authorization | <span style="color:red">(Required)</span> Your Bearer token |
+| Parameter     | Type   | Description                                                 |
+| ------------- | ------ | ----------------------------------------------------------- |
+| X-API-KEY     | String | <span style="color:red">(Required)</span> Your Ezus API key |
+| Authorization | String | <span style="color:red">(Required)</span> Your Bearer token |
 
 ### Body parameters (application/json)
 
@@ -723,7 +716,7 @@ axios.post(baseUrl + "/suppliers-upsert", body, headers);
 | capacity      | Number | Capacity of the Supplier                                                                                                                                                                                          |
 | type          | String | 3 Options: `accom`, `activity`, `transport`. You can select multiple options by typing "accom, activity" for exemple, the new data will erase old data. To add multiple options they must be separated by a comma |
 | contact       | JSON   | Contact is a JSON and email is needed ([Contact](#contact))                                                                                                                                                       |
-| address       | JSON   | Address is a JSON and label is needed if you want to add or update the adresse of your supplier ([Address](#address))                                                                                             |
+| address       | JSON   | JSON object address ([Address](#address))                                                                                                                                                                         |
 | custom_fields | JSON   | You can add custom fields for your supplier, this custom fields should be in your Ezus params and Write Exactly as they are written in your params technical name ([Custom fields](#custom-fields))               |
 
 ### Response
@@ -734,7 +727,7 @@ JSON object indicating whether an error has occured during the process and, if s
 
 ## GET product
 
-Retrieve information for a product record in Ezus. You must specify to the Ezus API which product you wish to retrieve, by indicating the appropriate reference in your query parameter.
+Retrieve information for a product record in Ezus. You must specify to the Ezus API which product you wish to retrieve, by indicating its appropriate reference in your query parameter.
 
 ```javascript
 const axios = require("axios");
@@ -820,10 +813,10 @@ axios.post(baseUrl + "/product?reference=product_reference_1234", {}, headers);
 
 ### Header parameters
 
-| Parameter     | Description                                                 |
-| ------------- | ----------------------------------------------------------- |
-| X-API-KEY     | <span style="color:red">(Required)</span> Your Ezus API key |
-| Authorization | <span style="color:red">(Required)</span> Your Bearer token |
+| Parameter     | Type   | Description                                                 |
+| ------------- | ------ | ----------------------------------------------------------- |
+| X-API-KEY     | String | <span style="color:red">(Required)</span> Your Ezus API key |
+| Authorization | String | <span style="color:red">(Required)</span> Your Bearer token |
 
 ### Query parameters
 
@@ -911,10 +904,10 @@ axios.post(baseUrl + "/products-upsert", body, headers);
 
 ### Header parameters
 
-| Parameter     | Description                                                 |
-| ------------- | ----------------------------------------------------------- |
-| X-API-KEY     | <span style="color:red">(Required)</span> Your Ezus API key |
-| Authorization | <span style="color:red">(Required)</span> Your Bearer token |
+| Parameter     | Type   | Description                                                 |
+| ------------- | ------ | ----------------------------------------------------------- |
+| X-API-KEY     | String | <span style="color:red">(Required)</span> Your Ezus API key |
+| Authorization | String | <span style="color:red">(Required)</span> Your Bearer token |
 
 ### Body parameters (application/json)
 
@@ -942,7 +935,7 @@ JSON object indicating whether an error has occured during the process and, if s
 
 ## GET package
 
-Retrieve information for a package record in Ezus. You must specify to the Ezus API which package you wish to retrieve, by indicating the appropriate reference in your query parameter.
+Retrieve information for a package record in Ezus. You must specify to the Ezus API which package you wish to retrieve, by indicating its appropriate reference in your query parameter.
 
 ```javascript
 const axios = require("axios");
@@ -1021,10 +1014,10 @@ axios.post(baseUrl + "/package?reference=package_reference_1234", {}, headers);
 
 ### Header parameters
 
-| Parameter     | Description                                                 |
-| ------------- | ----------------------------------------------------------- |
-| X-API-KEY     | <span style="color:red">(Required)</span> Your Ezus API key |
-| Authorization | <span style="color:red">(Required)</span> Your Bearer token |
+| Parameter     | Type   | Description                                                 |
+| ------------- | ------ | ----------------------------------------------------------- |
+| X-API-KEY     | String | <span style="color:red">(Required)</span> Your Ezus API key |
+| Authorization | String | <span style="color:red">(Required)</span> Your Bearer token |
 
 ### Query parameters
 
@@ -1088,10 +1081,10 @@ axios.post(baseUrl + "/packages-upsert", body, headers);
 
 ### Header parameters
 
-| Parameter     | Description                                                 |
-| ------------- | ----------------------------------------------------------- |
-| X-API-KEY     | <span style="color:red">(Required)</span> Your Ezus API key |
-| Authorization | <span style="color:red">(Required)</span> Your Bearer token |
+| Parameter     | Type   | Description                                                 |
+| ------------- | ------ | ----------------------------------------------------------- |
+| X-API-KEY     | String | <span style="color:red">(Required)</span> Your Ezus API key |
+| Authorization | String | <span style="color:red">(Required)</span> Your Bearer token |
 
 ### Body parameters (application/json)
 
