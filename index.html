@@ -432,23 +432,19 @@
       <div class="dark-box"></div>
       <div class="content">
         <h1 id='introduction'>Introduction</h1>
-<p>Welcome to the Ezus API. The Ezus API is organized around <a href='https://en.wikipedia.org/wiki/Representational_state_transfer' target="_blank">REST</a>. It supplies a collection of HTTP methods that underpin Ezus main functionalities. Its main objective is to enable you to manage your Ezus projects, customers and catalog (suppliers/products/packages) programmatically.</p>
+<p>Welcome to the Ezus API. The Ezus API is organized around <a href='https://en.wikipedia.org/wiki/Representational_state_transfer' target="_blank">REST</a>. It supplies a collection of HTTP methods that underpin Ezus main functionalities. Its main objective is to enable you to manage your Ezus projects, clients and catalog (suppliers/products/packages) programmatically.</p>
 
 <p>If you need an overview of some common use cases that you can setup with our API you can look at our help center section <a href='https://help.ezus.io/en/collections/3016686-integrations' target="_blank">Integrations</a></p>
 
 <p>If you want to dive into the list of available methods, you&#39;ve come to the right place. This documentation provides a technical description (reference) for each method in the left-hand section, as well as code examples in the right-hand section.</p>
 
-<aside class="success">
-You can find here a <a href="#" target="_blank"> Postman Collection</a> of our endpoints containing moke data to directly test it
-</aside>
-
 <p>Each method has its own specification, but as a general rule :</p>
 
 <p>For any request, you must provide <a href='https://swagger.io/docs/specification/describing-parameters/#header-parameters' target="_blank">header parameters</a></p>
 
-<p>For GET requests, you must also provide provide <a href='https://swagger.io/docs/specification/describing-parameters/#query-parameters'>querry parameters</a></p>
+<p>For GET requests, you must also provide <a href='https://swagger.io/docs/specification/describing-parameters/#query-parameters' target="_blank">querry parameters</a></p>
 
-<p>For POST requests, you must also provide provide <a href='https://swagger.io/docs/specification/2-0/describing-request-body'>body parameters</a> structured in a JSON payload (application/json)</p>
+<p>For POST requests, you must also provide <a href='https://swagger.io/docs/specification/2-0/describing-request-body' target="_blank">body parameters</a> structured in a JSON payload (application/json)</p>
 <h1 id='authentication'>Authentication</h1><h2 id='principles'>Principles</h2>
 <p>Ezus authentication scheme is based on <a href='https://swagger.io/docs/specification/authentication/api-keys/' target="_blank">API Keys</a> and <a href='https://swagger.io/docs/specification/authentication/bearer-authentication/' target="_blank">Bearer authentication</a>. So, you will need 2 things to be able to interact with our API:</p>
 
@@ -501,11 +497,13 @@ You can find here a <a href="#" target="_blank"> Postman Collection</a> of our e
 <table><thead>
 <tr>
 <th>Parameter</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>X-API-KEY</td>
+<td>String</td>
 <td><span style="color:red">(Required)</span> Your Ezus API key</td>
 </tr>
 </tbody></table>
@@ -513,22 +511,25 @@ You can find here a <a href="#" target="_blank"> Postman Collection</a> of our e
 <table><thead>
 <tr>
 <th>Parameter</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>email</td>
+<td>String</td>
 <td><span style="color:red">(Required)</span> Your account email</td>
 </tr>
 <tr>
 <td>password</td>
+<td>String</td>
 <td><span style="color:red">(Required)</span> Your account password</td>
 </tr>
 </tbody></table>
 <h3 id='response'>Response</h3>
 <p>JSON object indicating whether an error has occured during the process and, if so, the associated message. If there is no error, it also returns a <code>token</code>: you will need to store this token for future API requests.</p>
 <h1 id='projects'>Projects</h1><h2 id='get-project'>GET project</h2>
-<p>Retrieve information for a project record in Ezus. You must specify to the Ezus API which project you wish to retrieve, by indicating the appropriate reference in your query parameter.</p>
+<p>Retrieve information for a project record in Ezus. You must specify to the Ezus API which project you wish to retrieve, by indicating its appropriate reference in your query parameter.</p>
 <div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">axios</span><span class="dl">"</span><span class="p">);</span>
 <span class="kd">const</span> <span class="nx">baseUrl</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1</span><span class="dl">"</span><span class="p">;</span>
 
@@ -592,15 +593,18 @@ You can find here a <a href="#" target="_blank"> Postman Collection</a> of our e
 <table><thead>
 <tr>
 <th>Parameter</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>X-API-KEY</td>
+<td>String</td>
 <td><span style="color:red">(Required)</span> Your Ezus API key</td>
 </tr>
 <tr>
 <td>Authorization</td>
+<td>String</td>
 <td><span style="color:red">(Required)</span> Your Bearer token</td>
 </tr>
 </tbody></table>
@@ -712,15 +716,18 @@ You can find here a <a href="#" target="_blank"> Postman Collection</a> of our e
 <table><thead>
 <tr>
 <th>Parameter</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>X-API-KEY</td>
+<td>String</td>
 <td><span style="color:red">(Required)</span> Your Ezus API key</td>
 </tr>
 <tr>
 <td>Authorization</td>
+<td>String</td>
 <td><span style="color:red">(Required)</span> Your Bearer token</td>
 </tr>
 </tbody></table>
@@ -810,15 +817,18 @@ You can find here a <a href="#" target="_blank"> Postman Collection</a> of our e
 <table><thead>
 <tr>
 <th>Parameter</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>X-API-KEY</td>
+<td>String</td>
 <td><span style="color:red">(Required)</span> Your Ezus API key</td>
 </tr>
 <tr>
 <td>Authorization</td>
+<td>String</td>
 <td><span style="color:red">(Required)</span> Your Bearer token</td>
 </tr>
 </tbody></table>
@@ -843,13 +853,13 @@ You can find here a <a href="#" target="_blank"> Postman Collection</a> of our e
 <tr>
 <td>link</td>
 <td>Link</td>
-<td><span style="color:red">(Required)</span> HTTP link of your document (only PDF)</td>
+<td><span style="color:red">(Required)</span> URL of your document (only PDF). Make sure this link is publicly accessible</td>
 </tr>
 </tbody></table>
 <h3 id='response-4'>Response</h3>
 <p>JSON object indicating whether an error has occured during the process and, if so, the associated message.</p>
 <h1 id='clients'>Clients</h1><h2 id='get-client'>GET client</h2>
-<p>Retrieve information for a client record in Ezus. You must specify to the Ezus API which client you wish to retrieve, by indicating the appropriate reference in your query parameter.</p>
+<p>Retrieve information for a client record in Ezus. You must specify to the Ezus API which client you wish to retrieve, by indicating its appropriate reference in your query parameter.</p>
 <div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">axios</span><span class="dl">"</span><span class="p">);</span>
 <span class="kd">const</span> <span class="nx">baseUrl</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1</span><span class="dl">"</span><span class="p">;</span>
 
@@ -921,15 +931,18 @@ You can find here a <a href="#" target="_blank"> Postman Collection</a> of our e
 <table><thead>
 <tr>
 <th>Parameter</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>X-API-KEY</td>
+<td>String</td>
 <td><span style="color:red">(Required)</span> Your Ezus API key</td>
 </tr>
 <tr>
 <td>Authorization</td>
+<td>String</td>
 <td><span style="color:red">(Required)</span> Your Bearer token</td>
 </tr>
 </tbody></table>
@@ -1000,7 +1013,7 @@ You can find here a <a href="#" target="_blank"> Postman Collection</a> of our e
 <tr>
 <td>siret</td>
 <td>String</td>
-<td>Siret number of the client (only for entreprise)</td>
+<td>Company registration number of the client (only for entreprise)</td>
 </tr>
 <tr>
 <td>info_profile</td>
@@ -1054,15 +1067,15 @@ You can find here a <a href="#" target="_blank"> Postman Collection</a> of our e
 <span class="kd">const</span> <span class="nx">baseUrl</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1</span><span class="dl">"</span><span class="p">;</span>
 
 <span class="kd">const</span> <span class="nx">body</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="na">reference</span><span class="p">:</span> <span class="dl">"</span><span class="s2">client_reference</span><span class="dl">"</span><span class="p">,</span>
-  <span class="na">company_name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">client_company_name</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">reference</span><span class="p">:</span> <span class="dl">"</span><span class="s2">client_reference_1234</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">company_name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">MOKE INTERNATIONAL LIMITED</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">contact</span><span class="p">:</span> <span class="p">{</span>
-    <span class="na">first_name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">first_name</span><span class="dl">"</span><span class="p">,</span>
-    <span class="na">last_name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">last_name</span><span class="dl">"</span><span class="p">,</span>
-    <span class="na">gender</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Mr</span><span class="dl">"</span><span class="p">,</span>
-    <span class="na">email</span><span class="p">:</span> <span class="dl">"</span><span class="s2">email@email.email</span><span class="dl">"</span><span class="p">,</span>
+    <span class="na">first_name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Jane</span><span class="dl">"</span><span class="p">,</span>
+    <span class="na">last_name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Doe</span><span class="dl">"</span><span class="p">,</span>
+    <span class="na">email</span><span class="p">:</span> <span class="dl">"</span><span class="s2">contact@moke-international.com</span><span class="dl">"</span><span class="p">,</span>
+    <span class="na">gender</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Ms</span><span class="dl">"</span><span class="p">,</span>
     <span class="na">phone</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0606060606</span><span class="dl">"</span><span class="p">,</span>
-    <span class="na">birth_date</span><span class="p">:</span> <span class="dl">"</span><span class="s2">2023-01-01</span><span class="dl">"</span><span class="p">,</span>
+    <span class="na">birth_date</span><span class="p">:</span> <span class="dl">"</span><span class="s2">1986-09-17</span><span class="dl">"</span><span class="p">,</span>
   <span class="p">},</span>
   <span class="na">address</span><span class="p">:</span> <span class="p">{</span>
     <span class="na">label</span><span class="p">:</span> <span class="dl">"</span><span class="s2">58 Rue de Paradis</span><span class="dl">"</span><span class="p">,</span>
@@ -1070,10 +1083,7 @@ You can find here a <a href="#" target="_blank"> Postman Collection</a> of our e
     <span class="na">country</span><span class="p">:</span> <span class="dl">"</span><span class="s2">France</span><span class="dl">"</span><span class="p">,</span>
     <span class="na">zip</span><span class="p">:</span> <span class="dl">"</span><span class="s2">75010</span><span class="dl">"</span><span class="p">,</span>
   <span class="p">},</span>
-  <span class="na">custom_fields</span><span class="p">:</span> <span class="p">[</span>
-    <span class="p">{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">field1</span><span class="dl">"</span><span class="p">,</span> <span class="na">value</span><span class="p">:</span> <span class="dl">"</span><span class="s2">field1Value</span><span class="dl">"</span> <span class="p">},</span>
-    <span class="p">{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">field2</span><span class="dl">"</span><span class="p">,</span> <span class="na">value</span><span class="p">:</span> <span class="dl">"</span><span class="s2">field2Value</span><span class="dl">"</span> <span class="p">},</span>
-  <span class="p">],</span>
+  <span class="na">custom_fields</span><span class="p">:</span> <span class="p">[{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">field1</span><span class="dl">"</span><span class="p">,</span> <span class="na">value</span><span class="p">:</span> <span class="dl">"</span><span class="s2">field1Value</span><span class="dl">"</span> <span class="p">}],</span>
 <span class="p">};</span>
 <span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="dl">"</span><span class="s2">X-API-KEY</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">&lt;YOUR_API_KEY&gt;</span><span class="dl">"</span><span class="p">,</span>
@@ -1097,15 +1107,18 @@ You can find here a <a href="#" target="_blank"> Postman Collection</a> of our e
 <table><thead>
 <tr>
 <th>Parameter</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>X-API-KEY</td>
+<td>String</td>
 <td><span style="color:red">(Required)</span> Your Ezus API key</td>
 </tr>
 <tr>
 <td>Authorization</td>
+<td>String</td>
 <td><span style="color:red">(Required)</span> Your Bearer token</td>
 </tr>
 </tbody></table>
@@ -1130,23 +1143,23 @@ You can find here a <a href="#" target="_blank"> Postman Collection</a> of our e
 <tr>
 <td>contact</td>
 <td>JSON</td>
-<td>Contact is a JSON and email is needed (<a href="#contact">Contact</a>)</td>
+<td>Contact is a JSON and email is needed (<a href="#contact">Contacts</a>)</td>
 </tr>
 <tr>
 <td>address</td>
 <td>JSON</td>
-<td>Address is a JSON and label is needed if you want to add or update the adresse of your client (<a href="#address">Address</a>)</td>
+<td>JSON object address` (<a href="#address">Address</a>)</td>
 </tr>
 <tr>
 <td>custom_fields</td>
 <td>JSON</td>
-<td>You can add custom fields for your client, this custom fields should be in your Ezus params and Write exactly as they are written in your params technical name (<a href="#custom-fields">Custom fields</a>)</td>
+<td>Array of JSON custom fields ([Custom fields] <a href="#custom-fields">Custom fields</a>)</td>
 </tr>
 </tbody></table>
 <h3 id='response-6'>Response</h3>
 <p>JSON object indicating whether an error has occured during the process and, if so, the associated message. If there is no error, it also returns a <code>reference</code>: you will need to store this reference if you need to update or retrieve the client later on.</p>
 <h1 id='suppliers'>Suppliers</h1><h2 id='get-supplier'>GET supplier</h2>
-<p>Retrieve information for a supplier record in Ezus. You must specify to the Ezus API which supplier you wish to retrieve, by indicating the appropriate reference in your query parameter.</p>
+<p>Retrieve information for a supplier record in Ezus. You must specify to the Ezus API which supplier you wish to retrieve, by indicating its appropriate reference in your query parameter.</p>
 <div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">axios</span><span class="dl">"</span><span class="p">);</span>
 <span class="kd">const</span> <span class="nx">baseUrl</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1</span><span class="dl">"</span><span class="p">;</span>
 
@@ -1240,15 +1253,18 @@ You can find here a <a href="#" target="_blank"> Postman Collection</a> of our e
 <table><thead>
 <tr>
 <th>Parameter</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>X-API-KEY</td>
+<td>String</td>
 <td><span style="color:red">(Required)</span> Your Ezus API key</td>
 </tr>
 <tr>
 <td>Authorization</td>
+<td>String</td>
 <td><span style="color:red">(Required)</span> Your Bearer token</td>
 </tr>
 </tbody></table>
@@ -1394,15 +1410,18 @@ You can find here a <a href="#" target="_blank"> Postman Collection</a> of our e
 <table><thead>
 <tr>
 <th>Parameter</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>X-API-KEY</td>
+<td>String</td>
 <td><span style="color:red">(Required)</span> Your Ezus API key</td>
 </tr>
 <tr>
 <td>Authorization</td>
+<td>String</td>
 <td><span style="color:red">(Required)</span> Your Bearer token</td>
 </tr>
 </tbody></table>
@@ -1442,7 +1461,7 @@ You can find here a <a href="#" target="_blank"> Postman Collection</a> of our e
 <tr>
 <td>address</td>
 <td>JSON</td>
-<td>Address is a JSON and label is needed if you want to add or update the adresse of your supplier (<a href="#address">Address</a>)</td>
+<td>JSON object address (<a href="#address">Address</a>)</td>
 </tr>
 <tr>
 <td>custom_fields</td>
@@ -1453,7 +1472,7 @@ You can find here a <a href="#" target="_blank"> Postman Collection</a> of our e
 <h3 id='response-8'>Response</h3>
 <p>JSON object indicating whether an error has occured during the process and, if so, the associated message. If there is no error, it also returns a <code>reference</code>: you will need to store this reference if you need to update or retrieve the supplier later on.</p>
 <h1 id='products'>Products</h1><h2 id='get-product'>GET product</h2>
-<p>Retrieve information for a product record in Ezus. You must specify to the Ezus API which product you wish to retrieve, by indicating the appropriate reference in your query parameter.</p>
+<p>Retrieve information for a product record in Ezus. You must specify to the Ezus API which product you wish to retrieve, by indicating its appropriate reference in your query parameter.</p>
 <div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">axios</span><span class="dl">"</span><span class="p">);</span>
 <span class="kd">const</span> <span class="nx">baseUrl</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1</span><span class="dl">"</span><span class="p">;</span>
 
@@ -1534,15 +1553,18 @@ You can find here a <a href="#" target="_blank"> Postman Collection</a> of our e
 <table><thead>
 <tr>
 <th>Parameter</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>X-API-KEY</td>
+<td>String</td>
 <td><span style="color:red">(Required)</span> Your Ezus API key</td>
 </tr>
 <tr>
 <td>Authorization</td>
+<td>String</td>
 <td><span style="color:red">(Required)</span> Your Bearer token</td>
 </tr>
 </tbody></table>
@@ -1710,15 +1732,18 @@ You can find here a <a href="#" target="_blank"> Postman Collection</a> of our e
 <table><thead>
 <tr>
 <th>Parameter</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>X-API-KEY</td>
+<td>String</td>
 <td><span style="color:red">(Required)</span> Your Ezus API key</td>
 </tr>
 <tr>
 <td>Authorization</td>
+<td>String</td>
 <td><span style="color:red">(Required)</span> Your Bearer token</td>
 </tr>
 </tbody></table>
@@ -1799,7 +1824,7 @@ You can find here a <a href="#" target="_blank"> Postman Collection</a> of our e
 <h3 id='response-10'>Response</h3>
 <p>JSON object indicating whether an error has occured during the process and, if so, the associated message. If there is no error, it also returns a <code>reference</code>: you will need to store this reference if you need to update or retrieve the product later on.</p>
 <h1 id='package'>Package</h1><h2 id='get-package'>GET package</h2>
-<p>Retrieve information for a package record in Ezus. You must specify to the Ezus API which package you wish to retrieve, by indicating the appropriate reference in your query parameter.</p>
+<p>Retrieve information for a package record in Ezus. You must specify to the Ezus API which package you wish to retrieve, by indicating its appropriate reference in your query parameter.</p>
 <div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">axios</span><span class="dl">"</span><span class="p">);</span>
 <span class="kd">const</span> <span class="nx">baseUrl</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1</span><span class="dl">"</span><span class="p">;</span>
 
@@ -1873,15 +1898,18 @@ You can find here a <a href="#" target="_blank"> Postman Collection</a> of our e
 <table><thead>
 <tr>
 <th>Parameter</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>X-API-KEY</td>
+<td>String</td>
 <td><span style="color:red">(Required)</span> Your Ezus API key</td>
 </tr>
 <tr>
 <td>Authorization</td>
+<td>String</td>
 <td><span style="color:red">(Required)</span> Your Bearer token</td>
 </tr>
 </tbody></table>
@@ -1993,15 +2021,18 @@ You can find here a <a href="#" target="_blank"> Postman Collection</a> of our e
 <table><thead>
 <tr>
 <th>Parameter</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>X-API-KEY</td>
+<td>String</td>
 <td><span style="color:red">(Required)</span> Your Ezus API key</td>
 </tr>
 <tr>
 <td>Authorization</td>
+<td>String</td>
 <td><span style="color:red">(Required)</span> Your Bearer token</td>
 </tr>
 </tbody></table>
