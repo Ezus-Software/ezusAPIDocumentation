@@ -381,7 +381,7 @@
                     <a href="#get-package" class="toc-h2 toc-link" data-title="GET package">GET package</a>
                   </li>
                   <li>
-                    <a href="#post-packages_upsert" class="toc-h2 toc-link" data-title="POST packages_upsert">POST packages_upsert</a>
+                    <a href="#post-packages-upsert" class="toc-h2 toc-link" data-title="POST packages-upsert">POST packages-upsert</a>
                   </li>
               </ul>
           </li>
@@ -1988,7 +1988,7 @@
 <td>Array of JSON custom fields <a href="#custom-fields">Custom fields</a></td>
 </tr>
 </tbody></table>
-<h2 id='post-packages_upsert'>POST packages_upsert</h2>
+<h2 id='post-packages-upsert'>POST packages-upsert</h2>
 <p>Update a package record if the provided reference does match one of the package references in your account, otherwise create a new package record with the provided reference (or with a random one if no reference is provided).</p>
 <div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">axios</span><span class="dl">"</span><span class="p">);</span>
 <span class="kd">const</span> <span class="nx">baseUrl</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1</span><span class="dl">"</span><span class="p">;</span>
@@ -2525,7 +2525,7 @@ In an upsert, the custom_fields must be called with their technical_name which y
 <tr>
 <td>last_name</td>
 <td>String</td>
-<td>Last_name of the user</td>
+<td>Last name of the user</td>
 </tr>
 </tbody></table>
 <h1 id='errors'>Errors</h1>
