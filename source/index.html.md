@@ -1042,7 +1042,7 @@ JSON object containing the package information.
 | langs         | Array  | Array of JSON langs ([Langs](#langs))                       |
 | custom_fields | Array  | Array of JSON custom fields [Custom fields](#custom-fields) |
 
-## POST packages_upsert
+## POST packages-upsert
 
 Update a package record if the provided reference does match one of the package references in your account, otherwise create a new package record with the provided reference (or with a random one if no reference is provided).
 
@@ -1362,4 +1362,4 @@ One of the following options: `None`, `Everyone`, `User Group` or the following 
 | ---------- | ------ | ---------------------- |
 | email      | String | Email of the user      |
 | first_name | String | First name of the user |
-| last_name  | String | Last_name of the user  |
+| last_name  | String | Last name of the user  |
