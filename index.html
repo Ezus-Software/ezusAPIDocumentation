@@ -323,7 +323,7 @@
                     <a href="#principles" class="toc-h2 toc-link" data-title="Principles">Principles</a>
                   </li>
                   <li>
-                    <a href="#post-login" class="toc-h2 toc-link" data-title="POST Login">POST Login</a>
+                    <a href="#post-login" class="toc-h2 toc-link" data-title="POST login">POST login</a>
                   </li>
               </ul>
           </li>
@@ -438,7 +438,7 @@
 
 <p>If you want to dive into the list of available methods, you&#39;ve come to the right place. This documentation provides a technical description (reference) for each method in the left-hand section, as well as code examples in the right-hand section.</p>
 
-<p>Each method has its own specification, but as a general rule :</p>
+<p>Each method has its own specification, but as a general rule:</p>
 
 <p>For any request, you must provide <a href='https://swagger.io/docs/specification/describing-parameters/#header-parameters' target="_blank">header parameters</a></p>
 
@@ -464,7 +464,7 @@
 <p>After calling the /login endpoint with valid credentials, a bearer token will be returned to you: <code>&lt;YOUR_TOKEN&gt;</code>. This token is then valid for 12 hours. The Ezus API requires this bearer token to be included in the Authorization header parameter of all subsequent requests.</p>
 
 <p><code>Authorization: Bearer &lt;YOUR_TOKEN&gt;</code></p>
-<h2 id='post-login'>POST Login</h2>
+<h2 id='post-login'>POST login</h2>
 <blockquote>
 <p>To authenticate, you will need first to call our /login endpoint:</p>
 </blockquote>
@@ -878,6 +878,7 @@
   </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"client_reference_1234"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"entreprise"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"company_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MOKE INTERNATIONAL LIMITED"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"website"</span><span class="p">:</span><span class="w"> </span><span class="s2">"www.moke_ltd.com"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Jane"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Doe"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"contact@moke-international.com"</span><span class="p">,</span><span class="w">
@@ -991,6 +992,11 @@
 <td>Name of the company of your client</td>
 </tr>
 <tr>
+<td>website</td>
+<td>String</td>
+<td>Website of your client</td>
+</tr>
+<tr>
 <td>first_name</td>
 <td>String</td>
 <td>Frist name of the main contact of the client</td>
@@ -1074,6 +1080,7 @@
 <span class="kd">const</span> <span class="nx">body</span> <span class="o">=</span> <span class="p">{</span>
   <span class="na">reference</span><span class="p">:</span> <span class="dl">"</span><span class="s2">client_reference_1234</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">company_name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">MOKE INTERNATIONAL LIMITED</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">website</span><span class="p">:</span> <span class="dl">"</span><span class="s2">www.moke_ltd.com</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">contact</span><span class="p">:</span> <span class="p">{</span>
     <span class="na">email</span><span class="p">:</span> <span class="dl">"</span><span class="s2">contact@moke-international.com</span><span class="dl">"</span><span class="p">,</span>
     <span class="na">first_name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Jane</span><span class="dl">"</span><span class="p">,</span>
@@ -1146,6 +1153,11 @@
 <td>company_name</td>
 <td>String</td>
 <td><span style="color:red">(Required)</span> Set a company name - If company name is empty, the client will be set as an individual and the name of the client = name of the contact and if the company name is not empty, the name of the client will be the company name</td>
+</tr>
+<tr>
+<td>website</td>
+<td>String</td>
+<td>Website of your client</td>
 </tr>
 <tr>
 <td>contact</td>
@@ -1312,6 +1324,11 @@
 <td>Name of the company of your supplier</td>
 </tr>
 <tr>
+<td>website</td>
+<td>String</td>
+<td>Website of your supplier</td>
+</tr>
+<tr>
 <td>capacity</td>
 <td>String</td>
 <td>Capacity of the supplier</td>
@@ -1380,6 +1397,7 @@
 <span class="kd">const</span> <span class="nx">body</span> <span class="o">=</span> <span class="p">{</span>
   <span class="na">reference</span><span class="p">:</span> <span class="dl">"</span><span class="s2">supplier_reference_1234</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">company_name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">The best hotel</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">website</span><span class="p">:</span> <span class="dl">"</span><span class="s2">www.the_best_hotel.com</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">capacity</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span>
   <span class="na">type</span><span class="p">:</span> <span class="dl">"</span><span class="s2">accom, activity</span><span class="dl">"</span>
   <span class="na">contact</span><span class="p">:</span> <span class="p">{</span>
@@ -1453,6 +1471,11 @@
 <td>company_name</td>
 <td>String</td>
 <td>Name of the supplier. This parameter is required if you create a new supplier</td>
+</tr>
+<tr>
+<td>website</td>
+<td>String</td>
+<td>Website of your supplier</td>
 </tr>
 <tr>
 <td>capacity</td>
