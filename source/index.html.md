@@ -78,7 +78,7 @@ axios.post(baseUrl + "/login", body, headers);
 ```json
 {
   "message": "ok",
-  "erreur": "false",
+  "error": "false",
   "token": "<YOUR_TOKEN>"
 }
 ```
@@ -128,7 +128,7 @@ axios.post(baseUrl + "/project?reference=project_reference_1234", {}, headers);
 
 ```json
 {
-  "erreur": "false",
+  "error": "false",
   "reference": "project_reference_1234",
   "info_title": "Paris fashion week 2024",
   "info_stage": "Confirmed",
@@ -237,7 +237,7 @@ axios.post(baseUrl + "/projects-upsert", body, headers);
 
 ```json
 {
-  "erreur": "false",
+  "error": "false",
   "message": "ok",
   "action": "Project Updated Successfuly",
   "reference": "project_reference_1234"
@@ -298,7 +298,7 @@ axios.post(baseUrl + "/projects-documents-create", body, headers);
 
 ```json
 {
-  "erreur": "false",
+  "error": "false",
   "message": "ok"
 }
 ```
@@ -348,7 +348,7 @@ axios.post(baseUrl + "/client?reference=client_reference_1234", {}, headers);
 
 ```json
 {
-  "erreur": "false",
+  "error": "false",
   "reference": "client_reference_1234",
   "type": "entreprise",
   "company_name": "MOKE INTERNATIONAL LIMITED",
@@ -492,7 +492,7 @@ axios.post(baseUrl + "/clients-upsert", body, headers);
 
 ```json
 {
-  "erreur": "false",
+  "error": "false",
   "message": "ok",
   "action": "Client updated Successfully",
   "reference": "client_reference_1234"
@@ -551,7 +551,7 @@ axios.post(
 
 ```json
 {
-  "erreur": "false",
+  "error": "false",
   "reference": "supplier_reference_1234",
   "company_name": "The best hotel",
   "website": "www.the_best_hotel.com",
@@ -706,7 +706,7 @@ axios.post(baseUrl + "/suppliers-upsert", body, headers);
 
 ```json
 {
-  "erreur": "false",
+  "error": "false",
   "message": "ok",
   "action": "Supplier created Successfully",
   "reference": "supplier_reference_1234"
@@ -763,7 +763,7 @@ axios.post(baseUrl + "/product?reference=product_reference_1234", {}, headers);
 
 ```json
 {
-  "erreur": "false",
+  "error": "false",
   "reference": "product_reference_1234",
   "title": "2-bed room with breakfast",
   "capacity": 2,
@@ -909,7 +909,7 @@ axios.post(baseUrl + "/products-upsert", body, headers);
 
 ```json
 {
-  "erreur": "false",
+  "error": "false",
   "message": "ok",
   "action": "Product Created Successfully",
   "reference": "product_reference_1234"
@@ -971,7 +971,7 @@ axios.post(baseUrl + "/package?reference=package_reference_1234", {}, headers);
 
 ```json
 {
-  "erreur": "false",
+  "error": "false",
   "reference": "package_reference_1234",
   "title": "The best package",
   "capacity": 2,
@@ -1086,7 +1086,7 @@ axios.post(baseUrl + "/packages-upsert", body, headers);
 
 ```json
 {
-  "erreur": "false",
+  "error": "false",
   "message": "ok",
   "action": "Package Created Successfully",
   "reference": "package_reference_1234"
