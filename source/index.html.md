@@ -382,16 +382,21 @@ axios.post(baseUrl + "/client?reference=client_reference_1234", {}, headers);
     ],
     "size": 1
   },
-  "contacts": [
-    {
-      "first_name": "Jane",
-      "last_name": "Doe",
-      "email": "contact@moke-international.com",
-      "gender": "Ms",
-      "phone": "0606060606",
-      "birth_date": "1986-09-17"
-    }
-  ],
+  "contacts": {
+    "data": [
+      {
+        "email": "contact@moke-international.com",
+        "first_name": "Jane",
+        "last_name": "Doe",
+        "title": "CEO",
+        "gender": "Ms",
+        "phone": "0101010101",
+        "phone2": "0606060606",
+        "birth_date": "1986-09-17"
+      }
+    ],
+    "size": 1
+  },
   "custom_fields": [
     {
       "name": "CustomField",
@@ -455,11 +460,13 @@ const body = {
   reference: "client_reference_1234",
   company_name: "MOKE INTERNATIONAL LIMITED",
   contact: {
+    email: "contact@moke-international.com",
     first_name: "Jane",
     last_name: "Doe",
-    email: "contact@moke-international.com",
+    title: "CEO",
     gender: "Ms",
-    phone: "0606060606",
+    phone: "0101010101",
+    phone2: "0606060606",
     birth_date: "1986-09-17",
   },
   address: {
@@ -506,7 +513,7 @@ axios.post(baseUrl + "/clients-upsert", body, headers);
 | ------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --- |
 | reference     | String | If provided, the unique reference associated to the client you want to update or create (in case the one you provided has never been used). If not provided, a client will be created with a random one.                                                                |
 | company_name  | String | <span style="color:red">(Required)</span> Set a company name - If company name is empty, the client will be set as an individual and the name of the client = name of the contact and if the company name is not empty, the name of the client will be the company name |     |
-| contact       | JSON   | Contact is a JSON and email is needed ([Contacts](#contact))                                                                                                                                                                                                            |
+| contact       | JSON   | Contact is a single JSON element and email is needed. Note that only one contact can be upsert this way (the main contact of the supplier) ([Contacts](#contacts))                                                                                                      |
 | address       | JSON   | JSON object address` ([Address](#address))                                                                                                                                                                                                                              |
 | custom_fields | JSON   | Array of JSON custom fields ([Custom fields] [Custom fields](#custom-fields))                                                                                                                                                                                           |
 
@@ -580,11 +587,13 @@ axios.post(
   },
   "contacts": [
     {
+      "email": "bob@proton.me",
       "first_name": "Bob",
       "last_name": "Morane",
-      "email": "bob@proton.me",
+      "title": "Project Manager",
       "gender": "Mr",
-      "phone": "0606060606",
+      "phone": "0202020202",
+      "phone2": "0707070707",
       "birth_date": "1986-09-17"
     }
   ],
@@ -663,11 +672,13 @@ const body = {
   capacity: 200,
   type: "accom, activity"
   contact: {
+    email: "bob@proton.me",
       first_name: "Bob",
       last_name: "Morane",
-      email: "bob@proton.me",
+      title: "Project Manager",
       gender: "Mr",
       phone: "0606060606",
+      phone2: "0707070707",
       birth_date: "1986-09-17"
     },
   address: {
@@ -715,7 +726,7 @@ axios.post(baseUrl + "/suppliers-upsert", body, headers);
 | company_name  | String | Name of the supplier. This parameter is required if you create a new supplier                                                                                                                                     |     |
 | capacity      | Number | Capacity of the Supplier                                                                                                                                                                                          |
 | type          | String | 3 Options: `accom`, `activity`, `transport`. You can select multiple options by typing "accom, activity" for exemple, the new data will erase old data. To add multiple options they must be separated by a comma |
-| contact       | JSON   | Contact is a JSON and email is needed ([Contact](#contact))                                                                                                                                                       |
+| contact       | JSON   | Contact is a single JSON and email is needed. Note that only one contact can be upsert this way (the main contact of the supplier) ([Contact](#contacts))                                                         |
 | address       | JSON   | JSON object address ([Address](#address))                                                                                                                                                                         |
 | custom_fields | JSON   | You can add custom fields for your supplier, this custom fields should be in your Ezus params and Write Exactly as they are written in your params technical name ([Custom fields](#custom-fields))               |
 
@@ -844,7 +855,7 @@ JSON object containing the product information.
 | medias          | JSON   | JSON object medias ([Medias](#medias))                                                                                                                                                                           |
 | supplier        | JSON   | JSON object containing `reference`, `company_name`                                                                                                                                                               |
 | package         | JSON   | JSON object containing `reference`, `title`                                                                                                                                                                      |
-| commission      | JSON   | JSON object containing `value`, `commission_regime`, `commission_mode`                                                                                                                                           |
+| commission      | JSON   | JSON object containing `value`, `commission_regime` ("percent" or "amount"), `commission_mode` ("sales" or "purchase")`                                                                                          |
 | langs           | Array  | Array of JSON langs ([Langs](#langs))                                                                                                                                                                            |
 | tariffs         | Array  | Array of JSON tariffs ([Tariffs](#tariffs))                                                                                                                                                                      |
 | custom_fields   | Array  | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                                                                    |
@@ -1158,16 +1169,24 @@ JSON object indicating whether an error has occured during the process and, if s
 
 ### Contacts
 
+Only the last 10 contacts are returned in this object. Note that for upsert endpoints, only one contact is required (equivalent to a single JSON element in the contacts.data Array below).
+
 ```json
-"contact": {
+"contacts": {
+    "data": [
+      {
+  "email": "elliot@fsociety.org",
   "first_name": "Elliot",
   "last_name": "Alderson",
+  "title": "Developer",
   "gender": "Mr",
-  "email": "elliot@fsociety.org",
   "phone": "",
-  "birth_date": "1986-09-17",
-},
-
+  "phone2": "",
+  "birth_date": "1986-09-17"
+  }
+    ],
+    "size": 1
+  }
 ```
 
 | Property   | Type   | Description                                             |
@@ -1175,8 +1194,10 @@ JSON object indicating whether an error has occured during the process and, if s
 | email      | String | Email of the contact                                    |
 | first_name | String | First name of the contact as a string                   |
 | last_name  | String | Last name of the contact as a string                    |
+| title      | String | Title of the contact as a string                        |
 | gender     | String | `Mr`, `Ms` or `Undefined`                               |
-| phone      | String | Phone of the contact as a string                        |
+| phone      | String | Phone number of the contact as a string                 |
+| phone2     | String | Second phone number of the contact as a string          |
 | birth_date | String | Contact's date of birth in a "YYYY-MM-DD" format string |
 
 ### Custom Fields
@@ -1259,7 +1280,7 @@ In an upsert, the custom_fields must be called with their technical_name which y
 
 ### Medias
 
-Only the 10 last medias are returned in this object.
+Only the last 10 medias are returned in this object.
 
 ```json
 "medias": {
@@ -1270,7 +1291,7 @@ Only the 10 last medias are returned in this object.
       }
     ],
     "size": 1
-  },
+  }
 ```
 
 | Property   | Type   | Description                                                       |
@@ -1280,7 +1301,7 @@ Only the 10 last medias are returned in this object.
 
 ### Products
 
-Only the 10 last products are returned in this object.
+Only the last 10 products are returned in this object.
 
 ```json
 "products": {
@@ -1291,7 +1312,7 @@ Only the 10 last products are returned in this object.
       }
     ],
     "size": 1
-  },
+  }
 ```
 
 | Property  | Type   | Description                  |
@@ -1301,7 +1322,7 @@ Only the 10 last products are returned in this object.
 
 ### Suppliers
 
-Only the 10 last suppliers are returned in this object.
+Only the last 10 suppliers are returned in this object.
 
 ```json
  "suppliers": {
