@@ -27,7 +27,7 @@ If you need an overview of some common use cases that you can setup with our API
 
 If you want to dive into the list of available methods, you've come to the right place. This documentation provides a technical description (reference) for each method in the left-hand section, as well as code examples in the right-hand section.
 
-Each method has its own specification, but as a general rule :
+Each method has its own specification, but as a general rule:
 
 For any request, you must provide <a href='https://swagger.io/docs/specification/describing-parameters/#header-parameters' target="_blank">header parameters</a>
 
@@ -56,7 +56,7 @@ After calling the /login endpoint with valid credentials, a bearer token will be
 
 `Authorization: Bearer <YOUR_TOKEN>`
 
-## POST Login
+## POST login
 
 > To authenticate, you will need first to call our /login endpoint:
 
@@ -352,6 +352,7 @@ axios.post(baseUrl + "/client?reference=client_reference_1234", {}, headers);
   "reference": "client_reference_1234",
   "type": "entreprise",
   "company_name": "MOKE INTERNATIONAL LIMITED",
+  "website": "www.moke_ltd.com",
   "first_name": "Jane",
   "last_name": "Doe",
   "email": "contact@moke-international.com",
@@ -432,6 +433,7 @@ JSON object containing the client information.
 | reference     | String | The reference of the client you wish to retrieve                                                                                                                      |
 | type          | String | The type of the client can be either "entreprise" or "individual"                                                                                                     |
 | company_name  | String | Name of the company of your client                                                                                                                                    |
+| website       | String | Website of your client                                                                                                                                                |
 | first_name    | String | Frist name of the main contact of the client                                                                                                                          |
 | last_name     | String | Last name of the main contact of the client                                                                                                                           |
 | email         | String | Email of the main contact of the client                                                                                                                               |
@@ -459,6 +461,7 @@ const baseUrl = "https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1";
 const body = {
   reference: "client_reference_1234",
   company_name: "MOKE INTERNATIONAL LIMITED",
+  website: "www.moke_ltd.com",
   contact: {
     email: "contact@moke-international.com",
     first_name: "Jane",
@@ -510,9 +513,10 @@ axios.post(baseUrl + "/clients-upsert", body, headers);
 ### Body parameters (application/json)
 
 | Parameter     | Type   | Description                                                                                                                                                                                                                                                             |
-| ------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --- |
+| ------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | reference     | String | If provided, the unique reference associated to the client you want to update or create (in case the one you provided has never been used). If not provided, a client will be created with a random one.                                                                |
-| company_name  | String | <span style="color:red">(Required)</span> Set a company name - If company name is empty, the client will be set as an individual and the name of the client = name of the contact and if the company name is not empty, the name of the client will be the company name |     |
+| company_name  | String | <span style="color:red">(Required)</span> Set a company name - If company name is empty, the client will be set as an individual and the name of the client = name of the contact and if the company name is not empty, the name of the client will be the company name |
+| website       | String | Website of your client                                                                                                                                                                                                                                                  |
 | contact       | JSON   | Contact is a single JSON element and email is needed. Note that only one contact can be upsert this way (the main contact of the supplier) ([Contacts](#contacts))                                                                                                      |
 | address       | JSON   | JSON object address` ([Address](#address))                                                                                                                                                                                                                              |
 | custom_fields | JSON   | Array of JSON custom fields ([Custom fields] [Custom fields](#custom-fields))                                                                                                                                                                                           |
@@ -645,6 +649,7 @@ JSON object containing the supplier information.
 | ------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | reference     | String | The reference of the supplier you wish to retrieve                                                                                                          |
 | company_name  | String | Name of the company of your supplier                                                                                                                        |
+| website       | String | Website of your supplier                                                                                                                                    |
 | capacity      | String | Capacity of the supplier                                                                                                                                    |
 | type          | String | 3 options: `accom`, `activity`, `transport`. A supplier can have no type, 1 type or serval types. In this case, the different types are separated by commas |
 | info_notes    | String | Notes on the supplier                                                                                                                                       |
@@ -669,6 +674,7 @@ const baseUrl = "https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1";
 const body = {
   reference: "supplier_reference_1234",
   company_name: "The best hotel",
+  website: "www.the_best_hotel.com",
   capacity: 200,
   type: "accom, activity"
   contact: {
@@ -724,6 +730,7 @@ axios.post(baseUrl + "/suppliers-upsert", body, headers);
 | ------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --- |
 | reference     | String | If provided, the unique reference associated to the supplier you want to update or create (in case the one you provided has never been used). If not provided, a supplier will be created with a random one.      |
 | company_name  | String | Name of the supplier. This parameter is required if you create a new supplier                                                                                                                                     |     |
+| website       | String | Website of your supplier                                                                                                                                                                                          |
 | capacity      | Number | Capacity of the Supplier                                                                                                                                                                                          |
 | type          | String | 3 Options: `accom`, `activity`, `transport`. You can select multiple options by typing "accom, activity" for exemple, the new data will erase old data. To add multiple options they must be separated by a comma |
 | contact       | JSON   | Contact is a single JSON and email is needed. Note that only one contact can be upsert this way (the main contact of the supplier) ([Contact](#contacts))                                                         |
