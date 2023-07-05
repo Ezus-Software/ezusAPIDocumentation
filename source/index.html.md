@@ -1209,6 +1209,10 @@ Only the last 10 contacts are returned in this object. Note that for upsert endp
 
 ### Custom Fields
 
+<aside class="warning">
+The name of custom fields refers to their technical name, not their display name. The technical name of a custom field can be found in the custom field edit mode.
+</aside>
+
 ```json
   "custom_fields": [
     {
@@ -1249,10 +1253,6 @@ Only the last 10 contacts are returned in this object. Note that for upsert endp
     }
   ]
 ```
-
-<aside class="success">
-In an upsert, the custom_fields must be called with their technical_name which you can find in your custom field settings
-</aside>
 
 | Options           | Type   | Description                                                                                                                                                                                    |
 | ----------------- | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
