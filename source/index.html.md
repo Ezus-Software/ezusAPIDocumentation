@@ -259,7 +259,7 @@ axios.post(baseUrl + "/projects-upsert", body, headers);
 
 | Parameter           | Type   | Description                                                                                                                                                                                                                                                                      |
 | ------------------- | ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| reference           | String | If provided, the unique reference associated to the project you want to update or create (in case the one you provided has never been used). If not provided, a project will be created with a random one.                                                                       |
+| reference           | String | If provided, the unique reference associated to the project you want to update or create (in case the one you provided has never been used). If no reference is provided, a project will be created with a random one.                                                           |
 | info_title          | String | Title of your project. This parameter is required if you create a new project                                                                                                                                                                                                    |
 | trip_people         | Number | Number of people in your project                                                                                                                                                                                                                                                 |
 | trip_budget         | Number | Forecasted budget of your project                                                                                                                                                                                                                                                |
@@ -275,7 +275,7 @@ JSON object indicating whether an error has occured during the process and, if s
 
 ## POST projects-documents-create
 
-Create a document within a specific project based on its url
+Create a PDF document based on the link you provide within the project using project_reference as its reference.
 
 ```javascript
 const axios = require("axios");
@@ -514,7 +514,7 @@ axios.post(baseUrl + "/clients-upsert", body, headers);
 
 | Parameter     | Type   | Description                                                                                                                                                                                                                                                             |
 | ------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| reference     | String | If provided, the unique reference associated to the client you want to update or create (in case the one you provided has never been used). If not provided, a client will be created with a random one.                                                                |
+| reference     | String | If provided, the unique reference associated to the client you want to update or create (in case the one you provided has never been used). If no reference is provided, a client will be created with a random one.                                                    |
 | company_name  | String | <span style="color:red">(Required)</span> Set a company name - If company name is empty, the client will be set as an individual and the name of the client = name of the contact and if the company name is not empty, the name of the client will be the company name |
 | website       | String | Website of your client                                                                                                                                                                                                                                                  |
 | contact       | JSON   | Contact is a single JSON element and email is needed. Note that only one contact can be upsert this way (the main contact of the supplier) ([Contacts](#contacts))                                                                                                      |
@@ -665,7 +665,7 @@ JSON object containing the supplier information.
 
 ## POST suppliers-upsert
 
-Update a supplier record if the provided reference does match one of the supplier references in your account, otherwise create a new supplier record with the provided reference (or with a random one if no reference is provided).
+Update a supplier record if the provided reference (or the email) does match one of the supplier references in your account, otherwise create a new supplier record with the provided reference (or with a random one if no reference is provided). Note that for this endpoint, the email of the supplier can also be used as a primary key for the upsert.
 
 ```javascript
 const axios = require("axios");
@@ -726,16 +726,16 @@ axios.post(baseUrl + "/suppliers-upsert", body, headers);
 
 ### Body parameters (application/json)
 
-| Parameter     | Type   | Description                                                                                                                                                                                                       |
-| ------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --- |
-| reference     | String | If provided, the unique reference associated to the supplier you want to update or create (in case the one you provided has never been used). If not provided, a supplier will be created with a random one.      |
-| company_name  | String | Name of the supplier. This parameter is required if you create a new supplier                                                                                                                                     |     |
-| website       | String | Website of your supplier                                                                                                                                                                                          |
-| capacity      | Number | Capacity of the Supplier                                                                                                                                                                                          |
-| type          | String | 3 Options: `accom`, `activity`, `transport`. You can select multiple options by typing "accom, activity" for exemple, the new data will erase old data. To add multiple options they must be separated by a comma |
-| contact       | JSON   | Contact is a single JSON and email is needed. Note that only one contact can be upsert this way (the main contact of the supplier) ([Contact](#contacts))                                                         |
-| address       | JSON   | JSON object address ([Address](#address))                                                                                                                                                                         |
-| custom_fields | JSON   | You can add custom fields for your supplier, this custom fields should be in your Ezus params and Write Exactly as they are written in your params technical name ([Custom fields](#custom-fields))               |
+| Parameter     | Type   | Description                                                                                                                                                                                                                                                                                                                              |
+| ------------- | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --- |
+| reference     | String | If provided, the unique reference associated to the supplier you want to update or create (in case the one you provided has never been used). For this endpoint, the reference can either be a supplier reference or an email of maint contact of a supplier. If no reference is provided, a supplier will be created with a random one. |
+| company_name  | String | Name of the supplier. This parameter is required if you create a new supplier                                                                                                                                                                                                                                                            |     |
+| website       | String | Website of your supplier                                                                                                                                                                                                                                                                                                                 |
+| capacity      | Number | Capacity of the Supplier                                                                                                                                                                                                                                                                                                                 |
+| type          | String | 3 Options: `accom`, `activity`, `transport`. You can select multiple options by typing "accom, activity" for exemple, the new data will erase old data. To add multiple options they must be separated by a comma                                                                                                                        |
+| contact       | JSON   | Contact is a single JSON and email is needed. Note that only one contact can be upsert this way (the main contact of the supplier) ([Contact](#contacts))                                                                                                                                                                                |
+| address       | JSON   | JSON object address ([Address](#address))                                                                                                                                                                                                                                                                                                |
+| custom_fields | JSON   | You can add custom fields for your supplier, this custom fields should be in your Ezus params and Write Exactly as they are written in your params technical name ([Custom fields](#custom-fields))                                                                                                                                      |
 
 ### Response
 
@@ -931,7 +931,7 @@ axios.post(baseUrl + "/products-upsert", body, headers);
 
 | Parameter          | Type   | Description                                                                                                                                                                                                                                                             |
 | ------------------ | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| reference          | String | If provided, the unique reference associated to the product you want to update or create (in case the one you provided has never been used). If not provided, a product will be created with a random one.                                                              |
+| reference          | String | If provided, the unique reference associated to the product you want to update or create (in case the one you provided has never been used). If no reference is provided, a product will be created with a random one.                                                  |
 | title              | String | Title of your product. This parameter is required if you create a new product                                                                                                                                                                                           |
 | quantity           | String | Default quantity of this product when you add it into a project. It can either be a number or one of this letter (`P` = Number of people in the project, `D` = Number of days in the project, `N` = Number of nights in the project)                                    |
 | capacity           | Number | The capacity of the product                                                                                                                                                                                                                                             |
@@ -1106,12 +1106,12 @@ axios.post(baseUrl + "/packages-upsert", body, headers);
 
 ### Body parameters (application/json)
 
-| Parameter     | Type   | Description                                                                                                                                                                                                     |
-| ------------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --- |
-| reference     | String | If provided, the unique Ezus Reference associated to the package you want to update or create (in case the one you provided has never been used). If not provided, a package will be created with a random one. |
-| title         | String | If no reference or reference not found, the title is mandatory                                                                                                                                                  |
-| capacity      | Number | capacity is the default number of this package at his creation                                                                                                                                                  |     |
-| custom_fields | JSON   | You can add custom fields for your client, this custom fields should be in your Ezus params and Write exactly as they are written in your params technical name ([Custom fields](#custom-fields))               |
+| Parameter     | Type   | Description                                                                                                                                                                                                                 |
+| ------------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --- |
+| reference     | String | If provided, the unique Ezus Reference associated to the package you want to update or create (in case the one you provided has never been used). If no reference is provided, a package will be created with a random one. |
+| title         | String | If no reference or reference not found, the title is mandatory                                                                                                                                                              |
+| capacity      | Number | capacity is the default number of this package at his creation                                                                                                                                                              |     |
+| custom_fields | JSON   | You can add custom fields for your client, this custom fields should be in your Ezus params and Write exactly as they are written in your params technical name ([Custom fields](#custom-fields))                           |
 
 ### Response
 
