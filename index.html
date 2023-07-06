@@ -742,7 +742,7 @@
 <tr>
 <td>reference</td>
 <td>String</td>
-<td>If provided, the unique reference associated to the project you want to update or create (in case the one you provided has never been used). If not provided, a project will be created with a random one.</td>
+<td>If provided, the unique reference associated to the project you want to update or create (in case the one you provided has never been used). If no reference is provided, a project will be created with a random one.</td>
 </tr>
 <tr>
 <td>info_title</td>
@@ -788,7 +788,7 @@
 <h3 id='response-3'>Response</h3>
 <p>JSON object indicating whether an error has occured during the process and, if so, the associated message. If there is no error, it also returns a <code>reference</code>: you will need to store this reference if you need to update or retrieve the project later on.</p>
 <h2 id='post-projects-documents-create'>POST projects-documents-create</h2>
-<p>Create a document within a specific project based on its url</p>
+<p>Create a PDF document based on the link you provide within the project using project_reference as its reference.</p>
 <div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">axios</span><span class="dl">"</span><span class="p">);</span>
 <span class="kd">const</span> <span class="nx">baseUrl</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1</span><span class="dl">"</span><span class="p">;</span>
 
@@ -1147,7 +1147,7 @@
 <tr>
 <td>reference</td>
 <td>String</td>
-<td>If provided, the unique reference associated to the client you want to update or create (in case the one you provided has never been used). If not provided, a client will be created with a random one.</td>
+<td>If provided, the unique reference associated to the client you want to update or create (in case the one you provided has never been used). If no reference is provided, a client will be created with a random one.</td>
 </tr>
 <tr>
 <td>company_name</td>
@@ -1390,7 +1390,7 @@
 </tr>
 </tbody></table>
 <h2 id='post-suppliers-upsert'>POST suppliers-upsert</h2>
-<p>Update a supplier record if the provided reference does match one of the supplier references in your account, otherwise create a new supplier record with the provided reference (or with a random one if no reference is provided).</p>
+<p>Update a supplier record if the provided reference (or the email) does match one of the supplier references in your account, otherwise create a new supplier record with the provided reference (or with a random one if no reference is provided). Note that for this endpoint, the email of the supplier can also be used as a primary key for the upsert.</p>
 <div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">axios</span><span class="dl">"</span><span class="p">);</span>
 <span class="kd">const</span> <span class="nx">baseUrl</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1</span><span class="dl">"</span><span class="p">;</span>
 
@@ -1465,7 +1465,7 @@
 <tr>
 <td>reference</td>
 <td>String</td>
-<td>If provided, the unique reference associated to the supplier you want to update or create (in case the one you provided has never been used). If not provided, a supplier will be created with a random one.</td>
+<td>If provided, the unique reference associated to the supplier you want to update or create (in case the one you provided has never been used). For this endpoint, the reference can either be a supplier reference or an email of maint contact of a supplier. If no reference is provided, a supplier will be created with a random one.</td>
 </tr>
 <tr>
 <td>company_name</td>
@@ -1792,7 +1792,7 @@
 <tr>
 <td>reference</td>
 <td>String</td>
-<td>If provided, the unique reference associated to the product you want to update or create (in case the one you provided has never been used). If not provided, a product will be created with a random one.</td>
+<td>If provided, the unique reference associated to the product you want to update or create (in case the one you provided has never been used). If no reference is provided, a product will be created with a random one.</td>
 </tr>
 <tr>
 <td>title</td>
@@ -2081,7 +2081,7 @@
 <tr>
 <td>reference</td>
 <td>String</td>
-<td>If provided, the unique Ezus Reference associated to the package you want to update or create (in case the one you provided has never been used). If not provided, a package will be created with a random one.</td>
+<td>If provided, the unique Ezus Reference associated to the package you want to update or create (in case the one you provided has never been used). If no reference is provided, a package will be created with a random one.</td>
 </tr>
 <tr>
 <td>title</td>
