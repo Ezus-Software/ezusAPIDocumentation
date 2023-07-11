@@ -774,6 +774,7 @@ axios.post(baseUrl + "/product?reference=product_reference_1234", {}, headers);
   "budget_text": "Option",
   "budget_form": "Important",
   "budget_variable": "Display",
+  "info_number": "202306001-PR",
   "visual_url": "",
   "medias": {
     "data": [
@@ -858,6 +859,7 @@ JSON object containing the product information.
 | budget_text     | String | `Option`, `On Demand` or `""`, if it's Option/On demand, by default the product will be an Option/On demand, the mention will be added on your documents. If it's empty no options will be applied on the budget |
 | buget_form      | String | `Important`, `Normal`, `Low` represent how the product will be highlight on the budget By Default                                                                                                                |
 | budget_variable | String | `Display`, `Do not Display`, this option tells if the product will be displayed or not in the budget                                                                                                             |
+| info_number     | String | File number that appears at the bottom of the product record. Not to be confused with reference!                                                                                                                 |
 | visual_url      | String | URL of the Google Slides visual linked to the product                                                                                                                                                            |
 | medias          | JSON   | JSON object medias ([Medias](#medias))                                                                                                                                                                           |
 | supplier        | JSON   | JSON object containing `reference`, `company_name`                                                                                                                                                               |
@@ -976,6 +978,7 @@ axios.post(baseUrl + "/package?reference=package_reference_1234", {}, headers);
   "title": "The best package",
   "capacity": 2,
   "info_notes": "A classical day in Paris",
+  "info_number": "202306001-PK",
   "visual_url": "",
   "medias": {
     "data": [],
@@ -1047,18 +1050,19 @@ axios.post(baseUrl + "/package?reference=package_reference_1234", {}, headers);
 
 JSON object containing the package information.
 
-| Property      | Type   | Description                                                 |
-| ------------- | ------ | ----------------------------------------------------------- |
-| reference     | String | The reference of the package you wish to retrieve           |
-| title         | String | Name of the package                                         |
-| capacity      | String | Capacity of the package                                     |
-| info_notes    | String | Notes on the package budget                                 |
-| visual_url    | String | URL of the Google Slides visual linked to the package       |
-| medias        | JSON   | JSON object medias ([Medias](#medias))                      |
-| suppliers     | JSON   | JSON object suppliers ([Suppliers](#suppliers))             |
-| products      | JSON   | JSON object products ([Products](#products))                |
-| langs         | Array  | Array of JSON langs ([Langs](#langs))                       |
-| custom_fields | Array  | Array of JSON custom fields [Custom fields](#custom-fields) |
+| Property      | Type   | Description                                                                                      |
+| ------------- | ------ | ------------------------------------------------------------------------------------------------ |
+| reference     | String | The reference of the package you wish to retrieve                                                |
+| title         | String | Name of the package                                                                              |
+| capacity      | String | Capacity of the package                                                                          |
+| info_notes    | String | Notes on the package budget                                                                      |
+| info_number   | String | File number that appears at the bottom of the package record. Not to be confused with reference! |
+| visual_url    | String | URL of the Google Slides visual linked to the package                                            |
+| medias        | JSON   | JSON object medias ([Medias](#medias))                                                           |
+| suppliers     | JSON   | JSON object suppliers ([Suppliers](#suppliers))                                                  |
+| products      | JSON   | JSON object products ([Products](#products))                                                     |
+| langs         | Array  | Array of JSON langs ([Langs](#langs))                                                            |
+| custom_fields | Array  | Array of JSON custom fields [Custom fields](#custom-fields)                                      |
 
 ## POST packages-upsert
 
