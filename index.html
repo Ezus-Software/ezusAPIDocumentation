@@ -548,7 +548,7 @@
   </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"project_reference_1234"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"info_title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Paris fashion week 2024"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"info_stage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Confirmed"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"info_notes"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Jane has verbally confirmed our latest quotation, but we need to check the availability of our best supplier before sending her the contract"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"info_notes"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Jane has verbally confirmed our quotation"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"info_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"202306001-P"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"sales_manager"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"travel-design@e-corp.com"</span><span class="p">,</span><span class="w">
@@ -777,7 +777,7 @@
 <tr>
 <td>client_reference</td>
 <td>String</td>
-<td>This can be a reference or the email of a client already created in this Ezus account. By default, if no client is provided, or if the reference/email provided does not correspond to any client reference/email in this account, the project will not be linked to any client.</td>
+<td>This can be a reference or the email of a client already created in this Ezus account. By default, the project will not be linked to any client. If you want to update the project&#39;s client to None, you must enter 0.</td>
 </tr>
 <tr>
 <td>custom_fields</td>
@@ -848,7 +848,7 @@
 <tr>
 <td>title</td>
 <td>String</td>
-<td><span style="color:red">(Required)</span> Title of your document</td>
+<td>Title of your document</td>
 </tr>
 <tr>
 <td>link</td>
@@ -1235,18 +1235,21 @@
     </span><span class="p">],</span><span class="w">
     </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
   </span><span class="p">},</span><span class="w">
-  </span><span class="nl">"contacts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bob@proton.me"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bob"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Morane"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Project Manager"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"gender"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Mr"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0202020202"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"phone2"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0707070707"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"birth_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1986-09-17"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"contacts"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bob@proton.me"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bob"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Morane"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Project Manager"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"gender"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Mr"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0202020202"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"phone2"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0707070707"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"birth_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1986-09-17"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+  </span><span class="p">},</span><span class="w">
   </span><span class="nl">"langs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
       </span><span class="nl">"lang"</span><span class="p">:</span><span class="w"> </span><span class="s2">"american"</span><span class="p">,</span><span class="w">
@@ -1465,7 +1468,7 @@
 <tr>
 <td>reference</td>
 <td>String</td>
-<td>If provided, the unique reference associated to the supplier you want to update or create (in case the one you provided has never been used). For this endpoint, the reference can either be a supplier reference or an email of maint contact of a supplier. If no reference is provided, a supplier will be created with a random one.</td>
+<td>If provided, the unique reference associated to the supplier you want to update or create (in case the one you provided has never been used). If no reference is provided, a supplier will be created with a random one.</td>
 </tr>
 <tr>
 <td>company_name</td>
@@ -1485,7 +1488,7 @@
 <tr>
 <td>type</td>
 <td>String</td>
-<td>3 Options: <code>accom</code>, <code>activity</code>, <code>transport</code>. You can select multiple options by typing &quot;accom, activity&quot; for exemple, the new data will erase old data. To add multiple options they must be separated by a comma</td>
+<td>Either <code>undefined</code> or a combinaison of these 3 options: <code>accom</code>, <code>activity</code>, <code>transport</code>. You can select multiple options by separating them with comas (&quot;accom, activity&quot; for instance). Enter &quot;undefined&quot; if you want to reset this params.</td>
 </tr>
 <tr>
 <td>contact</td>
@@ -1818,12 +1821,12 @@
 <tr>
 <td>supplier_reference</td>
 <td>String</td>
-<td>If you give an adequate supplier reference, the product will be added in this supplier. Otherwise it won&#39;t belong to any supplier.</td>
+<td>If you give an adequate supplier reference, the product will be added in this supplier. If you want to update the supplier&#39;s product to None, you must enter 0.</td>
 </tr>
 <tr>
 <td>package_reference</td>
 <td>String</td>
-<td>If you give an adequate package reference, the product will be added in this package. Otherwise it won&#39;t belong to any package.</td>
+<td>If you give an adequate package reference, the product will be added in this package. If you want to update the package&#39;s product to None, you must enter 0.</td>
 </tr>
 <tr>
 <td>purchase_price</td>
@@ -2609,7 +2612,7 @@ Classic Error codes
 </thead><tbody>
 <tr>
 <td>200</td>
-<td>erreur=&quot;true&quot; error message explained in the &quot;message&quot; string</td>
+<td>error=&quot;true&quot; error message explained in the &quot;message&quot; string</td>
 </tr>
 <tr>
 <td>400</td>
