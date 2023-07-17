@@ -132,7 +132,7 @@ axios.post(baseUrl + "/project?reference=project_reference_1234", {}, headers);
   "reference": "project_reference_1234",
   "info_title": "Paris fashion week 2024",
   "info_stage": "Confirmed",
-  "info_notes": "Jane has verbally confirmed our latest quotation, but we need to check the availability of our best supplier before sending her the contract",
+  "info_notes": "Jane has verbally confirmed our quotation",
   "info_number": "202306001-P",
   "sales_manager": {
     "email": "travel-design@e-corp.com",
@@ -257,17 +257,17 @@ axios.post(baseUrl + "/projects-upsert", body, headers);
 
 ### Body parameters (application/json)
 
-| Parameter           | Type   | Description                                                                                                                                                                                                                                                                      |
-| ------------------- | ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| reference           | String | If provided, the unique reference associated to the project you want to update or create (in case the one you provided has never been used). If no reference is provided, a project will be created with a random one.                                                           |
-| info_title          | String | Title of your project. This parameter is required if you create a new project                                                                                                                                                                                                    |
-| trip_people         | Number | Number of people in your project                                                                                                                                                                                                                                                 |
-| trip_budget         | Number | Forecasted budget of your project                                                                                                                                                                                                                                                |
-| trip_date_in        | Date   | Date of the beginning of your project in a "YYYY-MM-DD" format string. If not provided or if not formatted correctly, or if duration > 40 days or if trip_date_in > trip_date_out, project will be set as 1 day and trip_date_in as today                                        |
-| trip_date_out       | Date   | Date of the end of your project in a "YYYY-MM-DD" format string. If not provided or if not formatted correctly, or if duration > 40 days or if trip_date_in > trip_date_out, project will be set as 1 day and trip_date_out as today                                             |
-| sales_manager_email | Email  | Email of the Ezus user that will be set as the sales manager of the project. By default, if no sales manager is provided or the provided email do not match any user on this account, the project will be assignated to None                                                     |
-| client_reference    | String | This can be a reference or the email of a client already created in this Ezus account. By default, if no client is provided, or if the reference/email provided does not correspond to any client reference/email in this account, the project will not be linked to any client. |
-| custom_fields       | JSON   | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                                                                                                                                    |
+| Parameter           | Type   | Description                                                                                                                                                                                                                               |
+| ------------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| reference           | String | If provided, the unique reference associated to the project you want to update or create (in case the one you provided has never been used). If no reference is provided, a project will be created with a random one.                    |
+| info_title          | String | Title of your project. This parameter is required if you create a new project                                                                                                                                                             |
+| trip_people         | Number | Number of people in your project                                                                                                                                                                                                          |
+| trip_budget         | Number | Forecasted budget of your project                                                                                                                                                                                                         |
+| trip_date_in        | Date   | Date of the beginning of your project in a "YYYY-MM-DD" format string. If not provided or if not formatted correctly, or if duration > 40 days or if trip_date_in > trip_date_out, project will be set as 1 day and trip_date_in as today |
+| trip_date_out       | Date   | Date of the end of your project in a "YYYY-MM-DD" format string. If not provided or if not formatted correctly, or if duration > 40 days or if trip_date_in > trip_date_out, project will be set as 1 day and trip_date_out as today      |
+| sales_manager_email | Email  | Email of the Ezus user that will be set as the sales manager of the project. By default, if no sales manager is provided or the provided email do not match any user on this account, the project will be assignated to None              |
+| client_reference    | String | This can be a reference or the email of a client already created in this Ezus account. By default, the project will not be linked to any client. If you want to update the project's client to None, you must enter 0.                    |
+| custom_fields       | JSON   | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                                                                                             |
 
 ### Response
 
@@ -319,7 +319,7 @@ axios.post(baseUrl + "/projects-documents-create", body, headers);
 | Parameter         | Type   | Description                                                                                                           |
 | ----------------- | ------ | --------------------------------------------------------------------------------------------------------------------- |
 | project_reference | String | <span style="color:red">(Required)</span> The project reference in which you want to create a document                |
-| title             | String | <span style="color:red">(Required)</span> Title of your document                                                      |
+| title             | String | Title of your document                                                                                                |
 | link              | Link   | <span style="color:red">(Required)</span> URL of your document (only PDF). Make sure this link is publicly accessible |
 
 ### Response
@@ -589,18 +589,21 @@ axios.post(
     ],
     "size": 1
   },
-  "contacts": [
-    {
-      "email": "bob@proton.me",
-      "first_name": "Bob",
-      "last_name": "Morane",
-      "title": "Project Manager",
-      "gender": "Mr",
-      "phone": "0202020202",
-      "phone2": "0707070707",
-      "birth_date": "1986-09-17"
-    }
-  ],
+  "contacts": {
+    "data": [
+      {
+        "email": "bob@proton.me",
+        "first_name": "Bob",
+        "last_name": "Morane",
+        "title": "Project Manager",
+        "gender": "Mr",
+        "phone": "0202020202",
+        "phone2": "0707070707",
+        "birth_date": "1986-09-17"
+      }
+    ],
+    "size": 1
+  },
   "langs": [
     {
       "lang": "american",
@@ -726,16 +729,16 @@ axios.post(baseUrl + "/suppliers-upsert", body, headers);
 
 ### Body parameters (application/json)
 
-| Parameter     | Type   | Description                                                                                                                                                                                                                                                                                                                              |
-| ------------- | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --- |
-| reference     | String | If provided, the unique reference associated to the supplier you want to update or create (in case the one you provided has never been used). For this endpoint, the reference can either be a supplier reference or an email of maint contact of a supplier. If no reference is provided, a supplier will be created with a random one. |
-| company_name  | String | Name of the supplier. This parameter is required if you create a new supplier                                                                                                                                                                                                                                                            |     |
-| website       | String | Website of your supplier                                                                                                                                                                                                                                                                                                                 |
-| capacity      | Number | Capacity of the Supplier                                                                                                                                                                                                                                                                                                                 |
-| type          | String | 3 Options: `accom`, `activity`, `transport`. You can select multiple options by typing "accom, activity" for exemple, the new data will erase old data. To add multiple options they must be separated by a comma                                                                                                                        |
-| contact       | JSON   | Contact is a single JSON and email is needed. Note that only one contact can be upsert this way (the main contact of the supplier) ([Contact](#contacts))                                                                                                                                                                                |
-| address       | JSON   | JSON object address ([Address](#address))                                                                                                                                                                                                                                                                                                |
-| custom_fields | JSON   | You can add custom fields for your supplier, this custom fields should be in your Ezus params and Write Exactly as they are written in your params technical name ([Custom fields](#custom-fields))                                                                                                                                      |
+| Parameter     | Type   | Description                                                                                                                                                                                                                                   |
+| ------------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --- |
+| reference     | String | If provided, the unique reference associated to the supplier you want to update or create (in case the one you provided has never been used). If no reference is provided, a supplier will be created with a random one.                      |
+| company_name  | String | Name of the supplier. This parameter is required if you create a new supplier                                                                                                                                                                 |     |
+| website       | String | Website of your supplier                                                                                                                                                                                                                      |
+| capacity      | Number | Capacity of the Supplier                                                                                                                                                                                                                      |
+| type          | String | Either `undefined` or a combinaison of these 3 options: `accom`, `activity`, `transport`. You can select multiple options by separating them with comas ("accom, activity" for instance). Enter "undefined" if you want to reset this params. |
+| contact       | JSON   | Contact is a single JSON and email is needed. Note that only one contact can be upsert this way (the main contact of the supplier) ([Contact](#contacts))                                                                                     |
+| address       | JSON   | JSON object address ([Address](#address))                                                                                                                                                                                                     |
+| custom_fields | JSON   | You can add custom fields for your supplier, this custom fields should be in your Ezus params and Write Exactly as they are written in your params technical name ([Custom fields](#custom-fields))                                           |
 
 ### Response
 
@@ -937,8 +940,8 @@ axios.post(baseUrl + "/products-upsert", body, headers);
 | title              | String | Title of your product. This parameter is required if you create a new product                                                                                                                                                                                           |
 | quantity           | String | Default quantity of this product when you add it into a project. It can either be a number or one of this letter (`P` = Number of people in the project, `D` = Number of days in the project, `N` = Number of nights in the project)                                    |
 | capacity           | Number | The capacity of the product                                                                                                                                                                                                                                             |
-| supplier_reference | String | If you give an adequate supplier reference, the product will be added in this supplier. Otherwise it won't belong to any supplier.                                                                                                                                      |
-| package_reference  | String | If you give an adequate package reference, the product will be added in this package. Otherwise it won't belong to any package.                                                                                                                                         |
+| supplier_reference | String | If you give an adequate supplier reference, the product will be added in this supplier. If you want to update the supplier's product to None, you must enter 0.                                                                                                         |
+| package_reference  | String | If you give an adequate package reference, the product will be added in this package. If you want to update the package's product to None, you must enter 0.                                                                                                            |
 | purchase_price     | Number | Purchase price as a number                                                                                                                                                                                                                                              |
 | sales_price        | Number | Sales price as a number                                                                                                                                                                                                                                                 |
 | vat_regime         | String | Can be either `classic` (common law VAT), `margin` (VAT on the margin), `none` (Non applicable VAT). If empty or not provided, your default account VAT regime will be set                                                                                              |
