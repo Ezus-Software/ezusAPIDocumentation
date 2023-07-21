@@ -698,12 +698,12 @@
 <span class="nt">--header</span> <span class="s1">'Authorization: Bearer &lt;YOUR_TOKEN&gt;'</span> <span class="se">\</span>
 <span class="nt">--data-raw</span> <span class="s1">'{
     "reference": "project_reference",
-    "info_title": "project_title",
+    "info_title": "Paris fashion week 2024",
     "trip_people": "15",
-    "trip_budget": "3000",
-    "trip_date_in": "2023-01-01",
-    "trip_date_out": "2023-01-02",
-    "sales_manager_email": "email@email.email",
+    "trip_budget": "90000",
+    "trip_date_in": "2023-03-01",
+    "trip_date_out": "2023-03-09",
+    "sales_manager_email": "travel-design@e-corp.com",
     "client_reference": "client_reference",
     "custom_fields": [
         {"name": "field_name", "value": "field_value" }
@@ -721,7 +721,7 @@
   <span class="na">trip_date_out</span><span class="p">:</span> <span class="dl">"</span><span class="s2">2023-03-09</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">sales_manager_email</span><span class="p">:</span> <span class="dl">"</span><span class="s2">travel-design@e-corp.com</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">client_reference</span><span class="p">:</span> <span class="dl">"</span><span class="s2">client_reference</span><span class="dl">"</span><span class="p">,</span>
-  <span class="na">custom_fields</span><span class="p">:</span> <span class="p">[{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">CustomField</span><span class="dl">"</span><span class="p">,</span> <span class="na">value</span><span class="p">:</span> <span class="dl">"</span><span class="s2">I need value</span><span class="dl">"</span> <span class="p">}],</span>
+  <span class="na">custom_fields</span><span class="p">:</span> <span class="p">[{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">field_name</span><span class="dl">"</span><span class="p">,</span> <span class="na">value</span><span class="p">:</span> <span class="dl">"</span><span class="s2">field_value</span><span class="dl">"</span> <span class="p">}],</span>
 <span class="p">};</span>
 <span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="dl">"</span><span class="s2">X-API-KEY</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">&lt;YOUR_API_KEY&gt;</span><span class="dl">"</span><span class="p">,</span>
@@ -824,8 +824,8 @@
 <span class="nt">--header</span> <span class="s1">'Authorization: Bearer &lt;YOUR_TOKEN&gt;'</span> <span class="se">\</span>
 <span class="nt">--data</span> <span class="s1">'{
     "project_reference": "project_reference",
-    "title": "document_title",
-    "link": "document_link"
+    "title": "Document PDF",
+    "link": "https://www.website.com/my_document.pdf"
 }'</span>
 </code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">axios</span><span class="dl">"</span><span class="p">);</span>
 <span class="kd">const</span> <span class="nx">baseUrl</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1</span><span class="dl">"</span><span class="p">;</span>
@@ -1121,7 +1121,7 @@
 <span class="nt">--header</span> <span class="s1">'Authorization: Bearer &lt;YOUR_TOKEN&gt;'</span> <span class="se">\</span>
 <span class="nt">--data-raw</span> <span class="s1">'{
     "reference": "client_reference",
-    "company_name": "company_name",
+    "company_name": "MOKE INTERNATIONAL LIMITED",
     "website": "www.moke_ltd.com",
     "contact": {
         "email": "contact@moke-international.com",
@@ -1166,7 +1166,7 @@
     <span class="na">country</span><span class="p">:</span> <span class="dl">"</span><span class="s2">France</span><span class="dl">"</span><span class="p">,</span>
     <span class="na">zip</span><span class="p">:</span> <span class="dl">"</span><span class="s2">75010</span><span class="dl">"</span><span class="p">,</span>
   <span class="p">},</span>
-  <span class="na">custom_fields</span><span class="p">:</span> <span class="p">[{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">field1</span><span class="dl">"</span><span class="p">,</span> <span class="na">value</span><span class="p">:</span> <span class="dl">"</span><span class="s2">field1Value</span><span class="dl">"</span> <span class="p">}],</span>
+  <span class="na">custom_fields</span><span class="p">:</span> <span class="p">[{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">field_name</span><span class="dl">"</span><span class="p">,</span> <span class="na">value</span><span class="p">:</span> <span class="dl">"</span><span class="s2">field_value</span><span class="dl">"</span> <span class="p">}],</span>
 <span class="p">};</span>
 <span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="dl">"</span><span class="s2">X-API-KEY</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">&lt;YOUR_API_KEY&gt;</span><span class="dl">"</span><span class="p">,</span>
@@ -1468,9 +1468,9 @@
 <span class="nt">--header</span> <span class="s1">'Authorization: Bearer &lt;YOUR_TOKEN&gt;'</span> <span class="se">\</span>
 <span class="nt">--data-raw</span> <span class="s1">'{
     "reference": "supplier_reference",
-    "company_name": "supplier_company",
+    "company_name": "The best hotel",
     "website": "www.the_best_hotel.com",
-    "capacity": 2,
+    "capacity": 200,
     "type": "accom, activity",
     "contact": {
         "email": "bob@proton.me",
@@ -1486,7 +1486,7 @@
         "label": "58 Rue de Paradis",
         "city": "Paris",
         "country": "France",
-        "zip": "75009"
+        "zip": "75010"
     },
     "custom_fields": [
         {"name": "field_name", "value": "field_value"}
@@ -1518,7 +1518,7 @@
     <span class="na">zip</span><span class="p">:</span> <span class="dl">"</span><span class="s2">75010</span><span class="dl">"</span><span class="p">,</span>
   <span class="p">},</span>
   <span class="na">custom_fields</span><span class="p">:</span> <span class="p">[</span>
-    <span class="p">{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Star</span><span class="dl">"</span><span class="p">,</span> <span class="na">value</span><span class="p">:</span> <span class="dl">"</span><span class="s2">5</span><span class="dl">"</span> <span class="p">}</span>
+    <span class="p">{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">field_name</span><span class="dl">"</span><span class="p">,</span> <span class="na">value</span><span class="p">:</span> <span class="dl">"</span><span class="s2">field_value</span><span class="dl">"</span> <span class="p">}</span>
   <span class="p">],</span>
 <span class="p">};</span>
 <span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span> <span class="dl">"</span><span class="s2">X-API-KEY</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">&lt;YOUR_API_KEY&gt;</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Authorization</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Bearer &lt;YOUR_TOKEN&gt;</span><span class="dl">"</span> <span class="p">};</span>
@@ -1835,19 +1835,19 @@
 <span class="nt">--header</span> <span class="s1">'Authorization: Bearer &lt;YOUR_TOKEN&gt;'</span> <span class="se">\</span>
 <span class="nt">--data</span> <span class="s1">'{
     "reference": "product_reference",
-    "title": "product_title",
-    "quantity": "P",
-    "capacity": 5,
+    "title": "2-bed room with breakfast",
+    "quantity": "1",
+    "capacity": 2,
     "supplier_reference": "supplier_reference",
     "package_reference": "package_reference",
-    "purchase_price": 100,
-    "sales_price": 200,
-    "vat_regime": "margin",
+    "purchase_price": "42",
+    "sales_price": "84",
+    "vat_regime": "none",
     "vat_rate": 20,
     "currency": "USD",
     "commission": {
+        "commission_mode": "purchase",
         "commission_regime": "percent",
-        "commission_mode": "default",
         "value": 10
     },
     "custom_fields": [
@@ -1874,10 +1874,7 @@
     <span class="na">commission_regime</span><span class="p">:</span> <span class="dl">"</span><span class="s2">percent</span><span class="dl">"</span><span class="p">,</span>
     <span class="na">value</span><span class="p">:</span> <span class="dl">"</span><span class="s2">10</span><span class="dl">"</span><span class="p">,</span>
   <span class="p">},</span>
-  <span class="na">custom_fields</span><span class="p">:</span> <span class="p">[</span>
-    <span class="p">{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">field1</span><span class="dl">"</span><span class="p">,</span> <span class="na">value</span><span class="p">:</span> <span class="dl">"</span><span class="s2">field1Value</span><span class="dl">"</span> <span class="p">},</span>
-    <span class="p">{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">field2</span><span class="dl">"</span><span class="p">,</span> <span class="na">value</span><span class="p">:</span> <span class="dl">"</span><span class="s2">field2Value</span><span class="dl">"</span> <span class="p">},</span>
-  <span class="p">],</span>
+  <span class="na">custom_fields</span><span class="p">:</span> <span class="p">[{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">field_name</span><span class="dl">"</span><span class="p">,</span> <span class="na">value</span><span class="p">:</span> <span class="dl">"</span><span class="s2">field_value</span><span class="dl">"</span> <span class="p">}],</span>
 <span class="p">};</span>
 <span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="dl">"</span><span class="s2">X-API-KEY</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">&lt;YOUR_API_KEY&gt;</span><span class="dl">"</span><span class="p">,</span>
@@ -2174,8 +2171,8 @@
 <span class="nt">--header</span> <span class="s1">'Authorization: Bearer &lt;YOUR_TOKEN&gt;'</span> <span class="se">\</span>
 <span class="nt">--data</span> <span class="s1">'{
     "reference": "package_reference",
-    "title": "packages_title",
-    "capacity": "25",
+    "title": "The best package",
+    "capacity": "2",
     "custom_fields": [
         {"name": "field_name", "value": "field_value"}
     ]
@@ -2188,7 +2185,7 @@
   <span class="na">reference</span><span class="p">:</span> <span class="dl">"</span><span class="s2">package_reference</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">title</span><span class="p">:</span> <span class="dl">"</span><span class="s2">The best package</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">capacity</span><span class="p">:</span> <span class="dl">"</span><span class="s2">2</span><span class="dl">"</span><span class="p">,</span>
-  <span class="na">custom_fields</span><span class="p">:</span> <span class="p">[{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Is for children?</span><span class="dl">"</span><span class="p">,</span> <span class="na">value</span><span class="p">:</span> <span class="dl">"</span><span class="s2">False</span><span class="dl">"</span> <span class="p">}],</span>
+  <span class="na">custom_fields</span><span class="p">:</span> <span class="p">[{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">field_name</span><span class="dl">"</span><span class="p">,</span> <span class="na">value</span><span class="p">:</span> <span class="dl">"</span><span class="s2">field_value</span><span class="dl">"</span> <span class="p">}],</span>
 <span class="p">};</span>
 <span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="dl">"</span><span class="s2">X-API-KEY</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">&lt;YOUR_API_KEY&gt;</span><span class="dl">"</span><span class="p">,</span>
