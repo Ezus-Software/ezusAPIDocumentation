@@ -67,8 +67,8 @@ curl --location 'https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/login
 --header 'Content-Type: application/json' \
 --header 'Authorization: Bearer <YOUR_TOKEN>' \
 --data-raw '{
-    "email": "yoann@ezus.io",
-    "password": "yoann@ezus.io"
+    "email": "<YOUR_EMAIL>",
+    "password": "<YOUR_PASSWORD>"
 }'
 ```
 
