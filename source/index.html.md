@@ -235,12 +235,12 @@ curl --location 'https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/proje
 --header 'Authorization: Bearer <YOUR_TOKEN>' \
 --data-raw '{
     "reference": "project_reference",
-    "info_title": "project_title",
+    "info_title": "Paris fashion week 2024",
     "trip_people": "15",
-    "trip_budget": "3000",
-    "trip_date_in": "2023-01-01",
-    "trip_date_out": "2023-01-02",
-    "sales_manager_email": "email@email.email",
+    "trip_budget": "90000",
+    "trip_date_in": "2023-03-01",
+    "trip_date_out": "2023-03-09",
+    "sales_manager_email": "travel-design@e-corp.com",
     "client_reference": "client_reference",
     "custom_fields": [
         {"name": "field_name", "value": "field_value" }
@@ -261,7 +261,7 @@ const body = {
   trip_date_out: "2023-03-09",
   sales_manager_email: "travel-design@e-corp.com",
   client_reference: "client_reference",
-  custom_fields: [{ name: "CustomField", value: "I need value" }],
+  custom_fields: [{ name: "field_name", value: "field_value" }],
 };
 const headers = {
   "X-API-KEY": "<YOUR_API_KEY>",
@@ -322,8 +322,8 @@ curl --location 'https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/proje
 --header 'Authorization: Bearer <YOUR_TOKEN>' \
 --data '{
     "project_reference": "project_reference",
-    "title": "document_title",
-    "link": "document_link"
+    "title": "Document PDF",
+    "link": "https://www.website.com/my_document.pdf"
 }'
 ```
 
@@ -517,7 +517,7 @@ curl --location 'https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/clien
 --header 'Authorization: Bearer <YOUR_TOKEN>' \
 --data-raw '{
     "reference": "client_reference",
-    "company_name": "company_name",
+    "company_name": "MOKE INTERNATIONAL LIMITED",
     "website": "www.moke_ltd.com",
     "contact": {
         "email": "contact@moke-international.com",
@@ -565,7 +565,7 @@ const body = {
     country: "France",
     zip: "75010",
   },
-  custom_fields: [{ name: "field1", value: "field1Value" }],
+  custom_fields: [{ name: "field_name", value: "field_value" }],
 };
 const headers = {
   "X-API-KEY": "<YOUR_API_KEY>",
@@ -766,9 +766,9 @@ curl --location 'https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/suppl
 --header 'Authorization: Bearer <YOUR_TOKEN>' \
 --data-raw '{
     "reference": "supplier_reference",
-    "company_name": "supplier_company",
+    "company_name": "The best hotel",
     "website": "www.the_best_hotel.com",
-    "capacity": 2,
+    "capacity": 200,
     "type": "accom, activity",
     "contact": {
         "email": "bob@proton.me",
@@ -784,7 +784,7 @@ curl --location 'https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/suppl
         "label": "58 Rue de Paradis",
         "city": "Paris",
         "country": "France",
-        "zip": "75009"
+        "zip": "75010"
     },
     "custom_fields": [
         {"name": "field_name", "value": "field_value"}
@@ -819,7 +819,7 @@ const body = {
     zip: "75010",
   },
   custom_fields: [
-    { name: "Star", value: "5" }
+    { name: "field_name", value: "field_value" }
   ],
 };
 const headers = { "X-API-KEY": "<YOUR_API_KEY>", "Authorization": "Bearer <YOUR_TOKEN>" };
@@ -1011,19 +1011,19 @@ curl --location 'https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/produ
 --header 'Authorization: Bearer <YOUR_TOKEN>' \
 --data '{
     "reference": "product_reference",
-    "title": "product_title",
-    "quantity": "P",
-    "capacity": 5,
+    "title": "2-bed room with breakfast",
+    "quantity": "1",
+    "capacity": 2,
     "supplier_reference": "supplier_reference",
     "package_reference": "package_reference",
-    "purchase_price": 100,
-    "sales_price": 200,
-    "vat_regime": "margin",
+    "purchase_price": "42",
+    "sales_price": "84",
+    "vat_regime": "none",
     "vat_rate": 20,
     "currency": "USD",
     "commission": {
+        "commission_mode": "purchase",
         "commission_regime": "percent",
-        "commission_mode": "default",
         "value": 10
     },
     "custom_fields": [
@@ -1053,10 +1053,7 @@ const body = {
     commission_regime: "percent",
     value: "10",
   },
-  custom_fields: [
-    { name: "field1", value: "field1Value" },
-    { name: "field2", value: "field2Value" },
-  ],
+  custom_fields: [{ name: "field_name", value: "field_value" }],
 };
 const headers = {
   "X-API-KEY": "<YOUR_API_KEY>",
@@ -1240,8 +1237,8 @@ curl --location 'https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/packa
 --header 'Authorization: Bearer <YOUR_TOKEN>' \
 --data '{
     "reference": "package_reference",
-    "title": "packages_title",
-    "capacity": "25",
+    "title": "The best package",
+    "capacity": "2",
     "custom_fields": [
         {"name": "field_name", "value": "field_value"}
     ]
@@ -1257,7 +1254,7 @@ const body = {
   reference: "package_reference",
   title: "The best package",
   capacity: "2",
-  custom_fields: [{ name: "Is for children?", value: "False" }],
+  custom_fields: [{ name: "field_name", value: "field_value" }],
 };
 const headers = {
   "X-API-KEY": "<YOUR_API_KEY>",
