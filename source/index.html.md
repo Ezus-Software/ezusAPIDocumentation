@@ -125,7 +125,7 @@ JSON object indicating whether an error has occured during the process and, if s
 Retrieve information for a project record in Ezus. You must specify to the Ezus API which project you wish to retrieve, by indicating its appropriate reference in your query parameter.
 
 ```shell
-curl --location 'https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/project?reference=projects_reference' \
+curl --location 'https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/project?reference=project_reference' \
 --header 'X-API-KEY: <YOUR_API_KEY>' \
 --header 'Authorization: Bearer <YOUR_TOKEN>'
 ```
@@ -139,7 +139,7 @@ const headers = {
   Authorization: "Bearer <YOUR_TOKEN>",
 };
 
-axios.post(baseUrl + "/project?reference=project_reference_1234", {}, headers);
+axios.post(baseUrl + "/project?reference=project_reference", {}, headers);
 ```
 
 > It returns a JSON object structured like this:
@@ -147,7 +147,7 @@ axios.post(baseUrl + "/project?reference=project_reference_1234", {}, headers);
 ```json
 {
   "error": "false",
-  "reference": "project_reference_1234",
+  "reference": "project_reference",
   "info_title": "Paris fashion week 2024",
   "info_stage": "Confirmed",
   "info_notes": "Jane has verbally confirmed our quotation",
@@ -173,7 +173,7 @@ axios.post(baseUrl + "/project?reference=project_reference_1234", {}, headers);
       "trip_destination": "France",
       "trip_subdestination": "Paris",
       "client": {
-        "reference": "client_reference_1234",
+        "reference": "client_reference",
         "type": "entreprise",
         "company_name": "MOKE INTERNATIONAL LIMITED",
         "first_name": "Jane",
@@ -234,7 +234,7 @@ curl --location 'https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/proje
 --header 'Content-Type: application/json' \
 --header 'Authorization: Bearer <YOUR_TOKEN>' \
 --data-raw '{
-    "reference": "projects_reference",
+    "reference": "project_reference",
     "info_title": "project_title",
     "trip_people": "15",
     "trip_budget": "3000",
@@ -253,14 +253,14 @@ const axios = require("axios");
 const baseUrl = "https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1";
 
 const body = {
-  reference: "project_reference_1234",
+  reference: "project_reference",
   info_title: "Paris fashion week 2024",
   trip_people: "15",
   trip_budget: "90000",
   trip_date_in: "2023-03-01",
   trip_date_out: "2023-03-09",
   sales_manager_email: "travel-design@e-corp.com",
-  client_reference: "client_reference_1234",
+  client_reference: "client_reference",
   custom_fields: [{ name: "CustomField", value: "I need value" }],
 };
 const headers = {
@@ -278,7 +278,7 @@ axios.post(baseUrl + "/projects-upsert", body, headers);
   "error": "false",
   "message": "ok",
   "action": "Project Updated Successfuly",
-  "reference": "project_reference_1234"
+  "reference": "project_reference"
 }
 ```
 
@@ -321,7 +321,7 @@ curl --location 'https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/proje
 --header 'Content-Type: application/json' \
 --header 'Authorization: Bearer <YOUR_TOKEN>' \
 --data '{
-    "project_reference": "projects_reference",
+    "project_reference": "project_reference",
     "title": "document_title",
     "link": "document_link"
 }'
@@ -332,7 +332,7 @@ const axios = require("axios");
 const baseUrl = "https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1";
 
 const body = {
-  project_reference: "project_reference_1234",
+  project_reference: "project_reference",
   title: "Document PDF",
   link: "https://www.website.com/my_document.pdf",
 };
@@ -383,7 +383,7 @@ JSON object indicating whether an error has occured during the process and, if s
 Retrieve information for a client record in Ezus. You must specify to the Ezus API which client you wish to retrieve, by indicating its appropriate reference in your query parameter.
 
 ```shell
-curl --location 'https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/client?reference=clients_reference' \
+curl --location 'https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/client?reference=client_reference' \
 --header 'X-API-KEY: <YOUR_API_KEY>' \
 --header 'Authorization: Bearer <YOUR_TOKEN>'
 ```
@@ -405,7 +405,7 @@ axios.post(baseUrl + "/client?reference=client_reference", {}, headers);
 ```json
 {
   "error": "false",
-  "reference": "client_reference_1234",
+  "reference": "client_reference",
   "type": "entreprise",
   "company_name": "MOKE INTERNATIONAL LIMITED",
   "website": "www.moke_ltd.com",
@@ -433,7 +433,7 @@ axios.post(baseUrl + "/client?reference=client_reference", {}, headers);
   "projects": {
     "data": [
       {
-        "reference": "project_reference_1234",
+        "reference": "project_reference",
         "info_title": "Project title"
       }
     ],
@@ -516,7 +516,7 @@ curl --location 'https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/clien
 --header 'Content-Type: application/json' \
 --header 'Authorization: Bearer <YOUR_TOKEN>' \
 --data-raw '{
-    "reference": "clients_reference",
+    "reference": "client_reference",
     "company_name": "company_name",
     "website": "www.moke_ltd.com",
     "contact": {
@@ -546,7 +546,7 @@ const axios = require("axios");
 const baseUrl = "https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1";
 
 const body = {
-  reference: "client_reference_1234",
+  reference: "client_reference",
   company_name: "MOKE INTERNATIONAL LIMITED",
   website: "www.moke_ltd.com",
   contact: {
@@ -582,7 +582,7 @@ axios.post(baseUrl + "/clients-upsert", body, headers);
   "error": "false",
   "message": "ok",
   "action": "Client updated Successfully",
-  "reference": "client_reference_1234"
+  "reference": "client_reference"
 }
 ```
 
@@ -619,7 +619,7 @@ JSON object indicating whether an error has occured during the process and, if s
 Retrieve information for a supplier record in Ezus. You must specify to the Ezus API which supplier you wish to retrieve, by indicating its appropriate reference in your query parameter.
 
 ```shell
-curl --location 'https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/supplier?reference=suppliers_reference' \
+curl --location 'https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/supplier?reference=supplier_reference' \
 --header 'X-API-KEY: <YOUR_API_KEY>' \
 --header 'Authorization: Bearer <YOUR_TOKEN>'
 ```
@@ -633,11 +633,7 @@ const headers = {
   Authorization: "Bearer <YOUR_TOKEN>",
 };
 
-axios.post(
-  baseUrl + "/supplier?reference=supplier_reference_1234",
-  {},
-  headers
-);
+axios.post(baseUrl + "/supplier?reference=supplier_reference", {}, headers);
 ```
 
 > It returns a JSON object structured like this:
@@ -645,7 +641,7 @@ axios.post(
 ```json
 {
   "error": "false",
-  "reference": "supplier_reference_1234",
+  "reference": "supplier_reference",
   "company_name": "The best hotel",
   "website": "www.the_best_hotel.com",
   "capacity": 200,
@@ -676,7 +672,7 @@ axios.post(
   "products": {
     "data": [
       {
-        "reference": "product_reference_1234",
+        "reference": "product_reference",
         "title": "2-bed room with breakfast"
       }
     ],
@@ -769,7 +765,7 @@ curl --location 'https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/suppl
 --header 'Content-Type: application/json' \
 --header 'Authorization: Bearer <YOUR_TOKEN>' \
 --data-raw '{
-    "reference": "suppliers_reference",
+    "reference": "supplier_reference",
     "company_name": "supplier_company",
     "website": "www.the_best_hotel.com",
     "capacity": 2,
@@ -801,7 +797,7 @@ const axios = require("axios");
 const baseUrl = "https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1";
 
 const body = {
-  reference: "supplier_reference_1234",
+  reference: "supplier_reference",
   company_name: "The best hotel",
   website: "www.the_best_hotel.com",
   capacity: 200,
@@ -838,7 +834,7 @@ axios.post(baseUrl + "/suppliers-upsert", body, headers);
   "error": "false",
   "message": "ok",
   "action": "Supplier created Successfully",
-  "reference": "supplier_reference_1234"
+  "reference": "supplier_reference"
 }
 ```
 
@@ -877,7 +873,7 @@ JSON object indicating whether an error has occured during the process and, if s
 Retrieve information for a product record in Ezus. You must specify to the Ezus API which product you wish to retrieve, by indicating its appropriate reference in your query parameter.
 
 ```shell
-curl --location 'https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/product?reference=products_reference' \
+curl --location 'https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/product?reference=product_reference' \
 --header 'X-API-KEY: <YOUR_API_KEY>' \
 --header 'Authorization: Bearer <YOUR_TOKEN>'
 ```
@@ -891,7 +887,7 @@ const headers = {
   Authorization: "Bearer <YOUR_TOKEN>",
 };
 
-axios.post(baseUrl + "/product?reference=product_reference_1234", {}, headers);
+axios.post(baseUrl + "/product?reference=product_reference", {}, headers);
 ```
 
 > It returns a JSON object structured like this:
@@ -899,7 +895,7 @@ axios.post(baseUrl + "/product?reference=product_reference_1234", {}, headers);
 ```json
 {
   "error": "false",
-  "reference": "product_reference_1234",
+  "reference": "product_reference",
   "title": "2-bed room with breakfast",
   "capacity": 2,
   "quantity": "1",
@@ -921,11 +917,11 @@ axios.post(baseUrl + "/product?reference=product_reference_1234", {}, headers);
     "size": 1
   },
   "supplier": {
-    "reference": "supplier_reference_1234",
+    "reference": "supplier_reference",
     "company_name": "The best hotel"
   },
   "package": {
-    "reference": "package_reference_1234",
+    "reference": "package_reference",
     "title": "packages_title"
   },
   "commission": {
@@ -943,7 +939,7 @@ axios.post(baseUrl + "/product?reference=product_reference_1234", {}, headers);
   ],
   "tariffs": [
     {
-      "reference": "tariff_reference_1234",
+      "reference": "tariff_reference",
       "type": "default",
       "name": "",
       "purchase_price": 100.0,
@@ -1014,12 +1010,12 @@ curl --location 'https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/produ
 --header 'Content-Type: application/json' \
 --header 'Authorization: Bearer <YOUR_TOKEN>' \
 --data '{
-    "reference": "products_reference",
+    "reference": "product_reference",
     "title": "product_title",
     "quantity": "P",
     "capacity": 5,
-    "supplier_reference": "suppliers_reference",
-    "package_reference": "packages_reference",
+    "supplier_reference": "supplier_reference",
+    "package_reference": "package_reference",
     "purchase_price": 100,
     "sales_price": 200,
     "vat_regime": "margin",
@@ -1041,7 +1037,7 @@ const axios = require("axios");
 const baseUrl = "https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1";
 
 const body = {
-  reference: "product_reference_1234",
+  reference: "product_reference",
   title: "2-bed room with breakfast",
   quantity: "1",
   capacity: 2,
@@ -1077,7 +1073,7 @@ axios.post(baseUrl + "/products-upsert", body, headers);
   "error": "false",
   "message": "ok",
   "action": "Product Created Successfully",
-  "reference": "product_reference_1234"
+  "reference": "product_reference"
 }
 ```
 
@@ -1121,7 +1117,7 @@ JSON object indicating whether an error has occured during the process and, if s
 Retrieve information for a package record in Ezus. You must specify to the Ezus API which package you wish to retrieve, by indicating its appropriate reference in your query parameter.
 
 ```shell
-curl --location 'https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/package?reference=packages_reference' \
+curl --location 'https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/package?reference=package_reference' \
 --header 'X-API-KEY: <YOUR_API_KEY>' \
 --header 'Authorization: Bearer <YOUR_TOKEN>'
 ```
@@ -1135,7 +1131,7 @@ const headers = {
   Authorization: "Bearer <YOUR_TOKEN>",
 };
 
-axios.post(baseUrl + "/package?reference=package_reference_1234", {}, headers);
+axios.post(baseUrl + "/package?reference=package_reference", {}, headers);
 ```
 
 > It returns a JSON object structured like this:
@@ -1143,7 +1139,7 @@ axios.post(baseUrl + "/package?reference=package_reference_1234", {}, headers);
 ```json
 {
   "error": "false",
-  "reference": "package_reference_1234",
+  "reference": "package_reference",
   "title": "The best package",
   "capacity": 2,
   "info_notes": "A classical day in Paris",
@@ -1156,7 +1152,7 @@ axios.post(baseUrl + "/package?reference=package_reference_1234", {}, headers);
   "suppliers": {
     "data": [
       {
-        "reference": "supplier_reference_1234",
+        "reference": "supplier_reference",
         "company_name": "The best hotel"
       }
     ],
@@ -1165,7 +1161,7 @@ axios.post(baseUrl + "/package?reference=package_reference_1234", {}, headers);
   "products": {
     "data": [
       {
-        "reference": "product_reference_1234",
+        "reference": "product_reference",
         "title": "2-bed room with breakfast"
       },
       {
@@ -1243,7 +1239,7 @@ curl --location 'https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/packa
 --header 'Content-Type: application/json' \
 --header 'Authorization: Bearer <YOUR_TOKEN>' \
 --data '{
-    "reference": "packages_reference",
+    "reference": "package_reference",
     "title": "packages_title",
     "capacity": "25",
     "custom_fields": [
@@ -1258,7 +1254,7 @@ const axios = require("axios");
 const baseUrl = "https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1";
 
 const body = {
-  reference: "package_reference_1234",
+  reference: "package_reference",
   title: "The best package",
   capacity: "2",
   custom_fields: [{ name: "Is for children?", value: "False" }],
@@ -1278,7 +1274,7 @@ axios.post(baseUrl + "/packages-upsert", body, headers);
   "error": "false",
   "message": "ok",
   "action": "Package Created Successfully",
-  "reference": "package_reference_1234"
+  "reference": "package_reference"
 }
 ```
 
@@ -1340,7 +1336,7 @@ JSON object indicating whether an error has occured during the process and, if s
       "trip_destination": "France",
       "trip_subdestination": "Paris",
       "client": {
-        "reference": "client_reference_1234",
+        "reference": "client_reference",
         "type": "entreprise",
         "company_name": "MOKE INTERNATIONAL LIMITED",
         "first_name": "Jane",
@@ -1504,7 +1500,7 @@ Only the last 10 products are returned in this object.
 "products": {
     "data": [
       {
-        "reference": "product_reference_1234",
+        "reference": "product_reference",
         "title": "2-bed room with breakfast"
       }
     ],
@@ -1525,7 +1521,7 @@ Only the last 10 suppliers are returned in this object.
  "suppliers": {
     "data": [
       {
-        "reference": "supplier_reference_1234",
+        "reference": "supplier_reference",
         "company_name": "The best hotel"
       }
     ],
@@ -1543,7 +1539,7 @@ Only the last 10 suppliers are returned in this object.
 ```json
   "tariffs": [
     {
-      "reference": "tariff_1234",
+      "reference": "tariff_reference",
       "type": "default",
       "name": "",
       "purchase_price": 100.0,
