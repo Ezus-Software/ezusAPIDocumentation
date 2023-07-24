@@ -65,7 +65,6 @@ After calling the /login endpoint with valid credentials, a bearer token will be
 curl --location 'https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/login' \
 --header 'X-API-KEY: <YOUR_API_KEY>' \
 --header 'Content-Type: application/json' \
---header 'Authorization: Bearer <YOUR_TOKEN>' \
 --data-raw '{
     "email": "<YOUR_EMAIL>",
     "password": "<YOUR_PASSWORD>"
