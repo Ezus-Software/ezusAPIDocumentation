@@ -1330,7 +1330,7 @@ JSON object indicating whether an error has occured during the process and, if s
       "trip_date_out": "2024-03-09",
       "trip_duration": "9",
       "trip_destination": "France",
-      "trip_subdestination": "Paris",
+      "trip_subdestination": "Paris1",
       "client": {
         "reference": "client_reference",
         "type": "entreprise",
