@@ -16,6 +16,6 @@ Classic Error messages
 </aside>
 The Ezus API uses the following error messages:
 
-| Error Message                  | Meaning                                       |
-| ------------------------------ | --------------------------------------------- |
-| This <OBJECT> has been deleted | The object you try to access has been deleted |
+| Error Message                    | Meaning                                       |
+| -------------------------------- | --------------------------------------------- |
+| This <'OBJECT'> has been deleted | The object you try to access has been deleted |
