@@ -175,6 +175,7 @@ axios.post(baseUrl + "/project?reference=project_reference", {}, headers);
       "trip_duration": "9",
       "trip_destination": "France",
       "trip_subdestination": "Paris",
+      "budget_actual": "88750",
       "client": {
         "reference": "client_reference",
         "type": "entreprise",
@@ -243,6 +244,7 @@ curl --location 'https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/proje
     "trip_budget": "90000",
     "trip_date_in": "2023-03-01",
     "trip_date_out": "2023-03-09",
+    "budget_actual": "88750",
     "sales_manager_email": "travel-design@e-corp.com",
     "client_reference": "client_reference",
     "custom_fields": [
@@ -1329,12 +1331,13 @@ JSON object indicating whether an error has occured during the process and, if s
     {
       "alternative_title": "Main Alternative",
       "trip_people": "15",
-      "trip_budget": "0",
+      "trip_budget": "90000",
       "trip_date_in": "2024-03-01",
       "trip_date_out": "2024-03-09",
       "trip_duration": "9",
       "trip_destination": "France",
       "trip_subdestination": "Paris",
+      "budget_actual": "88750",
       "client": {
         "reference": "client_reference",
         "type": "entreprise",
@@ -1357,6 +1360,7 @@ JSON object indicating whether an error has occured during the process and, if s
 | trip_duration       | String | Number of days this alternative last                                                                                     |
 | trip_destination    | String | Destination of the alternative                                                                                           |
 | trip_subdestination | String | Subdestination of the alternative                                                                                        |
+| budget_actual       | String | Real budget of the alternative                                                                                           |
 | client              | JSON   | JSON that contain: `reference`, `type` (entreprise or individual), `company_name`, `first_name`, `last_name` and `email` |
 
 ### Contacts
