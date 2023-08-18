@@ -665,15 +665,6 @@ axios.post(baseUrl + "/supplier?reference=supplier_reference", {}, headers);
     "city": "Paris",
     "country": "France"
   },
-  "medias": {
-    "data": [
-      {
-        "media_name": "The lobby",
-        "path_full": "www.the_best_hotel.com/media/loby.jpg"
-      }
-    ],
-    "size": 1
-  },
   "products": {
     "data": [
       {
@@ -694,6 +685,15 @@ axios.post(baseUrl + "/supplier?reference=supplier_reference", {}, headers);
         "phone": "0202020202",
         "phone2": "0707070707",
         "birth_date": "1986-09-17"
+      }
+    ],
+    "size": 1
+  },
+  "medias": {
+    "data": [
+      {
+        "media_name": "The lobby",
+        "path_full": "www.the_best_hotel.com/media/loby.jpg"
       }
     ],
     "size": 1
@@ -754,9 +754,9 @@ JSON object containing the supplier information.
 | visual_url    | String | URL of the Google Slides visual linked to the supplier                                                                                                      |
 | user          | JSON   | JSON object user ([User](#user))                                                                                                                            |
 | address       | JSON   | JSON object address ([Address](#address))                                                                                                                   |
-| medias        | JSON   | JSON object medias ([Medias](#medias))                                                                                                                      |
 | products      | JSON   | JSON object products ([Products](#products))                                                                                                                |
 | contacts      | Array  | Array of JSON contacts ([Contacts](#contacts))                                                                                                              |
+| medias        | JSON   | JSON object medias ([Medias](#medias))                                                                                                                      |
 | langs         | Array  | Array of JSON langs ([Langs](#langs))                                                                                                                       |
 | custom_fields | Array  | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                               |
 
@@ -1151,19 +1151,6 @@ axios.post(baseUrl + "/package?reference=package_reference", {}, headers);
   "info_notes": "A classical day in Paris",
   "info_number": "202306001-PK",
   "visual_url": "",
-  "medias": {
-    "data": [],
-    "size": 0
-  },
-  "suppliers": {
-    "data": [
-      {
-        "reference": "supplier_reference",
-        "company_name": "The best hotel"
-      }
-    ],
-    "size": 1
-  },
   "products": {
     "data": [
       {
@@ -1176,6 +1163,19 @@ axios.post(baseUrl + "/package?reference=package_reference", {}, headers);
       }
     ],
     "size": 2
+  },
+  "suppliers": {
+    "data": [
+      {
+        "reference": "supplier_reference",
+        "company_name": "The best hotel"
+      }
+    ],
+    "size": 1
+  },
+  "medias": {
+    "data": [],
+    "size": 0
   },
   "langs": [
     {
@@ -1229,9 +1229,9 @@ JSON object containing the package information.
 | info_notes    | String | Notes on the package                                                                             |
 | info_number   | String | File number that appears at the bottom of the package record. Not to be confused with reference! |
 | visual_url    | String | URL of the Google Slides visual linked to the package                                            |
-| medias        | JSON   | JSON object medias ([Medias](#medias))                                                           |
-| suppliers     | JSON   | JSON object suppliers ([Suppliers](#suppliers))                                                  |
 | products      | JSON   | JSON object products ([Products](#products))                                                     |
+| suppliers     | JSON   | JSON object suppliers ([Suppliers](#suppliers))                                                  |
+| medias        | JSON   | JSON object medias ([Medias](#medias))                                                           |
 | langs         | Array  | Array of JSON langs ([Langs](#langs))                                                            |
 | custom_fields | Array  | Array of JSON custom fields [Custom fields](#custom-fields)                                      |
 
