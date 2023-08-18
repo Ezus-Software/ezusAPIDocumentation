@@ -1290,15 +1290,6 @@ Quick tip: You can <a href="https://github.com/ezus-melchior/EzusAPI-Mock/tree/m
     </span><span class="nl">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Paris"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"France"</span><span class="w">
   </span><span class="p">},</span><span class="w">
-  </span><span class="nl">"medias"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-      </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"media_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The lobby"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"path_full"</span><span class="p">:</span><span class="w"> </span><span class="s2">"www.the_best_hotel.com/media/loby.jpg"</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">],</span><span class="w">
-    </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
-  </span><span class="p">},</span><span class="w">
   </span><span class="nl">"products"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
       </span><span class="p">{</span><span class="w">
@@ -1319,6 +1310,15 @@ Quick tip: You can <a href="https://github.com/ezus-melchior/EzusAPI-Mock/tree/m
         </span><span class="nl">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0202020202"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"phone2"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0707070707"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"birth_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1986-09-17"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"medias"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"media_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The lobby"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"path_full"</span><span class="p">:</span><span class="w"> </span><span class="s2">"www.the_best_hotel.com/media/loby.jpg"</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">],</span><span class="w">
     </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
@@ -1440,11 +1440,6 @@ Quick tip: You can <a href="https://github.com/ezus-melchior/EzusAPI-Mock/tree/m
 <td>JSON object address (<a href="#address">Address</a>)</td>
 </tr>
 <tr>
-<td>medias</td>
-<td>JSON</td>
-<td>JSON object medias (<a href="#medias">Medias</a>)</td>
-</tr>
-<tr>
 <td>products</td>
 <td>JSON</td>
 <td>JSON object products (<a href="#products">Products</a>)</td>
@@ -1453,6 +1448,11 @@ Quick tip: You can <a href="https://github.com/ezus-melchior/EzusAPI-Mock/tree/m
 <td>contacts</td>
 <td>Array</td>
 <td>Array of JSON contacts (<a href="#contacts">Contacts</a>)</td>
+</tr>
+<tr>
+<td>medias</td>
+<td>JSON</td>
+<td>JSON object medias (<a href="#medias">Medias</a>)</td>
 </tr>
 <tr>
 <td>langs</td>
@@ -2012,19 +2012,6 @@ Quick tip: You can <a href="https://github.com/ezus-melchior/EzusAPI-Mock/tree/m
   </span><span class="nl">"info_notes"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A classical day in Paris"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"info_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"202306001-PK"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"visual_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"medias"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
-    </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="nl">"suppliers"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-      </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"supplier_reference"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"company_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The best hotel"</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">],</span><span class="w">
-    </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
-  </span><span class="p">},</span><span class="w">
   </span><span class="nl">"products"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
       </span><span class="p">{</span><span class="w">
@@ -2037,6 +2024,19 @@ Quick tip: You can <a href="https://github.com/ezus-melchior/EzusAPI-Mock/tree/m
       </span><span class="p">}</span><span class="w">
     </span><span class="p">],</span><span class="w">
     </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"suppliers"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"supplier_reference"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"company_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The best hotel"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"medias"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+    </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="nl">"langs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
@@ -2135,9 +2135,9 @@ Quick tip: You can <a href="https://github.com/ezus-melchior/EzusAPI-Mock/tree/m
 <td>URL of the Google Slides visual linked to the package</td>
 </tr>
 <tr>
-<td>medias</td>
+<td>products</td>
 <td>JSON</td>
-<td>JSON object medias (<a href="#medias">Medias</a>)</td>
+<td>JSON object products (<a href="#products">Products</a>)</td>
 </tr>
 <tr>
 <td>suppliers</td>
@@ -2145,9 +2145,9 @@ Quick tip: You can <a href="https://github.com/ezus-melchior/EzusAPI-Mock/tree/m
 <td>JSON object suppliers (<a href="#suppliers">Suppliers</a>)</td>
 </tr>
 <tr>
-<td>products</td>
+<td>medias</td>
 <td>JSON</td>
-<td>JSON object products (<a href="#products">Products</a>)</td>
+<td>JSON object medias (<a href="#medias">Medias</a>)</td>
 </tr>
 <tr>
 <td>langs</td>
