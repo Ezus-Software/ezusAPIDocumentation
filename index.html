@@ -376,7 +376,7 @@
               </ul>
           </li>
           <li>
-            <a href="#package" class="toc-h1 toc-link" data-title="Package">Package</a>
+            <a href="#packages" class="toc-h1 toc-link" data-title="Packages">Packages</a>
               <ul class="toc-list-h2">
                   <li>
                     <a href="#get-package" class="toc-h2 toc-link" data-title="GET package">GET package</a>
@@ -387,7 +387,7 @@
               </ul>
           </li>
           <li>
-            <a href="#nested-resource" class="toc-h1 toc-link" data-title="Nested Resource">Nested Resource</a>
+            <a href="#nested-resources" class="toc-h1 toc-link" data-title="Nested Resources">Nested Resources</a>
               <ul class="toc-list-h2">
                   <li>
                     <a href="#address" class="toc-h2 toc-link" data-title="Address">Address</a>
@@ -578,14 +578,14 @@ Quick tip: You can <a href="https://github.com/ezus-melchior/EzusAPI-Mock/tree/m
   </span><span class="nl">"alternatives"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
       </span><span class="nl">"alternative_title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Main Alternative"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"trip_people"</span><span class="p">:</span><span class="w"> </span><span class="s2">"15"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"budget_actual"</span><span class="p">:</span><span class="w"> </span><span class="s2">"88750"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"trip_budget"</span><span class="p">:</span><span class="w"> </span><span class="s2">"90000"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"trip_people"</span><span class="p">:</span><span class="w"> </span><span class="s2">"15"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"trip_date_in"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-03-01"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"trip_date_out"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-03-09"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"trip_duration"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"trip_destination"</span><span class="p">:</span><span class="w"> </span><span class="s2">"France"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"trip_subdestination"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Paris"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"budget_actual"</span><span class="p">:</span><span class="w"> </span><span class="s2">"88750"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"client"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"client_reference"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"entreprise"</span><span class="p">,</span><span class="w">
@@ -656,17 +656,17 @@ Quick tip: You can <a href="https://github.com/ezus-melchior/EzusAPI-Mock/tree/m
 <tr>
 <td>info_title</td>
 <td>String</td>
-<td>The title of your project</td>
+<td>The title of the project</td>
 </tr>
 <tr>
 <td>info_stage</td>
 <td>String</td>
-<td>The stage of your project (Confirmed, Received, Paid...)</td>
+<td>The stage of the project (Confirmed, Received, Paid...)</td>
 </tr>
 <tr>
 <td>info_notes</td>
 <td>String</td>
-<td>Notes on your project</td>
+<td>Notes on the project</td>
 </tr>
 <tr>
 <td>info_number</td>
@@ -703,11 +703,11 @@ Quick tip: You can <a href="https://github.com/ezus-melchior/EzusAPI-Mock/tree/m
 <span class="nt">--data-raw</span> <span class="s1">'{
     "reference": "project_reference",
     "info_title": "Paris fashion week 2024",
-    "trip_people": "15",
+    "budget_actual": "88750",
     "trip_budget": "90000",
+    "trip_people": "15",
     "trip_date_in": "2023-03-01",
     "trip_date_out": "2023-03-09",
-    "budget_actual": "88750",
     "sales_manager_email": "travel-design@e-corp.com",
     "client_reference": "client_reference",
     "custom_fields": [
@@ -720,8 +720,8 @@ Quick tip: You can <a href="https://github.com/ezus-melchior/EzusAPI-Mock/tree/m
 <span class="kd">const</span> <span class="nx">body</span> <span class="o">=</span> <span class="p">{</span>
   <span class="na">reference</span><span class="p">:</span> <span class="dl">"</span><span class="s2">project_reference</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">info_title</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Paris fashion week 2024</span><span class="dl">"</span><span class="p">,</span>
-  <span class="na">trip_people</span><span class="p">:</span> <span class="dl">"</span><span class="s2">15</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">trip_budget</span><span class="p">:</span> <span class="dl">"</span><span class="s2">90000</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">trip_people</span><span class="p">:</span> <span class="dl">"</span><span class="s2">15</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">trip_date_in</span><span class="p">:</span> <span class="dl">"</span><span class="s2">2023-03-01</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">trip_date_out</span><span class="p">:</span> <span class="dl">"</span><span class="s2">2023-03-09</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">sales_manager_email</span><span class="p">:</span> <span class="dl">"</span><span class="s2">travel-design@e-corp.com</span><span class="dl">"</span><span class="p">,</span>
@@ -781,27 +781,27 @@ Quick tip: You can <a href="https://github.com/ezus-melchior/EzusAPI-Mock/tree/m
 <tr>
 <td>info_title</td>
 <td>String</td>
-<td>Title of your project. This parameter is required if you create a new project</td>
-</tr>
-<tr>
-<td>trip_people</td>
-<td>Number</td>
-<td>Number of people in your project</td>
+<td>Title of the project. This parameter is required if you create a new project</td>
 </tr>
 <tr>
 <td>trip_budget</td>
 <td>Number</td>
-<td>Forecasted budget of your project</td>
+<td>Forecasted budget for the project</td>
+</tr>
+<tr>
+<td>trip_people</td>
+<td>Number</td>
+<td>Number of people in the project</td>
 </tr>
 <tr>
 <td>trip_date_in</td>
 <td>Date</td>
-<td>Date of the beginning of your project in a &quot;YYYY-MM-DD&quot; format string. If not provided or if not formatted correctly, or if duration &gt; 40 days or if trip_date_in &gt; trip_date_out, project will be set as 1 day and trip_date_in as today</td>
+<td>Date of the beginning of the project in a &quot;YYYY-MM-DD&quot; format string. If not provided or if not formatted correctly, or if duration &gt; 40 days or if trip_date_in &gt; trip_date_out, project will be set as 1 day and trip_date_in as today</td>
 </tr>
 <tr>
 <td>trip_date_out</td>
 <td>Date</td>
-<td>Date of the end of your project in a &quot;YYYY-MM-DD&quot; format string. If not provided or if not formatted correctly, or if duration &gt; 40 days or if trip_date_in &gt; trip_date_out, project will be set as 1 day and trip_date_out as today</td>
+<td>Date of the end of the project in a &quot;YYYY-MM-DD&quot; format string. If not provided or if not formatted correctly, or if duration &gt; 40 days or if trip_date_in &gt; trip_date_out, project will be set as 1 day and trip_date_out as today</td>
 </tr>
 <tr>
 <td>sales_manager_email</td>
@@ -891,12 +891,12 @@ Quick tip: You can <a href="https://github.com/ezus-melchior/EzusAPI-Mock/tree/m
 <tr>
 <td>title</td>
 <td>String</td>
-<td>Title of your document</td>
+<td>Title of the document</td>
 </tr>
 <tr>
 <td>link</td>
 <td>Link</td>
-<td><span style="color:red">(Required)</span> URL of your document (only PDF). Make sure this link is publicly accessible</td>
+<td><span style="color:red">(Required)</span> URL of the document (only PDF). Make sure this link is publicly accessible</td>
 </tr>
 </tbody></table>
 <h3 id='response-4'>Response</h3>
@@ -1035,12 +1035,12 @@ Quick tip: You can <a href="https://github.com/ezus-melchior/EzusAPI-Mock/tree/m
 <tr>
 <td>company_name</td>
 <td>String</td>
-<td>Name of the company of your client</td>
+<td>Name of the company of the client</td>
 </tr>
 <tr>
 <td>website</td>
 <td>String</td>
-<td>Website of your client</td>
+<td>Website of the client</td>
 </tr>
 <tr>
 <td>first_name</td>
@@ -1231,7 +1231,7 @@ Quick tip: You can <a href="https://github.com/ezus-melchior/EzusAPI-Mock/tree/m
 <tr>
 <td>website</td>
 <td>String</td>
-<td>Website of your client</td>
+<td>Website of the client</td>
 </tr>
 <tr>
 <td>contact</td>
@@ -1246,7 +1246,7 @@ Quick tip: You can <a href="https://github.com/ezus-melchior/EzusAPI-Mock/tree/m
 <tr>
 <td>custom_fields</td>
 <td>JSON</td>
-<td>Array of JSON custom fields ([Custom fields] <a href="#custom-fields">Custom fields</a>)</td>
+<td>Array of JSON custom fields (<a href="#custom-fields">Custom fields</a>)</td>
 </tr>
 </tbody></table>
 <h3 id='response-6'>Response</h3>
@@ -1284,6 +1284,12 @@ Quick tip: You can <a href="https://github.com/ezus-melchior/EzusAPI-Mock/tree/m
     </span><span class="nl">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Alice"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Tate"</span><span class="w">
   </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"58 Rue de Paradis"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"zip"</span><span class="p">:</span><span class="w"> </span><span class="s2">"75010"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Paris"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"France"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
   </span><span class="nl">"medias"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
       </span><span class="p">{</span><span class="w">
@@ -1292,12 +1298,6 @@ Quick tip: You can <a href="https://github.com/ezus-melchior/EzusAPI-Mock/tree/m
       </span><span class="p">}</span><span class="w">
     </span><span class="p">],</span><span class="w">
     </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"58 Rue de Paradis"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"zip"</span><span class="p">:</span><span class="w"> </span><span class="s2">"75010"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Paris"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"France"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="nl">"products"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
@@ -1397,17 +1397,17 @@ Quick tip: You can <a href="https://github.com/ezus-melchior/EzusAPI-Mock/tree/m
 <tr>
 <td>company_name</td>
 <td>String</td>
-<td>Name of the company of your supplier</td>
+<td>Name of the company of the supplier</td>
 </tr>
 <tr>
 <td>website</td>
 <td>String</td>
-<td>Website of your supplier</td>
+<td>Website of the supplier</td>
 </tr>
 <tr>
 <td>capacity</td>
 <td>String</td>
-<td>Capacity of the supplier</td>
+<td>Maximum number of people for which the supplier can be used</td>
 </tr>
 <tr>
 <td>type</td>
@@ -1435,14 +1435,14 @@ Quick tip: You can <a href="https://github.com/ezus-melchior/EzusAPI-Mock/tree/m
 <td>JSON object user (<a href="#user">User</a>)</td>
 </tr>
 <tr>
-<td>medias</td>
-<td>JSON</td>
-<td>JSON object medias (<a href="#medias">Medias</a>)</td>
-</tr>
-<tr>
 <td>address</td>
 <td>JSON</td>
 <td>JSON object address (<a href="#address">Address</a>)</td>
+</tr>
+<tr>
+<td>medias</td>
+<td>JSON</td>
+<td>JSON object medias (<a href="#medias">Medias</a>)</td>
 </tr>
 <tr>
 <td>products</td>
@@ -1581,34 +1581,21 @@ Quick tip: You can <a href="https://github.com/ezus-melchior/EzusAPI-Mock/tree/m
 <tr>
 <td>website</td>
 <td>String</td>
-<td>Website of your supplier</td>
+<td>Website of the supplier</td>
 </tr>
 <tr>
 <td>capacity</td>
 <td>Number</td>
-<td>Capacity of the Supplier</td>
-</tr>
-<tr>
-<td>type</td>
-<td>String</td>
-<td>Either <code>undefined</code> or a combinaison of these 3 options: <code>accom</code>, <code>activity</code>, <code>transport</code>. You can select multiple options by separating them with comas (&quot;accom, activity&quot; for instance). Enter &quot;undefined&quot; if you want to reset this params.</td>
-</tr>
-<tr>
-<td>contact</td>
-<td>JSON</td>
-<td>Contact is a single JSON and email is needed. Note that only one contact can be upsert this way (the main contact of the supplier) (<a href="#contacts">Contact</a>)</td>
-</tr>
-<tr>
-<td>address</td>
-<td>JSON</td>
-<td>JSON object address (<a href="#address">Address</a>)</td>
-</tr>
-<tr>
-<td>custom_fields</td>
-<td>JSON</td>
-<td>You can add custom fields for your supplier, this custom fields should be in your Ezus params and Write Exactly as they are written in your params technical name (<a href="#custom-fields">Custom fields</a>)</td>
+<td></td>
 </tr>
 </tbody></table>
+
+<p>| Maximum number of people for which the supplier can be used. Leave blank &#39;&#39; if not relevant
+|
+| type | String | Either <code>undefined</code> or a combinaison of these 3 options: <code>accom</code>, <code>activity</code>, <code>transport</code>. You can select multiple options by separating them with comas (&quot;accom, activity&quot; for instance). Enter &quot;undefined&quot; if you want to reset this params. |
+| contact | JSON | Contact is a single JSON and email is needed. Note that only one contact can be upsert this way (the main contact of the supplier) (<a href="#contacts">Contact</a>) |
+| address | JSON | JSON object address (<a href="#address">Address</a>) |
+| custom_fields | JSON | Array of JSON custom fields (<a href="#custom-fields">Custom fields</a>) |</p>
 <h3 id='response-8'>Response</h3>
 <p>JSON object indicating whether an error has occured during the process and, if so, the associated message. If there is no error, it also returns a <code>reference</code>: you will need to store this reference if you need to update or retrieve the supplier later on.</p>
 <h1 id='products'>Products</h1><h2 id='get-product'>GET product</h2>
@@ -1643,15 +1630,6 @@ Quick tip: You can <a href="https://github.com/ezus-melchior/EzusAPI-Mock/tree/m
   </span><span class="nl">"budget_variable"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Display"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"info_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"202306001-PR"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"visual_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"medias"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-      </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"media_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"img.jpeg"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"path_full"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://link-img.jpeg"</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">],</span><span class="w">
-    </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
-  </span><span class="p">},</span><span class="w">
   </span><span class="nl">"supplier"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"supplier_reference"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"company_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The best hotel"</span><span class="w">
@@ -1664,6 +1642,15 @@ Quick tip: You can <a href="https://github.com/ezus-melchior/EzusAPI-Mock/tree/m
     </span><span class="nl">"commission_mode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"purchase"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"commission_regime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"percent"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"medias"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"media_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"img.jpeg"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"path_full"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://link-img.jpeg"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="nl">"langs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
@@ -1749,17 +1736,22 @@ Quick tip: You can <a href="https://github.com/ezus-melchior/EzusAPI-Mock/tree/m
 <tr>
 <td>capacity</td>
 <td>Number</td>
-<td>Capacity of the product</td>
+<td></td>
+</tr>
+<tr>
+<td>Maximum number of people for which the product can be used</td>
+<td></td>
+<td></td>
 </tr>
 <tr>
 <td>quantity</td>
 <td>String</td>
-<td>Quantity is the default number of this product at his creation (P = Number of people in the project, D = Number of days in the project, N = Number of nights in the project)</td>
+<td>The default number for this product when it is added to a project. It can either be a Number or one of these letters (<code>P</code> = Number of people in the project, <code>D</code> = Number of days in the project, <code>N</code> = Number of nights in the project)</td>
 </tr>
 <tr>
 <td>vat_regime</td>
 <td>String</td>
-<td>VAT regime of the product - 3 options: VAT on margin (&quot;margin&quot;), Common law (&quot;classic&quot;) or VAT non applicable (&quot;none&quot;)</td>
+<td>Can be either <code>classic</code> (common law VAT), <code>margin</code> (VAT on the margin), <code>none</code> (Non applicable VAT)</td>
 </tr>
 <tr>
 <td>vat_rate</td>
@@ -1797,11 +1789,6 @@ Quick tip: You can <a href="https://github.com/ezus-melchior/EzusAPI-Mock/tree/m
 <td>URL of the Google Slides visual linked to the product</td>
 </tr>
 <tr>
-<td>medias</td>
-<td>JSON</td>
-<td>JSON object medias (<a href="#medias">Medias</a>)</td>
-</tr>
-<tr>
 <td>supplier</td>
 <td>JSON</td>
 <td>JSON object containing <code>reference</code>, <code>company_name</code></td>
@@ -1815,6 +1802,11 @@ Quick tip: You can <a href="https://github.com/ezus-melchior/EzusAPI-Mock/tree/m
 <td>commission</td>
 <td>JSON</td>
 <td>JSON object containing <code>value</code>, <code>commission_regime</code> (&quot;percent&quot; or &quot;amount&quot;), <code>commission_mode</code> (&quot;sales&quot; or &quot;purchase&quot;)`</td>
+</tr>
+<tr>
+<td>medias</td>
+<td>JSON</td>
+<td>JSON object medias (<a href="#medias">Medias</a>)</td>
 </tr>
 <tr>
 <td>langs</td>
@@ -1939,12 +1931,12 @@ Quick tip: You can <a href="https://github.com/ezus-melchior/EzusAPI-Mock/tree/m
 <tr>
 <td>quantity</td>
 <td>String</td>
-<td>Default quantity of this product when you add it into a project. It can either be a number or one of this letter (<code>P</code> = Number of people in the project, <code>D</code> = Number of days in the project, <code>N</code> = Number of nights in the project)</td>
+<td>The default number for this product when it is added to a project. It can either be a Number or one of these letters (<code>P</code> = Number of people in the project, <code>D</code> = Number of days in the project, <code>N</code> = Number of nights in the project)</td>
 </tr>
 <tr>
 <td>capacity</td>
 <td>Number</td>
-<td>The capacity of the product</td>
+<td>Maximum number of people for which the product can be used. Leave blank &#39;&#39; if not relevant</td>
 </tr>
 <tr>
 <td>supplier_reference</td>
@@ -1994,7 +1986,7 @@ Quick tip: You can <a href="https://github.com/ezus-melchior/EzusAPI-Mock/tree/m
 </tbody></table>
 <h3 id='response-10'>Response</h3>
 <p>JSON object indicating whether an error has occured during the process and, if so, the associated message. If there is no error, it also returns a <code>reference</code>: you will need to store this reference if you need to update or retrieve the product later on.</p>
-<h1 id='package'>Package</h1><h2 id='get-package'>GET package</h2>
+<h1 id='packages'>Packages</h1><h2 id='get-package'>GET package</h2>
 <p>Retrieve information for a package record in Ezus. You must specify to the Ezus API which package you wish to retrieve, by indicating its appropriate reference in your query parameter.</p>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="s1">'https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/package?reference=package_reference'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'X-API-KEY: &lt;YOUR_API_KEY&gt;'</span> <span class="se">\</span>
@@ -2125,12 +2117,12 @@ Quick tip: You can <a href="https://github.com/ezus-melchior/EzusAPI-Mock/tree/m
 <tr>
 <td>capacity</td>
 <td>String</td>
-<td>Capacity of the package</td>
+<td>Maximum number of people for which the package can be used</td>
 </tr>
 <tr>
 <td>info_notes</td>
 <td>String</td>
-<td>Notes on the package budget</td>
+<td>Notes on the package</td>
 </tr>
 <tr>
 <td>info_number</td>
@@ -2245,12 +2237,12 @@ Quick tip: You can <a href="https://github.com/ezus-melchior/EzusAPI-Mock/tree/m
 <tr>
 <td>title</td>
 <td>String</td>
-<td>If no reference or reference not found, the title is mandatory</td>
+<td>This parameter is required if you create a new package</td>
 </tr>
 <tr>
 <td>capacity</td>
 <td>Number</td>
-<td>capacity is the default number of this package at his creation</td>
+<td>Maximum number of people for which the package can be used . Leave blank &#39;&#39; if not relevant</td>
 </tr>
 <tr>
 <td>custom_fields</td>
@@ -2260,7 +2252,7 @@ Quick tip: You can <a href="https://github.com/ezus-melchior/EzusAPI-Mock/tree/m
 </tbody></table>
 <h3 id='response-12'>Response</h3>
 <p>JSON object indicating whether an error has occured during the process and, if so, the associated message. If there is no error, it also returns a <code>reference</code>: you will need to store this reference if you need to update or retrieve the package later on.</p>
-<h1 id='nested-resource'>Nested Resource</h1><h3 id='address'>Address</h3><div class="highlight"><pre class="highlight json tab-json"><code><span class="w">   </span><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+<h1 id='nested-resources'>Nested Resources</h1><h3 id='address'>Address</h3><div class="highlight"><pre class="highlight json tab-json"><code><span class="w">   </span><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"58 Rue de Paradis"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"zip"</span><span class="p">:</span><span class="w"> </span><span class="s2">"75010"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Paris"</span><span class="p">,</span><span class="w">
@@ -2298,14 +2290,14 @@ Quick tip: You can <a href="https://github.com/ezus-melchior/EzusAPI-Mock/tree/m
 <h3 id='alternatives'>Alternatives</h3><div class="highlight"><pre class="highlight json tab-json"><code><span class="w">  </span><span class="nl">"alternatives"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
       </span><span class="nl">"alternative_title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Main Alternative"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"trip_people"</span><span class="p">:</span><span class="w"> </span><span class="s2">"15"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"budget_actual"</span><span class="p">:</span><span class="w"> </span><span class="s2">"88750"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"trip_budget"</span><span class="p">:</span><span class="w"> </span><span class="s2">"90000"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"trip_people"</span><span class="p">:</span><span class="w"> </span><span class="s2">"15"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"trip_date_in"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-03-01"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"trip_date_out"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-03-09"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"trip_duration"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"trip_destination"</span><span class="p">:</span><span class="w"> </span><span class="s2">"France"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"trip_subdestination"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Paris"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"budget_actual"</span><span class="p">:</span><span class="w"> </span><span class="s2">"88750"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"client"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"client_reference"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"entreprise"</span><span class="p">,</span><span class="w">
@@ -2330,29 +2322,34 @@ Quick tip: You can <a href="https://github.com/ezus-melchior/EzusAPI-Mock/tree/m
 <td>Title of the alternative</td>
 </tr>
 <tr>
+<td>budget_actual</td>
+<td>String</td>
+<td>Actual budget for the alternative (corresponding to its associated Ezus program)</td>
+</tr>
+<tr>
+<td>trip_budget</td>
+<td>Number</td>
+<td>Forecasted budget for the alternative (the one that is entered manually not the actual one)</td>
+</tr>
+<tr>
 <td>trip_people</td>
 <td>String</td>
 <td>Number of people</td>
 </tr>
 <tr>
-<td>trip_budget</td>
-<td>Number</td>
-<td>Forecasted budget of the alternative (the one that is entered manually not the actual one)</td>
-</tr>
-<tr>
 <td>trip_date_in</td>
 <td>String</td>
-<td>Date of the begining of this alternative, in a &quot;YYYY-MM-DD&quot; format string. If it&#39;s empty, the project have no dates</td>
+<td>Date of the begining of this alternative, in a &quot;YYYY-MM-DD&quot; format string. If it&#39;s empty, the project has no dates</td>
 </tr>
 <tr>
 <td>trip_date_out</td>
 <td>String</td>
-<td>Date of the end of this alternative, in a &quot;YYYY-MM-DD&quot; format string. If it&#39;s empty, the project have no dates</td>
+<td>Date of the end of this alternative, in a &quot;YYYY-MM-DD&quot; format string. If it&#39;s empty, the project has no dates</td>
 </tr>
 <tr>
 <td>trip_duration</td>
 <td>String</td>
-<td>Number of days this alternative last</td>
+<td>Number of days this alternative lasts</td>
 </tr>
 <tr>
 <td>trip_destination</td>
@@ -2363,11 +2360,6 @@ Quick tip: You can <a href="https://github.com/ezus-melchior/EzusAPI-Mock/tree/m
 <td>trip_subdestination</td>
 <td>String</td>
 <td>Subdestination of the alternative</td>
-</tr>
-<tr>
-<td>budget_actual</td>
-<td>String</td>
-<td>Real budget of the alternative</td>
 </tr>
 <tr>
 <td>client</td>
