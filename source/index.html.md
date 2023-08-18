@@ -168,14 +168,14 @@ axios.post(baseUrl + "/project?reference=project_reference", {}, headers);
   "alternatives": [
     {
       "alternative_title": "Main Alternative",
-      "trip_people": "15",
+      "budget_actual": "88750",
       "trip_budget": "90000",
+      "trip_people": "15",
       "trip_date_in": "2024-03-01",
       "trip_date_out": "2024-03-09",
       "trip_duration": "9",
       "trip_destination": "France",
       "trip_subdestination": "Paris",
-      "budget_actual": "88750",
       "client": {
         "reference": "client_reference",
         "type": "entreprise",
@@ -219,9 +219,9 @@ JSON object containing the project information.
 | Property        | Type   | Description                                                                                      |
 | --------------- | ------ | ------------------------------------------------------------------------------------------------ |
 | reference       | String | The reference of the project you wish to retrieve                                                |
-| info_title      | String | The title of your project                                                                        |
-| info_stage      | String | The stage of your project (Confirmed, Received, Paid...)                                         |
-| info_notes      | String | Notes on your project                                                                            |
+| info_title      | String | The title of the project                                                                         |
+| info_stage      | String | The stage of the project (Confirmed, Received, Paid...)                                          |
+| info_notes      | String | Notes on the project                                                                             |
 | info_number     | String | File number that appears at the bottom of the project record. Not to be confused with reference! |
 | sales_manager   | JSON   | JSON object user ([User](#user))                                                                 |
 | project_manager | JSON   | JSON object user ([User](#user))                                                                 |
@@ -240,11 +240,11 @@ curl --location 'https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/proje
 --data-raw '{
     "reference": "project_reference",
     "info_title": "Paris fashion week 2024",
-    "trip_people": "15",
+    "budget_actual": "88750",
     "trip_budget": "90000",
+    "trip_people": "15",
     "trip_date_in": "2023-03-01",
     "trip_date_out": "2023-03-09",
-    "budget_actual": "88750",
     "sales_manager_email": "travel-design@e-corp.com",
     "client_reference": "client_reference",
     "custom_fields": [
@@ -260,8 +260,8 @@ const baseUrl = "https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1";
 const body = {
   reference: "project_reference",
   info_title: "Paris fashion week 2024",
-  trip_people: "15",
   trip_budget: "90000",
+  trip_people: "15",
   trip_date_in: "2023-03-01",
   trip_date_out: "2023-03-09",
   sales_manager_email: "travel-design@e-corp.com",
@@ -300,17 +300,17 @@ axios.post(baseUrl + "/projects-upsert", body, headers);
 
 ### Body parameters (application/json)
 
-| Parameter           | Type   | Description                                                                                                                                                                                                                               |
-| ------------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| reference           | String | If provided, the unique reference associated to the project you want to update or create (in case the one you provided has never been used). If no reference is provided, a project will be created with a random one.                    |
-| info_title          | String | Title of your project. This parameter is required if you create a new project                                                                                                                                                             |
-| trip_people         | Number | Number of people in your project                                                                                                                                                                                                          |
-| trip_budget         | Number | Forecasted budget of your project                                                                                                                                                                                                         |
-| trip_date_in        | Date   | Date of the beginning of your project in a "YYYY-MM-DD" format string. If not provided or if not formatted correctly, or if duration > 40 days or if trip_date_in > trip_date_out, project will be set as 1 day and trip_date_in as today |
-| trip_date_out       | Date   | Date of the end of your project in a "YYYY-MM-DD" format string. If not provided or if not formatted correctly, or if duration > 40 days or if trip_date_in > trip_date_out, project will be set as 1 day and trip_date_out as today      |
-| sales_manager_email | Email  | Email of the Ezus user that will be set as the sales manager of the project. By default, if no sales manager is provided or the provided email do not match any user on this account, the project will be assignated to None              |
-| client_reference    | String | This can be a reference or the email of a client already created in this Ezus account. By default, the project will not be linked to any client. If you want to update the project's client to None, you must enter 0.                    |
-| custom_fields       | JSON   | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                                                                                             |
+| Parameter           | Type   | Description                                                                                                                                                                                                                              |
+| ------------------- | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| reference           | String | If provided, the unique reference associated to the project you want to update or create (in case the one you provided has never been used). If no reference is provided, a project will be created with a random one.                   |
+| info_title          | String | Title of the project. This parameter is required if you create a new project                                                                                                                                                             |
+| trip_budget         | Number | Forecasted budget for the project                                                                                                                                                                                                        |
+| trip_people         | Number | Number of people in the project                                                                                                                                                                                                          |
+| trip_date_in        | Date   | Date of the beginning of the project in a "YYYY-MM-DD" format string. If not provided or if not formatted correctly, or if duration > 40 days or if trip_date_in > trip_date_out, project will be set as 1 day and trip_date_in as today |
+| trip_date_out       | Date   | Date of the end of the project in a "YYYY-MM-DD" format string. If not provided or if not formatted correctly, or if duration > 40 days or if trip_date_in > trip_date_out, project will be set as 1 day and trip_date_out as today      |
+| sales_manager_email | Email  | Email of the Ezus user that will be set as the sales manager of the project. By default, if no sales manager is provided or the provided email do not match any user on this account, the project will be assignated to None             |
+| client_reference    | String | This can be a reference or the email of a client already created in this Ezus account. By default, the project will not be linked to any client. If you want to update the project's client to None, you must enter 0.                   |
+| custom_fields       | JSON   | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                                                                                            |
 
 ### Response
 
@@ -371,11 +371,11 @@ axios.post(baseUrl + "/projects-documents-create", body, headers);
 
 ### Body parameters (application/json)
 
-| Parameter         | Type   | Description                                                                                                           |
-| ----------------- | ------ | --------------------------------------------------------------------------------------------------------------------- |
-| project_reference | String | <span style="color:red">(Required)</span> The project reference in which you want to create a document                |
-| title             | String | Title of your document                                                                                                |
-| link              | Link   | <span style="color:red">(Required)</span> URL of your document (only PDF). Make sure this link is publicly accessible |
+| Parameter         | Type   | Description                                                                                                          |
+| ----------------- | ------ | -------------------------------------------------------------------------------------------------------------------- |
+| project_reference | String | <span style="color:red">(Required)</span> The project reference in which you want to create a document               |
+| title             | String | Title of the document                                                                                                |
+| link              | Link   | <span style="color:red">(Required)</span> URL of the document (only PDF). Make sure this link is publicly accessible |
 
 ### Response
 
@@ -493,8 +493,8 @@ JSON object containing the client information.
 | ------------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | reference     | String | The reference of the client you wish to retrieve                                                                                                                      |
 | type          | String | The type of the client can be either "entreprise" or "individual"                                                                                                     |
-| company_name  | String | Name of the company of your client                                                                                                                                    |
-| website       | String | Website of your client                                                                                                                                                |
+| company_name  | String | Name of the company of the client                                                                                                                                     |
+| website       | String | Website of the client                                                                                                                                                 |
 | first_name    | String | Frist name of the main contact of the client                                                                                                                          |
 | last_name     | String | Last name of the main contact of the client                                                                                                                           |
 | email         | String | Email of the main contact of the client                                                                                                                               |
@@ -608,10 +608,10 @@ axios.post(baseUrl + "/clients-upsert", body, headers);
 | ------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | reference     | String | If provided, the unique reference associated to the client you want to update or create (in case the one you provided has never been used). If no reference is provided, a client will be created with a random one.                                                    |
 | company_name  | String | <span style="color:red">(Required)</span> Set a company name - If company name is empty, the client will be set as an individual and the name of the client = name of the contact and if the company name is not empty, the name of the client will be the company name |
-| website       | String | Website of your client                                                                                                                                                                                                                                                  |
+| website       | String | Website of the client                                                                                                                                                                                                                                                   |
 | contact       | JSON   | Contact is a single JSON element and email is needed. Note that only one contact can be upsert this way (the main contact of the client) ([Contacts](#contacts))                                                                                                        |
 | address       | JSON   | JSON object address` ([Address](#address))                                                                                                                                                                                                                              |
-| custom_fields | JSON   | Array of JSON custom fields ([Custom fields] [Custom fields](#custom-fields))                                                                                                                                                                                           |
+| custom_fields | JSON   | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                                                                                                                           |
 
 ### Response
 
@@ -659,6 +659,12 @@ axios.post(baseUrl + "/supplier?reference=supplier_reference", {}, headers);
     "first_name": "Alice",
     "last_name": "Tate"
   },
+  "address": {
+    "label": "58 Rue de Paradis",
+    "zip": "75010",
+    "city": "Paris",
+    "country": "France"
+  },
   "medias": {
     "data": [
       {
@@ -667,12 +673,6 @@ axios.post(baseUrl + "/supplier?reference=supplier_reference", {}, headers);
       }
     ],
     "size": 1
-  },
-  "address": {
-    "label": "58 Rue de Paradis",
-    "zip": "75010",
-    "city": "Paris",
-    "country": "France"
   },
   "products": {
     "data": [
@@ -745,16 +745,16 @@ JSON object containing the supplier information.
 | Property      | Type   | Description                                                                                                                                                 |
 | ------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | reference     | String | The reference of the supplier you wish to retrieve                                                                                                          |
-| company_name  | String | Name of the company of your supplier                                                                                                                        |
-| website       | String | Website of your supplier                                                                                                                                    |
-| capacity      | String | Capacity of the supplier                                                                                                                                    |
+| company_name  | String | Name of the company of the supplier                                                                                                                         |
+| website       | String | Website of the supplier                                                                                                                                     |
+| capacity      | String | Maximum number of people for which the supplier can be used                                                                                                 |
 | type          | String | 3 options: `accom`, `activity`, `transport`. A supplier can have no type, 1 type or serval types. In this case, the different types are separated by commas |
 | info_notes    | String | Notes on the supplier                                                                                                                                       |
 | info_number   | String | File number that appears at the bottom of the supplier record. Not to be confused with reference!                                                           |
 | visual_url    | String | URL of the Google Slides visual linked to the supplier                                                                                                      |
 | user          | JSON   | JSON object user ([User](#user))                                                                                                                            |
-| medias        | JSON   | JSON object medias ([Medias](#medias))                                                                                                                      |
 | address       | JSON   | JSON object address ([Address](#address))                                                                                                                   |
+| medias        | JSON   | JSON object medias ([Medias](#medias))                                                                                                                      |
 | products      | JSON   | JSON object products ([Products](#products))                                                                                                                |
 | contacts      | Array  | Array of JSON contacts ([Contacts](#contacts))                                                                                                              |
 | langs         | Array  | Array of JSON langs ([Langs](#langs))                                                                                                                       |
@@ -856,16 +856,19 @@ axios.post(baseUrl + "/suppliers-upsert", body, headers);
 
 ### Body parameters (application/json)
 
-| Parameter     | Type   | Description                                                                                                                                                                                                                                   |
-| ------------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --- |
-| reference     | String | If provided, the unique reference associated to the supplier you want to update or create (in case the one you provided has never been used). If no reference is provided, a supplier will be created with a random one.                      |
-| company_name  | String | Name of the supplier. This parameter is required if you create a new supplier                                                                                                                                                                 |     |
-| website       | String | Website of your supplier                                                                                                                                                                                                                      |
-| capacity      | Number | Capacity of the Supplier                                                                                                                                                                                                                      |
-| type          | String | Either `undefined` or a combinaison of these 3 options: `accom`, `activity`, `transport`. You can select multiple options by separating them with comas ("accom, activity" for instance). Enter "undefined" if you want to reset this params. |
-| contact       | JSON   | Contact is a single JSON and email is needed. Note that only one contact can be upsert this way (the main contact of the supplier) ([Contact](#contacts))                                                                                     |
-| address       | JSON   | JSON object address ([Address](#address))                                                                                                                                                                                                     |
-| custom_fields | JSON   | You can add custom fields for your supplier, this custom fields should be in your Ezus params and Write Exactly as they are written in your params technical name ([Custom fields](#custom-fields))                                           |
+| Parameter    | Type   | Description                                                                                                                                                                                                              |
+| ------------ | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --- |
+| reference    | String | If provided, the unique reference associated to the supplier you want to update or create (in case the one you provided has never been used). If no reference is provided, a supplier will be created with a random one. |
+| company_name | String | Name of the supplier. This parameter is required if you create a new supplier                                                                                                                                            |     |
+| website      | String | Website of the supplier                                                                                                                                                                                                  |
+| capacity     | Number |
+
+| Maximum number of people for which the supplier can be used. Leave blank '' if not relevant
+|
+| type | String | Either `undefined` or a combinaison of these 3 options: `accom`, `activity`, `transport`. You can select multiple options by separating them with comas ("accom, activity" for instance). Enter "undefined" if you want to reset this params. |
+| contact | JSON | Contact is a single JSON and email is needed. Note that only one contact can be upsert this way (the main contact of the supplier) ([Contact](#contacts)) |
+| address | JSON | JSON object address ([Address](#address)) |
+| custom_fields | JSON | Array of JSON custom fields ([Custom fields](#custom-fields)) |
 
 ### Response
 
@@ -912,15 +915,6 @@ axios.post(baseUrl + "/product?reference=product_reference", {}, headers);
   "budget_variable": "Display",
   "info_number": "202306001-PR",
   "visual_url": "",
-  "medias": {
-    "data": [
-      {
-        "media_name": "img.jpeg",
-        "path_full": "https://link-img.jpeg"
-      }
-    ],
-    "size": 1
-  },
   "supplier": {
     "reference": "supplier_reference",
     "company_name": "The best hotel"
@@ -933,6 +927,15 @@ axios.post(baseUrl + "/product?reference=product_reference", {}, headers);
     "commission_mode": "purchase",
     "commission_regime": "percent",
     "value": "10"
+  },
+  "medias": {
+    "data": [
+      {
+        "media_name": "img.jpeg",
+        "path_full": "https://link-img.jpeg"
+      }
+    ],
+    "size": 1
   },
   "langs": [
     {
@@ -983,27 +986,28 @@ axios.post(baseUrl + "/product?reference=product_reference", {}, headers);
 
 JSON object containing the product information.
 
-| Property        | Type   | Description                                                                                                                                                                                                      |
-| --------------- | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| reference       | String | The reference of the product you wish to retrieve                                                                                                                                                                |
-| title           | String | Name of the product                                                                                                                                                                                              |
-| capacity        | Number | Capacity of the product                                                                                                                                                                                          |
-| quantity        | String | Quantity is the default number of this product at his creation (P = Number of people in the project, D = Number of days in the project, N = Number of nights in the project)                                     |
-| vat_regime      | String | VAT regime of the product - 3 options: VAT on margin ("margin"), Common law ("classic") or VAT non applicable ("none")                                                                                           |
-| vat_rate        | Number | Default % of the VAT on the product                                                                                                                                                                              |
-| currency        | String | The ISO 4217 code who represent the currency you use (<a href="https://docs.google.com/spreadsheets/d/1b7BNOwKyN1hMOouve6xhFZ2R2zrH4Sj1L-646j755fU/edit?usp=sharing" target="_blank">Link to doc</a>)            |
-| budget_text     | String | `Option`, `On Demand` or `""`, if it's Option/On demand, by default the product will be an Option/On demand, the mention will be added on your documents. If it's empty no options will be applied on the budget |
-| buget_form      | String | `Important`, `Normal`, `Low` represent how the product will be highlight on the budget By Default                                                                                                                |
-| budget_variable | String | `Display`, `Do not Display`, this option tells if the product will be displayed or not in the budget                                                                                                             |
-| info_number     | String | File number that appears at the bottom of the product record. Not to be confused with reference!                                                                                                                 |
-| visual_url      | String | URL of the Google Slides visual linked to the product                                                                                                                                                            |
-| medias          | JSON   | JSON object medias ([Medias](#medias))                                                                                                                                                                           |
-| supplier        | JSON   | JSON object containing `reference`, `company_name`                                                                                                                                                               |
-| package         | JSON   | JSON object containing `reference`, `title`                                                                                                                                                                      |
-| commission      | JSON   | JSON object containing `value`, `commission_regime` ("percent" or "amount"), `commission_mode` ("sales" or "purchase")`                                                                                          |
-| langs           | Array  | Array of JSON langs ([Langs](#langs))                                                                                                                                                                            |
-| tariffs         | Array  | Array of JSON tariffs ([Tariffs](#tariffs))                                                                                                                                                                      |
-| custom_fields   | Array  | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                                                                    |
+| Property                                                   | Type   | Description                                                                                                                                                                                                                              |
+| ---------------------------------------------------------- | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| reference                                                  | String | The reference of the product you wish to retrieve                                                                                                                                                                                        |
+| title                                                      | String | Name of the product                                                                                                                                                                                                                      |
+| capacity                                                   | Number |
+| Maximum number of people for which the product can be used |
+| quantity                                                   | String | The default number for this product when it is added to a project. It can either be a Number or one of these letters (`P` = Number of people in the project, `D` = Number of days in the project, `N` = Number of nights in the project) |
+| vat_regime                                                 | String | Can be either `classic` (common law VAT), `margin` (VAT on the margin), `none` (Non applicable VAT)                                                                                                                                      |
+| vat_rate                                                   | Number | Default % of the VAT on the product                                                                                                                                                                                                      |
+| currency                                                   | String | The ISO 4217 code who represent the currency you use (<a href="https://docs.google.com/spreadsheets/d/1b7BNOwKyN1hMOouve6xhFZ2R2zrH4Sj1L-646j755fU/edit?usp=sharing" target="_blank">Link to doc</a>)                                    |
+| budget_text                                                | String | `Option`, `On Demand` or `""`, if it's Option/On demand, by default the product will be an Option/On demand, the mention will be added on your documents. If it's empty no options will be applied on the budget                         |
+| buget_form                                                 | String | `Important`, `Normal`, `Low` represent how the product will be highlight on the budget By Default                                                                                                                                        |
+| budget_variable                                            | String | `Display`, `Do not Display`, this option tells if the product will be displayed or not in the budget                                                                                                                                     |
+| info_number                                                | String | File number that appears at the bottom of the product record. Not to be confused with reference!                                                                                                                                         |
+| visual_url                                                 | String | URL of the Google Slides visual linked to the product                                                                                                                                                                                    |
+| supplier                                                   | JSON   | JSON object containing `reference`, `company_name`                                                                                                                                                                                       |
+| package                                                    | JSON   | JSON object containing `reference`, `title`                                                                                                                                                                                              |
+| commission                                                 | JSON   | JSON object containing `value`, `commission_regime` ("percent" or "amount"), `commission_mode` ("sales" or "purchase")`                                                                                                                  |
+| medias                                                     | JSON   | JSON object medias ([Medias](#medias))                                                                                                                                                                                                   |
+| langs                                                      | Array  | Array of JSON langs ([Langs](#langs))                                                                                                                                                                                                    |
+| tariffs                                                    | Array  | Array of JSON tariffs ([Tariffs](#tariffs))                                                                                                                                                                                              |
+| custom_fields                                              | Array  | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                                                                                            |
 
 ## POST products-upsert
 
@@ -1096,8 +1100,8 @@ axios.post(baseUrl + "/products-upsert", body, headers);
 | ------------------ | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | reference          | String | If provided, the unique reference associated to the product you want to update or create (in case the one you provided has never been used). If no reference is provided, a product will be created with a random one.                                                  |
 | title              | String | Title of your product. This parameter is required if you create a new product                                                                                                                                                                                           |
-| quantity           | String | Default quantity of this product when you add it into a project. It can either be a number or one of this letter (`P` = Number of people in the project, `D` = Number of days in the project, `N` = Number of nights in the project)                                    |
-| capacity           | Number | The capacity of the product                                                                                                                                                                                                                                             |
+| quantity           | String | The default number for this product when it is added to a project. It can either be a Number or one of these letters (`P` = Number of people in the project, `D` = Number of days in the project, `N` = Number of nights in the project)                                |
+| capacity           | Number | Maximum number of people for which the product can be used. Leave blank '' if not relevant                                                                                                                                                                              |
 | supplier_reference | String | If you give an adequate supplier reference, the product will be added in this supplier. If you want to update the supplier's product to None, you must enter 0.                                                                                                         |
 | package_reference  | String | If you give an adequate package reference, the product will be added in this package. If you want to update the package's product to None, you must enter 0.                                                                                                            |
 | purchase_price     | Number | Purchase price as a number                                                                                                                                                                                                                                              |
@@ -1112,7 +1116,7 @@ axios.post(baseUrl + "/products-upsert", body, headers);
 
 JSON object indicating whether an error has occured during the process and, if so, the associated message. If there is no error, it also returns a `reference`: you will need to store this reference if you need to update or retrieve the product later on.
 
-# Package
+# Packages
 
 ## GET package
 
@@ -1221,8 +1225,8 @@ JSON object containing the package information.
 | ------------- | ------ | ------------------------------------------------------------------------------------------------ |
 | reference     | String | The reference of the package you wish to retrieve                                                |
 | title         | String | Name of the package                                                                              |
-| capacity      | String | Capacity of the package                                                                          |
-| info_notes    | String | Notes on the package budget                                                                      |
+| capacity      | String | Maximum number of people for which the package can be used                                       |
+| info_notes    | String | Notes on the package                                                                             |
 | info_number   | String | File number that appears at the bottom of the package record. Not to be confused with reference! |
 | visual_url    | String | URL of the Google Slides visual linked to the package                                            |
 | medias        | JSON   | JSON object medias ([Medias](#medias))                                                           |
@@ -1294,17 +1298,17 @@ axios.post(baseUrl + "/packages-upsert", body, headers);
 ### Body parameters (application/json)
 
 | Parameter     | Type   | Description                                                                                                                                                                                                                 |
-| ------------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --- |
+| ------------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | reference     | String | If provided, the unique Ezus Reference associated to the package you want to update or create (in case the one you provided has never been used). If no reference is provided, a package will be created with a random one. |
-| title         | String | If no reference or reference not found, the title is mandatory                                                                                                                                                              |
-| capacity      | Number | capacity is the default number of this package at his creation                                                                                                                                                              |     |
+| title         | String | This parameter is required if you create a new package                                                                                                                                                                      |
+| capacity      | Number | Maximum number of people for which the package can be used . Leave blank '' if not relevant                                                                                                                                 |
 | custom_fields | JSON   | You can add custom fields for your client, this custom fields should be in your Ezus params and Write exactly as they are written in your params technical name ([Custom fields](#custom-fields))                           |
 
 ### Response
 
 JSON object indicating whether an error has occured during the process and, if so, the associated message. If there is no error, it also returns a `reference`: you will need to store this reference if you need to update or retrieve the package later on.
 
-# Nested Resource
+# Nested Resources
 
 ### Address
 
@@ -1330,14 +1334,14 @@ JSON object indicating whether an error has occured during the process and, if s
   "alternatives": [
     {
       "alternative_title": "Main Alternative",
-      "trip_people": "15",
+      "budget_actual": "88750",
       "trip_budget": "90000",
+      "trip_people": "15",
       "trip_date_in": "2024-03-01",
       "trip_date_out": "2024-03-09",
       "trip_duration": "9",
       "trip_destination": "France",
       "trip_subdestination": "Paris",
-      "budget_actual": "88750",
       "client": {
         "reference": "client_reference",
         "type": "entreprise",
@@ -1353,14 +1357,14 @@ JSON object indicating whether an error has occured during the process and, if s
 | Property            | Type   | Description                                                                                                              |
 | ------------------- | ------ | ------------------------------------------------------------------------------------------------------------------------ |
 | alternative_title   | String | Title of the alternative                                                                                                 |
+| budget_actual       | String | Actual budget for the alternative (corresponding to its associated Ezus program)                                         |
+| trip_budget         | Number | Forecasted budget for the alternative (the one that is entered manually not the actual one)                              |
 | trip_people         | String | Number of people                                                                                                         |
-| trip_budget         | Number | Forecasted budget of the alternative (the one that is entered manually not the actual one)                               |
-| trip_date_in        | String | Date of the begining of this alternative, in a "YYYY-MM-DD" format string. If it's empty, the project have no dates      |
-| trip_date_out       | String | Date of the end of this alternative, in a "YYYY-MM-DD" format string. If it's empty, the project have no dates           |
-| trip_duration       | String | Number of days this alternative last                                                                                     |
+| trip_date_in        | String | Date of the begining of this alternative, in a "YYYY-MM-DD" format string. If it's empty, the project has no dates       |
+| trip_date_out       | String | Date of the end of this alternative, in a "YYYY-MM-DD" format string. If it's empty, the project has no dates            |
+| trip_duration       | String | Number of days this alternative lasts                                                                                    |
 | trip_destination    | String | Destination of the alternative                                                                                           |
 | trip_subdestination | String | Subdestination of the alternative                                                                                        |
-| budget_actual       | String | Real budget of the alternative                                                                                           |
 | client              | JSON   | JSON that contain: `reference`, `type` (entreprise or individual), `company_name`, `first_name`, `last_name` and `email` |
 
 ### Contacts
