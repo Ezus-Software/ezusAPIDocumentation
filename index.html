@@ -1586,16 +1586,29 @@ Quick tip: You can <a href="https://github.com/ezus-melchior/EzusAPI-Mock/tree/m
 <tr>
 <td>capacity</td>
 <td>Number</td>
-<td></td>
+<td>Maximum number of people for which the supplier can be used. Leave blank &#39;&#39; if not relevant</td>
+</tr>
+<tr>
+<td>type</td>
+<td>String</td>
+<td>Either <code>undefined</code> or a combinaison of these 3 options: <code>accom</code>, <code>activity</code>, <code>transport</code>. You can select multiple options by separating them with comas (&quot;accom, activity&quot; for instance). Enter &quot;undefined&quot; if you want to reset this params.</td>
+</tr>
+<tr>
+<td>contact</td>
+<td>JSON</td>
+<td>Contact is a single JSON and email is needed. Note that only one contact can be upsert this way (the main contact of the supplier) (<a href="#contacts">Contact</a>)</td>
+</tr>
+<tr>
+<td>address</td>
+<td>JSON</td>
+<td>JSON object address (<a href="#address">Address</a>)</td>
+</tr>
+<tr>
+<td>custom_fields</td>
+<td>JSON</td>
+<td>Array of JSON custom fields (<a href="#custom-fields">Custom fields</a>)</td>
 </tr>
 </tbody></table>
-
-<p>| Maximum number of people for which the supplier can be used. Leave blank &#39;&#39; if not relevant
-|
-| type | String | Either <code>undefined</code> or a combinaison of these 3 options: <code>accom</code>, <code>activity</code>, <code>transport</code>. You can select multiple options by separating them with comas (&quot;accom, activity&quot; for instance). Enter &quot;undefined&quot; if you want to reset this params. |
-| contact | JSON | Contact is a single JSON and email is needed. Note that only one contact can be upsert this way (the main contact of the supplier) (<a href="#contacts">Contact</a>) |
-| address | JSON | JSON object address (<a href="#address">Address</a>) |
-| custom_fields | JSON | Array of JSON custom fields (<a href="#custom-fields">Custom fields</a>) |</p>
 <h3 id='response-8'>Response</h3>
 <p>JSON object indicating whether an error has occured during the process and, if so, the associated message. If there is no error, it also returns a <code>reference</code>: you will need to store this reference if you need to update or retrieve the supplier later on.</p>
 <h1 id='products'>Products</h1><h2 id='get-product'>GET product</h2>
@@ -1736,12 +1749,7 @@ Quick tip: You can <a href="https://github.com/ezus-melchior/EzusAPI-Mock/tree/m
 <tr>
 <td>capacity</td>
 <td>Number</td>
-<td></td>
-</tr>
-<tr>
 <td>Maximum number of people for which the product can be used</td>
-<td></td>
-<td></td>
 </tr>
 <tr>
 <td>quantity</td>
@@ -1936,7 +1944,7 @@ Quick tip: You can <a href="https://github.com/ezus-melchior/EzusAPI-Mock/tree/m
 <tr>
 <td>capacity</td>
 <td>Number</td>
-<td>Maximum number of people for which the product can be used. Leave blank &#39;&#39; if not relevant</td>
+<td>Maximum number of people for which the product can be used. Leave blank <code>&#39;&#39;</code> if not relevant</td>
 </tr>
 <tr>
 <td>supplier_reference</td>
@@ -2242,7 +2250,7 @@ Quick tip: You can <a href="https://github.com/ezus-melchior/EzusAPI-Mock/tree/m
 <tr>
 <td>capacity</td>
 <td>Number</td>
-<td>Maximum number of people for which the package can be used . Leave blank &#39;&#39; if not relevant</td>
+<td>Maximum number of people for which the package can be used . Leave blank <code>&#39;&#39;</code> if not relevant</td>
 </tr>
 <tr>
 <td>custom_fields</td>
