@@ -66,7 +66,7 @@ After calling the /login endpoint with valid credentials, a bearer token will be
 > To authenticate, you will need first to call our /login endpoint:
 
 ```shell
-curl --location 'https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/login' \
+curl --location 'https://api.ezus.app/login' \
 --header 'X-API-KEY: <YOUR_API_KEY>' \
 --header 'Content-Type: application/json' \
 --data-raw '{
@@ -77,7 +77,7 @@ curl --location 'https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/login
 
 ```javascript
 const axios = require("axios");
-const baseUrl = "https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1";
+const baseUrl = "https://api.ezus.app";
 
 const body = {
   email: "<YOUR_EMAIL>",
@@ -102,7 +102,7 @@ axios.post(baseUrl + "/login", body, headers);
 
 ### HTTP Endpoint
 
-`POST https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/login`
+`POST https://api.ezus.app/login`
 
 ### Header parameters
 
@@ -128,14 +128,14 @@ JSON object indicating whether an error has occured during the process and, if s
 Retrieve information for a project record in Ezus. You must specify to the Ezus API which project you wish to retrieve, by indicating its appropriate reference in your query parameter.
 
 ```shell
-curl --location 'https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/project?reference=project_reference' \
+curl --location 'https://api.ezus.app/project?reference=project_reference' \
 --header 'X-API-KEY: <YOUR_API_KEY>' \
 --header 'Authorization: Bearer <YOUR_TOKEN>'
 ```
 
 ```javascript
 const axios = require("axios");
-const baseUrl = "https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1";
+const baseUrl = "https://api.ezus.app";
 
 const headers = {
   "X-API-KEY": "<YOUR_API_KEY>",
@@ -197,7 +197,7 @@ axios.post(baseUrl + "/project?reference=project_reference", {}, headers);
 
 ### HTTP Endpoint
 
-`GET https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/project`
+`GET https://api.ezus.app/project`
 
 ### Header parameters
 
@@ -233,7 +233,7 @@ JSON object containing the project information.
 Update a project record if the provided reference does match one of the project references in your account, otherwise create a new project record with the provided reference (or with a random one if no reference is provided).
 
 ```shell
-curl --location 'https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/projects-upsert' \
+curl --location 'https://api.ezus.app/projects-upsert' \
 --header 'X-API-KEY: <YOUR_API_KEY>' \
 --header 'Content-Type: application/json' \
 --header 'Authorization: Bearer <YOUR_TOKEN>' \
@@ -255,7 +255,7 @@ curl --location 'https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/proje
 
 ```javascript
 const axios = require("axios");
-const baseUrl = "https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1";
+const baseUrl = "https://api.ezus.app";
 
 const body = {
   reference: "project_reference",
@@ -289,7 +289,7 @@ axios.post(baseUrl + "/projects-upsert", body, headers);
 
 ### HTTP Endpoint
 
-`POST https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/projects-upsert`
+`POST https://api.ezus.app/projects-upsert`
 
 ### Header parameters
 
@@ -321,7 +321,7 @@ JSON object indicating whether an error has occured during the process and, if s
 Create a PDF document based on the link you provide within the project using project_reference as its reference.
 
 ```shell
-curl --location 'https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/projects-documents-create' \
+curl --location 'https://api.ezus.app/projects-documents-create' \
 --header 'X-API-KEY: <YOUR_API_KEY>' \
 --header 'Content-Type: application/json' \
 --header 'Authorization: Bearer <YOUR_TOKEN>' \
@@ -334,7 +334,7 @@ curl --location 'https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/proje
 
 ```javascript
 const axios = require("axios");
-const baseUrl = "https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1";
+const baseUrl = "https://api.ezus.app";
 
 const body = {
   project_reference: "project_reference",
@@ -360,7 +360,7 @@ axios.post(baseUrl + "/projects-documents-create", body, headers);
 
 ### HTTP Endpoint
 
-`POST https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/projects-documents-create`
+`POST https://api.ezus.app/projects-documents-create`
 
 ### Header parameters
 
@@ -388,14 +388,14 @@ JSON object indicating whether an error has occured during the process and, if s
 Retrieve information for a client record in Ezus. You must specify to the Ezus API which client you wish to retrieve, by indicating its appropriate reference in your query parameter.
 
 ```shell
-curl --location 'https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/client?reference=client_reference' \
+curl --location 'https://api.ezus.app/client?reference=client_reference' \
 --header 'X-API-KEY: <YOUR_API_KEY>' \
 --header 'Authorization: Bearer <YOUR_TOKEN>'
 ```
 
 ```javascript
 const axios = require("axios");
-const baseUrl = "https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1";
+const baseUrl = "https://api.ezus.app";
 
 const headers = {
   "X-API-KEY": "<YOUR_API_KEY>",
@@ -470,7 +470,7 @@ axios.post(baseUrl + "/client?reference=client_reference", {}, headers);
 
 ### HTTP Endpoint
 
-`GET https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/client`
+`GET https://api.ezus.app/client`
 
 ### Header parameters
 
@@ -516,7 +516,7 @@ JSON object containing the client information.
 Update a client record if the provided reference (or the email) does match one of the client references in your account, otherwise create a new client record with the provided reference (or with a random one if no reference is provided). Note that for this endpoint, the email of the client can also be used as a primary key for the upsert.
 
 ```shell
-curl --location 'https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/clients-upsert' \
+curl --location 'https://api.ezus.app/clients-upsert' \
 --header 'X-API-KEY: <YOUR_API_KEY>' \
 --header 'Content-Type: application/json' \
 --header 'Authorization: Bearer <YOUR_TOKEN>' \
@@ -548,7 +548,7 @@ curl --location 'https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/clien
 
 ```javascript
 const axios = require("axios");
-const baseUrl = "https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1";
+const baseUrl = "https://api.ezus.app";
 
 const body = {
   reference: "client_reference",
@@ -593,7 +593,7 @@ axios.post(baseUrl + "/clients-upsert", body, headers);
 
 ### HTTP Endpoint
 
-`POST https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/clients-upsert`
+`POST https://api.ezus.app/clients-upsert`
 
 ### Header parameters
 
@@ -624,14 +624,14 @@ JSON object indicating whether an error has occured during the process and, if s
 Retrieve information for a supplier record in Ezus. You must specify to the Ezus API which supplier you wish to retrieve, by indicating its appropriate reference in your query parameter.
 
 ```shell
-curl --location 'https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/supplier?reference=supplier_reference' \
+curl --location 'https://api.ezus.app/supplier?reference=supplier_reference' \
 --header 'X-API-KEY: <YOUR_API_KEY>' \
 --header 'Authorization: Bearer <YOUR_TOKEN>'
 ```
 
 ```javascript
 const axios = require("axios");
-const baseUrl = "https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1";
+const baseUrl = "https://api.ezus.app";
 
 const headers = {
   "X-API-KEY": "<YOUR_API_KEY>",
@@ -723,7 +723,7 @@ axios.post(baseUrl + "/supplier?reference=supplier_reference", {}, headers);
 
 ### HTTP Endpoint
 
-`GET https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/supplier`
+`GET https://api.ezus.app/supplier`
 
 ### Header parameters
 
@@ -765,7 +765,7 @@ JSON object containing the supplier information.
 Update a supplier record if the provided reference (or the email) does match one of the supplier references in your account, otherwise create a new supplier record with the provided reference (or with a random one if no reference is provided). Note that for this endpoint, the email of the supplier can also be used as a primary key for the upsert.
 
 ```shell
-curl --location 'https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/suppliers-upsert' \
+curl --location 'https://api.ezus.app/suppliers-upsert' \
 --header 'X-API-KEY: <YOUR_API_KEY>' \
 --header 'Content-Type: application/json' \
 --header 'Authorization: Bearer <YOUR_TOKEN>' \
@@ -799,7 +799,7 @@ curl --location 'https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/suppl
 
 ```javascript
 const axios = require("axios");
-const baseUrl = "https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1";
+const baseUrl = "https://api.ezus.app";
 
 const body = {
   reference: "supplier_reference",
@@ -845,7 +845,7 @@ axios.post(baseUrl + "/suppliers-upsert", body, headers);
 
 ### HTTP Endpoint
 
-`POST https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/suppliers-upsert`
+`POST https://api.ezus.app/suppliers-upsert`
 
 ### Header parameters
 
@@ -878,14 +878,14 @@ JSON object indicating whether an error has occured during the process and, if s
 Retrieve information for a product record in Ezus. You must specify to the Ezus API which product you wish to retrieve, by indicating its appropriate reference in your query parameter.
 
 ```shell
-curl --location 'https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/product?reference=product_reference' \
+curl --location 'https://api.ezus.app/product?reference=product_reference' \
 --header 'X-API-KEY: <YOUR_API_KEY>' \
 --header 'Authorization: Bearer <YOUR_TOKEN>'
 ```
 
 ```javascript
 const axios = require("axios");
-const baseUrl = "https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1";
+const baseUrl = "https://api.ezus.app";
 
 const headers = {
   "X-API-KEY": "<YOUR_API_KEY>",
@@ -964,7 +964,7 @@ axios.post(baseUrl + "/product?reference=product_reference", {}, headers);
 
 ### HTTP Endpoint
 
-`GET https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/product`
+`GET https://api.ezus.app/product`
 
 ### Header parameters
 
@@ -1010,7 +1010,7 @@ JSON object containing the product information.
 Update a product record if the provided reference does match one of the product references in your account, otherwise create a new product record with the provided reference (or with a random one if no reference is provided).
 
 ```shell
-curl --location 'https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/products-upsert' \
+curl --location 'https://api.ezus.app/products-upsert' \
 --header 'X-API-KEY: <YOUR_API_KEY>' \
 --header 'Content-Type: application/json' \
 --header 'Authorization: Bearer <YOUR_TOKEN>' \
@@ -1039,7 +1039,7 @@ curl --location 'https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/produ
 
 ```javascript
 const axios = require("axios");
-const baseUrl = "https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1";
+const baseUrl = "https://api.ezus.app";
 
 const body = {
   reference: "product_reference",
@@ -1081,7 +1081,7 @@ axios.post(baseUrl + "/products-upsert", body, headers);
 
 ### HTTP Endpoint
 
-`POST https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/products-upsert`
+`POST https://api.ezus.app/products-upsert`
 
 ### Header parameters
 
@@ -1119,14 +1119,14 @@ JSON object indicating whether an error has occured during the process and, if s
 Retrieve information for a package record in Ezus. You must specify to the Ezus API which package you wish to retrieve, by indicating its appropriate reference in your query parameter.
 
 ```shell
-curl --location 'https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/package?reference=package_reference' \
+curl --location 'https://api.ezus.app/package?reference=package_reference' \
 --header 'X-API-KEY: <YOUR_API_KEY>' \
 --header 'Authorization: Bearer <YOUR_TOKEN>'
 ```
 
 ```javascript
 const axios = require("axios");
-const baseUrl = "https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1";
+const baseUrl = "https://api.ezus.app";
 
 const headers = {
   "X-API-KEY": "<YOUR_API_KEY>",
@@ -1198,7 +1198,7 @@ axios.post(baseUrl + "/package?reference=package_reference", {}, headers);
 
 ### HTTP Endpoint
 
-`GET https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/package`
+`GET https://api.ezus.app/package`
 
 ### Header parameters
 
@@ -1236,7 +1236,7 @@ JSON object containing the package information.
 Update a package record if the provided reference does match one of the package references in your account, otherwise create a new package record with the provided reference (or with a random one if no reference is provided).
 
 ```shell
-curl --location 'https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/packages-upsert' \
+curl --location 'https://api.ezus.app/packages-upsert' \
 --header 'X-API-KEY: <YOUR_API_KEY>' \
 --header 'Content-Type: application/json' \
 --header 'Authorization: Bearer <YOUR_TOKEN>' \
@@ -1253,7 +1253,7 @@ curl --location 'https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/packa
 
 ```javascript
 const axios = require("axios");
-const baseUrl = "https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1";
+const baseUrl = "https://api.ezus.app";
 
 const body = {
   reference: "package_reference",
@@ -1282,7 +1282,7 @@ axios.post(baseUrl + "/packages-upsert", body, headers);
 
 ### HTTP Endpoint
 
-`POST https://66af9sr048.execute-api.eu-west-1.amazonaws.com/v1/packages-upsert`
+`POST https://api.ezus.app/packages-upsert`
 
 ### Header parameters
 
