@@ -119,7 +119,7 @@ axios.post(baseUrl + "/login", body, headers);
 
 ### Response
 
-JSON object indicating whether an error has occured during the process and, if so, the associated message. If there is no error, it also returns a `token`: you will need to store this token for future API requests.
+JSON object indicating whether an error has occurred during the process and, if so, the associated message. If there is no error, it also returns a `token`: you will need to store this token for future API requests.
 
 # Projects
 
@@ -178,7 +178,7 @@ axios.post(baseUrl + "/project?reference=project_reference", {}, headers);
       "trip_subdestination": "Paris",
       "client": {
         "reference": "client_reference",
-        "type": "entreprise",
+        "type": "enterprise",
         "company_name": "MOKE INTERNATIONAL LIMITED",
         "first_name": "Jane",
         "last_name": "Doe",
@@ -308,13 +308,13 @@ axios.post(baseUrl + "/projects-upsert", body, headers);
 | trip_people         | Number | Number of people in the project                                                                                                                                                                                                          |
 | trip_date_in        | Date   | Date of the beginning of the project in a "YYYY-MM-DD" format string. If not provided or if not formatted correctly, or if duration > 40 days or if trip_date_in > trip_date_out, project will be set as 1 day and trip_date_in as today |
 | trip_date_out       | Date   | Date of the end of the project in a "YYYY-MM-DD" format string. If not provided or if not formatted correctly, or if duration > 40 days or if trip_date_in > trip_date_out, project will be set as 1 day and trip_date_out as today      |
-| sales_manager_email | Email  | Email of the Ezus user that will be set as the sales manager of the project. By default, if no sales manager is provided or the provided email do not match any user on this account, the project will be assignated to None             |
+| sales_manager_email | Email  | Email of the Ezus user that will be set as the sales manager of the project. By default, if no sales manager is provided or the provided email do not match any user on this account, the project will be assigned to None               |
 | client_reference    | String | This can be a reference or the email of a client already created in this Ezus account. By default, the project will not be linked to any client. If you want to update the project's client to None, you must enter 0.                   |
 | custom_fields       | JSON   | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                                                                                            |
 
 ### Response
 
-JSON object indicating whether an error has occured during the process and, if so, the associated message. If there is no error, it also returns a `reference`: you will need to store this reference if you need to update or retrieve the project later on.
+JSON object indicating whether an error has occurred during the process and, if so, the associated message. If there is no error, it also returns a `reference`: you will need to store this reference if you need to update or retrieve the project later on.
 
 ## POST projects-documents-create
 
@@ -379,7 +379,7 @@ axios.post(baseUrl + "/projects-documents-create", body, headers);
 
 ### Response
 
-JSON object indicating whether an error has occured during the process and, if so, the associated message.
+JSON object indicating whether an error has occurred during the process and, if so, the associated message.
 
 # Clients
 
@@ -411,7 +411,7 @@ axios.post(baseUrl + "/client?reference=client_reference", {}, headers);
 {
   "error": "false",
   "reference": "client_reference",
-  "type": "entreprise",
+  "type": "enterprise",
   "company_name": "MOKE INTERNATIONAL LIMITED",
   "website": "www.moke_ltd.com",
   "first_name": "Jane",
@@ -492,15 +492,15 @@ JSON object containing the client information.
 | Property      | Type   | Description                                                                                                                                                           |
 | ------------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | reference     | String | The reference of the client you wish to retrieve                                                                                                                      |
-| type          | String | The type of the client can be either "entreprise" or "individual"                                                                                                     |
+| type          | String | The type of the client can be either "enterprise" or "individual"                                                                                                     |
 | company_name  | String | Name of the company of the client                                                                                                                                     |
 | website       | String | Website of the client                                                                                                                                                 |
 | first_name    | String | Frist name of the main contact of the client                                                                                                                          |
 | last_name     | String | Last name of the main contact of the client                                                                                                                           |
 | email         | String | Email of the main contact of the client                                                                                                                               |
-| activity      | String | Activity of the client (only for entreprise)                                                                                                                          |
-| vat_number    | String | VAT number of the client (only for entreprise)                                                                                                                        |
-| siret         | String | Company registration number of the client (only for entreprise)                                                                                                       |
+| activity      | String | Activity of the client (only for enterprise)                                                                                                                          |
+| vat_number    | String | VAT number of the client (only for enterprise)                                                                                                                        |
+| siret         | String | Company registration number of the client (only for enterprise)                                                                                                       |
 | info_profile  | String | Profile of the client                                                                                                                                                 |
 | info_origin   | String | Source of the client                                                                                                                                                  |
 | info_notes    | String | Notes on the client                                                                                                                                                   |
@@ -615,7 +615,7 @@ axios.post(baseUrl + "/clients-upsert", body, headers);
 
 ### Response
 
-JSON object indicating whether an error has occured during the process and, if so, the associated message. If there is no error, it also returns a `reference`: you will need to store this reference if you need to update or retrieve the client later on.
+JSON object indicating whether an error has occurred during the process and, if so, the associated message. If there is no error, it also returns a `reference`: you will need to store this reference if you need to update or retrieve the client later on.
 
 # Suppliers
 
@@ -742,23 +742,23 @@ axios.post(baseUrl + "/supplier?reference=supplier_reference", {}, headers);
 
 JSON object containing the supplier information.
 
-| Property      | Type   | Description                                                                                                                                                 |
-| ------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| reference     | String | The reference of the supplier you wish to retrieve                                                                                                          |
-| company_name  | String | Name of the company of the supplier                                                                                                                         |
-| website       | String | Website of the supplier                                                                                                                                     |
-| capacity      | String | Maximum number of people for which the supplier can be used                                                                                                 |
-| type          | String | 3 options: `accom`, `activity`, `transport`. A supplier can have no type, 1 type or serval types. In this case, the different types are separated by commas |
-| info_notes    | String | Notes on the supplier                                                                                                                                       |
-| info_number   | String | File number that appears at the bottom of the supplier record. Not to be confused with reference!                                                           |
-| visual_url    | String | URL of the Google Slides visual linked to the supplier                                                                                                      |
-| user          | JSON   | JSON object user ([User](#user))                                                                                                                            |
-| address       | JSON   | JSON object address ([Address](#address))                                                                                                                   |
-| products      | JSON   | JSON object products ([Products](#products))                                                                                                                |
-| contacts      | Array  | Array of JSON contacts ([Contacts](#contacts))                                                                                                              |
-| medias        | JSON   | JSON object medias ([Medias](#medias))                                                                                                                      |
-| langs         | Array  | Array of JSON langs ([Langs](#langs))                                                                                                                       |
-| custom_fields | Array  | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                               |
+| Property      | Type   | Description                                                                                                                                                  |
+| ------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| reference     | String | The reference of the supplier you wish to retrieve                                                                                                           |
+| company_name  | String | Name of the company of the supplier                                                                                                                          |
+| website       | String | Website of the supplier                                                                                                                                      |
+| capacity      | String | Maximum number of people for which the supplier can be used                                                                                                  |
+| type          | String | 3 options: `accom`, `activity`, `transport`. A supplier can have no type, 1 type or several types. In this case, the different types are separated by commas |
+| info_notes    | String | Notes on the supplier                                                                                                                                        |
+| info_number   | String | File number that appears at the bottom of the supplier record. Not to be confused with reference!                                                            |
+| visual_url    | String | URL of the Google Slides visual linked to the supplier                                                                                                       |
+| user          | JSON   | JSON object user ([User](#user))                                                                                                                             |
+| address       | JSON   | JSON object address ([Address](#address))                                                                                                                    |
+| products      | JSON   | JSON object products ([Products](#products))                                                                                                                 |
+| contacts      | Array  | Array of JSON contacts ([Contacts](#contacts))                                                                                                               |
+| medias        | JSON   | JSON object medias ([Medias](#medias))                                                                                                                       |
+| langs         | Array  | Array of JSON langs ([Langs](#langs))                                                                                                                        |
+| custom_fields | Array  | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                |
 
 ## POST suppliers-upsert
 
@@ -862,14 +862,14 @@ axios.post(baseUrl + "/suppliers-upsert", body, headers);
 | company_name  | String | Name of the supplier. This parameter is required if you create a new supplier                                                                                                                                                                 |     |
 | website       | String | Website of the supplier                                                                                                                                                                                                                       |
 | capacity      | Number | Maximum number of people for which the supplier can be used. Leave blank `''` if not relevant                                                                                                                                                 |
-| type          | String | Either `undefined` or a combinaison of these 3 options: `accom`, `activity`, `transport`. You can select multiple options by separating them with comas ("accom, activity" for instance). Enter "undefined" if you want to reset this params. |
+| type          | String | Either `undefined` or a combination of these 3 options: `accom`, `activity`, `transport`. You can select multiple options by separating them with comas ("accom, activity" for instance). Enter "undefined" if you want to reset this params. |
 | contact       | JSON   | Contact is a single JSON and email is needed. Note that only one contact can be upsert this way (the main contact of the supplier) ([Contact](#contacts))                                                                                     |
 | address       | JSON   | JSON object address ([Address](#address))                                                                                                                                                                                                     |
 | custom_fields | JSON   | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                                                                                                 |
 
 ### Response
 
-JSON object indicating whether an error has occured during the process and, if so, the associated message. If there is no error, it also returns a `reference`: you will need to store this reference if you need to update or retrieve the supplier later on.
+JSON object indicating whether an error has occurred during the process and, if so, the associated message. If there is no error, it also returns a `reference`: you will need to store this reference if you need to update or retrieve the supplier later on.
 
 # Products
 
@@ -1110,7 +1110,7 @@ axios.post(baseUrl + "/products-upsert", body, headers);
 
 ### Response
 
-JSON object indicating whether an error has occured during the process and, if so, the associated message. If there is no error, it also returns a `reference`: you will need to store this reference if you need to update or retrieve the product later on.
+JSON object indicating whether an error has occurred during the process and, if so, the associated message. If there is no error, it also returns a `reference`: you will need to store this reference if you need to update or retrieve the product later on.
 
 # Packages
 
@@ -1302,7 +1302,7 @@ axios.post(baseUrl + "/packages-upsert", body, headers);
 
 ### Response
 
-JSON object indicating whether an error has occured during the process and, if so, the associated message. If there is no error, it also returns a `reference`: you will need to store this reference if you need to update or retrieve the package later on.
+JSON object indicating whether an error has occurred during the process and, if so, the associated message. If there is no error, it also returns a `reference`: you will need to store this reference if you need to update or retrieve the package later on.
 
 # Nested Resources
 
@@ -1340,7 +1340,7 @@ JSON object indicating whether an error has occured during the process and, if s
       "trip_subdestination": "Paris",
       "client": {
         "reference": "client_reference",
-        "type": "entreprise",
+        "type": "enterprise",
         "company_name": "MOKE INTERNATIONAL LIMITED",
         "first_name": "Jane",
         "last_name": "Doe",
@@ -1356,12 +1356,12 @@ JSON object indicating whether an error has occured during the process and, if s
 | budget_actual       | String | Actual budget for the alternative (corresponding to its associated Ezus program)                                         |
 | trip_budget         | Number | Forecasted budget for the alternative (the one that is entered manually not the actual one)                              |
 | trip_people         | String | Number of people                                                                                                         |
-| trip_date_in        | String | Date of the begining of this alternative, in a "YYYY-MM-DD" format string. If it's empty, the project has no dates       |
+| trip_date_in        | String | Date of the beginning of this alternative, in a "YYYY-MM-DD" format string. If it's empty, the project has no dates      |
 | trip_date_out       | String | Date of the end of this alternative, in a "YYYY-MM-DD" format string. If it's empty, the project has no dates            |
 | trip_duration       | String | Number of days this alternative lasts                                                                                    |
 | trip_destination    | String | Destination of the alternative                                                                                           |
 | trip_subdestination | String | Subdestination of the alternative                                                                                        |
-| client              | JSON   | JSON that contain: `reference`, `type` (entreprise or individual), `company_name`, `first_name`, `last_name` and `email` |
+| client              | JSON   | JSON that contain: `reference`, `type` (enterprise or individual), `company_name`, `first_name`, `last_name` and `email` |
 
 ### Contacts
 
