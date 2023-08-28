@@ -37,7 +37,7 @@ For GET requests, you must also provide <a href='https://swagger.io/docs/specifi
 For POST requests, you must also provide <a href='https://swagger.io/docs/specification/2-0/describing-request-body' target="_blank">body parameters</a> structured in a JSON payload (application/json)
 
 <aside class="warning">
-Quick tip: You can <a href="https://github.com/ezus-melchior/EzusAPI-Mock/tree/main"  target="_blank">download here</a> a Postman export and a Swagger export of this API
+Quick tip: You can <a href="https://github.com/ezus-melchior/EzusAPI-Mock/tree/main"  target="_blank">download here</a> a Postman export of this API
 </aside>
 
 # Authentication
