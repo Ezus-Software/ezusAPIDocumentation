@@ -26,7 +26,7 @@ Welcome to the Ezus API. The Ezus API is organized around <a href='https://en.wi
 
 If you need an overview of some common use cases that you can setup with our API you can look at our help center section <a href='https://help.ezus.io/en/collections/3016686-integrations' target="_blank">Integrations</a>
 
-If you wantt to dive into the list of available methods, you've come to the right place. This documentation provides a technical description (reference) for each method in the left-hand section, as well as code examples in the right-hand section.
+If you want to dive into the list of available methods, you've come to the right place. This documentation provides a technical description (reference) for each method in the left-hand section, as well as code examples in the right-hand section.
 
 Each method has its own specification, but as a general rule:
 
