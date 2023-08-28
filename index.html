@@ -703,7 +703,6 @@ Quick tip: You can <a href="https://github.com/ezus-melchior/EzusAPI-Mock/tree/m
 <span class="nt">--data-raw</span> <span class="s1">'{
     "reference": "project_reference",
     "info_title": "Paris fashion week 2024",
-    "budget_actual": "88750",
     "trip_budget": "90000",
     "trip_people": "15",
     "trip_date_in": "2023-03-01",
@@ -830,7 +829,7 @@ Quick tip: You can <a href="https://github.com/ezus-melchior/EzusAPI-Mock/tree/m
 <span class="nt">--data</span> <span class="s1">'{
     "project_reference": "project_reference",
     "title": "Document PDF",
-    "link": "https://www.website.com/my_document.pdf"
+    "link": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
 }'</span>
 </code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">axios</span><span class="dl">"</span><span class="p">);</span>
 <span class="kd">const</span> <span class="nx">baseUrl</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">https://api.ezus.app</span><span class="dl">"</span><span class="p">;</span>
@@ -838,7 +837,7 @@ Quick tip: You can <a href="https://github.com/ezus-melchior/EzusAPI-Mock/tree/m
 <span class="kd">const</span> <span class="nx">body</span> <span class="o">=</span> <span class="p">{</span>
   <span class="na">project_reference</span><span class="p">:</span> <span class="dl">"</span><span class="s2">project_reference</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">title</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Document PDF</span><span class="dl">"</span><span class="p">,</span>
-  <span class="na">link</span><span class="p">:</span> <span class="dl">"</span><span class="s2">https://www.website.com/my_document.pdf</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">link</span><span class="p">:</span> <span class="dl">"</span><span class="s2">https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf</span><span class="dl">"</span><span class="p">,</span>
 <span class="p">};</span>
 <span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="dl">"</span><span class="s2">X-API-KEY</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">&lt;YOUR_API_KEY&gt;</span><span class="dl">"</span><span class="p">,</span>
