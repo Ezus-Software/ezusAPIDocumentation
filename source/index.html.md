@@ -240,7 +240,6 @@ curl --location 'https://api.ezus.app/projects-upsert' \
 --data-raw '{
     "reference": "project_reference",
     "info_title": "Paris fashion week 2024",
-    "budget_actual": "88750",
     "trip_budget": "90000",
     "trip_people": "15",
     "trip_date_in": "2023-03-01",
@@ -328,7 +327,7 @@ curl --location 'https://api.ezus.app/projects-documents-create' \
 --data '{
     "project_reference": "project_reference",
     "title": "Document PDF",
-    "link": "https://www.website.com/my_document.pdf"
+    "link": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
 }'
 ```
 
@@ -339,7 +338,7 @@ const baseUrl = "https://api.ezus.app";
 const body = {
   project_reference: "project_reference",
   title: "Document PDF",
-  link: "https://www.website.com/my_document.pdf",
+  link: "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
 };
 const headers = {
   "X-API-KEY": "<YOUR_API_KEY>",
