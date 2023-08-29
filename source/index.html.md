@@ -782,7 +782,6 @@ curl --location 'https://api.ezus.app/suppliers-upsert' \
         "gender": "Mr",
         "phone": "0606060606",
         "phone2": "0707070707",
-        "birth_date": "1986-09-17"
     },
     "address": {
         "label": "58 Rue de Paradis",
@@ -814,7 +813,6 @@ const body = {
       gender: "Mr",
       phone: "0606060606",
       phone2: "0707070707",
-      birth_date: "1986-09-17"
     },
   address: {
     label: "58 Rue de Paradis",
