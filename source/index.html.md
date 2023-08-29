@@ -660,7 +660,7 @@ axios.post(baseUrl + "/supplier?reference=supplier_reference", {}, headers);
     "last_name": "Tate"
   },
   "address": {
-    "label": "58 Rue de Paradi",
+    "label": "58 Rue de Paradis",
     "zip": "75010",
     "city": "Paris",
     "country": "France"
