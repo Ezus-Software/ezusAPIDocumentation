@@ -155,6 +155,7 @@ axios.post(baseUrl + "/project?reference=project_reference", {}, headers);
   "info_stage": "Confirmed",
   "info_notes": "Jane has verbally confirmed our quotation",
   "info_number": "202306001-P",
+  "currency": "€",
   "sales_manager": {
     "email": "travel-design@e-corp.com",
     "first_name": "Alice",
@@ -223,6 +224,7 @@ JSON object containing the project information.
 | info_stage      | String | The stage of the project (Confirmed, Received, Paid...)                                          |
 | info_notes      | String | Notes on the project                                                                             |
 | info_number     | String | File number that appears at the bottom of the project record. Not to be confused with reference! |
+| currency        | String | Default currency of the project                                                                  |
 | sales_manager   | JSON   | JSON object user ([User](#user))                                                                 |
 | project_manager | JSON   | JSON object user ([User](#user))                                                                 |
 | alternatives    | Array  | Array of JSON alternatives ([Alternatives](#alternatives))                                       |
