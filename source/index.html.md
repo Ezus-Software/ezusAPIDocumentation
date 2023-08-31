@@ -195,7 +195,7 @@ axios.post(baseUrl + "/project?reference=project_reference", {}, headers);
 }
 ```
 
-### HTTP Endpoint
+### HTTP Endpoints
 
 `GET https://api.ezus.app/project`
 
