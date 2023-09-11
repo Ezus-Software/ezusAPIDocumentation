@@ -682,8 +682,7 @@ axios.post(baseUrl + "/supplier?reference=supplier_reference", {}, headers);
         "title": "Project Manager",
         "gender": "Mr",
         "phone": "0202020202",
-        "phone2": "0707070707",
-        "birth_date": "1986-09-17"
+        "phone2": "0707070707"
       }
     ],
     "size": 1
@@ -782,7 +781,6 @@ curl --location 'https://api.ezus.app/suppliers-upsert' \
         "gender": "Mr",
         "phone": "0606060606",
         "phone2": "0707070707",
-        "birth_date": "1986-09-17"
     },
     "address": {
         "label": "58 Rue de Paradis",
@@ -814,7 +812,6 @@ const body = {
       gender: "Mr",
       phone: "0606060606",
       phone2: "0707070707",
-      birth_date: "1986-09-17"
     },
   address: {
     label: "58 Rue de Paradis",
@@ -1384,16 +1381,16 @@ Only the last 10 contacts are returned in this object. Note that for upsert endp
   }
 ```
 
-| Property   | Type   | Description                                             |
-| ---------- | ------ | ------------------------------------------------------- |
-| email      | String | Email of the contact                                    |
-| first_name | String | First name of the contact as a string                   |
-| last_name  | String | Last name of the contact as a string                    |
-| title      | String | Title of the contact as a string                        |
-| gender     | String | `Mr`, `Ms` or `Undefined`                               |
-| phone      | String | Phone number of the contact as a string                 |
-| phone2     | String | Second phone number of the contact as a string          |
-| birth_date | String | Contact's date of birth in a "YYYY-MM-DD" format string |
+| Property   | Type   | Description                                                                                       |
+| ---------- | ------ | ------------------------------------------------------------------------------------------------- |
+| email      | String | Email of the contact                                                                              |
+| first_name | String | First name of the contact as a string                                                             |
+| last_name  | String | Last name of the contact as a string                                                              |
+| title      | String | Title of the contact as a string                                                                  |
+| gender     | String | `Mr`, `Ms` or `Undefined`                                                                         |
+| phone      | String | Phone number of the contact as a string                                                           |
+| phone2     | String | Second phone number of the contact as a string                                                    |
+| birth_date | String | Contact's date of birth in a "YYYY-MM-DD" format string (supplier contacts have no date of birth) |
 
 ### Custom Fields
 
