@@ -1382,16 +1382,16 @@ Only the last 10 contacts are returned in this object. Note that for upsert endp
   }
 ```
 
-| Property   | Type   | Description                                                                                    |
-| ---------- | ------ | ---------------------------------------------------------------------------------------------- |
-| email      | String | Email of the contact                                                                           |
-| first_name | String | First name of the contact as a string                                                          |
-| last_name  | String | Last name of the contact as a string                                                           |
-| title      | String | Title of the contact as a string                                                               |
-| gender     | String | `Mr`, `Ms` or `Undefined`                                                                      |
-| phone      | String | Phone number of the contact as a string                                                        |
-| phone2     | String | Second phone number of the contact as a string                                                 |
-| birth_date | String | Contact's date of birth in a "YYYY-MM-DD" format string does not appear for a supplier contact |
+| Property   | Type   | Description                                                                                       |
+| ---------- | ------ | ------------------------------------------------------------------------------------------------- |
+| email      | String | Email of the contact                                                                              |
+| first_name | String | First name of the contact as a string                                                             |
+| last_name  | String | Last name of the contact as a string                                                              |
+| title      | String | Title of the contact as a string                                                                  |
+| gender     | String | `Mr`, `Ms` or `Undefined`                                                                         |
+| phone      | String | Phone number of the contact as a string                                                           |
+| phone2     | String | Second phone number of the contact as a string                                                    |
+| birth_date | String | Contact's date of birth in a "YYYY-MM-DD" format string (supplier contacts have no date of birth) |
 
 ### Custom Fields
 
