@@ -539,7 +539,7 @@ Quick tip: You can <a href="https://ezus-public-documentation.s3.eu-west-1.amazo
 </tr>
 </tbody></table>
 <h3 id='response'>Response</h3>
-<p>JSON object indicating whether an error has occured during the process and, if so, the associated message. If there is no error, it also returns a <code>token</code>: you will need to store this token for future API requests.</p>
+<p>JSON object indicating whether an error has occurred during the process and, if so, the associated message. If there is no error, it also returns a <code>token</code>: you will need to store this token for future API requests.</p>
 <h1 id='projects'>Projects</h1><h2 id='get-project'>GET project</h2>
 <p>Retrieve information for a project record in Ezus. You must specify to the Ezus API which project you wish to retrieve, by indicating its appropriate reference in your query parameter.</p>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="s1">'https://api.ezus.app/project?reference=project_reference'</span> <span class="se">\</span>
@@ -589,7 +589,7 @@ Quick tip: You can <a href="https://ezus-public-documentation.s3.eu-west-1.amazo
       </span><span class="nl">"trip_subdestination"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Paris"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"client"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"client_reference"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"entreprise"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"enterprise"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"company_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MOKE INTERNATIONAL LIMITED"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Jane"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Doe"</span><span class="p">,</span><span class="w">
@@ -811,7 +811,7 @@ Quick tip: You can <a href="https://ezus-public-documentation.s3.eu-west-1.amazo
 <tr>
 <td>sales_manager_email</td>
 <td>Email</td>
-<td>Email of the Ezus user that will be set as the sales manager of the project. By default, if no sales manager is provided or the provided email do not match any user on this account, the project will be assignated to None</td>
+<td>Email of the Ezus user that will be set as the sales manager of the project. By default, if no sales manager is provided or the provided email do not match any user on this account, the project will be assigned to None</td>
 </tr>
 <tr>
 <td>client_reference</td>
@@ -825,7 +825,7 @@ Quick tip: You can <a href="https://ezus-public-documentation.s3.eu-west-1.amazo
 </tr>
 </tbody></table>
 <h3 id='response-3'>Response</h3>
-<p>JSON object indicating whether an error has occured during the process and, if so, the associated message. If there is no error, it also returns a <code>reference</code>: you will need to store this reference if you need to update or retrieve the project later on.</p>
+<p>JSON object indicating whether an error has occurred during the process and, if so, the associated message. If there is no error, it also returns a <code>reference</code>: you will need to store this reference if you need to update or retrieve the project later on.</p>
 <h2 id='post-projects-documents-create'>POST projects-documents-create</h2>
 <p>Create a PDF document based on the link you provide within the project using project_reference as its reference.</p>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="s1">'https://api.ezus.app/projects-documents-create'</span> <span class="se">\</span>
@@ -905,7 +905,7 @@ Quick tip: You can <a href="https://ezus-public-documentation.s3.eu-west-1.amazo
 </tr>
 </tbody></table>
 <h3 id='response-4'>Response</h3>
-<p>JSON object indicating whether an error has occured during the process and, if so, the associated message.</p>
+<p>JSON object indicating whether an error has occurred during the process and, if so, the associated message.</p>
 <h1 id='clients'>Clients</h1><h2 id='get-client'>GET client</h2>
 <p>Retrieve information for a client record in Ezus. You must specify to the Ezus API which client you wish to retrieve, by indicating its appropriate reference in your query parameter.</p>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="s1">'https://api.ezus.app/client?reference=client_reference'</span> <span class="se">\</span>
@@ -927,7 +927,7 @@ Quick tip: You can <a href="https://ezus-public-documentation.s3.eu-west-1.amazo
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">"false"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"client_reference"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"entreprise"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"enterprise"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"company_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MOKE INTERNATIONAL LIMITED"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"website"</span><span class="p">:</span><span class="w"> </span><span class="s2">"www.moke_ltd.com"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Jane"</span><span class="p">,</span><span class="w">
@@ -1035,7 +1035,7 @@ Quick tip: You can <a href="https://ezus-public-documentation.s3.eu-west-1.amazo
 <tr>
 <td>type</td>
 <td>String</td>
-<td>The type of the client can be either &quot;entreprise&quot; or &quot;individual&quot;</td>
+<td>The type of the client can be either &quot;enterprise&quot; or &quot;individual&quot;</td>
 </tr>
 <tr>
 <td>company_name</td>
@@ -1065,17 +1065,17 @@ Quick tip: You can <a href="https://ezus-public-documentation.s3.eu-west-1.amazo
 <tr>
 <td>activity</td>
 <td>String</td>
-<td>Activity of the client (only for entreprise)</td>
+<td>Activity of the client (only for enterprise)</td>
 </tr>
 <tr>
 <td>vat_number</td>
 <td>String</td>
-<td>VAT number of the client (only for entreprise)</td>
+<td>VAT number of the client (only for enterprise)</td>
 </tr>
 <tr>
 <td>siret</td>
 <td>String</td>
-<td>Company registration number of the client (only for entreprise)</td>
+<td>Company registration number of the client (only for enterprise)</td>
 </tr>
 <tr>
 <td>info_profile</td>
@@ -1255,7 +1255,7 @@ Quick tip: You can <a href="https://ezus-public-documentation.s3.eu-west-1.amazo
 </tr>
 </tbody></table>
 <h3 id='response-6'>Response</h3>
-<p>JSON object indicating whether an error has occured during the process and, if so, the associated message. If there is no error, it also returns a <code>reference</code>: you will need to store this reference if you need to update or retrieve the client later on.</p>
+<p>JSON object indicating whether an error has occurred during the process and, if so, the associated message. If there is no error, it also returns a <code>reference</code>: you will need to store this reference if you need to update or retrieve the client later on.</p>
 <h1 id='suppliers'>Suppliers</h1><h2 id='get-supplier'>GET supplier</h2>
 <p>Retrieve information for a supplier record in Ezus. You must specify to the Ezus API which supplier you wish to retrieve, by indicating its appropriate reference in your query parameter.</p>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="s1">'https://api.ezus.app/supplier?reference=supplier_reference'</span> <span class="se">\</span>
@@ -1416,7 +1416,7 @@ Quick tip: You can <a href="https://ezus-public-documentation.s3.eu-west-1.amazo
 <tr>
 <td>type</td>
 <td>String</td>
-<td>3 options: <code>accom</code>, <code>activity</code>, <code>transport</code>. A supplier can have no type, 1 type or serval types. In this case, the different types are separated by commas</td>
+<td>3 options: <code>accom</code>, <code>activity</code>, <code>transport</code>. A supplier can have no type, 1 type or several types. In this case, the different types are separated by commas</td>
 </tr>
 <tr>
 <td>info_notes</td>
@@ -1593,7 +1593,7 @@ Quick tip: You can <a href="https://ezus-public-documentation.s3.eu-west-1.amazo
 <tr>
 <td>type</td>
 <td>String</td>
-<td>Either <code>undefined</code> or a combinaison of these 3 options: <code>accom</code>, <code>activity</code>, <code>transport</code>. You can select multiple options by separating them with comas (&quot;accom, activity&quot; for instance). Enter &quot;undefined&quot; if you want to reset this params.</td>
+<td>Either <code>undefined</code> or a combination of these 3 options: <code>accom</code>, <code>activity</code>, <code>transport</code>. You can select multiple options by separating them with comas (&quot;accom, activity&quot; for instance). Enter &quot;undefined&quot; if you want to reset this params.</td>
 </tr>
 <tr>
 <td>contact</td>
@@ -1612,7 +1612,7 @@ Quick tip: You can <a href="https://ezus-public-documentation.s3.eu-west-1.amazo
 </tr>
 </tbody></table>
 <h3 id='response-8'>Response</h3>
-<p>JSON object indicating whether an error has occured during the process and, if so, the associated message. If there is no error, it also returns a <code>reference</code>: you will need to store this reference if you need to update or retrieve the supplier later on.</p>
+<p>JSON object indicating whether an error has occurred during the process and, if so, the associated message. If there is no error, it also returns a <code>reference</code>: you will need to store this reference if you need to update or retrieve the supplier later on.</p>
 <h1 id='products'>Products</h1><h2 id='get-product'>GET product</h2>
 <p>Retrieve information for a product record in Ezus. You must specify to the Ezus API which product you wish to retrieve, by indicating its appropriate reference in your query parameter.</p>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="s1">'https://api.ezus.app/product?reference=product_reference'</span> <span class="se">\</span>
@@ -1995,7 +1995,7 @@ Quick tip: You can <a href="https://ezus-public-documentation.s3.eu-west-1.amazo
 </tr>
 </tbody></table>
 <h3 id='response-10'>Response</h3>
-<p>JSON object indicating whether an error has occured during the process and, if so, the associated message. If there is no error, it also returns a <code>reference</code>: you will need to store this reference if you need to update or retrieve the product later on.</p>
+<p>JSON object indicating whether an error has occurred during the process and, if so, the associated message. If there is no error, it also returns a <code>reference</code>: you will need to store this reference if you need to update or retrieve the product later on.</p>
 <h1 id='packages'>Packages</h1><h2 id='get-package'>GET package</h2>
 <p>Retrieve information for a package record in Ezus. You must specify to the Ezus API which package you wish to retrieve, by indicating its appropriate reference in your query parameter.</p>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="s1">'https://api.ezus.app/package?reference=package_reference'</span> <span class="se">\</span>
@@ -2261,7 +2261,7 @@ Quick tip: You can <a href="https://ezus-public-documentation.s3.eu-west-1.amazo
 </tr>
 </tbody></table>
 <h3 id='response-12'>Response</h3>
-<p>JSON object indicating whether an error has occured during the process and, if so, the associated message. If there is no error, it also returns a <code>reference</code>: you will need to store this reference if you need to update or retrieve the package later on.</p>
+<p>JSON object indicating whether an error has occurred during the process and, if so, the associated message. If there is no error, it also returns a <code>reference</code>: you will need to store this reference if you need to update or retrieve the package later on.</p>
 <h1 id='nested-resources'>Nested Resources</h1><h3 id='address'>Address</h3><div class="highlight"><pre class="highlight json tab-json"><code><span class="w">   </span><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"58 Rue de Paradis"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"zip"</span><span class="p">:</span><span class="w"> </span><span class="s2">"75010"</span><span class="p">,</span><span class="w">
@@ -2310,7 +2310,7 @@ Quick tip: You can <a href="https://ezus-public-documentation.s3.eu-west-1.amazo
       </span><span class="nl">"trip_subdestination"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Paris"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"client"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"client_reference"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"entreprise"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"enterprise"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"company_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MOKE INTERNATIONAL LIMITED"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Jane"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Doe"</span><span class="p">,</span><span class="w">
@@ -2349,7 +2349,7 @@ Quick tip: You can <a href="https://ezus-public-documentation.s3.eu-west-1.amazo
 <tr>
 <td>trip_date_in</td>
 <td>String</td>
-<td>Date of the begining of this alternative, in a &quot;YYYY-MM-DD&quot; format string. If it&#39;s empty, the project has no dates</td>
+<td>Date of the beginning of this alternative, in a &quot;YYYY-MM-DD&quot; format string. If it&#39;s empty, the project has no dates</td>
 </tr>
 <tr>
 <td>trip_date_out</td>
@@ -2374,7 +2374,7 @@ Quick tip: You can <a href="https://ezus-public-documentation.s3.eu-west-1.amazo
 <tr>
 <td>client</td>
 <td>JSON</td>
-<td>JSON that contain: <code>reference</code>, <code>type</code> (entreprise or individual), <code>company_name</code>, <code>first_name</code>, <code>last_name</code> and <code>email</code></td>
+<td>JSON that contain: <code>reference</code>, <code>type</code> (enterprise or individual), <code>company_name</code>, <code>first_name</code>, <code>last_name</code> and <code>email</code></td>
 </tr>
 </tbody></table>
 <h3 id='contacts'>Contacts</h3>
