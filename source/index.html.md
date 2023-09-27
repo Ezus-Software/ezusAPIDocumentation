@@ -51,9 +51,9 @@ Ezus authentication scheme is based on <a href='https://swagger.io/docs/specific
 
 <span style="text-decoration:underline">API key</span>
 
-Ezus uses API keys to control access to its API. To get `<YOUR_API_KEY>`, ask your account manager. The Ezus API requires this API key to be included in the X-API-KEY header parameter of all your requests.
+Ezus uses API keys to control access to its API. To get `<YOUR_API_KEY>`, ask your account manager. The Ezus API requires this API key to be included in the x-api-key header parameter of all your requests.
 
-`X-API-KEY: <YOUR_API_KEY>`
+`x-api-key: <YOUR_API_KEY>`
 
 <span style="text-decoration:underline">Bearer authentication</span>
 
@@ -67,7 +67,7 @@ After calling the /login endpoint with valid credentials, a bearer token will be
 
 ```shell
 curl --location 'https://api.ezus.app/login' \
---header 'X-API-KEY: <YOUR_API_KEY>' \
+--header 'x-api-key: <YOUR_API_KEY>' \
 --header 'Content-Type: application/json' \
 --data-raw '{
     "email": "<YOUR_EMAIL>",
@@ -83,7 +83,7 @@ const body = {
   email: "<YOUR_EMAIL>",
   password: "<YOUR_PASSWORD>",
 };
-const headers = { "X-API-KEY": "<YOUR_API_KEY>" };
+const headers = { "x-api-key": "<YOUR_API_KEY>" };
 
 axios.post(baseUrl + "/login", body, headers);
 ```
@@ -108,7 +108,7 @@ axios.post(baseUrl + "/login", body, headers);
 
 | Parameter | Type   | Description                                                 |
 | --------- | ------ | ----------------------------------------------------------- |
-| X-API-KEY | String | <span style="color:red">(Required)</span> Your Ezus API key |
+| x-api-key | String | <span style="color:red">(Required)</span> Your Ezus API key |
 
 ### Body parameters (application/json)
 
@@ -129,7 +129,7 @@ Retrieve information for a project record in Ezus. You must specify to the Ezus 
 
 ```shell
 curl --location 'https://api.ezus.app/project?reference=project_reference' \
---header 'X-API-KEY: <YOUR_API_KEY>' \
+--header 'x-api-key: <YOUR_API_KEY>' \
 --header 'Authorization: Bearer <YOUR_TOKEN>'
 ```
 
@@ -138,7 +138,7 @@ const axios = require("axios");
 const baseUrl = "https://api.ezus.app";
 
 const headers = {
-  "X-API-KEY": "<YOUR_API_KEY>",
+  "x-api-key": "<YOUR_API_KEY>",
   Authorization: "Bearer <YOUR_TOKEN>",
 };
 
@@ -204,7 +204,7 @@ axios.post(baseUrl + "/project?reference=project_reference", {}, headers);
 
 | Parameter     | Type   | Description                                                 |
 | ------------- | ------ | ----------------------------------------------------------- |
-| X-API-KEY     | String | <span style="color:red">(Required)</span> Your Ezus API key |
+| x-api-key     | String | <span style="color:red">(Required)</span> Your Ezus API key |
 | Authorization | String | <span style="color:red">(Required)</span> Your Bearer token |
 
 ### Query parameters
@@ -236,7 +236,7 @@ Update a project record if the provided reference does match one of the project 
 
 ```shell
 curl --location 'https://api.ezus.app/projects-upsert' \
---header 'X-API-KEY: <YOUR_API_KEY>' \
+--header 'x-api-key: <YOUR_API_KEY>' \
 --header 'Content-Type: application/json' \
 --header 'Authorization: Bearer <YOUR_TOKEN>' \
 --data-raw '{
@@ -270,7 +270,7 @@ const body = {
   custom_fields: [{ name: "field_name", value: "field_value" }],
 };
 const headers = {
-  "X-API-KEY": "<YOUR_API_KEY>",
+  "x-api-key": "<YOUR_API_KEY>",
   Authorization: "Bearer <YOUR_TOKEN>",
 };
 
@@ -296,7 +296,7 @@ axios.post(baseUrl + "/projects-upsert", body, headers);
 
 | Parameter     | Type   | Description                                                 |
 | ------------- | ------ | ----------------------------------------------------------- |
-| X-API-KEY     | String | <span style="color:red">(Required)</span> Your Ezus API key |
+| x-api-key     | String | <span style="color:red">(Required)</span> Your Ezus API key |
 | Authorization | String | <span style="color:red">(Required)</span> Your Bearer token |
 
 ### Body parameters (application/json)
@@ -323,7 +323,7 @@ Create a PDF document based on the link you provide within the project using pro
 
 ```shell
 curl --location 'https://api.ezus.app/projects-documents-create' \
---header 'X-API-KEY: <YOUR_API_KEY>' \
+--header 'x-api-key: <YOUR_API_KEY>' \
 --header 'Content-Type: application/json' \
 --header 'Authorization: Bearer <YOUR_TOKEN>' \
 --data '{
@@ -343,7 +343,7 @@ const body = {
   link: "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
 };
 const headers = {
-  "X-API-KEY": "<YOUR_API_KEY>",
+  "x-api-key": "<YOUR_API_KEY>",
   Authorization: "Bearer <YOUR_TOKEN>",
 };
 
@@ -367,7 +367,7 @@ axios.post(baseUrl + "/projects-documents-create", body, headers);
 
 | Parameter     | Type   | Description                                                 |
 | ------------- | ------ | ----------------------------------------------------------- |
-| X-API-KEY     | String | <span style="color:red">(Required)</span> Your Ezus API key |
+| x-api-key     | String | <span style="color:red">(Required)</span> Your Ezus API key |
 | Authorization | String | <span style="color:red">(Required)</span> Your Bearer token |
 
 ### Body parameters (application/json)
@@ -390,7 +390,7 @@ Retrieve information for a client record in Ezus. You must specify to the Ezus A
 
 ```shell
 curl --location 'https://api.ezus.app/client?reference=client_reference' \
---header 'X-API-KEY: <YOUR_API_KEY>' \
+--header 'x-api-key: <YOUR_API_KEY>' \
 --header 'Authorization: Bearer <YOUR_TOKEN>'
 ```
 
@@ -399,7 +399,7 @@ const axios = require("axios");
 const baseUrl = "https://api.ezus.app";
 
 const headers = {
-  "X-API-KEY": "<YOUR_API_KEY>",
+  "x-api-key": "<YOUR_API_KEY>",
   Authorization: "Bearer <YOUR_TOKEN>",
 };
 
@@ -477,7 +477,7 @@ axios.post(baseUrl + "/client?reference=client_reference", {}, headers);
 
 | Parameter     | Type   | Description                                                 |
 | ------------- | ------ | ----------------------------------------------------------- |
-| X-API-KEY     | String | <span style="color:red">(Required)</span> Your Ezus API key |
+| x-api-key     | String | <span style="color:red">(Required)</span> Your Ezus API key |
 | Authorization | String | <span style="color:red">(Required)</span> Your Bearer token |
 
 ### Query parameters
@@ -518,7 +518,7 @@ Update a client record if the provided reference (or the email) does match one o
 
 ```shell
 curl --location 'https://api.ezus.app/clients-upsert' \
---header 'X-API-KEY: <YOUR_API_KEY>' \
+--header 'x-api-key: <YOUR_API_KEY>' \
 --header 'Content-Type: application/json' \
 --header 'Authorization: Bearer <YOUR_TOKEN>' \
 --data-raw '{
@@ -574,7 +574,7 @@ const body = {
   custom_fields: [{ name: "field_name", value: "field_value" }],
 };
 const headers = {
-  "X-API-KEY": "<YOUR_API_KEY>",
+  "x-api-key": "<YOUR_API_KEY>",
   Authorization: "Bearer <YOUR_TOKEN>",
 };
 
@@ -600,7 +600,7 @@ axios.post(baseUrl + "/clients-upsert", body, headers);
 
 | Parameter     | Type   | Description                                                 |
 | ------------- | ------ | ----------------------------------------------------------- |
-| X-API-KEY     | String | <span style="color:red">(Required)</span> Your Ezus API key |
+| x-api-key     | String | <span style="color:red">(Required)</span> Your Ezus API key |
 | Authorization | String | <span style="color:red">(Required)</span> Your Bearer token |
 
 ### Body parameters (application/json)
@@ -626,7 +626,7 @@ Retrieve information for a supplier record in Ezus. You must specify to the Ezus
 
 ```shell
 curl --location 'https://api.ezus.app/supplier?reference=supplier_reference' \
---header 'X-API-KEY: <YOUR_API_KEY>' \
+--header 'x-api-key: <YOUR_API_KEY>' \
 --header 'Authorization: Bearer <YOUR_TOKEN>'
 ```
 
@@ -635,7 +635,7 @@ const axios = require("axios");
 const baseUrl = "https://api.ezus.app";
 
 const headers = {
-  "X-API-KEY": "<YOUR_API_KEY>",
+  "x-api-key": "<YOUR_API_KEY>",
   Authorization: "Bearer <YOUR_TOKEN>",
 };
 
@@ -729,7 +729,7 @@ axios.post(baseUrl + "/supplier?reference=supplier_reference", {}, headers);
 
 | Parameter     | Type   | Description                                                 |
 | ------------- | ------ | ----------------------------------------------------------- |
-| X-API-KEY     | String | <span style="color:red">(Required)</span> Your Ezus API key |
+| x-api-key     | String | <span style="color:red">(Required)</span> Your Ezus API key |
 | Authorization | String | <span style="color:red">(Required)</span> Your Bearer token |
 
 ### Query parameters
@@ -766,7 +766,7 @@ Update a supplier record if the provided reference (or the email) does match one
 
 ```shell
 curl --location 'https://api.ezus.app/suppliers-upsert' \
---header 'X-API-KEY: <YOUR_API_KEY>' \
+--header 'x-api-key: <YOUR_API_KEY>' \
 --header 'Content-Type: application/json' \
 --header 'Authorization: Bearer <YOUR_TOKEN>' \
 --data-raw '{
@@ -825,7 +825,7 @@ const body = {
     { name: "field_name", value: "field_value" }
   ],
 };
-const headers = { "X-API-KEY": "<YOUR_API_KEY>", "Authorization": "Bearer <YOUR_TOKEN>" };
+const headers = { "x-api-key": "<YOUR_API_KEY>", "Authorization": "Bearer <YOUR_TOKEN>" };
 
 axios.post(baseUrl + "/suppliers-upsert", body, headers);
 ```
@@ -849,7 +849,7 @@ axios.post(baseUrl + "/suppliers-upsert", body, headers);
 
 | Parameter     | Type   | Description                                                 |
 | ------------- | ------ | ----------------------------------------------------------- |
-| X-API-KEY     | String | <span style="color:red">(Required)</span> Your Ezus API key |
+| x-api-key     | String | <span style="color:red">(Required)</span> Your Ezus API key |
 | Authorization | String | <span style="color:red">(Required)</span> Your Bearer token |
 
 ### Body parameters (application/json)
@@ -877,7 +877,7 @@ Retrieve information for a product record in Ezus. You must specify to the Ezus 
 
 ```shell
 curl --location 'https://api.ezus.app/product?reference=product_reference' \
---header 'X-API-KEY: <YOUR_API_KEY>' \
+--header 'x-api-key: <YOUR_API_KEY>' \
 --header 'Authorization: Bearer <YOUR_TOKEN>'
 ```
 
@@ -886,7 +886,7 @@ const axios = require("axios");
 const baseUrl = "https://api.ezus.app";
 
 const headers = {
-  "X-API-KEY": "<YOUR_API_KEY>",
+  "x-api-key": "<YOUR_API_KEY>",
   Authorization: "Bearer <YOUR_TOKEN>",
 };
 
@@ -968,7 +968,7 @@ axios.post(baseUrl + "/product?reference=product_reference", {}, headers);
 
 | Parameter     | Type   | Description                                                 |
 | ------------- | ------ | ----------------------------------------------------------- |
-| X-API-KEY     | String | <span style="color:red">(Required)</span> Your Ezus API key |
+| x-api-key     | String | <span style="color:red">(Required)</span> Your Ezus API key |
 | Authorization | String | <span style="color:red">(Required)</span> Your Bearer token |
 
 ### Query parameters
@@ -1009,7 +1009,7 @@ Update a product record if the provided reference does match one of the product 
 
 ```shell
 curl --location 'https://api.ezus.app/products-upsert' \
---header 'X-API-KEY: <YOUR_API_KEY>' \
+--header 'x-api-key: <YOUR_API_KEY>' \
 --header 'Content-Type: application/json' \
 --header 'Authorization: Bearer <YOUR_TOKEN>' \
 --data '{
@@ -1059,7 +1059,7 @@ const body = {
   custom_fields: [{ name: "field_name", value: "field_value" }],
 };
 const headers = {
-  "X-API-KEY": "<YOUR_API_KEY>",
+  "x-api-key": "<YOUR_API_KEY>",
   Authorization: "Bearer <YOUR_TOKEN>",
 };
 
@@ -1085,7 +1085,7 @@ axios.post(baseUrl + "/products-upsert", body, headers);
 
 | Parameter     | Type   | Description                                                 |
 | ------------- | ------ | ----------------------------------------------------------- |
-| X-API-KEY     | String | <span style="color:red">(Required)</span> Your Ezus API key |
+| x-api-key     | String | <span style="color:red">(Required)</span> Your Ezus API key |
 | Authorization | String | <span style="color:red">(Required)</span> Your Bearer token |
 
 ### Body parameters (application/json)
@@ -1118,7 +1118,7 @@ Retrieve information for a package record in Ezus. You must specify to the Ezus 
 
 ```shell
 curl --location 'https://api.ezus.app/package?reference=package_reference' \
---header 'X-API-KEY: <YOUR_API_KEY>' \
+--header 'x-api-key: <YOUR_API_KEY>' \
 --header 'Authorization: Bearer <YOUR_TOKEN>'
 ```
 
@@ -1127,7 +1127,7 @@ const axios = require("axios");
 const baseUrl = "https://api.ezus.app";
 
 const headers = {
-  "X-API-KEY": "<YOUR_API_KEY>",
+  "x-api-key": "<YOUR_API_KEY>",
   Authorization: "Bearer <YOUR_TOKEN>",
 };
 
@@ -1202,7 +1202,7 @@ axios.post(baseUrl + "/package?reference=package_reference", {}, headers);
 
 | Parameter     | Type   | Description                                                 |
 | ------------- | ------ | ----------------------------------------------------------- |
-| X-API-KEY     | String | <span style="color:red">(Required)</span> Your Ezus API key |
+| x-api-key     | String | <span style="color:red">(Required)</span> Your Ezus API key |
 | Authorization | String | <span style="color:red">(Required)</span> Your Bearer token |
 
 ### Query parameters
@@ -1235,7 +1235,7 @@ Update a package record if the provided reference does match one of the package 
 
 ```shell
 curl --location 'https://api.ezus.app/packages-upsert' \
---header 'X-API-KEY: <YOUR_API_KEY>' \
+--header 'x-api-key: <YOUR_API_KEY>' \
 --header 'Content-Type: application/json' \
 --header 'Authorization: Bearer <YOUR_TOKEN>' \
 --data '{
@@ -1260,7 +1260,7 @@ const body = {
   custom_fields: [{ name: "field_name", value: "field_value" }],
 };
 const headers = {
-  "X-API-KEY": "<YOUR_API_KEY>",
+  "x-api-key": "<YOUR_API_KEY>",
   Authorization: "Bearer <YOUR_TOKEN>",
 };
 
@@ -1286,7 +1286,7 @@ axios.post(baseUrl + "/packages-upsert", body, headers);
 
 | Parameter     | Type   | Description                                                 |
 | ------------- | ------ | ----------------------------------------------------------- |
-| X-API-KEY     | String | <span style="color:red">(Required)</span> Your Ezus API key |
+| x-api-key     | String | <span style="color:red">(Required)</span> Your Ezus API key |
 | Authorization | String | <span style="color:red">(Required)</span> Your Bearer token |
 
 ### Body parameters (application/json)
