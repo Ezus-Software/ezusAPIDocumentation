@@ -1337,7 +1337,7 @@ axios.get(baseUrl + "/webhooks", headers);
       "endpoint": "webhook_endpoint",
       "is_active": "true",
       "events_types": "projects.created,clients.created",
-      "last_called_at": "2023-01-01"
+      "last_called_at": "2023-01-01 01:01:01"
     }
   ]
 }
@@ -1715,18 +1715,18 @@ One of the following options: `None`, `Everyone`, `User Group` or the following 
     "endpoint": "webhook_endpoint",
     "is_active": "true",
     "events_types": "projects.created,clients.created",
-    "last_called_at": "2023-01-01"
+    "last_called_at": "2023-01-01 01:01:01"
   },
 ]
 ```
 
-| Property       | Type   | Description                                                  |
-| -------------- | ------ | ------------------------------------------------------------ |
-| reference      | String | The reference of the webhook                                 |
-| endpoint       | String | The endpoint URL of the webhook                              |
-| is_active      | String | The status of the webhook `true` or `false`                  |
-| events_types   | String | The list of events for this endpoint ([Events](#events))     |
-| last_called_at | String | The webhook last called date in a "YYYY-MM-DD" format string |
+| Property       | Type   | Description                                                           |
+| -------------- | ------ | --------------------------------------------------------------------- |
+| reference      | String | The reference of the webhook                                          |
+| endpoint       | String | The endpoint URL of the webhook                                       |
+| is_active      | String | The status of the webhook `true` or `false`                           |
+| events_types   | String | The list of events for this endpoint ([Events](#events))              |
+| last_called_at | String | The webhook last called date in a "YYYY-MM-DD hh:mm:ss" format string |
 
 # Events
 
