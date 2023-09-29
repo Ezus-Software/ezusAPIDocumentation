@@ -618,12 +618,12 @@ axios.post(baseUrl + "/clients-upsert", body, headers);
 
 JSON object indicating whether an error has occurred during the process and, if so, the associated message. If there is no error, it also returns a `reference`: you will need to store this reference if you need to update or retrieve the client later on.
 
-## POST invoices-upsert
+## POST invoices-update
 
 Update an invoice record if the provided reference does match one of the invoices references in your account.
 
 ```shell
-curl --location 'https://api.ezus.app/invoices-upsert' \
+curl --location 'https://api.ezus.app/invoices-update' \
 --header 'x-api-key: <YOUR_API_KEY>' \
 --header 'Content-Type: application/json' \
 --header 'Authorization: Bearer <YOUR_TOKEN>' \
@@ -654,7 +654,7 @@ const headers = {
   Authorization: "Bearer <YOUR_TOKEN>",
 };
 
-axios.post(baseUrl + "/invoices-upsert", body, headers);
+axios.post(baseUrl + "/invoices-update", body, headers);
 ```
 
 > It returns a JSON object structured like this:
@@ -669,7 +669,7 @@ axios.post(baseUrl + "/invoices-upsert", body, headers);
 
 ### HTTP Endpoint
 
-`POST https://api.ezus.app/invoices-upsert`
+`POST https://api.ezus.app/invoices-update`
 
 ### Header parameters
 
