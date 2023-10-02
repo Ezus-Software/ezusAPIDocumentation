@@ -618,6 +618,157 @@ axios.post(baseUrl + "/clients-upsert", body, headers);
 
 JSON object indicating whether an error has occurred during the process and, if so, the associated message. If there is no error, it also returns a `reference`: you will need to store this reference if you need to update or retrieve the client later on.
 
+## POST deposits-create
+
+Create a deposit in a project
+
+```shell
+curl --location 'https://api.ezus.app/deposits-create' \
+--header 'x-api-key: <YOUR_API_KEY>' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer <YOUR_TOKEN>' \
+--data-raw '{
+    "project_reference": "project_reference",
+    "alternative_order": "0",
+    "amount": 6855,
+    "type": "deposit",
+    "date": "2023-05-25",
+    "payment_method": "card",
+    "notes": "Up-front payment 2023-05-25",
+}'
+```
+
+```javascript
+const axios = require("axios");
+const baseUrl = "https://api.ezus.app";
+
+const body = {
+  project_reference: "project_reference",
+  alternative_order: "0",
+  amount: 6855,
+  type: "deposit",
+  date: "2023-05-25",
+  payment_method: "card",
+  notes: "Up-front payment 2023-05-25",
+};
+const headers = {
+  "x-api-key": "<YOUR_API_KEY>",
+  Authorization: "Bearer <YOUR_TOKEN>",
+};
+
+axios.post(baseUrl + "/deposits-create", body, headers);
+```
+
+> It returns a JSON object structured like this:
+
+```json
+{
+  "error": "false",
+  "message": "ok"
+}
+```
+
+### HTTP Endpoint
+
+`POST https://api.ezus.app/deposits-create`
+
+### Header parameters
+
+| Parameter     | Type   | Description                                                 |
+| ------------- | ------ | ----------------------------------------------------------- |
+| x-api-key     | String | <span style="color:red">(Required)</span> Your Ezus API key |
+| Authorization | String | <span style="color:red">(Required)</span> Your Bearer token |
+
+### Body parameters (application/json)
+
+| Parameter         | Type   | Description                                                                                                                               |
+| ----------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| project_reference | String | <span style="color:red">(Required)</span> The reference is mandatory and refers to the project to which the payment will be added.        |
+| alternative_order | String | Alternative number, if not entered, the payment will be added to the project's main alternative.                                          |
+| amount            | int    | Payment amount in centimes                                                                                                                |
+| type              | String | Type can be `deposit`, `payment`, `final_payment`, `extra_paid`. By default the deposits will be a `deposit`                              |
+| date              | String | The date must be a string in "YYYY-MM-DD" format. If it is not filled in or is invalid, the payment will be assigned to the current date. |
+| payment_method    | String | Technical name of the payment method, you can find it in Settings - Custom fields                                                         |
+| notes             | String | Note attributed to the payment, this note is limited to 100 characters, all additional characters will not be saved.                      |
+
+### Response
+
+JSON object indicating whether an error has occurred during the process and, if so, the associated message. If there is no error, it also returns a `reference`: you will need to store this reference if you need to update or retrieve the client later on.
+
+## POST invoices-update
+
+Update an invoice record if the provided reference does match one of the invoices references in your account.
+
+```shell
+curl --location 'https://api.ezus.app/invoices-update' \
+--header 'x-api-key: <YOUR_API_KEY>' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer <YOUR_TOKEN>' \
+--data-raw '{
+    "reference": "invoice_reference",
+    "stage": "paid",
+    "send_date": "2023-09-29",
+    "due_date": "2023-09-29",
+    "custom_fields": [
+        {"name": "field_name", "value": "field_value"}
+    ]
+}'
+```
+
+```javascript
+const axios = require("axios");
+const baseUrl = "https://api.ezus.app";
+
+const body = {
+  reference: "invoice_reference",
+  stage: "paid",
+  send_date: "2023-09-29",
+  due_date: "2023-09-29",
+  custom_fields: [{ name: "field_name", value: "field_value" }],
+};
+const headers = {
+  "x-api-key": "<YOUR_API_KEY>",
+  Authorization: "Bearer <YOUR_TOKEN>",
+};
+
+axios.post(baseUrl + "/invoices-update", body, headers);
+```
+
+> It returns a JSON object structured like this:
+
+```json
+{
+  "error": "false",
+  "message": "ok",
+  "reference": "invoice_reference"
+}
+```
+
+### HTTP Endpoint
+
+`POST https://api.ezus.app/invoices-update`
+
+### Header parameters
+
+| Parameter     | Type   | Description                                                 |
+| ------------- | ------ | ----------------------------------------------------------- |
+| x-api-key     | String | <span style="color:red">(Required)</span> Your Ezus API key |
+| Authorization | String | <span style="color:red">(Required)</span> Your Bearer token |
+
+### Body parameters (application/json)
+
+| Parameter     | Type   | Description                                                                                           |
+| ------------- | ------ | ----------------------------------------------------------------------------------------------------- |
+| reference     | String | The reference of the invoice you want to update                                                       |
+| stage         | String | stage can be updated only if the invoice is a draft, the stage can be `completed` or `paid`           |
+| send_date     | String | send_date can be updated only if the invoice is a draft, send_date can be only on format `YYYY-MM-DD` |
+| due_date      | String | due_date can be updated only if the invoice is a draft, due_date can be only on format `YYYY-MM-DD`   |
+| custom_fields | JSON   | Array of JSON custom fields ([Custom fields](#custom-fields))                                         |
+
+### Response
+
+JSON object indicating whether an error has occurred during the process and, if so, the associated message. If there is no error, it also returns a `reference`: you will need to store this reference if you need to update or retrieve the client later on.
+
 # Suppliers
 
 ## GET supplier
