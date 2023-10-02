@@ -618,6 +618,8 @@ axios.post(baseUrl + "/clients-upsert", body, headers);
 
 JSON object indicating whether an error has occurred during the process and, if so, the associated message. If there is no error, it also returns a `reference`: you will need to store this reference if you need to update or retrieve the client later on.
 
+# Deposits
+
 ## POST deposits-create
 
 Create a deposit in a project
