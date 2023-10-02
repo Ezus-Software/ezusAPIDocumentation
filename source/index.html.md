@@ -283,7 +283,7 @@ axios.post(baseUrl + "/projects-upsert", body, headers);
 {
   "error": "false",
   "message": "ok",
-  "action": "Project Updated Successfuly",
+  "action": "Project successfully created",
   "reference": "project_reference"
 }
 ```
@@ -587,7 +587,7 @@ axios.post(baseUrl + "/clients-upsert", body, headers);
 {
   "error": "false",
   "message": "ok",
-  "action": "Client updated Successfully",
+  "action": "Client successfully created",
   "reference": "client_reference"
 }
 ```
@@ -836,7 +836,7 @@ axios.post(baseUrl + "/suppliers-upsert", body, headers);
 {
   "error": "false",
   "message": "ok",
-  "action": "Supplier created Successfully",
+  "action": "Supplier successfully created",
   "reference": "supplier_reference"
 }
 ```
@@ -1072,7 +1072,7 @@ axios.post(baseUrl + "/products-upsert", body, headers);
 {
   "error": "false",
   "message": "ok",
-  "action": "Product Created Successfully",
+  "action": "Product successfully created",
   "reference": "product_reference"
 }
 ```
@@ -1273,7 +1273,7 @@ axios.post(baseUrl + "/packages-upsert", body, headers);
 {
   "error": "false",
   "message": "ok",
-  "action": "Package Created Successfully",
+  "action": "Package successfully created",
   "reference": "package_reference"
 }
 ```
@@ -1403,7 +1403,7 @@ axios.post(baseUrl + "/webhooks-upsert", body, headers);
 {
   "error": "false",
   "message": "ok",
-  "action": "Webhook Created Successfuly",
+  "action": "Webhook successfully created",
   "reference": "webhook_reference"
 }
 ```
