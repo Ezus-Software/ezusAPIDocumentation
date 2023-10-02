@@ -690,7 +690,7 @@ axios.post(baseUrl + "/invoices-update", body, headers);
 
 ### Response
 
-JSON object indicating whether an error has occurred during the process and, if so, the associated message. If there is no error, it also returns a `reference`: you will need to store this reference if you need to update or retrieve the client later on.
+JSON object indicating whether an error has occurred during the process and, if so, the associated message. If there is no error, it also returns a `reference`: you will need to store this reference if you need to update or retrieve the invoice later on.
 
 # Suppliers
 
