@@ -387,6 +387,17 @@
               </ul>
           </li>
           <li>
+            <a href="#webhooks" class="toc-h1 toc-link" data-title="Webhooks">Webhooks</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#get-webhooks" class="toc-h2 toc-link" data-title="GET webhooks">GET webhooks</a>
+                  </li>
+                  <li>
+                    <a href="#post-webhooks-upsert" class="toc-h2 toc-link" data-title="POST webhooks-upsert">POST webhooks-upsert</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
             <a href="#nested-resources" class="toc-h1 toc-link" data-title="Nested Resources">Nested Resources</a>
               <ul class="toc-list-h2">
                   <li>
@@ -418,6 +429,23 @@
                   </li>
                   <li>
                     <a href="#user" class="toc-h2 toc-link" data-title="User">User</a>
+                  </li>
+                  <li>
+                    <a href="#webhook" class="toc-h2 toc-link" data-title="Webhook">Webhook</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#events" class="toc-h1 toc-link" data-title="Events">Events</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#basic-event-information" class="toc-h2 toc-link" data-title="Basic event information">Basic event information</a>
+                  </li>
+                  <li>
+                    <a href="#projects-created" class="toc-h2 toc-link" data-title="projects.created">projects.created</a>
+                  </li>
+                  <li>
+                    <a href="#clients-created" class="toc-h2 toc-link" data-title="clients.created">clients.created</a>
                   </li>
               </ul>
           </li>
@@ -553,7 +581,7 @@ Quick tip: You can <a href="https://ezus-public-documentation.s3.eu-west-1.amazo
   <span class="na">Authorization</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Bearer &lt;YOUR_TOKEN&gt;</span><span class="dl">"</span><span class="p">,</span>
 <span class="p">};</span>
 
-<span class="nx">axios</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="nx">baseUrl</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">/project?reference=project_reference</span><span class="dl">"</span><span class="p">,</span> <span class="p">{},</span> <span class="nx">headers</span><span class="p">);</span>
+<span class="nx">axios</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="nx">baseUrl</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">/project?reference=project_reference</span><span class="dl">"</span><span class="p">,</span> <span class="nx">headers</span><span class="p">);</span>
 </code></pre></div>
 <blockquote>
 <p>It returns a JSON object structured like this:</p>
@@ -746,7 +774,7 @@ Quick tip: You can <a href="https://ezus-public-documentation.s3.eu-west-1.amazo
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">"false"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ok"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Project Updated Successfuly"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Project successfully created"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"project_reference"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h3 id='http-endpoint-3'>HTTP Endpoint</h3>
@@ -919,7 +947,7 @@ Quick tip: You can <a href="https://ezus-public-documentation.s3.eu-west-1.amazo
   <span class="na">Authorization</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Bearer &lt;YOUR_TOKEN&gt;</span><span class="dl">"</span><span class="p">,</span>
 <span class="p">};</span>
 
-<span class="nx">axios</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="nx">baseUrl</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">/client?reference=client_reference</span><span class="dl">"</span><span class="p">,</span> <span class="p">{},</span> <span class="nx">headers</span><span class="p">);</span>
+<span class="nx">axios</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="nx">baseUrl</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">/client?reference=client_reference</span><span class="dl">"</span><span class="p">,</span> <span class="nx">headers</span><span class="p">);</span>
 </code></pre></div>
 <blockquote>
 <p>It returns a JSON object structured like this:</p>
@@ -933,7 +961,7 @@ Quick tip: You can <a href="https://ezus-public-documentation.s3.eu-west-1.amazo
   </span><span class="nl">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Jane"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Doe"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"contact@moke-international.com"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"activity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sofware"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"activity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Software"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"vat_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GB 240-635-038"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"siret"</span><span class="p">:</span><span class="w"> </span><span class="s2">"09728676"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"info_profile"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Prospect"</span><span class="p">,</span><span class="w">
@@ -1191,7 +1219,7 @@ Quick tip: You can <a href="https://ezus-public-documentation.s3.eu-west-1.amazo
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">"false"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ok"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Client updated Successfully"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Client successfully created"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"client_reference"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h3 id='http-endpoint-6'>HTTP Endpoint</h3>
@@ -1269,7 +1297,7 @@ Quick tip: You can <a href="https://ezus-public-documentation.s3.eu-west-1.amazo
   <span class="na">Authorization</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Bearer &lt;YOUR_TOKEN&gt;</span><span class="dl">"</span><span class="p">,</span>
 <span class="p">};</span>
 
-<span class="nx">axios</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="nx">baseUrl</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">/supplier?reference=supplier_reference</span><span class="dl">"</span><span class="p">,</span> <span class="p">{},</span> <span class="nx">headers</span><span class="p">);</span>
+<span class="nx">axios</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="nx">baseUrl</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">/supplier?reference=supplier_reference</span><span class="dl">"</span><span class="p">,</span> <span class="nx">headers</span><span class="p">);</span>
 </code></pre></div>
 <blockquote>
 <p>It returns a JSON object structured like this:</p>
@@ -1538,7 +1566,7 @@ Quick tip: You can <a href="https://ezus-public-documentation.s3.eu-west-1.amazo
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">"false"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ok"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Supplier created Successfully"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Supplier successfully created"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"supplier_reference"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h3 id='http-endpoint-8'>HTTP Endpoint</h3>
@@ -1626,7 +1654,7 @@ Quick tip: You can <a href="https://ezus-public-documentation.s3.eu-west-1.amazo
   <span class="na">Authorization</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Bearer &lt;YOUR_TOKEN&gt;</span><span class="dl">"</span><span class="p">,</span>
 <span class="p">};</span>
 
-<span class="nx">axios</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="nx">baseUrl</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">/product?reference=product_reference</span><span class="dl">"</span><span class="p">,</span> <span class="p">{},</span> <span class="nx">headers</span><span class="p">);</span>
+<span class="nx">axios</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="nx">baseUrl</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">/product?reference=product_reference</span><span class="dl">"</span><span class="p">,</span> <span class="nx">headers</span><span class="p">);</span>
 </code></pre></div>
 <blockquote>
 <p>It returns a JSON object structured like this:</p>
@@ -1896,7 +1924,7 @@ Quick tip: You can <a href="https://ezus-public-documentation.s3.eu-west-1.amazo
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">"false"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ok"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Product Created Successfully"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Product successfully created"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"product_reference"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h3 id='http-endpoint-10'>HTTP Endpoint</h3>
@@ -2009,7 +2037,7 @@ Quick tip: You can <a href="https://ezus-public-documentation.s3.eu-west-1.amazo
   <span class="na">Authorization</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Bearer &lt;YOUR_TOKEN&gt;</span><span class="dl">"</span><span class="p">,</span>
 <span class="p">};</span>
 
-<span class="nx">axios</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="nx">baseUrl</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">/package?reference=package_reference</span><span class="dl">"</span><span class="p">,</span> <span class="p">{},</span> <span class="nx">headers</span><span class="p">);</span>
+<span class="nx">axios</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="nx">baseUrl</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">/package?reference=package_reference</span><span class="dl">"</span><span class="p">,</span> <span class="nx">headers</span><span class="p">);</span>
 </code></pre></div>
 <blockquote>
 <p>It returns a JSON object structured like this:</p>
@@ -2207,7 +2235,7 @@ Quick tip: You can <a href="https://ezus-public-documentation.s3.eu-west-1.amazo
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">"false"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ok"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Package Created Successfully"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Package successfully created"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"package_reference"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h3 id='http-endpoint-12'>HTTP Endpoint</h3>
@@ -2262,6 +2290,160 @@ Quick tip: You can <a href="https://ezus-public-documentation.s3.eu-west-1.amazo
 </tbody></table>
 <h3 id='response-12'>Response</h3>
 <p>JSON object indicating whether an error has occurred during the process and, if so, the associated message. If there is no error, it also returns a <code>reference</code>: you will need to store this reference if you need to update or retrieve the package later on.</p>
+<h1 id='webhooks'>Webhooks</h1><h2 id='get-webhooks'>GET webhooks</h2>
+<p>Returns a list of your webhook endpoints.</p>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="s1">'https://api.ezus.app/webhooks'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'X-API-KEY: &lt;YOUR_API_KEY&gt;'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Bearer &lt;YOUR_TOKEN&gt;'</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">axios</span><span class="dl">"</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">baseUrl</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">https://api.ezus.app</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="dl">"</span><span class="s2">X-API-KEY</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">&lt;YOUR_API_KEY&gt;</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">Authorization</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Bearer &lt;YOUR_TOKEN&gt;</span><span class="dl">"</span><span class="p">,</span>
+<span class="p">};</span>
+
+<span class="nx">axios</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="nx">baseUrl</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">/webhooks</span><span class="dl">"</span><span class="p">,</span> <span class="nx">headers</span><span class="p">);</span>
+</code></pre></div>
+<blockquote>
+<p>It returns a JSON object structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">"false"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"webhooks"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"webhook_reference"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"endpoint"</span><span class="p">:</span><span class="w"> </span><span class="s2">"webhook_endpoint"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"is_active"</span><span class="p">:</span><span class="w"> </span><span class="s2">"true"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"events_types"</span><span class="p">:</span><span class="w"> </span><span class="s2">"projects.created,clients.created"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"last_called_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2023-01-01 01:01:01"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='http-endpoint-13'>HTTP Endpoint</h3>
+<p><code>GET https://api.ezus.app/webhooks</code></p>
+<h3 id='header-parameters-13'>Header parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>X-API-KEY</td>
+<td>String</td>
+<td><span style="color:red">(Required)</span> Your Ezus API key</td>
+</tr>
+<tr>
+<td>Authorization</td>
+<td>String</td>
+<td><span style="color:red">(Required)</span> Your Bearer token</td>
+</tr>
+</tbody></table>
+<h3 id='response-13'>Response</h3>
+<p>JSON object containing your webhooks information.</p>
+
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>webhooks</td>
+<td>JSON</td>
+<td>JSON object webhook (<a href="#webhook">Webhook</a>)</td>
+</tr>
+</tbody></table>
+<h2 id='post-webhooks-upsert'>POST webhooks-upsert</h2>
+<p>Update a webhook record if the provided reference does match one of the webhooks in your account, otherwise create a new webhook record with the provided reference (or with a random one if no reference is provided).</p>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="s1">'https://api.ezus.app/webhooks-upsert'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'X-API-KEY: &lt;YOUR_API_KEY&gt;'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Bearer &lt;YOUR_TOKEN&gt;'</span> <span class="se">\</span>
+<span class="nt">--data</span> <span class="s1">'{
+    "reference": "webhook_reference",
+    "endpoint": "https://webhook.webhook/",
+    "is_active": "true",
+    "events_types": "projects.created,clients.created"
+}'</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">axios</span><span class="dl">"</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">baseUrl</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">https://api.ezus.app</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">body</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">reference</span><span class="p">:</span> <span class="dl">"</span><span class="s2">webhook_reference</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">endpoint</span><span class="p">:</span> <span class="dl">"</span><span class="s2">https://webhook.webhook/</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">is_active</span><span class="p">:</span> <span class="dl">"</span><span class="s2">true</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">events_types</span><span class="p">:</span> <span class="dl">"</span><span class="s2">projects.created,clients.created</span><span class="dl">"</span><span class="p">,</span>
+<span class="p">};</span>
+<span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="dl">"</span><span class="s2">X-API-KEY</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">&lt;YOUR_API_KEY&gt;</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">Authorization</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Bearer &lt;YOUR_TOKEN&gt;</span><span class="dl">"</span><span class="p">,</span>
+<span class="p">};</span>
+
+<span class="nx">axios</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="nx">baseUrl</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">/webhooks-upsert</span><span class="dl">"</span><span class="p">,</span> <span class="nx">body</span><span class="p">,</span> <span class="nx">headers</span><span class="p">);</span>
+</code></pre></div>
+<blockquote>
+<p>It returns a JSON object structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">"false"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ok"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Webhook successfully created"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"webhook_reference"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='http-endpoint-14'>HTTP Endpoint</h3>
+<p><code>POST https://api.ezus.app/webhooks-upsert</code></p>
+<h3 id='header-parameters-14'>Header parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>X-API-KEY</td>
+<td>String</td>
+<td><span style="color:red">(Required)</span> Your Ezus API key</td>
+</tr>
+<tr>
+<td>Authorization</td>
+<td>String</td>
+<td><span style="color:red">(Required)</span> Your Bearer token</td>
+</tr>
+</tbody></table>
+<h3 id='body-parameters-application-json-8'>Body parameters (application/json)</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>reference</td>
+<td>String</td>
+<td>If provided, the unique Ezus Reference associated to the webhook you want to update or create (in case the one you provided has never been used). If no reference is provided, a webhook will be created with a random one.</td>
+</tr>
+<tr>
+<td>endpoint</td>
+<td>String</td>
+<td>This parameter is required if you create a new webhook. You cannot update the endpoint of an existing webhook.</td>
+</tr>
+<tr>
+<td>is_active</td>
+<td>String</td>
+<td>Status of the webhook <code>true</code> or <code>false</code></td>
+</tr>
+<tr>
+<td>events_types</td>
+<td>JSON</td>
+<td>The list of events to enable for this endpoint. At least 1 required, separated by commas if more than one. (<a href="#events">Events</a>)</td>
+</tr>
+</tbody></table>
 <h1 id='nested-resources'>Nested Resources</h1><h3 id='address'>Address</h3><div class="highlight"><pre class="highlight json tab-json"><code><span class="w">   </span><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"58 Rue de Paradis"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"zip"</span><span class="p">:</span><span class="w"> </span><span class="s2">"75010"</span><span class="p">,</span><span class="w">
@@ -2720,11 +2902,11 @@ The name of custom fields refers to their technical name, not their display name
 </tbody></table>
 <h3 id='user'>User</h3>
 <p>One of the following options: <code>None</code>, <code>Everyone</code>, <code>User Group</code> or the following JSON object corresponding to an active Ezus user of this account</p>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="nl">"user"</span><span class="p">:{</span><span class="w">
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="nl">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tommy@e-corp.com"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Tommy"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Atkins"</span><span class="w">
-  </span><span class="p">}</span><span class="err">,</span><span class="w">
+</span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <table><thead>
 <tr>
@@ -2747,6 +2929,248 @@ The name of custom fields refers to their technical name, not their display name
 <td>last_name</td>
 <td>String</td>
 <td>Last name of the user</td>
+</tr>
+</tbody></table>
+<h3 id='webhook'>Webhook</h3><div class="highlight"><pre class="highlight json tab-json"><code><span class="nl">"webhooks"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"webhook_reference"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"endpoint"</span><span class="p">:</span><span class="w"> </span><span class="s2">"webhook_endpoint"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"is_active"</span><span class="p">:</span><span class="w"> </span><span class="s2">"true"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"events_types"</span><span class="p">:</span><span class="w"> </span><span class="s2">"projects.created,clients.created"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"last_called_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2023-01-01 01:01:01"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div>
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>reference</td>
+<td>String</td>
+<td>The reference of the webhook</td>
+</tr>
+<tr>
+<td>endpoint</td>
+<td>String</td>
+<td>The endpoint URL of the webhook</td>
+</tr>
+<tr>
+<td>is_active</td>
+<td>String</td>
+<td>The status of the webhook <code>true</code> or <code>false</code></td>
+</tr>
+<tr>
+<td>events_types</td>
+<td>String</td>
+<td>The list of events for this endpoint (<a href="#events">Events</a>)</td>
+</tr>
+<tr>
+<td>last_called_at</td>
+<td>String</td>
+<td>The webhook last called date in a &quot;YYYY-MM-DD hh:mm:ss&quot; format string</td>
+</tr>
+</tbody></table>
+<h1 id='events'>Events</h1><h2 id='basic-event-information'>Basic event information</h2>
+<p>This section provides an overview of the fundamental details related to a webhook event, including its unique identifier, type, creation timestamp, trigger source, and whether it&#39;s a duplication.</p>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"event_id"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"object"</span><span class="p">:</span><span class="w"> </span><span class="s2">"event"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"projects.created"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"created"</span><span class="p">:</span><span class="w"> </span><span class="mi">1234567890</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"trigger_reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pro.ezus.io;projects-create"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"is_duplication"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>String</td>
+<td>Unique identifier for the event</td>
+</tr>
+<tr>
+<td>object</td>
+<td>String</td>
+<td>The object of the event. The event&#39;s target object is currently limited to <code>event</code> but in the future, webhooks will become capable of being triggered by various other events.</td>
+</tr>
+<tr>
+<td>type</td>
+<td>String</td>
+<td>The type of the event</td>
+</tr>
+<tr>
+<td>created</td>
+<td>String</td>
+<td>Time at which the object was created. Measured in seconds since the Unix epoch.</td>
+</tr>
+<tr>
+<td>trigger_reference</td>
+<td>String</td>
+<td>The trigger of the event. Indicates the source or origin from which the event was initiated.</td>
+</tr>
+<tr>
+<td>is_duplication</td>
+<td>String</td>
+<td>Indicates whether the event originates from a duplication</td>
+</tr>
+<tr>
+<td>data</td>
+<td>String</td>
+<td>Detailed information about the event. For more in-depth details, please refer to the sections below.</td>
+</tr>
+</tbody></table>
+<h2 id='projects-created'>projects.created</h2>
+<p>This event is triggered whenever a project is either created or duplicated.</p>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"project_reference"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"info_title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Paris fashion week 2024"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"trip_budget"</span><span class="p">:</span><span class="w"> </span><span class="s2">"90000"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"trip_people"</span><span class="p">:</span><span class="w"> </span><span class="s2">"15"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"trip_date_in"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-03-01"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"trip_date_out"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-03-09"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"trip_duration"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"info_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"202306001-P"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>reference</td>
+<td>String</td>
+<td>The reference of the project</td>
+</tr>
+<tr>
+<td>info_title</td>
+<td>String</td>
+<td>The title of the project</td>
+</tr>
+<tr>
+<td>trip_budget</td>
+<td>String</td>
+<td>Forecasted budget for the alternative (the one that is entered manually not the actual one)</td>
+</tr>
+<tr>
+<td>trip_people</td>
+<td>String</td>
+<td>Number of people</td>
+</tr>
+<tr>
+<td>trip_date_in</td>
+<td>String</td>
+<td>Date of the beginning of this alternative, in a &quot;YYYY-MM-DD&quot; format string. If it&#39;s empty, the project has no dates.</td>
+</tr>
+<tr>
+<td>trip_date_out</td>
+<td>String</td>
+<td>Date of the end of this alternative, in a &quot;YYYY-MM-DD&quot; format string. If it&#39;s empty, the project has no dates.</td>
+</tr>
+<tr>
+<td>trip_duration</td>
+<td>String</td>
+<td>Number of days this project lasts</td>
+</tr>
+<tr>
+<td>info_number</td>
+<td>String</td>
+<td>File number that appears at the bottom of the project record. Not to be confused with reference!</td>
+</tr>
+</tbody></table>
+<h2 id='clients-created'>clients.created</h2>
+<p>This event is triggered whenever a client is created.</p>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"client_reference"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"enterprise"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"company_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MOKE INTERNATIONAL LIMITED"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"activity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Software"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Jane"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Doe"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"contact@moke-international.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"gender"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Ms"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0101010101"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"birth_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1986-09-17"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"info_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"202306001-C"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>reference</td>
+<td>String</td>
+<td>The reference of the client</td>
+</tr>
+<tr>
+<td>type</td>
+<td>String</td>
+<td>The type of the client can be either &quot;enterprise&quot; or &quot;individual&quot;</td>
+</tr>
+<tr>
+<td>company_name</td>
+<td>String</td>
+<td>Name of the company of the client</td>
+</tr>
+<tr>
+<td>activity</td>
+<td>String</td>
+<td>Activity of the client (only for enterprise)</td>
+</tr>
+<tr>
+<td>first_name</td>
+<td>String</td>
+<td>First name of the main contact of the client</td>
+</tr>
+<tr>
+<td>last_name</td>
+<td>String</td>
+<td>Last name of the main contact of the client</td>
+</tr>
+<tr>
+<td>email</td>
+<td>String</td>
+<td>Email of the main contact of the client</td>
+</tr>
+<tr>
+<td>gender</td>
+<td>String</td>
+<td><code>Mr</code>, <code>Ms</code> or <code>Undefined</code></td>
+</tr>
+<tr>
+<td>phone</td>
+<td>String</td>
+<td>Phone number of the contact as a string</td>
+</tr>
+<tr>
+<td>birth_date</td>
+<td>String</td>
+<td>Contact&#39;s date of birth in a &quot;YYYY-MM-DD&quot; format string</td>
+</tr>
+<tr>
+<td>info_number</td>
+<td>String</td>
+<td>File number that appears at the bottom of the client record. Not to be confused with reference!</td>
 </tr>
 </tbody></table>
 <h1 id='errors'>Errors</h1>
