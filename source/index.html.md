@@ -142,7 +142,7 @@ const headers = {
   Authorization: "Bearer <YOUR_TOKEN>",
 };
 
-axios.post(baseUrl + "/project?reference=project_reference", {}, headers);
+axios.get(baseUrl + "/project?reference=project_reference", headers);
 ```
 
 > It returns a JSON object structured like this:
@@ -283,7 +283,7 @@ axios.post(baseUrl + "/projects-upsert", body, headers);
 {
   "error": "false",
   "message": "ok",
-  "action": "Project Updated Successfuly",
+  "action": "Project successfully created",
   "reference": "project_reference"
 }
 ```
@@ -403,7 +403,7 @@ const headers = {
   Authorization: "Bearer <YOUR_TOKEN>",
 };
 
-axios.post(baseUrl + "/client?reference=client_reference", {}, headers);
+axios.get(baseUrl + "/client?reference=client_reference", headers);
 ```
 
 > It returns a JSON object structured like this:
@@ -418,7 +418,7 @@ axios.post(baseUrl + "/client?reference=client_reference", {}, headers);
   "first_name": "Jane",
   "last_name": "Doe",
   "email": "contact@moke-international.com",
-  "activity": "Sofware",
+  "activity": "Software",
   "vat_number": "GB 240-635-038",
   "siret": "09728676",
   "info_profile": "Prospect",
@@ -587,7 +587,7 @@ axios.post(baseUrl + "/clients-upsert", body, headers);
 {
   "error": "false",
   "message": "ok",
-  "action": "Client updated Successfully",
+  "action": "Client successfully created",
   "reference": "client_reference"
 }
 ```
@@ -639,7 +639,7 @@ const headers = {
   Authorization: "Bearer <YOUR_TOKEN>",
 };
 
-axios.post(baseUrl + "/supplier?reference=supplier_reference", {}, headers);
+axios.get(baseUrl + "/supplier?reference=supplier_reference", headers);
 ```
 
 > It returns a JSON object structured like this:
@@ -836,7 +836,7 @@ axios.post(baseUrl + "/suppliers-upsert", body, headers);
 {
   "error": "false",
   "message": "ok",
-  "action": "Supplier created Successfully",
+  "action": "Supplier successfully created",
   "reference": "supplier_reference"
 }
 ```
@@ -890,7 +890,7 @@ const headers = {
   Authorization: "Bearer <YOUR_TOKEN>",
 };
 
-axios.post(baseUrl + "/product?reference=product_reference", {}, headers);
+axios.get(baseUrl + "/product?reference=product_reference", headers);
 ```
 
 > It returns a JSON object structured like this:
@@ -1072,7 +1072,7 @@ axios.post(baseUrl + "/products-upsert", body, headers);
 {
   "error": "false",
   "message": "ok",
-  "action": "Product Created Successfully",
+  "action": "Product successfully created",
   "reference": "product_reference"
 }
 ```
@@ -1131,7 +1131,7 @@ const headers = {
   Authorization: "Bearer <YOUR_TOKEN>",
 };
 
-axios.post(baseUrl + "/package?reference=package_reference", {}, headers);
+axios.get(baseUrl + "/package?reference=package_reference", headers);
 ```
 
 > It returns a JSON object structured like this:
@@ -1273,7 +1273,7 @@ axios.post(baseUrl + "/packages-upsert", body, headers);
 {
   "error": "false",
   "message": "ok",
-  "action": "Package Created Successfully",
+  "action": "Package successfully created",
   "reference": "package_reference"
 }
 ```
@@ -1301,6 +1301,132 @@ axios.post(baseUrl + "/packages-upsert", body, headers);
 ### Response
 
 JSON object indicating whether an error has occurred during the process and, if so, the associated message. If there is no error, it also returns a `reference`: you will need to store this reference if you need to update or retrieve the package later on.
+
+# Webhooks
+
+## GET webhooks
+
+Returns a list of your webhook endpoints.
+
+```shell
+curl --location 'https://api.ezus.app/webhooks' \
+--header 'X-API-KEY: <YOUR_API_KEY>' \
+--header 'Authorization: Bearer <YOUR_TOKEN>'
+```
+
+```javascript
+const axios = require("axios");
+const baseUrl = "https://api.ezus.app";
+
+const headers = {
+  "X-API-KEY": "<YOUR_API_KEY>",
+  Authorization: "Bearer <YOUR_TOKEN>",
+};
+
+axios.get(baseUrl + "/webhooks", headers);
+```
+
+> It returns a JSON object structured like this:
+
+```json
+{
+  "error": "false",
+  "webhooks": [
+    {
+      "reference": "webhook_reference",
+      "endpoint": "webhook_endpoint",
+      "is_active": "true",
+      "events_types": "projects.created,clients.created",
+      "last_called_at": "2023-01-01 01:01:01"
+    }
+  ]
+}
+```
+
+### HTTP Endpoint
+
+`GET https://api.ezus.app/webhooks`
+
+### Header parameters
+
+| Parameter     | Type   | Description                                                 |
+| ------------- | ------ | ----------------------------------------------------------- |
+| X-API-KEY     | String | <span style="color:red">(Required)</span> Your Ezus API key |
+| Authorization | String | <span style="color:red">(Required)</span> Your Bearer token |
+
+### Response
+
+JSON object containing your webhooks information.
+
+| Property | Type | Description                               |
+| -------- | ---- | ----------------------------------------- |
+| webhooks | JSON | JSON object webhook ([Webhook](#webhook)) |
+
+## POST webhooks-upsert
+
+Update a webhook record if the provided reference does match one of the webhooks in your account, otherwise create a new webhook record with the provided reference (or with a random one if no reference is provided).
+
+```shell
+curl --location 'https://api.ezus.app/webhooks-upsert' \
+--header 'X-API-KEY: <YOUR_API_KEY>' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer <YOUR_TOKEN>' \
+--data '{
+    "reference": "webhook_reference",
+    "endpoint": "https://webhook.webhook/",
+    "is_active": "true",
+    "events_types": "projects.created,clients.created"
+}'
+```
+
+```javascript
+const axios = require("axios");
+const baseUrl = "https://api.ezus.app";
+
+const body = {
+  reference: "webhook_reference",
+  endpoint: "https://webhook.webhook/",
+  is_active: "true",
+  events_types: "projects.created,clients.created",
+};
+const headers = {
+  "X-API-KEY": "<YOUR_API_KEY>",
+  Authorization: "Bearer <YOUR_TOKEN>",
+};
+
+axios.post(baseUrl + "/webhooks-upsert", body, headers);
+```
+
+> It returns a JSON object structured like this:
+
+```json
+{
+  "error": "false",
+  "message": "ok",
+  "action": "Webhook successfully created",
+  "reference": "webhook_reference"
+}
+```
+
+### HTTP Endpoint
+
+`POST https://api.ezus.app/webhooks-upsert`
+
+### Header parameters
+
+| Parameter     | Type   | Description                                                 |
+| ------------- | ------ | ----------------------------------------------------------- |
+| X-API-KEY     | String | <span style="color:red">(Required)</span> Your Ezus API key |
+| Authorization | String | <span style="color:red">(Required)</span> Your Bearer token |
+
+### Body parameters (application/json)
+
+| Parameter    | Type   | Description                                                                                                                                                                                                                 |
+| ------------ | ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| reference    | String | If provided, the unique Ezus Reference associated to the webhook you want to update or create (in case the one you provided has never been used). If no reference is provided, a webhook will be created with a random one. |
+| endpoint     | String | This parameter is required if you create a new webhook. You cannot update the endpoint of an existing webhook.                                                                                                              |
+| is_active    | String | Status of the webhook `true` or `false`                                                                                                                                                                                     |
+| events_types | JSON   | The list of events to enable for this endpoint. At least 1 required, separated by commas if more than one. ([Events](#events))                                                                                              |
 
 # Nested Resources
 
@@ -1567,11 +1693,11 @@ Only the last 10 suppliers are returned in this object.
 One of the following options: `None`, `Everyone`, `User Group` or the following JSON object corresponding to an active Ezus user of this account
 
 ```json
-"user":{
+"user": {
     "email": "tommy@e-corp.com",
     "first_name": "Tommy",
     "last_name": "Atkins"
-  },
+}
 ```
 
 | Property   | Type   | Description            |
@@ -1579,3 +1705,119 @@ One of the following options: `None`, `Everyone`, `User Group` or the following 
 | email      | String | Email of the user      |
 | first_name | String | First name of the user |
 | last_name  | String | Last name of the user  |
+
+### Webhook
+
+```json
+"webhooks": [
+  {
+    "reference": "webhook_reference",
+    "endpoint": "webhook_endpoint",
+    "is_active": "true",
+    "events_types": "projects.created,clients.created",
+    "last_called_at": "2023-01-01 01:01:01"
+  },
+]
+```
+
+| Property       | Type   | Description                                                           |
+| -------------- | ------ | --------------------------------------------------------------------- |
+| reference      | String | The reference of the webhook                                          |
+| endpoint       | String | The endpoint URL of the webhook                                       |
+| is_active      | String | The status of the webhook `true` or `false`                           |
+| events_types   | String | The list of events for this endpoint ([Events](#events))              |
+| last_called_at | String | The webhook last called date in a "YYYY-MM-DD hh:mm:ss" format string |
+
+# Events
+
+## Basic event information
+
+This section provides an overview of the fundamental details related to a webhook event, including its unique identifier, type, creation timestamp, trigger source, and whether it's a duplication.
+
+```json
+{
+  "id": "event_id",
+  "object": "event",
+  "type": "projects.created",
+  "created": 1234567890,
+  "trigger_reference": "pro.ezus.io;projects-create",
+  "is_duplication": false,
+  "data": {...}
+}
+```
+
+| Property          | Type   | Description                                                                                                                                                                    |
+| ----------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| id                | String | Unique identifier for the event                                                                                                                                                |
+| object            | String | The object of the event. The event's target object is currently limited to `event` but in the future, webhooks will become capable of being triggered by various other events. |
+| type              | String | The type of the event                                                                                                                                                          |
+| created           | String | Time at which the object was created. Measured in seconds since the Unix epoch.                                                                                                |
+| trigger_reference | String | The trigger of the event. Indicates the source or origin from which the event was initiated.                                                                                   |
+| is_duplication    | String | Indicates whether the event originates from a duplication                                                                                                                      |
+| data              | String | Detailed information about the event. For more in-depth details, please refer to the sections below.                                                                           |
+
+## projects.created
+
+This event is triggered whenever a project is either created or duplicated.
+
+```json
+{
+  "data": {
+    "reference": "project_reference",
+    "info_title": "Paris fashion week 2024",
+    "trip_budget": "90000",
+    "trip_people": "15",
+    "trip_date_in": "2024-03-01",
+    "trip_date_out": "2024-03-09",
+    "trip_duration": "9",
+    "info_number": "202306001-P"
+  }
+}
+```
+
+| Property      | Type   | Description                                                                                                          |
+| ------------- | ------ | -------------------------------------------------------------------------------------------------------------------- |
+| reference     | String | The reference of the project                                                                                         |
+| info_title    | String | The title of the project                                                                                             |
+| trip_budget   | String | Forecasted budget for the alternative (the one that is entered manually not the actual one)                          |
+| trip_people   | String | Number of people                                                                                                     |
+| trip_date_in  | String | Date of the beginning of this alternative, in a "YYYY-MM-DD" format string. If it's empty, the project has no dates. |
+| trip_date_out | String | Date of the end of this alternative, in a "YYYY-MM-DD" format string. If it's empty, the project has no dates.       |
+| trip_duration | String | Number of days this project lasts                                                                                    |
+| info_number   | String | File number that appears at the bottom of the project record. Not to be confused with reference!                     |
+
+## clients.created
+
+This event is triggered whenever a client is created.
+
+```json
+{
+  "data": {
+    "reference": "client_reference",
+    "type": "enterprise",
+    "company_name": "MOKE INTERNATIONAL LIMITED",
+    "activity": "Software",
+    "first_name": "Jane",
+    "last_name": "Doe",
+    "email": "contact@moke-international.com",
+    "gender": "Ms",
+    "phone": "0101010101",
+    "birth_date": "1986-09-17",
+    "info_number": "202306001-C"
+  }
+}
+```
+
+| Property     | Type   | Description                                                                                     |
+| ------------ | ------ | ----------------------------------------------------------------------------------------------- |
+| reference    | String | The reference of the client                                                                     |
+| type         | String | The type of the client can be either "enterprise" or "individual"                               |
+| company_name | String | Name of the company of the client                                                               |
+| activity     | String | Activity of the client (only for enterprise)                                                    |
+| first_name   | String | First name of the main contact of the client                                                    |
+| last_name    | String | Last name of the main contact of the client                                                     |
+| email        | String | Email of the main contact of the client                                                         |
+| gender       | String | `Mr`, `Ms` or `Undefined`                                                                       |
+| phone        | String | Phone number of the contact as a string                                                         |
+| birth_date   | String | Contact's date of birth in a "YYYY-MM-DD" format string                                         |
+| info_number  | String | File number that appears at the bottom of the client record. Not to be confused with reference! |
