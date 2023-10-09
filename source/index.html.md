@@ -989,7 +989,7 @@ JSON object containing the product information.
 | quantity        | String | The default number for this product when it is added to a project. It can either be a Number or one of these letters (`P` = Number of people in the project, `D` = Number of days in the project, `N` = Number of nights in the project) |
 | vat_regime      | String | Can be either `classic` (common law VAT), `margin` (VAT on the margin), `none` (Non applicable VAT)                                                                                                                                      |
 | vat_rate        | Number | Default % of the VAT on the product                                                                                                                                                                                                      |
-| currency        | String | The ISO 4217 code who represent the currency you use (<a href="https://docs.google.com/spreadsheets/d/1b7BNOwKyN1hMOouve6xhFZ2R2zrH4Sj1L-646j755fU/edit?usp=sharing" target="_blank">Link to doc</a>)                                    |
+| currency        | String | The ISO 4217 currency code representing the currency you utilize (<a href="https://docs.google.com/spreadsheets/d/1b7BNOwKyN1hMOouve6xhFZ2R2zrH4Sj1L-646j755fU/edit?usp=sharing" target="_blank">Link to doc</a>)                        |
 | budget_text     | String | This is an empty string `""` if the product is not marked as an option in the budget, otherwise it is the custom label of the option to which the product is associated                                                                  |
 | buget_form      | String | `Important`, `Normal`, `Low` represent how the product will be highlight on the budget By Default                                                                                                                                        |
 | budget_variable | String | `Display`, `Do not Display`, this option tells if the product will be displayed or not in the budget                                                                                                                                     |
@@ -1355,9 +1355,9 @@ axios.get(baseUrl + "/invoice?reference=invoice_reference", headers);
   "actual": {
     "is_automatic": true,
     "purchase": null,
-    "amount_ht": null,
     "commission": null,
-    "vat_deducted": null
+    "vat_deducted": null,
+    "amount_ht": null
   },
   "project": {
     "reference": "project_reference",
@@ -1404,27 +1404,27 @@ axios.get(baseUrl + "/invoice?reference=invoice_reference", headers);
 
 JSON object containing the invoice information.
 
-| Property           | Type   | Description                                                                                                                                                                                           |
-| ------------------ | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| reference          | String | The reference of the invoice you wish to retrieve                                                                                                                                                     |
-| info_number        | String | Title of the invoice                                                                                                                                                                                  |
-| url                | String | URL of the invoice `.pdf` file                                                                                                                                                                        |
-| stage              | String | Stage of the invoice `draft` `completed` or `paid`                                                                                                                                                    |
-| type               | String | Type of the invoice `invoice` or `credit_note`                                                                                                                                                        |
-| origin_reference   | String | This is only displayed if the type of the invoice is a credit_note. The reference of the origin invoice.                                                                                              |
-| origin_info_number | String | This is only displayed if the type of the invoice is a credit_note. Title of the origin invoice.                                                                                                      |
-| created_date       | String | Date of the creation of this invoice, in a "YYYY-MM-DD" format                                                                                                                                        |
-| send_date          | String | Sent date of this invoice, in a "YYYY-MM-DD" format                                                                                                                                                   |
-| due_date           | String | Due date of this invoice, in a "YYYY-MM-DD" format                                                                                                                                                    |
-| amount_ttc         | Number | Amount of the invoice including taxes                                                                                                                                                                 |
-| amount_ht          | Number | Amount of the invoice excluding taxes                                                                                                                                                                 |
-| vat                | Number | VAT amount of the invoice                                                                                                                                                                             |
-| currency           | String | The ISO 4217 code who represent the currency you use (<a href="https://docs.google.com/spreadsheets/d/1b7BNOwKyN1hMOouve6xhFZ2R2zrH4Sj1L-646j755fU/edit?usp=sharing" target="_blank">Link to doc</a>) |
-| forecast           | JSON   | JSON object forecast ([Forecast](#forecast))                                                                                                                                                          |
-| actual             | JSON   | JSON object actual ([Actual](#actual))                                                                                                                                                                |
-| project            | JSON   | JSON object project ([Project](#project))                                                                                                                                                             |
-| alternative        | JSON   | JSON object alternative ([Alternative](#alternative))                                                                                                                                                 |
-| client             | JSON   | JSON object client ([Client](#client))                                                                                                                                                                |
+| Property           | Type   | Description                                                                                                                                                                                                       |
+| ------------------ | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| reference          | String | The reference of the invoice you wish to retrieve                                                                                                                                                                 |
+| info_number        | String | Title of the invoice                                                                                                                                                                                              |
+| url                | String | URL of the invoice `.pdf` file                                                                                                                                                                                    |
+| stage              | String | Stage of the invoice `draft` `completed` or `paid`                                                                                                                                                                |
+| type               | String | Type of the invoice `invoice` or `credit_note`                                                                                                                                                                    |
+| origin_reference   | String | This is only displayed if the type of the invoice is a `credit_note`. The reference of the origin invoice.                                                                                                        |
+| origin_info_number | String | This is only displayed if the type of the invoice is a `credit_note`. Title of the origin invoice.                                                                                                                |
+| created_date       | String | Date of the creation of this invoice, in a "YYYY-MM-DD" format                                                                                                                                                    |
+| send_date          | String | Sent date of this invoice, in a "YYYY-MM-DD" format                                                                                                                                                               |
+| due_date           | String | Due date of this invoice, in a "YYYY-MM-DD" format                                                                                                                                                                |
+| amount_ttc         | Number | Amount of the invoice including taxes                                                                                                                                                                             |
+| amount_ht          | Number | Amount of the invoice excluding taxes                                                                                                                                                                             |
+| vat                | Number | VAT amount of the invoice                                                                                                                                                                                         |
+| currency           | String | The ISO 4217 currency code representing the currency you utilize (<a href="https://docs.google.com/spreadsheets/d/1b7BNOwKyN1hMOouve6xhFZ2R2zrH4Sj1L-646j755fU/edit?usp=sharing" target="_blank">Link to doc</a>) |
+| forecast           | JSON   | JSON object forecast ([Invoices Amounts](#invoices-amounts))                                                                                                                                                      |
+| actual             | JSON   | JSON object actual ([Invoices Amounts](#invoices-amounts))                                                                                                                                                        |
+| project            | JSON   | JSON including: `reference`, `info_title`, `info_stage`, `info_number`, `currency` and `is_closed`                                                                                                                |
+| alternative        | JSON   | JSON including: `sort_order` and `title`                                                                                                                                                                          |
+| client             | JSON   | JSON including: `reference`, `type` (enterprise or individual), `company_name`, `first_name`, `last_name` and `email`                                                                                             |
 
 ## GET invoice-supplier
 
@@ -1531,22 +1531,22 @@ axios.get(
 
 JSON object containing the supplier invoice information.
 
-| Property     | Type   | Description                                                                                                                                                                                           |
-| ------------ | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| reference    | String | The reference of the supplier invoice you wish to retrieve                                                                                                                                            |
-| url          | String | URL of the supplier invoice `.pdf` file                                                                                                                                                               |
-| filename     | String | Filename of the supplier invoice                                                                                                                                                                      |
-| created_date | String | Date of the creation of this supplier invoice, in a "YYYY-MM-DD" format                                                                                                                               |
-| due_date     | String | Due date of the this supplier invoice, in a "YYYY-MM-DD" format                                                                                                                                       |
-| amount_ttc   | Number | Amount of the supplier invoice excluding taxes                                                                                                                                                        |
-| amount_ht    | Number | Amount of the supplier invoice including taxes                                                                                                                                                        |
-| vat          | Number | VAT amount of the supplier invoice                                                                                                                                                                    |
-| currency     | String | The ISO 4217 code who represent the currency you use (<a href="https://docs.google.com/spreadsheets/d/1b7BNOwKyN1hMOouve6xhFZ2R2zrH4Sj1L-646j755fU/edit?usp=sharing" target="_blank">Link to doc</a>) |
-| payments     | JSON   | JSON object payments ([Payments](#payments))                                                                                                                                                          |
-| supplier     | JSON   | JSON object supplier ([Supplier](#supplier))                                                                                                                                                          |
-| project      | JSON   | JSON object project ([Project](#project))                                                                                                                                                             |
-| alternative  | JSON   | JSON object alternative ([Alternative](#alternative))                                                                                                                                                 |
-| client       | JSON   | JSON object client ([Client](#client))                                                                                                                                                                |
+| Property     | Type   | Description                                                                                                                                                                                                       |
+| ------------ | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| reference    | String | The reference of the supplier invoice you wish to retrieve                                                                                                                                                        |
+| url          | String | URL of the supplier invoice file                                                                                                                                                                                  |
+| filename     | String | Filename of the supplier invoice                                                                                                                                                                                  |
+| created_date | String | Date of the creation of this supplier invoice, in a "YYYY-MM-DD" format                                                                                                                                           |
+| due_date     | String | Due date of the this supplier invoice, in a "YYYY-MM-DD" format                                                                                                                                                   |
+| amount_ttc   | Number | Amount of the supplier invoice excluding taxes                                                                                                                                                                    |
+| amount_ht    | Number | Amount of the supplier invoice including taxes                                                                                                                                                                    |
+| vat          | Number | VAT amount of the supplier invoice                                                                                                                                                                                |
+| currency     | String | The ISO 4217 currency code representing the currency you utilize (<a href="https://docs.google.com/spreadsheets/d/1b7BNOwKyN1hMOouve6xhFZ2R2zrH4Sj1L-646j755fU/edit?usp=sharing" target="_blank">Link to doc</a>) |
+| payments     | Array  | Array of JSON including: `date`, `amount` and `payment_method`                                                                                                                                                    |
+| supplier     | JSON   | JSON including: `reference`, `company_name` and `website`                                                                                                                                                         |
+| project      | JSON   | JSON including: `reference`, `info_title`, `info_stage`, `info_number`, `currency` and `is_closed`                                                                                                                |
+| alternative  | JSON   | JSON including: `sort_order` and `title`                                                                                                                                                                          |
+| client       | JSON   | JSON including: `reference`, `type` (enterprise or individual), `company_name`, `first_name`, `last_name` and `email`                                                                                             |
 
 # Webhooks
 
@@ -1602,11 +1602,11 @@ axios.get(baseUrl + "/webhooks", headers);
 
 ### Response
 
-JSON object containing your webhooks information.
+Array of JSON containing your webhooks information.
 
-| Property | Type | Description                               |
-| -------- | ---- | ----------------------------------------- |
-| webhooks | JSON | JSON object webhook ([Webhook](#webhook)) |
+| Property | Type  | Description                                      |
+| -------- | ----- | ------------------------------------------------ |
+| webhooks | Array | Array of JSON webhooks ([Webhooks](#webhooks-2)) |
 
 ## POST webhooks-upsert
 
@@ -1672,7 +1672,7 @@ axios.post(baseUrl + "/webhooks-upsert", body, headers);
 | reference    | String | If provided, the unique Ezus Reference associated to the webhook you want to update or create (in case the one you provided has never been used). If no reference is provided, a webhook will be created with a random one. |
 | endpoint     | String | This parameter is required if you create a new webhook. You cannot update the endpoint of an existing webhook.                                                                                                              |
 | is_active    | String | Status of the webhook `true` or `false`                                                                                                                                                                                     |
-| events_types | JSON   | The list of events to enable for this endpoint. At least 1 required, separated by commas if more than one. ([Events](#events))                                                                                              |
+| events_types | String | The list of events to enable for this endpoint. At least 1 required, separated by commas if more than one. ([Events](#events))                                                                                              |
 
 # Nested Resources
 
@@ -1720,18 +1720,18 @@ axios.post(baseUrl + "/webhooks-upsert", body, headers);
   ]
 ```
 
-| Property            | Type   | Description                                                                                                              |
-| ------------------- | ------ | ------------------------------------------------------------------------------------------------------------------------ |
-| alternative_title   | String | Title of the alternative                                                                                                 |
-| budget_actual       | String | Actual budget for the alternative (corresponding to its associated Ezus program)                                         |
-| trip_budget         | Number | Forecasted budget for the alternative (the one that is entered manually not the actual one)                              |
-| trip_people         | String | Number of people                                                                                                         |
-| trip_date_in        | String | Date of the beginning of this alternative, in a "YYYY-MM-DD" format string. If it's empty, the project has no dates      |
-| trip_date_out       | String | Date of the end of this alternative, in a "YYYY-MM-DD" format string. If it's empty, the project has no dates            |
-| trip_duration       | String | Number of days this alternative lasts                                                                                    |
-| trip_destination    | String | Destination of the alternative                                                                                           |
-| trip_subdestination | String | Subdestination of the alternative                                                                                        |
-| client              | JSON   | JSON that contain: `reference`, `type` (enterprise or individual), `company_name`, `first_name`, `last_name` and `email` |
+| Property            | Type   | Description                                                                                                           |
+| ------------------- | ------ | --------------------------------------------------------------------------------------------------------------------- |
+| alternative_title   | String | Title of the alternative                                                                                              |
+| budget_actual       | String | Actual budget for the alternative (corresponding to its associated Ezus program)                                      |
+| trip_budget         | Number | Forecasted budget for the alternative (the one that is entered manually not the actual one)                           |
+| trip_people         | String | Number of people                                                                                                      |
+| trip_date_in        | String | Date of the beginning of this alternative, in a "YYYY-MM-DD" format string. If it's empty, the project has no dates   |
+| trip_date_out       | String | Date of the end of this alternative, in a "YYYY-MM-DD" format string. If it's empty, the project has no dates         |
+| trip_duration       | String | Number of days this alternative lasts                                                                                 |
+| trip_destination    | String | Destination of the alternative                                                                                        |
+| trip_subdestination | String | Subdestination of the alternative                                                                                     |
+| client              | JSON   | JSON including: `reference`, `type` (enterprise or individual), `company_name`, `first_name`, `last_name` and `email` |
 
 ### Contacts
 
@@ -1824,6 +1824,35 @@ The technical name of a custom field can be found in the custom field edit modal
 | Checkbox          | String | The checkbox must be a string: "true" (checked) OR "false" (unchecked)                                                                                                                         |
 | Number            | String | Number type should be a Number without other character                                                                                                                                         |
 | File              | File   | Not supported yet                                                                                                                                                                              |
+
+### Invoices Amounts
+
+```json
+"forecast": {
+  "is_automatic": true,
+  "purchase": 0.0,
+  "commission": 0.0,
+  "vat_deducted": 0.0,
+  "amount_ht": 1000.0
+}
+"actual": {
+  "is_automatic": true,
+  "purchase": null,
+  "commission": null,
+  "vat_deducted": null,
+  "amount_ht": null
+}
+```
+
+Those objects provides insights into the invoice amounts, differentiating between actual figures and forecasts. Actual figures are available when the associated project is closed and the invoice is marked as `completed` or `paid`. Otherwise, `null` values are displayed.
+
+| Property     | Type    | Description                                                                              |
+| ------------ | ------- | ---------------------------------------------------------------------------------------- |
+| is_automatic | Boolean | Automatically use the figures of the project to which this invoice/credit_note is linked |
+| purchase     | Number  | Forecasted / Actual purchase                                                             |
+| commission   | Number  | Forecasted / Actual commission                                                           |
+| vat_deducted | Number  | Forecasted / Actual deductible VAT                                                       |
+| amount_ht    | Number  | Forecasted / Actual amount excluding taxes                                               |
 
 ### Langs
 
@@ -1952,7 +1981,7 @@ One of the following options: `None`, `Everyone`, `User Group` or the following 
 | first_name | String | First name of the user |
 | last_name  | String | Last name of the user  |
 
-### Webhook
+### Webhooks
 
 ```json
 "webhooks": [
@@ -2098,24 +2127,24 @@ This event is triggered whenever an invoice is finalized.
 }
 ```
 
-| Property           | Type   | Description                                                                                                                                                                                           |
-| ------------------ | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| reference          | String | The reference of the invoice                                                                                                                                                                          |
-| info_number        | String | Title of the invoice                                                                                                                                                                                  |
-| url                | String | URL of the invoice `.pdf` file                                                                                                                                                                        |
-| stage              | String | Stage of the invoice `draft` `completed` or `paid`                                                                                                                                                    |
-| type               | String | Type of the invoice `invoice` or `credit_note`                                                                                                                                                        |
-| origin_reference   | String | This is only displayed if the type of the invoice is a credit_note. The reference of the origin invoice.                                                                                              |
-| origin_info_number | String | This is only displayed if the type of the invoice is a credit_note. Title of the origin invoice.                                                                                                      |
-| created_date       | String | Date of the creation of this invoice, in a "YYYY-MM-DD" format                                                                                                                                        |
-| send_date          | String | Sent date of this invoice, in a "YYYY-MM-DD" format                                                                                                                                                   |
-| due_date           | String | Due date of this invoice, in a "YYYY-MM-DD" format                                                                                                                                                    |
-| amount_ttc         | Number | Amount of the invoice including taxes                                                                                                                                                                 |
-| amount_ht          | Number | Amount of the invoice excluding taxes                                                                                                                                                                 |
-| vat                | Number | VAT amount of the invoice                                                                                                                                                                             |
-| currency           | String | The ISO 4217 code who represent the currency you use (<a href="https://docs.google.com/spreadsheets/d/1b7BNOwKyN1hMOouve6xhFZ2R2zrH4Sj1L-646j755fU/edit?usp=sharing" target="_blank">Link to doc</a>) |
-| project_reference  | String | The reference of the project linked to this invoice                                                                                                                                                   |
-| alternative        | JSON   | JSON object alternative ([Alternative](#alternative))                                                                                                                                                 |
+| Property           | Type   | Description                                                                                                                                                                                                       |
+| ------------------ | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| reference          | String | The reference of the invoice                                                                                                                                                                                      |
+| info_number        | String | Title of the invoice                                                                                                                                                                                              |
+| url                | String | URL of the invoice `.pdf` file                                                                                                                                                                                    |
+| stage              | String | Stage of the invoice `draft` `completed` or `paid`                                                                                                                                                                |
+| type               | String | Type of the invoice `invoice` or `credit_note`                                                                                                                                                                    |
+| origin_reference   | String | This is only displayed if the type of the invoice is a `credit_note`. The reference of the origin invoice.                                                                                                        |
+| origin_info_number | String | This is only displayed if the type of the invoice is a `credit_note`. Title of the origin invoice.                                                                                                                |
+| created_date       | String | Date of the creation of this invoice, in a "YYYY-MM-DD" format                                                                                                                                                    |
+| send_date          | String | Sent date of this invoice, in a "YYYY-MM-DD" format                                                                                                                                                               |
+| due_date           | String | Due date of this invoice, in a "YYYY-MM-DD" format                                                                                                                                                                |
+| amount_ttc         | Number | Amount of the invoice including taxes                                                                                                                                                                             |
+| amount_ht          | Number | Amount of the invoice excluding taxes                                                                                                                                                                             |
+| vat                | Number | VAT amount of the invoice                                                                                                                                                                                         |
+| currency           | String | The ISO 4217 currency code representing the currency you utilize (<a href="https://docs.google.com/spreadsheets/d/1b7BNOwKyN1hMOouve6xhFZ2R2zrH4Sj1L-646j755fU/edit?usp=sharing" target="_blank">Link to doc</a>) |
+| project_reference  | String | The reference of the project linked to this invoice                                                                                                                                                               |
+| alternative        | JSON   | JSON including: `sort_order` and `title`                                                                                                                                                                          |
 
 ## invoices_suppliers.attached
 
@@ -2143,17 +2172,17 @@ This event is triggered whenever an file is added to a supplier invoice.
 }
 ```
 
-| Property           | Type   | Description                                                                                                                                                                                           |
-| ------------------ | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| reference          | String | The reference of the supplier invoice                                                                                                                                                                 |
-| url                | String | URL of the supplier invoice `.pdf` file                                                                                                                                                               |
-| filename           | String | Filename of the supplier invoice                                                                                                                                                                      |
-| created_date       | String | Date of the creation of this supplier invoice, in a "YYYY-MM-DD" format                                                                                                                               |
-| due_date           | String | Due date of this supplier invoice, in a "YYYY-MM-DD" format                                                                                                                                           |
-| amount_ttc         | Number | Amount of the supplier invoice including taxes                                                                                                                                                        |
-| amount_ht          | Number | Amount of the supplier invoice excluding taxes                                                                                                                                                        |
-| vat                | Number | VAT amount of the supplier invoice                                                                                                                                                                    |
-| currency           | String | The ISO 4217 code who represent the currency you use (<a href="https://docs.google.com/spreadsheets/d/1b7BNOwKyN1hMOouve6xhFZ2R2zrH4Sj1L-646j755fU/edit?usp=sharing" target="_blank">Link to doc</a>) |
-| supplier_reference | String | The reference of the supplier linked to this supplier invoice                                                                                                                                         |
-| project_reference  | String | The reference of the project linked to this supplier invoice                                                                                                                                          |
-| alternative        | JSON   | JSON object alternative ([Alternative](#alternative))                                                                                                                                                 |
+| Property           | Type   | Description                                                                                                                                                                                                       |
+| ------------------ | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| reference          | String | The reference of the supplier invoice                                                                                                                                                                             |
+| url                | String | URL of the supplier invoice file                                                                                                                                                                                  |
+| filename           | String | Filename of the supplier invoice                                                                                                                                                                                  |
+| created_date       | String | Date of the creation of this supplier invoice, in a "YYYY-MM-DD" format                                                                                                                                           |
+| due_date           | String | Due date of this supplier invoice, in a "YYYY-MM-DD" format                                                                                                                                                       |
+| amount_ttc         | Number | Amount of the supplier invoice including taxes                                                                                                                                                                    |
+| amount_ht          | Number | Amount of the supplier invoice excluding taxes                                                                                                                                                                    |
+| vat                | Number | VAT amount of the supplier invoice                                                                                                                                                                                |
+| currency           | String | The ISO 4217 currency code representing the currency you utilize (<a href="https://docs.google.com/spreadsheets/d/1b7BNOwKyN1hMOouve6xhFZ2R2zrH4Sj1L-646j755fU/edit?usp=sharing" target="_blank">Link to doc</a>) |
+| supplier_reference | String | The reference of the supplier linked to this supplier invoice                                                                                                                                                     |
+| project_reference  | String | The reference of the project linked to this supplier invoice                                                                                                                                                      |
+| alternative        | JSON   | JSON including: `sort_order` and `title`                                                                                                                                                                          |
