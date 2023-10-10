@@ -1375,7 +1375,6 @@ axios.get(baseUrl + "/invoice?reference=invoice_reference", headers);
     "reference": "client_reference",
     "type": "enterprise",
     "company_name": "MOKE INTERNATIONAL LIMITED",
-    "website": "www.moke_ltd.com",
     "first_name": "Jane",
     "last_name": "Doe",
     "email": "contact@moke-international.com"
@@ -1502,7 +1501,6 @@ axios.get(
     "reference": "client_reference",
     "type": "enterprise",
     "company_name": "MOKE INTERNATIONAL LIMITED",
-    "website": "www.moke_ltd.com",
     "first_name": "Jane",
     "last_name": "Doe",
     "email": "contact@moke-international.com"
