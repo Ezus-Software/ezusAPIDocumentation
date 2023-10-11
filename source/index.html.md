@@ -687,7 +687,7 @@ axios.post(baseUrl + "/deposits-create", body, headers);
 | ----------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------- |
 | project_reference | String | <span style="color:red">(Required)</span> The reference is mandatory and refers to the project to which the payment will be added.        |
 | alternative_order | String | Alternative number, if not entered, the payment will be added to the project's main alternative.                                          |
-| amount            | int    | Payment amount in centimes                                                                                                                |
+| amount            | int    | Payment amount in cents                                                                                                                   |
 | type              | String | Type can be `deposit`, `payment`, `final_payment`, `extra_paid`. By default the deposits will be a `deposit`                              |
 | date              | String | The date must be a string in "YYYY-MM-DD" format. If it is not filled in or is invalid, the payment will be assigned to the current date. |
 | payment_method    | String | Technical name of the payment method, you can find it in Settings - Custom fields                                                         |
