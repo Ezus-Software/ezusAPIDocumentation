@@ -525,6 +525,7 @@ curl --location 'https://api.ezus.app/clients-upsert' \
     "reference": "client_reference",
     "company_name": "MOKE INTERNATIONAL LIMITED",
     "website": "www.moke_ltd.com",
+    "user": "sam@proton.me",
     "contact": {
         "email": "contact@moke-international.com",
         "first_name": "Jane",
@@ -555,6 +556,7 @@ const body = {
   reference: "client_reference",
   company_name: "MOKE INTERNATIONAL LIMITED",
   website: "www.moke_ltd.com",
+  user: "sam@proton.me",
   contact: {
     email: "contact@moke-international.com",
     first_name: "Jane",
@@ -610,6 +612,7 @@ axios.post(baseUrl + "/clients-upsert", body, headers);
 | reference     | String | If provided, the unique reference associated to the client you want to update or create (in case the one you provided has never been used). If no reference is provided, a client will be created with a random one.                                                    |
 | company_name  | String | <span style="color:red">(Required)</span> Set a company name - If company name is empty, the client will be set as an individual and the name of the client = name of the contact and if the company name is not empty, the name of the client will be the company name |
 | website       | String | Website of the client                                                                                                                                                                                                                                                   |
+| user          | Email  | Email of the Ezus user that will be set as the owner of the client. By default, if no owner is provided or the provided email do not match any user on this account, the owner will be assigned to everyone                                                             |
 | contact       | JSON   | Contact is a single JSON element and email is needed. Note that only one contact can be upsert this way (the main contact of the client) ([Contacts](#contacts)) To reset the main contact, you can put `'0'`                                                           |
 | address       | JSON   | JSON object address ([Address](#address)) To reset the address, you can put `'0'`                                                                                                                                                                                       |
 | custom_fields | JSON   | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                                                                                                                           |
@@ -774,6 +777,7 @@ curl --location 'https://api.ezus.app/suppliers-upsert' \
     "company_name": "The best hotel",
     "website": "www.the_best_hotel.com",
     "capacity": 200,
+    "user": "sam@proton.me",
     "type": "accom, activity",
     "contact": {
         "email": "bob@proton.me",
@@ -805,6 +809,7 @@ const body = {
   company_name: "The best hotel",
   website: "www.the_best_hotel.com",
   capacity: 200,
+  user: "sam@proton.me",
   type: "accom, activity"
   contact: {
     email: "bob@proton.me",
@@ -860,6 +865,7 @@ axios.post(baseUrl + "/suppliers-upsert", body, headers);
 | company_name  | String | Name of the supplier. This parameter is required if you create a new supplier                                                                                                                                                                 |     |
 | website       | String | Website of the supplier                                                                                                                                                                                                                       |
 | capacity      | Number | Maximum number of people for which the supplier can be used. Leave blank `''` if not relevant                                                                                                                                                 |
+| user          | Email  | Email of the Ezus user that will be set as the owner of the supplier. By default, if no owner is provided or the provided email do not match any user on this account, the owner will be assigned to everyone                                 |
 | type          | String | Either `undefined` or a combination of these 3 options: `accom`, `activity`, `transport`. You can select multiple options by separating them with comas ("accom, activity" for instance). Enter "undefined" if you want to reset this params. |
 | contact       | JSON   | Contact is a single JSON and email is needed. Note that only one contact can be upsert this way (the main contact of the supplier) ([Contact](#contacts)) To reset the main contact, you can put `'0'`                                        |
 | address       | JSON   | JSON object address ([Address](#address)) To reset the address, you can put `'0'`                                                                                                                                                             |
