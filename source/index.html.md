@@ -1341,7 +1341,7 @@ axios.get(baseUrl + "/invoices?stage=finalized&is_in_netsuite=false", headers);
       "reference": "invoice_reference",
       "info_number": "2023_101010",
       "url": "https://ezus.io/2023_101010.pdf",
-      "stage": "draft",
+      "stage": "completed",
       "type": "credit_note",
       "origin_reference": "origin_reference",
       "origin_info_number": "2023_101009",
@@ -1416,12 +1416,12 @@ JSON object containing the invoice information.
 
 | Property  | Type   | Description                                                                                                              |
 | --------- | ------ | ------------------------------------------------------------------------------------------------------------------------ |
-| error     | String | false if no errors append else true                                                                                      |
+| error     | String | false if no errors occurs else true                                                                                      |
 | token     | String | A token will be returned if all invoices have not been returned. Use it in another call to access the following invoices |
 | size      | Number | The total number of invoices available with these filters                                                                |
 | data_size | Number | Number of invoices returned                                                                                              |
 | page      | Number | The page number                                                                                                          |
-| invoices  | Array  | An array of JSON containing all the invoices returned formated like GET `invoice` ([GET invoice](#get_invoices))         |
+| invoices  | Array  | An array of JSON containing all the invoices returned formated like GET `invoice` ([GET invoice](get_invoices))          |
 
 ## GET invoice
 
