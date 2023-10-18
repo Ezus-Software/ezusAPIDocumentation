@@ -1421,7 +1421,7 @@ JSON object containing the invoice information.
 | size      | Number | The total number of invoices available with these filters                                                                |
 | data_size | Number | Number of invoices returned                                                                                              |
 | page      | Number | The page number                                                                                                          |
-| invoices  | Array  | An array of JSON containing all the invoices returned formated like GET `invoice` ([GET invoice](get_invoices))          |
+| invoices  | Array  | An array of JSON containing all the invoices returned formated like GET `invoice` ([GET invoice](#get-invoices))         |
 
 ## GET invoice
 
