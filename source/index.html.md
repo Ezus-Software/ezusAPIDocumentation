@@ -1331,7 +1331,7 @@ axios.get(baseUrl + "/invoices?stage=finalized&is_in_netsuite=false", headers);
 ```json
 {
   "error": "false",
-  "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJtZW51X211bG11bCI6Im9wdDEiLCJudW1iZXIiOiIyMDAwMCIsInBhZ2UiOjEsInBlcnNvX2ludm9pY2UiOiJHRyIsInN0YWdlIjoicGFpZCIsIl9fdGltZSI6MTY5NzQ0NjEzNX0.jEs7aL3UzCNrjzwDtAUbq4Rt4T64nu2LBYC0NnQhHiA",
+  "next_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJtZW51X211bG11bCI6Im9wdDEiLCJudW1iZXIiOiIyMDAwMCIsInBhZ2UiOjEsInBlcnNvX2ludm9pY2UiOiJHRyIsInN0YWdlIjoicGFpZCIsIl9fdGltZSI6MTY5NzQ0NjEzNX0.jEs7aL3UzCNrjzwDtAUbq4Rt4T64nu2LBYC0NnQhHiA",
   "size": 338,
   "data_size": 50,
   "page": 1,
@@ -1407,7 +1407,7 @@ axios.get(baseUrl + "/invoices?stage=finalized&is_in_netsuite=false", headers);
 | Parameter      | Type   | Description                                                                                                                                                                                       |
 | -------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | stage          | String | The stage of the invoice you wish to retrieve can be `paid`, `completed` or `draft`                                                                                                               |
-| token          | String | The invoice token, given after the first call with certain filters active. This token is valid for 24 hours, after which the filters used will be applied. This token overrides all other filters |
+| next_token     | String | The invoice token, given after the first call with certain filters active. This token is valid for 24 hours, after which the filters used will be applied. This token overrides all other filters |
 | technical_name | String | You can filter invoices by their custom fields by adding the technical name of the custom field as a parameter and the desired value as a value.                                                  |
 
 ### Response
