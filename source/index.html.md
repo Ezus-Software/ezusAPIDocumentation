@@ -1364,7 +1364,7 @@ JSON object containing your webhooks information.
 
 ## POST webhooks-upsert
 
-Update a webhook record if the provided reference does match one of the webhooks in your account, otherwise create a new webhook record with the provided reference (or with a random one if no reference is provided).
+Update a webhook record if the provided reference or endpoint does match one of the webhooks in your account, otherwise create a new webhook record with the provided reference (or with a random one if no reference is provided).
 
 ```shell
 curl --location 'https://api.ezus.app/webhooks-upsert' \
@@ -1421,12 +1421,72 @@ axios.post(baseUrl + "/webhooks-upsert", body, headers);
 
 ### Body parameters (application/json)
 
-| Parameter    | Type   | Description                                                                                                                                                                                                                 |
-| ------------ | ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| reference    | String | If provided, the unique Ezus Reference associated to the webhook you want to update or create (in case the one you provided has never been used). If no reference is provided, a webhook will be created with a random one. |
-| endpoint     | String | This parameter is required if you create a new webhook. You cannot update the endpoint of an existing webhook.                                                                                                              |
-| is_active    | String | Status of the webhook `true` or `false`                                                                                                                                                                                     |
-| events_types | JSON   | The list of events to enable for this endpoint. At least 1 required, separated by commas if more than one. ([Events](#events))                                                                                              |
+| Parameter    | Type   | Description                                                                                                                                                                                                                                                              |
+| ------------ | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| reference    | String | If provided, the unique Ezus Reference associated to the webhook you want to update or create (in case the one you provided has never been used). If no reference is provided, a webhook will be created with a random one.                                              |
+| endpoint     | String | If provided, the endpoint associated to the webhook you want to update or create (in case the one you provided has never been used). This parameter is required if you create a new webhook and has to be unique. You cannot update the endpoint of an existing webhook. |
+| is_active    | String | Status of the webhook `true` or `false`                                                                                                                                                                                                                                  |
+| events_types | JSON   | The list of events to enable for this endpoint. At least 1 required, separated by commas if more than one. ([Events](#events))                                                                                                                                           |
+
+## DELETE webhooks-delete
+
+Delete a webhook record if the provided reference or endpoint does match one of the webhooks in your account.
+
+```shell
+curl --request "DELETE" \
+--location 'https://api.ezus.app/webhooks-upsert' \
+--header 'X-API-KEY: <YOUR_API_KEY>' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer <YOUR_TOKEN>' \
+--data '{
+    "reference": "webhook_reference",
+    "endpoint": "https://webhook.webhook/"
+}'
+```
+
+```javascript
+const axios = require("axios");
+const baseUrl = "https://api.ezus.app";
+
+const body = {
+  reference: "webhook_reference",
+  endpoint: "https://webhook.webhook/",
+};
+const headers = {
+  "X-API-KEY": "<YOUR_API_KEY>",
+  Authorization: "Bearer <YOUR_TOKEN>",
+};
+
+axios.delete(baseUrl + "/webhooks-upsert", body, headers);
+```
+
+> It returns a JSON object structured like this:
+
+```json
+{
+  "error": "false",
+  "message": "ok",
+  "action": "Webhook successfully deleted"
+}
+```
+
+### HTTP Endpoint
+
+`DELETE https://api.ezus.app/webhooks-delete`
+
+### Header parameters
+
+| Parameter     | Type   | Description                                                 |
+| ------------- | ------ | ----------------------------------------------------------- |
+| X-API-KEY     | String | <span style="color:red">(Required)</span> Your Ezus API key |
+| Authorization | String | <span style="color:red">(Required)</span> Your Bearer token |
+
+### Body parameters (application/json)
+
+| Parameter | Type   | Description                                                                         |
+| --------- | ------ | ----------------------------------------------------------------------------------- |
+| reference | String | If provided, the unique Ezus Reference associated to the webhook you want to delete |
+| endpoint  | String | If provided, the endpoint associated to the webhook you want to t delete            |
 
 # Nested Resources
 
