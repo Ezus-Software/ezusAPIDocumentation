@@ -620,12 +620,12 @@ JSON object indicating whether an error has occurred during the process and, if 
 
 # Deposits
 
-## POST deposits-create
+## PUT deposits-create
 
 Create a deposit in a project
 
 ```shell
-curl --location 'https://api.ezus.app/deposits-create' \
+curl --location --request PUT 'https://api.ezus.app/deposits-create' \
 --header 'x-api-key: <YOUR_API_KEY>' \
 --header 'Content-Type: application/json' \
 --header 'Authorization: Bearer <YOUR_TOKEN>' \
@@ -658,7 +658,7 @@ const headers = {
   Authorization: "Bearer <YOUR_TOKEN>",
 };
 
-axios.post(baseUrl + "/deposits-create", body, headers);
+axios.put(baseUrl + "/deposits-create", body, headers);
 ```
 
 > It returns a JSON object structured like this:
