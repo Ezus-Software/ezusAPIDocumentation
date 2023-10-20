@@ -1310,6 +1310,125 @@ JSON object indicating whether an error has occurred during the process and, if 
 
 # Invoices
 
+## GET invoices
+
+Retrieve information for a list of invoices record in Ezus. You must specify to the Ezus API which filters you want to apply on the invoices list. The return of this invoice list is paginated with a token, to call the following elements of the list, you must call the route with the token
+
+```shell
+curl --location 'https://api.ezus.app/invoices?stage=finalized&is_in_netsuite=false' \
+--header 'x-api-key: <YOUR_API_KEY>' \
+--header 'Authorization: Bearer <YOUR_TOKEN>'
+```
+
+```javascript
+const axios = require("axios");
+const baseUrl = "https://api.ezus.app";
+
+const headers = {
+  "x-api-key": "<YOUR_API_KEY>",
+  Authorization: "Bearer <YOUR_TOKEN>",
+};
+
+axios.get(baseUrl + "/invoices?stage=finalized&is_in_netsuite=false", headers);
+```
+
+> It returns a JSON object structured like this:
+
+```json
+{
+  "error": "false",
+  "next_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJtZW51X211bG11bCI6Im9wdDEiLCJudW1iZXIiOiIyMDAwMCIsInBhZ2UiOjEsInBlcnNvX2ludm9pY2UiOiJHRyIsInN0YWdlIjoicGFpZCIsIl9fdGltZSI6MTY5NzQ0NjEzNX0.jEs7aL3UzCNrjzwDtAUbq4Rt4T64nu2LBYC0NnQhHiA",
+  "size": 338,
+  "data_size": 50,
+  "page": 1,
+  "invoices": [
+    {
+      "error": "false",
+      "reference": "invoice_reference",
+      "info_number": "2023_101010",
+      "url": "https://ezus.io/2023_101010.pdf",
+      "stage": "completed",
+      "type": "credit_note",
+      "origin_reference": "origin_reference",
+      "origin_info_number": "2023_101009",
+      "created_date": "2023-10-10",
+      "send_date": "2023-10-10",
+      "due_date": "2023-10-10",
+      "amount_ttc": 1200.0,
+      "amount_ht": 1000.0,
+      "vat": 200.0,
+      "currency": "EUR",
+      "forecast": {
+        "is_automatic": true,
+        "purchase": 0.0,
+        "commission": 0.0,
+        "vat_deducted": 0.0,
+        "amount_ht": 1000.0
+      },
+      "actual": {
+        "is_automatic": true,
+        "purchase": null,
+        "commission": null,
+        "vat_deducted": null,
+        "amount_ht": null
+      },
+      "project": {
+        "reference": "project_reference",
+        "info_title": "Paris fashion week 2024",
+        "info_stage": "Confirmed",
+        "info_number": "202306001-P",
+        "currency": "EUR",
+        "is_closed": false
+      },
+      "alternative": {
+        "sort_order": "0",
+        "title": "Main Alternative"
+      },
+      "client": {
+        "reference": "client_reference",
+        "type": "enterprise",
+        "company_name": "MOKE INTERNATIONAL LIMITED",
+        "first_name": "Jane",
+        "last_name": "Doe",
+        "email": "contact@moke-international.com"
+      }
+    },...
+  ]
+}
+```
+
+### HTTP Endpoint
+
+`GET https://api.ezus.app/invoice`
+
+### Header parameters
+
+| Parameter     | Type   | Description                                                 |
+| ------------- | ------ | ----------------------------------------------------------- |
+| x-api-key     | String | <span style="color:red">(Required)</span> Your Ezus API key |
+| Authorization | String | <span style="color:red">(Required)</span> Your Bearer token |
+
+### Query parameters
+
+| Parameter      | Type   | Description                                                                                                                                                                                       |
+| -------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| stage          | String | The stage of the invoice you wish to retrieve can be `paid`, `completed` or `draft`                                                                                                               |
+| next_token     | String | The invoice token, given after the first call with certain filters active. This token is valid for 24 hours, after which the filters used will be applied. This token overrides all other filters |
+| technical_name | String | You can filter invoices by their custom fields by adding the technical name of the custom field as a parameter and the desired value as a value.                                                  |
+
+### Response
+
+JSON object containing the invoice information.
+
+| Property  | Type   | Description                                                                                                              |
+| --------- | ------ | ------------------------------------------------------------------------------------------------------------------------ |
+| error     | String | false if no errors occurs else true                                                                                      |
+| token     | String | A token will be returned if all invoices have not been returned. Use it in another call to access the following invoices |
+| size      | Number | The total number of invoices available with these filters                                                                |
+| data_size | Number | Number of invoices returned                                                                                              |
+| page      | Number | The page number                                                                                                          |
+| invoices  | Array  | An array of JSON containing all the invoices returned formated like GET `invoice` ([GET invoice](#get-invoice))          |
+
 ## GET invoice
 
 Retrieve information for an invoice record in Ezus. You must specify to the Ezus API which invoice you wish to retrieve, by indicating its appropriate reference in your query parameter.
