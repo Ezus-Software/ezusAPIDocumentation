@@ -387,6 +387,17 @@
               </ul>
           </li>
           <li>
+            <a href="#invoices" class="toc-h1 toc-link" data-title="Invoices">Invoices</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#get-invoice" class="toc-h2 toc-link" data-title="GET invoice">GET invoice</a>
+                  </li>
+                  <li>
+                    <a href="#get-invoice-supplier" class="toc-h2 toc-link" data-title="GET invoice-supplier">GET invoice-supplier</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
             <a href="#webhooks" class="toc-h1 toc-link" data-title="Webhooks">Webhooks</a>
               <ul class="toc-list-h2">
                   <li>
@@ -413,6 +424,9 @@
                     <a href="#custom-fields" class="toc-h2 toc-link" data-title="Custom Fields">Custom Fields</a>
                   </li>
                   <li>
+                    <a href="#invoices-amounts" class="toc-h2 toc-link" data-title="Invoices Amounts">Invoices Amounts</a>
+                  </li>
+                  <li>
                     <a href="#langs" class="toc-h2 toc-link" data-title="Langs">Langs</a>
                   </li>
                   <li>
@@ -431,7 +445,7 @@
                     <a href="#user" class="toc-h2 toc-link" data-title="User">User</a>
                   </li>
                   <li>
-                    <a href="#webhook" class="toc-h2 toc-link" data-title="Webhook">Webhook</a>
+                    <a href="#webhooks-2" class="toc-h2 toc-link" data-title="Webhooks">Webhooks</a>
                   </li>
               </ul>
           </li>
@@ -446,6 +460,12 @@
                   </li>
                   <li>
                     <a href="#clients-created" class="toc-h2 toc-link" data-title="clients.created">clients.created</a>
+                  </li>
+                  <li>
+                    <a href="#invoices-finalized" class="toc-h2 toc-link" data-title="invoices.finalized">invoices.finalized</a>
+                  </li>
+                  <li>
+                    <a href="#invoices_suppliers-attached" class="toc-h2 toc-link" data-title="invoices_suppliers.attached">invoices_suppliers.attached</a>
                   </li>
               </ul>
           </li>
@@ -1799,7 +1819,7 @@ Quick tip: You can <a href="https://ezus-public-documentation.s3.eu-west-1.amazo
 <tr>
 <td>currency</td>
 <td>String</td>
-<td>The ISO 4217 code who represent the currency you use (<a href="https://docs.google.com/spreadsheets/d/1b7BNOwKyN1hMOouve6xhFZ2R2zrH4Sj1L-646j755fU/edit?usp=sharing" target="_blank">Link to doc</a>)</td>
+<td>The ISO 4217 currency code representing the currency you utilize (<a href="https://docs.google.com/spreadsheets/d/1b7BNOwKyN1hMOouve6xhFZ2R2zrH4Sj1L-646j755fU/edit?usp=sharing" target="_blank">Link to doc</a>)</td>
 </tr>
 <tr>
 <td>budget_text</td>
@@ -2290,6 +2310,406 @@ Quick tip: You can <a href="https://ezus-public-documentation.s3.eu-west-1.amazo
 </tbody></table>
 <h3 id='response-12'>Response</h3>
 <p>JSON object indicating whether an error has occurred during the process and, if so, the associated message. If there is no error, it also returns a <code>reference</code>: you will need to store this reference if you need to update or retrieve the package later on.</p>
+<h1 id='invoices'>Invoices</h1><h2 id='get-invoice'>GET invoice</h2>
+<p>Retrieve information for an invoice record in Ezus. You must specify to the Ezus API which invoice you wish to retrieve, by indicating its appropriate reference in your query parameter.</p>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="s1">'https://api.ezus.app/invoice?reference=invoice_reference'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'x-api-key: &lt;YOUR_API_KEY&gt;'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Bearer &lt;YOUR_TOKEN&gt;'</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">axios</span><span class="dl">"</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">baseUrl</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">https://api.ezus.app</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="dl">"</span><span class="s2">x-api-key</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">&lt;YOUR_API_KEY&gt;</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">Authorization</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Bearer &lt;YOUR_TOKEN&gt;</span><span class="dl">"</span><span class="p">,</span>
+<span class="p">};</span>
+
+<span class="nx">axios</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="nx">baseUrl</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">/invoice?reference=invoice_reference</span><span class="dl">"</span><span class="p">,</span> <span class="nx">headers</span><span class="p">);</span>
+</code></pre></div>
+<blockquote>
+<p>It returns a JSON object structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">"false"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"invoice_reference"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"info_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2023_101010"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ezus.io/2023_101010.pdf"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"stage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"draft"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"credit_note"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"origin_reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"origin_reference"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"origin_info_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2023_101009"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"created_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2023-10-10"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"send_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2023-10-10"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"due_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2023-10-10"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"amount_ttc"</span><span class="p">:</span><span class="w"> </span><span class="mf">1200.0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"amount_ht"</span><span class="p">:</span><span class="w"> </span><span class="mf">1000.0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"vat"</span><span class="p">:</span><span class="w"> </span><span class="mf">200.0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EUR"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"forecast"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"is_automatic"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"purchase"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"commission"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"vat_deducted"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"amount_ht"</span><span class="p">:</span><span class="w"> </span><span class="mf">1000.0</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"actual"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"is_automatic"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"purchase"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"commission"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"vat_deducted"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"amount_ht"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"project"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"project_reference"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"info_title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Paris fashion week 2024"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"info_stage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Confirmed"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"info_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"202306001-P"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EUR"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"is_closed"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"alternative"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"sort_order"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Main Alternative"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"client"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"client_reference"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"enterprise"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"company_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MOKE INTERNATIONAL LIMITED"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Jane"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Doe"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"contact@moke-international.com"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='http-endpoint-13'>HTTP Endpoint</h3>
+<p><code>GET https://api.ezus.app/invoice</code></p>
+<h3 id='header-parameters-13'>Header parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>x-api-key</td>
+<td>String</td>
+<td><span style="color:red">(Required)</span> Your Ezus API key</td>
+</tr>
+<tr>
+<td>Authorization</td>
+<td>String</td>
+<td><span style="color:red">(Required)</span> Your Bearer token</td>
+</tr>
+</tbody></table>
+<h3 id='query-parameters-6'>Query parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>reference</td>
+<td>String</td>
+<td><span style="color:red">(Required)</span> The reference of the invoice you wish to retrieve</td>
+</tr>
+</tbody></table>
+<h3 id='response-13'>Response</h3>
+<p>JSON object containing the invoice information.</p>
+
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>reference</td>
+<td>String</td>
+<td>The reference of the invoice you wish to retrieve</td>
+</tr>
+<tr>
+<td>info_number</td>
+<td>String</td>
+<td>Title of the invoice</td>
+</tr>
+<tr>
+<td>url</td>
+<td>String</td>
+<td>URL of the invoice <code>.pdf</code> file</td>
+</tr>
+<tr>
+<td>stage</td>
+<td>String</td>
+<td>Stage of the invoice <code>draft</code> <code>completed</code> or <code>paid</code></td>
+</tr>
+<tr>
+<td>type</td>
+<td>String</td>
+<td>Type of the invoice <code>invoice</code> or <code>credit_note</code></td>
+</tr>
+<tr>
+<td>origin_reference</td>
+<td>String</td>
+<td>This is only displayed if the type of the invoice is a <code>credit_note</code>. The reference of the origin invoice.</td>
+</tr>
+<tr>
+<td>origin_info_number</td>
+<td>String</td>
+<td>This is only displayed if the type of the invoice is a <code>credit_note</code>. Title of the origin invoice.</td>
+</tr>
+<tr>
+<td>created_date</td>
+<td>String</td>
+<td>Date of the creation of this invoice, in a &quot;YYYY-MM-DD&quot; format</td>
+</tr>
+<tr>
+<td>send_date</td>
+<td>String</td>
+<td>Sent date of this invoice, in a &quot;YYYY-MM-DD&quot; format</td>
+</tr>
+<tr>
+<td>due_date</td>
+<td>String</td>
+<td>Due date of this invoice, in a &quot;YYYY-MM-DD&quot; format</td>
+</tr>
+<tr>
+<td>amount_ttc</td>
+<td>Number</td>
+<td>Amount of the invoice including taxes</td>
+</tr>
+<tr>
+<td>amount_ht</td>
+<td>Number</td>
+<td>Amount of the invoice excluding taxes</td>
+</tr>
+<tr>
+<td>vat</td>
+<td>Number</td>
+<td>VAT amount of the invoice</td>
+</tr>
+<tr>
+<td>currency</td>
+<td>String</td>
+<td>The ISO 4217 currency code representing the currency you utilize (<a href="https://docs.google.com/spreadsheets/d/1b7BNOwKyN1hMOouve6xhFZ2R2zrH4Sj1L-646j755fU/edit?usp=sharing" target="_blank">Link to doc</a>)</td>
+</tr>
+<tr>
+<td>forecast</td>
+<td>JSON</td>
+<td>JSON object forecast (<a href="#invoices-amounts">Invoices Amounts</a>)</td>
+</tr>
+<tr>
+<td>actual</td>
+<td>JSON</td>
+<td>JSON object actual (<a href="#invoices-amounts">Invoices Amounts</a>)</td>
+</tr>
+<tr>
+<td>project</td>
+<td>JSON</td>
+<td>JSON including: <code>reference</code>, <code>info_title</code>, <code>info_stage</code>, <code>info_number</code>, <code>currency</code> and <code>is_closed</code></td>
+</tr>
+<tr>
+<td>alternative</td>
+<td>JSON</td>
+<td>JSON including: <code>sort_order</code> and <code>title</code></td>
+</tr>
+<tr>
+<td>client</td>
+<td>JSON</td>
+<td>JSON including: <code>reference</code>, <code>type</code> (enterprise or individual), <code>company_name</code>, <code>first_name</code>, <code>last_name</code> and <code>email</code></td>
+</tr>
+</tbody></table>
+<h2 id='get-invoice-supplier'>GET invoice-supplier</h2>
+<p>Retrieve information for a supplier invoice record in Ezus. You must specify to the Ezus API which supplier invoice you wish to retrieve, by indicating its appropriate reference in your query parameter.</p>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="s1">'https://api.ezus.app/invoice-supplier?reference=invoice_supplier_reference'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'x-api-key: &lt;YOUR_API_KEY&gt;'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Bearer &lt;YOUR_TOKEN&gt;'</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">axios</span><span class="dl">"</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">baseUrl</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">https://api.ezus.app</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="dl">"</span><span class="s2">x-api-key</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">&lt;YOUR_API_KEY&gt;</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">Authorization</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Bearer &lt;YOUR_TOKEN&gt;</span><span class="dl">"</span><span class="p">,</span>
+<span class="p">};</span>
+
+<span class="nx">axios</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span>
+  <span class="nx">baseUrl</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">/invoice-supplier?reference=invoice_supplier_reference</span><span class="dl">"</span><span class="p">,</span>
+  <span class="nx">headers</span>
+<span class="p">);</span>
+</code></pre></div>
+<blockquote>
+<p>It returns a JSON object structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">"false"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"invoice_supplier_reference"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ezus.io/2023_101010.pdf"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"created_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2023-10-10"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"due_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2023-10-20"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"amount_ttc"</span><span class="p">:</span><span class="w"> </span><span class="mf">1200.0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"amount_ht"</span><span class="p">:</span><span class="w"> </span><span class="mf">1000.0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"vat"</span><span class="p">:</span><span class="w"> </span><span class="mf">200.0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EUR"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"payments"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2023-10-10"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">500.0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"payment_method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Credit Card"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2023-10-11"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">500.0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"payment_method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Wire"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2023-10-12"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">200.0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"payment_method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Check"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"supplier"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"supplier_reference"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"company_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The best hotel"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"website"</span><span class="p">:</span><span class="w"> </span><span class="s2">"www.the_best_hotel.com"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"project"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"project_reference"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"info_title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Paris fashion week 2024"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"info_stage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Confirmed"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"info_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"202306001-P"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EUR"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"is_closed"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"alternative"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"sort_order"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Main Alternative"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"client"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"client_reference"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"enterprise"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"company_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MOKE INTERNATIONAL LIMITED"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Jane"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Doe"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"contact@moke-international.com"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='http-endpoint-14'>HTTP Endpoint</h3>
+<p><code>GET https://api.ezus.app/invoice-supplier</code></p>
+<h3 id='header-parameters-14'>Header parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>x-api-key</td>
+<td>String</td>
+<td><span style="color:red">(Required)</span> Your Ezus API key</td>
+</tr>
+<tr>
+<td>Authorization</td>
+<td>String</td>
+<td><span style="color:red">(Required)</span> Your Bearer token</td>
+</tr>
+</tbody></table>
+<h3 id='query-parameters-7'>Query parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>reference</td>
+<td>String</td>
+<td><span style="color:red">(Required)</span> The reference of the invoice you wish to retrieve</td>
+</tr>
+</tbody></table>
+<h3 id='response-14'>Response</h3>
+<p>JSON object containing the supplier invoice information.</p>
+
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>reference</td>
+<td>String</td>
+<td>The reference of the supplier invoice you wish to retrieve</td>
+</tr>
+<tr>
+<td>url</td>
+<td>String</td>
+<td>URL of the supplier invoice file</td>
+</tr>
+<tr>
+<td>filename</td>
+<td>String</td>
+<td>Filename of the supplier invoice</td>
+</tr>
+<tr>
+<td>created_date</td>
+<td>String</td>
+<td>Date of the creation of this supplier invoice, in a &quot;YYYY-MM-DD&quot; format</td>
+</tr>
+<tr>
+<td>due_date</td>
+<td>String</td>
+<td>Due date of the this supplier invoice, in a &quot;YYYY-MM-DD&quot; format</td>
+</tr>
+<tr>
+<td>amount_ttc</td>
+<td>Number</td>
+<td>Amount of the supplier invoice excluding taxes</td>
+</tr>
+<tr>
+<td>amount_ht</td>
+<td>Number</td>
+<td>Amount of the supplier invoice including taxes</td>
+</tr>
+<tr>
+<td>vat</td>
+<td>Number</td>
+<td>VAT amount of the supplier invoice</td>
+</tr>
+<tr>
+<td>currency</td>
+<td>String</td>
+<td>The ISO 4217 currency code representing the currency you utilize (<a href="https://docs.google.com/spreadsheets/d/1b7BNOwKyN1hMOouve6xhFZ2R2zrH4Sj1L-646j755fU/edit?usp=sharing" target="_blank">Link to doc</a>)</td>
+</tr>
+<tr>
+<td>payments</td>
+<td>Array</td>
+<td>Array of JSON including: <code>date</code>, <code>amount</code> and <code>payment_method</code></td>
+</tr>
+<tr>
+<td>supplier</td>
+<td>JSON</td>
+<td>JSON including: <code>reference</code>, <code>company_name</code> and <code>website</code></td>
+</tr>
+<tr>
+<td>project</td>
+<td>JSON</td>
+<td>JSON including: <code>reference</code>, <code>info_title</code>, <code>info_stage</code>, <code>info_number</code>, <code>currency</code> and <code>is_closed</code></td>
+</tr>
+<tr>
+<td>alternative</td>
+<td>JSON</td>
+<td>JSON including: <code>sort_order</code> and <code>title</code></td>
+</tr>
+<tr>
+<td>client</td>
+<td>JSON</td>
+<td>JSON including: <code>reference</code>, <code>type</code> (enterprise or individual), <code>company_name</code>, <code>first_name</code>, <code>last_name</code> and <code>email</code></td>
+</tr>
+</tbody></table>
 <h1 id='webhooks'>Webhooks</h1><h2 id='get-webhooks'>GET webhooks</h2>
 <p>Returns a list of your webhook endpoints.</p>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="s1">'https://api.ezus.app/webhooks'</span> <span class="se">\</span>
@@ -2320,9 +2740,9 @@ Quick tip: You can <a href="https://ezus-public-documentation.s3.eu-west-1.amazo
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='http-endpoint-13'>HTTP Endpoint</h3>
+</span></code></pre></div><h3 id='http-endpoint-15'>HTTP Endpoint</h3>
 <p><code>GET https://api.ezus.app/webhooks</code></p>
-<h3 id='header-parameters-13'>Header parameters</h3>
+<h3 id='header-parameters-15'>Header parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -2341,8 +2761,8 @@ Quick tip: You can <a href="https://ezus-public-documentation.s3.eu-west-1.amazo
 <td><span style="color:red">(Required)</span> Your Bearer token</td>
 </tr>
 </tbody></table>
-<h3 id='response-13'>Response</h3>
-<p>JSON object containing your webhooks information.</p>
+<h3 id='response-15'>Response</h3>
+<p>Array of JSON containing your webhooks information.</p>
 
 <table><thead>
 <tr>
@@ -2353,8 +2773,8 @@ Quick tip: You can <a href="https://ezus-public-documentation.s3.eu-west-1.amazo
 </thead><tbody>
 <tr>
 <td>webhooks</td>
-<td>JSON</td>
-<td>JSON object webhook (<a href="#webhook">Webhook</a>)</td>
+<td>Array</td>
+<td>Array of JSON webhooks (<a href="#webhooks-2">Webhooks</a>)</td>
 </tr>
 </tbody></table>
 <h2 id='post-webhooks-upsert'>POST webhooks-upsert</h2>
@@ -2394,9 +2814,9 @@ Quick tip: You can <a href="https://ezus-public-documentation.s3.eu-west-1.amazo
   </span><span class="nl">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Webhook successfully created"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"webhook_reference"</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='http-endpoint-14'>HTTP Endpoint</h3>
+</span></code></pre></div><h3 id='http-endpoint-16'>HTTP Endpoint</h3>
 <p><code>POST https://api.ezus.app/webhooks-upsert</code></p>
-<h3 id='header-parameters-14'>Header parameters</h3>
+<h3 id='header-parameters-16'>Header parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -2440,7 +2860,7 @@ Quick tip: You can <a href="https://ezus-public-documentation.s3.eu-west-1.amazo
 </tr>
 <tr>
 <td>events_types</td>
-<td>JSON</td>
+<td>String</td>
 <td>The list of events to enable for this endpoint. At least 1 required, separated by commas if more than one. (<a href="#events">Events</a>)</td>
 </tr>
 </tbody></table>
@@ -2556,7 +2976,7 @@ Quick tip: You can <a href="https://ezus-public-documentation.s3.eu-west-1.amazo
 <tr>
 <td>client</td>
 <td>JSON</td>
-<td>JSON that contain: <code>reference</code>, <code>type</code> (enterprise or individual), <code>company_name</code>, <code>first_name</code>, <code>last_name</code> and <code>email</code></td>
+<td>JSON including: <code>reference</code>, <code>type</code> (enterprise or individual), <code>company_name</code>, <code>first_name</code>, <code>last_name</code> and <code>email</code></td>
 </tr>
 </tbody></table>
 <h3 id='contacts'>Contacts</h3>
@@ -2716,6 +3136,56 @@ The name of custom fields refers to their technical name, not their display name
 <td>File</td>
 <td>File</td>
 <td>Not supported yet</td>
+</tr>
+</tbody></table>
+<h3 id='invoices-amounts'>Invoices Amounts</h3><div class="highlight"><pre class="highlight json tab-json"><code><span class="nl">"forecast"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="nl">"is_automatic"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"purchase"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"commission"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"vat_deducted"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"amount_ht"</span><span class="p">:</span><span class="w"> </span><span class="mf">1000.0</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span><span class="nl">"actual"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="nl">"is_automatic"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"purchase"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"commission"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"vat_deducted"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"amount_ht"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>Those objects provides insights into the invoice amounts, differentiating between actual figures and forecasts. Actual figures are available when the associated project is closed and the invoice is marked as <code>completed</code> or <code>paid</code>. Otherwise, <code>null</code> values are displayed.</p>
+
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>is_automatic</td>
+<td>Boolean</td>
+<td>Automatically use the figures of the project to which this invoice/credit_note is linked</td>
+</tr>
+<tr>
+<td>purchase</td>
+<td>Number</td>
+<td>Forecasted / Actual purchase</td>
+</tr>
+<tr>
+<td>commission</td>
+<td>Number</td>
+<td>Forecasted / Actual commission</td>
+</tr>
+<tr>
+<td>vat_deducted</td>
+<td>Number</td>
+<td>Forecasted / Actual deductible VAT</td>
+</tr>
+<tr>
+<td>amount_ht</td>
+<td>Number</td>
+<td>Forecasted / Actual amount excluding taxes</td>
 </tr>
 </tbody></table>
 <h3 id='langs'>Langs</h3><div class="highlight"><pre class="highlight json tab-json"><code><span class="nl">"langs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
@@ -2931,7 +3401,7 @@ The name of custom fields refers to their technical name, not their display name
 <td>Last name of the user</td>
 </tr>
 </tbody></table>
-<h3 id='webhook'>Webhook</h3><div class="highlight"><pre class="highlight json tab-json"><code><span class="nl">"webhooks"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+<h3 id='webhooks-2'>Webhooks</h3><div class="highlight"><pre class="highlight json tab-json"><code><span class="nl">"webhooks"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
     </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"webhook_reference"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"endpoint"</span><span class="p">:</span><span class="w"> </span><span class="s2">"webhook_endpoint"</span><span class="p">,</span><span class="w">
@@ -3010,7 +3480,7 @@ The name of custom fields refers to their technical name, not their display name
 </tr>
 <tr>
 <td>created</td>
-<td>String</td>
+<td>Number</td>
 <td>Time at which the object was created. Measured in seconds since the Unix epoch.</td>
 </tr>
 <tr>
@@ -3020,7 +3490,7 @@ The name of custom fields refers to their technical name, not their display name
 </tr>
 <tr>
 <td>is_duplication</td>
-<td>String</td>
+<td>Boolean</td>
 <td>Indicates whether the event originates from a duplication</td>
 </tr>
 <tr>
@@ -3171,6 +3641,210 @@ The name of custom fields refers to their technical name, not their display name
 <td>info_number</td>
 <td>String</td>
 <td>File number that appears at the bottom of the client record. Not to be confused with reference!</td>
+</tr>
+</tbody></table>
+<h2 id='invoices-finalized'>invoices.finalized</h2>
+<p>This event is triggered whenever an invoice is finalized.</p>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"invoice_reference"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"info_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2023_101010"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ezus.io/2023_101010.pdf"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"stage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"draft"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"credit_note"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"origin_reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"origin_reference"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"origin_info_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2023_101009"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"created_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2023-10-10"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"send_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2023-10-10"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"due_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2023-10-10"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"amount_ttc"</span><span class="p">:</span><span class="w"> </span><span class="mf">1200.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"amount_ht"</span><span class="p">:</span><span class="w"> </span><span class="mf">1000.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"vat"</span><span class="p">:</span><span class="w"> </span><span class="mf">200.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EUR"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"project_reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"project_reference"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"alternative"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"sort_order"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Main Alternative"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>reference</td>
+<td>String</td>
+<td>The reference of the invoice</td>
+</tr>
+<tr>
+<td>info_number</td>
+<td>String</td>
+<td>Title of the invoice</td>
+</tr>
+<tr>
+<td>url</td>
+<td>String</td>
+<td>URL of the invoice <code>.pdf</code> file</td>
+</tr>
+<tr>
+<td>stage</td>
+<td>String</td>
+<td>Stage of the invoice <code>draft</code> <code>completed</code> or <code>paid</code></td>
+</tr>
+<tr>
+<td>type</td>
+<td>String</td>
+<td>Type of the invoice <code>invoice</code> or <code>credit_note</code></td>
+</tr>
+<tr>
+<td>origin_reference</td>
+<td>String</td>
+<td>This is only displayed if the type of the invoice is a <code>credit_note</code>. The reference of the origin invoice.</td>
+</tr>
+<tr>
+<td>origin_info_number</td>
+<td>String</td>
+<td>This is only displayed if the type of the invoice is a <code>credit_note</code>. Title of the origin invoice.</td>
+</tr>
+<tr>
+<td>created_date</td>
+<td>String</td>
+<td>Date of the creation of this invoice, in a &quot;YYYY-MM-DD&quot; format</td>
+</tr>
+<tr>
+<td>send_date</td>
+<td>String</td>
+<td>Sent date of this invoice, in a &quot;YYYY-MM-DD&quot; format</td>
+</tr>
+<tr>
+<td>due_date</td>
+<td>String</td>
+<td>Due date of this invoice, in a &quot;YYYY-MM-DD&quot; format</td>
+</tr>
+<tr>
+<td>amount_ttc</td>
+<td>Number</td>
+<td>Amount of the invoice including taxes</td>
+</tr>
+<tr>
+<td>amount_ht</td>
+<td>Number</td>
+<td>Amount of the invoice excluding taxes</td>
+</tr>
+<tr>
+<td>vat</td>
+<td>Number</td>
+<td>VAT amount of the invoice</td>
+</tr>
+<tr>
+<td>currency</td>
+<td>String</td>
+<td>The ISO 4217 currency code representing the currency you utilize (<a href="https://docs.google.com/spreadsheets/d/1b7BNOwKyN1hMOouve6xhFZ2R2zrH4Sj1L-646j755fU/edit?usp=sharing" target="_blank">Link to doc</a>)</td>
+</tr>
+<tr>
+<td>project_reference</td>
+<td>String</td>
+<td>The reference of the project linked to this invoice</td>
+</tr>
+<tr>
+<td>alternative</td>
+<td>JSON</td>
+<td>JSON including: <code>sort_order</code> and <code>title</code></td>
+</tr>
+</tbody></table>
+<h2 id='invoices_suppliers-attached'>invoices_suppliers.attached</h2>
+<p>This event is triggered whenever an file is added to a supplier invoice.</p>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"invoice_supplier_reference"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ezus.io/2023_101010.pdf"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2023_101010.pdf"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"created_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2023-10-10"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"due_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2023-10-20"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"amount_ttc"</span><span class="p">:</span><span class="w"> </span><span class="mf">1200.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"amount_ht"</span><span class="p">:</span><span class="w"> </span><span class="mf">1000.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"vat"</span><span class="p">:</span><span class="w"> </span><span class="mf">200.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EUR"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"supplier_reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"supplier_reference"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"project_reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"project_reference"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"alternative"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"sort_order"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Main Alternative"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>reference</td>
+<td>String</td>
+<td>The reference of the supplier invoice</td>
+</tr>
+<tr>
+<td>url</td>
+<td>String</td>
+<td>URL of the supplier invoice file</td>
+</tr>
+<tr>
+<td>filename</td>
+<td>String</td>
+<td>Filename of the supplier invoice</td>
+</tr>
+<tr>
+<td>created_date</td>
+<td>String</td>
+<td>Date of the creation of this supplier invoice, in a &quot;YYYY-MM-DD&quot; format</td>
+</tr>
+<tr>
+<td>due_date</td>
+<td>String</td>
+<td>Due date of this supplier invoice, in a &quot;YYYY-MM-DD&quot; format</td>
+</tr>
+<tr>
+<td>amount_ttc</td>
+<td>Number</td>
+<td>Amount of the supplier invoice including taxes</td>
+</tr>
+<tr>
+<td>amount_ht</td>
+<td>Number</td>
+<td>Amount of the supplier invoice excluding taxes</td>
+</tr>
+<tr>
+<td>vat</td>
+<td>Number</td>
+<td>VAT amount of the supplier invoice</td>
+</tr>
+<tr>
+<td>currency</td>
+<td>String</td>
+<td>The ISO 4217 currency code representing the currency you utilize (<a href="https://docs.google.com/spreadsheets/d/1b7BNOwKyN1hMOouve6xhFZ2R2zrH4Sj1L-646j755fU/edit?usp=sharing" target="_blank">Link to doc</a>)</td>
+</tr>
+<tr>
+<td>supplier_reference</td>
+<td>String</td>
+<td>The reference of the supplier linked to this supplier invoice</td>
+</tr>
+<tr>
+<td>project_reference</td>
+<td>String</td>
+<td>The reference of the project linked to this supplier invoice</td>
+</tr>
+<tr>
+<td>alternative</td>
+<td>JSON</td>
+<td>JSON including: <code>sort_order</code> and <code>title</code></td>
 </tr>
 </tbody></table>
 <h1 id='errors'>Errors</h1>
