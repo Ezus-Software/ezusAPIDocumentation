@@ -1181,6 +1181,7 @@ Quick tip: You can <a href="https://ezus-public-documentation.s3.eu-west-1.amazo
     "reference": "client_reference",
     "company_name": "MOKE INTERNATIONAL LIMITED",
     "website": "www.moke_ltd.com",
+    "user": "sam@proton.me",
     "contact": {
         "email": "contact@moke-international.com",
         "first_name": "Jane",
@@ -1208,6 +1209,7 @@ Quick tip: You can <a href="https://ezus-public-documentation.s3.eu-west-1.amazo
   <span class="na">reference</span><span class="p">:</span> <span class="dl">"</span><span class="s2">client_reference</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">company_name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">MOKE INTERNATIONAL LIMITED</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">website</span><span class="p">:</span> <span class="dl">"</span><span class="s2">www.moke_ltd.com</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">user</span><span class="p">:</span> <span class="dl">"</span><span class="s2">sam@proton.me</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">contact</span><span class="p">:</span> <span class="p">{</span>
     <span class="na">email</span><span class="p">:</span> <span class="dl">"</span><span class="s2">contact@moke-international.com</span><span class="dl">"</span><span class="p">,</span>
     <span class="na">first_name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Jane</span><span class="dl">"</span><span class="p">,</span>
@@ -1285,6 +1287,11 @@ Quick tip: You can <a href="https://ezus-public-documentation.s3.eu-west-1.amazo
 <td>website</td>
 <td>String</td>
 <td>Website of the client</td>
+</tr>
+<tr>
+<td>user</td>
+<td>Email</td>
+<td>Email of the Ezus user that will be set as the owner of the client. By default, if no owner is provided or the provided email do not match any user on this account, the owner will be assigned to everyone</td>
 </tr>
 <tr>
 <td>contact</td>
@@ -1528,6 +1535,7 @@ Quick tip: You can <a href="https://ezus-public-documentation.s3.eu-west-1.amazo
     "company_name": "The best hotel",
     "website": "www.the_best_hotel.com",
     "capacity": 200,
+    "user": "sam@proton.me",
     "type": "accom, activity",
     "contact": {
         "email": "bob@proton.me",
@@ -1556,6 +1564,7 @@ Quick tip: You can <a href="https://ezus-public-documentation.s3.eu-west-1.amazo
   <span class="na">company_name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">The best hotel</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">website</span><span class="p">:</span> <span class="dl">"</span><span class="s2">www.the_best_hotel.com</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">capacity</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span>
+  <span class="na">user</span><span class="p">:</span> <span class="dl">"</span><span class="s2">sam@proton.me</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">type</span><span class="p">:</span> <span class="dl">"</span><span class="s2">accom, activity</span><span class="dl">"</span>
   <span class="na">contact</span><span class="p">:</span> <span class="p">{</span>
     <span class="na">email</span><span class="p">:</span> <span class="dl">"</span><span class="s2">bob@proton.me</span><span class="dl">"</span><span class="p">,</span>
@@ -1637,6 +1646,11 @@ Quick tip: You can <a href="https://ezus-public-documentation.s3.eu-west-1.amazo
 <td>capacity</td>
 <td>Number</td>
 <td>Maximum number of people for which the supplier can be used. Leave blank <code>&#39;&#39;</code> if not relevant</td>
+</tr>
+<tr>
+<td>user</td>
+<td>Email</td>
+<td>Email of the Ezus user that will be set as the owner of the supplier. By default, if no owner is provided or the provided email do not match any user on this account, the owner will be assigned to everyone</td>
 </tr>
 <tr>
 <td>type</td>
