@@ -621,6 +621,82 @@ axios.post(baseUrl + "/clients-upsert", body, headers);
 
 JSON object indicating whether an error has occurred during the process and, if so, the associated message. If there is no error, it also returns a `reference`: you will need to store this reference if you need to update or retrieve the client later on.
 
+# Invoices
+
+## POST invoices-update
+
+Update an invoice record if the provided reference does match one of the invoices references in your account.
+
+```shell
+curl --location 'https://api.ezus.app/invoices-update' \
+--header 'x-api-key: <YOUR_API_KEY>' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer <YOUR_TOKEN>' \
+--data-raw '{
+    "reference": "invoice_reference",
+    "stage": "paid",
+    "send_date": "2023-09-29",
+    "due_date": "2023-09-29",
+    "custom_fields": [
+        {"name": "field_name", "value": "field_value"}
+    ]
+}'
+```
+
+```javascript
+const axios = require("axios");
+const baseUrl = "https://api.ezus.app";
+
+const body = {
+  reference: "invoice_reference",
+  stage: "paid",
+  send_date: "2023-09-29",
+  due_date: "2023-09-29",
+  custom_fields: [{ name: "field_name", value: "field_value" }],
+};
+const headers = {
+  "x-api-key": "<YOUR_API_KEY>",
+  Authorization: "Bearer <YOUR_TOKEN>",
+};
+
+axios.post(baseUrl + "/invoices-update", body, headers);
+```
+
+> It returns a JSON object structured like this:
+
+```json
+{
+  "error": "false",
+  "message": "ok",
+  "reference": "invoice_reference"
+}
+```
+
+### HTTP Endpoint
+
+`POST https://api.ezus.app/invoices-update`
+
+### Header parameters
+
+| Parameter     | Type   | Description                                                 |
+| ------------- | ------ | ----------------------------------------------------------- |
+| x-api-key     | String | <span style="color:red">(Required)</span> Your Ezus API key |
+| Authorization | String | <span style="color:red">(Required)</span> Your Bearer token |
+
+### Body parameters (application/json)
+
+| Parameter     | Type   | Description                                                                                           |
+| ------------- | ------ | ----------------------------------------------------------------------------------------------------- |
+| reference     | String | The reference of the invoice you want to update                                                       |
+| stage         | String | stage can be updated only if the invoice is a draft, the stage can be `completed` or `paid`           |
+| send_date     | String | send_date can be updated only if the invoice is a draft, send_date can be only on format `YYYY-MM-DD` |
+| due_date      | String | due_date can be updated only if the invoice is a draft, due_date can be only on format `YYYY-MM-DD`   |
+| custom_fields | JSON   | Array of JSON custom fields ([Custom fields](#custom-fields))                                         |
+
+### Response
+
+JSON object indicating whether an error has occurred during the process and, if so, the associated message. If there is no error, it also returns a `reference`: you will need to store this reference if you need to update or retrieve the invoice later on.
+
 # Suppliers
 
 ## GET supplier
