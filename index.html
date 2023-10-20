@@ -354,6 +354,14 @@
               </ul>
           </li>
           <li>
+            <a href="#invoices" class="toc-h1 toc-link" data-title="Invoices">Invoices</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#post-invoices-update" class="toc-h2 toc-link" data-title="POST invoices-update">POST invoices-update</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
             <a href="#suppliers" class="toc-h1 toc-link" data-title="Suppliers">Suppliers</a>
               <ul class="toc-list-h2">
                   <li>
@@ -387,7 +395,7 @@
               </ul>
           </li>
           <li>
-            <a href="#invoices" class="toc-h1 toc-link" data-title="Invoices">Invoices</a>
+            <a href="#invoices-2" class="toc-h1 toc-link" data-title="Invoices">Invoices</a>
               <ul class="toc-list-h2">
                   <li>
                     <a href="#get-invoices" class="toc-h2 toc-link" data-title="GET invoices">GET invoices</a>
@@ -1314,6 +1322,103 @@ Quick tip: You can <a href="https://ezus-public-documentation.s3.eu-west-1.amazo
 </tbody></table>
 <h3 id='response-6'>Response</h3>
 <p>JSON object indicating whether an error has occurred during the process and, if so, the associated message. If there is no error, it also returns a <code>reference</code>: you will need to store this reference if you need to update or retrieve the client later on.</p>
+<h1 id='invoices'>Invoices</h1><h2 id='post-invoices-update'>POST invoices-update</h2>
+<p>Update an invoice record if the provided reference does match one of the invoices references in your account.</p>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="s1">'https://api.ezus.app/invoices-update'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'x-api-key: &lt;YOUR_API_KEY&gt;'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Bearer &lt;YOUR_TOKEN&gt;'</span> <span class="se">\</span>
+<span class="nt">--data-raw</span> <span class="s1">'{
+    "reference": "invoice_reference",
+    "stage": "paid",
+    "send_date": "2023-09-29",
+    "due_date": "2023-09-29",
+    "custom_fields": [
+        {"name": "field_name", "value": "field_value"}
+    ]
+}'</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">axios</span><span class="dl">"</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">baseUrl</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">https://api.ezus.app</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">body</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">reference</span><span class="p">:</span> <span class="dl">"</span><span class="s2">invoice_reference</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">stage</span><span class="p">:</span> <span class="dl">"</span><span class="s2">paid</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">send_date</span><span class="p">:</span> <span class="dl">"</span><span class="s2">2023-09-29</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">due_date</span><span class="p">:</span> <span class="dl">"</span><span class="s2">2023-09-29</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">custom_fields</span><span class="p">:</span> <span class="p">[{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">field_name</span><span class="dl">"</span><span class="p">,</span> <span class="na">value</span><span class="p">:</span> <span class="dl">"</span><span class="s2">field_value</span><span class="dl">"</span> <span class="p">}],</span>
+<span class="p">};</span>
+<span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="dl">"</span><span class="s2">x-api-key</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">&lt;YOUR_API_KEY&gt;</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">Authorization</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Bearer &lt;YOUR_TOKEN&gt;</span><span class="dl">"</span><span class="p">,</span>
+<span class="p">};</span>
+
+<span class="nx">axios</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="nx">baseUrl</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">/invoices-update</span><span class="dl">"</span><span class="p">,</span> <span class="nx">body</span><span class="p">,</span> <span class="nx">headers</span><span class="p">);</span>
+</code></pre></div>
+<blockquote>
+<p>It returns a JSON object structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">"false"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ok"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"invoice_reference"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='http-endpoint-7'>HTTP Endpoint</h3>
+<p><code>POST https://api.ezus.app/invoices-update</code></p>
+<h3 id='header-parameters-7'>Header parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>x-api-key</td>
+<td>String</td>
+<td><span style="color:red">(Required)</span> Your Ezus API key</td>
+</tr>
+<tr>
+<td>Authorization</td>
+<td>String</td>
+<td><span style="color:red">(Required)</span> Your Bearer token</td>
+</tr>
+</tbody></table>
+<h3 id='body-parameters-application-json-5'>Body parameters (application/json)</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>reference</td>
+<td>String</td>
+<td>The reference of the invoice you want to update</td>
+</tr>
+<tr>
+<td>stage</td>
+<td>String</td>
+<td>stage can be updated only if the invoice is a draft, the stage can be <code>completed</code> or <code>paid</code></td>
+</tr>
+<tr>
+<td>send_date</td>
+<td>String</td>
+<td>send_date can be updated only if the invoice is a draft, send_date can be only on format <code>YYYY-MM-DD</code></td>
+</tr>
+<tr>
+<td>due_date</td>
+<td>String</td>
+<td>due_date can be updated only if the invoice is a draft, due_date can be only on format <code>YYYY-MM-DD</code></td>
+</tr>
+<tr>
+<td>custom_fields</td>
+<td>JSON</td>
+<td>Array of JSON custom fields (<a href="#custom-fields">Custom fields</a>)</td>
+</tr>
+</tbody></table>
+<h3 id='response-7'>Response</h3>
+<p>JSON object indicating whether an error has occurred during the process and, if so, the associated message. If there is no error, it also returns a <code>reference</code>: you will need to store this reference if you need to update or retrieve the invoice later on.</p>
 <h1 id='suppliers'>Suppliers</h1><h2 id='get-supplier'>GET supplier</h2>
 <p>Retrieve information for a supplier record in Ezus. You must specify to the Ezus API which supplier you wish to retrieve, by indicating its appropriate reference in your query parameter.</p>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="s1">'https://api.ezus.app/supplier?reference=supplier_reference'</span> <span class="se">\</span>
@@ -1406,9 +1511,9 @@ Quick tip: You can <a href="https://ezus-public-documentation.s3.eu-west-1.amazo
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='http-endpoint-7'>HTTP Endpoint</h3>
+</span></code></pre></div><h3 id='http-endpoint-8'>HTTP Endpoint</h3>
 <p><code>GET https://api.ezus.app/supplier</code></p>
-<h3 id='header-parameters-7'>Header parameters</h3>
+<h3 id='header-parameters-8'>Header parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -1441,7 +1546,7 @@ Quick tip: You can <a href="https://ezus-public-documentation.s3.eu-west-1.amazo
 <td><span style="color:red">(Required)</span> The reference of the supplier you wish to retrieve</td>
 </tr>
 </tbody></table>
-<h3 id='response-7'>Response</h3>
+<h3 id='response-8'>Response</h3>
 <p>JSON object containing the supplier information.</p>
 
 <table><thead>
@@ -1601,9 +1706,9 @@ Quick tip: You can <a href="https://ezus-public-documentation.s3.eu-west-1.amazo
   </span><span class="nl">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Supplier successfully created"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"supplier_reference"</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='http-endpoint-8'>HTTP Endpoint</h3>
+</span></code></pre></div><h3 id='http-endpoint-9'>HTTP Endpoint</h3>
 <p><code>POST https://api.ezus.app/suppliers-upsert</code></p>
-<h3 id='header-parameters-8'>Header parameters</h3>
+<h3 id='header-parameters-9'>Header parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -1622,7 +1727,7 @@ Quick tip: You can <a href="https://ezus-public-documentation.s3.eu-west-1.amazo
 <td><span style="color:red">(Required)</span> Your Bearer token</td>
 </tr>
 </tbody></table>
-<h3 id='body-parameters-application-json-5'>Body parameters (application/json)</h3>
+<h3 id='body-parameters-application-json-6'>Body parameters (application/json)</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -1676,7 +1781,7 @@ Quick tip: You can <a href="https://ezus-public-documentation.s3.eu-west-1.amazo
 <td>Array of JSON custom fields (<a href="#custom-fields">Custom fields</a>)</td>
 </tr>
 </tbody></table>
-<h3 id='response-8'>Response</h3>
+<h3 id='response-9'>Response</h3>
 <p>JSON object indicating whether an error has occurred during the process and, if so, the associated message. If there is no error, it also returns a <code>reference</code>: you will need to store this reference if you need to update or retrieve the supplier later on.</p>
 <h1 id='products'>Products</h1><h2 id='get-product'>GET product</h2>
 <p>Retrieve information for a product record in Ezus. You must specify to the Ezus API which product you wish to retrieve, by indicating its appropriate reference in your query parameter.</p>
@@ -1758,9 +1863,9 @@ Quick tip: You can <a href="https://ezus-public-documentation.s3.eu-west-1.amazo
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='http-endpoint-9'>HTTP Endpoint</h3>
+</span></code></pre></div><h3 id='http-endpoint-10'>HTTP Endpoint</h3>
 <p><code>GET https://api.ezus.app/product</code></p>
-<h3 id='header-parameters-9'>Header parameters</h3>
+<h3 id='header-parameters-10'>Header parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -1793,7 +1898,7 @@ Quick tip: You can <a href="https://ezus-public-documentation.s3.eu-west-1.amazo
 <td><span style="color:red">(Required)</span> The reference of the product you wish to retrieve</td>
 </tr>
 </tbody></table>
-<h3 id='response-9'>Response</h3>
+<h3 id='response-10'>Response</h3>
 <p>JSON object containing the product information.</p>
 
 <table><thead>
@@ -1964,9 +2069,9 @@ Quick tip: You can <a href="https://ezus-public-documentation.s3.eu-west-1.amazo
   </span><span class="nl">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Product successfully created"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"product_reference"</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='http-endpoint-10'>HTTP Endpoint</h3>
+</span></code></pre></div><h3 id='http-endpoint-11'>HTTP Endpoint</h3>
 <p><code>POST https://api.ezus.app/products-upsert</code></p>
-<h3 id='header-parameters-10'>Header parameters</h3>
+<h3 id='header-parameters-11'>Header parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -1985,7 +2090,7 @@ Quick tip: You can <a href="https://ezus-public-documentation.s3.eu-west-1.amazo
 <td><span style="color:red">(Required)</span> Your Bearer token</td>
 </tr>
 </tbody></table>
-<h3 id='body-parameters-application-json-6'>Body parameters (application/json)</h3>
+<h3 id='body-parameters-application-json-7'>Body parameters (application/json)</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -2059,7 +2164,7 @@ Quick tip: You can <a href="https://ezus-public-documentation.s3.eu-west-1.amazo
 <td>Array of JSON custom fields (<a href="#custom-fields">Custom fields</a>)</td>
 </tr>
 </tbody></table>
-<h3 id='response-10'>Response</h3>
+<h3 id='response-11'>Response</h3>
 <p>JSON object indicating whether an error has occurred during the process and, if so, the associated message. If there is no error, it also returns a <code>reference</code>: you will need to store this reference if you need to update or retrieve the product later on.</p>
 <h1 id='packages'>Packages</h1><h2 id='get-package'>GET package</h2>
 <p>Retrieve information for a package record in Ezus. You must specify to the Ezus API which package you wish to retrieve, by indicating its appropriate reference in your query parameter.</p>
@@ -2134,9 +2239,9 @@ Quick tip: You can <a href="https://ezus-public-documentation.s3.eu-west-1.amazo
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='http-endpoint-11'>HTTP Endpoint</h3>
+</span></code></pre></div><h3 id='http-endpoint-12'>HTTP Endpoint</h3>
 <p><code>GET https://api.ezus.app/package</code></p>
-<h3 id='header-parameters-11'>Header parameters</h3>
+<h3 id='header-parameters-12'>Header parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -2169,7 +2274,7 @@ Quick tip: You can <a href="https://ezus-public-documentation.s3.eu-west-1.amazo
 <td><span style="color:red">(Required)</span> The reference of the package you wish to retrieve</td>
 </tr>
 </tbody></table>
-<h3 id='response-11'>Response</h3>
+<h3 id='response-12'>Response</h3>
 <p>JSON object containing the package information.</p>
 
 <table><thead>
@@ -2275,9 +2380,9 @@ Quick tip: You can <a href="https://ezus-public-documentation.s3.eu-west-1.amazo
   </span><span class="nl">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Package successfully created"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"package_reference"</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='http-endpoint-12'>HTTP Endpoint</h3>
+</span></code></pre></div><h3 id='http-endpoint-13'>HTTP Endpoint</h3>
 <p><code>POST https://api.ezus.app/packages-upsert</code></p>
-<h3 id='header-parameters-12'>Header parameters</h3>
+<h3 id='header-parameters-13'>Header parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -2296,7 +2401,7 @@ Quick tip: You can <a href="https://ezus-public-documentation.s3.eu-west-1.amazo
 <td><span style="color:red">(Required)</span> Your Bearer token</td>
 </tr>
 </tbody></table>
-<h3 id='body-parameters-application-json-7'>Body parameters (application/json)</h3>
+<h3 id='body-parameters-application-json-8'>Body parameters (application/json)</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -2325,9 +2430,9 @@ Quick tip: You can <a href="https://ezus-public-documentation.s3.eu-west-1.amazo
 <td>You can add custom fields for your client, this custom fields should be in your Ezus params and Write exactly as they are written in your params technical name (<a href="#custom-fields">Custom fields</a>)</td>
 </tr>
 </tbody></table>
-<h3 id='response-12'>Response</h3>
+<h3 id='response-13'>Response</h3>
 <p>JSON object indicating whether an error has occurred during the process and, if so, the associated message. If there is no error, it also returns a <code>reference</code>: you will need to store this reference if you need to update or retrieve the package later on.</p>
-<h1 id='invoices'>Invoices</h1><h2 id='get-invoices'>GET invoices</h2>
+<h1 id='invoices-2'>Invoices</h1><h2 id='get-invoices'>GET invoices</h2>
 <p>Retrieve information for a list of invoices record in Ezus. You must specify to the Ezus API which filters you want to apply on the invoices list. The return of this invoice list is paginated with a token, to call the following elements of the list, you must call the route with the token</p>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="s1">'https://api.ezus.app/invoices?stage=finalized&amp;is_in_netsuite=false'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'x-api-key: &lt;YOUR_API_KEY&gt;'</span> <span class="se">\</span>
@@ -2405,9 +2510,9 @@ Quick tip: You can <a href="https://ezus-public-documentation.s3.eu-west-1.amazo
     </span><span class="p">},</span><span class="err">...</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='http-endpoint-13'>HTTP Endpoint</h3>
+</span></code></pre></div><h3 id='http-endpoint-14'>HTTP Endpoint</h3>
 <p><code>GET https://api.ezus.app/invoice</code></p>
-<h3 id='header-parameters-13'>Header parameters</h3>
+<h3 id='header-parameters-14'>Header parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -2450,7 +2555,7 @@ Quick tip: You can <a href="https://ezus-public-documentation.s3.eu-west-1.amazo
 <td>You can filter invoices by their custom fields by adding the technical name of the custom field as a parameter and the desired value as a value.</td>
 </tr>
 </tbody></table>
-<h3 id='response-13'>Response</h3>
+<h3 id='response-14'>Response</h3>
 <p>JSON object containing the invoice information.</p>
 
 <table><thead>
@@ -2560,9 +2665,9 @@ Quick tip: You can <a href="https://ezus-public-documentation.s3.eu-west-1.amazo
     </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"contact@moke-international.com"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='http-endpoint-14'>HTTP Endpoint</h3>
+</span></code></pre></div><h3 id='http-endpoint-15'>HTTP Endpoint</h3>
 <p><code>GET https://api.ezus.app/invoice</code></p>
-<h3 id='header-parameters-14'>Header parameters</h3>
+<h3 id='header-parameters-15'>Header parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -2595,7 +2700,7 @@ Quick tip: You can <a href="https://ezus-public-documentation.s3.eu-west-1.amazo
 <td><span style="color:red">(Required)</span> The reference of the invoice you wish to retrieve</td>
 </tr>
 </tbody></table>
-<h3 id='response-14'>Response</h3>
+<h3 id='response-15'>Response</h3>
 <p>JSON object containing the invoice information.</p>
 
 <table><thead>
@@ -2775,9 +2880,9 @@ Quick tip: You can <a href="https://ezus-public-documentation.s3.eu-west-1.amazo
     </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"contact@moke-international.com"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='http-endpoint-15'>HTTP Endpoint</h3>
+</span></code></pre></div><h3 id='http-endpoint-16'>HTTP Endpoint</h3>
 <p><code>GET https://api.ezus.app/invoice-supplier</code></p>
-<h3 id='header-parameters-15'>Header parameters</h3>
+<h3 id='header-parameters-16'>Header parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -2810,7 +2915,7 @@ Quick tip: You can <a href="https://ezus-public-documentation.s3.eu-west-1.amazo
 <td><span style="color:red">(Required)</span> The reference of the invoice you wish to retrieve</td>
 </tr>
 </tbody></table>
-<h3 id='response-15'>Response</h3>
+<h3 id='response-16'>Response</h3>
 <p>JSON object containing the supplier invoice information.</p>
 
 <table><thead>
@@ -2921,9 +3026,9 @@ Quick tip: You can <a href="https://ezus-public-documentation.s3.eu-west-1.amazo
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='http-endpoint-16'>HTTP Endpoint</h3>
+</span></code></pre></div><h3 id='http-endpoint-17'>HTTP Endpoint</h3>
 <p><code>GET https://api.ezus.app/webhooks</code></p>
-<h3 id='header-parameters-16'>Header parameters</h3>
+<h3 id='header-parameters-17'>Header parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -2942,7 +3047,7 @@ Quick tip: You can <a href="https://ezus-public-documentation.s3.eu-west-1.amazo
 <td><span style="color:red">(Required)</span> Your Bearer token</td>
 </tr>
 </tbody></table>
-<h3 id='response-16'>Response</h3>
+<h3 id='response-17'>Response</h3>
 <p>Array of JSON containing your webhooks information.</p>
 
 <table><thead>
@@ -2995,9 +3100,9 @@ Quick tip: You can <a href="https://ezus-public-documentation.s3.eu-west-1.amazo
   </span><span class="nl">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Webhook successfully created"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"webhook_reference"</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='http-endpoint-17'>HTTP Endpoint</h3>
+</span></code></pre></div><h3 id='http-endpoint-18'>HTTP Endpoint</h3>
 <p><code>POST https://api.ezus.app/webhooks-upsert</code></p>
-<h3 id='header-parameters-17'>Header parameters</h3>
+<h3 id='header-parameters-18'>Header parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -3016,7 +3121,7 @@ Quick tip: You can <a href="https://ezus-public-documentation.s3.eu-west-1.amazo
 <td><span style="color:red">(Required)</span> Your Bearer token</td>
 </tr>
 </tbody></table>
-<h3 id='body-parameters-application-json-8'>Body parameters (application/json)</h3>
+<h3 id='body-parameters-application-json-9'>Body parameters (application/json)</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
