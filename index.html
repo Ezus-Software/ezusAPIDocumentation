@@ -824,17 +824,17 @@ Quick tip: You can <a href="https://ezus-public-documentation.s3.eu-west-1.amazo
 <tr>
 <td>trip_people</td>
 <td>Number</td>
-<td>Number of people in the project</td>
+<td>Number of people in the project. The number of people can be added when a project is created, but cannot be updated via API in an existing project.</td>
 </tr>
 <tr>
 <td>trip_date_in</td>
 <td>Date</td>
-<td>Date of the beginning of the project in a &quot;YYYY-MM-DD&quot; format string. If not provided or if not formatted correctly, or if duration &gt; 40 days or if trip_date_in &gt; trip_date_out, project will be set as 1 day and trip_date_in as today</td>
+<td>Date of the beginning of the project in a &quot;YYYY-MM-DD&quot; format string. If not provided or if not formatted correctly, or if duration &gt; 40 days or if trip_date_in &gt; trip_date_out, project will be set as 1 day and trip_date_in as today. A date can be added at project creation via API, but cannot be updated via API.</td>
 </tr>
 <tr>
 <td>trip_date_out</td>
 <td>Date</td>
-<td>Date of the end of the project in a &quot;YYYY-MM-DD&quot; format string. If not provided or if not formatted correctly, or if duration &gt; 40 days or if trip_date_in &gt; trip_date_out, project will be set as 1 day and trip_date_out as today</td>
+<td>Date of the end of the project in a &quot;YYYY-MM-DD&quot; format string. If not provided or if not formatted correctly, or if duration &gt; 40 days or if trip_date_in &gt; trip_date_out, project will be set as 1 day and trip_date_out as today. A date can be added at project creation via API, but cannot be updated via API.</td>
 </tr>
 <tr>
 <td>sales_manager_email</td>
@@ -844,7 +844,7 @@ Quick tip: You can <a href="https://ezus-public-documentation.s3.eu-west-1.amazo
 <tr>
 <td>client_reference</td>
 <td>String</td>
-<td>This can be a reference or the email of a client already created in this Ezus account. By default, the project will not be linked to any client. If you want to update the project&#39;s client to None, you must enter 0.</td>
+<td>This can be a reference or the email of a client already created in this Ezus account. By default, the project will not be linked to any client. You can add client at the creation but you can&#39;t change client by API</td>
 </tr>
 <tr>
 <td>custom_fields</td>
