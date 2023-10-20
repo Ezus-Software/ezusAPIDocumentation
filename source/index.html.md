@@ -672,7 +672,7 @@ axios.put(baseUrl + "/deposits-create", body, headers);
 
 ### HTTP Endpoint
 
-`POST https://api.ezus.app/deposits-create`
+`PUT https://api.ezus.app/deposits-create`
 
 ### Header parameters
 
