@@ -889,7 +889,7 @@ Quick tip: You can <a href="https://ezus-public-documentation.s3.eu-west-1.amazo
 <h3 id='response-3'>Response</h3>
 <p>JSON object indicating whether an error has occurred during the process and, if so, the associated message. If there is no error, it also returns a <code>reference</code>: you will need to store this reference if you need to update or retrieve the project later on.</p>
 <h2 id='post-projects-documents-create'>POST projects-documents-create</h2>
-<p>Create a PDF document based on the link you provide within the project using project_reference as its reference.</p>
+<p>It creates a PDF document based on the link you provide within the project using project_reference as its reference.</p>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="s1">'https://api.ezus.app/projects-documents-create'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'x-api-key: &lt;YOUR_API_KEY&gt;'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
@@ -1348,7 +1348,7 @@ Quick tip: You can <a href="https://ezus-public-documentation.s3.eu-west-1.amazo
   </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"supplier_reference"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"company_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The best hotel"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"website"</span><span class="p">:</span><span class="w"> </span><span class="s2">"www.the_best_hotel.com"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"capacity"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"capacity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"200"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"accom, activity"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"info_notes"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Emily confirmed: this hotel really is the best in town."</span><span class="p">,</span><span class="w">
   </span><span class="nl">"info_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"202306001-S"</span><span class="p">,</span><span class="w">
@@ -1548,7 +1548,7 @@ Quick tip: You can <a href="https://ezus-public-documentation.s3.eu-west-1.amazo
     "reference": "supplier_reference",
     "company_name": "The best hotel",
     "website": "www.the_best_hotel.com",
-    "capacity": 200,
+    "capacity": "200",
     "user": "sam@proton.me",
     "type": "accom, activity",
     "contact": {
@@ -1711,7 +1711,7 @@ Quick tip: You can <a href="https://ezus-public-documentation.s3.eu-west-1.amazo
   </span><span class="nl">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">"false"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"product_reference"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2-bed room with breakfast"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"capacity"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"capacity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"vat_regime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"margin"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"vat_rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">20.0</span><span class="p">,</span><span class="w">
@@ -1920,7 +1920,7 @@ Quick tip: You can <a href="https://ezus-public-documentation.s3.eu-west-1.amazo
     "reference": "product_reference",
     "title": "2-bed room with breakfast",
     "quantity": "1",
-    "capacity": 2,
+    "capacity": "2",
     "supplier_reference": "supplier_reference",
     "package_reference": "package_reference",
     "purchase_price": "42",
@@ -2094,7 +2094,7 @@ Quick tip: You can <a href="https://ezus-public-documentation.s3.eu-west-1.amazo
   </span><span class="nl">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">"false"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"package_reference"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The best package"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"capacity"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"capacity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"info_notes"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A classical day in Paris"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"info_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"202306001-PK"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"visual_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
@@ -3000,7 +3000,7 @@ Quick tip: You can <a href="https://ezus-public-documentation.s3.eu-west-1.amazo
 </tr>
 </tbody></table>
 <h1 id='deposits'>Deposits</h1><h2 id='put-deposits-create'>PUT deposits-create</h2>
-<p>Create a deposit in a project</p>
+<p>It creates a client deposit in the specified project.</p>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> PUT <span class="s1">'https://api.ezus.app/deposits-create'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'x-api-key: &lt;YOUR_API_KEY&gt;'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
@@ -3081,8 +3081,8 @@ Quick tip: You can <a href="https://ezus-public-documentation.s3.eu-west-1.amazo
 </tr>
 <tr>
 <td>amount</td>
-<td>int</td>
-<td>Payment amount in cents</td>
+<td>Integer</td>
+<td>The deposit amount in cents.</td>
 </tr>
 <tr>
 <td>type</td>
