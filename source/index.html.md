@@ -2383,7 +2383,7 @@ This event is triggered whenever an invoice is finalized (its stage goes from `d
     "reference": "invoice_reference",
     "info_number": "2023_101010",
     "url": "https://ezus.io/2023_101010.pdf",
-    "stage": "draft",
+    "stage": "completed",
     "type": "credit_note",
     "origin_reference": "origin_reference",
     "origin_info_number": "2023_101009",
