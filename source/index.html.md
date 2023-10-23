@@ -319,7 +319,7 @@ JSON object indicating whether an error has occurred during the process and, if 
 
 ## POST projects-documents-create
 
-Create a PDF document based on the link you provide within the project using project_reference as its reference.
+It creates a PDF document based on the link you provide within the project using project_reference as its reference.
 
 ```shell
 curl --location 'https://api.ezus.app/projects-documents-create' \
@@ -653,7 +653,7 @@ axios.get(baseUrl + "/supplier?reference=supplier_reference", headers);
   "reference": "supplier_reference",
   "company_name": "The best hotel",
   "website": "www.the_best_hotel.com",
-  "capacity": 200,
+  "capacity": "200",
   "type": "accom, activity",
   "info_notes": "Emily confirmed: this hotel really is the best in town.",
   "info_number": "202306001-S",
@@ -776,7 +776,7 @@ curl --location 'https://api.ezus.app/suppliers-upsert' \
     "reference": "supplier_reference",
     "company_name": "The best hotel",
     "website": "www.the_best_hotel.com",
-    "capacity": 200,
+    "capacity": "200",
     "user": "sam@proton.me",
     "type": "accom, activity",
     "contact": {
@@ -906,7 +906,7 @@ axios.get(baseUrl + "/product?reference=product_reference", headers);
   "error": "false",
   "reference": "product_reference",
   "title": "2-bed room with breakfast",
-  "capacity": 2,
+  "capacity": "2",
   "quantity": "1",
   "vat_regime": "margin",
   "vat_rate": 20.0,
@@ -1022,7 +1022,7 @@ curl --location 'https://api.ezus.app/products-upsert' \
     "reference": "product_reference",
     "title": "2-bed room with breakfast",
     "quantity": "1",
-    "capacity": 2,
+    "capacity": "2",
     "supplier_reference": "supplier_reference",
     "package_reference": "package_reference",
     "purchase_price": "42",
@@ -1147,7 +1147,7 @@ axios.get(baseUrl + "/package?reference=package_reference", headers);
   "error": "false",
   "reference": "package_reference",
   "title": "The best package",
-  "capacity": 2,
+  "capacity": "2",
   "info_notes": "A classical day in Paris",
   "info_number": "202306001-PK",
   "visual_url": "",
@@ -1749,7 +1749,7 @@ JSON object containing the supplier invoice information.
 
 ## PUT deposits-create
 
-Create a deposit in a project
+It creates a client deposit in the specified project.
 
 ```shell
 curl --location --request PUT 'https://api.ezus.app/deposits-create' \
@@ -1810,15 +1810,15 @@ axios.put(baseUrl + "/deposits-create", body, headers);
 
 ### Body parameters (application/json)
 
-| Parameter         | Type   | Description                                                                                                                               |
-| ----------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| project_reference | String | <span style="color:red">(Required)</span> The reference is mandatory and refers to the project to which the payment will be added.        |
-| alternative_order | String | Alternative number, if not entered, the payment will be added to the project's main alternative.                                          |
-| amount            | int    | Payment amount in cents                                                                                                                   |
-| type              | String | Type can be `deposit`, `payment`, `final_payment`, `extra_paid`. By default the deposits will be a `deposit`                              |
-| date              | String | The date must be a string in "YYYY-MM-DD" format. If it is not filled in or is invalid, the payment will be assigned to the current date. |
-| payment_method    | String | Technical name of the payment method, you can find it in Settings - Custom fields                                                         |
-| notes             | String | Note attributed to the payment, this note is limited to 100 characters, all additional characters will not be saved.                      |
+| Parameter         | Type    | Description                                                                                                                               |
+| ----------------- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| project_reference | String  | <span style="color:red">(Required)</span> The reference is mandatory and refers to the project to which the payment will be added.        |
+| alternative_order | String  | Alternative number, if not entered, the payment will be added to the project's main alternative.                                          |
+| amount            | Integer | The deposit amount in cents.                                                                                                              |
+| type              | String  | Type can be `deposit`, `payment`, `final_payment`, `extra_paid`. By default the deposits will be a `deposit`                              |
+| date              | String  | The date must be a string in "YYYY-MM-DD" format. If it is not filled in or is invalid, the payment will be assigned to the current date. |
+| payment_method    | String  | Technical name of the payment method, you can find it in Settings - Custom fields                                                         |
+| notes             | String  | Note attributed to the payment, this note is limited to 100 characters, all additional characters will not be saved.                      |
 
 ### Response
 
