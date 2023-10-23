@@ -1822,7 +1822,7 @@ axios.put(baseUrl + "/deposits-create", body, headers);
 
 ### Response
 
-JSON object indicating whether an error has occurred during the process and, if so, the associated message. If there is no error, it also returns a `reference`: you will need to store this reference if you need to retrieve the deposit later on.
+JSON object indicating whether an error has occurred during the process and, if so, the associated message. If there is no error, it also returns a `reference`: you will need to store this reference if you need to update or retrieve the deposit later on.
 
 # Webhooks
 
@@ -1949,6 +1949,10 @@ axios.post(baseUrl + "/webhooks-upsert", body, headers);
 | endpoint     | String | This parameter is required if you create a new webhook. You cannot update the endpoint of an existing webhook.                                                                                                              |
 | is_active    | String | Status of the webhook `true` or `false`                                                                                                                                                                                     |
 | events_types | String | The list of events to enable for this endpoint. At least 1 required, separated by commas if more than one. ([Events](#events))                                                                                              |
+
+### Response
+
+JSON object indicating whether an error has occurred during the process and, if so, the associated message. If there is no error, it also returns a reference: you will need to store this reference if you need to update or retrieve the webhook later on.
 
 # Nested Resources
 
