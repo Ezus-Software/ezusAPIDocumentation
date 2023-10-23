@@ -1399,7 +1399,7 @@ axios.get(baseUrl + "/invoices?stage=finalized&is_in_netsuite=false", headers);
 
 ### HTTP Endpoint
 
-`GET https://api.ezus.app/invoice`
+`GET https://api.ezus.app/invoices`
 
 ### Header parameters
 
@@ -1507,6 +1507,49 @@ axios.get(baseUrl + "/invoice?reference=invoice_reference", headers);
 }
 ```
 
+### HTTP Endpoint
+
+`GET https://api.ezus.app/invoice`
+
+### Header parameters
+
+| Parameter     | Type   | Description                                                 |
+| ------------- | ------ | ----------------------------------------------------------- |
+| x-api-key     | String | <span style="color:red">(Required)</span> Your Ezus API key |
+| Authorization | String | <span style="color:red">(Required)</span> Your Bearer token |
+
+### Query parameters
+
+| Parameter | Type   | Description                                                                                 |
+| --------- | ------ | ------------------------------------------------------------------------------------------- |
+| reference | String | <span style="color:red">(Required)</span> The reference of the invoice you wish to retrieve |
+
+### Response
+
+JSON object containing the invoice information.
+
+| Property           | Type   | Description                                                                                                                                                                                                       |
+| ------------------ | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| reference          | String | The reference of the invoice you wish to retrieve                                                                                                                                                                 |
+| info_number        | String | Title of the invoice                                                                                                                                                                                              |
+| url                | String | URL of the invoice `.pdf` file                                                                                                                                                                                    |
+| stage              | String | Stage of the invoice `draft` `completed` or `paid`                                                                                                                                                                |
+| type               | String | Type of the invoice `invoice` or `credit_note`                                                                                                                                                                    |
+| origin_reference   | String | This is only displayed if the type of the invoice is a `credit_note`. The reference of the origin invoice.                                                                                                        |
+| origin_info_number | String | This is only displayed if the type of the invoice is a `credit_note`. Title of the origin invoice.                                                                                                                |
+| created_date       | String | Date of the creation of this invoice, in a "YYYY-MM-DD" format                                                                                                                                                    |
+| send_date          | String | Sent date of this invoice, in a "YYYY-MM-DD" format                                                                                                                                                               |
+| due_date           | String | Due date of this invoice, in a "YYYY-MM-DD" format                                                                                                                                                                |
+| amount_ttc         | Number | Amount of the invoice including taxes                                                                                                                                                                             |
+| amount_ht          | Number | Amount of the invoice excluding taxes                                                                                                                                                                             |
+| vat                | Number | VAT amount of the invoice                                                                                                                                                                                         |
+| currency           | String | The ISO 4217 currency code representing the currency you utilize (<a href="https://docs.google.com/spreadsheets/d/1b7BNOwKyN1hMOouve6xhFZ2R2zrH4Sj1L-646j755fU/edit?usp=sharing" target="_blank">Link to doc</a>) |
+| forecast           | JSON   | JSON object forecast ([Invoices Amounts](#invoices-amounts))                                                                                                                                                      |
+| actual             | JSON   | JSON object actual ([Invoices Amounts](#invoices-amounts))                                                                                                                                                        |
+| project            | JSON   | JSON including: `reference`, `info_title`, `info_stage`, `info_number`, `currency` and `is_closed`                                                                                                                |
+| alternative        | JSON   | JSON including: `sort_order` and `title`                                                                                                                                                                          |
+| client             | JSON   | JSON including: `reference`, `type` (enterprise or individual), `company_name`, `first_name`, `last_name` and `email`                                                                                             |
+
 ## POST invoices-update
 
 Update an invoice record if the provided reference does match one of the invoices references in your account.
@@ -1580,49 +1623,6 @@ axios.post(baseUrl + "/invoices-update", body, headers);
 ### Response
 
 JSON object indicating whether an error has occurred during the process and, if so, the associated message. If there is no error, it also returns a `reference`: you will need to store this reference if you need to update or retrieve the invoice later on.
-
-### HTTP Endpoint
-
-`GET https://api.ezus.app/invoice`
-
-### Header parameters
-
-| Parameter     | Type   | Description                                                 |
-| ------------- | ------ | ----------------------------------------------------------- |
-| x-api-key     | String | <span style="color:red">(Required)</span> Your Ezus API key |
-| Authorization | String | <span style="color:red">(Required)</span> Your Bearer token |
-
-### Query parameters
-
-| Parameter | Type   | Description                                                                                 |
-| --------- | ------ | ------------------------------------------------------------------------------------------- |
-| reference | String | <span style="color:red">(Required)</span> The reference of the invoice you wish to retrieve |
-
-### Response
-
-JSON object containing the invoice information.
-
-| Property           | Type   | Description                                                                                                                                                                                                       |
-| ------------------ | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| reference          | String | The reference of the invoice you wish to retrieve                                                                                                                                                                 |
-| info_number        | String | Title of the invoice                                                                                                                                                                                              |
-| url                | String | URL of the invoice `.pdf` file                                                                                                                                                                                    |
-| stage              | String | Stage of the invoice `draft` `completed` or `paid`                                                                                                                                                                |
-| type               | String | Type of the invoice `invoice` or `credit_note`                                                                                                                                                                    |
-| origin_reference   | String | This is only displayed if the type of the invoice is a `credit_note`. The reference of the origin invoice.                                                                                                        |
-| origin_info_number | String | This is only displayed if the type of the invoice is a `credit_note`. Title of the origin invoice.                                                                                                                |
-| created_date       | String | Date of the creation of this invoice, in a "YYYY-MM-DD" format                                                                                                                                                    |
-| send_date          | String | Sent date of this invoice, in a "YYYY-MM-DD" format                                                                                                                                                               |
-| due_date           | String | Due date of this invoice, in a "YYYY-MM-DD" format                                                                                                                                                                |
-| amount_ttc         | Number | Amount of the invoice including taxes                                                                                                                                                                             |
-| amount_ht          | Number | Amount of the invoice excluding taxes                                                                                                                                                                             |
-| vat                | Number | VAT amount of the invoice                                                                                                                                                                                         |
-| currency           | String | The ISO 4217 currency code representing the currency you utilize (<a href="https://docs.google.com/spreadsheets/d/1b7BNOwKyN1hMOouve6xhFZ2R2zrH4Sj1L-646j755fU/edit?usp=sharing" target="_blank">Link to doc</a>) |
-| forecast           | JSON   | JSON object forecast ([Invoices Amounts](#invoices-amounts))                                                                                                                                                      |
-| actual             | JSON   | JSON object actual ([Invoices Amounts](#invoices-amounts))                                                                                                                                                        |
-| project            | JSON   | JSON including: `reference`, `info_title`, `info_stage`, `info_number`, `currency` and `is_closed`                                                                                                                |
-| alternative        | JSON   | JSON including: `sort_order` and `title`                                                                                                                                                                          |
-| client             | JSON   | JSON including: `reference`, `type` (enterprise or individual), `company_name`, `first_name`, `last_name` and `email`                                                                                             |
 
 ## GET invoice-supplier
 
