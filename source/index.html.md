@@ -1315,7 +1315,7 @@ JSON object indicating whether an error has occurred during the process and, if 
 It returns a list of your invoices. The invoices are returned sorted by creation date, with the most recent invoices appearing first. You can specify filters as query parameters to narrow down your search. The list of invoices returned is paginated (50 per 50): to call the 50 next items in the list, call the route with the `next_token` query parameter.
 
 ```shell
-curl --location 'https://api.ezus.app/invoices?stage=finalized' \
+curl --location 'https://api.ezus.app/invoices?stage=completed' \
 --header 'x-api-key: <YOUR_API_KEY>' \
 --header 'Authorization: Bearer <YOUR_TOKEN>'
 ```
@@ -1329,7 +1329,7 @@ const headers = {
   Authorization: "Bearer <YOUR_TOKEN>",
 };
 
-axios.get(baseUrl + "/invoices?stage=finalized", headers);
+axios.get(baseUrl + "/invoices?stage=completed", headers);
 ```
 
 > It returns a JSON object structured like this:
@@ -2375,7 +2375,7 @@ This event is triggered whenever a client is created.
 
 ## invoices.finalized
 
-This event is triggered whenever an invoice is finalized.
+This event is triggered whenever an invoice is finalized (its stage goes from `draft` to `completed`).
 
 ```json
 {
