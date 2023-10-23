@@ -1410,11 +1410,11 @@ axios.get(baseUrl + "/invoices?stage=completed", headers);
 
 ### Query parameters
 
-| Parameter      | Type   | Description                                                                                                                                                         |
-| -------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| next_token     | String | Specify this parameter if you want to retrieve the following elements of a given list query. If this parameter is filled, other parameters are ignored.             |
-| stage          | String | You can filter your search only by invoices that are in a specific stage. The stage can be `paid`, `completed` or `draft`                                           |
-| technical_name | String | You can also filter invoices by on of their custom fields by adding the `technical_name` of the custom field as a query parameter and the desired value as a value. |
+| Parameter      | Type   | Description                                                                                                                                                          |
+| -------------- | ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| next_token     | String | Specify this parameter if you want to retrieve the following elements of a given list query. If this parameter is filled, other parameters are ignored.              |
+| stage          | String | You can filter your search only by invoices that are in a specific stage. The stage can be `paid`, `completed` or `draft`.                                           |
+| technical_name | String | You can also filter invoices by one of their custom fields by adding the `technical_name` of the custom field as a query parameter and the desired value as a value. |
 
 ### Response
 
