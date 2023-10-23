@@ -3106,7 +3106,7 @@ Quick tip: You can <a href="https://ezus-public-documentation.s3.eu-west-1.amazo
 </tr>
 </tbody></table>
 <h3 id='response-17'>Response</h3>
-<p>JSON object indicating whether an error has occurred during the process and, if so, the associated message. If there is no error, it also returns a <code>reference</code>: you will need to store this reference if you need to retrieve the deposit later on.</p>
+<p>JSON object indicating whether an error has occurred during the process and, if so, the associated message. If there is no error, it also returns a <code>reference</code>: you will need to store this reference if you need to update or retrieve the deposit later on.</p>
 <h1 id='webhooks'>Webhooks</h1><h2 id='get-webhooks'>GET webhooks</h2>
 <p>Returns a list of your webhook endpoints.</p>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="s1">'https://api.ezus.app/webhooks'</span> <span class="se">\</span>
@@ -3261,6 +3261,8 @@ Quick tip: You can <a href="https://ezus-public-documentation.s3.eu-west-1.amazo
 <td>The list of events to enable for this endpoint. At least 1 required, separated by commas if more than one. (<a href="#events">Events</a>)</td>
 </tr>
 </tbody></table>
+<h3 id='response-19'>Response</h3>
+<p>JSON object indicating whether an error has occurred during the process and, if so, the associated message. If there is no error, it also returns a reference: you will need to store this reference if you need to update or retrieve the webhook later on.</p>
 <h1 id='nested-resources'>Nested Resources</h1><h3 id='address'>Address</h3><div class="highlight"><pre class="highlight json tab-json"><code><span class="w">   </span><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"58 Rue de Paradis"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"zip"</span><span class="p">:</span><span class="w"> </span><span class="s2">"75010"</span><span class="p">,</span><span class="w">
