@@ -34,7 +34,7 @@ For any request, you must provide <a href='https://swagger.io/docs/specification
 
 For GET requests, you must also provide <a href='https://swagger.io/docs/specification/describing-parameters/#query-parameters' target="_blank">query parameters</a>
 
-For POST requests, you must also provide <a href='https://swagger.io/docs/specification/2-0/describing-request-body' target="_blank">body parameters</a> structured in a JSON payload (application/json)
+For POST/PUT/DELETE requests, you must also provide <a href='https://swagger.io/docs/specification/2-0/describing-request-body' target="_blank">body parameters</a> structured in a JSON payload (application/json)
 
 <aside class="warning">
 Quick tip: You can <a href="https://ezus-public-documentation.s3.eu-west-1.amazonaws.com/ezus_api_postman.json?attachmentlinks=true"  target="_blank" download>download here</a> a Postman export of this API
