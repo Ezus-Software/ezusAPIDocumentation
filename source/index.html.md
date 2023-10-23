@@ -32,7 +32,7 @@ Each method has its own specification, but as a general rule:
 
 For any request, you must provide <a href='https://swagger.io/docs/specification/describing-parameters/#header-parameters' target="_blank">header parameters</a>
 
-For GET requests, you must also provide <a href='https://swagger.io/docs/specification/describing-parameters/#query-parameters' target="_blank">querry parameters</a>
+For GET requests, you must also provide <a href='https://swagger.io/docs/specification/describing-parameters/#query-parameters' target="_blank">query parameters</a>
 
 For POST requests, you must also provide <a href='https://swagger.io/docs/specification/2-0/describing-request-body' target="_blank">body parameters</a> structured in a JSON payload (application/json)
 
@@ -125,7 +125,7 @@ JSON object indicating whether an error has occurred during the process and, if 
 
 ## GET project
 
-Retrieve information for a project record in Ezus. You must specify to the Ezus API which project you wish to retrieve, by indicating its appropriate reference in your query parameter.
+It retrieves information for a project record in Ezus. You must specify to the Ezus API which project you wish to retrieve, by indicating its appropriate reference in your query parameter.
 
 ```shell
 curl --location 'https://api.ezus.app/project?reference=project_reference' \
@@ -232,7 +232,7 @@ JSON object containing the project information.
 
 ## POST projects-upsert
 
-Update a project record if the provided reference does match one of the project references in your account, otherwise create a new project record with the provided reference (or with a random one if no reference is provided).
+It updates a project record if the provided reference does match one of the project references in your account, otherwise it creates a new project record with the provided reference (or with a random one if no reference is provided).
 
 ```shell
 curl --location 'https://api.ezus.app/projects-upsert' \
@@ -386,7 +386,7 @@ JSON object indicating whether an error has occurred during the process and, if 
 
 ## GET client
 
-Retrieve information for a client record in Ezus. You must specify to the Ezus API which client you wish to retrieve, by indicating its appropriate reference in your query parameter.
+It retrieves information for a client record in Ezus. You must specify to the Ezus API which client you wish to retrieve, by indicating its appropriate reference in your query parameter.
 
 ```shell
 curl --location 'https://api.ezus.app/client?reference=client_reference' \
@@ -514,7 +514,7 @@ JSON object containing the client information.
 
 ## POST clients-upsert
 
-Update a client record if the provided reference (or the email) does match one of the client references in your account, otherwise create a new client record with the provided reference (or with a random one if no reference is provided). Note that for this endpoint, the email of the client can also be used as a primary key for the upsert.
+It updates a client record if the provided reference (or the email) does match one of the client references in your account, otherwise it creates a new client record with the provided reference (or with a random one if no reference is provided). Note that for this endpoint, the email of the client can also be used as a primary key for the upsert.
 
 ```shell
 curl --location 'https://api.ezus.app/clients-upsert' \
@@ -625,7 +625,7 @@ JSON object indicating whether an error has occurred during the process and, if 
 
 ## GET supplier
 
-Retrieve information for a supplier record in Ezus. You must specify to the Ezus API which supplier you wish to retrieve, by indicating its appropriate reference in your query parameter.
+It retrieves information for a supplier record in Ezus. You must specify to the Ezus API which supplier you wish to retrieve, by indicating its appropriate reference in your query parameter.
 
 ```shell
 curl --location 'https://api.ezus.app/supplier?reference=supplier_reference' \
@@ -765,7 +765,7 @@ JSON object containing the supplier information.
 
 ## POST suppliers-upsert
 
-Update a supplier record if the provided reference (or the email) does match one of the supplier references in your account, otherwise create a new supplier record with the provided reference (or with a random one if no reference is provided). Note that for this endpoint, the email of the supplier can also be used as a primary key for the upsert.
+It updates a supplier record if the provided reference (or the email) does match one of the supplier references in your account, otherwise it creates a new supplier record with the provided reference (or with a random one if no reference is provided). Note that for this endpoint, the email of the supplier can also be used as a primary key for the upsert.
 
 ```shell
 curl --location 'https://api.ezus.app/suppliers-upsert' \
@@ -859,17 +859,17 @@ axios.post(baseUrl + "/suppliers-upsert", body, headers);
 
 ### Body parameters (application/json)
 
-| Parameter     | Type   | Description                                                                                                                                                                                                                                   |
-| ------------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --- |
-| reference     | String | If provided, the unique reference associated to the supplier you want to update or create (in case the one you provided has never been used). If no reference is provided, a supplier will be created with a random one.                      |
-| company_name  | String | Name of the supplier. This parameter is required if you create a new supplier                                                                                                                                                                 |     |
-| website       | String | Website of the supplier                                                                                                                                                                                                                       |
-| capacity      | Number | Maximum number of people for which the supplier can be used. Leave blank `''` if not relevant                                                                                                                                                 |
-| user          | Email  | Email of the Ezus user that will be set as the owner of the supplier. By default, if no owner is provided or the provided email do not match any user on this account, the owner will be assigned to everyone                                 |
-| type          | String | Either `undefined` or a combination of these 3 options: `accom`, `activity`, `transport`. You can select multiple options by separating them with comas ("accom, activity" for instance). Enter "undefined" if you want to reset this params. |
-| contact       | JSON   | Contact is a single JSON and email is needed. Note that only one contact can be upsert this way (the main contact of the supplier) ([Contact](#contacts)) To reset the main contact, you can put `'0'`                                        |
-| address       | JSON   | JSON object address ([Address](#address)) To reset the address, you can put `'0'`                                                                                                                                                             |
-| custom_fields | JSON   | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                                                                                                 |
+| Parameter     | Type   | Description                                                                                                                                                                                                                                      |
+| ------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --- |
+| reference     | String | If provided, the unique reference associated to the supplier you want to update or create (in case the one you provided has never been used). If no reference is provided, a supplier will be created with a random one.                         |
+| company_name  | String | Name of the supplier. This parameter is required if you create a new supplier                                                                                                                                                                    |     |
+| website       | String | Website of the supplier                                                                                                                                                                                                                          |
+| capacity      | Number | Maximum number of people for which the supplier can be used. Leave blank `''` if not relevant                                                                                                                                                    |
+| user          | Email  | Email of the Ezus user that will be set as the owner of the supplier. By default, if no owner is provided or the provided email do not match any user on this account, the owner will be assigned to everyone                                    |
+| type          | String | Either `undefined` or a combination of these 3 options: `accom`, `activity`, `transport`. You can select multiple options by separating them with comas ("accom, activity" for instance). Enter "undefined" if you want to reset this parameter. |
+| contact       | JSON   | Contact is a single JSON and email is needed. Note that only one contact can be upsert this way (the main contact of the supplier) ([Contact](#contacts)) To reset the main contact, you can put `'0'`                                           |
+| address       | JSON   | JSON object address ([Address](#address)) To reset the address, you can put `'0'`                                                                                                                                                                |
+| custom_fields | JSON   | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                                                                                                    |
 
 ### Response
 
@@ -879,7 +879,7 @@ JSON object indicating whether an error has occurred during the process and, if 
 
 ## GET product
 
-Retrieve information for a product record in Ezus. You must specify to the Ezus API which product you wish to retrieve, by indicating its appropriate reference in your query parameter.
+It retrieves information for a product record in Ezus. You must specify to the Ezus API which product you wish to retrieve, by indicating its appropriate reference in your query parameter.
 
 ```shell
 curl --location 'https://api.ezus.app/product?reference=product_reference' \
@@ -1011,7 +1011,7 @@ JSON object containing the product information.
 
 ## POST products-upsert
 
-Update a product record if the provided reference does match one of the product references in your account, otherwise create a new product record with the provided reference (or with a random one if no reference is provided).
+It updates a product record if the provided reference does match one of the product references in your account, otherwise it creates a new product record with the provided reference (or with a random one if no reference is provided).
 
 ```shell
 curl --location 'https://api.ezus.app/products-upsert' \
@@ -1120,7 +1120,7 @@ JSON object indicating whether an error has occurred during the process and, if 
 
 ## GET package
 
-Retrieve information for a package record in Ezus. You must specify to the Ezus API which package you wish to retrieve, by indicating its appropriate reference in your query parameter.
+It retrieves information for a package record in Ezus. You must specify to the Ezus API which package you wish to retrieve, by indicating its appropriate reference in your query parameter.
 
 ```shell
 curl --location 'https://api.ezus.app/package?reference=package_reference' \
@@ -1237,7 +1237,7 @@ JSON object containing the package information.
 
 ## POST packages-upsert
 
-Update a package record if the provided reference does match one of the package references in your account, otherwise create a new package record with the provided reference (or with a random one if no reference is provided).
+It updates a package record if the provided reference does match one of the package references in your account, otherwise it creates a new package record with the provided reference (or with a random one if no reference is provided).
 
 ```shell
 curl --location 'https://api.ezus.app/packages-upsert' \
@@ -1302,7 +1302,7 @@ axios.post(baseUrl + "/packages-upsert", body, headers);
 | reference     | String | If provided, the unique Ezus Reference associated to the package you want to update or create (in case the one you provided has never been used). If no reference is provided, a package will be created with a random one. |
 | title         | String | This parameter is required if you create a new package                                                                                                                                                                      |
 | capacity      | Number | Maximum number of people for which the package can be used . Leave blank `''` if not relevant                                                                                                                               |
-| custom_fields | JSON   | You can add custom fields for your client, this custom fields should be in your Ezus params and Write exactly as they are written in your params technical name ([Custom fields](#custom-fields))                           |
+| custom_fields | JSON   | Array of JSON custom fields [Custom fields](#custom-fields)                                                                                                                                                                 |
 
 ### Response
 
@@ -1312,10 +1312,10 @@ JSON object indicating whether an error has occurred during the process and, if 
 
 ## GET invoices
 
-Retrieve information for a list of invoices record in Ezus. You must specify to the Ezus API which filters you want to apply on the invoices list. The return of this invoice list is paginated with a token, to call the following elements of the list, you must call the route with the token
+It returns a list of your invoices. The invoices are returned sorted by creation date, with the most recent invoices appearing first. You can specify filters as query parameters to narrow down your search. The list of invoices returned is paginated (50 per 50): to call the 50 next items in the list, call the route with the `next_token` query parameter.
 
 ```shell
-curl --location 'https://api.ezus.app/invoices?stage=finalized&is_in_netsuite=false' \
+curl --location 'https://api.ezus.app/invoices?stage=finalized' \
 --header 'x-api-key: <YOUR_API_KEY>' \
 --header 'Authorization: Bearer <YOUR_TOKEN>'
 ```
@@ -1329,7 +1329,7 @@ const headers = {
   Authorization: "Bearer <YOUR_TOKEN>",
 };
 
-axios.get(baseUrl + "/invoices?stage=finalized&is_in_netsuite=false", headers);
+axios.get(baseUrl + "/invoices?stage=finalized", headers);
 ```
 
 > It returns a JSON object structured like this:
@@ -1410,11 +1410,11 @@ axios.get(baseUrl + "/invoices?stage=finalized&is_in_netsuite=false", headers);
 
 ### Query parameters
 
-| Parameter      | Type   | Description                                                                                                                                                                                       |
-| -------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| stage          | String | The stage of the invoice you wish to retrieve can be `paid`, `completed` or `draft`                                                                                                               |
-| next_token     | String | The invoice token, given after the first call with certain filters active. This token is valid for 24 hours, after which the filters used will be applied. This token overrides all other filters |
-| technical_name | String | You can filter invoices by their custom fields by adding the technical name of the custom field as a parameter and the desired value as a value.                                                  |
+| Parameter      | Type   | Description                                                                                                                                                         |
+| -------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| next_token     | String | Specify this parameter if you want to retrieve the following elements of a given list query. If this parameter is filled, other parameters are ignored.             |
+| stage          | String | You can filter your search only by invoices that are in a specific stage. The stage can be `paid`, `completed` or `draft`                                           |
+| technical_name | String | You can also filter invoices by on of their custom fields by adding the `technical_name` of the custom field as a query parameter and the desired value as a value. |
 
 ### Response
 
@@ -1431,7 +1431,7 @@ JSON object containing the invoice information.
 
 ## GET invoice
 
-Retrieve information for an invoice record in Ezus. You must specify to the Ezus API which invoice you wish to retrieve, by indicating its appropriate reference in your query parameter.
+It retrieves information for an invoice record in Ezus. You must specify to the Ezus API which invoice you wish to retrieve, by indicating its appropriate reference in your query parameter.
 
 ```shell
 curl --location 'https://api.ezus.app/invoice?reference=invoice_reference' \
@@ -1552,7 +1552,7 @@ JSON object containing the invoice information.
 
 ## POST invoices-update
 
-Update an invoice record if the provided reference does match one of the invoices references in your account.
+It updates an invoice record if the provided reference does match one of the invoices references in your account.
 
 ```shell
 curl --location 'https://api.ezus.app/invoices-update' \
@@ -1626,7 +1626,7 @@ JSON object indicating whether an error has occurred during the process and, if 
 
 ## GET invoice-supplier
 
-Retrieve information for a supplier invoice record in Ezus. You must specify to the Ezus API which supplier invoice you wish to retrieve, by indicating its appropriate reference in your query parameter.
+It retrieves information for a supplier invoice record in Ezus. You must specify to the Ezus API which supplier invoice you wish to retrieve, by indicating its appropriate reference in your query parameter.
 
 ```shell
 curl --location 'https://api.ezus.app/invoice-supplier?reference=invoice_supplier_reference' \
@@ -1733,8 +1733,8 @@ JSON object containing the supplier invoice information.
 | reference    | String | The reference of the supplier invoice you wish to retrieve                                                                                                                                                        |
 | url          | String | URL of the supplier invoice file                                                                                                                                                                                  |
 | filename     | String | Filename of the supplier invoice                                                                                                                                                                                  |
-| created_date | String | Date of the creation of this supplier invoice, in a "YYYY-MM-DD" format                                                                                                                                           |
-| due_date     | String | Due date of the this supplier invoice, in a "YYYY-MM-DD" format                                                                                                                                                   |
+| created_date | String | Date of the creation of the supplier invoice, in a "YYYY-MM-DD" format                                                                                                                                            |
+| due_date     | String | Due date of the supplier invoice, in a "YYYY-MM-DD" format                                                                                                                                                        |
 | amount_ttc   | Number | Amount of the supplier invoice excluding taxes                                                                                                                                                                    |
 | amount_ht    | Number | Amount of the supplier invoice including taxes                                                                                                                                                                    |
 | vat          | Number | VAT amount of the supplier invoice                                                                                                                                                                                |
@@ -1886,7 +1886,7 @@ Array of JSON containing your webhooks information.
 
 ## POST webhooks-upsert
 
-Update a webhook record if the provided reference does match one of the webhooks in your account, otherwise create a new webhook record with the provided reference (or with a random one if no reference is provided).
+It updates a webhook record if the provided reference does match one of the webhooks in your account, otherwise it creates a new webhook record with the provided reference (or with a random one if no reference is provided).
 
 ```shell
 curl --location 'https://api.ezus.app/webhooks-upsert' \
@@ -2234,14 +2234,14 @@ Only the last 10 suppliers are returned in this object.
 | reference      | String | An unique reference of this tariff                                                    |
 | type           | String | A tariff can be `default`, `custom` OR `season`.                                      |
 | name           | String | Name of the tariff (only season tariffs can have a name)                              |
-| purchase_price | Number | Purchase price incl taxes                                                             |
+| purchase_price | Number | Purchase price including taxes                                                        |
 | margin_rate    | Number | The margin rate is based on the sales price                                           |
-| sales_price    | Number | Sales price incl taxes                                                                |
+| sales_price    | Number | Sales price including taxes                                                           |
 | childs         | Array  | Childs are sub-tariffs contained by this tariff (only season tariffs can have childs) |
 
 ### User
 
-One of the following options: `None`, `Everyone`, `User Group` or the following JSON object corresponding to an active Ezus user of this account
+One of the following options: `None`, `Everyone`, `User Group` or the following JSON object corresponding to an active Ezus user of this account.
 
 ```json
 "user": {
@@ -2424,7 +2424,7 @@ This event is triggered whenever an invoice is finalized.
 
 ## invoices_suppliers.attached
 
-This event is triggered whenever an file is added to a supplier invoice.
+This event is triggered whenever a file is added to a supplier invoice.
 
 ```json
 {
