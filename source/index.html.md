@@ -1486,7 +1486,7 @@ axios.delete(baseUrl + "/webhooks-upsert", body, headers);
 | Parameter | Type   | Description                                                                         |
 | --------- | ------ | ----------------------------------------------------------------------------------- |
 | reference | String | If provided, the unique Ezus Reference associated to the webhook you want to delete |
-| endpoint  | String | If provided, the endpoint associated to the webhook you want to t delete            |
+| endpoint  | String | If provided, the endpoint associated to the webhook you want to delete              |
 
 # Nested Resources
 
