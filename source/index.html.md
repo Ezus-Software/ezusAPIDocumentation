@@ -1434,7 +1434,7 @@ Delete a webhook record if the provided reference or endpoint does match one of 
 
 ```shell
 curl --request "DELETE" \
---location 'https://api.ezus.app/webhooks-upsert' \
+--location 'https://api.ezus.app/webhooks-delete' \
 --header 'X-API-KEY: <YOUR_API_KEY>' \
 --header 'Content-Type: application/json' \
 --header 'Authorization: Bearer <YOUR_TOKEN>' \
