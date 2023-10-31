@@ -417,7 +417,7 @@
       "response": []
     },
     {
-      "name": "invoices-upsert",
+      "name": "invoices-update",
       "request": {
         "method": "POST",
         "header": [
