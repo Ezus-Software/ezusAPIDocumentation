@@ -1550,12 +1550,12 @@ JSON object containing the invoice information.
 | alternative        | JSON   | JSON including: `sort_order` and `title`                                                                                                                                                                          |
 | client             | JSON   | JSON including: `reference`, `type` (enterprise or individual), `company_name`, `first_name`, `last_name` and `email`                                                                                             |
 
-## POST invoices-update
+## PUT invoices-update
 
 It updates an invoice record if the provided reference does match one of the invoices references in your account.
 
 ```shell
-curl --location 'https://api.ezus.app/invoices-update' \
+curl --location --request PUT 'https://api.ezus.app/invoices-update' \
 --header 'x-api-key: <YOUR_API_KEY>' \
 --header 'Content-Type: application/json' \
 --header 'Authorization: Bearer <YOUR_TOKEN>' \
@@ -1586,7 +1586,7 @@ const headers = {
   Authorization: "Bearer <YOUR_TOKEN>",
 };
 
-axios.post(baseUrl + "/invoices-update", body, headers);
+axios.put(baseUrl + "/invoices-update", body, headers);
 ```
 
 > It returns a JSON object structured like this:
@@ -1601,7 +1601,7 @@ axios.post(baseUrl + "/invoices-update", body, headers);
 
 ### HTTP Endpoint
 
-`POST https://api.ezus.app/invoices-update`
+`PUT https://api.ezus.app/invoices-update`
 
 ### Header parameters
 
@@ -1747,12 +1747,12 @@ JSON object containing the supplier invoice information.
 
 # Deposits
 
-## PUT deposits-create
+## POST deposits-create
 
 It creates a client deposit in the specified project.
 
 ```shell
-curl --location --request PUT 'https://api.ezus.app/deposits-create' \
+curl --location 'https://api.ezus.app/deposits-create' \
 --header 'x-api-key: <YOUR_API_KEY>' \
 --header 'Content-Type: application/json' \
 --header 'Authorization: Bearer <YOUR_TOKEN>' \
@@ -1785,7 +1785,7 @@ const headers = {
   Authorization: "Bearer <YOUR_TOKEN>",
 };
 
-axios.put(baseUrl + "/deposits-create", body, headers);
+axios.post(baseUrl + "/deposits-create", body, headers);
 ```
 
 > It returns a JSON object structured like this:
@@ -1799,7 +1799,7 @@ axios.put(baseUrl + "/deposits-create", body, headers);
 
 ### HTTP Endpoint
 
-`PUT https://api.ezus.app/deposits-create`
+`POST https://api.ezus.app/deposits-create`
 
 ### Header parameters
 
