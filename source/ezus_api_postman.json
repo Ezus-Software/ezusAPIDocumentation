@@ -419,7 +419,7 @@
     {
       "name": "invoices-update",
       "request": {
-        "method": "POST",
+        "method": "PUT",
         "header": [
           {
             "key": "X-API-KEY",
@@ -447,7 +447,7 @@
     {
       "name": "deposits-create",
       "request": {
-        "method": "PUT",
+        "method": "POST",
         "header": [
           {
             "key": "X-API-KEY",
