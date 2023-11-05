@@ -22,7 +22,7 @@ meta:
 
 # Introduction
 
-Welcome to the Ezus API, a powerful tool designed to enhance your interaction with the Ezus software. Our API follows <a href='https://en.wikipedia.org/wiki/Representational_state_transfer' target="_blank">REST</a> principles, offering a set of HTTP methods that serve as the foundation for Ezus' core functionalities. Its primary purpose is to empower you to programmatically manage your Ezus projects, clients, catalog (suppliers, products, packages), and invoices.
+Welcome to the Ezus API. Our API follows <a href='https://en.wikipedia.org/wiki/Representational_state_transfer' target="_blank">REST</a> principles, offering a set of HTTP methods that serve as the foundation for Ezus' core functionalities. Its primary purpose is to empower you to programmatically manage your Ezus projects, clients, catalog (suppliers, products, packages), and invoices.
 
 If you're seeking an overview of common use cases achievable through our API, feel free to explore our help center's <a href='https://help.ezus.io/en/collections/3016686-integrations' target="_blank">Integrations</a> section for valuable insights.
 
