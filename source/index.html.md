@@ -1983,10 +1983,10 @@ const headers = {
   Authorization: "Bearer <YOUR_TOKEN>",
 };
 
-axios.delete(baseUrl + "/webhooks-upsert", body, headers);
+axios.delete(baseUrl + "/webhooks-delete", body, headers);
 ```
 
-> It returns a JSON object structured like this:
+> This request returns a structured JSON object:
 
 ```json
 {
