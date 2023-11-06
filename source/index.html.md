@@ -1878,7 +1878,7 @@ axios.get(baseUrl + "/webhooks", headers);
 
 ### Response
 
-An array of JSON tha contains your webhooks information.
+An array of JSON that contains your webhooks information.
 
 | Property | Type  | Description                                      |
 | -------- | ----- | ------------------------------------------------ |
@@ -1952,11 +1952,11 @@ axios.post(baseUrl + "/webhooks-upsert", body, headers);
 
 ### Response
 
-A JSON object indicating whether an error occurred during the process, along with the associated message. If successful, it also returns a reference for the project, which you should store for future updates or retrievals.
+A JSON object indicating whether an error occurred during the process, along with the associated message. If successful, it also returns a reference for the webhook, which you should store for future updates or retrievals.
 
 ## DELETE webhooks-delete
 
-Delete a webhook record if the provided reference or endpoint does match one of the webhooks in your account.
+It deletes a webhook record if the provided reference or endpoint does match one of the webhooks in your account.
 
 ```shell
 curl --request "DELETE" \
@@ -2013,6 +2013,10 @@ axios.delete(baseUrl + "/webhooks-delete", body, headers);
 | --------- | ------ | ----------------------------------------------------------------------------------- |
 | reference | String | If provided, the unique Ezus Reference associated to the webhook you want to delete |
 | endpoint  | String | If provided, the endpoint associated to the webhook you want to delete              |
+
+### Response
+
+A JSON object indicating whether an error occurred during the process, along with the associated message.
 
 # Nested Resources
 
