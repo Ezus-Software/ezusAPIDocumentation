@@ -22,48 +22,48 @@ meta:
 
 # Introduction
 
-Welcome to the Ezus API. The Ezus API is organized around <a href='https://en.wikipedia.org/wiki/Representational_state_transfer' target="_blank">REST</a>. It supplies a collection of HTTP methods that underpin Ezus main functionalities. Its main objective is to enable you to manage your Ezus projects, clients and catalog (suppliers/products/packages) programmatically.
+Welcome to the Ezus API. Our API follows <a href='https://en.wikipedia.org/wiki/Representational_state_transfer' target="_blank">REST</a> principles, offering a set of HTTP methods that serve as the foundation for Ezus' core functionalities. Its primary purpose is to empower you to programmatically manage your Ezus projects, clients, catalog (suppliers, products, packages), and invoices.
 
-If you need an overview of some common use cases that you can setup with our API you can look at our help center section <a href='https://help.ezus.io/en/collections/3016686-integrations' target="_blank">Integrations</a>
+If you're seeking an overview of common use cases achievable through our API, feel free to explore our help center's <a href='https://help.ezus.io/en/collections/3016686-integrations' target="_blank">Integrations</a> section for valuable insights.
 
-If you want to dive into the list of available methods, you've come to the right place. This documentation provides a technical description (reference) for each method in the left-hand section, as well as code examples in the right-hand section.
+For those ready to delve into the details of available methods, you're in the right place. This documentation presents a technical reference for each method in the left-hand section, complemented by code examples in the right-hand section.
 
-Each method has its own specification, but as a general rule:
+While each method possesses its unique specifications, here are some general guidelines:
 
-For any request, you must provide <a href='https://swagger.io/docs/specification/describing-parameters/#header-parameters' target="_blank">header parameters</a>
+For any request, you must provide <a href='https://swagger.io/docs/specification/describing-parameters/#header-parameters' target="_blank">Header Parameters</a>
 
-For GET requests, you must also provide <a href='https://swagger.io/docs/specification/describing-parameters/#query-parameters' target="_blank">querry parameters</a>
+For GET requests, ensure you also provide the required <a href='https://swagger.io/docs/specification/describing-parameters/#query-parameters' target="_blank">query parameters</a>
 
-For POST requests, you must also provide <a href='https://swagger.io/docs/specification/2-0/describing-request-body' target="_blank">body parameters</a> structured in a JSON payload (application/json)
+For POST/PUT/DELETE requests, structure your request's <a href='https://swagger.io/docs/specification/2-0/describing-request-body' target="_blank">body parameters</a> in JSON format (application/json)
 
 <aside class="warning">
-Quick tip: You can <a href="https://ezus-public-documentation.s3.eu-west-1.amazonaws.com/ezus_api_postman.json?attachmentlinks=true"  target="_blank" download>download here</a> a Postman export of this API
+Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  target="_blank" download>download here</a> a Postman export of this API
 </aside>
 
 # Authentication
 
 ## Principles
 
-Ezus authentication scheme is based on <a href='https://swagger.io/docs/specification/authentication/api-keys/' target="_blank">API Keys</a> and <a href='https://swagger.io/docs/specification/authentication/bearer-authentication/' target="_blank">Bearer authentication</a>. So, you will need 2 things to be able to interact with our API:
+Ezus API employs a robust authentication scheme that leverages <a href='https://swagger.io/docs/specification/authentication/api-keys/' target="_blank">API Keys</a> and <a href='https://swagger.io/docs/specification/authentication/bearer-authentication/' target="_blank">Bearer authentication</a>. To interact with the Ezus API effectively, you'll need two crucial elements:
 
 - An Ezus API key
-- User credentials of an Ezus account
+- User credentials for an active Ezus account
 
 <span style="text-decoration:underline">API key</span>
 
-Ezus uses API keys to control access to its API. To get `<YOUR_API_KEY>`, ask your account manager. The Ezus API requires this API key to be included in the x-api-key header parameter of all your requests.
+Ezus uses API keys to control access to its API. To obtain your `<YOUR_API_KEY>`, kindly request it from your account manager. Every request you make to the Ezus API must include this API key as the `x-api-key` header parameter, like so:
 
 `x-api-key: <YOUR_API_KEY>`
 
-<span style="text-decoration:underline">Bearer authentication</span>
+<span style="text-decoration:underline">Bearer Authentication</span>
 
-After calling the /login endpoint with valid credentials, a bearer token will be returned to you: `<YOUR_TOKEN>`. This token is then valid for 12 hours. The Ezus API requires this bearer token to be included in the Authorization header parameter of all subsequent requests.
+Upon successfully calling the `/login` endpoint with valid credentials, you will receive a bearer token, referred to as `<YOUR_TOKEN>`. This token remains valid for a duration of 12 hours. The Ezus API requires this bearer token to be included in the Authorization header parameter of all subsequent requests.
 
 `Authorization: Bearer <YOUR_TOKEN>`
 
 ## POST login
 
-> To authenticate, you will need first to call our /login endpoint:
+> To initiate authentication, your first step is to make a request to the `/login` endpoint:
 
 ```shell
 curl --location 'https://api.ezus.app/login' \
@@ -88,7 +88,7 @@ const headers = { "x-api-key": "<YOUR_API_KEY>" };
 axios.post(baseUrl + "/login", body, headers);
 ```
 
-> It returns a JSON object structured like this:
+> This request returns a structured JSON object:
 
 ```json
 {
@@ -98,19 +98,19 @@ axios.post(baseUrl + "/login", body, headers);
 }
 ```
 
-> In subsequent requests, be sure to replace `<YOUR_TOKEN>` in the Authorization header parameter with the token returned to you here.
+> In subsequent requests, remember to replace `<YOUR_TOKEN>` in the Authorization header parameter with the token you received during this authentication process.
 
 ### HTTP Endpoint
 
 `POST https://api.ezus.app/login`
 
-### Header parameters
+### Header Parameters
 
 | Parameter | Type   | Description                                                 |
 | --------- | ------ | ----------------------------------------------------------- |
 | x-api-key | String | <span style="color:red">(Required)</span> Your Ezus API key |
 
-### Body parameters (application/json)
+### Body Parameters (application/json)
 
 | Parameter | Type   | Description                                                     |
 | --------- | ------ | --------------------------------------------------------------- |
@@ -119,13 +119,13 @@ axios.post(baseUrl + "/login", body, headers);
 
 ### Response
 
-JSON object indicating whether an error has occurred during the process and, if so, the associated message. If there is no error, it also returns a `token`: you will need to store this token for future API requests.
+A JSON object indicating whether an error occurred during the process, along with the associated message. If successful, it also returns a `token` that you must retain for future API requests.
 
 # Projects
 
 ## GET project
 
-Retrieve information for a project record in Ezus. You must specify to the Ezus API which project you wish to retrieve, by indicating its appropriate reference in your query parameter.
+This API endpoint allows you to retrieve information for a specific project record in Ezus. To do so, you need to specify the project's reference in your query parameter.
 
 ```shell
 curl --location 'https://api.ezus.app/project?reference=project_reference' \
@@ -145,7 +145,7 @@ const headers = {
 axios.get(baseUrl + "/project?reference=project_reference", headers);
 ```
 
-> It returns a JSON object structured like this:
+> This request returns a structured JSON object:
 
 ```json
 {
@@ -200,14 +200,14 @@ axios.get(baseUrl + "/project?reference=project_reference", headers);
 
 `GET https://api.ezus.app/project`
 
-### Header parameters
+### Header Parameters
 
 | Parameter     | Type   | Description                                                 |
 | ------------- | ------ | ----------------------------------------------------------- |
 | x-api-key     | String | <span style="color:red">(Required)</span> Your Ezus API key |
 | Authorization | String | <span style="color:red">(Required)</span> Your Bearer token |
 
-### Query parameters
+### Query Parameters
 
 | Parameter | Type   | Description                                                                                 |
 | --------- | ------ | ------------------------------------------------------------------------------------------- |
@@ -215,24 +215,24 @@ axios.get(baseUrl + "/project?reference=project_reference", headers);
 
 ### Response
 
-JSON object containing the project information.
+A JSON object containing the project information with properties like:
 
 | Property        | Type   | Description                                                                                      |
 | --------------- | ------ | ------------------------------------------------------------------------------------------------ |
-| reference       | String | The reference of the project you wish to retrieve                                                |
+| reference       | String | The reference of the project                                                                     |
 | info_title      | String | The title of the project                                                                         |
 | info_stage      | String | The stage of the project (Confirmed, Received, Paid...)                                          |
 | info_notes      | String | Notes on the project                                                                             |
 | info_number     | String | File number that appears at the bottom of the project record. Not to be confused with reference! |
 | currency        | String | Default currency of the project                                                                  |
-| sales_manager   | JSON   | JSON object user ([User](#user))                                                                 |
-| project_manager | JSON   | JSON object user ([User](#user))                                                                 |
+| sales_manager   | JSON   | JSON object representing the sales manager ([User](#user))                                       |
+| project_manager | JSON   | JSON object representing the project manager ([User](#user))                                     |
 | alternatives    | Array  | Array of JSON alternatives ([Alternatives](#alternatives))                                       |
 | custom_fields   | Array  | Array of JSON custom fields ([Custom fields](#custom-fields))                                    |
 
 ## POST projects-upsert
 
-Update a project record if the provided reference does match one of the project references in your account, otherwise create a new project record with the provided reference (or with a random one if no reference is provided).
+It updates a project record if the provided reference does match one of the project references in your account, otherwise it creates a new project record with the provided reference (or with a random one if no reference is provided).
 
 ```shell
 curl --location 'https://api.ezus.app/projects-upsert' \
@@ -277,7 +277,7 @@ const headers = {
 axios.post(baseUrl + "/projects-upsert", body, headers);
 ```
 
-> It returns a JSON object structured like this:
+> This request returns a structured JSON object:
 
 ```json
 {
@@ -292,34 +292,34 @@ axios.post(baseUrl + "/projects-upsert", body, headers);
 
 `POST https://api.ezus.app/projects-upsert`
 
-### Header parameters
+### Header Parameters
 
 | Parameter     | Type   | Description                                                 |
 | ------------- | ------ | ----------------------------------------------------------- |
 | x-api-key     | String | <span style="color:red">(Required)</span> Your Ezus API key |
 | Authorization | String | <span style="color:red">(Required)</span> Your Bearer token |
 
-### Body parameters (application/json)
+### Body Parameters (application/json)
 
-| Parameter           | Type   | Description                                                                                                                                                                                                                              |
-| ------------------- | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| reference           | String | If provided, the unique reference associated to the project you want to update or create (in case the one you provided has never been used). If no reference is provided, a project will be created with a random one.                   |
-| info_title          | String | Title of the project. This parameter is required if you create a new project                                                                                                                                                             |
-| trip_budget         | Number | Forecasted budget for the project                                                                                                                                                                                                        |
-| trip_people         | Number | Number of people in the project                                                                                                                                                                                                          |
-| trip_date_in        | Date   | Date of the beginning of the project in a "YYYY-MM-DD" format string. If not provided or if not formatted correctly, or if duration > 40 days or if trip_date_in > trip_date_out, project will be set as 1 day and trip_date_in as today |
-| trip_date_out       | Date   | Date of the end of the project in a "YYYY-MM-DD" format string. If not provided or if not formatted correctly, or if duration > 40 days or if trip_date_in > trip_date_out, project will be set as 1 day and trip_date_out as today      |
-| sales_manager_email | Email  | Email of the Ezus user that will be set as the sales manager of the project. By default, if no sales manager is provided or the provided email do not match any user on this account, the project will be assigned to None               |
-| client_reference    | String | This can be a reference or the email of a client already created in this Ezus account. By default, the project will not be linked to any client. If you want to update the project's client to None, you must enter 0.                   |
-| custom_fields       | JSON   | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                                                                                            |
+| Parameter           | Type   | Description                                                                                                                                                                                                                                                         |
+| ------------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| reference           | String | If provided, the unique reference associated with the project you want to update or create (or a random one will be generated).                                                                                                                                     |
+| info_title          | String | Title of the project. This parameter is required if you create a new project                                                                                                                                                                                        |
+| trip_budget         | Number | Forecasted budget for the project                                                                                                                                                                                                                                   |
+| trip_people         | Number | Number of people in the project (only settable when creating a new project)                                                                                                                                                                                         |
+| trip_date_in        | Date   | Date of the project's start in "YYYY-MM-DD" format (only settable when creating a new project). If not provided or if not formatted correctly, or if duration > 40 days or if trip_date_in > trip_date_out, project will be set as 1 day and trip_date_in as today. |
+| trip_date_out       | Date   | Date of the project's end in "YYYY-MM-DD" format (only settable when creating a new project). If not provided or if not formatted correctly, or if duration > 40 days or if trip_date_in > trip_date_out, project will be set as 1 day and trip_date_out as today.  |
+| sales_manager_email | Email  | Email of the Ezus user to be set as the sales manager of the project                                                                                                                                                                                                |
+| client_reference    | String | Reference or email of an existing client in your Ezus account to link to the project (only settable when creating a new project)                                                                                                                                    |
+| custom_fields       | JSON   | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                                                                                                                       |
 
 ### Response
 
-JSON object indicating whether an error has occurred during the process and, if so, the associated message. If there is no error, it also returns a `reference`: you will need to store this reference if you need to update or retrieve the project later on.
+A JSON object indicating whether an error occurred during the process, along with the associated message. If successful, it also returns a `reference` for the project, which you should store for future updates or retrievals.
 
 ## POST projects-documents-create
 
-Create a PDF document based on the link you provide within the project using project_reference as its reference.
+This API endpoint enables the creation of a PDF document based on the provided link within the specified project, using the project_reference as its reference.
 
 ```shell
 curl --location 'https://api.ezus.app/projects-documents-create' \
@@ -350,7 +350,7 @@ const headers = {
 axios.post(baseUrl + "/projects-documents-create", body, headers);
 ```
 
-> It returns a JSON object structured like this:
+> This request returns a structured JSON object:
 
 ```json
 {
@@ -363,30 +363,30 @@ axios.post(baseUrl + "/projects-documents-create", body, headers);
 
 `POST https://api.ezus.app/projects-documents-create`
 
-### Header parameters
+### Header Parameters
 
 | Parameter     | Type   | Description                                                 |
 | ------------- | ------ | ----------------------------------------------------------- |
 | x-api-key     | String | <span style="color:red">(Required)</span> Your Ezus API key |
 | Authorization | String | <span style="color:red">(Required)</span> Your Bearer token |
 
-### Body parameters (application/json)
+### Body Parameters (application/json)
 
-| Parameter         | Type   | Description                                                                                                          |
-| ----------------- | ------ | -------------------------------------------------------------------------------------------------------------------- |
-| project_reference | String | <span style="color:red">(Required)</span> The project reference in which you want to create a document               |
-| title             | String | Title of the document                                                                                                |
-| link              | Link   | <span style="color:red">(Required)</span> URL of the document (only PDF). Make sure this link is publicly accessible |
+| Parameter         | Type   | Description                                                                                                              |
+| ----------------- | ------ | ------------------------------------------------------------------------------------------------------------------------ |
+| project_reference | String | <span style="color:red">(Required)</span> The project reference in which you want to create a document                   |
+| title             | String | Title of the document                                                                                                    |
+| link              | Link   | <span style="color:red">(Required)</span> URL of the document (only supports PDF format and must be publicly accessible) |
 
 ### Response
 
-JSON object indicating whether an error has occurred during the process and, if so, the associated message.
+A JSON object indicating whether an error occurred during the process, along with the associated message.
 
 # Clients
 
 ## GET client
 
-Retrieve information for a client record in Ezus. You must specify to the Ezus API which client you wish to retrieve, by indicating its appropriate reference in your query parameter.
+This API endpoint allows you to retrieve information for a specific client record in Ezus. To do so, you need to specify the client's reference in your query parameter.
 
 ```shell
 curl --location 'https://api.ezus.app/client?reference=client_reference' \
@@ -406,7 +406,7 @@ const headers = {
 axios.get(baseUrl + "/client?reference=client_reference", headers);
 ```
 
-> It returns a JSON object structured like this:
+> This request returns a structured JSON object:
 
 ```json
 {
@@ -473,14 +473,14 @@ axios.get(baseUrl + "/client?reference=client_reference", headers);
 
 `GET https://api.ezus.app/client`
 
-### Header parameters
+### Header Parameters
 
 | Parameter     | Type   | Description                                                 |
 | ------------- | ------ | ----------------------------------------------------------- |
 | x-api-key     | String | <span style="color:red">(Required)</span> Your Ezus API key |
 | Authorization | String | <span style="color:red">(Required)</span> Your Bearer token |
 
-### Query parameters
+### Query Parameters
 
 | Parameter | Type   | Description                                                                                |
 | --------- | ------ | ------------------------------------------------------------------------------------------ |
@@ -488,33 +488,33 @@ axios.get(baseUrl + "/client?reference=client_reference", headers);
 
 ### Response
 
-JSON object containing the client information.
+A JSON object containing the client information with properties like:
 
-| Property      | Type   | Description                                                                                                                                                           |
-| ------------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| reference     | String | The reference of the client you wish to retrieve                                                                                                                      |
-| type          | String | The type of the client can be either "enterprise" or "individual"                                                                                                     |
-| company_name  | String | Name of the company of the client                                                                                                                                     |
-| website       | String | Website of the client                                                                                                                                                 |
-| first_name    | String | First name of the main contact of the client                                                                                                                          |
-| last_name     | String | Last name of the main contact of the client                                                                                                                           |
-| email         | String | Email of the main contact of the client                                                                                                                               |
-| activity      | String | Activity of the client (only for enterprise)                                                                                                                          |
-| vat_number    | String | VAT number of the client (only for enterprise)                                                                                                                        |
-| siret         | String | Company registration number of the client (only for enterprise)                                                                                                       |
-| info_profile  | String | Profile of the client                                                                                                                                                 |
-| info_origin   | String | Source of the client                                                                                                                                                  |
-| info_notes    | String | Notes on the client                                                                                                                                                   |
-| info_number   | String | File number that appears at the bottom of the client record. Not to be confused with reference!                                                                       |
-| user          | JSON   | JSON object user ([User](#user))                                                                                                                                      |
-| address       | JSON   | JSON object address` ([Address](#address))                                                                                                                            |
-| projects      | JSON   | Projects linked to the client (return only the 10 first projects). JSON object containing `data` (Array of JSON objects containing `reference`, `info_title`), `size` |
-| contacts      | Array  | Array of JSON contacts ([Contacts](#contacts))                                                                                                                        |
-| custom_fields | Array  | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                         |
+| Property      | Type   | Description                                                                                     |
+| ------------- | ------ | ----------------------------------------------------------------------------------------------- |
+| reference     | String | The reference of the client                                                                     |
+| type          | String | The type of the client (either "enterprise" or "individual")                                    |
+| company_name  | String | Name of the client's company (if applicable)                                                    |
+| website       | String | Website of the client                                                                           |
+| first_name    | String | First name of the main contact at the client's organization                                     |
+| last_name     | String | Last name of the main contact at the client's organization                                      |
+| email         | String | Email of the main contact at the client's organization                                          |
+| activity      | String | Activity of the client (only for "enterprise" clients)                                          |
+| vat_number    | String | VAT number of the client (only for "enterprise" clients)                                        |
+| siret         | String | Company registration number of the client (only for "enterprise" clients)                       |
+| info_profile  | String | Profile of the client                                                                           |
+| info_origin   | String | Source of the client                                                                            |
+| info_notes    | String | Notes on the client                                                                             |
+| info_number   | String | File number that appears at the bottom of the client record. Not to be confused with reference! |
+| user          | JSON   | JSON object representing the user ([User](#user)) associated with the client                    |
+| address       | JSON   | JSON object representing the address ([Address](#address)) of the client                        |
+| projects      | JSON   | Projects linked to the client (returns the first 10 projects)                                   |
+| contacts      | Array  | An array of JSON contacts ([Contacts](#contacts)) associated with the client                    |
+| custom_fields | Array  | An array of JSON custom fields ([Custom fields](#custom-fields)) for the client                 |
 
 ## POST clients-upsert
 
-Update a client record if the provided reference (or the email) does match one of the client references in your account, otherwise create a new client record with the provided reference (or with a random one if no reference is provided). Note that for this endpoint, the email of the client can also be used as a primary key for the upsert.
+This API endpoint allows you to update a client record if the provided reference (or email) matches one of the client references in your account. If no match is found, it creates a new client record with the provided reference (or a random one if no reference is provided). You can use the client's email as the primary key for upserting.
 
 ```shell
 curl --location 'https://api.ezus.app/clients-upsert' \
@@ -525,6 +525,7 @@ curl --location 'https://api.ezus.app/clients-upsert' \
     "reference": "client_reference",
     "company_name": "MOKE INTERNATIONAL LIMITED",
     "website": "www.moke_ltd.com",
+    "user": "sam@proton.me",
     "contact": {
         "email": "contact@moke-international.com",
         "first_name": "Jane",
@@ -555,6 +556,7 @@ const body = {
   reference: "client_reference",
   company_name: "MOKE INTERNATIONAL LIMITED",
   website: "www.moke_ltd.com",
+  user: "sam@proton.me",
   contact: {
     email: "contact@moke-international.com",
     first_name: "Jane",
@@ -581,7 +583,7 @@ const headers = {
 axios.post(baseUrl + "/clients-upsert", body, headers);
 ```
 
-> It returns a JSON object structured like this:
+> This request returns a structured JSON object:
 
 ```json
 {
@@ -596,33 +598,34 @@ axios.post(baseUrl + "/clients-upsert", body, headers);
 
 `POST https://api.ezus.app/clients-upsert`
 
-### Header parameters
+### Header Parameters
 
 | Parameter     | Type   | Description                                                 |
 | ------------- | ------ | ----------------------------------------------------------- |
 | x-api-key     | String | <span style="color:red">(Required)</span> Your Ezus API key |
 | Authorization | String | <span style="color:red">(Required)</span> Your Bearer token |
 
-### Body parameters (application/json)
+### Body Parameters (application/json)
 
-| Parameter     | Type   | Description                                                                                                                                                                                                                                                             |
-| ------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| reference     | String | If provided, the unique reference associated to the client you want to update or create (in case the one you provided has never been used). If no reference is provided, a client will be created with a random one.                                                    |
-| company_name  | String | <span style="color:red">(Required)</span> Set a company name - If company name is empty, the client will be set as an individual and the name of the client = name of the contact and if the company name is not empty, the name of the client will be the company name |
-| website       | String | Website of the client                                                                                                                                                                                                                                                   |
-| contact       | JSON   | Contact is a single JSON element and email is needed. Note that only one contact can be upsert this way (the main contact of the client) ([Contacts](#contacts)) To reset the main contact, you can put `'0'`                                                           |
-| address       | JSON   | JSON object address ([Address](#address)) To reset the address, you can put `'0'`                                                                                                                                                                                       |
-| custom_fields | JSON   | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                                                                                                                           |
+| Parameter     | Type   | Description                                                                                                                                                                                                            |
+| ------------- | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| reference     | String | If provided, the unique reference associated with the client you want to update or create (or a random one will be generated).                                                                                         |
+| company_name  | String | <span style="color:red">(Required)</span> Name of the client's company (if applicable). If empty, the client will be considered an individual, and the name of the client will be the same as the name of the contact. |
+| website       | String | Website of the client                                                                                                                                                                                                  |
+| user          | Email  | Email of the Ezus user to be set as the owner of the client                                                                                                                                                            |
+| contact       | JSON   | A single JSON element ([Contacts](#contacts)) representing the main                                                                                                                                                    |
+| address       | JSON   | JSON object address ([Address](#address)) To reset the address, you can put `'0'`                                                                                                                                      |
+| custom_fields | JSON   | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                                                                          |
 
 ### Response
 
-JSON object indicating whether an error has occurred during the process and, if so, the associated message. If there is no error, it also returns a `reference`: you will need to store this reference if you need to update or retrieve the client later on.
+A JSON object indicating whether an error occurred during the process, along with the associated message. If successful, it also returns a `reference` for the project, which you should store for future updates or retrievals.
 
 # Suppliers
 
 ## GET supplier
 
-Retrieve information for a supplier record in Ezus. You must specify to the Ezus API which supplier you wish to retrieve, by indicating its appropriate reference in your query parameter.
+This API endpoint allows you to retrieve information for a specific supplier record in Ezus. To do so, you need to specify the supplier's reference in your query parameter.
 
 ```shell
 curl --location 'https://api.ezus.app/supplier?reference=supplier_reference' \
@@ -642,7 +645,7 @@ const headers = {
 axios.get(baseUrl + "/supplier?reference=supplier_reference", headers);
 ```
 
-> It returns a JSON object structured like this:
+> This request returns a structured JSON object:
 
 ```json
 {
@@ -650,7 +653,7 @@ axios.get(baseUrl + "/supplier?reference=supplier_reference", headers);
   "reference": "supplier_reference",
   "company_name": "The best hotel",
   "website": "www.the_best_hotel.com",
-  "capacity": 200,
+  "capacity": "200",
   "type": "accom, activity",
   "info_notes": "Emily confirmed: this hotel really is the best in town.",
   "info_number": "202306001-S",
@@ -725,14 +728,14 @@ axios.get(baseUrl + "/supplier?reference=supplier_reference", headers);
 
 `GET https://api.ezus.app/supplier`
 
-### Header parameters
+### Header Parameters
 
 | Parameter     | Type   | Description                                                 |
 | ------------- | ------ | ----------------------------------------------------------- |
 | x-api-key     | String | <span style="color:red">(Required)</span> Your Ezus API key |
 | Authorization | String | <span style="color:red">(Required)</span> Your Bearer token |
 
-### Query parameters
+### Query Parameters
 
 | Parameter | Type   | Description                                                                                  |
 | --------- | ------ | -------------------------------------------------------------------------------------------- |
@@ -740,11 +743,11 @@ axios.get(baseUrl + "/supplier?reference=supplier_reference", headers);
 
 ### Response
 
-JSON object containing the supplier information.
+A JSON object containing the supplier information with properties like:
 
 | Property      | Type   | Description                                                                                                                                                  |
 | ------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| reference     | String | The reference of the supplier you wish to retrieve                                                                                                           |
+| reference     | String | The reference of the supplier                                                                                                                                |
 | company_name  | String | Name of the company of the supplier                                                                                                                          |
 | website       | String | Website of the supplier                                                                                                                                      |
 | capacity      | String | Maximum number of people for which the supplier can be used                                                                                                  |
@@ -762,7 +765,7 @@ JSON object containing the supplier information.
 
 ## POST suppliers-upsert
 
-Update a supplier record if the provided reference (or the email) does match one of the supplier references in your account, otherwise create a new supplier record with the provided reference (or with a random one if no reference is provided). Note that for this endpoint, the email of the supplier can also be used as a primary key for the upsert.
+It updates a supplier record if the provided reference (or the email) does match one of the supplier references in your account, otherwise it creates a new supplier record with the provided reference (or with a random one if no reference is provided). Note that for this endpoint, the email of the supplier can also be used as a primary key for the upsert.
 
 ```shell
 curl --location 'https://api.ezus.app/suppliers-upsert' \
@@ -773,7 +776,8 @@ curl --location 'https://api.ezus.app/suppliers-upsert' \
     "reference": "supplier_reference",
     "company_name": "The best hotel",
     "website": "www.the_best_hotel.com",
-    "capacity": 200,
+    "capacity": "200",
+    "user": "sam@proton.me",
     "type": "accom, activity",
     "contact": {
         "email": "bob@proton.me",
@@ -805,6 +809,7 @@ const body = {
   company_name: "The best hotel",
   website: "www.the_best_hotel.com",
   capacity: 200,
+  user: "sam@proton.me",
   type: "accom, activity"
   contact: {
     email: "bob@proton.me",
@@ -830,7 +835,7 @@ const headers = { "x-api-key": "<YOUR_API_KEY>", "Authorization": "Bearer <YOUR_
 axios.post(baseUrl + "/suppliers-upsert", body, headers);
 ```
 
-> It returns a JSON object structured like this:
+> This request returns a structured JSON object:
 
 ```json
 {
@@ -845,35 +850,36 @@ axios.post(baseUrl + "/suppliers-upsert", body, headers);
 
 `POST https://api.ezus.app/suppliers-upsert`
 
-### Header parameters
+### Header Parameters
 
 | Parameter     | Type   | Description                                                 |
 | ------------- | ------ | ----------------------------------------------------------- |
 | x-api-key     | String | <span style="color:red">(Required)</span> Your Ezus API key |
 | Authorization | String | <span style="color:red">(Required)</span> Your Bearer token |
 
-### Body parameters (application/json)
+### Body Parameters (application/json)
 
-| Parameter     | Type   | Description                                                                                                                                                                                                                                   |
-| ------------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --- |
-| reference     | String | If provided, the unique reference associated to the supplier you want to update or create (in case the one you provided has never been used). If no reference is provided, a supplier will be created with a random one.                      |
-| company_name  | String | Name of the supplier. This parameter is required if you create a new supplier                                                                                                                                                                 |     |
-| website       | String | Website of the supplier                                                                                                                                                                                                                       |
-| capacity      | Number | Maximum number of people for which the supplier can be used. Leave blank `''` if not relevant                                                                                                                                                 |
-| type          | String | Either `undefined` or a combination of these 3 options: `accom`, `activity`, `transport`. You can select multiple options by separating them with comas ("accom, activity" for instance). Enter "undefined" if you want to reset this params. |
-| contact       | JSON   | Contact is a single JSON and email is needed. Note that only one contact can be upsert this way (the main contact of the supplier) ([Contact](#contacts)) To reset the main contact, you can put `'0'`                                        |
-| address       | JSON   | JSON object address ([Address](#address)) To reset the address, you can put `'0'`                                                                                                                                                             |
-| custom_fields | JSON   | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                                                                                                 |
+| Parameter     | Type   | Description                                                                                                                                                                                                                                      |
+| ------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --- |
+| reference     | String | If provided, the unique reference associated to the supplier you want to update or create (in case the one you provided has never been used). If no reference is provided, a supplier will be created with a random one.                         |
+| company_name  | String | Name of the supplier. This parameter is required if you create a new supplier                                                                                                                                                                    |     |
+| website       | String | Website of the supplier                                                                                                                                                                                                                          |
+| capacity      | Number | Maximum number of people for which the supplier can be used. Leave blank `''` if not relevant                                                                                                                                                    |
+| user          | Email  | Email of the Ezus user that will be set as the owner of the supplier. By default, if no owner is provided or the provided email do not match any user on this account, the owner will be assigned to everyone                                    |
+| type          | String | Either `undefined` or a combination of these 3 options: `accom`, `activity`, `transport`. You can select multiple options by separating them with comas ("accom, activity" for instance). Enter "undefined" if you want to reset this parameter. |
+| contact       | JSON   | Contact is a single JSON and email is needed. Note that only one contact can be upsert this way (the main contact of the supplier) ([Contact](#contacts)) To reset the main contact, you can put `'0'`                                           |
+| address       | JSON   | JSON object address ([Address](#address)) To reset the address, you can put `'0'`                                                                                                                                                                |
+| custom_fields | JSON   | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                                                                                                    |
 
 ### Response
 
-JSON object indicating whether an error has occurred during the process and, if so, the associated message. If there is no error, it also returns a `reference`: you will need to store this reference if you need to update or retrieve the supplier later on.
+A JSON object indicating whether an error occurred during the process, along with the associated message. If successful, it also returns a `reference` for the project, which you should store for future updates or retrievals.
 
 # Products
 
 ## GET product
 
-Retrieve information for a product record in Ezus. You must specify to the Ezus API which product you wish to retrieve, by indicating its appropriate reference in your query parameter.
+This API endpoint allows you to retrieve information for a specific product record in Ezus. To do so, you need to specify the product's reference in your query parameter.
 
 ```shell
 curl --location 'https://api.ezus.app/product?reference=product_reference' \
@@ -893,14 +899,14 @@ const headers = {
 axios.get(baseUrl + "/product?reference=product_reference", headers);
 ```
 
-> It returns a JSON object structured like this:
+> This request returns a structured JSON object:
 
 ```json
 {
   "error": "false",
   "reference": "product_reference",
   "title": "2-bed room with breakfast",
-  "capacity": 2,
+  "capacity": "2",
   "quantity": "1",
   "vat_regime": "margin",
   "vat_rate": 20.0,
@@ -964,14 +970,14 @@ axios.get(baseUrl + "/product?reference=product_reference", headers);
 
 `GET https://api.ezus.app/product`
 
-### Header parameters
+### Header Parameters
 
 | Parameter     | Type   | Description                                                 |
 | ------------- | ------ | ----------------------------------------------------------- |
 | x-api-key     | String | <span style="color:red">(Required)</span> Your Ezus API key |
 | Authorization | String | <span style="color:red">(Required)</span> Your Bearer token |
 
-### Query parameters
+### Query Parameters
 
 | Parameter | Type   | Description                                                                                 |
 | --------- | ------ | ------------------------------------------------------------------------------------------- |
@@ -979,25 +985,25 @@ axios.get(baseUrl + "/product?reference=product_reference", headers);
 
 ### Response
 
-JSON object containing the product information.
+A JSON object containing the product information with properties like:
 
 | Property        | Type   | Description                                                                                                                                                                                                                              |
 | --------------- | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| reference       | String | The reference of the product you wish to retrieve                                                                                                                                                                                        |
+| reference       | String | The reference of the product                                                                                                                                                                                                             |
 | title           | String | Name of the product                                                                                                                                                                                                                      |
 | capacity        | Number | Maximum number of people for which the product can be used                                                                                                                                                                               |
 | quantity        | String | The default number for this product when it is added to a project. It can either be a Number or one of these letters (`P` = Number of people in the project, `D` = Number of days in the project, `N` = Number of nights in the project) |
 | vat_regime      | String | Can be either `classic` (common law VAT), `margin` (VAT on the margin), `none` (Non applicable VAT)                                                                                                                                      |
 | vat_rate        | Number | Default % of the VAT on the product                                                                                                                                                                                                      |
-| currency        | String | The ISO 4217 code who represent the currency you use (<a href="https://docs.google.com/spreadsheets/d/1b7BNOwKyN1hMOouve6xhFZ2R2zrH4Sj1L-646j755fU/edit?usp=sharing" target="_blank">Link to doc</a>)                                    |
+| currency        | String | The ISO 4217 currency code representing the currency you utilize (<a href="https://docs.google.com/spreadsheets/d/1b7BNOwKyN1hMOouve6xhFZ2R2zrH4Sj1L-646j755fU/edit?usp=sharing" target="_blank">Link to doc</a>)                        |
 | budget_text     | String | This is an empty string `""` if the product is not marked as an option in the budget, otherwise it is the custom label of the option to which the product is associated                                                                  |
 | buget_form      | String | `Important`, `Normal`, `Low` represent how the product will be highlight on the budget By Default                                                                                                                                        |
 | budget_variable | String | `Display`, `Do not Display`, this option tells if the product will be displayed or not in the budget                                                                                                                                     |
 | info_number     | String | File number that appears at the bottom of the product record. Not to be confused with reference!                                                                                                                                         |
 | visual_url      | String | URL of the Google Slides visual linked to the product                                                                                                                                                                                    |
-| supplier        | JSON   | JSON object containing `reference`, `company_name`                                                                                                                                                                                       |
-| package         | JSON   | JSON object containing `reference`, `title`                                                                                                                                                                                              |
-| commission      | JSON   | JSON object containing `value`, `commission_regime` ("percent" or "amount"), `commission_mode` ("sales" or "purchase")`                                                                                                                  |
+| supplier        | JSON   | A JSON object containing `reference`, `company_name`                                                                                                                                                                                     |
+| package         | JSON   | A JSON object containing `reference`, `title`                                                                                                                                                                                            |
+| commission      | JSON   | A JSON object containing `value`, `commission_regime` ("percent" or "amount"), `commission_mode` ("sales" or "purchase")`                                                                                                                |
 | medias          | JSON   | JSON object medias ([Medias](#medias))                                                                                                                                                                                                   |
 | langs           | Array  | Array of JSON langs ([Langs](#langs))                                                                                                                                                                                                    |
 | tariffs         | Array  | Array of JSON tariffs ([Tariffs](#tariffs))                                                                                                                                                                                              |
@@ -1005,7 +1011,7 @@ JSON object containing the product information.
 
 ## POST products-upsert
 
-Update a product record if the provided reference does match one of the product references in your account, otherwise create a new product record with the provided reference (or with a random one if no reference is provided).
+It updates a product record if the provided reference does match one of the product references in your account, otherwise it creates a new product record with the provided reference (or with a random one if no reference is provided).
 
 ```shell
 curl --location 'https://api.ezus.app/products-upsert' \
@@ -1016,7 +1022,7 @@ curl --location 'https://api.ezus.app/products-upsert' \
     "reference": "product_reference",
     "title": "2-bed room with breakfast",
     "quantity": "1",
-    "capacity": 2,
+    "capacity": "2",
     "supplier_reference": "supplier_reference",
     "package_reference": "package_reference",
     "purchase_price": "42",
@@ -1066,7 +1072,7 @@ const headers = {
 axios.post(baseUrl + "/products-upsert", body, headers);
 ```
 
-> It returns a JSON object structured like this:
+> This request returns a structured JSON object:
 
 ```json
 {
@@ -1081,14 +1087,14 @@ axios.post(baseUrl + "/products-upsert", body, headers);
 
 `POST https://api.ezus.app/products-upsert`
 
-### Header parameters
+### Header Parameters
 
 | Parameter     | Type   | Description                                                 |
 | ------------- | ------ | ----------------------------------------------------------- |
 | x-api-key     | String | <span style="color:red">(Required)</span> Your Ezus API key |
 | Authorization | String | <span style="color:red">(Required)</span> Your Bearer token |
 
-### Body parameters (application/json)
+### Body Parameters (application/json)
 
 | Parameter          | Type   | Description                                                                                                                                                                                                                                                             |
 | ------------------ | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -1103,18 +1109,18 @@ axios.post(baseUrl + "/products-upsert", body, headers);
 | vat_regime         | String | Can be either `classic` (common law VAT), `margin` (VAT on the margin), `none` (Non applicable VAT). If empty or not provided, your default account VAT regime will be set                                                                                              |
 | vat_rate           | Number | Default VAT rate. If empty or not provided, your default account VAT rate will be set                                                                                                                                                                                   |
 | currency           | String | The ISO 4217 code of the currency of this product (<a href="https://docs.google.com/spreadsheets/d/1b7BNOwKyN1hMOouve6xhFZ2R2zrH4Sj1L-646j755fU/edit?usp=sharing" target="_blank">Link to Doc</a>). If empty or not provided, your default account currency will be set |
-| commission         | JSON   | JSON object containing `value`, `commission_regime` ("percent" or "amount"), `commission_mode` ("sales" or "purchase")                                                                                                                                                  |
+| commission         | JSON   | A JSON object containing `value`, `commission_regime` ("percent" or "amount"), `commission_mode` ("sales" or "purchase")                                                                                                                                                |
 | custom_fields      | JSON   | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                                                                                                                           |
 
 ### Response
 
-JSON object indicating whether an error has occurred during the process and, if so, the associated message. If there is no error, it also returns a `reference`: you will need to store this reference if you need to update or retrieve the product later on.
+A JSON object indicating whether an error occurred during the process, along with the associated message. If successful, it also returns a `reference` for the project, which you should store for future updates or retrievals.
 
 # Packages
 
 ## GET package
 
-Retrieve information for a package record in Ezus. You must specify to the Ezus API which package you wish to retrieve, by indicating its appropriate reference in your query parameter.
+This API endpoint allows you to retrieve information for a specific package record in Ezus. To do so, you need to specify the package's reference in your query parameter.
 
 ```shell
 curl --location 'https://api.ezus.app/package?reference=package_reference' \
@@ -1134,14 +1140,14 @@ const headers = {
 axios.get(baseUrl + "/package?reference=package_reference", headers);
 ```
 
-> It returns a JSON object structured like this:
+> This request returns a structured JSON object:
 
 ```json
 {
   "error": "false",
   "reference": "package_reference",
   "title": "The best package",
-  "capacity": 2,
+  "capacity": "2",
   "info_notes": "A classical day in Paris",
   "info_number": "202306001-PK",
   "visual_url": "",
@@ -1198,14 +1204,14 @@ axios.get(baseUrl + "/package?reference=package_reference", headers);
 
 `GET https://api.ezus.app/package`
 
-### Header parameters
+### Header Parameters
 
 | Parameter     | Type   | Description                                                 |
 | ------------- | ------ | ----------------------------------------------------------- |
 | x-api-key     | String | <span style="color:red">(Required)</span> Your Ezus API key |
 | Authorization | String | <span style="color:red">(Required)</span> Your Bearer token |
 
-### Query parameters
+### Query Parameters
 
 | Parameter | Type   | Description                                                                                 |
 | --------- | ------ | ------------------------------------------------------------------------------------------- |
@@ -1213,11 +1219,11 @@ axios.get(baseUrl + "/package?reference=package_reference", headers);
 
 ### Response
 
-JSON object containing the package information.
+A JSON object containing the package information with properties like:
 
 | Property      | Type   | Description                                                                                      |
 | ------------- | ------ | ------------------------------------------------------------------------------------------------ |
-| reference     | String | The reference of the package you wish to retrieve                                                |
+| reference     | String | The reference of the package                                                                     |
 | title         | String | Name of the package                                                                              |
 | capacity      | String | Maximum number of people for which the package can be used                                       |
 | info_notes    | String | Notes on the package                                                                             |
@@ -1231,7 +1237,7 @@ JSON object containing the package information.
 
 ## POST packages-upsert
 
-Update a package record if the provided reference does match one of the package references in your account, otherwise create a new package record with the provided reference (or with a random one if no reference is provided).
+It updates a package record if the provided reference does match one of the package references in your account, otherwise it creates a new package record with the provided reference (or with a random one if no reference is provided).
 
 ```shell
 curl --location 'https://api.ezus.app/packages-upsert' \
@@ -1267,7 +1273,7 @@ const headers = {
 axios.post(baseUrl + "/packages-upsert", body, headers);
 ```
 
-> It returns a JSON object structured like this:
+> This request returns a structured JSON object:
 
 ```json
 {
@@ -1282,25 +1288,541 @@ axios.post(baseUrl + "/packages-upsert", body, headers);
 
 `POST https://api.ezus.app/packages-upsert`
 
-### Header parameters
+### Header Parameters
 
 | Parameter     | Type   | Description                                                 |
 | ------------- | ------ | ----------------------------------------------------------- |
 | x-api-key     | String | <span style="color:red">(Required)</span> Your Ezus API key |
 | Authorization | String | <span style="color:red">(Required)</span> Your Bearer token |
 
-### Body parameters (application/json)
+### Body Parameters (application/json)
 
 | Parameter     | Type   | Description                                                                                                                                                                                                                 |
 | ------------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | reference     | String | If provided, the unique Ezus Reference associated to the package you want to update or create (in case the one you provided has never been used). If no reference is provided, a package will be created with a random one. |
 | title         | String | This parameter is required if you create a new package                                                                                                                                                                      |
 | capacity      | Number | Maximum number of people for which the package can be used . Leave blank `''` if not relevant                                                                                                                               |
-| custom_fields | JSON   | You can add custom fields for your client, this custom fields should be in your Ezus params and Write exactly as they are written in your params technical name ([Custom fields](#custom-fields))                           |
+| custom_fields | JSON   | Array of JSON custom fields [Custom fields](#custom-fields)                                                                                                                                                                 |
 
 ### Response
 
-JSON object indicating whether an error has occurred during the process and, if so, the associated message. If there is no error, it also returns a `reference`: you will need to store this reference if you need to update or retrieve the package later on.
+A JSON object indicating whether an error occurred during the process, along with the associated message. If successful, it also returns a `reference` for the project, which you should store for future updates or retrievals.
+
+# Invoices
+
+## GET invoices
+
+It returns a list of your invoices. The invoices are returned sorted by creation date, with the most recent invoices appearing first. You can specify filters as query parameters to narrow down your search. The list of invoices returned is paginated (50 per 50): to call the 50 next items in the list, call the route with the `next_token` query parameter.
+
+```shell
+curl --location 'https://api.ezus.app/invoices?stage=completed' \
+--header 'x-api-key: <YOUR_API_KEY>' \
+--header 'Authorization: Bearer <YOUR_TOKEN>'
+```
+
+```javascript
+const axios = require("axios");
+const baseUrl = "https://api.ezus.app";
+
+const headers = {
+  "x-api-key": "<YOUR_API_KEY>",
+  Authorization: "Bearer <YOUR_TOKEN>",
+};
+
+axios.get(baseUrl + "/invoices?stage=completed", headers);
+```
+
+> This request returns a structured JSON object:
+
+```json
+{
+  "error": "false",
+  "next_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJtZW51X211bG11bCI6Im9wdDEiLCJudW1iZXIiOiIyMDAwMCIsInBhZ2UiOjEsInBlcnNvX2ludm9pY2UiOiJHRyIsInN0YWdlIjoicGFpZCIsIl9fdGltZSI6MTY5NzQ0NjEzNX0.jEs7aL3UzCNrjzwDtAUbq4Rt4T64nu2LBYC0NnQhHiA",
+  "size": 338,
+  "data_size": 50,
+  "page": 1,
+  "invoices": [
+    {
+      "error": "false",
+      "reference": "invoice_reference",
+      "info_number": "2023_101010",
+      "url": "https://ezus.io/2023_101010.pdf",
+      "stage": "completed",
+      "type": "credit_note",
+      "origin_reference": "origin_reference",
+      "origin_info_number": "2023_101009",
+      "created_date": "2023-10-10",
+      "send_date": "2023-10-10",
+      "due_date": "2023-10-10",
+      "amount_ttc": 1200.0,
+      "amount_ht": 1000.0,
+      "vat": 200.0,
+      "currency": "EUR",
+      "forecast": {
+        "is_automatic": true,
+        "purchase": 0.0,
+        "commission": 0.0,
+        "vat_deducted": 0.0,
+        "amount_ht": 1000.0
+      },
+      "actual": {
+        "is_automatic": true,
+        "purchase": null,
+        "commission": null,
+        "vat_deducted": null,
+        "amount_ht": null
+      },
+      "project": {
+        "reference": "project_reference",
+        "info_title": "Paris fashion week 2024",
+        "info_stage": "Confirmed",
+        "info_number": "202306001-P",
+        "currency": "EUR",
+        "is_closed": false
+      },
+      "alternative": {
+        "sort_order": "0",
+        "title": "Main Alternative"
+      },
+      "client": {
+        "reference": "client_reference",
+        "type": "enterprise",
+        "company_name": "MOKE INTERNATIONAL LIMITED",
+        "first_name": "Jane",
+        "last_name": "Doe",
+        "email": "contact@moke-international.com"
+      }
+    },...
+  ]
+}
+```
+
+### HTTP Endpoint
+
+`GET https://api.ezus.app/invoices`
+
+### Header Parameters
+
+| Parameter     | Type   | Description                                                 |
+| ------------- | ------ | ----------------------------------------------------------- |
+| x-api-key     | String | <span style="color:red">(Required)</span> Your Ezus API key |
+| Authorization | String | <span style="color:red">(Required)</span> Your Bearer token |
+
+### Query Parameters
+
+| Parameter      | Type   | Description                                                                                                                                                          |
+| -------------- | ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| next_token     | String | Specify this parameter if you want to retrieve the following elements of a given list query. If this parameter is filled, other parameters are ignored.              |
+| stage          | String | You can filter your search only by invoices that are in a specific stage. The stage can be `paid`, `completed` or `draft`.                                           |
+| technical_name | String | You can also filter invoices by one of their custom fields by adding the `technical_name` of the custom field as a query parameter and the desired value as a value. |
+
+### Response
+
+A JSON object containing the invoice information with properties like:
+
+| Property  | Type   | Description                                                                                                              |
+| --------- | ------ | ------------------------------------------------------------------------------------------------------------------------ |
+| error     | String | false if no errors occurs else true                                                                                      |
+| token     | String | A token will be returned if all invoices have not been returned. Use it in another call to access the following invoices |
+| size      | Number | The total number of invoices available with these filters                                                                |
+| data_size | Number | Number of invoices returned                                                                                              |
+| page      | Number | The page number                                                                                                          |
+| invoices  | Array  | An array of JSON containing all the invoices returned formated like GET `invoice` ([GET invoice](#get-invoice))          |
+
+## GET invoice
+
+This API endpoint allows you to retrieve information for a specific invoice record in Ezus. To do so, you need to specify the invoice's reference in your query parameter.
+
+```shell
+curl --location 'https://api.ezus.app/invoice?reference=invoice_reference' \
+--header 'x-api-key: <YOUR_API_KEY>' \
+--header 'Authorization: Bearer <YOUR_TOKEN>'
+```
+
+```javascript
+const axios = require("axios");
+const baseUrl = "https://api.ezus.app";
+
+const headers = {
+  "x-api-key": "<YOUR_API_KEY>",
+  Authorization: "Bearer <YOUR_TOKEN>",
+};
+
+axios.get(baseUrl + "/invoice?reference=invoice_reference", headers);
+```
+
+> This request returns a structured JSON object:
+
+```json
+{
+  "error": "false",
+  "reference": "invoice_reference",
+  "info_number": "2023_101010",
+  "url": "https://ezus.io/2023_101010.pdf",
+  "stage": "draft",
+  "type": "credit_note",
+  "origin_reference": "origin_reference",
+  "origin_info_number": "2023_101009",
+  "created_date": "2023-10-10",
+  "send_date": "2023-10-10",
+  "due_date": "2023-10-10",
+  "amount_ttc": 1200.0,
+  "amount_ht": 1000.0,
+  "vat": 200.0,
+  "currency": "EUR",
+  "forecast": {
+    "is_automatic": true,
+    "purchase": 0.0,
+    "commission": 0.0,
+    "vat_deducted": 0.0,
+    "amount_ht": 1000.0
+  },
+  "actual": {
+    "is_automatic": true,
+    "purchase": null,
+    "commission": null,
+    "vat_deducted": null,
+    "amount_ht": null
+  },
+  "project": {
+    "reference": "project_reference",
+    "info_title": "Paris fashion week 2024",
+    "info_stage": "Confirmed",
+    "info_number": "202306001-P",
+    "currency": "EUR",
+    "is_closed": false
+  },
+  "alternative": {
+    "sort_order": "0",
+    "title": "Main Alternative"
+  },
+  "client": {
+    "reference": "client_reference",
+    "type": "enterprise",
+    "company_name": "MOKE INTERNATIONAL LIMITED",
+    "first_name": "Jane",
+    "last_name": "Doe",
+    "email": "contact@moke-international.com"
+  }
+}
+```
+
+### HTTP Endpoint
+
+`GET https://api.ezus.app/invoice`
+
+### Header Parameters
+
+| Parameter     | Type   | Description                                                 |
+| ------------- | ------ | ----------------------------------------------------------- |
+| x-api-key     | String | <span style="color:red">(Required)</span> Your Ezus API key |
+| Authorization | String | <span style="color:red">(Required)</span> Your Bearer token |
+
+### Query Parameters
+
+| Parameter | Type   | Description                                                                                 |
+| --------- | ------ | ------------------------------------------------------------------------------------------- |
+| reference | String | <span style="color:red">(Required)</span> The reference of the invoice you wish to retrieve |
+
+### Response
+
+A JSON object containing the invoice information with properties like:
+
+| Property           | Type   | Description                                                                                                                                                                                                       |
+| ------------------ | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| reference          | String | The reference of the invoice                                                                                                                                                                                      |
+| info_number        | String | Title of the invoice                                                                                                                                                                                              |
+| url                | String | URL of the invoice `.pdf` file                                                                                                                                                                                    |
+| stage              | String | Stage of the invoice `draft` `completed` or `paid`                                                                                                                                                                |
+| type               | String | Type of the invoice `invoice` or `credit_note`                                                                                                                                                                    |
+| origin_reference   | String | This is only displayed if the type of the invoice is a `credit_note`. The reference of the origin invoice.                                                                                                        |
+| origin_info_number | String | This is only displayed if the type of the invoice is a `credit_note`. Title of the origin invoice.                                                                                                                |
+| created_date       | String | Date of the creation of this invoice, in a "YYYY-MM-DD" format                                                                                                                                                    |
+| send_date          | String | Sent date of this invoice, in a "YYYY-MM-DD" format                                                                                                                                                               |
+| due_date           | String | Due date of this invoice, in a "YYYY-MM-DD" format                                                                                                                                                                |
+| amount_ttc         | Number | Amount of the invoice including taxes                                                                                                                                                                             |
+| amount_ht          | Number | Amount of the invoice excluding taxes                                                                                                                                                                             |
+| vat                | Number | VAT amount of the invoice                                                                                                                                                                                         |
+| currency           | String | The ISO 4217 currency code representing the currency you utilize (<a href="https://docs.google.com/spreadsheets/d/1b7BNOwKyN1hMOouve6xhFZ2R2zrH4Sj1L-646j755fU/edit?usp=sharing" target="_blank">Link to doc</a>) |
+| forecast           | JSON   | JSON object forecast ([Invoices Amounts](#invoices-amounts))                                                                                                                                                      |
+| actual             | JSON   | JSON object actual ([Invoices Amounts](#invoices-amounts))                                                                                                                                                        |
+| project            | JSON   | JSON including: `reference`, `info_title`, `info_stage`, `info_number`, `currency` and `is_closed`                                                                                                                |
+| alternative        | JSON   | JSON including: `sort_order` and `title`                                                                                                                                                                          |
+| client             | JSON   | JSON including: `reference`, `type` (enterprise or individual), `company_name`, `first_name`, `last_name` and `email`                                                                                             |
+
+## PUT invoices-update
+
+It updates an invoice record if the provided reference does match one of the invoices references in your account.
+
+```shell
+curl --location --request PUT 'https://api.ezus.app/invoices-update' \
+--header 'x-api-key: <YOUR_API_KEY>' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer <YOUR_TOKEN>' \
+--data-raw '{
+    "reference": "invoice_reference",
+    "stage": "paid",
+    "send_date": "2023-09-29",
+    "due_date": "2023-09-29",
+    "custom_fields": [
+        {"name": "field_name", "value": "field_value"}
+    ]
+}'
+```
+
+```javascript
+const axios = require("axios");
+const baseUrl = "https://api.ezus.app";
+
+const body = {
+  reference: "invoice_reference",
+  stage: "paid",
+  send_date: "2023-09-29",
+  due_date: "2023-09-29",
+  custom_fields: [{ name: "field_name", value: "field_value" }],
+};
+const headers = {
+  "x-api-key": "<YOUR_API_KEY>",
+  Authorization: "Bearer <YOUR_TOKEN>",
+};
+
+axios.put(baseUrl + "/invoices-update", body, headers);
+```
+
+> This request returns a structured JSON object:
+
+```json
+{
+  "error": "false",
+  "message": "ok",
+  "reference": "invoice_reference"
+}
+```
+
+### HTTP Endpoint
+
+`PUT https://api.ezus.app/invoices-update`
+
+### Header Parameters
+
+| Parameter     | Type   | Description                                                 |
+| ------------- | ------ | ----------------------------------------------------------- |
+| x-api-key     | String | <span style="color:red">(Required)</span> Your Ezus API key |
+| Authorization | String | <span style="color:red">(Required)</span> Your Bearer token |
+
+### Body Parameters (application/json)
+
+| Parameter     | Type   | Description                                                                                           |
+| ------------- | ------ | ----------------------------------------------------------------------------------------------------- |
+| reference     | String | The reference of the invoice you want to update                                                       |
+| stage         | String | stage can be updated only if the invoice is a draft, the stage can be `completed` or `paid`           |
+| send_date     | String | send_date can be updated only if the invoice is a draft, send_date can be only on format `YYYY-MM-DD` |
+| due_date      | String | due_date can be updated only if the invoice is a draft, due_date can be only on format `YYYY-MM-DD`   |
+| custom_fields | JSON   | Array of JSON custom fields ([Custom fields](#custom-fields))                                         |
+
+### Response
+
+A JSON object indicating whether an error occurred during the process, along with the associated message. If successful, it also returns a `reference` for the project, which you should store for future updates or retrievals.
+
+## GET invoice-supplier
+
+This API endpoint allows you to retrieve information for a specific supplier invoice record in Ezus. To do so, you need to specify the supplier invoice's reference in your query parameter.
+
+```shell
+curl --location 'https://api.ezus.app/invoice-supplier?reference=invoice_supplier_reference' \
+--header 'x-api-key: <YOUR_API_KEY>' \
+--header 'Authorization: Bearer <YOUR_TOKEN>'
+```
+
+```javascript
+const axios = require("axios");
+const baseUrl = "https://api.ezus.app";
+
+const headers = {
+  "x-api-key": "<YOUR_API_KEY>",
+  Authorization: "Bearer <YOUR_TOKEN>",
+};
+
+axios.get(
+  baseUrl + "/invoice-supplier?reference=invoice_supplier_reference",
+  headers
+);
+```
+
+> This request returns a structured JSON object:
+
+```json
+{
+  "error": "false",
+  "reference": "invoice_supplier_reference",
+  "url": "https://ezus.io/2023_101010.pdf",
+  "created_date": "2023-10-10",
+  "due_date": "2023-10-20",
+  "amount_ttc": 1200.0,
+  "amount_ht": 1000.0,
+  "vat": 200.0,
+  "currency": "EUR",
+  "payments": [
+    {
+      "date": "2023-10-10",
+      "amount": 500.0,
+      "payment_method": "Credit Card"
+    },
+    {
+      "date": "2023-10-11",
+      "amount": 500.0,
+      "payment_method": "Wire"
+    },
+    {
+      "date": "2023-10-12",
+      "amount": 200.0,
+      "payment_method": "Check"
+    }
+  ],
+  "supplier": {
+    "reference": "supplier_reference",
+    "company_name": "The best hotel",
+    "website": "www.the_best_hotel.com"
+  },
+  "project": {
+    "reference": "project_reference",
+    "info_title": "Paris fashion week 2024",
+    "info_stage": "Confirmed",
+    "info_number": "202306001-P",
+    "currency": "EUR",
+    "is_closed": false
+  },
+  "alternative": {
+    "sort_order": "0",
+    "title": "Main Alternative"
+  },
+  "client": {
+    "reference": "client_reference",
+    "type": "enterprise",
+    "company_name": "MOKE INTERNATIONAL LIMITED",
+    "first_name": "Jane",
+    "last_name": "Doe",
+    "email": "contact@moke-international.com"
+  }
+}
+```
+
+### HTTP Endpoint
+
+`GET https://api.ezus.app/invoice-supplier`
+
+### Header Parameters
+
+| Parameter     | Type   | Description                                                 |
+| ------------- | ------ | ----------------------------------------------------------- |
+| x-api-key     | String | <span style="color:red">(Required)</span> Your Ezus API key |
+| Authorization | String | <span style="color:red">(Required)</span> Your Bearer token |
+
+### Query Parameters
+
+| Parameter | Type   | Description                                                                                 |
+| --------- | ------ | ------------------------------------------------------------------------------------------- |
+| reference | String | <span style="color:red">(Required)</span> The reference of the invoice you wish to retrieve |
+
+### Response
+
+A JSON object containing the supplier invoice information with properties like:
+
+| Property     | Type   | Description                                                                                                                                                                                                       |
+| ------------ | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| reference    | String | The reference of the supplier invoice                                                                                                                                                                             |
+| url          | String | URL of the supplier invoice file                                                                                                                                                                                  |
+| filename     | String | Filename of the supplier invoice                                                                                                                                                                                  |
+| created_date | String | Date of the creation of the supplier invoice, in a "YYYY-MM-DD" format                                                                                                                                            |
+| due_date     | String | Due date of the supplier invoice, in a "YYYY-MM-DD" format                                                                                                                                                        |
+| amount_ttc   | Number | Amount of the supplier invoice excluding taxes                                                                                                                                                                    |
+| amount_ht    | Number | Amount of the supplier invoice including taxes                                                                                                                                                                    |
+| vat          | Number | VAT amount of the supplier invoice                                                                                                                                                                                |
+| currency     | String | The ISO 4217 currency code representing the currency you utilize (<a href="https://docs.google.com/spreadsheets/d/1b7BNOwKyN1hMOouve6xhFZ2R2zrH4Sj1L-646j755fU/edit?usp=sharing" target="_blank">Link to doc</a>) |
+| payments     | Array  | Array of JSON including: `date`, `amount` and `payment_method`                                                                                                                                                    |
+| supplier     | JSON   | JSON including: `reference`, `company_name` and `website`                                                                                                                                                         |
+| project      | JSON   | JSON including: `reference`, `info_title`, `info_stage`, `info_number`, `currency` and `is_closed`                                                                                                                |
+| alternative  | JSON   | JSON including: `sort_order` and `title`                                                                                                                                                                          |
+| client       | JSON   | JSON including: `reference`, `type` (enterprise or individual), `company_name`, `first_name`, `last_name` and `email`                                                                                             |
+
+# Deposits
+
+## POST deposits-create
+
+It creates a client deposit in the specified project.
+
+```shell
+curl --location 'https://api.ezus.app/deposits-create' \
+--header 'x-api-key: <YOUR_API_KEY>' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer <YOUR_TOKEN>' \
+--data-raw '{
+    "project_reference": "project_reference",
+    "alternative_order": "0",
+    "amount": 6855,
+    "type": "deposit",
+    "date": "2023-05-25",
+    "payment_method": "card",
+    "notes": "Up-front payment 2023-05-25",
+}'
+```
+
+```javascript
+const axios = require("axios");
+const baseUrl = "https://api.ezus.app";
+
+const body = {
+  project_reference: "project_reference",
+  alternative_order: "0",
+  amount: 6855,
+  type: "deposit",
+  date: "2023-05-25",
+  payment_method: "card",
+  notes: "Up-front payment 2023-05-25",
+};
+const headers = {
+  "x-api-key": "<YOUR_API_KEY>",
+  Authorization: "Bearer <YOUR_TOKEN>",
+};
+
+axios.post(baseUrl + "/deposits-create", body, headers);
+```
+
+> This request returns a structured JSON object:
+
+```json
+{
+  "error": "false",
+  "message": "ok"
+}
+```
+
+### HTTP Endpoint
+
+`POST https://api.ezus.app/deposits-create`
+
+### Header Parameters
+
+| Parameter     | Type   | Description                                                 |
+| ------------- | ------ | ----------------------------------------------------------- |
+| x-api-key     | String | <span style="color:red">(Required)</span> Your Ezus API key |
+| Authorization | String | <span style="color:red">(Required)</span> Your Bearer token |
+
+### Body Parameters (application/json)
+
+| Parameter         | Type    | Description                                                                                                                               |
+| ----------------- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| project_reference | String  | <span style="color:red">(Required)</span> The reference is mandatory and refers to the project to which the payment will be added.        |
+| alternative_order | String  | Alternative number, if not entered, the payment will be added to the project's main alternative.                                          |
+| amount            | Integer | The deposit amount in cents.                                                                                                              |
+| type              | String  | Type can be `deposit`, `payment`, `final_payment`, `extra_paid`. By default the deposits will be a `deposit`                              |
+| date              | String  | The date must be a string in "YYYY-MM-DD" format. If it is not filled in or is invalid, the payment will be assigned to the current date. |
+| payment_method    | String  | Technical name of the payment method, you can find it in Settings - Custom fields                                                         |
+| notes             | String  | Note attributed to the payment, this note is limited to 100 characters, all additional characters will not be saved.                      |
+
+### Response
+
+A JSON object indicating whether an error occurred during the process, along with the associated message. If successful, it also returns a `reference` for the project, which you should store for future updates or retrievals.
 
 # Webhooks
 
@@ -1326,7 +1848,7 @@ const headers = {
 axios.get(baseUrl + "/webhooks", headers);
 ```
 
-> It returns a JSON object structured like this:
+> This request returns a structured JSON object:
 
 ```json
 {
@@ -1347,7 +1869,7 @@ axios.get(baseUrl + "/webhooks", headers);
 
 `GET https://api.ezus.app/webhooks`
 
-### Header parameters
+### Header Parameters
 
 | Parameter     | Type   | Description                                                 |
 | ------------- | ------ | ----------------------------------------------------------- |
@@ -1356,15 +1878,15 @@ axios.get(baseUrl + "/webhooks", headers);
 
 ### Response
 
-JSON object containing your webhooks information.
+An array of JSON tha contains your webhooks information.
 
-| Property | Type | Description                               |
-| -------- | ---- | ----------------------------------------- |
-| webhooks | JSON | JSON object webhook ([Webhook](#webhook)) |
+| Property | Type  | Description                                      |
+| -------- | ----- | ------------------------------------------------ |
+| webhooks | Array | Array of JSON webhooks ([Webhooks](#webhooks-2)) |
 
 ## POST webhooks-upsert
 
-Update a webhook record if the provided reference or endpoint does match one of the webhooks in your account, otherwise create a new webhook record with the provided reference (or with a random one if no reference is provided).
+It updates a webhook record if the provided reference or endpoint does match one of the webhooks in your account, otherwise it creates a new webhook record with the provided reference (or with a random one if no reference is provided).
 
 ```shell
 curl --location 'https://api.ezus.app/webhooks-upsert' \
@@ -1397,7 +1919,7 @@ const headers = {
 axios.post(baseUrl + "/webhooks-upsert", body, headers);
 ```
 
-> It returns a JSON object structured like this:
+> This request returns a structured JSON object:
 
 ```json
 {
@@ -1412,14 +1934,14 @@ axios.post(baseUrl + "/webhooks-upsert", body, headers);
 
 `POST https://api.ezus.app/webhooks-upsert`
 
-### Header parameters
+### Header Parameters
 
 | Parameter     | Type   | Description                                                 |
 | ------------- | ------ | ----------------------------------------------------------- |
 | X-API-KEY     | String | <span style="color:red">(Required)</span> Your Ezus API key |
 | Authorization | String | <span style="color:red">(Required)</span> Your Bearer token |
 
-### Body parameters (application/json)
+### Body Parameters (application/json)
 
 | Parameter    | Type   | Description                                                                                                                                                                                                                                                              |
 | ------------ | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -1427,6 +1949,10 @@ axios.post(baseUrl + "/webhooks-upsert", body, headers);
 | endpoint     | String | If provided, the endpoint associated to the webhook you want to update or create (in case the one you provided has never been used). This parameter is required if you create a new webhook and has to be unique. You cannot update the endpoint of an existing webhook. |
 | is_active    | String | Status of the webhook `true` or `false`                                                                                                                                                                                                                                  |
 | events_types | JSON   | The list of events to enable for this endpoint. At least 1 required, separated by commas if more than one. ([Events](#events))                                                                                                                                           |
+
+### Response
+
+A JSON object indicating whether an error occurred during the process, along with the associated message. If successful, it also returns a reference for the project, which you should store for future updates or retrievals.
 
 ## DELETE webhooks-delete
 
@@ -1534,18 +2060,18 @@ axios.delete(baseUrl + "/webhooks-upsert", body, headers);
   ]
 ```
 
-| Property            | Type   | Description                                                                                                              |
-| ------------------- | ------ | ------------------------------------------------------------------------------------------------------------------------ |
-| alternative_title   | String | Title of the alternative                                                                                                 |
-| budget_actual       | String | Actual budget for the alternative (corresponding to its associated Ezus program)                                         |
-| trip_budget         | Number | Forecasted budget for the alternative (the one that is entered manually not the actual one)                              |
-| trip_people         | String | Number of people                                                                                                         |
-| trip_date_in        | String | Date of the beginning of this alternative, in a "YYYY-MM-DD" format string. If it's empty, the project has no dates      |
-| trip_date_out       | String | Date of the end of this alternative, in a "YYYY-MM-DD" format string. If it's empty, the project has no dates            |
-| trip_duration       | String | Number of days this alternative lasts                                                                                    |
-| trip_destination    | String | Destination of the alternative                                                                                           |
-| trip_subdestination | String | Subdestination of the alternative                                                                                        |
-| client              | JSON   | JSON that contain: `reference`, `type` (enterprise or individual), `company_name`, `first_name`, `last_name` and `email` |
+| Property            | Type   | Description                                                                                                           |
+| ------------------- | ------ | --------------------------------------------------------------------------------------------------------------------- |
+| alternative_title   | String | Title of the alternative                                                                                              |
+| budget_actual       | String | Actual budget for the alternative (corresponding to its associated Ezus program)                                      |
+| trip_budget         | Number | Forecasted budget for the alternative (the one that is entered manually not the actual one)                           |
+| trip_people         | String | Number of people                                                                                                      |
+| trip_date_in        | String | Date of the beginning of this alternative, in a "YYYY-MM-DD" format string. If it's empty, the project has no dates   |
+| trip_date_out       | String | Date of the end of this alternative, in a "YYYY-MM-DD" format string. If it's empty, the project has no dates         |
+| trip_duration       | String | Number of days this alternative lasts                                                                                 |
+| trip_destination    | String | Destination of the alternative                                                                                        |
+| trip_subdestination | String | Subdestination of the alternative                                                                                     |
+| client              | JSON   | JSON including: `reference`, `type` (enterprise or individual), `company_name`, `first_name`, `last_name` and `email` |
 
 ### Contacts
 
@@ -1638,6 +2164,35 @@ The technical name of a custom field can be found in the custom field edit modal
 | Checkbox          | String | The checkbox must be a string: "true" (checked) OR "false" (unchecked)                                                                                                                         |
 | Number            | String | Number type should be a Number without other character                                                                                                                                         |
 | File              | File   | Not supported yet                                                                                                                                                                              |
+
+### Invoices Amounts
+
+```json
+"forecast": {
+  "is_automatic": true,
+  "purchase": 0.0,
+  "commission": 0.0,
+  "vat_deducted": 0.0,
+  "amount_ht": 1000.0
+}
+"actual": {
+  "is_automatic": true,
+  "purchase": null,
+  "commission": null,
+  "vat_deducted": null,
+  "amount_ht": null
+}
+```
+
+Those objects provides insights into the invoice amounts, differentiating between actual figures and forecasts. Actual figures are available when the associated project is closed and the invoice is marked as `completed` or `paid`. Otherwise, `null` values are displayed.
+
+| Property     | Type    | Description                                                                              |
+| ------------ | ------- | ---------------------------------------------------------------------------------------- |
+| is_automatic | Boolean | Automatically use the figures of the project to which this invoice/credit_note is linked |
+| purchase     | Number  | Forecasted / Actual purchase                                                             |
+| commission   | Number  | Forecasted / Actual commission                                                           |
+| vat_deducted | Number  | Forecasted / Actual deductible VAT                                                       |
+| amount_ht    | Number  | Forecasted / Actual amount excluding taxes                                               |
 
 ### Langs
 
@@ -1743,14 +2298,14 @@ Only the last 10 suppliers are returned in this object.
 | reference      | String | An unique reference of this tariff                                                    |
 | type           | String | A tariff can be `default`, `custom` OR `season`.                                      |
 | name           | String | Name of the tariff (only season tariffs can have a name)                              |
-| purchase_price | Number | Purchase price incl taxes                                                             |
+| purchase_price | Number | Purchase price including taxes                                                        |
 | margin_rate    | Number | The margin rate is based on the sales price                                           |
-| sales_price    | Number | Sales price incl taxes                                                                |
+| sales_price    | Number | Sales price including taxes                                                           |
 | childs         | Array  | Childs are sub-tariffs contained by this tariff (only season tariffs can have childs) |
 
 ### User
 
-One of the following options: `None`, `Everyone`, `User Group` or the following JSON object corresponding to an active Ezus user of this account
+One of the following options: `None`, `Everyone`, `User Group` or the following JSON object corresponding to an active Ezus user of this account.
 
 ```json
 "user": {
@@ -1766,7 +2321,7 @@ One of the following options: `None`, `Everyone`, `User Group` or the following 
 | first_name | String | First name of the user |
 | last_name  | String | Last name of the user  |
 
-### Webhook
+### Webhooks
 
 ```json
 "webhooks": [
@@ -1806,15 +2361,15 @@ This section provides an overview of the fundamental details related to a webhoo
 }
 ```
 
-| Property          | Type   | Description                                                                                                                                                                    |
-| ----------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| id                | String | Unique identifier for the event                                                                                                                                                |
-| object            | String | The object of the event. The event's target object is currently limited to `event` but in the future, webhooks will become capable of being triggered by various other events. |
-| type              | String | The type of the event                                                                                                                                                          |
-| created           | String | Time at which the object was created. Measured in seconds since the Unix epoch.                                                                                                |
-| trigger_reference | String | The trigger of the event. Indicates the source or origin from which the event was initiated.                                                                                   |
-| is_duplication    | String | Indicates whether the event originates from a duplication                                                                                                                      |
-| data              | String | Detailed information about the event. For more in-depth details, please refer to the sections below.                                                                           |
+| Property          | Type    | Description                                                                                                                                                                    |
+| ----------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| id                | String  | Unique identifier for the event                                                                                                                                                |
+| object            | String  | The object of the event. The event's target object is currently limited to `event` but in the future, webhooks will become capable of being triggered by various other events. |
+| type              | String  | The type of the event                                                                                                                                                          |
+| created           | Number  | Time at which the object was created. Measured in seconds since the Unix epoch.                                                                                                |
+| trigger_reference | String  | The trigger of the event. Indicates the source or origin from which the event was initiated.                                                                                   |
+| is_duplication    | Boolean | Indicates whether the event originates from a duplication                                                                                                                      |
+| data              | String  | Detailed information about the event. For more in-depth details, please refer to the sections below.                                                                           |
 
 ## projects.created
 
@@ -1881,3 +2436,93 @@ This event is triggered whenever a client is created.
 | phone        | String | Phone number of the contact as a string                                                         |
 | birth_date   | String | Contact's date of birth in a "YYYY-MM-DD" format string                                         |
 | info_number  | String | File number that appears at the bottom of the client record. Not to be confused with reference! |
+
+## invoices.finalized
+
+This event is triggered whenever an invoice is finalized (its stage goes from `draft` to `completed`).
+
+```json
+{
+  "data": {
+    "reference": "invoice_reference",
+    "info_number": "2023_101010",
+    "url": "https://ezus.io/2023_101010.pdf",
+    "stage": "completed",
+    "type": "credit_note",
+    "origin_reference": "origin_reference",
+    "origin_info_number": "2023_101009",
+    "created_date": "2023-10-10",
+    "send_date": "2023-10-10",
+    "due_date": "2023-10-10",
+    "amount_ttc": 1200.0,
+    "amount_ht": 1000.0,
+    "vat": 200.0,
+    "currency": "EUR",
+    "project_reference": "project_reference",
+    "alternative": {
+      "sort_order": "0",
+      "title": "Main Alternative"
+    }
+  }
+}
+```
+
+| Property           | Type   | Description                                                                                                                                                                                                       |
+| ------------------ | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| reference          | String | The reference of the invoice                                                                                                                                                                                      |
+| info_number        | String | Title of the invoice                                                                                                                                                                                              |
+| url                | String | URL of the invoice `.pdf` file                                                                                                                                                                                    |
+| stage              | String | Stage of the invoice `draft` `completed` or `paid`                                                                                                                                                                |
+| type               | String | Type of the invoice `invoice` or `credit_note`                                                                                                                                                                    |
+| origin_reference   | String | This is only displayed if the type of the invoice is a `credit_note`. The reference of the origin invoice.                                                                                                        |
+| origin_info_number | String | This is only displayed if the type of the invoice is a `credit_note`. Title of the origin invoice.                                                                                                                |
+| created_date       | String | Date of the creation of this invoice, in a "YYYY-MM-DD" format                                                                                                                                                    |
+| send_date          | String | Sent date of this invoice, in a "YYYY-MM-DD" format                                                                                                                                                               |
+| due_date           | String | Due date of this invoice, in a "YYYY-MM-DD" format                                                                                                                                                                |
+| amount_ttc         | Number | Amount of the invoice including taxes                                                                                                                                                                             |
+| amount_ht          | Number | Amount of the invoice excluding taxes                                                                                                                                                                             |
+| vat                | Number | VAT amount of the invoice                                                                                                                                                                                         |
+| currency           | String | The ISO 4217 currency code representing the currency you utilize (<a href="https://docs.google.com/spreadsheets/d/1b7BNOwKyN1hMOouve6xhFZ2R2zrH4Sj1L-646j755fU/edit?usp=sharing" target="_blank">Link to doc</a>) |
+| project_reference  | String | The reference of the project linked to this invoice                                                                                                                                                               |
+| alternative        | JSON   | JSON including: `sort_order` and `title`                                                                                                                                                                          |
+
+## invoices_suppliers.attached
+
+This event is triggered whenever a file is added to a supplier invoice.
+
+```json
+{
+  "data": {
+    "reference": "invoice_supplier_reference",
+    "url": "https://ezus.io/2023_101010.pdf",
+    "filename": "2023_101010.pdf",
+    "created_date": "2023-10-10",
+    "due_date": "2023-10-20",
+    "amount_ttc": 1200.0,
+    "amount_ht": 1000.0,
+    "vat": 200.0,
+    "currency": "EUR",
+    "supplier_reference": "supplier_reference",
+    "project_reference": "project_reference",
+    "alternative": {
+      "sort_order": "0",
+      "title": "Main Alternative"
+    }
+  }
+}
+```
+
+| Property           | Type   | Description                                                                                                                                                                                                       |
+| ------------------ | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| reference          | String | The reference of the supplier invoice                                                                                                                                                                             |
+| url                | String | URL of the supplier invoice file                                                                                                                                                                                  |
+| filename           | String | Filename of the supplier invoice                                                                                                                                                                                  |
+| created_date       | String | Date of the creation of this supplier invoice, in a "YYYY-MM-DD" format                                                                                                                                           |
+| due_date           | String | Due date of this supplier invoice, in a "YYYY-MM-DD" format                                                                                                                                                       |
+| amount_ttc         | Number | Amount of the supplier invoice including taxes                                                                                                                                                                    |
+| amount_ht          | Number | Amount of the supplier invoice excluding taxes                                                                                                                                                                    |
+| vat                | Number | VAT amount of the supplier invoice                                                                                                                                                                                |
+| currency           | String | The ISO 4217 currency code representing the currency you utilize (<a href="https://docs.google.com/spreadsheets/d/1b7BNOwKyN1hMOouve6xhFZ2R2zrH4Sj1L-646j755fU/edit?usp=sharing" target="_blank">Link to doc</a>) |
+| supplier_reference | String | The reference of the supplier linked to this supplier invoice                                                                                                                                                     |
+| project_reference  | String | The reference of the project linked to this supplier invoice                                                                                                                                                      |
+| alternative        | JSON   | JSON including: `sort_order` and `title`                                                                                                                                                                          |
