@@ -504,7 +504,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\n    \"reference\": \"webhook_reference\",\n    \"endpoint\": \"https://webhook.webhook/\",\n    \"is_active\": \"true\",\n    \"events_types\": \"projects.created,projects.updated,clients.created,clients.updated,invoices.finalized,invoices_suppliers.attached\"\n}",
+          "raw": "{\n    \"reference\": \"webhook_reference\",\n    \"endpoint\": \"https://webhook.webhook/\",\n    \"is_active\": \"true\",\n    \"events_types\": \"projects.created,projects.updated,clients.created,invoices.finalized,invoices_suppliers.attached\"\n}",
           "options": {
             "raw": {
               "language": "json"
