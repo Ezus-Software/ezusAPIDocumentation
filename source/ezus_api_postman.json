@@ -518,6 +518,34 @@
         }
       },
       "response": []
+    },
+    {
+      "name": "webhooks-delete",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "X-API-KEY",
+            "value": "{{<YOUR_API_KEY>}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"reference\": \"webhook_reference\",\n    \"endpoint\": \"https://webhook.webhook/\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/webhooks-delete",
+          "host": ["{{baseUrl}}"],
+          "path": ["webhooks-delete"]
+        }
+      },
+      "response": []
     }
   ],
   "auth": {
