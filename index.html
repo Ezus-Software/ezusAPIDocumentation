@@ -420,6 +420,9 @@
                   <li>
                     <a href="#post-webhooks-upsert" class="toc-h2 toc-link" data-title="POST webhooks-upsert">POST webhooks-upsert</a>
                   </li>
+                  <li>
+                    <a href="#delete-webhooks-delete" class="toc-h2 toc-link" data-title="DELETE webhooks-delete">DELETE webhooks-delete</a>
+                  </li>
               </ul>
           </li>
           <li>
@@ -3162,7 +3165,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 </tr>
 </tbody></table>
 <h3 id='response-18'>Response</h3>
-<p>An array of JSON tha contains your webhooks information.</p>
+<p>An array of JSON that contains your webhooks information.</p>
 
 <table><thead>
 <tr>
@@ -3178,7 +3181,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 </tr>
 </tbody></table>
 <h2 id='post-webhooks-upsert'>POST webhooks-upsert</h2>
-<p>It updates a webhook record if the provided reference does match one of the webhooks in your account, otherwise it creates a new webhook record with the provided reference (or with a random one if no reference is provided).</p>
+<p>It updates a webhook record if the provided reference or endpoint does match one of the webhooks in your account, otherwise it creates a new webhook record with the provided reference (or with a random one if no reference is provided).</p>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="s1">'https://api.ezus.app/webhooks-upsert'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'X-API-KEY: &lt;YOUR_API_KEY&gt;'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
@@ -3251,7 +3254,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <tr>
 <td>endpoint</td>
 <td>String</td>
-<td>This parameter is required if you create a new webhook. You cannot update the endpoint of an existing webhook.</td>
+<td>If provided, the endpoint associated to the webhook you want to update or create (in case the one you provided has never been used). This parameter is required if you create a new webhook and has to be unique. You cannot update the endpoint of an existing webhook.</td>
 </tr>
 <tr>
 <td>is_active</td>
@@ -3260,12 +3263,87 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 </tr>
 <tr>
 <td>events_types</td>
-<td>String</td>
+<td>JSON</td>
 <td>The list of events to enable for this endpoint. At least 1 required, separated by commas if more than one. (<a href="#events">Events</a>)</td>
 </tr>
 </tbody></table>
 <h3 id='response-19'>Response</h3>
-<p>A JSON object indicating whether an error occurred during the process, along with the associated message. If successful, it also returns a reference for the project, which you should store for future updates or retrievals.</p>
+<p>A JSON object indicating whether an error occurred during the process, along with the associated message. If successful, it also returns a reference for the webhook, which you should store for future updates or retrievals.</p>
+<h2 id='delete-webhooks-delete'>DELETE webhooks-delete</h2>
+<p>It deletes a webhook record if the provided reference or endpoint does match one of the webhooks in your account.</p>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--request</span> <span class="s2">"DELETE"</span> <span class="se">\</span>
+<span class="nt">--location</span> <span class="s1">'https://api.ezus.app/webhooks-delete'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'X-API-KEY: &lt;YOUR_API_KEY&gt;'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Bearer &lt;YOUR_TOKEN&gt;'</span> <span class="se">\</span>
+<span class="nt">--data</span> <span class="s1">'{
+    "reference": "webhook_reference",
+    "endpoint": "https://webhook.webhook/"
+}'</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">axios</span><span class="dl">"</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">baseUrl</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">https://api.ezus.app</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">body</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">reference</span><span class="p">:</span> <span class="dl">"</span><span class="s2">webhook_reference</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">endpoint</span><span class="p">:</span> <span class="dl">"</span><span class="s2">https://webhook.webhook/</span><span class="dl">"</span><span class="p">,</span>
+<span class="p">};</span>
+<span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="dl">"</span><span class="s2">X-API-KEY</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">&lt;YOUR_API_KEY&gt;</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">Authorization</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Bearer &lt;YOUR_TOKEN&gt;</span><span class="dl">"</span><span class="p">,</span>
+<span class="p">};</span>
+
+<span class="nx">axios</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="nx">baseUrl</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">/webhooks-delete</span><span class="dl">"</span><span class="p">,</span> <span class="nx">body</span><span class="p">,</span> <span class="nx">headers</span><span class="p">);</span>
+</code></pre></div>
+<blockquote>
+<p>This request returns a structured JSON object:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">"false"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ok"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Webhook successfully deleted"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='http-endpoint-20'>HTTP Endpoint</h3>
+<p><code>DELETE https://api.ezus.app/webhooks-delete</code></p>
+<h3 id='header-parameters-20'>Header parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>X-API-KEY</td>
+<td>String</td>
+<td><span style="color:red">(Required)</span> Your Ezus API key</td>
+</tr>
+<tr>
+<td>Authorization</td>
+<td>String</td>
+<td><span style="color:red">(Required)</span> Your Bearer token</td>
+</tr>
+</tbody></table>
+<h3 id='body-parameters-application-json-11'>Body parameters (application/json)</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>reference</td>
+<td>String</td>
+<td>If provided, the unique Ezus Reference associated to the webhook you want to delete</td>
+</tr>
+<tr>
+<td>endpoint</td>
+<td>String</td>
+<td>If provided, the endpoint associated to the webhook you want to delete</td>
+</tr>
+</tbody></table>
+<h3 id='response-20'>Response</h3>
+<p>A JSON object indicating whether an error occurred during the process, along with the associated message.</p>
 <h1 id='nested-resources'>Nested Resources</h1><h3 id='address'>Address</h3><div class="highlight"><pre class="highlight json tab-json"><code><span class="w">   </span><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"58 Rue de Paradis"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"zip"</span><span class="p">:</span><span class="w"> </span><span class="s2">"75010"</span><span class="p">,</span><span class="w">
