@@ -2297,6 +2297,9 @@ This section provides an overview of the fundamental details related to a webhoo
   "created": 1234567890,
   "trigger_reference": "pro.ezus.io;projects-create",
   "is_duplication": false,
+  "field": "",
+  "old_value": "",
+  "new_value": "",
   "data": {...}
 }
 ```
@@ -2309,11 +2312,44 @@ This section provides an overview of the fundamental details related to a webhoo
 | created           | Number  | Time at which the object was created. Measured in seconds since the Unix epoch.                                                                                                |
 | trigger_reference | String  | The trigger of the event. Indicates the source or origin from which the event was initiated.                                                                                   |
 | is_duplication    | Boolean | Indicates whether the event originates from a duplication                                                                                                                      |
+| field             | String  | This is only displayed if the event is an update. The name of the field that was updated.                                                                                      |
+| old_value         | String  | This is only displayed if the event is an update. The previous value of the updated field.                                                                                     |
+| new_value         | String  | This is only displayed if the event is an update. The updated field's new value.                                                                                               |
 | data              | String  | Detailed information about the event. For more in-depth details, please refer to the sections below.                                                                           |
 
 ## projects.created
 
 This event is triggered whenever a project is either created or duplicated.
+
+```json
+{
+  "data": {
+    "reference": "project_reference",
+    "info_title": "Paris fashion week 2024",
+    "trip_budget": "90000",
+    "trip_people": "15",
+    "trip_date_in": "2024-03-01",
+    "trip_date_out": "2024-03-09",
+    "trip_duration": "9",
+    "info_number": "202306001-P"
+  }
+}
+```
+
+| Property      | Type   | Description                                                                                                          |
+| ------------- | ------ | -------------------------------------------------------------------------------------------------------------------- |
+| reference     | String | The reference of the project                                                                                         |
+| info_title    | String | The title of the project                                                                                             |
+| trip_budget   | String | Forecasted budget for the alternative (the one that is entered manually not the actual one)                          |
+| trip_people   | String | Number of people                                                                                                     |
+| trip_date_in  | String | Date of the beginning of this alternative, in a "YYYY-MM-DD" format string. If it's empty, the project has no dates. |
+| trip_date_out | String | Date of the end of this alternative, in a "YYYY-MM-DD" format string. If it's empty, the project has no dates.       |
+| trip_duration | String | Number of days this project lasts                                                                                    |
+| info_number   | String | File number that appears at the bottom of the project record. Not to be confused with reference!                     |
+
+## projects.updated
+
+This event is triggered whenever a project is updated. This event is triggered only by specific fields within projects, including: `info_title`, `info_stage`, `info_notes`, `info_number`, `currency`, `sales_manager`, and `projects_manager`.
 
 ```json
 {
