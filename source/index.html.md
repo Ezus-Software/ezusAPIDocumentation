@@ -2420,26 +2420,16 @@ This event is triggered whenever a project is updated. This event is triggered o
   "data": {
     "reference": "project_reference",
     "info_title": "Paris fashion week 2024",
-    "trip_budget": "90000",
-    "trip_people": "15",
-    "trip_date_in": "2024-03-01",
-    "trip_date_out": "2024-03-09",
-    "trip_duration": "9",
     "info_number": "202306001-P"
   }
 }
 ```
 
-| Property      | Type   | Description                                                                                                          |
-| ------------- | ------ | -------------------------------------------------------------------------------------------------------------------- |
-| reference     | String | The reference of the project                                                                                         |
-| info_title    | String | The title of the project                                                                                             |
-| trip_budget   | String | Forecasted budget for the alternative (the one that is entered manually not the actual one)                          |
-| trip_people   | String | Number of people                                                                                                     |
-| trip_date_in  | String | Date of the beginning of this alternative, in a "YYYY-MM-DD" format string. If it's empty, the project has no dates. |
-| trip_date_out | String | Date of the end of this alternative, in a "YYYY-MM-DD" format string. If it's empty, the project has no dates.       |
-| trip_duration | String | Number of days this project lasts                                                                                    |
-| info_number   | String | File number that appears at the bottom of the project record. Not to be confused with reference!                     |
+| Property    | Type   | Description                                                                                      |
+| ----------- | ------ | ------------------------------------------------------------------------------------------------ |
+| reference   | String | The reference of the project                                                                     |
+| info_title  | String | The title of the project                                                                         |
+| info_number | String | File number that appears at the bottom of the project record. Not to be confused with reference! |
 
 ## clients.created
 
