@@ -1822,7 +1822,7 @@ axios.post(baseUrl + "/deposits-create", body, headers);
 
 ### Response
 
-A JSON object indicating whether an error occurred during the process, along with the associated message. If successful, it also returns a `reference` for the project, which you should store for future updates or retrievals.
+A JSON object indicating whether an error occurred during the process, along with the associated message.
 
 # Webhooks
 
