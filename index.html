@@ -2727,7 +2727,6 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <span class="nt">--data-raw</span> <span class="s1">'{
     "reference": "invoice_reference",
     "stage": "paid",
-    "send_date": "2023-09-29",
     "due_date": "2023-09-29",
     "custom_fields": [
         {"name": "field_name", "value": "field_value"}
@@ -2739,7 +2738,6 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <span class="kd">const</span> <span class="nx">body</span> <span class="o">=</span> <span class="p">{</span>
   <span class="na">reference</span><span class="p">:</span> <span class="dl">"</span><span class="s2">invoice_reference</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">stage</span><span class="p">:</span> <span class="dl">"</span><span class="s2">paid</span><span class="dl">"</span><span class="p">,</span>
-  <span class="na">send_date</span><span class="p">:</span> <span class="dl">"</span><span class="s2">2023-09-29</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">due_date</span><span class="p">:</span> <span class="dl">"</span><span class="s2">2023-09-29</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">custom_fields</span><span class="p">:</span> <span class="p">[{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">field_name</span><span class="dl">"</span><span class="p">,</span> <span class="na">value</span><span class="p">:</span> <span class="dl">"</span><span class="s2">field_value</span><span class="dl">"</span> <span class="p">}],</span>
 <span class="p">};</span>
@@ -2796,11 +2794,6 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <td>stage</td>
 <td>String</td>
 <td>stage can be updated only if the invoice is a draft, the stage can be <code>completed</code> or <code>paid</code></td>
-</tr>
-<tr>
-<td>send_date</td>
-<td>String</td>
-<td>send_date can be updated only if the invoice is a draft, send_date can be only on format <code>YYYY-MM-DD</code></td>
 </tr>
 <tr>
 <td>due_date</td>
