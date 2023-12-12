@@ -429,7 +429,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\n    \"reference\": \"invoice_reference\",\n    \"stage\": \"paid\",\n    \"send_date\": \"2023-09-29\",\n    \"due_date\": \"2023-09-29\",\n    \"custom_fields\": [\n        {\"name\": \"field_name\", \"value\": \"field_value\"}\n    ]\n}",
+          "raw": "{\n    \"reference\": \"invoice_reference\",\n    \"stage\": \"paid\",\n    \"due_date\": \"2023-09-29\",\n    \"custom_fields\": [\n        {\"name\": \"field_name\", \"value\": \"field_value\"}\n    ]\n}",
           "options": {
             "raw": {
               "language": "json"
