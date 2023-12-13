@@ -1881,6 +1881,66 @@ An array of JSON that contains your webhooks information.
 | -------- | ----- | ------------------------------------------------ |
 | webhooks | Array | Array of JSON webhooks ([Webhooks](#webhooks-2)) |
 
+## GET webhooks-last
+
+Returns the latest event occurrence of a specified event type.
+
+```shell
+curl --location 'https://api.ezus.app/webhooks-last?event_type=event_type' \
+--header 'X-API-KEY: <YOUR_API_KEY>' \
+--header 'Authorization: Bearer <YOUR_TOKEN>'
+```
+
+```javascript
+const axios = require("axios");
+const baseUrl = "https://api.ezus.app";
+
+const headers = {
+  "X-API-KEY": "<YOUR_API_KEY>",
+  Authorization: "Bearer <YOUR_TOKEN>",
+};
+
+axios.get(baseUrl + "/webhooks-last?event_type=event_type", headers);
+```
+
+> This request returns a structured JSON object:
+
+```json
+{
+  "id": "event_id",
+  "object": "event",
+  "type": "projects.created",
+  "created": 1234567890,
+  "trigger_reference": "pro.ezus.io;projects-create",
+  "is_duplication": false,
+  "field": "",
+  "old_value": "",
+  "new_value": "",
+  "data": {...}
+}
+```
+
+### HTTP Endpoint
+
+`GET https://api.ezus.app/webhooks`
+
+### Header Parameters
+
+| Parameter     | Type   | Description                                                 |
+| ------------- | ------ | ----------------------------------------------------------- |
+| X-API-KEY     | String | <span style="color:red">(Required)</span> Your Ezus API key |
+| Authorization | String | <span style="color:red">(Required)</span> Your Bearer token |
+
+### Query Parameters
+
+| Parameter  | Type   | Description                                                                   |
+| ---------- | ------ | ----------------------------------------------------------------------------- |
+| event_type | String | <span style="color:red">(Required)</span> The event type you wish to retrieve |
+
+### Response
+
+A JSON object indicating whether an error occurred during the process, along with the associated message. If successful, it returns the latest event occurrence of a specified event type ([Events](#events)).
+
 ## POST webhooks-upsert
 
 It updates a webhook record if the provided reference or endpoint does match one of the webhooks in your account, otherwise it creates a new webhook record with the provided reference (or with a random one if no reference is provided).
