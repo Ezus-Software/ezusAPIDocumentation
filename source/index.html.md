@@ -1922,7 +1922,7 @@ axios.get(baseUrl + "/webhooks-last?event_type=event_type", headers);
 
 ### HTTP Endpoint
 
-`GET https://api.ezus.app/webhooks`
+`GET https://api.ezus.app/webhooks-last`
 
 ### Header Parameters
 
