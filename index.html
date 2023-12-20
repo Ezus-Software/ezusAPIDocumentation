@@ -490,6 +490,17 @@
               </ul>
           </li>
           <li>
+            <a href="#rate-limits" class="toc-h1 toc-link" data-title="Rate Limits">Rate Limits</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#daily-rate-limit" class="toc-h2 toc-link" data-title="Daily rate limit">Daily rate limit</a>
+                  </li>
+                  <li>
+                    <a href="#burst-rate-limit" class="toc-h2 toc-link" data-title="Burst rate limit">Burst rate limit</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
             <a href="#errors" class="toc-h1 toc-link" data-title="Errors">Errors</a>
           </li>
       </ul>
@@ -4371,6 +4382,11 @@ The name of custom fields refers to their technical name, not their display name
 <td>JSON including: <code>sort_order</code> and <code>title</code></td>
 </tr>
 </tbody></table>
+<h1 id='rate-limits'>Rate Limits</h1><h3 id='daily-rate-limit'>Daily rate limit</h3>
+<p>For security reasons, the API allows you to make 10,000 calls per day period.
+What does this &quot;day period&quot; mean? It means we limit to 10,000 requests per day from the first request made. This limit is called later &quot;daily rate limit&quot; and is reset once the day is over.</p>
+<h3 id='burst-rate-limit'>Burst rate limit</h3>
+<p>Additionally, the API is protected by a burst rate limit. This means you can&#39;t make more than 100 requests per second.</p>
 <h1 id='errors'>Errors</h1>
 <aside class="notice">
 Classic Error codes
