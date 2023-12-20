@@ -492,6 +492,31 @@
       "response": []
     },
     {
+      "name": "webhooks-last",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "X-API-KEY",
+            "value": "{{<YOUR_API_KEY>}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/webhooks-last?event_type=event_type",
+          "host": ["{{baseUrl}}"],
+          "path": ["webhooks-last"],
+          "query": [
+            {
+              "key": "event_type",
+              "value": "event_type"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
       "name": "webhooks-upsert",
       "request": {
         "method": "POST",
