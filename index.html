@@ -418,6 +418,9 @@
                     <a href="#get-webhooks" class="toc-h2 toc-link" data-title="GET webhooks">GET webhooks</a>
                   </li>
                   <li>
+                    <a href="#get-webhooks-last" class="toc-h2 toc-link" data-title="GET webhooks-last">GET webhooks-last</a>
+                  </li>
+                  <li>
                     <a href="#post-webhooks-upsert" class="toc-h2 toc-link" data-title="POST webhooks-upsert">POST webhooks-upsert</a>
                   </li>
                   <li>
@@ -3184,6 +3187,73 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <td>Array of JSON webhooks (<a href="#webhooks-2">Webhooks</a>)</td>
 </tr>
 </tbody></table>
+<h2 id='get-webhooks-last'>GET webhooks-last</h2>
+<p>Returns the latest event occurrence of a specified event type.</p>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="s1">'https://api.ezus.app/webhooks-last?event_type=event_type'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'X-API-KEY: &lt;YOUR_API_KEY&gt;'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Bearer &lt;YOUR_TOKEN&gt;'</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">axios</span><span class="dl">"</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">baseUrl</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">https://api.ezus.app</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="dl">"</span><span class="s2">X-API-KEY</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">&lt;YOUR_API_KEY&gt;</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">Authorization</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Bearer &lt;YOUR_TOKEN&gt;</span><span class="dl">"</span><span class="p">,</span>
+<span class="p">};</span>
+
+<span class="nx">axios</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="nx">baseUrl</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">/webhooks-last?event_type=event_type</span><span class="dl">"</span><span class="p">,</span> <span class="nx">headers</span><span class="p">);</span>
+</code></pre></div>
+<blockquote>
+<p>This request returns a structured JSON object:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"event_id"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"object"</span><span class="p">:</span><span class="w"> </span><span class="s2">"event"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"projects.created"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"created"</span><span class="p">:</span><span class="w"> </span><span class="mi">1234567890</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"trigger_reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pro.ezus.io;projects-create"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"is_duplication"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"field"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"old_value"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"new_value"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='http-endpoint-19'>HTTP Endpoint</h3>
+<p><code>GET https://api.ezus.app/webhooks-last</code></p>
+<h3 id='header-parameters-19'>Header Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>X-API-KEY</td>
+<td>String</td>
+<td><span style="color:red">(Required)</span> Your Ezus API key</td>
+</tr>
+<tr>
+<td>Authorization</td>
+<td>String</td>
+<td><span style="color:red">(Required)</span> Your Bearer token</td>
+</tr>
+</tbody></table>
+<h3 id='query-parameters-9'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>event_type</td>
+<td>String</td>
+<td><span style="color:red">(Required)</span> The event type you wish to retrieve</td>
+</tr>
+</tbody></table>
+<h3 id='response-19'>Response</h3>
+<p>A JSON object indicating whether an error occurred during the process, along with the associated message. If successful, it returns the latest event occurrence of a specified event type (<a href="#events">Events</a>).</p>
 <h2 id='post-webhooks-upsert'>POST webhooks-upsert</h2>
 <p>It updates a webhook record if the provided reference or endpoint does match one of the webhooks in your account, otherwise it creates a new webhook record with the provided reference (or with a random one if no reference is provided).</p>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="s1">'https://api.ezus.app/webhooks-upsert'</span> <span class="se">\</span>
@@ -3221,9 +3291,9 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
   </span><span class="nl">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Webhook successfully created"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"webhook_reference"</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='http-endpoint-19'>HTTP Endpoint</h3>
+</span></code></pre></div><h3 id='http-endpoint-20'>HTTP Endpoint</h3>
 <p><code>POST https://api.ezus.app/webhooks-upsert</code></p>
-<h3 id='header-parameters-19'>Header Parameters</h3>
+<h3 id='header-parameters-20'>Header Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -3271,7 +3341,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <td>The list of events to enable for this endpoint. At least 1 required, separated by commas if more than one. (<a href="#events">Events</a>)</td>
 </tr>
 </tbody></table>
-<h3 id='response-19'>Response</h3>
+<h3 id='response-20'>Response</h3>
 <p>A JSON object indicating whether an error occurred during the process, along with the associated message. If successful, it also returns a reference for the webhook, which you should store for future updates or retrievals.</p>
 <h2 id='delete-webhooks-delete'>DELETE webhooks-delete</h2>
 <p>It deletes a webhook record if the provided reference or endpoint does match one of the webhooks in your account.</p>
@@ -3306,9 +3376,9 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
   </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ok"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Webhook successfully deleted"</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='http-endpoint-20'>HTTP Endpoint</h3>
+</span></code></pre></div><h3 id='http-endpoint-21'>HTTP Endpoint</h3>
 <p><code>DELETE https://api.ezus.app/webhooks-delete</code></p>
-<h3 id='header-parameters-20'>Header parameters</h3>
+<h3 id='header-parameters-21'>Header parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -3346,7 +3416,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <td>If provided, the endpoint associated to the webhook you want to delete</td>
 </tr>
 </tbody></table>
-<h3 id='response-20'>Response</h3>
+<h3 id='response-21'>Response</h3>
 <p>A JSON object indicating whether an error occurred during the process, along with the associated message.</p>
 <h1 id='nested-resources'>Nested Resources</h1><h3 id='address'>Address</h3><div class="highlight"><pre class="highlight json tab-json"><code><span class="w">   </span><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"58 Rue de Paradis"</span><span class="p">,</span><span class="w">
