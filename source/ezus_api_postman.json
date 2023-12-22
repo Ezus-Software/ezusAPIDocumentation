@@ -86,7 +86,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\n    \"reference\": \"project_reference\",\n    \"info_title\": \"Paris fashion week 2024\",\n    \"trip_budget\": \"90000\",\n    \"trip_people\": \"15\",\n    \"trip_date_in\": \"2023-03-01\",\n    \"trip_date_out\": \"2023-03-09\",\n    \"sales_manager_email\": \"travel-design@e-corp.com\",\n    \"client_reference\": \"client_reference\",\n    \"custom_fields\": [\n        {\"name\": \"field_name\", \"value\": \"field_value\" }\n    ]\n}",
+          "raw": "{\n    \"reference\": \"project_reference\",\n    \"info_title\": \"Paris fashion week 2024\",\n    \"info_stage\": \"Received\",\n    \"trip_budget\": \"90000\",\n    \"trip_people\": \"15\",\n    \"trip_date_in\": \"2023-03-01\",\n    \"trip_date_out\": \"2023-03-09\",\n    \"sales_manager_email\": \"travel-design@e-corp.com\",\n    \"client_reference\": \"client_reference\",\n    \"custom_fields\": [\n        {\"name\": \"field_name\", \"value\": \"field_value\" }\n    ]\n}",
           "options": {
             "raw": {
               "language": "json"
