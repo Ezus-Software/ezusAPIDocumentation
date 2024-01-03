@@ -2524,6 +2524,26 @@ This event is triggered whenever a client is created.
 | birth_date   | String | Contact's date of birth in a "YYYY-MM-DD" format string                                         |
 | info_number  | String | File number that appears at the bottom of the client record. Not to be confused with reference! |
 
+## clients.updated
+
+This event is triggered whenever a client is updated. This event is triggered only by specific fields within clients, including: `company_name`, `website`, `activity`, `vat_number`, `siret`, `info_origin`, `info_notes`, `info_number` and `user`.
+
+```json
+{
+  "data": {
+    "reference": "client_reference",
+    "company_name": "MOKE INTERNATIONAL LIMITED",
+    "info_number": "202306001-C"
+  }
+}
+```
+
+| Property     | Type   | Description                                                                                     |
+| ------------ | ------ | ----------------------------------------------------------------------------------------------- |
+| reference    | String | The reference of the client                                                                     |
+| company_name | String | Name of the client's company                                                                    |
+| info_number  | String | File number that appears at the bottom of the client record. Not to be confused with reference! |
+
 ## invoices.finalized
 
 This event is triggered whenever an invoice is finalized (its stage goes from `draft` to `completed`).
