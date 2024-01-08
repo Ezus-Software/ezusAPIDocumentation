@@ -160,13 +160,13 @@ axios.get(baseUrl + "/project?reference=project_reference", headers);
     "email": "travel-design@e-corp.com",
     "first_name": "Alice",
     "last_name": "Tate",
-    "agency": "Voyageurs du monde"
+    "agency": "Paris Agency"
   },
   "project_manager": {
     "email": "no-reply@e-corp.com",
     "first_name": "Joe",
     "last_name": "Shmoe",
-    "agency": "Voyageurs du monde"
+    "agency": "Paris Agency"
   },
   "alternatives": [
     {
@@ -431,7 +431,7 @@ axios.get(baseUrl + "/client?reference=client_reference", headers);
     "email": "tommy@e-corp.com",
     "first_name": "Tommy",
     "last_name": "Atkins",
-    "agency": "Voyageurs du monde"
+    "agency": "Paris Agency"
   },
   "address": {
     "label": "58 Rue de Paradis",
@@ -665,7 +665,7 @@ axios.get(baseUrl + "/supplier?reference=supplier_reference", headers);
     "email": "travel-design@e-corp.com",
     "first_name": "Alice",
     "last_name": "Tate",
-    "agency": "Voyageurs du monde"
+    "agency": "Paris Agency"
   },
   "address": {
     "label": "58 Rue de Paradis",
@@ -2377,7 +2377,7 @@ One of the following options: `None`, `Everyone`, `User Group` or the following 
     "email": "tommy@e-corp.com",
     "first_name": "Tommy",
     "last_name": "Atkins",
-    "agency": "Voyageurs du monde"
+    "agency": "Paris Agency"
 }
 ```
 
