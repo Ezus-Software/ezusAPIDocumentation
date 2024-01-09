@@ -242,6 +242,7 @@ curl --location 'https://api.ezus.app/projects-upsert' \
 --data-raw '{
     "reference": "project_reference",
     "info_title": "Paris fashion week 2024",
+    "info_stage": "Received",
     "trip_budget": "90000",
     "trip_people": "15",
     "trip_date_in": "2023-03-01",
@@ -261,6 +262,7 @@ const baseUrl = "https://api.ezus.app";
 const body = {
   reference: "project_reference",
   info_title: "Paris fashion week 2024",
+  info_stage: "Received",
   trip_budget: "90000",
   trip_people: "15",
   trip_date_in: "2023-03-01",
@@ -305,6 +307,7 @@ axios.post(baseUrl + "/projects-upsert", body, headers);
 | ------------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | reference           | String | If provided, the unique reference associated with the project you want to update or create (or a random one will be generated).                                                                                                                                     |
 | info_title          | String | Title of the project. This parameter is required if you create a new project                                                                                                                                                                                        |
+| info_stage          | String | Stage of the project: Please use the technical name of the stage you intend to apply. If no specific stage is found, a default stage will be automatically assigned upon adding the project.                                                                        |
 | trip_budget         | Number | Forecasted budget for the project                                                                                                                                                                                                                                   |
 | trip_people         | Number | Number of people in the project (only settable when creating a new project)                                                                                                                                                                                         |
 | trip_date_in        | Date   | Date of the project's start in "YYYY-MM-DD" format (only settable when creating a new project). If not provided or if not formatted correctly, or if duration > 40 days or if trip_date_in > trip_date_out, project will be set as 1 day and trip_date_in as today. |
