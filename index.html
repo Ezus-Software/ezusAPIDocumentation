@@ -791,6 +791,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <span class="nt">--data-raw</span> <span class="s1">'{
     "reference": "project_reference",
     "info_title": "Paris fashion week 2024",
+    "info_stage": "Received",
     "trip_budget": "90000",
     "trip_people": "15",
     "trip_date_in": "2023-03-01",
@@ -807,6 +808,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <span class="kd">const</span> <span class="nx">body</span> <span class="o">=</span> <span class="p">{</span>
   <span class="na">reference</span><span class="p">:</span> <span class="dl">"</span><span class="s2">project_reference</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">info_title</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Paris fashion week 2024</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">info_stage</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Received</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">trip_budget</span><span class="p">:</span> <span class="dl">"</span><span class="s2">90000</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">trip_people</span><span class="p">:</span> <span class="dl">"</span><span class="s2">15</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">trip_date_in</span><span class="p">:</span> <span class="dl">"</span><span class="s2">2023-03-01</span><span class="dl">"</span><span class="p">,</span>
@@ -869,6 +871,11 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <td>info_title</td>
 <td>String</td>
 <td>Title of the project. This parameter is required if you create a new project</td>
+</tr>
+<tr>
+<td>info_stage</td>
+<td>String</td>
+<td>Stage of the project: Please use the technical name of the stage you intend to apply. If no specific stage is found, a default stage will be automatically assigned upon adding the project.</td>
 </tr>
 <tr>
 <td>trip_budget</td>
