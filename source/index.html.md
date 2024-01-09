@@ -159,12 +159,14 @@ axios.get(baseUrl + "/project?reference=project_reference", headers);
   "sales_manager": {
     "email": "travel-design@e-corp.com",
     "first_name": "Alice",
-    "last_name": "Tate"
+    "last_name": "Tate",
+    "agency": "Paris Agency"
   },
   "project_manager": {
     "email": "no-reply@e-corp.com",
     "first_name": "Joe",
-    "last_name": "Shmoe"
+    "last_name": "Shmoe",
+    "agency": "Paris Agency"
   },
   "alternatives": [
     {
@@ -431,7 +433,8 @@ axios.get(baseUrl + "/client?reference=client_reference", headers);
   "user": {
     "email": "tommy@e-corp.com",
     "first_name": "Tommy",
-    "last_name": "Atkins"
+    "last_name": "Atkins",
+    "agency": "Paris Agency"
   },
   "address": {
     "label": "58 Rue de Paradis",
@@ -664,7 +667,8 @@ axios.get(baseUrl + "/supplier?reference=supplier_reference", headers);
   "user": {
     "email": "travel-design@e-corp.com",
     "first_name": "Alice",
-    "last_name": "Tate"
+    "last_name": "Tate",
+    "agency": "Paris Agency"
   },
   "address": {
     "label": "58 Rue de Paradis",
@@ -2375,15 +2379,17 @@ One of the following options: `None`, `Everyone`, `User Group` or the following 
 "user": {
     "email": "tommy@e-corp.com",
     "first_name": "Tommy",
-    "last_name": "Atkins"
+    "last_name": "Atkins",
+    "agency": "Paris Agency"
 }
 ```
 
-| Property   | Type   | Description            |
-| ---------- | ------ | ---------------------- |
-| email      | String | Email of the user      |
-| first_name | String | First name of the user |
-| last_name  | String | Last name of the user  |
+| Property   | Type   | Description              |
+| ---------- | ------ | ------------------------ |
+| email      | String | Email of the user        |
+| first_name | String | First name of the user   |
+| last_name  | String | Last name of the user    |
+| agency     | String | User's affiliated agency |
 
 ### Webhooks
 
