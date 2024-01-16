@@ -485,6 +485,9 @@
                     <a href="#clients-created" class="toc-h2 toc-link" data-title="clients.created">clients.created</a>
                   </li>
                   <li>
+                    <a href="#clients-updated" class="toc-h2 toc-link" data-title="clients.updated">clients.updated</a>
+                  </li>
+                  <li>
                     <a href="#invoices-finalized" class="toc-h2 toc-link" data-title="invoices.finalized">invoices.finalized</a>
                   </li>
                   <li>
@@ -4258,6 +4261,39 @@ The name of custom fields refers to their technical name, not their display name
 <td>birth_date</td>
 <td>String</td>
 <td>Contact&#39;s date of birth in a &quot;YYYY-MM-DD&quot; format string</td>
+</tr>
+<tr>
+<td>info_number</td>
+<td>String</td>
+<td>File number that appears at the bottom of the client record. Not to be confused with reference!</td>
+</tr>
+</tbody></table>
+<h2 id='clients-updated'>clients.updated</h2>
+<p>This event is triggered whenever a client is updated. This event is triggered only by specific fields within clients, including: <code>company_name</code>, <code>website</code>, <code>activity</code>, <code>vat_number</code>, <code>siret</code>, <code>info_origin</code>, <code>info_notes</code>, <code>info_number</code> and <code>user</code>.</p>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"client_reference"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"company_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MOKE INTERNATIONAL LIMITED"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"info_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"202306001-C"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>reference</td>
+<td>String</td>
+<td>The reference of the client</td>
+</tr>
+<tr>
+<td>company_name</td>
+<td>String</td>
+<td>Name of the client&#39;s company</td>
 </tr>
 <tr>
 <td>info_number</td>
