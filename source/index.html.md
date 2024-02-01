@@ -1569,6 +1569,7 @@ curl --location --request PUT 'https://api.ezus.app/invoices-update' \
 --data-raw '{
     "reference": "invoice_reference",
     "stage": "paid",
+    "send_date": "2023-09-29",
     "due_date": "2023-09-29",
     "custom_fields": [
         {"name": "field_name", "value": "field_value"}
@@ -1583,6 +1584,7 @@ const baseUrl = "https://api.ezus.app";
 const body = {
   reference: "invoice_reference",
   stage: "paid",
+  send_date: "2023-09-29",
   due_date: "2023-09-29",
   custom_fields: [{ name: "field_name", value: "field_value" }],
 };
@@ -1617,12 +1619,13 @@ axios.put(baseUrl + "/invoices-update", body, headers);
 
 ### Body Parameters (application/json)
 
-| Parameter     | Type   | Description                                                                                         |
-| ------------- | ------ | --------------------------------------------------------------------------------------------------- |
-| reference     | String | The reference of the invoice you want to update                                                     |
-| stage         | String | stage can be updated only if the invoice is a draft, the stage can be `completed` or `paid`         |
-| due_date      | String | due_date can be updated only if the invoice is a draft, due_date can be only on format `YYYY-MM-DD` |
-| custom_fields | JSON   | Array of JSON custom fields ([Custom fields](#custom-fields))                                       |
+| Parameter     | Type   | Description                                                                                           |
+| ------------- | ------ | ----------------------------------------------------------------------------------------------------- |
+| reference     | String | The reference of the invoice you want to update                                                       |
+| stage         | String | stage can be updated only if the invoice is a draft, the stage can be `completed` or `paid`           |
+| send_date     | String | send_date can be updated only if the invoice is a draft, send_date can be only on format `YYYY-MM-DD` |
+| due_date      | String | due_date can be updated only if the invoice is a draft, due_date can be only on format `YYYY-MM-DD`   |
+| custom_fields | JSON   | Array of JSON custom fields ([Custom fields](#custom-fields))                                         |
 
 ### Response
 
