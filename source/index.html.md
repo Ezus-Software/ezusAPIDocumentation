@@ -1569,7 +1569,7 @@ curl --location --request PUT 'https://api.ezus.app/invoices-update' \
 --data-raw '{
     "reference": "invoice_reference",
     "stage": "paid",
-    "send_date": "2023-09-29",
+    "send_date": "2023-09-19",
     "due_date": "2023-09-29",
     "custom_fields": [
         {"name": "field_name", "value": "field_value"}
@@ -1584,7 +1584,7 @@ const baseUrl = "https://api.ezus.app";
 const body = {
   reference: "invoice_reference",
   stage: "paid",
-  send_date: "2023-09-29",
+  send_date: "2023-09-19",
   due_date: "2023-09-29",
   custom_fields: [{ name: "field_name", value: "field_value" }],
 };
