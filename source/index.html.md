@@ -2200,7 +2200,11 @@ Only the last 10 contacts are returned in this object. Note that for upsert endp
     },
     {
       "name": "URL link",
-      "value": "urlLink.com"
+      "value": "https://urllink.com"
+    },
+    {
+      "name": "File",
+      "value": "https://urllink.com/files/document.pdf"
     },
     {
       "name": "Checkbox",
