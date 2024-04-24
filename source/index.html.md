@@ -2200,7 +2200,11 @@ Only the last 10 contacts are returned in this object. Note that for upsert endp
     },
     {
       "name": "URL link",
-      "value": "urlLink.com"
+      "value": "https://urllink.com"
+    },
+    {
+      "name": "File",
+      "value": "https://urllink.com/files/document.pdf"
     },
     {
       "name": "Checkbox",
@@ -2231,7 +2235,7 @@ The technical name of a custom field can be found in the custom field edit modal
 | Time              | String | The time must be in a "YYYY-MM-DDTHH:MM:SS+01:00" format string                                                                                                                                |
 | Checkbox          | String | The checkbox must be a string: "true" (checked) OR "false" (unchecked)                                                                                                                         |
 | Number            | String | Number type should be a Number without other character                                                                                                                                         |
-| File              | File   | Not supported yet                                                                                                                                                                              |
+| File              | String | File must be a valid URL, and supported file extensions include: .pdf, .jpg, .jpeg, .png, .bmp, .gif, .docx, .doc, .msg, .odt, .rtf, .txt, .ppt, .pptx, .pptm, .csv, .xlsx                     |
 
 ### Invoices Amounts
 
