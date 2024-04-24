@@ -3636,7 +3636,11 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
     </span><span class="p">},</span><span class="w">
     </span><span class="p">{</span><span class="w">
       </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"URL link"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"urlLink.com"</span><span class="w">
+      </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://urllink.com"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"File"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://urllink.com/files/document.pdf"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="p">{</span><span class="w">
       </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Checkbox"</span><span class="p">,</span><span class="w">
@@ -3702,8 +3706,8 @@ The name of custom fields refers to their technical name, not their display name
 </tr>
 <tr>
 <td>File</td>
-<td>File</td>
-<td>Not supported yet</td>
+<td>String</td>
+<td>File must be a valid URL, and supported file extensions include: .pdf, .jpg, .jpeg, .png, .bmp, .gif, .docx, .doc, .msg, .odt, .rtf, .txt, .ppt, .pptx, .pptm, .csv, .xlsx</td>
 </tr>
 </tbody></table>
 <h3 id='invoices-amounts'>Invoices Amounts</h3><div class="highlight"><pre class="highlight json tab-json"><code><span class="nl">"forecast"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
