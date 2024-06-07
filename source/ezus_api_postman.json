@@ -49,6 +49,26 @@
       "response": []
     },
     {
+      "name": "projects",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "X-API-KEY",
+            "value": "{{<YOUR_API_KEY>}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/projects",
+          "host": ["{{baseUrl}}"],
+          "path": ["projects"],
+          "query": []
+        }
+      },
+      "response": []
+    },
+    {
       "name": "project",
       "request": {
         "method": "GET",
@@ -130,6 +150,26 @@
       "response": []
     },
     {
+      "name": "clients",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "X-API-KEY",
+            "value": "{{<YOUR_API_KEY>}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/clients",
+          "host": ["{{baseUrl}}"],
+          "path": ["clients"],
+          "query": []
+        }
+      },
+      "response": []
+    },
+    {
       "name": "client",
       "request": {
         "method": "GET",
@@ -183,6 +223,26 @@
       "response": []
     },
     {
+      "name": "suppliers",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "X-API-KEY",
+            "value": "{{<YOUR_API_KEY>}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/suppliers",
+          "host": ["{{baseUrl}}"],
+          "path": ["suppliers"],
+          "query": []
+        }
+      },
+      "response": []
+    },
+    {
       "name": "supplier",
       "request": {
         "method": "GET",
@@ -231,6 +291,26 @@
           "raw": "{{baseUrl}}/suppliers-upsert",
           "host": ["{{baseUrl}}"],
           "path": ["suppliers-upsert"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "products",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "X-API-KEY",
+            "value": "{{<YOUR_API_KEY>}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/products",
+          "host": ["{{baseUrl}}"],
+          "path": ["products"],
+          "query": []
         }
       },
       "response": []
