@@ -192,7 +192,7 @@ A JSON object containing the project information with properties like:
 
 | Property  | Type   | Description                                                                                                              |
 | --------- | ------ | ------------------------------------------------------------------------------------------------------------------------ |
-| error     | String | false if no errors occurs else true                                                                                      |
+| error     | String | false if no errors occur else true                                                                                       |
 | token     | String | A token will be returned if all projects have not been returned. Use it in another call to access the following projects |
 | size      | Number | The total number of projects available with these filters                                                                |
 | data_size | Number | Number of projects returned                                                                                              |
@@ -540,7 +540,7 @@ A JSON object containing the client information with properties like:
 
 | Property  | Type   | Description                                                                                                            |
 | --------- | ------ | ---------------------------------------------------------------------------------------------------------------------- |
-| error     | String | false if no errors occurs else true                                                                                    |
+| error     | String | false if no errors occur else true                                                                                     |
 | token     | String | A token will be returned if all clients have not been returned. Use it in another call to access the following clients |
 | size      | Number | The total number of clients available with these filters                                                               |
 | data_size | Number | Number of clients returned                                                                                             |
@@ -856,7 +856,7 @@ A JSON object containing the supplier information with properties like:
 
 | Property  | Type   | Description                                                                                                                |
 | --------- | ------ | -------------------------------------------------------------------------------------------------------------------------- |
-| error     | String | false if no errors occurs else true                                                                                        |
+| error     | String | false if no errors occur else true                                                                                         |
 | token     | String | A token will be returned if all suppliers have not been returned. Use it in another call to access the following suppliers |
 | size      | Number | The total number of suppliers available with these filters                                                                 |
 | data_size | Number | Number of suppliers returned                                                                                               |
@@ -1202,7 +1202,7 @@ A JSON object containing the product information with properties like:
 
 | Property  | Type   | Description                                                                                                              |
 | --------- | ------ | ------------------------------------------------------------------------------------------------------------------------ |
-| error     | String | false if no errors occurs else true                                                                                      |
+| error     | String | false if no errors occur else true                                                                                       |
 | token     | String | A token will be returned if all products have not been returned. Use it in another call to access the following products |
 | size      | Number | The total number of products available with these filters                                                                |
 | data_size | Number | Number of products returned                                                                                              |
@@ -1754,7 +1754,7 @@ A JSON object containing the invoice information with properties like:
 
 | Property  | Type   | Description                                                                                                              |
 | --------- | ------ | ------------------------------------------------------------------------------------------------------------------------ |
-| error     | String | false if no errors occurs else true                                                                                      |
+| error     | String | false if no errors occur else true                                                                                       |
 | token     | String | A token will be returned if all invoices have not been returned. Use it in another call to access the following invoices |
 | size      | Number | The total number of invoices available with these filters                                                                |
 | data_size | Number | Number of invoices returned                                                                                              |
