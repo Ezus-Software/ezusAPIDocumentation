@@ -162,8 +162,8 @@ axios.get(baseUrl + "/projects", headers);
       "info_notes": "Jane has verbally confirmed our quotation",
       "info_number": "202306001-P",
       "currency": "€",
-      "sales_manager": "Alice Tate",
-      "project_manager": "Joe Shmoe",
+      "sales_manager_name": "Alice Tate",
+      "project_manager_name": "Joe Shmoe",
     },...
   ]
 }
@@ -511,7 +511,12 @@ axios.get(baseUrl + "/clients", headers);
     "info_origin": "Adwords",
     "info_notes": "This prospect looks interesting to follow",
     "info_number": "202306001-C",
-    "address": "58 Rue de Paradis",
+    "address": {
+    "label": "58 Rue de Paradis",
+    "zip": "75010",
+    "city": "Paris",
+    "country": "France"
+  },
     ],...
   ]
 }
@@ -827,7 +832,12 @@ axios.get(baseUrl + "/suppliers", headers);
       "type": "accom, activity",
       "info_notes": "Emily confirmed: this hotel really is the best in town.",
       "info_number": "202306001-S",
-      "address":  "58 Rue de Paradis"
+      "address":  {
+        "label": "58 Rue de Paradis",
+        "zip": "75010",
+        "city": "Paris",
+        "country": "France"
+      }
     },...
   ],
 }
