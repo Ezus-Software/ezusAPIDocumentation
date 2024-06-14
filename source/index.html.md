@@ -190,14 +190,14 @@ axios.get(baseUrl + "/projects", headers);
 
 A JSON object containing the project information with properties like:
 
-| Property  | Type   | Description                                                                                                              |
-| --------- | ------ | ------------------------------------------------------------------------------------------------------------------------ |
-| error     | String | false if no errors occur else true                                                                                       |
-| token     | String | A token will be returned if all projects have not been returned. Use it in another call to access the following projects |
-| size      | Number | The total number of projects available with these filters                                                                |
-| data_size | Number | Number of projects returned                                                                                              |
-| page      | Number | The page number                                                                                                          |
-| projects  | Array  | An array of JSON containing all the projects returned formated like GET `project` ([GET project](#get-project))          |
+| Property  | Type   | Description                                                                                                                          |
+| --------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------ |
+| error     | String | false if no errors occur else true                                                                                                   |
+| token     | String | A token will be returned if all projects have not been returned. Use it in another call to access the following projects             |
+| size      | Number | The total number of projects available with these filters                                                                            |
+| data_size | Number | Number of projects returned                                                                                                          |
+| page      | Number | The page number                                                                                                                      |
+| projects  | Array  | An array of JSON containing all the returned projects, formatted like a reduced GET `project` response ([GET project](#get-project)) |
 
 ## GET project
 
@@ -543,14 +543,14 @@ axios.get(baseUrl + "/clients", headers);
 
 A JSON object containing the client information with properties like:
 
-| Property  | Type   | Description                                                                                                            |
-| --------- | ------ | ---------------------------------------------------------------------------------------------------------------------- |
-| error     | String | false if no errors occur else true                                                                                     |
-| token     | String | A token will be returned if all clients have not been returned. Use it in another call to access the following clients |
-| size      | Number | The total number of clients available with these filters                                                               |
-| data_size | Number | Number of clients returned                                                                                             |
-| page      | Number | The page number                                                                                                        |
-| clients   | Array  | An array of JSON containing all the clients returned formated like GET `client` ([GET client](#get-client))            |
+| Property  | Type   | Description                                                                                                                        |
+| --------- | ------ | ---------------------------------------------------------------------------------------------------------------------------------- | --------------------------- |
+| error     | String | false if no errors occur else true                                                                                                 |
+| token     | String | A token will be returned if all clients have not been returned. Use it in another call to access the following clients             |
+| size      | Number | The total number of clients available with these filters                                                                           |
+| data_size | Number | Number of clients returned                                                                                                         |
+| page      | Number | The page number                                                                                                                    |
+| clients   | Array  | An array of JSON containing all the returned clients, formatted like a reduced GET `client` response ([GET project](#get-project)) | ([GET client](#get-client)) |
 
 ## GET client
 
@@ -864,14 +864,14 @@ axios.get(baseUrl + "/suppliers", headers);
 
 A JSON object containing the supplier information with properties like:
 
-| Property  | Type   | Description                                                                                                                |
-| --------- | ------ | -------------------------------------------------------------------------------------------------------------------------- |
-| error     | String | false if no errors occur else true                                                                                         |
-| token     | String | A token will be returned if all suppliers have not been returned. Use it in another call to access the following suppliers |
-| size      | Number | The total number of suppliers available with these filters                                                                 |
-| data_size | Number | Number of suppliers returned                                                                                               |
-| page      | Number | The page number                                                                                                            |
-| suppliers | Array  | An array of JSON containing all the suppliers returned formated like GET `supplier` ([GET supplier](#get-supplier))        |
+| Property  | Type   | Description                                                                                                                            |
+| --------- | ------ | -------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------- |
+| error     | String | false if no errors occur else true                                                                                                     |
+| token     | String | A token will be returned if all suppliers have not been returned. Use it in another call to access the following suppliers             |
+| size      | Number | The total number of suppliers available with these filters                                                                             |
+| data_size | Number | Number of suppliers returned                                                                                                           |
+| page      | Number | The page number                                                                                                                        |
+| suppliers | Array  | An array of JSON containing all the returned suppliers, formatted like a reduced GET `supplier` response ([GET project](#get-project)) | ([GET supplier](#get-supplier)) |
 
 ## GET supplier
 
@@ -1210,14 +1210,14 @@ axios.get(baseUrl + "/products", headers);
 
 A JSON object containing the product information with properties like:
 
-| Property  | Type   | Description                                                                                                              |
-| --------- | ------ | ------------------------------------------------------------------------------------------------------------------------ |
-| error     | String | false if no errors occur else true                                                                                       |
-| token     | String | A token will be returned if all products have not been returned. Use it in another call to access the following products |
-| size      | Number | The total number of products available with these filters                                                                |
-| data_size | Number | Number of products returned                                                                                              |
-| page      | Number | The page number                                                                                                          |
-| products  | Array  | An array of JSON containing all the products returned formated like GET `product` ([GET product](#get-product))          |
+| Property  | Type   | Description                                                                                                                          |
+| --------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------- |
+| error     | String | false if no errors occur else true                                                                                                   |
+| token     | String | A token will be returned if all products have not been returned. Use it in another call to access the following products             |
+| size      | Number | The total number of products available with these filters                                                                            |
+| data_size | Number | Number of products returned                                                                                                          |
+| page      | Number | The page number                                                                                                                      |
+| products  | Array  | An array of JSON containing all the returned products, formatted like a reduced GET `product` response ([GET project](#get-project)) | ([GET product](#get-product)) |
 
 ## GET product
 
