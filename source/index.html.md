@@ -497,6 +497,7 @@ axios.get(baseUrl + "/clients", headers);
   "data_size": 50,
   "page": 1,
   "clients": [
+  {
     "reference": "client_reference",
     "type": "enterprise",
     "company_name": "MOKE INTERNATIONAL LIMITED",
