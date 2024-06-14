@@ -513,11 +513,11 @@ axios.get(baseUrl + "/clients", headers);
     "info_notes": "This prospect looks interesting to follow",
     "info_number": "202306001-C",
     "address": {
-    "label": "58 Rue de Paradis",
-    "zip": "75010",
-    "city": "Paris",
-    "country": "France"
-  },
+      "label": "58 Rue de Paradis",
+      "zip": "75010",
+      "city": "Paris",
+      "country": "France"
+    },
     ],...
   ]
 }
@@ -1179,7 +1179,7 @@ axios.get(baseUrl + "/products", headers);
     "budget_variable": "Display",
     "info_number": "202306001-PR",
     "supplier_reference": "supplier_reference",
-    "package_reference": "reference": "package_reference",
+    "package_reference": "package_reference",
     "commission": {
       "commission_mode": "purchase",
       "commission_regime": "percent",
