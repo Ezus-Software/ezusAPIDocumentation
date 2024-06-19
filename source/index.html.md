@@ -123,6 +123,82 @@ A JSON object indicating whether an error occurred during the process, along wit
 
 # Projects
 
+## GET projects
+
+It returns a list of your projects. The projects are returned sorted by creation date, with the most recent projects appearing first. You can specify filters as query parameters to narrow down your search. The list of projects returned is paginated (50 per 50): to call the 50 next items in the list, call the route with the `next_token` query parameter.
+
+```shell
+curl --location 'https://api.ezus.app/projects' \
+--header 'x-api-key: <YOUR_API_KEY>' \
+--header 'Authorization: Bearer <YOUR_TOKEN>'
+```
+
+```javascript
+const axios = require("axios");
+const baseUrl = "https://api.ezus.app";
+
+const headers = {
+  "x-api-key": "<YOUR_API_KEY>",
+  Authorization: "Bearer <YOUR_TOKEN>",
+};
+
+axios.get(baseUrl + "/projects", headers);
+```
+
+> This request returns a structured JSON object:
+
+```json
+{
+  "error": "false",
+  "next_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJtZW51X211bG11bCI6Im9wdDEiLCJudW1iZXIiOiIyMDAwMCIsInBhZ2UiOjEsInBlcnNvX2ludm9pY2UiOiJHRyIsInN0YWdlIjoicGFpZCIsIl9fdGltZSI6MTY5NzQ0NjEzNX0.jEs7aL3UzCNrjzwDtAUbq4Rt4T64nu2LBYC0NnQhHiA",
+  "size": 338,
+  "data_size": 50,
+  "page": 1,
+  "projects": [
+    {
+      "reference": "project_reference",
+      "info_title": "Paris fashion week 2024",
+      "info_stage": "Confirmed",
+      "info_notes": "Jane has verbally confirmed our quotation",
+      "info_number": "202306001-P",
+      "currency": "€",
+      "sales_manager_name": "Alice Tate",
+      "project_manager_name": "Joe Shmoe",
+    },...
+  ]
+}
+```
+
+### HTTP Endpoint
+
+`GET https://api.ezus.app/projects`
+
+### Header Parameters
+
+| Parameter     | Type   | Description                                                 |
+| ------------- | ------ | ----------------------------------------------------------- |
+| x-api-key     | String | <span style="color:red">(Required)</span> Your Ezus API key |
+| Authorization | String | <span style="color:red">(Required)</span> Your Bearer token |
+
+### Query Parameters
+
+| Parameter  | Type   | Description                                                                                                                                             |
+| ---------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| next_token | String | Specify this parameter if you want to retrieve the following elements of a given list query. If this parameter is filled, other parameters are ignored. |
+
+### Response
+
+A JSON object containing the project information with properties like:
+
+| Property  | Type   | Description                                                                                                                          |
+| --------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------ |
+| error     | String | false if no errors occur else true                                                                                                   |
+| token     | String | A token will be returned if all projects have not been returned. Use it in another call to access the following projects             |
+| size      | Number | The total number of projects available with these filters                                                                            |
+| data_size | Number | Number of projects returned                                                                                                          |
+| page      | Number | The page number                                                                                                                      |
+| projects  | Array  | An array of JSON containing all the returned projects, formatted like a reduced GET `project` response ([GET project](#get-project)) |
+
 ## GET project
 
 This API endpoint allows you to retrieve information for a specific project record in Ezus. To do so, you need to specify the project's reference in your query parameter.
@@ -389,6 +465,94 @@ A JSON object indicating whether an error occurred during the process, along wit
 
 # Clients
 
+## GET clients
+
+It returns a list of your clients. The clients are returned sorted by creation date, with the most recent clients appearing first. You can specify filters as query parameters to narrow down your search. The list of clients returned is paginated (50 per 50): to call the 50 next items in the list, call the route with the `next_token` query parameter.
+
+```shell
+curl --location 'https://api.ezus.app/clients' \
+--header 'x-api-key: <YOUR_API_KEY>' \
+--header 'Authorization: Bearer <YOUR_TOKEN>'
+```
+
+```javascript
+const axios = require("axios");
+const baseUrl = "https://api.ezus.app";
+
+const headers = {
+  "x-api-key": "<YOUR_API_KEY>",
+  Authorization: "Bearer <YOUR_TOKEN>",
+};
+
+axios.get(baseUrl + "/clients", headers);
+```
+
+> This request returns a structured JSON object:
+
+```json
+{
+  "error": "false",
+  "next_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJtZW51X211bG11bCI6Im9wdDEiLCJudW1iZXIiOiIyMDAwMCIsInBhZ2UiOjEsInBlcnNvX2ludm9pY2UiOiJHRyIsInN0YWdlIjoicGFpZCIsIl9fdGltZSI6MTY5NzQ0NjEzNX0.jEs7aL3UzCNrjzwDtAUbq4Rt4T64nu2LBYC0NnQhHiA",
+  "size": 338,
+  "data_size": 50,
+  "page": 1,
+  "clients": [
+  {
+    "reference": "client_reference",
+    "type": "enterprise",
+    "company_name": "MOKE INTERNATIONAL LIMITED",
+    "website": "www.moke_ltd.com",
+    "first_name": "Jane",
+    "last_name": "Doe",
+    "email": "contact@moke-international.com",
+    "activity": "Software",
+    "vat_number": "GB 240-635-038",
+    "siret": "09728676",
+    "info_profile": "Prospect",
+    "info_origin": "Adwords",
+    "info_notes": "This prospect looks interesting to follow",
+    "info_number": "202306001-C",
+    "address": {
+      "label": "58 Rue de Paradis",
+      "zip": "75010",
+      "city": "Paris",
+      "country": "France"
+    },
+    ],...
+  ]
+}
+```
+
+### HTTP Endpoint
+
+`GET https://api.ezus.app/clients`
+
+### Header Parameters
+
+| Parameter     | Type   | Description                                                 |
+| ------------- | ------ | ----------------------------------------------------------- |
+| x-api-key     | String | <span style="color:red">(Required)</span> Your Ezus API key |
+| Authorization | String | <span style="color:red">(Required)</span> Your Bearer token |
+
+### Query Parameters
+
+| Parameter  | Type   | Description                                                                                                                                             |
+| ---------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| next_token | String | Specify this parameter if you want to retrieve the following elements of a given list query. If this parameter is filled, other parameters are ignored. |
+
+### Response
+
+A JSON object containing the client information with properties like:
+
+| Property  | Type   | Description                                                                                                                        |
+| --------- | ------ | ---------------------------------------------------------------------------------------------------------------------------------- | --------------------------- |
+| error     | String | false if no errors occur else true                                                                                                 |
+| token     | String | A token will be returned if all clients have not been returned. Use it in another call to access the following clients             |
+| size      | Number | The total number of clients available with these filters                                                                           |
+| data_size | Number | Number of clients returned                                                                                                         |
+| page      | Number | The page number                                                                                                                    |
+| clients   | Array  | An array of JSON containing all the returned clients, formatted like a reduced GET `client` response ([GET project](#get-project)) | ([GET client](#get-client)) |
+
 ## GET client
 
 This API endpoint allows you to retrieve information for a specific client record in Ezus. To do so, you need to specify the client's reference in your query parameter.
@@ -628,6 +792,87 @@ axios.post(baseUrl + "/clients-upsert", body, headers);
 A JSON object indicating whether an error occurred during the process, along with the associated message. If successful, it also returns a `reference` for the project, which you should store for future updates or retrievals.
 
 # Suppliers
+
+## GET suppliers
+
+It returns a list of your suppliers. The suppliers are returned sorted by creation date, with the most recent suppliers appearing first. You can specify filters as query parameters to narrow down your search. The list of suppliers returned is paginated (50 per 50): to call the 50 next items in the list, call the route with the `next_token` query parameter.
+
+```shell
+curl --location 'https://api.ezus.app/suppliers' \
+--header 'x-api-key: <YOUR_API_KEY>' \
+--header 'Authorization: Bearer <YOUR_TOKEN>'
+```
+
+```javascript
+const axios = require("axios");
+const baseUrl = "https://api.ezus.app";
+
+const headers = {
+  "x-api-key": "<YOUR_API_KEY>",
+  Authorization: "Bearer <YOUR_TOKEN>",
+};
+
+axios.get(baseUrl + "/suppliers", headers);
+```
+
+> This request returns a structured JSON object:
+
+```json
+{
+  "error": "false",
+  "next_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJtZW51X211bG11bCI6Im9wdDEiLCJudW1iZXIiOiIyMDAwMCIsInBhZ2UiOjEsInBlcnNvX2ludm9pY2UiOiJHRyIsInN0YWdlIjoicGFpZCIsIl9fdGltZSI6MTY5NzQ0NjEzNX0.jEs7aL3UzCNrjzwDtAUbq4Rt4T64nu2LBYC0NnQhHiA",
+  "size": 338,
+  "data_size": 50,
+  "page": 1,
+  "suppliers": [
+    {
+      "reference": "supplier_reference",
+      "company_name": "The best hotel",
+      "website": "www.the_best_hotel.com",
+      "capacity": "200",
+      "type": "accom, activity",
+      "info_notes": "Emily confirmed: this hotel really is the best in town.",
+      "info_number": "202306001-S",
+      "address":  {
+        "label": "58 Rue de Paradis",
+        "zip": "75010",
+        "city": "Paris",
+        "country": "France"
+      }
+    },...
+  ],
+}
+```
+
+### HTTP Endpoint
+
+`GET https://api.ezus.app/suppliers`
+
+### Header Parameters
+
+| Parameter     | Type   | Description                                                 |
+| ------------- | ------ | ----------------------------------------------------------- |
+| x-api-key     | String | <span style="color:red">(Required)</span> Your Ezus API key |
+| Authorization | String | <span style="color:red">(Required)</span> Your Bearer token |
+
+### Query Parameters
+
+| Parameter  | Type   | Description                                                                                                                                             |
+| ---------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| next_token | String | Specify this parameter if you want to retrieve the following elements of a given list query. If this parameter is filled, other parameters are ignored. |
+
+### Response
+
+A JSON object containing the supplier information with properties like:
+
+| Property  | Type   | Description                                                                                                                            |
+| --------- | ------ | -------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------- |
+| error     | String | false if no errors occur else true                                                                                                     |
+| token     | String | A token will be returned if all suppliers have not been returned. Use it in another call to access the following suppliers             |
+| size      | Number | The total number of suppliers available with these filters                                                                             |
+| data_size | Number | Number of suppliers returned                                                                                                           |
+| page      | Number | The page number                                                                                                                        |
+| suppliers | Array  | An array of JSON containing all the returned suppliers, formatted like a reduced GET `supplier` response ([GET project](#get-project)) | ([GET supplier](#get-supplier)) |
 
 ## GET supplier
 
@@ -883,6 +1128,97 @@ axios.post(baseUrl + "/suppliers-upsert", body, headers);
 A JSON object indicating whether an error occurred during the process, along with the associated message. If successful, it also returns a `reference` for the project, which you should store for future updates or retrievals.
 
 # Products
+
+## GET products
+
+It returns a list of your products. The products are returned sorted by creation date, with the most recent products appearing first. You can specify filters as query parameters to narrow down your search. The list of products returned is paginated (50 per 50): to call the 50 next items in the list, call the route with the `next_token` query parameter.
+
+```shell
+curl --location 'https://api.ezus.app/products' \
+--header 'x-api-key: <YOUR_API_KEY>' \
+--header 'Authorization: Bearer <YOUR_TOKEN>'
+```
+
+```javascript
+const axios = require("axios");
+const baseUrl = "https://api.ezus.app";
+
+const headers = {
+  "x-api-key": "<YOUR_API_KEY>",
+  Authorization: "Bearer <YOUR_TOKEN>",
+};
+
+axios.get(baseUrl + "/products", headers);
+```
+
+> This request returns a structured JSON object:
+
+```json
+{
+  "error": "false",
+  "next_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJtZW51X211bG11bCI6Im9wdDEiLCJudW1iZXIiOiIyMDAwMCIsInBhZ2UiOjEsInBlcnNvX2ludm9pY2UiOiJHRyIsInN0YWdlIjoicGFpZCIsIl9fdGltZSI6MTY5NzQ0NjEzNX0.jEs7aL3UzCNrjzwDtAUbq4Rt4T64nu2LBYC0NnQhHiA",
+  "size": 338,
+  "data_size": 50,
+  "page": 1,
+  "products": [
+    {
+    "reference": "product_reference",
+    "title": "2-bed room with breakfast",
+    "capacity": "2",
+    "quantity": "1",
+    "vat_regime": "margin",
+    "vat_rate": 20.0,
+    "tariff": {
+      "purchase_price": "42",
+      "margin_rate": "50",
+      "sales_price": "84"
+    },
+    "currency": "EUR",
+    "budget_text": "Option",
+    "budget_form": "Important",
+    "budget_variable": "Display",
+    "info_number": "202306001-PR",
+    "supplier_reference": "supplier_reference",
+    "package_reference": "package_reference",
+    "commission": {
+      "commission_mode": "purchase",
+      "commission_regime": "percent",
+      "value": "10"
+      },
+    },...
+  ],
+}
+```
+
+### HTTP Endpoint
+
+`GET https://api.ezus.app/products`
+
+### Header Parameters
+
+| Parameter     | Type   | Description                                                 |
+| ------------- | ------ | ----------------------------------------------------------- |
+| x-api-key     | String | <span style="color:red">(Required)</span> Your Ezus API key |
+| Authorization | String | <span style="color:red">(Required)</span> Your Bearer token |
+
+### Query Parameters
+
+| Parameter  | Type   | Description                                                                                                                                             |
+| ---------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| next_token | String | Specify this parameter if you want to retrieve the following elements of a given list query. If this parameter is filled, other parameters are ignored. |
+
+### Response
+
+A JSON object containing the product information with properties like:
+
+| Property  | Type   | Description                                                                                                                          |
+| --------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------- |
+| error     | String | false if no errors occur else true                                                                                                   |
+| token     | String | A token will be returned if all products have not been returned. Use it in another call to access the following products             |
+| size      | Number | The total number of products available with these filters                                                                            |
+| data_size | Number | Number of products returned                                                                                                          |
+| page      | Number | The page number                                                                                                                      |
+| products  | Array  | An array of JSON containing all the returned products, formatted like a reduced GET `product` response ([GET project](#get-project)) | ([GET product](#get-product)) |
 
 ## GET product
 
@@ -1429,7 +1765,7 @@ A JSON object containing the invoice information with properties like:
 
 | Property  | Type   | Description                                                                                                              |
 | --------- | ------ | ------------------------------------------------------------------------------------------------------------------------ |
-| error     | String | false if no errors occurs else true                                                                                      |
+| error     | String | false if no errors occur else true                                                                                       |
 | token     | String | A token will be returned if all invoices have not been returned. Use it in another call to access the following invoices |
 | size      | Number | The total number of invoices available with these filters                                                                |
 | data_size | Number | Number of invoices returned                                                                                              |
