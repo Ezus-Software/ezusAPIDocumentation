@@ -125,7 +125,7 @@ A JSON object indicating whether an error occurred during the process, along wit
 
 ## GET projects
 
-It returns a list of your projects. The projects are returned sorted by creation date, with the most recent projects appearing first. You can specify filters as query parameters to narrow down your search. The list of projects returned is paginated (50 per 50): to call the 50 next items in the list, call the route with the `next_token` query parameter.
+It returns a list of your projects. The projects are returned sorted by creation date, with the most recent projects appearing first. The list of projects returned is paginated (50 per 50): to call the 50 next items in the list, call the route with the `next_token` query parameter.
 
 ```shell
 curl --location 'https://api.ezus.app/projects' \
@@ -200,14 +200,13 @@ axios.get(baseUrl + "/projects", headers);
 
 A JSON object containing the project information with properties like:
 
-| Property  | Type   | Description                                                                                                                          |
-| --------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------ |
-| error     | String | false if no errors occur else true                                                                                                   |
-| token     | String | A token will be returned if all projects have not been returned. Use it in another call to access the following projects             |
-| size      | Number | The total number of projects available with these filters                                                                            |
-| data_size | Number | Number of projects returned                                                                                                          |
-| page      | Number | The page number                                                                                                                      |
-| projects  | Array  | An array of JSON containing all the returned projects, formatted like a reduced GET `project` response ([GET project](#get-project)) |
+| Property   | Type   | Description                                                                                                                                                                                 |
+| ---------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| next_token | String | A token will be returned if all projects have not been returned. Use it in another call to access the following projects                                                                    |
+| size       | Number | The total number of projects available with these filters                                                                                                                                   |
+| data_size  | Number | Number of projects returned on the current page                                                                                                                                             |
+| page       | Number | The page number                                                                                                                                                                             |
+| projects   | Array  | An array of JSON objects, each representing a project. These objects are formatted according to a simplified version of the GET `project` response structure. ([GET project](#get-project)) |
 
 ## GET project
 
@@ -477,7 +476,7 @@ A JSON object indicating whether an error occurred during the process, along wit
 
 ## GET clients
 
-It returns a list of your clients. The clients are returned sorted by creation date, with the most recent clients appearing first. You can specify filters as query parameters to narrow down your search. The list of clients returned is paginated (50 per 50): to call the 50 next items in the list, call the route with the `next_token` query parameter.
+It returns a list of your clients. The clients are returned sorted by creation date, with the most recent clients appearing first. The list of clients returned is paginated (50 per 50): to call the 50 next items in the list, call the route with the `next_token` query parameter.
 
 ```shell
 curl --location 'https://api.ezus.app/clients' \
@@ -554,14 +553,13 @@ axios.get(baseUrl + "/clients", headers);
 
 A JSON object containing the client information with properties like:
 
-| Property  | Type   | Description                                                                                                                        |
-| --------- | ------ | ---------------------------------------------------------------------------------------------------------------------------------- | --------------------------- |
-| error     | String | false if no errors occur else true                                                                                                 |
-| token     | String | A token will be returned if all clients have not been returned. Use it in another call to access the following clients             |
-| size      | Number | The total number of clients available with these filters                                                                           |
-| data_size | Number | Number of clients returned                                                                                                         |
-| page      | Number | The page number                                                                                                                    |
-| clients   | Array  | An array of JSON containing all the returned clients, formatted like a reduced GET `client` response ([GET project](#get-project)) | ([GET client](#get-client)) |
+| Property   | Type   | Description                                                                                                                                                                             |
+| ---------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| next_token | String | A token will be returned if all clients have not been returned. Use it in another call to access the following clients                                                                  |
+| size       | Number | The total number of clients available with these filters                                                                                                                                |
+| data_size  | Number | Number of clients returned on the current page                                                                                                                                          |
+| page       | Number | The page number                                                                                                                                                                         |
+| clients    | Array  | An array of JSON objects, each representing a client. These objects are formatted according to a simplified version of the GET `client` response structure. ([GET client](#get-client)) |
 
 ## GET client
 
@@ -805,7 +803,7 @@ A JSON object indicating whether an error occurred during the process, along wit
 
 ## GET suppliers
 
-It returns a list of your suppliers. The suppliers are returned sorted by creation date, with the most recent suppliers appearing first. You can specify filters as query parameters to narrow down your search. The list of suppliers returned is paginated (50 per 50): to call the 50 next items in the list, call the route with the `next_token` query parameter.
+It returns a list of your suppliers. The suppliers are returned sorted by creation date, with the most recent suppliers appearing first. The list of suppliers returned is paginated (50 per 50): to call the 50 next items in the list, call the route with the `next_token` query parameter.
 
 ```shell
 curl --location 'https://api.ezus.app/suppliers' \
@@ -875,14 +873,13 @@ axios.get(baseUrl + "/suppliers", headers);
 
 A JSON object containing the supplier information with properties like:
 
-| Property  | Type   | Description                                                                                                                            |
-| --------- | ------ | -------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------- |
-| error     | String | false if no errors occur else true                                                                                                     |
-| token     | String | A token will be returned if all suppliers have not been returned. Use it in another call to access the following suppliers             |
-| size      | Number | The total number of suppliers available with these filters                                                                             |
-| data_size | Number | Number of suppliers returned                                                                                                           |
-| page      | Number | The page number                                                                                                                        |
-| suppliers | Array  | An array of JSON containing all the returned suppliers, formatted like a reduced GET `supplier` response ([GET project](#get-project)) | ([GET supplier](#get-supplier)) |
+| Property   | Type   | Description                                                                                                                                                                                     |
+| ---------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| next_token | String | A token will be returned if all suppliers have not been returned. Use it in another call to access the following suppliers                                                                      |
+| size       | Number | The total number of suppliers available with these filters                                                                                                                                      |
+| data_size  | Number | Number of suppliers returned on the current page                                                                                                                                                |
+| page       | Number | The page number                                                                                                                                                                                 |
+| suppliers  | Array  | An array of JSON objects, each representing a supplier. These objects are formatted according to a simplified version of the GET `supplier` response structure. ([GET supplier](#get-supplier)) |
 
 ## GET supplier
 
@@ -1141,7 +1138,7 @@ A JSON object indicating whether an error occurred during the process, along wit
 
 ## GET products
 
-It returns a list of your products. The products are returned sorted by creation date, with the most recent products appearing first. You can specify filters as query parameters to narrow down your search. The list of products returned is paginated (50 per 50): to call the 50 next items in the list, call the route with the `next_token` query parameter.
+It returns a list of your products. The products are returned sorted by creation date, with the most recent products appearing first. The list of products returned is paginated (50 per 50): to call the 50 next items in the list, call the route with the `next_token` query parameter.
 
 ```shell
 curl --location 'https://api.ezus.app/products' \
@@ -1221,14 +1218,13 @@ axios.get(baseUrl + "/products", headers);
 
 A JSON object containing the product information with properties like:
 
-| Property  | Type   | Description                                                                                                                          |
-| --------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------- |
-| error     | String | false if no errors occur else true                                                                                                   |
-| token     | String | A token will be returned if all products have not been returned. Use it in another call to access the following products             |
-| size      | Number | The total number of products available with these filters                                                                            |
-| data_size | Number | Number of products returned                                                                                                          |
-| page      | Number | The page number                                                                                                                      |
-| products  | Array  | An array of JSON containing all the returned products, formatted like a reduced GET `product` response ([GET project](#get-project)) | ([GET product](#get-product)) |
+| Property   | Type   | Description                                                                                                                                                                                 |
+| ---------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| next_token | String | A token will be returned if all products have not been returned. Use it in another call to access the following products                                                                    |
+| size       | Number | The total number of products available with these filters                                                                                                                                   |
+| data_size  | Number | Number of products returned on the current page                                                                                                                                             |
+| page       | Number | The page number                                                                                                                                                                             |
+| products   | Array  | An array of JSON objects, each representing a product. These objects are formatted according to a simplified version of the GET `product` response structure. ([GET product](#get-product)) |
 
 ## GET product
 
@@ -1773,14 +1769,13 @@ axios.get(baseUrl + "/invoices?stage=completed", headers);
 
 A JSON object containing the invoice information with properties like:
 
-| Property  | Type   | Description                                                                                                              |
-| --------- | ------ | ------------------------------------------------------------------------------------------------------------------------ |
-| error     | String | false if no errors occur else true                                                                                       |
-| token     | String | A token will be returned if all invoices have not been returned. Use it in another call to access the following invoices |
-| size      | Number | The total number of invoices available with these filters                                                                |
-| data_size | Number | Number of invoices returned                                                                                              |
-| page      | Number | The page number                                                                                                          |
-| invoices  | Array  | An array of JSON containing all the invoices returned formated like GET `invoice` ([GET invoice](#get-invoice))          |
+| Property   | Type   | Description                                                                                                                                                                                 |
+| ---------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| next_token | String | A token will be returned if all invoices have not been returned. Use it in another call to access the following invoices                                                                    |
+| size       | Number | The total number of invoices available with these filters                                                                                                                                   |
+| data_size  | Number | Number of invoices returned on the current page                                                                                                                                             |
+| page       | Number | The page number                                                                                                                                                                             |
+| invoices   | Array  | An array of JSON objects, each representing a invoice. These objects are formatted according to a simplified version of the GET `invoice` response structure. ([GET invoice](#get-invoice)) |
 
 ## GET invoice
 
