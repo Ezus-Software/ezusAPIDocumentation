@@ -638,7 +638,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <h3 id='response'>Response</h3>
 <p>A JSON object indicating whether an error occurred during the process, along with the associated message. If successful, it also returns a <code>token</code> that you must retain for future API requests.</p>
 <h1 id='projects'>Projects</h1><h2 id='get-projects'>GET projects</h2>
-<p>It returns a list of your projects. The projects are returned sorted by creation date, with the most recent projects appearing first. You can specify filters as query parameters to narrow down your search. The list of projects returned is paginated (50 per 50): to call the 50 next items in the list, call the route with the <code>next_token</code> query parameter.</p>
+<p>It returns a list of your projects. The projects are returned sorted by creation date, with the most recent projects appearing first. The list of projects returned is paginated (50 per 50): to call the 50 next items in the list, call the route with the <code>next_token</code> query parameter.</p>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="s1">'https://api.ezus.app/projects'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'x-api-key: &lt;YOUR_API_KEY&gt;'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Authorization: Bearer &lt;YOUR_TOKEN&gt;'</span>
@@ -730,12 +730,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 </tr>
 </thead><tbody>
 <tr>
-<td>error</td>
-<td>String</td>
-<td>false if no errors occur else true</td>
-</tr>
-<tr>
-<td>token</td>
+<td>next_token</td>
 <td>String</td>
 <td>A token will be returned if all projects have not been returned. Use it in another call to access the following projects</td>
 </tr>
@@ -747,7 +742,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <tr>
 <td>data_size</td>
 <td>Number</td>
-<td>Number of projects returned</td>
+<td>Number of projects returned on the current page</td>
 </tr>
 <tr>
 <td>page</td>
@@ -757,7 +752,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <tr>
 <td>projects</td>
 <td>Array</td>
-<td>An array of JSON containing all the returned projects, formatted like a reduced GET <code>project</code> response (<a href="#get-project">GET project</a>)</td>
+<td>An array of JSON objects, each representing a project. These objects are formatted according to a simplified version of the GET <code>project</code> response structure. (<a href="#get-project">GET project</a>)</td>
 </tr>
 </tbody></table>
 <h2 id='get-project'>GET project</h2>
@@ -1136,7 +1131,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <h3 id='response-5'>Response</h3>
 <p>A JSON object indicating whether an error occurred during the process, along with the associated message.</p>
 <h1 id='clients'>Clients</h1><h2 id='get-clients'>GET clients</h2>
-<p>It returns a list of your clients. The clients are returned sorted by creation date, with the most recent clients appearing first. You can specify filters as query parameters to narrow down your search. The list of clients returned is paginated (50 per 50): to call the 50 next items in the list, call the route with the <code>next_token</code> query parameter.</p>
+<p>It returns a list of your clients. The clients are returned sorted by creation date, with the most recent clients appearing first. The list of clients returned is paginated (50 per 50): to call the 50 next items in the list, call the route with the <code>next_token</code> query parameter.</p>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="s1">'https://api.ezus.app/clients'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'x-api-key: &lt;YOUR_API_KEY&gt;'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Authorization: Bearer &lt;YOUR_TOKEN&gt;'</span>
@@ -1230,12 +1225,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 </tr>
 </thead><tbody>
 <tr>
-<td>error</td>
-<td>String</td>
-<td>false if no errors occur else true</td>
-</tr>
-<tr>
-<td>token</td>
+<td>next_token</td>
 <td>String</td>
 <td>A token will be returned if all clients have not been returned. Use it in another call to access the following clients</td>
 </tr>
@@ -1247,7 +1237,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <tr>
 <td>data_size</td>
 <td>Number</td>
-<td>Number of clients returned</td>
+<td>Number of clients returned on the current page</td>
 </tr>
 <tr>
 <td>page</td>
@@ -1257,7 +1247,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <tr>
 <td>clients</td>
 <td>Array</td>
-<td>An array of JSON containing all the returned clients, formatted like a reduced GET <code>client</code> response (<a href="#get-project">GET project</a>)</td>
+<td>An array of JSON objects, each representing a client. These objects are formatted according to a simplified version of the GET <code>client</code> response structure. (<a href="#get-client">GET client</a>)</td>
 </tr>
 </tbody></table>
 <h2 id='get-client'>GET client</h2>
@@ -1619,7 +1609,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <h3 id='response-8'>Response</h3>
 <p>A JSON object indicating whether an error occurred during the process, along with the associated message. If successful, it also returns a <code>reference</code> for the project, which you should store for future updates or retrievals.</p>
 <h1 id='suppliers'>Suppliers</h1><h2 id='get-suppliers'>GET suppliers</h2>
-<p>It returns a list of your suppliers. The suppliers are returned sorted by creation date, with the most recent suppliers appearing first. You can specify filters as query parameters to narrow down your search. The list of suppliers returned is paginated (50 per 50): to call the 50 next items in the list, call the route with the <code>next_token</code> query parameter.</p>
+<p>It returns a list of your suppliers. The suppliers are returned sorted by creation date, with the most recent suppliers appearing first. The list of suppliers returned is paginated (50 per 50): to call the 50 next items in the list, call the route with the <code>next_token</code> query parameter.</p>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="s1">'https://api.ezus.app/suppliers'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'x-api-key: &lt;YOUR_API_KEY&gt;'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Authorization: Bearer &lt;YOUR_TOKEN&gt;'</span>
@@ -1706,12 +1696,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 </tr>
 </thead><tbody>
 <tr>
-<td>error</td>
-<td>String</td>
-<td>false if no errors occur else true</td>
-</tr>
-<tr>
-<td>token</td>
+<td>next_token</td>
 <td>String</td>
 <td>A token will be returned if all suppliers have not been returned. Use it in another call to access the following suppliers</td>
 </tr>
@@ -1723,7 +1708,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <tr>
 <td>data_size</td>
 <td>Number</td>
-<td>Number of suppliers returned</td>
+<td>Number of suppliers returned on the current page</td>
 </tr>
 <tr>
 <td>page</td>
@@ -1733,7 +1718,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <tr>
 <td>suppliers</td>
 <td>Array</td>
-<td>An array of JSON containing all the returned suppliers, formatted like a reduced GET <code>supplier</code> response (<a href="#get-project">GET project</a>)</td>
+<td>An array of JSON objects, each representing a supplier. These objects are formatted according to a simplified version of the GET <code>supplier</code> response structure. (<a href="#get-supplier">GET supplier</a>)</td>
 </tr>
 </tbody></table>
 <h2 id='get-supplier'>GET supplier</h2>
@@ -2102,7 +2087,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <h3 id='response-11'>Response</h3>
 <p>A JSON object indicating whether an error occurred during the process, along with the associated message. If successful, it also returns a <code>reference</code> for the project, which you should store for future updates or retrievals.</p>
 <h1 id='products'>Products</h1><h2 id='get-products'>GET products</h2>
-<p>It returns a list of your products. The products are returned sorted by creation date, with the most recent products appearing first. You can specify filters as query parameters to narrow down your search. The list of products returned is paginated (50 per 50): to call the 50 next items in the list, call the route with the <code>next_token</code> query parameter.</p>
+<p>It returns a list of your products. The products are returned sorted by creation date, with the most recent products appearing first. The list of products returned is paginated (50 per 50): to call the 50 next items in the list, call the route with the <code>next_token</code> query parameter.</p>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="s1">'https://api.ezus.app/products'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'x-api-key: &lt;YOUR_API_KEY&gt;'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Authorization: Bearer &lt;YOUR_TOKEN&gt;'</span>
@@ -2199,12 +2184,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 </tr>
 </thead><tbody>
 <tr>
-<td>error</td>
-<td>String</td>
-<td>false if no errors occur else true</td>
-</tr>
-<tr>
-<td>token</td>
+<td>next_token</td>
 <td>String</td>
 <td>A token will be returned if all products have not been returned. Use it in another call to access the following products</td>
 </tr>
@@ -2216,7 +2196,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <tr>
 <td>data_size</td>
 <td>Number</td>
-<td>Number of products returned</td>
+<td>Number of products returned on the current page</td>
 </tr>
 <tr>
 <td>page</td>
@@ -2226,7 +2206,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <tr>
 <td>products</td>
 <td>Array</td>
-<td>An array of JSON containing all the returned products, formatted like a reduced GET <code>product</code> response (<a href="#get-project">GET project</a>)</td>
+<td>An array of JSON objects, each representing a product. These objects are formatted according to a simplified version of the GET <code>product</code> response structure. (<a href="#get-product">GET product</a>)</td>
 </tr>
 </tbody></table>
 <h2 id='get-product'>GET product</h2>
@@ -3012,12 +2992,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 </tr>
 </thead><tbody>
 <tr>
-<td>error</td>
-<td>String</td>
-<td>false if no errors occur else true</td>
-</tr>
-<tr>
-<td>token</td>
+<td>next_token</td>
 <td>String</td>
 <td>A token will be returned if all invoices have not been returned. Use it in another call to access the following invoices</td>
 </tr>
@@ -3029,7 +3004,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <tr>
 <td>data_size</td>
 <td>Number</td>
-<td>Number of invoices returned</td>
+<td>Number of invoices returned on the current page</td>
 </tr>
 <tr>
 <td>page</td>
@@ -3039,7 +3014,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <tr>
 <td>invoices</td>
 <td>Array</td>
-<td>An array of JSON containing all the invoices returned formated like GET <code>invoice</code> (<a href="#get-invoice">GET invoice</a>)</td>
+<td>An array of JSON objects, each representing a invoice. These objects are formatted according to a simplified version of the GET <code>invoice</code> response structure. (<a href="#get-invoice">GET invoice</a>)</td>
 </tr>
 </tbody></table>
 <h2 id='get-invoice'>GET invoice</h2>
