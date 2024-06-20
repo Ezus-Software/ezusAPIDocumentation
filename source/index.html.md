@@ -521,6 +521,12 @@ axios.get(baseUrl + "/clients", headers);
       "info_origin": "Adwords",
       "info_notes": "This prospect looks interesting to follow",
       "info_number": "202306001-C",
+      "user": {
+        "email": "tommy@e-corp.com",
+        "first_name": "Tommy",
+        "last_name": "Atkins",
+        "agency": "Paris Agency"
+      },
       "address": {
         "label": "58 Rue de Paradis",
         "zip": "75010",
@@ -841,6 +847,12 @@ axios.get(baseUrl + "/suppliers", headers);
       "type": "accom, activity",
       "info_notes": "Emily confirmed: this hotel really is the best in town.",
       "info_number": "202306001-S",
+      "user": {
+        "email": "travel-design@e-corp.com",
+        "first_name": "Alice",
+        "last_name": "Tate",
+        "agency": "Paris Agency"
+      },
       "address":  {
         "label": "58 Rue de Paradis",
         "zip": "75010",
@@ -1175,11 +1187,6 @@ axios.get(baseUrl + "/products", headers);
     "quantity": "1",
     "vat_regime": "margin",
     "vat_rate": 20.0,
-    "tariff": {
-      "purchase_price": "42",
-      "margin_rate": "50",
-      "sales_price": "84"
-    },
     "currency": "EUR",
     "budget_text": "Option",
     "budget_form": "Important",
