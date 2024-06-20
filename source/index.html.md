@@ -162,8 +162,18 @@ axios.get(baseUrl + "/projects", headers);
       "info_notes": "Jane has verbally confirmed our quotation",
       "info_number": "202306001-P",
       "currency": "€",
-      "sales_manager_name": "Alice Tate",
-      "project_manager_name": "Joe Shmoe",
+      "sales_manager": {
+        "email": "travel-design@e-corp.com",
+        "first_name": "Alice",
+        "last_name": "Tate",
+        "agency": "Paris Agency"
+      },
+      "project_manager": {
+        "email": "no-reply@e-corp.com",
+        "first_name": "Joe",
+        "last_name": "Shmoe",
+        "agency": "Paris Agency"
+      }
     },...
   ]
 }
@@ -497,28 +507,28 @@ axios.get(baseUrl + "/clients", headers);
   "data_size": 50,
   "page": 1,
   "clients": [
-  {
-    "reference": "client_reference",
-    "type": "enterprise",
-    "company_name": "MOKE INTERNATIONAL LIMITED",
-    "website": "www.moke_ltd.com",
-    "first_name": "Jane",
-    "last_name": "Doe",
-    "email": "contact@moke-international.com",
-    "activity": "Software",
-    "vat_number": "GB 240-635-038",
-    "siret": "09728676",
-    "info_profile": "Prospect",
-    "info_origin": "Adwords",
-    "info_notes": "This prospect looks interesting to follow",
-    "info_number": "202306001-C",
-    "address": {
-      "label": "58 Rue de Paradis",
-      "zip": "75010",
-      "city": "Paris",
-      "country": "France"
-    },
-    ],...
+    {
+      "reference": "client_reference",
+      "type": "enterprise",
+      "company_name": "MOKE INTERNATIONAL LIMITED",
+      "website": "www.moke_ltd.com",
+      "first_name": "Jane",
+      "last_name": "Doe",
+      "email": "contact@moke-international.com",
+      "activity": "Software",
+      "vat_number": "GB 240-635-038",
+      "siret": "09728676",
+      "info_profile": "Prospect",
+      "info_origin": "Adwords",
+      "info_notes": "This prospect looks interesting to follow",
+      "info_number": "202306001-C",
+      "address": {
+        "label": "58 Rue de Paradis",
+        "zip": "75010",
+        "city": "Paris",
+        "country": "France"
+      }
+    },...
   ]
 }
 ```
@@ -840,7 +850,7 @@ axios.get(baseUrl + "/suppliers", headers);
         "country": "France"
       }
     },...
-  ],
+  ]
 }
 ```
 
@@ -1184,9 +1194,9 @@ axios.get(baseUrl + "/products", headers);
       "commission_mode": "purchase",
       "commission_regime": "percent",
       "value": "10"
-      },
+      }
     },...
-  ],
+  ]
 }
 ```
 
