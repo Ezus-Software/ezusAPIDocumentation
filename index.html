@@ -669,8 +669,18 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
       </span><span class="nl">"info_notes"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Jane has verbally confirmed our quotation"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"info_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"202306001-P"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"€"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"sales_manager_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Alice Tate"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"project_manager_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Joe Shmoe"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"sales_manager"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"travel-design@e-corp.com"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Alice"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Tate"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"agency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Paris Agency"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nl">"project_manager"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"no-reply@e-corp.com"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Joe"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Shmoe"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"agency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Paris Agency"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
     </span><span class="p">},</span><span class="err">...</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -1150,29 +1160,29 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
   </span><span class="nl">"data_size"</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="p">,</span><span class="w">
   </span><span class="nl">"page"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
   </span><span class="nl">"clients"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"client_reference"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"enterprise"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"company_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MOKE INTERNATIONAL LIMITED"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"website"</span><span class="p">:</span><span class="w"> </span><span class="s2">"www.moke_ltd.com"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Jane"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Doe"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"contact@moke-international.com"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"activity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Software"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"vat_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GB 240-635-038"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"siret"</span><span class="p">:</span><span class="w"> </span><span class="s2">"09728676"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"info_profile"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Prospect"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"info_origin"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Adwords"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"info_notes"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This prospect looks interesting to follow"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"info_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"202306001-C"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"58 Rue de Paradis"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"zip"</span><span class="p">:</span><span class="w"> </span><span class="s2">"75010"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Paris"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"France"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="err">]</span><span class="p">,</span><span class="err">...</span><span class="w">
-  </span><span class="err">]</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"client_reference"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"enterprise"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"company_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MOKE INTERNATIONAL LIMITED"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"website"</span><span class="p">:</span><span class="w"> </span><span class="s2">"www.moke_ltd.com"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Jane"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Doe"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"contact@moke-international.com"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"activity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Software"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"vat_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GB 240-635-038"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"siret"</span><span class="p">:</span><span class="w"> </span><span class="s2">"09728676"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"info_profile"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Prospect"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"info_origin"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Adwords"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"info_notes"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This prospect looks interesting to follow"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"info_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"202306001-C"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"58 Rue de Paradis"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"zip"</span><span class="p">:</span><span class="w"> </span><span class="s2">"75010"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Paris"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"France"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="err">...</span><span class="w">
+  </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h3 id='http-endpoint-6'>HTTP Endpoint</h3>
 <p><code>GET https://api.ezus.app/clients</code></p>
@@ -1648,7 +1658,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
         </span><span class="nl">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"France"</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">},</span><span class="err">...</span><span class="w">
-  </span><span class="p">],</span><span class="w">
+  </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h3 id='http-endpoint-9'>HTTP Endpoint</h3>
 <p><code>GET https://api.ezus.app/suppliers</code></p>
@@ -2139,9 +2149,9 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
       </span><span class="nl">"commission_mode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"purchase"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"commission_regime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"percent"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10"</span><span class="w">
-      </span><span class="p">},</span><span class="w">
+      </span><span class="p">}</span><span class="w">
     </span><span class="p">},</span><span class="err">...</span><span class="w">
-  </span><span class="p">],</span><span class="w">
+  </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h3 id='http-endpoint-12'>HTTP Endpoint</h3>
 <p><code>GET https://api.ezus.app/products</code></p>
