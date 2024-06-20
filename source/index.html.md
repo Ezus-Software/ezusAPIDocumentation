@@ -192,9 +192,9 @@ axios.get(baseUrl + "/projects", headers);
 
 ### Query Parameters
 
-| Parameter  | Type   | Description                                                                                                                                             |
-| ---------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| next_token | String | Specify this parameter if you want to retrieve the following elements of a given list query. If this parameter is filled, other parameters are ignored. |
+| Parameter  | Type   | Description                                                                                  |
+| ---------- | ------ | -------------------------------------------------------------------------------------------- |
+| next_token | String | Specify this parameter if you want to retrieve the following elements of a given list query. |
 
 ### Response
 
@@ -551,9 +551,9 @@ axios.get(baseUrl + "/clients", headers);
 
 ### Query Parameters
 
-| Parameter  | Type   | Description                                                                                                                                             |
-| ---------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| next_token | String | Specify this parameter if you want to retrieve the following elements of a given list query. If this parameter is filled, other parameters are ignored. |
+| Parameter  | Type   | Description                                                                                  |
+| ---------- | ------ | -------------------------------------------------------------------------------------------- |
+| next_token | String | Specify this parameter if you want to retrieve the following elements of a given list query. |
 
 ### Response
 
@@ -877,9 +877,9 @@ axios.get(baseUrl + "/suppliers", headers);
 
 ### Query Parameters
 
-| Parameter  | Type   | Description                                                                                                                                             |
-| ---------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| next_token | String | Specify this parameter if you want to retrieve the following elements of a given list query. If this parameter is filled, other parameters are ignored. |
+| Parameter  | Type   | Description                                                                                  |
+| ---------- | ------ | -------------------------------------------------------------------------------------------- |
+| next_token | String | Specify this parameter if you want to retrieve the following elements of a given list query. |
 
 ### Response
 
@@ -1217,9 +1217,9 @@ axios.get(baseUrl + "/products", headers);
 
 ### Query Parameters
 
-| Parameter  | Type   | Description                                                                                                                                             |
-| ---------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| next_token | String | Specify this parameter if you want to retrieve the following elements of a given list query. If this parameter is filled, other parameters are ignored. |
+| Parameter  | Type   | Description                                                                                  |
+| ---------- | ------ | -------------------------------------------------------------------------------------------- |
+| next_token | String | Specify this parameter if you want to retrieve the following elements of a given list query. |
 
 ### Response
 
