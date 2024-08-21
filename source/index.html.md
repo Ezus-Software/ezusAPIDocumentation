@@ -2476,18 +2476,18 @@ A JSON object indicating whether an error occurred during the process, along wit
   ]
 ```
 
-| Property            | Type   | Description                                                                                                           |
-| ------------------- | ------ | --------------------------------------------------------------------------------------------------------------------- |
-| alternative_title   | String | Title of the alternative                                                                                              |
-| budget_actual       | String | Actual budget for the alternative (corresponding to its associated Ezus program)                                      |
-| trip_budget         | Number | Forecasted budget for the alternative (the one that is entered manually not the actual one)                           |
-| trip_people         | String | Number of people                                                                                                      |
-| trip_date_in        | String | Date of the beginning of this alternative, in a "YYYY-MM-DD" format string. If it's empty, the project has no dates   |
-| trip_date_out       | String | Date of the end of this alternative, in a "YYYY-MM-DD" format string. If it's empty, the project has no dates         |
-| trip_duration       | String | Number of days this alternative lasts                                                                                 |
-| trip_destination    | String | Destination of the alternative                                                                                        |
-| trip_subdestination | String | Subdestination of the alternative                                                                                     |
-| client              | JSON   | JSON including: `reference`, `type` (enterprise or individual), `company_name`, `first_name`, `last_name` and `email` |
+| Property            | Type   | Description                                                                                                               |
+| ------------------- | ------ | ------------------------------------------------------------------------------------------------------------------------- |
+| alternative_title   | String | Title of the alternative                                                                                                  |
+| budget_actual       | String | Actual budget for the alternative (corresponding to its associated Ezus program)                                          |
+| trip_budget         | Number | Forecasted budget for the alternative (the one that is entered manually not the actual one)                               |
+| trip_people         | String | Number of people                                                                                                          |
+| trip_date_in        | String | Date of the beginning of this alternative, in a "YYYY-MM-DD" format string. If it's empty, the project has no dates       |
+| trip_date_out       | String | Date of the end of this alternative, in a "YYYY-MM-DD" format string. If it's empty, the project has no dates             |
+| trip_duration       | String | Number of days this alternative lasts                                                                                     |
+| trip_destination    | String | Destination of the alternative. Note: For multi-destination alternatives, only the primary destination is returned.       |
+| trip_subdestination | String | Subdestination of the alternative. Note: For multi-destination alternatives, only the primary subdestination is returned. |
+| client              | JSON   | JSON including: `reference`, `type` (enterprise or individual), `company_name`, `first_name`, `last_name` and `email`     |
 
 ### Contacts
 
