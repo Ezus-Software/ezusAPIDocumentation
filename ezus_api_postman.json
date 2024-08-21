@@ -583,13 +583,13 @@
           }
         ],
         "url": {
-          "raw": "{{baseUrl}}/webhooks-last?event_type=event_type",
+          "raw": "{{baseUrl}}/webhooks-last?event_type=projects.created",
           "host": ["{{baseUrl}}"],
           "path": ["webhooks-last"],
           "query": [
             {
               "key": "event_type",
-              "value": "event_type"
+              "value": "projects.created"
             }
           ]
         }
