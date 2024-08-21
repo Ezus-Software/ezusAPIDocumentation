@@ -2241,7 +2241,7 @@ An array of JSON that contains your webhooks information.
 Returns the latest event occurrence of a specified event type.
 
 ```shell
-curl --location 'https://api.ezus.app/webhooks-last?event_type=event_type' \
+curl --location 'https://api.ezus.app/webhooks-last?event_type=projects.created' \
 --header 'X-API-KEY: <YOUR_API_KEY>' \
 --header 'Authorization: Bearer <YOUR_TOKEN>'
 ```
@@ -2255,7 +2255,7 @@ const headers = {
   Authorization: "Bearer <YOUR_TOKEN>",
 };
 
-axios.get(baseUrl + "/webhooks-last?event_type=event_type", headers);
+axios.get(baseUrl + "/webhooks-last?event_type=projects.created", headers);
 ```
 
 > This request returns a structured JSON object:
