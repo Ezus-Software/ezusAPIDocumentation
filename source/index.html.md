@@ -335,7 +335,7 @@ curl --location 'https://api.ezus.app/projects-upsert' \
 --data-raw '{
     "reference": "project_reference",
     "info_title": "Paris fashion week 2024",
-    "info_stage_reference": "Received",
+    "info_stage_reference": "received",
     "trip_budget": "90000",
     "trip_people": "15",
     "trip_date_in": "2023-03-01",
@@ -1738,6 +1738,7 @@ axios.get(baseUrl + "/invoices?stage=completed", headers);
         "reference": "project_reference",
         "info_title": "Paris fashion week 2024",
         "info_stage": "Confirmed",
+        "info_stage_reference": "confirmed",
         "info_number": "202306001-P",
         "currency": "EUR",
         "is_closed": false
@@ -1849,6 +1850,7 @@ axios.get(baseUrl + "/invoice?reference=invoice_reference", headers);
     "reference": "project_reference",
     "info_title": "Paris fashion week 2024",
     "info_stage": "Confirmed",
+    "info_stage_reference": "confirmed",
     "info_number": "202306001-P",
     "currency": "EUR",
     "is_closed": false
@@ -1907,7 +1909,7 @@ A JSON object containing the invoice information with properties like:
 | currency           | String | The ISO 4217 currency code representing the currency you utilize (<a href="https://docs.google.com/spreadsheets/d/1b7BNOwKyN1hMOouve6xhFZ2R2zrH4Sj1L-646j755fU/edit?usp=sharing" target="_blank">Link to doc</a>) |
 | forecast           | JSON   | JSON object forecast ([Invoices Amounts](#invoices-amounts))                                                                                                                                                      |
 | actual             | JSON   | JSON object actual ([Invoices Amounts](#invoices-amounts))                                                                                                                                                        |
-| project            | JSON   | JSON including: `reference`, `info_title`, `info_stage`, `info_number`, `currency` and `is_closed`                                                                                                                |
+| project            | JSON   | JSON including: `reference`, `info_title`, `info_stage`, `info_stage_reference`, `info_number`, `currency` and `is_closed`                                                                                        |
 | alternative        | JSON   | JSON including: `sort_order` and `title`                                                                                                                                                                          |
 | client             | JSON   | JSON including: `reference`, `type` (enterprise or individual), `company_name`, `first_name`, `last_name` and `email`                                                                                             |
 
@@ -2046,6 +2048,7 @@ axios.get(
     "reference": "project_reference",
     "info_title": "Paris fashion week 2024",
     "info_stage": "Confirmed",
+    "info_stage_reference": "confirmed",
     "info_number": "202306001-P",
     "currency": "EUR",
     "is_closed": false
@@ -2099,7 +2102,7 @@ A JSON object containing the supplier invoice information with properties like:
 | currency     | String | The ISO 4217 currency code representing the currency you utilize (<a href="https://docs.google.com/spreadsheets/d/1b7BNOwKyN1hMOouve6xhFZ2R2zrH4Sj1L-646j755fU/edit?usp=sharing" target="_blank">Link to doc</a>) |
 | payments     | Array  | Array of JSON including: `date`, `amount` and `payment_method`                                                                                                                                                    |
 | supplier     | JSON   | JSON including: `reference`, `company_name` and `website`                                                                                                                                                         |
-| project      | JSON   | JSON including: `reference`, `info_title`, `info_stage`, `info_number`, `currency` and `is_closed`                                                                                                                |
+| project      | JSON   | JSON including: `reference`, `info_title`, `info_stage`, `info_stage_reference`, `info_number`, `currency` and `is_closed`                                                                                        |
 | alternative  | JSON   | JSON including: `sort_order` and `title`                                                                                                                                                                          |
 | client       | JSON   | JSON including: `reference`, `type` (enterprise or individual), `company_name`, `first_name`, `last_name` and `email`                                                                                             |
 
