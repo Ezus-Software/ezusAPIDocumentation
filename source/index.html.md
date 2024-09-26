@@ -159,6 +159,7 @@ axios.get(baseUrl + "/projects", headers);
       "reference": "project_reference",
       "info_title": "Paris fashion week 2024",
       "info_stage": "Confirmed",
+      "info_stage_reference": "confirmed",
       "info_notes": "Jane has verbally confirmed our quotation",
       "info_number": "202306001-P",
       "currency": "€",
@@ -241,6 +242,7 @@ axios.get(baseUrl + "/project?reference=project_reference", headers);
   "reference": "project_reference",
   "info_title": "Paris fashion week 2024",
   "info_stage": "Confirmed",
+  "info_stage_reference": "confirmed",
   "info_notes": "Jane has verbally confirmed our quotation",
   "info_number": "202306001-P",
   "currency": "€",
@@ -307,18 +309,19 @@ axios.get(baseUrl + "/project?reference=project_reference", headers);
 
 A JSON object containing the project information with properties like:
 
-| Property        | Type   | Description                                                                                      |
-| --------------- | ------ | ------------------------------------------------------------------------------------------------ |
-| reference       | String | The reference of the project                                                                     |
-| info_title      | String | The title of the project                                                                         |
-| info_stage      | String | The stage of the project (Confirmed, Received, Paid...)                                          |
-| info_notes      | String | Notes on the project                                                                             |
-| info_number     | String | File number that appears at the bottom of the project record. Not to be confused with reference! |
-| currency        | String | Default currency of the project                                                                  |
-| sales_manager   | JSON   | JSON object representing the sales manager ([User](#user))                                       |
-| project_manager | JSON   | JSON object representing the project manager ([User](#user))                                     |
-| alternatives    | Array  | Array of JSON alternatives ([Alternatives](#alternatives))                                       |
-| custom_fields   | Array  | Array of JSON custom fields ([Custom fields](#custom-fields))                                    |
+| Property             | Type   | Description                                                                                      |
+| -------------------- | ------ | ------------------------------------------------------------------------------------------------ |
+| reference            | String | The reference of the project                                                                     |
+| info_title           | String | The title of the project                                                                         |
+| info_stage           | String | The stage of the project (Confirmed, Received, Paid...)                                          |
+| info_stage_reference | String | Technical name of the stage of the project (confirmed, received, paid...)                        |
+| info_notes           | String | Notes on the project                                                                             |
+| info_number          | String | File number that appears at the bottom of the project record. Not to be confused with reference! |
+| currency             | String | Default currency of the project                                                                  |
+| sales_manager        | JSON   | JSON object representing the sales manager ([User](#user))                                       |
+| project_manager      | JSON   | JSON object representing the project manager ([User](#user))                                     |
+| alternatives         | Array  | Array of JSON alternatives ([Alternatives](#alternatives))                                       |
+| custom_fields        | Array  | Array of JSON custom fields ([Custom fields](#custom-fields))                                    |
 
 ## POST projects-upsert
 
@@ -332,7 +335,7 @@ curl --location 'https://api.ezus.app/projects-upsert' \
 --data-raw '{
     "reference": "project_reference",
     "info_title": "Paris fashion week 2024",
-    "info_stage": "Received",
+    "info_stage_reference": "Received",
     "trip_budget": "90000",
     "trip_people": "15",
     "trip_date_in": "2023-03-01",
@@ -352,7 +355,7 @@ const baseUrl = "https://api.ezus.app";
 const body = {
   reference: "project_reference",
   info_title: "Paris fashion week 2024",
-  info_stage: "Received",
+  info_stage_reference: "received",
   trip_budget: "90000",
   trip_people: "15",
   trip_date_in: "2023-03-01",
@@ -393,18 +396,18 @@ axios.post(baseUrl + "/projects-upsert", body, headers);
 
 ### Body Parameters (application/json)
 
-| Parameter           | Type   | Description                                                                                                                                                                                                                                                         |
-| ------------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| reference           | String | If provided, the unique reference associated with the project you want to update or create (or a random one will be generated).                                                                                                                                     |
-| info_title          | String | Title of the project. This parameter is required if you create a new project                                                                                                                                                                                        |
-| info_stage          | String | Stage of the project: Please use the technical name of the stage you intend to apply. If no specific stage is found, a default stage will be automatically assigned upon adding the project.                                                                        |
-| trip_budget         | Number | Forecasted budget for the project                                                                                                                                                                                                                                   |
-| trip_people         | Number | Number of people in the project (only settable when creating a new project)                                                                                                                                                                                         |
-| trip_date_in        | Date   | Date of the project's start in "YYYY-MM-DD" format (only settable when creating a new project). If not provided or if not formatted correctly, or if duration > 40 days or if trip_date_in > trip_date_out, project will be set as 1 day and trip_date_in as today. |
-| trip_date_out       | Date   | Date of the project's end in "YYYY-MM-DD" format (only settable when creating a new project). If not provided or if not formatted correctly, or if duration > 40 days or if trip_date_in > trip_date_out, project will be set as 1 day and trip_date_out as today.  |
-| sales_manager_email | Email  | Email of the Ezus user to be set as the sales manager of the project                                                                                                                                                                                                |
-| client_reference    | String | Reference or email of an existing client in your Ezus account to link to the project (only settable when creating a new project)                                                                                                                                    |
-| custom_fields       | JSON   | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                                                                                                                       |
+| Parameter            | Type   | Description                                                                                                                                                                                                                                                         |
+| -------------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| reference            | String | If provided, the unique reference associated with the project you want to update or create (or a random one will be generated).                                                                                                                                     |
+| info_title           | String | Title of the project. This parameter is required if you create a new project                                                                                                                                                                                        |
+| info_stage_reference | String | Stage of the project: Please use the technical name of the stage you intend to apply. If no specific stage is found, a default stage will be automatically assigned upon adding the project.                                                                        |
+| trip_budget          | Number | Forecasted budget for the project                                                                                                                                                                                                                                   |
+| trip_people          | Number | Number of people in the project (only settable when creating a new project)                                                                                                                                                                                         |
+| trip_date_in         | Date   | Date of the project's start in "YYYY-MM-DD" format (only settable when creating a new project). If not provided or if not formatted correctly, or if duration > 40 days or if trip_date_in > trip_date_out, project will be set as 1 day and trip_date_in as today. |
+| trip_date_out        | Date   | Date of the project's end in "YYYY-MM-DD" format (only settable when creating a new project). If not provided or if not formatted correctly, or if duration > 40 days or if trip_date_in > trip_date_out, project will be set as 1 day and trip_date_out as today.  |
+| sales_manager_email  | Email  | Email of the Ezus user to be set as the sales manager of the project                                                                                                                                                                                                |
+| client_reference     | String | Reference or email of an existing client in your Ezus account to link to the project (only settable when creating a new project)                                                                                                                                    |
+| custom_fields        | JSON   | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                                                                                                                       |
 
 ### Response
 
