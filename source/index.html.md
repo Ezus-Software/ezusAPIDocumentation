@@ -192,12 +192,12 @@ axios.get(baseUrl + "/projects", headers);
 
 ### Query Parameters
 
-| Parameter          | Type   | Description                                                                                                                                 |
-| ------------------ | ------ | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| next_token         | String | Specify this parameter if you want to retrieve the following elements of a given list query.                                                |
-| sales_manager      | String | Filter to retrieve projects associated with a sales manager. Expected format: first_name%20last_name (e.g., Melchior%20Bengtsson) OR email. |
-| project_manager_id | String | Filter to retrieve projects associated with a project manager. Expected format: first_name%20last_name (e.g., Alexandre%20Lin) OR email.    |
-| info_stage         | String | Filter to retrieve projects based on their status. The status should be provided via its technical_name.                                    |
+| Parameter       | Type   | Description                                                                                                                                 |
+| --------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| next_token      | String | Specify this parameter if you want to retrieve the following elements of a given list query.                                                |
+| sales_manager   | String | Filter to retrieve projects associated with a sales manager. Expected format: first_name%20last_name (e.g., Melchior%20Bengtsson) OR email. |
+| project_manager | String | Filter to retrieve projects associated with a project manager. Expected format: first_name%20last_name (e.g., Alexandre%20Lin) OR email.    |
+| info_stage      | String | Filter to retrieve projects based on their status. The status should be provided via its technical_name.                                    |
 
 ### Response
 
