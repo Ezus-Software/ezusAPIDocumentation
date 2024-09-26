@@ -666,6 +666,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
       </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"project_reference"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"info_title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Paris fashion week 2024"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"info_stage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Confirmed"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"info_stage_reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"confirmed"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"info_notes"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Jane has verbally confirmed our quotation"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"info_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"202306001-P"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"€"</span><span class="p">,</span><span class="w">
@@ -717,6 +718,21 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <td>next_token</td>
 <td>String</td>
 <td>Specify this parameter if you want to retrieve the following elements of a given list query.</td>
+</tr>
+<tr>
+<td>sales_manager</td>
+<td>String</td>
+<td>Filter to retrieve projects associated with a sales manager. Expected format: first_name%20last_name (e.g., Melchior%20Bengtsson) OR email.</td>
+</tr>
+<tr>
+<td>project_manager</td>
+<td>String</td>
+<td>Filter to retrieve projects associated with a project manager. Expected format: first_name%20last_name (e.g., Alexandre%20Lin) OR email.</td>
+</tr>
+<tr>
+<td>info_stage_reference</td>
+<td>String</td>
+<td>Filter to retrieve projects based on their status. The status should be provided via its technical_name.</td>
 </tr>
 </tbody></table>
 <h3 id='response-2'>Response</h3>
@@ -778,6 +794,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
   </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"project_reference"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"info_title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Paris fashion week 2024"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"info_stage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Confirmed"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"info_stage_reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"confirmed"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"info_notes"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Jane has verbally confirmed our quotation"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"info_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"202306001-P"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"€"</span><span class="p">,</span><span class="w">
@@ -882,6 +899,11 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <td>The stage of the project (Confirmed, Received, Paid...)</td>
 </tr>
 <tr>
+<td>info_stage_reference</td>
+<td>String</td>
+<td>Technical name of the stage of the project (confirmed, received, paid...)</td>
+</tr>
+<tr>
 <td>info_notes</td>
 <td>String</td>
 <td>Notes on the project</td>
@@ -926,7 +948,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <span class="nt">--data-raw</span> <span class="s1">'{
     "reference": "project_reference",
     "info_title": "Paris fashion week 2024",
-    "info_stage": "Received",
+    "info_stage_reference": "Received",
     "trip_budget": "90000",
     "trip_people": "15",
     "trip_date_in": "2023-03-01",
@@ -943,7 +965,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <span class="kd">const</span> <span class="nx">body</span> <span class="o">=</span> <span class="p">{</span>
   <span class="na">reference</span><span class="p">:</span> <span class="dl">"</span><span class="s2">project_reference</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">info_title</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Paris fashion week 2024</span><span class="dl">"</span><span class="p">,</span>
-  <span class="na">info_stage</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Received</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">info_stage_reference</span><span class="p">:</span> <span class="dl">"</span><span class="s2">received</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">trip_budget</span><span class="p">:</span> <span class="dl">"</span><span class="s2">90000</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">trip_people</span><span class="p">:</span> <span class="dl">"</span><span class="s2">15</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">trip_date_in</span><span class="p">:</span> <span class="dl">"</span><span class="s2">2023-03-01</span><span class="dl">"</span><span class="p">,</span>
@@ -1008,7 +1030,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <td>Title of the project. This parameter is required if you create a new project</td>
 </tr>
 <tr>
-<td>info_stage</td>
+<td>info_stage_reference</td>
 <td>String</td>
 <td>Stage of the project: Please use the technical name of the stage you intend to apply. If no specific stage is found, a default stage will be automatically assigned upon adding the project.</td>
 </tr>
