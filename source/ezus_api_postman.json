@@ -63,7 +63,23 @@
           "raw": "{{baseUrl}}/projects",
           "host": ["{{baseUrl}}"],
           "path": ["projects"],
-          "query": []
+          "query": [
+            {
+              "key": "info_stage_reference",
+              "value": "received",
+              "disabled": true
+            },
+            {
+              "key": "sales_manager",
+              "value": "john.doe@e-corp.com",
+              "disabled": true
+            },
+            {
+              "key": "project_manager",
+              "value": "John Doe",
+              "disabled": true
+            }
+          ]
         }
       },
       "response": []
@@ -439,7 +455,8 @@
           "query": [
             {
               "key": "stage",
-              "value": "completed"
+              "value": "completed",
+              "disabled": true
             }
           ]
         }

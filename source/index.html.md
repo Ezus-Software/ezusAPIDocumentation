@@ -193,12 +193,12 @@ axios.get(baseUrl + "/projects", headers);
 
 ### Query Parameters
 
-| Parameter            | Type   | Description                                                                                                                                 |
-| -------------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| next_token           | String | Specify this parameter if you want to retrieve the following elements of a given list query.                                                |
-| sales_manager        | String | Filter to retrieve projects associated with a sales manager. Expected format: first_name%20last_name (e.g., Melchior%20Bengtsson) OR email. |
-| project_manager      | String | Filter to retrieve projects associated with a project manager. Expected format: first_name%20last_name (e.g., Alexandre%20Lin) OR email.    |
-| info_stage_reference | String | Filter to retrieve projects based on their status. The status should be provided via its technical_name.                                    |
+| Parameter            | Type   | Description                                                                                                                                        |
+| -------------------- | ------ | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| next_token           | String | Specify this parameter if you want to retrieve the following elements of a given list query.                                                       |
+| sales_manager        | String | You can filter projects assigned to a specific sales manager. Expected format: email (john.doe@e-corp.com) OR first_name%20last_name (John Doe).   |
+| project_manager      | String | You can filter projects assigned to a specific project manager. Expected format: email (john.doe@e-corp.com) OR first_name%20last_name (John Doe). |
+| info_stage_reference | String | You can filter projects that are in a specific stage. The stage of the project must be indicated by its technical name.                            |
 
 ### Response
 
@@ -1773,11 +1773,11 @@ axios.get(baseUrl + "/invoices?stage=completed", headers);
 
 ### Query Parameters
 
-| Parameter      | Type   | Description                                                                                                                                                          |
-| -------------- | ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| next_token     | String | Specify this parameter if you want to retrieve the following elements of a given list query. If this parameter is filled, other parameters are ignored.              |
-| stage          | String | You can filter your search only by invoices that are in a specific stage. The stage can be `paid`, `completed` or `draft`.                                           |
-| technical_name | String | You can also filter invoices by one of their custom fields by adding the `technical_name` of the custom field as a query parameter and the desired value as a value. |
+| Parameter      | Type   | Description                                                                                                                                                               |
+| -------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| next_token     | String | Specify this parameter if you want to retrieve the following elements of a given list query. If this parameter is filled, other parameters are ignored.                   |
+| stage          | String | You can filter invoices that are at a specific stage. The stage can be `paid`, `completed` or `draft`.                                                                    |
+| technical_name | String | You can filter invoices according to one of their custom fields by adding the `technical_name` of the custom field as a query parameter and the desired value as a value. |
 
 ### Response
 
