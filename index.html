@@ -722,17 +722,17 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <tr>
 <td>sales_manager</td>
 <td>String</td>
-<td>Filter to retrieve projects associated with a sales manager. Expected format: first_name%20last_name (e.g., Melchior%20Bengtsson) OR email.</td>
+<td>You can filter projects assigned to a specific sales manager. Expected format: email (john.doe@e-corp.com) OR first_name%20last_name (John Doe).</td>
 </tr>
 <tr>
 <td>project_manager</td>
 <td>String</td>
-<td>Filter to retrieve projects associated with a project manager. Expected format: first_name%20last_name (e.g., Alexandre%20Lin) OR email.</td>
+<td>You can filter projects assigned to a specific project manager. Expected format: email (john.doe@e-corp.com) OR first_name%20last_name (John Doe).</td>
 </tr>
 <tr>
 <td>info_stage_reference</td>
 <td>String</td>
-<td>Filter to retrieve projects based on their status. The status should be provided via its technical_name.</td>
+<td>You can filter projects that are in a specific stage. The stage of the project must be indicated by its technical name.</td>
 </tr>
 </tbody></table>
 <h3 id='response-2'>Response</h3>
@@ -3003,12 +3003,12 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <tr>
 <td>stage</td>
 <td>String</td>
-<td>You can filter your search only by invoices that are in a specific stage. The stage can be <code>paid</code>, <code>completed</code> or <code>draft</code>.</td>
+<td>You can filter invoices that are at a specific stage. The stage can be <code>paid</code>, <code>completed</code> or <code>draft</code>.</td>
 </tr>
 <tr>
 <td>technical_name</td>
 <td>String</td>
-<td>You can also filter invoices by one of their custom fields by adding the <code>technical_name</code> of the custom field as a query parameter and the desired value as a value.</td>
+<td>You can filter invoices according to one of their custom fields by adding the <code>technical_name</code> of the custom field as a query parameter and the desired value as a value.</td>
 </tr>
 </tbody></table>
 <h3 id='response-17'>Response</h3>
