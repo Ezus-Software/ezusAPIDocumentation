@@ -323,6 +323,134 @@ A JSON object containing the project information with properties like:
 | alternatives         | Array  | Array of JSON alternatives ([Alternatives](#alternatives))                                       |
 | custom_fields        | Array  | Array of JSON custom fields ([Custom fields](#custom-fields))                                    |
 
+## GET project-infos
+
+This API endpoint allows you to retrieve information for a specific project record in Ezus. To do so, you need to specify the project's reference and the alternative number in your query parameter.
+
+```shell
+curl --location 'https://api.ezus.app/project-infos?reference=project_reference' \
+--header 'x-api-key: <YOUR_API_KEY>' \
+--header 'Authorization: Bearer <YOUR_TOKEN>'
+```
+
+```javascript
+const axios = require("axios");
+const baseUrl = "https://api.ezus.app";
+
+const headers = {
+  "x-api-key": "<YOUR_API_KEY>",
+  Authorization: "Bearer <YOUR_TOKEN>",
+};
+
+axios.get(baseUrl + "/project-infos?reference=project_reference", headers);
+```
+
+> This request returns a structured JSON object:
+
+```json
+{
+  "error": "false",
+  "reference": "project_reference",
+  "name": "Paris fashion week 2024",
+  "start_date": "2024-03-01",
+  "end_date": "2024-03-09",
+  "destinations": [
+    {
+      "name": "Paris",
+      "start_date": "2024-03-01",
+      "end_date": "2024-03-09",
+      "activities": [
+        {
+          "date": "2024-03-01",
+          "name": "Fashion week 2024 debrief",
+          "start_time": "10:00",
+          "duration": 480,
+          "comments": "Explore the top trends and key highlights from Fashion Week 2024—perfect for staying ahead in style!",
+          "address": "Paris, France",
+          "location": "{\"latitude\":\"48.857548\",\"longitude\":\"2.351377\"}",
+          "period": "morning"
+        }
+      ]
+    }
+  ],
+  "accommodations": [
+    {
+      "name": "Hôtel Plaza Athénée",
+      "from_date": "2024-03-01",
+      "to_date": "2024-03-08",
+      "check_in_time": "10:00",
+      "check_out_time": "14:00",
+      "info": null,
+      "address": "25 Av. Montaigne, 75008 Paris, France",
+      "city": null,
+      "phone": "",
+      "email": ""
+    }
+  ],
+  "transports": [
+    {
+      "airline_company": "AIR FRANCE",
+      "departure_date": "2024-03-01",
+      "arrival_date": "2024-03-01",
+      "info": null,
+      "departure_address": "95700 Roissy-en-France, France",
+      "departure_city": null
+    }
+  ],
+  "travelers": [
+    {
+      "identifier": "traveler_identifier",
+      "email": "tommy@e-corp.com",
+      "first_name": "Tommy",
+      "last_name": "Atkins"
+    },
+    {
+      "identifier": "traveler_identifier",
+      "email": "contact@moke-international.com",
+      "first_name": "Jane",
+      "last_name": "Doe"
+    }
+  ],
+  "description": "Fashion Week 2024 was an unforgettable experience for fashion-forward travelers! The week buzzed with energy as the world’s top designers showcased their latest collections across iconic venues in Paris, Milan, New York, and London. Attendees were treated to exclusive runway shows, where bold trends and cutting-edge designs took center stage. Beyond the catwalk, visitors enjoyed a packed calendar of stylish events—pop-up boutiques, designer meet-and-greets, and glamorous after-parties. For those wanting a hands-on experience, workshops on sustainable fashion and styling sessions were offered throughout the week. Travelers could also explore fashion museums, stroll down fashion districts, and sip cocktails with the industry’s elite. A must-see event for anyone looking to immerse themselves in the world of haute couture!",
+  "picture_url": "https://ezus.io/2024_fashion_week_banner.jpg"
+}
+```
+
+### HTTP Endpoint
+
+`GET https://api.ezus.app/project-infos`
+
+### Header Parameters
+
+| Parameter     | Type   | Description                                                 |
+| ------------- | ------ | ----------------------------------------------------------- |
+| x-api-key     | String | <span style="color:red">(Required)</span> Your Ezus API key |
+| Authorization | String | <span style="color:red">(Required)</span> Your Bearer token |
+
+### Query Parameters
+
+| Parameter         | Type   | Description                                                                                 |
+| ----------------- | ------ | ------------------------------------------------------------------------------------------- |
+| reference         | String | <span style="color:red">(Required)</span> The reference of the project you wish to retrieve |
+| alternative_order | String | Alternative number, if not entered, retrieve project's main alternative.                    |
+
+### Response
+
+A JSON object containing the project information with properties like:
+
+| Property       | Type   | Description                                                                                                         |
+| -------------- | ------ | ------------------------------------------------------------------------------------------------------------------- |
+| reference      | String | The reference of the project                                                                                        |
+| name           | String | The title of the project                                                                                            |
+| start_date     | String | Date of the beginning of this alternative, in a "YYYY-MM-DD" format string. If it's empty, the project has no dates |
+| end_date       | String | Date of the end of this alternative, in a "YYYY-MM-DD" format string. If it's empty, the project has no dates       |
+| destinations   | Array  |                                                                                                                     |
+| accommodations | Array  |                                                                                                                     |
+| transports     | Array  |                                                                                                                     |
+| travelers      | Array  |                                                                                                                     |
+| description    | String |                                                                                                                     |
+| picture_url    | String | URL of the client space cover                                                                                       |
+
 ## POST projects-upsert
 
 It updates a project record if the provided reference does match one of the project references in your account, otherwise it creates a new project record with the provided reference (or with a random one if no reference is provided).
