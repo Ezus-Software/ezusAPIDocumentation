@@ -432,7 +432,7 @@ axios.get(baseUrl + "/project-infos?reference=project_reference", headers);
 | Parameter         | Type   | Description                                                                                 |
 | ----------------- | ------ | ------------------------------------------------------------------------------------------- |
 | reference         | String | <span style="color:red">(Required)</span> The reference of the project you wish to retrieve |
-| alternative_order | String | Alternative number, if not entered, retrieve project's main alternative.                    |
+| alternative_order | String | Alternative number, if not entered, retrieve project's main alternative                     |
 
 ### Response
 
@@ -447,7 +447,7 @@ A JSON object containing the project information with properties like:
 | destinations   | Array  | Array containing a single JSON object representing the project's sub-destination. This feature currently **does not support multiple destinations** and will return the project's start and end dates if the feature is enabled. ([Destinations](#destinations)) |
 | accommodations | Array  | Array of JSON accommodations ([Accommodations](#accommodations))                                                                                                                                                                                                 |
 | transports     | Array  | Array of JSON transports ([Transports](#transports))                                                                                                                                                                                                             |
-| travelers      | Array  | Array of JSON objects representing the contact details of the project client. ([Travelers](#travelers))                                                                                                                                                          |
+| travelers      | Array  | Array of JSON objects representing the contact details of the project client ([Travelers](#travelers))                                                                                                                                                           |
 | picture_url    | String | URL of the client space cover                                                                                                                                                                                                                                    |
 
 ## POST projects-upsert
@@ -2622,12 +2622,12 @@ A JSON object indicating whether an error occurred during the process, along wit
 | ---------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | date       | String | Date when the activity takes place, in a "YYYY-MM-DD" format string. If the **project has no dates**, this will be calculated as today's date plus the day at which the activity is supposed to take place. |
 | name       | String | Title of the activity                                                                                                                                                                                       |
-| start_time | String | Time when the activity begins, specified in "HH:MM" format string.                                                                                                                                          |
-| duration   | String | Duration of the activity in minutes, indicating how long the activity lasts.                                                                                                                                |
-| comments   | String | Description of the activity.                                                                                                                                                                                |
+| start_time | String | Time when the activity begins, specified in "HH:MM" format string                                                                                                                                           |
+| duration   | String | Duration of the activity in minutes, indicating how long the activity lasts                                                                                                                                 |
+| comments   | String | Description of the activity                                                                                                                                                                                 |
 | address    | String | Complete address of the activity, including street and post code                                                                                                                                            |
-| location   | JSON   | JSON object containing geographical coordinates of the activity's location, with properties for latitude and longitude.                                                                                     |
-| period     | String | A description of the time period during which the activity occurs : `morning`, `lunch`, `afternoon`, `dinner` or `evening` .                                                                                |
+| location   | JSON   | JSON object containing geographical coordinates of the activity's location, with properties for latitude and longitude                                                                                      |
+| period     | String | A description of the time period during which the activity occurs : `morning`, `lunch`, `afternoon`, `dinner` or `evening`                                                                                  |
 
 ### Address
 
