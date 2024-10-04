@@ -367,7 +367,10 @@ axios.get(baseUrl + "/project-infos?reference=project_reference", headers);
           "duration": 480,
           "comments": "Explore the top trends and key highlights from Fashion Week 2024—perfect for staying ahead in style!",
           "address": "Paris, France",
-          "location": "{\"latitude\":\"48.857548\",\"longitude\":\"2.351377\"}",
+          "location": {
+            "latitude": "48.857548",
+            "longitude": "2.351377"
+          },
           "period": "morning"
         }
       ]
@@ -380,9 +383,8 @@ axios.get(baseUrl + "/project-infos?reference=project_reference", headers);
       "to_date": "2024-03-08",
       "check_in_time": "10:00",
       "check_out_time": "14:00",
-      "info": null,
       "address": "25 Av. Montaigne, 75008 Paris, France",
-      "city": null,
+      "city": "Paris",
       "phone": "",
       "email": ""
     }
@@ -392,9 +394,8 @@ axios.get(baseUrl + "/project-infos?reference=project_reference", headers);
       "airline_company": "AIR FRANCE",
       "departure_date": "2024-03-01",
       "arrival_date": "2024-03-01",
-      "info": null,
       "departure_address": "95700 Roissy-en-France, France",
-      "departure_city": null
+      "departure_city": "Roissy-en-France"
     }
   ],
   "travelers": [
@@ -411,7 +412,6 @@ axios.get(baseUrl + "/project-infos?reference=project_reference", headers);
       "last_name": "Doe"
     }
   ],
-  "description": "Fashion Week 2024 was an unforgettable experience for fashion-forward travelers! The week buzzed with energy as the world’s top designers showcased their latest collections across iconic venues in Paris, Milan, New York, and London. Attendees were treated to exclusive runway shows, where bold trends and cutting-edge designs took center stage. Beyond the catwalk, visitors enjoyed a packed calendar of stylish events—pop-up boutiques, designer meet-and-greets, and glamorous after-parties. For those wanting a hands-on experience, workshops on sustainable fashion and styling sessions were offered throughout the week. Travelers could also explore fashion museums, stroll down fashion districts, and sip cocktails with the industry’s elite. A must-see event for anyone looking to immerse themselves in the world of haute couture!",
   "picture_url": "https://ezus.io/2024_fashion_week_banner.jpg"
 }
 ```
@@ -438,18 +438,17 @@ axios.get(baseUrl + "/project-infos?reference=project_reference", headers);
 
 A JSON object containing the project information with properties like:
 
-| Property       | Type   | Description                                                                                                         |
-| -------------- | ------ | ------------------------------------------------------------------------------------------------------------------- |
-| reference      | String | The reference of the project                                                                                        |
-| name           | String | The title of the project                                                                                            |
-| start_date     | String | Date of the beginning of this alternative, in a "YYYY-MM-DD" format string. If it's empty, the project has no dates |
-| end_date       | String | Date of the end of this alternative, in a "YYYY-MM-DD" format string. If it's empty, the project has no dates       |
-| destinations   | Array  |                                                                                                                     |
-| accommodations | Array  |                                                                                                                     |
-| transports     | Array  |                                                                                                                     |
-| travelers      | Array  |                                                                                                                     |
-| description    | String |                                                                                                                     |
-| picture_url    | String | URL of the client space cover                                                                                       |
+| Property       | Type   | Description                                                                                                                                                                                                                                                      |
+| -------------- | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| reference      | String | The reference of the project                                                                                                                                                                                                                                     |
+| name           | String | The title of the project                                                                                                                                                                                                                                         |
+| start_date     | String | Date of the beginning of this project, in a "YYYY-MM-DD" format string. If the **project has no dates**, this will default to today's date.                                                                                                                      |
+| end_date       | String | Date of the end of this project, in a "YYYY-MM-DD" format string. If the **project has no dates**, this will be calculated as today's date plus the number of days from the project’s duration.                                                                  |
+| destinations   | Array  | Array containing a single JSON object representing the project's sub-destination. This feature currently **does not support multiple destinations** and will return the project's start and end dates if the feature is enabled. ([Destinations](#destinations)) |
+| accommodations | Array  | Array of JSON accommodations ([Accommodations](#accommodations))                                                                                                                                                                                                 |
+| transports     | Array  | Array of JSON transports ([Transports](#transports))                                                                                                                                                                                                             |
+| travelers      | Array  | Array of JSON objects representing the contact details of the project client. ([Travelers](#travelers))                                                                                                                                                          |
+| picture_url    | String | URL of the client space cover                                                                                                                                                                                                                                    |
 
 ## POST projects-upsert
 
@@ -2569,6 +2568,67 @@ A JSON object indicating whether an error occurred during the process, along wit
 
 # Nested Resources
 
+### Accommodations
+
+```json
+   "accommodations": [
+    {
+      "name": "Hôtel Plaza Athénée",
+      "from_date": "2024-03-01",
+      "to_date": "2024-03-08",
+      "check_in_time": "10:00",
+      "check_out_time": "14:00",
+      "address": "25 Av. Montaigne, 75008 Paris, France",
+      "city": "Paris",
+      "phone": "",
+      "email": ""
+    }
+  ]
+```
+
+| Property       | Type   | Description                                                                                                                                                                          |
+| -------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| name           | String | Name of the accommodation                                                                                                                                                            |
+| from_date      | String | Start date of the stay, in a "YYYY-MM-DD" format string. If the **project has no dates**, this will default to today's date.                                                         |
+| to_date        | String | End date of the stay, in a "YYYY-MM-DD" format string. If the **project has no dates**, this will be calculated as today's date plus the number of days from the project’s duration. |
+| check_in_time  | String | Check in time, specified in "HH:MM" format string                                                                                                                                    |
+| check_out_time | String | Check out time, specified in "HH:MM" format string                                                                                                                                   |
+| address        | String | Complete address of the accommodation, including street and post code                                                                                                                |
+| city           | String | Name of the city where the accommodation is located                                                                                                                                  |
+| phone          | String | Supplier's contact phone number for the accommodation                                                                                                                                |
+| email          | String | Supplier's email address for the accommodation                                                                                                                                       |
+
+### Activities
+
+```json
+"activities": [
+        {
+          "date": "2024-03-01",
+          "name": "Fashion week 2024 debrief",
+          "start_time": "10:00",
+          "duration": 480,
+          "comments": "Explore the top trends and key highlights from Fashion Week 2024—perfect for staying ahead in style!",
+          "address": "Paris, France",
+          "location": {
+            "latitude": "48.857548",
+            "longitude": "2.351377"
+          },
+          "period": "morning"
+        }
+      ]
+```
+
+| Property   | Type   | Description                                                                                                                                                                                                 |
+| ---------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| date       | String | Date when the activity takes place, in a "YYYY-MM-DD" format string. If the **project has no dates**, this will be calculated as today's date plus the day at which the activity is supposed to take place. |
+| name       | String | Title of the activity                                                                                                                                                                                       |
+| start_time | String | Time when the activity begins, specified in "HH:MM" format string.                                                                                                                                          |
+| duration   | String | Duration of the activity in minutes, indicating how long the activity lasts.                                                                                                                                |
+| comments   | String | Description of the activity.                                                                                                                                                                                |
+| address    | String | Complete address of the activity, including street and post code                                                                                                                                            |
+| location   | JSON   | JSON object containing geographical coordinates of the activity's location, with properties for latitude and longitude.                                                                                     |
+| period     | String | A description of the time period during which the activity occurs : `morning`, `lunch`, `afternoon`, `dinner` or `evening` .                                                                                |
+
 ### Address
 
 ```json
@@ -2577,7 +2637,7 @@ A JSON object indicating whether an error occurred during the process, along wit
     "zip": "75010",
     "city": "Paris",
     "country": "France"
-  },
+  }
 ```
 
 | Property | Type   | Description          |
@@ -2658,6 +2718,40 @@ Only the last 10 contacts are returned in this object. Note that for upsert endp
 | phone      | String | Phone number of the contact as a string                                                           |
 | phone2     | String | Second phone number of the contact as a string                                                    |
 | birth_date | String | Contact's date of birth in a "YYYY-MM-DD" format string (supplier contacts have no date of birth) |
+
+### Destinations
+
+```json
+"destinations": [
+    {
+      "name": "Paris",
+      "start_date": "2024-03-01",
+      "end_date": "2024-03-09",
+      "activities": [
+        {
+          "date": "2024-03-01",
+          "name": "Fashion week 2024 debrief",
+          "start_time": "10:00",
+          "duration": 480,
+          "comments": "Explore the top trends and key highlights from Fashion Week 2024—perfect for staying ahead in style!",
+          "address": "Paris, France",
+          "location": {
+            "latitude": "48.857548",
+            "longitude": "2.351377"
+          },
+          "period": "morning"
+        }
+      ]
+    }
+  ]
+```
+
+| Property   | Type   | Description                                                                                                                                                                                          |
+| ---------- | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| name       | String | The name of the destination                                                                                                                                                                          |
+| start_date | String | Date when the destination visit begins, in a "YYYY-MM-DD" format string. If the **project has no dates**, this will default to today's date.                                                         |
+| end_date   | String | Date when the destination visit ends, in a "YYYY-MM-DD" format string. If the **project has no dates**, this will be calculated as today's date plus the number of days from the project’s duration. |
+| activities | Array  | An array of JSON objects detailing the activities scheduled during the stay at the destination ([Activities](#activities))                                                                           |
 
 ### Custom Fields
 
@@ -2847,7 +2941,7 @@ Only the last 10 suppliers are returned in this object.
       "sales_price": 200.0,
       "childs": []
     }
-  ],
+  ]
 ```
 
 | Property       | Type   | Description                                                                           |
@@ -2859,6 +2953,48 @@ Only the last 10 suppliers are returned in this object.
 | margin_rate    | Number | The margin rate is based on the sales price                                           |
 | sales_price    | Number | Sales price including taxes                                                           |
 | childs         | Array  | Childs are sub-tariffs contained by this tariff (only season tariffs can have childs) |
+
+### Transports
+
+```json
+   "transports": [
+    {
+      "airline_company": "AIR FRANCE",
+      "departure_date": "2024-03-01",
+      "arrival_date": "2024-03-01",
+      "departure_address": "95700 Roissy-en-France, France",
+      "departure_city": "Roissy-en-France"
+    }
+  ]
+```
+
+| Property          | Type   | Description                                                                                                                                                                                       |
+| ----------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| airline_company   | String | Name of the airline company providing the transport service, which represents the title of this transport                                                                                         |
+| departure_date    | String | Date when the transport begins, in a "YYYY-MM-DD" format string. If the **project has no dates**, this will default to today's date.                                                              |
+| arrival_date      | String | Date when the transport concludes, in a "YYYY-MM-DD" format string. If the **project has no dates**, this will be calculated as today's date plus the number of days from the project’s duration. |
+| departure_address | String | Complete address from which the transport departs , including street and post code                                                                                                                |
+| departure_city    | String | Name of the city where the transport departs from                                                                                                                                                 |
+
+### Travelers
+
+```json
+  "travelers": [
+    {
+      "identifier": "traveler_identifier",
+      "email": "tommy@e-corp.com",
+      "first_name": "Tommy",
+      "last_name": "Atkins"
+    }
+  ]
+```
+
+| Property   | Type   | Description                            |
+| ---------- | ------ | -------------------------------------- |
+| identifier | String | The reference of the traveler          |
+| email      | String | Email of the traveler                  |
+| first_name | String | First name of the traveler as a string |
+| last_name  | String | Last name of the traveler as a string  |
 
 ### User
 
