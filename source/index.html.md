@@ -2189,7 +2189,7 @@ A JSON object indicating whether an error occurred during the process, along wit
 
 ## GET webhooks
 
-Returns a list of your webhook endpoints.
+Returns a list of your webhook endpoints order by creation date descending.
 
 ```shell
 curl --location 'https://api.ezus.app/webhooks' \
