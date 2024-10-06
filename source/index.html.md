@@ -125,7 +125,7 @@ A JSON object indicating whether an error occurred during the process, along wit
 
 ## GET projects
 
-It returns a list of your projects. The projects are returned sorted by creation date, with the most recent projects appearing first. The list of projects returned is paginated (50 per 50): to call the 50 next items in the list, call the route with the `next_token` query parameter.
+It returns a list of your projects. The projects are returned sorted in descending order by creation date, with the most recent projects appearing first. The list of projects returned is paginated (50 per 50): to call the 50 next items in the list, call the route with the `next_token` query parameter.
 
 ```shell
 curl --location 'https://api.ezus.app/projects' \
@@ -482,7 +482,7 @@ A JSON object indicating whether an error occurred during the process, along wit
 
 ## GET clients
 
-It returns a list of your clients. The clients are returned sorted by creation date, with the most recent clients appearing first. The list of clients returned is paginated (50 per 50): to call the 50 next items in the list, call the route with the `next_token` query parameter.
+It returns a list of your clients. The clients are returned sorted in descending order by creation date, with the most recent clients appearing first. The list of clients returned is paginated (50 per 50): to call the 50 next items in the list, call the route with the `next_token` query parameter.
 
 ```shell
 curl --location 'https://api.ezus.app/clients' \
@@ -815,7 +815,7 @@ A JSON object indicating whether an error occurred during the process, along wit
 
 ## GET suppliers
 
-It returns a list of your suppliers. The suppliers are returned sorted by creation date, with the most recent suppliers appearing first. The list of suppliers returned is paginated (50 per 50): to call the 50 next items in the list, call the route with the `next_token` query parameter.
+It returns a list of your suppliers. The suppliers are returned sorted in descending order by creation date, with the most recent suppliers appearing first. The list of suppliers returned is paginated (50 per 50): to call the 50 next items in the list, call the route with the `next_token` query parameter.
 
 ```shell
 curl --location 'https://api.ezus.app/suppliers' \
@@ -1156,7 +1156,7 @@ A JSON object indicating whether an error occurred during the process, along wit
 
 ## GET products
 
-It returns a list of your products. The products are returned sorted by creation date, with the most recent products appearing first. The list of products returned is paginated (50 per 50): to call the 50 next items in the list, call the route with the `next_token` query parameter.
+It returns a list of your products. The products are returned sorted in descending order by creation date, with the most recent products appearing first. The list of products returned is paginated (50 per 50): to call the 50 next items in the list, call the route with the `next_token` query parameter.
 
 ```shell
 curl --location 'https://api.ezus.app/products' \
@@ -1674,7 +1674,7 @@ A JSON object indicating whether an error occurred during the process, along wit
 
 ## GET invoices
 
-It returns a list of your invoices. The invoices are returned sorted by creation date, with the most recent invoices appearing first. You can specify filters as query parameters to narrow down your search. The list of invoices returned is paginated (50 per 50): to call the 50 next items in the list, call the route with the `next_token` query parameter.
+It returns a list of your invoices. The invoices are returned sorted in descending order by creation date, with the most recent invoices appearing first. You can specify filters as query parameters to narrow down your search. The list of invoices returned is paginated (50 per 50): to call the 50 next items in the list, call the route with the `next_token` query parameter.
 
 ```shell
 curl --location 'https://api.ezus.app/invoices?stage=completed' \
@@ -2189,7 +2189,7 @@ A JSON object indicating whether an error occurred during the process, along wit
 
 ## GET webhooks
 
-Returns a list of your webhook endpoints order by creation date descending.
+Returns a list of your webhook endpoints in descending order by creation date.
 
 ```shell
 curl --location 'https://api.ezus.app/webhooks' \
