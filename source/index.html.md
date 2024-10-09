@@ -325,7 +325,7 @@ A JSON object containing the project information with properties like:
 
 ## GET project-infos
 
-This API endpoint allows you to retrieve information for a specific project record in Ezus. To do so, you need to specify the project's reference and the alternative number in your query parameter.
+This API endpoint allows you to retrieve information for a specific project record in Ezus. To do so, you need to specify the project's reference and optionnaly the alternative number in your query parameter.
 
 ```shell
 curl --location 'https://api.ezus.app/project-infos?reference=project_reference' \
