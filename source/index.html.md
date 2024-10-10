@@ -520,11 +520,8 @@ axios.get(baseUrl + "/clients", headers);
       "first_name": "Jane",
       "last_name": "Doe",
       "email": "contact@moke-international.com",
-      "activity": "Software",
       "vat_number": "GB 240-635-038",
       "siret": "09728676",
-      "info_profile": "Prospect",
-      "info_origin": "Adwords",
       "info_notes": "This prospect looks interesting to follow",
       "info_number": "202306001-C",
       "user": {
@@ -607,11 +604,8 @@ axios.get(baseUrl + "/client?reference=client_reference", headers);
   "first_name": "Jane",
   "last_name": "Doe",
   "email": "contact@moke-international.com",
-  "activity": "Software",
   "vat_number": "GB 240-635-038",
   "siret": "09728676",
-  "info_profile": "Prospect",
-  "info_origin": "Adwords",
   "info_notes": "This prospect looks interesting to follow",
   "info_number": "202306001-C",
   "user": {
@@ -689,11 +683,8 @@ A JSON object containing the client information with properties like:
 | first_name    | String | First name of the main contact at the client's organization                                     |
 | last_name     | String | Last name of the main contact at the client's organization                                      |
 | email         | String | Email of the main contact at the client's organization                                          |
-| activity      | String | Activity of the client (only for "enterprise" clients)                                          |
 | vat_number    | String | VAT number of the client (only for "enterprise" clients)                                        |
 | siret         | String | Company registration number of the client (only for "enterprise" clients)                       |
-| info_profile  | String | Profile of the client                                                                           |
-| info_origin   | String | Source of the client                                                                            |
 | info_notes    | String | Notes on the client                                                                             |
 | info_number   | String | File number that appears at the bottom of the client record. Not to be confused with reference! |
 | user          | JSON   | JSON object representing the user ([User](#user)) associated with the client                    |
@@ -2896,7 +2887,7 @@ This event is triggered whenever a client is created.
 
 ## clients.updated
 
-This event is triggered whenever a client is updated. This event is triggered only by specific fields within clients, including: `company_name`, `website`, `vat_number`, `siret`, `info_origin`, `info_notes`, `info_number` and `user`.
+This event is triggered whenever a client is updated. This event is triggered only by specific fields within clients, including: `company_name`, `website`, `vat_number`, `siret`, `info_notes`, `info_number` and `user`.
 
 ```json
 {
