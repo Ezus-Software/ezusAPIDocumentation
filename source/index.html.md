@@ -2896,7 +2896,7 @@ This event is triggered whenever a client is created.
 
 ## clients.updated
 
-This event is triggered whenever a client is updated. This event is triggered only by specific fields within clients, including: `company_name`, `website`, `activity`, `vat_number`, `siret`, `info_origin`, `info_notes`, `info_number` and `user`.
+This event is triggered whenever a client is updated. This event is triggered only by specific fields within clients, including: `company_name`, `website`, `vat_number`, `siret`, `info_origin`, `info_notes`, `info_number` and `user`.
 
 ```json
 {
