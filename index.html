@@ -638,7 +638,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <h3 id='response'>Response</h3>
 <p>A JSON object indicating whether an error occurred during the process, along with the associated message. If successful, it also returns a <code>token</code> that you must retain for future API requests.</p>
 <h1 id='projects'>Projects</h1><h2 id='get-projects'>GET projects</h2>
-<p>It returns a list of your projects. The projects are returned sorted by creation date, with the most recent projects appearing first. The list of projects returned is paginated (50 per 50): to call the 50 next items in the list, call the route with the <code>next_token</code> query parameter.</p>
+<p>Returns a list of your projects, sorted from the most recent to the oldest, with the newest projects appearing first. The list of projects returned is paginated (50 per 50): to call the 50 next items in the list, call the route with the <code>next_token</code> query parameter.</p>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="s1">'https://api.ezus.app/projects'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'x-api-key: &lt;YOUR_API_KEY&gt;'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Authorization: Bearer &lt;YOUR_TOKEN&gt;'</span>
@@ -1153,7 +1153,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <h3 id='response-5'>Response</h3>
 <p>A JSON object indicating whether an error occurred during the process, along with the associated message.</p>
 <h1 id='clients'>Clients</h1><h2 id='get-clients'>GET clients</h2>
-<p>It returns a list of your clients. The clients are returned sorted by creation date, with the most recent clients appearing first. The list of clients returned is paginated (50 per 50): to call the 50 next items in the list, call the route with the <code>next_token</code> query parameter.</p>
+<p>Returns a list of your clients, sorted from the newest to the oldest, with the most recent clients appearing first. The list of clients returned is paginated (50 per 50): to call the 50 next items in the list, call the route with the <code>next_token</code> query parameter.</p>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="s1">'https://api.ezus.app/clients'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'x-api-key: &lt;YOUR_API_KEY&gt;'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Authorization: Bearer &lt;YOUR_TOKEN&gt;'</span>
@@ -1637,7 +1637,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <h3 id='response-8'>Response</h3>
 <p>A JSON object indicating whether an error occurred during the process, along with the associated message. If successful, it also returns a <code>reference</code> for the project, which you should store for future updates or retrievals.</p>
 <h1 id='suppliers'>Suppliers</h1><h2 id='get-suppliers'>GET suppliers</h2>
-<p>It returns a list of your suppliers. The suppliers are returned sorted by creation date, with the most recent suppliers appearing first. The list of suppliers returned is paginated (50 per 50): to call the 50 next items in the list, call the route with the <code>next_token</code> query parameter.</p>
+<p>Returns a list of your suppliers, sorted by creation date from newest to oldest, with the most recent suppliers appearing first. The list of suppliers returned is paginated (50 per 50): to call the 50 next items in the list, call the route with the <code>next_token</code> query parameter.</p>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="s1">'https://api.ezus.app/suppliers'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'x-api-key: &lt;YOUR_API_KEY&gt;'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Authorization: Bearer &lt;YOUR_TOKEN&gt;'</span>
@@ -2121,7 +2121,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <h3 id='response-11'>Response</h3>
 <p>A JSON object indicating whether an error occurred during the process, along with the associated message. If successful, it also returns a <code>reference</code> for the project, which you should store for future updates or retrievals.</p>
 <h1 id='products'>Products</h1><h2 id='get-products'>GET products</h2>
-<p>It returns a list of your products. The products are returned sorted by creation date, with the most recent products appearing first. The list of products returned is paginated (50 per 50): to call the 50 next items in the list, call the route with the <code>next_token</code> query parameter.</p>
+<p>Returns a list of your products, sorted by creation date from newest to oldest, with the most recent products appearing first. The list of products returned is paginated (50 per 50): to call the 50 next items in the list, call the route with the <code>next_token</code> query parameter.</p>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="s1">'https://api.ezus.app/products'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'x-api-key: &lt;YOUR_API_KEY&gt;'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Authorization: Bearer &lt;YOUR_TOKEN&gt;'</span>
@@ -2888,7 +2888,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <h3 id='response-16'>Response</h3>
 <p>A JSON object indicating whether an error occurred during the process, along with the associated message. If successful, it also returns a <code>reference</code> for the project, which you should store for future updates or retrievals.</p>
 <h1 id='invoices'>Invoices</h1><h2 id='get-invoices'>GET invoices</h2>
-<p>It returns a list of your invoices. The invoices are returned sorted by creation date, with the most recent invoices appearing first. You can specify filters as query parameters to narrow down your search. The list of invoices returned is paginated (50 per 50): to call the 50 next items in the list, call the route with the <code>next_token</code> query parameter.</p>
+<p>Returns a list of your invoices, sorted by creation date from newest to oldest, with the most recent invoices appearing first. You can specify filters as query parameters to narrow down your search. The list of invoices returned is paginated (50 per 50): to call the 50 next items in the list, call the route with the <code>next_token</code> query parameter.</p>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="s1">'https://api.ezus.app/invoices?stage=completed'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'x-api-key: &lt;YOUR_API_KEY&gt;'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Authorization: Bearer &lt;YOUR_TOKEN&gt;'</span>
@@ -3648,7 +3648,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <h3 id='response-21'>Response</h3>
 <p>A JSON object indicating whether an error occurred during the process, along with the associated message.</p>
 <h1 id='webhooks'>Webhooks</h1><h2 id='get-webhooks'>GET webhooks</h2>
-<p>Returns a list of your webhook endpoints.</p>
+<p>Retrieves a list of webhook endpoints, sorted by creation date from newest to oldest.</p>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="s1">'https://api.ezus.app/webhooks'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'X-API-KEY: &lt;YOUR_API_KEY&gt;'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Authorization: Bearer &lt;YOUR_TOKEN&gt;'</span>
