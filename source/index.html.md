@@ -193,12 +193,12 @@ axios.get(baseUrl + "/projects", headers);
 
 ### Query Parameters
 
-| Parameter            | Type   | Description                                                                                                                                        |
-| -------------------- | ------ | -------------------------------------------------------------------------------------------------------------------------------------------------- |
-| next_token           | String | Specify this parameter if you want to retrieve the following elements of a given list query.                                                       |
-| sales_manager        | String | You can filter projects assigned to a specific sales manager. Expected format: email (john.doe@e-corp.com) OR first_name%20last_name (John Doe).   |
-| project_manager      | String | You can filter projects assigned to a specific project manager. Expected format: email (john.doe@e-corp.com) OR first_name%20last_name (John Doe). |
-| info_stage_reference | String | You can filter projects that are in a specific stage. The stage of the project must be indicated by its technical name.                            |
+| Parameter            | Type   | Description                                                                                                            |
+| -------------------- | ------ | ---------------------------------------------------------------------------------------------------------------------- |
+| next_token           | String | Specify this parameter if you want to retrieve the following elements of a given list query                            |
+| sales_manager        | String | You can filter projects assigned to a specific sales manager. Expected format: email (john.doe@e-corp.com)             |
+| project_manager      | String | You can filter projects assigned to a specific project manager. Expected format: email (john.doe@e-corp.com)           |
+| info_stage_reference | String | You can filter projects that are in a specific stage. The stage of the project must be indicated by its technical name |
 
 ### Response
 
