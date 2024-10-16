@@ -2859,7 +2859,6 @@ This event is triggered whenever a client is created.
     "reference": "client_reference",
     "type": "enterprise",
     "company_name": "MOKE INTERNATIONAL LIMITED",
-    "activity": "Software",
     "first_name": "Jane",
     "last_name": "Doe",
     "email": "contact@moke-international.com",
@@ -2876,7 +2875,6 @@ This event is triggered whenever a client is created.
 | reference    | String | The reference of the client                                                                     |
 | type         | String | The type of the client can be either "enterprise" or "individual"                               |
 | company_name | String | Name of the company of the client                                                               |
-| activity     | String | Activity of the client (only for enterprise)                                                    |
 | first_name   | String | First name of the main contact of the client                                                    |
 | last_name    | String | Last name of the main contact of the client                                                     |
 | email        | String | Email of the main contact of the client                                                         |
