@@ -325,10 +325,10 @@ A JSON object containing the project information with properties like:
 
 ## GET projects-documents
 
-Returns a list of documents in your projects, sorted from the most recent to the oldest, with the newest document appearing first. To do so, you need to specify the project's reference in your query parameter.
+It returns a list of documents in your project, sorted from the most recent to the oldest, with the newest document appearing first. To do so, you need to specify the project's reference in your query parameter.
 
 ```shell
-curl --location 'https://api.ezus.app/projects' \
+curl --location 'https://api.ezus.app/projects-documents' \
 --header 'x-api-key: <YOUR_API_KEY>' \
 --header 'Authorization: Bearer <YOUR_TOKEN>'
 ```
@@ -342,7 +342,7 @@ const headers = {
   Authorization: "Bearer <YOUR_TOKEN>",
 };
 
-axios.get(baseUrl + "/projects", headers);
+axios.get(baseUrl + "/projects-documents", headers);
 ```
 
 > This request returns a structured JSON object:
@@ -379,10 +379,10 @@ axios.get(baseUrl + "/projects", headers);
 
 ### Query Parameters
 
-| Parameter         | Type   | Description                                                                                                                                                                                                                              |
-| ----------------- | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| project_reference | String | Specify this parameter to retrieve documents associated with the project reference ID.                                                                                                                                                   |
-| alternative_order | Number | You can iterate through the alternative projects by specifying this parameter. If not provided, it defaults to 0 and displays documents from the main project. The accepted values range from 0 to Total number of alternative projects. |
+| Parameter         | Type   | Description                                                                                                                                                                                                                                                              |
+| ----------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| project_reference | String | Specify this parameter to retrieve the documents associated with the project reference ID.                                                                                                                                                                               |
+| alternative_order | Number | You can iterate through the alternatives of your project by specifying this parameter. If not provided, it is set by default to 0 and it displays documents from the main project. The accepted values range from 0 to the total number of alternatives the project has. |
 
 ### Response
 
@@ -390,7 +390,7 @@ A JSON object containing the project documents information with properties like:
 
 | Property          | Type   | Description                                                                                                                                                                                                                       |
 | ----------------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| project_reference | String | This is the reference ID that identifies which main project the documents belongs to. It is also included in the parameters passed in query.                                                                                      |
+| project_reference | String | This is the reference ID that identifies which main project these documents belong to. It is also included in the parameters passed in query.                                                                                     |
 | alternative_order | Number | This value indicates which alternate project’s documents are being fetched. If the value is 0, it refers to the documents of the main project.                                                                                    |
 | documents         | Array  | An array of JSON objects, each representing a document. The documents are sorted by their creation date, with the most recently created appearing first. Each document includes the following fields: `title`, `type`, and `url`. |
 
