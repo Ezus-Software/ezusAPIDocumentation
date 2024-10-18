@@ -110,6 +110,36 @@
       "response": []
     },
     {
+      "name": "projects-documents",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "X-API-KEY",
+            "value": "{{<YOUR_API_KEY>}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/projects-documents?project_reference=project_reference_id&alternative_order=alternative_project_index",
+          "host": ["{{baseUrl}}"],
+          "path": ["projects-documents"],
+          "query": [
+            {
+              "key": "project_reference",
+              "value": "project_reference_id"
+            },
+            {
+              "key": "alternative_order",
+              "value": "alternative_project_index",
+              "disabled": true
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
       "name": "projects-upsert",
       "request": {
         "method": "POST",
