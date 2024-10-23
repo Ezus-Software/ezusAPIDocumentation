@@ -110,7 +110,7 @@
       "response": []
     },
     {
-      "name": "projects-documents",
+      "name": "project-documents",
       "request": {
         "method": "GET",
         "header": [
@@ -121,17 +121,17 @@
           }
         ],
         "url": {
-          "raw": "{{baseUrl}}/projects-documents?project_reference=project_reference_id&alternative_order=alternative_project_index",
+          "raw": "{{baseUrl}}/project-documents?reference=project_reference&alternative_order=0",
           "host": ["{{baseUrl}}"],
-          "path": ["projects-documents"],
+          "path": ["project-documents"],
           "query": [
             {
-              "key": "project_reference",
-              "value": "project_reference_id"
+              "key": "reference",
+              "value": "project_reference"
             },
             {
               "key": "alternative_order",
-              "value": "alternative_project_index",
+              "value": "0",
               "disabled": true
             }
           ]
