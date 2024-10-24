@@ -16,6 +16,7 @@ build/
 .cache
 .vagrant
 .sass-cache
+Gemfile.lock
 
 # YARD artifacts
 .yardoc
