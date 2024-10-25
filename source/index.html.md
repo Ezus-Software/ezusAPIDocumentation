@@ -323,7 +323,7 @@ A JSON object containing the project information with properties like:
 | alternatives         | Array  | Array of JSON alternatives ([Alternatives](#alternatives))                                       |
 | custom_fields        | Array  | Array of JSON custom fields ([Custom fields](#custom-fields))                                    |
 
-## GET projects-documents
+## GET project-documents
 
 It returns a list of documents in your project, sorted from the most recent to the oldest, with the newest document appearing first. To do so, you need to specify the project's reference in your query parameter.
 
