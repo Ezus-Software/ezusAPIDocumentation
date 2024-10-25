@@ -338,7 +338,7 @@
                     <a href="#get-project" class="toc-h2 toc-link" data-title="GET project">GET project</a>
                   </li>
                   <li>
-                    <a href="#get-projects-documents" class="toc-h2 toc-link" data-title="GET projects-documents">GET projects-documents</a>
+                    <a href="#get-project-documents" class="toc-h2 toc-link" data-title="GET project-documents">GET project-documents</a>
                   </li>
                   <li>
                     <a href="#post-projects-upsert" class="toc-h2 toc-link" data-title="POST projects-upsert">POST projects-upsert</a>
@@ -942,7 +942,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <td>Array of JSON custom fields (<a href="#custom-fields">Custom fields</a>)</td>
 </tr>
 </tbody></table>
-<h2 id='get-projects-documents'>GET projects-documents</h2>
+<h2 id='get-project-documents'>GET project-documents</h2>
 <p>It returns a list of documents in your project, sorted from the most recent to the oldest, with the newest document appearing first. To do so, you need to specify the project&#39;s reference in your query parameter.</p>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="s1">'https://api.ezus.app/project-documents?reference=project_reference'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'x-api-key: &lt;YOUR_API_KEY&gt;'</span> <span class="se">\</span>
