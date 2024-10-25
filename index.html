@@ -775,7 +775,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 </tr>
 </tbody></table>
 <h2 id='get-project'>GET project</h2>
-<p>This API endpoint allows you to retrieve information for a specific project record in Ezus. To do so, you need to specify the project&#39;s reference in your query parameter.</p>
+<p>This API endpoint retrieves detailed information about a specific project in Ezus.</p>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="s1">'https://api.ezus.app/project?reference=project_reference'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'x-api-key: &lt;YOUR_API_KEY&gt;'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Authorization: Bearer &lt;YOUR_TOKEN&gt;'</span>
@@ -873,7 +873,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <tr>
 <td>reference</td>
 <td>String</td>
-<td><span style="color:red">(Required)</span> The reference of the project you wish to retrieve</td>
+<td><span style="color:red">(Required)</span> The reference of the project to retrieve</td>
 </tr>
 </tbody></table>
 <h3 id='response-3'>Response</h3>
@@ -943,7 +943,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 </tr>
 </tbody></table>
 <h2 id='get-project-documents'>GET project-documents</h2>
-<p>It returns a list of documents in your project, sorted from the most recent to the oldest, with the newest document appearing first. To do so, you need to specify the project&#39;s reference in your query parameter.</p>
+<p>Returns the list of documents of your project, sorted from the most recent to the oldest.</p>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="s1">'https://api.ezus.app/project-documents?reference=project_reference'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'x-api-key: &lt;YOUR_API_KEY&gt;'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Authorization: Bearer &lt;YOUR_TOKEN&gt;'</span>
@@ -1004,12 +1004,12 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <tr>
 <td>reference</td>
 <td>String</td>
-<td><span style="color:red">(Required)</span> Specify this parameter to retrieve the documents associated with the project reference ID.</td>
+<td><span style="color:red">(Required)</span> The reference of the project to retrieve documents from</td>
 </tr>
 <tr>
 <td>alternative_order</td>
 <td>Number</td>
-<td>You can iterate through the alternatives of your project by specifying this parameter. If not provided, it is set by default to 0 and it displays documents from the main project. The accepted values range from 0 to the total number of alternatives the project has.</td>
+<td>Specifies the alternative order in the project to retrieve documents from. If not provided, defaults to 0 for main alternative</td>
 </tr>
 </tbody></table>
 <h3 id='response-4'>Response</h3>
@@ -1025,12 +1025,12 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <tr>
 <td>reference</td>
 <td>String</td>
-<td>This is the reference ID that identifies which main project these documents belong to. It is also included in the parameters passed in query.</td>
+<td>The reference of the project</td>
 </tr>
 <tr>
 <td>alternative_order</td>
 <td>Number</td>
-<td>This value indicates which alternate project’s documents are being fetched. If the value is 0, it refers to the documents of the main project.</td>
+<td>The alternative order; 0 is for main alternative</td>
 </tr>
 <tr>
 <td>documents</td>
@@ -1039,7 +1039,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 </tr>
 </tbody></table>
 <h2 id='post-projects-upsert'>POST projects-upsert</h2>
-<p>It updates a project record if the provided reference does match one of the project references in your account, otherwise it creates a new project record with the provided reference (or with a random one if no reference is provided).</p>
+<p>This API endpoint updates a project record if the provided reference matches an existing project in your account. If no match is found, a new project record is created with the provided reference, or a randomly generated one if no reference is supplied.</p>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="s1">'https://api.ezus.app/projects-upsert'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'x-api-key: &lt;YOUR_API_KEY&gt;'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
@@ -1172,7 +1172,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <h3 id='response-5'>Response</h3>
 <p>A JSON object indicating whether an error occurred during the process, along with the associated message. If successful, it also returns a <code>reference</code> for the project, which you should store for future updates or retrievals.</p>
 <h2 id='post-projects-documents-create'>POST projects-documents-create</h2>
-<p>This API endpoint enables the creation of a PDF document based on the provided link within the specified project, using the project_reference as its reference.</p>
+<p>This API endpoint generates a PDF document from a given link within the specified project.</p>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="s1">'https://api.ezus.app/projects-documents-create'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'x-api-key: &lt;YOUR_API_KEY&gt;'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
@@ -1375,7 +1375,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 </tr>
 </tbody></table>
 <h2 id='get-client'>GET client</h2>
-<p>This API endpoint allows you to retrieve information for a specific client record in Ezus. To do so, you need to specify the client&#39;s reference in your query parameter.</p>
+<p>This API endpoint retrieves detailed information about a specific client in Ezus.</p>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="s1">'https://api.ezus.app/client?reference=client_reference'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'x-api-key: &lt;YOUR_API_KEY&gt;'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Authorization: Bearer &lt;YOUR_TOKEN&gt;'</span>
@@ -1480,7 +1480,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <tr>
 <td>reference</td>
 <td>String</td>
-<td><span style="color:red">(Required)</span> The reference of the client you wish to retrieve</td>
+<td><span style="color:red">(Required)</span> The reference of the client to retrieve</td>
 </tr>
 </tbody></table>
 <h3 id='response-8'>Response</h3>
@@ -1575,7 +1575,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 </tr>
 </tbody></table>
 <h2 id='post-clients-upsert'>POST clients-upsert</h2>
-<p>This API endpoint allows you to update a client record if the provided reference (or email) matches one of the client references in your account. If no match is found, it creates a new client record with the provided reference (or a random one if no reference is provided). You can use the client&#39;s email as the primary key for upserting.</p>
+<p>This API endpoint updates a client record if the provided reference or email matches an existing client in your account. If no match is found, a new client record is created with the provided reference, or a randomly generated one if no reference is supplied. The client&#39;s email can be used as the primary key for upsert operations.</p>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="s1">'https://api.ezus.app/clients-upsert'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'x-api-key: &lt;YOUR_API_KEY&gt;'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
@@ -1834,7 +1834,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 </tr>
 </tbody></table>
 <h2 id='get-supplier'>GET supplier</h2>
-<p>This API endpoint allows you to retrieve information for a specific supplier record in Ezus. To do so, you need to specify the supplier&#39;s reference in your query parameter.</p>
+<p>This API endpoint retrieves detailed information about a specific supplier in Ezus.</p>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="s1">'https://api.ezus.app/supplier?reference=supplier_reference'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'x-api-key: &lt;YOUR_API_KEY&gt;'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Authorization: Bearer &lt;YOUR_TOKEN&gt;'</span>
@@ -1958,7 +1958,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <tr>
 <td>reference</td>
 <td>String</td>
-<td><span style="color:red">(Required)</span> The reference of the supplier you wish to retrieve</td>
+<td><span style="color:red">(Required)</span> The reference of the supplier to retrieve</td>
 </tr>
 </tbody></table>
 <h3 id='response-11'>Response</h3>
@@ -2317,7 +2317,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 </tr>
 </tbody></table>
 <h2 id='get-product'>GET product</h2>
-<p>This API endpoint allows you to retrieve information for a specific product record in Ezus. To do so, you need to specify the product&#39;s reference in your query parameter.</p>
+<p>This API endpoint retrieves detailed information about a specific product in Ezus.</p>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="s1">'https://api.ezus.app/product?reference=product_reference'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'x-api-key: &lt;YOUR_API_KEY&gt;'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Authorization: Bearer &lt;YOUR_TOKEN&gt;'</span>
@@ -2428,7 +2428,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <tr>
 <td>reference</td>
 <td>String</td>
-<td><span style="color:red">(Required)</span> The reference of the product you wish to retrieve</td>
+<td><span style="color:red">(Required)</span> The reference of the product to retrieve</td>
 </tr>
 </tbody></table>
 <h3 id='response-14'>Response</h3>
@@ -2700,7 +2700,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <h3 id='response-15'>Response</h3>
 <p>A JSON object indicating whether an error occurred during the process, along with the associated message. If successful, it also returns a <code>reference</code> for the project, which you should store for future updates or retrievals.</p>
 <h1 id='packages'>Packages</h1><h2 id='get-package'>GET package</h2>
-<p>This API endpoint allows you to retrieve information for a specific package record in Ezus. To do so, you need to specify the package&#39;s reference in your query parameter.</p>
+<p>This API endpoint retrieves detailed information about a specific package in Ezus.</p>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="s1">'https://api.ezus.app/package?reference=package_reference'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'x-api-key: &lt;YOUR_API_KEY&gt;'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Authorization: Bearer &lt;YOUR_TOKEN&gt;'</span>
@@ -2804,7 +2804,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <tr>
 <td>reference</td>
 <td>String</td>
-<td><span style="color:red">(Required)</span> The reference of the package you wish to retrieve</td>
+<td><span style="color:red">(Required)</span> The reference of the package to retrieve</td>
 </tr>
 </tbody></table>
 <h3 id='response-16'>Response</h3>
@@ -3126,7 +3126,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 </tr>
 </tbody></table>
 <h2 id='get-invoice'>GET invoice</h2>
-<p>This API endpoint allows you to retrieve information for a specific invoice record in Ezus. To do so, you need to specify the invoice&#39;s reference in your query parameter.</p>
+<p>This API endpoint retrieves detailed information about a specific invoice in Ezus.</p>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="s1">'https://api.ezus.app/invoice?reference=invoice_reference'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'x-api-key: &lt;YOUR_API_KEY&gt;'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Authorization: Bearer &lt;YOUR_TOKEN&gt;'</span>
@@ -3227,7 +3227,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <tr>
 <td>reference</td>
 <td>String</td>
-<td><span style="color:red">(Required)</span> The reference of the invoice you wish to retrieve</td>
+<td><span style="color:red">(Required)</span> The reference of the invoice to retrieve</td>
 </tr>
 </tbody></table>
 <h3 id='response-19'>Response</h3>
@@ -3427,7 +3427,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <h3 id='response-20'>Response</h3>
 <p>A JSON object indicating whether an error occurred during the process, along with the associated message. If successful, it also returns a <code>reference</code> for the project, which you should store for future updates or retrievals.</p>
 <h2 id='get-invoice-supplier'>GET invoice-supplier</h2>
-<p>This API endpoint allows you to retrieve information for a specific supplier invoice record in Ezus. To do so, you need to specify the supplier invoice&#39;s reference in your query parameter.</p>
+<p>This API endpoint retrieves detailed information about a specific purchase invoice in Ezus.</p>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="s1">'https://api.ezus.app/invoice-supplier?reference=invoice_supplier_reference'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'x-api-key: &lt;YOUR_API_KEY&gt;'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Authorization: Bearer &lt;YOUR_TOKEN&gt;'</span>
@@ -3533,7 +3533,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <tr>
 <td>reference</td>
 <td>String</td>
-<td><span style="color:red">(Required)</span> The reference of the invoice you wish to retrieve</td>
+<td><span style="color:red">(Required)</span> The reference of the invoice to retrieve</td>
 </tr>
 </tbody></table>
 <h3 id='response-21'>Response</h3>
@@ -3854,7 +3854,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <tr>
 <td>event_type</td>
 <td>String</td>
-<td><span style="color:red">(Required)</span> The event type you wish to retrieve</td>
+<td><span style="color:red">(Required)</span> The event type to retrieve</td>
 </tr>
 </tbody></table>
 <h3 id='response-24'>Response</h3>
