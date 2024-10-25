@@ -214,7 +214,7 @@ A JSON object containing the project information with properties like:
 
 ## GET project
 
-This API endpoint allows you to retrieve information for a specific project record in Ezus. To do so, you need to specify the project's reference in your query parameter.
+This API endpoint retrieves detailed information about a specific project in Ezus.
 
 ```shell
 curl --location 'https://api.ezus.app/project?reference=project_reference' \
@@ -301,9 +301,9 @@ axios.get(baseUrl + "/project?reference=project_reference", headers);
 
 ### Query Parameters
 
-| Parameter | Type   | Description                                                                                 |
-| --------- | ------ | ------------------------------------------------------------------------------------------- |
-| reference | String | <span style="color:red">(Required)</span> The reference of the project you wish to retrieve |
+| Parameter | Type   | Description                                                                        |
+| --------- | ------ | ---------------------------------------------------------------------------------- |
+| reference | String | <span style="color:red">(Required)</span> The reference of the project to retrieve |
 
 ### Response
 
@@ -325,7 +325,7 @@ A JSON object containing the project information with properties like:
 
 ## GET project-documents
 
-It returns a list of documents in your project, sorted from the most recent to the oldest, with the newest document appearing first. To do so, you need to specify the project's reference in your query parameter.
+Returns the list of documents of your project, sorted from the most recent to the oldest.
 
 ```shell
 curl --location 'https://api.ezus.app/project-documents?reference=project_reference' \
@@ -375,10 +375,10 @@ axios.get(baseUrl + "/project-documents?reference=project_reference", headers);
 
 ### Query Parameters
 
-| Parameter         | Type   | Description                                                                                                                                                                                                                                                              |
-| ----------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| reference         | String | <span style="color:red">(Required)</span> Specify this parameter to retrieve the documents associated with the project reference ID.                                                                                                                                     |
-| alternative_order | Number | You can iterate through the alternatives of your project by specifying this parameter. If not provided, it is set by default to 0 and it displays documents from the main project. The accepted values range from 0 to the total number of alternatives the project has. |
+| Parameter         | Type   | Description                                                                                                                    |
+| ----------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------ |
+| reference         | String | <span style="color:red">(Required)</span> The reference of the project to retrieve documents from                              |
+| alternative_order | Number | Specifies the alternative order in the project to retrieve documents from. If not provided, defaults to 0 for main alternative |
 
 ### Response
 
@@ -386,13 +386,13 @@ A JSON object containing the project documents information with properties like:
 
 | Property          | Type   | Description                                                                                                                                                                                                                       |
 | ----------------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| reference         | String | This is the reference ID that identifies which main project these documents belong to. It is also included in the parameters passed in query.                                                                                     |
-| alternative_order | Number | This value indicates which alternate project’s documents are being fetched. If the value is 0, it refers to the documents of the main project.                                                                                    |
+| reference         | String | The reference of the project                                                                                                                                                                                                      |
+| alternative_order | Number | The alternative order; 0 is for main alternative                                                                                                                                                                                  |
 | documents         | Array  | An array of JSON objects, each representing a document. The documents are sorted by their creation date, with the most recently created appearing first. Each document includes the following fields: `title`, `type`, and `url`. |
 
 ## POST projects-upsert
 
-It updates a project record if the provided reference does match one of the project references in your account, otherwise it creates a new project record with the provided reference (or with a random one if no reference is provided).
+This API endpoint updates a project record if the provided reference matches an existing project in your account. If no match is found, a new project record is created with the provided reference, or a randomly generated one if no reference is supplied.
 
 ```shell
 curl --location 'https://api.ezus.app/projects-upsert' \
@@ -482,7 +482,7 @@ A JSON object indicating whether an error occurred during the process, along wit
 
 ## POST projects-documents-create
 
-This API endpoint enables the creation of a PDF document based on the provided link within the specified project, using the project_reference as its reference.
+This API endpoint generates a PDF document from a given link within the specified project.
 
 ```shell
 curl --location 'https://api.ezus.app/projects-documents-create' \
@@ -639,7 +639,7 @@ A JSON object containing the client information with properties like:
 
 ## GET client
 
-This API endpoint allows you to retrieve information for a specific client record in Ezus. To do so, you need to specify the client's reference in your query parameter.
+This API endpoint retrieves detailed information about a specific client in Ezus.
 
 ```shell
 curl --location 'https://api.ezus.app/client?reference=client_reference' \
@@ -733,9 +733,9 @@ axios.get(baseUrl + "/client?reference=client_reference", headers);
 
 ### Query Parameters
 
-| Parameter | Type   | Description                                                                                |
-| --------- | ------ | ------------------------------------------------------------------------------------------ |
-| reference | String | <span style="color:red">(Required)</span> The reference of the client you wish to retrieve |
+| Parameter | Type   | Description                                                                       |
+| --------- | ------ | --------------------------------------------------------------------------------- |
+| reference | String | <span style="color:red">(Required)</span> The reference of the client to retrieve |
 
 ### Response
 
@@ -762,7 +762,7 @@ A JSON object containing the client information with properties like:
 
 ## POST clients-upsert
 
-This API endpoint allows you to update a client record if the provided reference (or email) matches one of the client references in your account. If no match is found, it creates a new client record with the provided reference (or a random one if no reference is provided). You can use the client's email as the primary key for upserting.
+This API endpoint updates a client record if the provided reference or email matches an existing client in your account. If no match is found, a new client record is created with the provided reference, or a randomly generated one if no reference is supplied. The client's email can be used as the primary key for upsert operations.
 
 ```shell
 curl --location 'https://api.ezus.app/clients-upsert' \
@@ -959,7 +959,7 @@ A JSON object containing the supplier information with properties like:
 
 ## GET supplier
 
-This API endpoint allows you to retrieve information for a specific supplier record in Ezus. To do so, you need to specify the supplier's reference in your query parameter.
+This API endpoint retrieves detailed information about a specific supplier in Ezus.
 
 ```shell
 curl --location 'https://api.ezus.app/supplier?reference=supplier_reference' \
@@ -1072,9 +1072,9 @@ axios.get(baseUrl + "/supplier?reference=supplier_reference", headers);
 
 ### Query Parameters
 
-| Parameter | Type   | Description                                                                                  |
-| --------- | ------ | -------------------------------------------------------------------------------------------- |
-| reference | String | <span style="color:red">(Required)</span> The reference of the supplier you wish to retrieve |
+| Parameter | Type   | Description                                                                         |
+| --------- | ------ | ----------------------------------------------------------------------------------- |
+| reference | String | <span style="color:red">(Required)</span> The reference of the supplier to retrieve |
 
 ### Response
 
@@ -1299,7 +1299,7 @@ A JSON object containing the product information with properties like:
 
 ## GET product
 
-This API endpoint allows you to retrieve information for a specific product record in Ezus. To do so, you need to specify the product's reference in your query parameter.
+This API endpoint retrieves detailed information about a specific product in Ezus.
 
 ```shell
 curl --location 'https://api.ezus.app/product?reference=product_reference' \
@@ -1399,9 +1399,9 @@ axios.get(baseUrl + "/product?reference=product_reference", headers);
 
 ### Query Parameters
 
-| Parameter | Type   | Description                                                                                 |
-| --------- | ------ | ------------------------------------------------------------------------------------------- |
-| reference | String | <span style="color:red">(Required)</span> The reference of the product you wish to retrieve |
+| Parameter | Type   | Description                                                                        |
+| --------- | ------ | ---------------------------------------------------------------------------------- |
+| reference | String | <span style="color:red">(Required)</span> The reference of the product to retrieve |
 
 ### Response
 
@@ -1540,7 +1540,7 @@ A JSON object indicating whether an error occurred during the process, along wit
 
 ## GET package
 
-This API endpoint allows you to retrieve information for a specific package record in Ezus. To do so, you need to specify the package's reference in your query parameter.
+This API endpoint retrieves detailed information about a specific package in Ezus.
 
 ```shell
 curl --location 'https://api.ezus.app/package?reference=package_reference' \
@@ -1633,9 +1633,9 @@ axios.get(baseUrl + "/package?reference=package_reference", headers);
 
 ### Query Parameters
 
-| Parameter | Type   | Description                                                                                 |
-| --------- | ------ | ------------------------------------------------------------------------------------------- |
-| reference | String | <span style="color:red">(Required)</span> The reference of the package you wish to retrieve |
+| Parameter | Type   | Description                                                                        |
+| --------- | ------ | ---------------------------------------------------------------------------------- |
+| reference | String | <span style="color:red">(Required)</span> The reference of the package to retrieve |
 
 ### Response
 
@@ -1851,7 +1851,7 @@ A JSON object containing the invoice information with properties like:
 
 ## GET invoice
 
-This API endpoint allows you to retrieve information for a specific invoice record in Ezus. To do so, you need to specify the invoice's reference in your query parameter.
+This API endpoint retrieves detailed information about a specific invoice in Ezus.
 
 ```shell
 curl --location 'https://api.ezus.app/invoice?reference=invoice_reference' \
@@ -1941,9 +1941,9 @@ axios.get(baseUrl + "/invoice?reference=invoice_reference", headers);
 
 ### Query Parameters
 
-| Parameter | Type   | Description                                                                                 |
-| --------- | ------ | ------------------------------------------------------------------------------------------- |
-| reference | String | <span style="color:red">(Required)</span> The reference of the invoice you wish to retrieve |
+| Parameter | Type   | Description                                                                        |
+| --------- | ------ | ---------------------------------------------------------------------------------- |
+| reference | String | <span style="color:red">(Required)</span> The reference of the invoice to retrieve |
 
 ### Response
 
@@ -2044,7 +2044,7 @@ A JSON object indicating whether an error occurred during the process, along wit
 
 ## GET invoice-supplier
 
-This API endpoint allows you to retrieve information for a specific supplier invoice record in Ezus. To do so, you need to specify the supplier invoice's reference in your query parameter.
+This API endpoint retrieves detailed information about a specific purchase invoice in Ezus.
 
 ```shell
 curl --location 'https://api.ezus.app/invoice-supplier?reference=invoice_supplier_reference' \
@@ -2139,9 +2139,9 @@ axios.get(
 
 ### Query Parameters
 
-| Parameter | Type   | Description                                                                                 |
-| --------- | ------ | ------------------------------------------------------------------------------------------- |
-| reference | String | <span style="color:red">(Required)</span> The reference of the invoice you wish to retrieve |
+| Parameter | Type   | Description                                                                        |
+| --------- | ------ | ---------------------------------------------------------------------------------- |
+| reference | String | <span style="color:red">(Required)</span> The reference of the invoice to retrieve |
 
 ### Response
 
@@ -2355,9 +2355,9 @@ axios.get(baseUrl + "/webhooks-last?event_type=projects.created", headers);
 
 ### Query Parameters
 
-| Parameter  | Type   | Description                                                                   |
-| ---------- | ------ | ----------------------------------------------------------------------------- |
-| event_type | String | <span style="color:red">(Required)</span> The event type you wish to retrieve |
+| Parameter  | Type   | Description                                                          |
+| ---------- | ------ | -------------------------------------------------------------------- |
+| event_type | String | <span style="color:red">(Required)</span> The event type to retrieve |
 
 ### Response
 
