@@ -140,6 +140,36 @@
       "response": []
     },
     {
+      "name": "project-steps",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "X-API-KEY",
+            "value": "{{<YOUR_API_KEY>}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/project-steps?reference=project_reference&alternative_order=0",
+          "host": ["{{baseUrl}}"],
+          "path": ["project-steps"],
+          "query": [
+            {
+              "key": "reference",
+              "value": "project_reference"
+            },
+            {
+              "key": "alternative_order",
+              "value": "0",
+              "disabled": true
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
       "name": "projects-upsert",
       "request": {
         "method": "POST",
