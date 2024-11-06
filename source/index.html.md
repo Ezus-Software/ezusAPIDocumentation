@@ -1326,6 +1326,7 @@ axios.get(baseUrl + "/product?reference=product_reference", headers);
   "error": "false",
   "reference": "product_reference",
   "title": "2-bed room with breakfast",
+  "info_notes": "Product's notes",
   "capacity": "2",
   "quantity": "1",
   "vat_regime": "margin",
@@ -1382,8 +1383,7 @@ axios.get(baseUrl + "/product?reference=product_reference", headers);
       "name": "View",
       "value": "Parking"
     }
-  ],
-  "info_notes": "Product's notes"
+  ]
 }
 ```
 
@@ -1409,9 +1409,10 @@ axios.get(baseUrl + "/product?reference=product_reference", headers);
 A JSON object containing the product information with properties like:
 
 | Property        | Type   | Description                                                                                                                                                                                                                              |
-| --------------- | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| --------------- | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --- |
 | reference       | String | The reference of the product                                                                                                                                                                                                             |
 | title           | String | Name of the product                                                                                                                                                                                                                      |
+| info_notes      | String | Notes about your product                                                                                                                                                                                                                 |     |
 | capacity        | Number | Maximum number of people for which the product can be used                                                                                                                                                                               |
 | quantity        | String | The default number for this product when it is added to a project. It can either be a Number or one of these letters (`P` = Number of people in the project, `D` = Number of days in the project, `N` = Number of nights in the project) |
 | vat_regime      | String | Can be either `classic` (common law VAT), `margin` (VAT on the margin), `none` (Non applicable VAT)                                                                                                                                      |
@@ -1429,7 +1430,6 @@ A JSON object containing the product information with properties like:
 | langs           | Array  | Array of JSON langs ([Langs](#langs))                                                                                                                                                                                                    |
 | tariffs         | Array  | Array of JSON tariffs ([Tariffs](#tariffs))                                                                                                                                                                                              |
 | custom_fields   | Array  | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                                                                                            |
-| info_notes      | String | Notes about your product.                                                                                                                                                                                                                |
 |                 |
 
 ## POST products-upsert
@@ -1444,7 +1444,7 @@ curl --location 'https://api.ezus.app/products-upsert' \
 --data '{
     "reference": "product_reference",
     "title": "2-bed room with breakfast",
-    "info_notes":"Product\'s notes"
+    "info_notes": "The notes about the product",
     "quantity": "1",
     "capacity": "2",
     "supplier_reference": "supplier_reference",

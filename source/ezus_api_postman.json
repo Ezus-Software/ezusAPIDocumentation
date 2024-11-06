@@ -399,7 +399,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\n    \"reference\": \"product_reference\",\n    \"title\": \"2-bed room with breakfast\",\n    \"quantity\": \"1\",\n    \"capacity\": 2,\n    \"supplier_reference\": \"supplier_reference\",\n    \"package_reference\": \"package_reference\",\n    \"purchase_price\": 42,\n    \"sales_price\": 84,\n    \"vat_regime\": \"none\",\n    \"vat_rate\": 20,\n    \"currency\": \"USD\",\n    \"commission\": {\n       \"commission_mode\": \"purchase\",\n    \"commission_regime\": \"percent\",\n     \"value\": 10\n    },\n    \"custom_fields\": [\n        {\"name\": \"field_name\", \"value\": \"field_value\"}\n    ],\n    \"info_notes\": \"Product's notes\"\n}",
+          "raw": "{\n    \"reference\": \"product_reference\",\n    \"title\": \"2-bed room with breakfast\",\n    \"info_notes\": \"Product's notes\",\n    \"quantity\": \"1\",\n    \"capacity\": 2,\n    \"supplier_reference\": \"supplier_reference\",\n    \"package_reference\": \"package_reference\",\n    \"purchase_price\": 42,\n    \"sales_price\": 84,\n    \"vat_regime\": \"none\",\n    \"vat_rate\": 20,\n    \"currency\": \"USD\",\n    \"commission\": {\n       \"commission_mode\": \"purchase\",\n    \"commission_regime\": \"percent\",\n     \"value\": 10\n    },\n    \"custom_fields\": [\n        {\"name\": \"field_name\", \"value\": \"field_value\"}\n    ]}",
           "options": {
             "raw": {
               "language": "json"
