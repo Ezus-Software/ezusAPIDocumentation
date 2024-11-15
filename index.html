@@ -2338,6 +2338,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
   </span><span class="nl">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">"false"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"product_reference"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2-bed room with breakfast"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"info_notes"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Product's notes"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"capacity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"vat_regime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"margin"</span><span class="p">,</span><span class="w">
@@ -2452,6 +2453,11 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <td>Name of the product</td>
 </tr>
 <tr>
+<td>info_notes</td>
+<td>String</td>
+<td>Notes about your product</td>
+</tr>
+<tr>
 <td>capacity</td>
 <td>Number</td>
 <td>Maximum number of people for which the product can be used</td>
@@ -2536,6 +2542,11 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <td>Array</td>
 <td>Array of JSON custom fields (<a href="#custom-fields">Custom fields</a>)</td>
 </tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
 </tbody></table>
 <h2 id='post-products-upsert'>POST products-upsert</h2>
 <p>It updates a product record if the provided reference does match one of the product references in your account, otherwise it creates a new product record with the provided reference (or with a random one if no reference is provided).</p>
@@ -2546,6 +2557,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <span class="nt">--data</span> <span class="s1">'{
     "reference": "product_reference",
     "title": "2-bed room with breakfast",
+    "info_notes": "The notes about the product",
     "quantity": "1",
     "capacity": "2",
     "supplier_reference": "supplier_reference",
@@ -2562,7 +2574,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
     },
     "custom_fields": [
         {"name": "field_name", "value": "field_value"}
-    ]
+    ],
 }'</span>
 </code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">axios</span><span class="dl">"</span><span class="p">);</span>
 <span class="kd">const</span> <span class="nx">baseUrl</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">https://api.ezus.app</span><span class="dl">"</span><span class="p">;</span>
@@ -2570,6 +2582,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <span class="kd">const</span> <span class="nx">body</span> <span class="o">=</span> <span class="p">{</span>
   <span class="na">reference</span><span class="p">:</span> <span class="dl">"</span><span class="s2">product_reference</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">title</span><span class="p">:</span> <span class="dl">"</span><span class="s2">2-bed room with breakfast</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">info_notes</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Product's notes</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">quantity</span><span class="p">:</span> <span class="dl">"</span><span class="s2">1</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">capacity</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
   <span class="na">supplier_reference</span><span class="p">:</span> <span class="dl">"</span><span class="s2">supplier_reference</span><span class="dl">"</span><span class="p">,</span>
@@ -2640,6 +2653,11 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <td>title</td>
 <td>String</td>
 <td>Title of your product. This parameter is required if you create a new product</td>
+</tr>
+<tr>
+<td>info_notes</td>
+<td>String</td>
+<td>Notes about your product. This parameter is not required if you create or update a product</td>
 </tr>
 <tr>
 <td>quantity</td>
