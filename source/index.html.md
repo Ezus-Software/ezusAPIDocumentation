@@ -1180,7 +1180,7 @@ A JSON object containing the supplier information with properties like:
 | website       | String | Website of the supplier                                                                                                                                      |
 | capacity      | String | Maximum number of people for which the supplier can be used                                                                                                  |
 | type          | String | 3 options: `accom`, `activity`, `transport`. A supplier can have no type, 1 type or several types. In this case, the different types are separated by commas |
-| info_notes    | String | Notes on the supplier                                                                                                                                        |
+| info_notes    | String | The notes about the product                                                                                                                                  |
 | info_number   | String | File number that appears at the bottom of the supplier record. Not to be confused with reference!                                                            |
 | visual_url    | String | URL of the Google Slides visual linked to the supplier                                                                                                       |
 | user          | JSON   | JSON object user ([User](#user))                                                                                                                             |
