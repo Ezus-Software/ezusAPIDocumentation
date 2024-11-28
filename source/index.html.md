@@ -163,6 +163,8 @@ axios.get(baseUrl + "/projects", headers);
       "info_notes": "Jane has verbally confirmed our quotation",
       "info_number": "202306001-P",
       "currency": "€",
+      "created_at": "2024-06-18 15:45:00" ,
+      "updated_at": "2024-06-19 17:25:10" ,
       "sales_manager": {
         "email": "travel-design@e-corp.com",
         "first_name": "Alice",
@@ -193,12 +195,16 @@ axios.get(baseUrl + "/projects", headers);
 
 ### Query Parameters
 
-| Parameter            | Type   | Description                                                                                                            |
-| -------------------- | ------ | ---------------------------------------------------------------------------------------------------------------------- |
-| next_token           | String | Specify this parameter if you want to retrieve the following elements of a given list query                            |
-| sales_manager        | String | You can filter projects assigned to a specific sales manager. Expected format: email (john.doe@e-corp.com)             |
-| project_manager      | String | You can filter projects assigned to a specific project manager. Expected format: email (john.doe@e-corp.com)           |
-| info_stage_reference | String | You can filter projects that are in a specific stage. The stage of the project must be indicated by its technical name |
+| Parameter            | Type   | Description                                                                                                                                    |
+| -------------------- | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| next_token           | String | Specify this parameter if you want to retrieve the following elements of a given list query                                                    |
+| sales_manager        | String | You can filter projects assigned to a specific sales manager. Expected format: email (john.doe@e-corp.com)                                     |
+| project_manager      | String | You can filter projects assigned to a specific project manager. Expected format: email (john.doe@e-corp.com)                                   |
+| info_stage_reference | String | You can filter projects that are in a specific stage. The stage of the project must be indicated by its technical name                         |
+| created_at           | String | You can filter projects assigned to a specific or an intersection of creation date. Expected format: “YYYY-MM-DD” or “YYYY-MM-DD,YYYY-MM-DD”   |
+| updated_at           | String | You can filter projects assigned to a specific or an intersection of updated date. Expected format: “YYYY-MM-DD” or “YYYY-MM-DD,YYYY-MM-DD”    |
+| trip_date_in         | String | You can filter projects assigned to a specific or an intersection of trip start date. Expected format: “YYYY-MM-DD” or “YYYY-MM-DD,YYYY-MM-DD” |
+| trip_date_out        | String | You can filter projects assigned to a specific or an intersection of trip end date. Expected format: “YYYY-MM-DD” or “YYYY-MM-DD,YYYY-MM-DD”   |
 
 ### Response
 
@@ -246,6 +252,8 @@ axios.get(baseUrl + "/project?reference=project_reference", headers);
   "info_notes": "Jane has verbally confirmed our quotation",
   "info_number": "202306001-P",
   "currency": "€",
+  "created_at": "2024-06-18 15:45:00",
+  "updated_at": "2024-06-19 17:25:10",
   "sales_manager": {
     "email": "travel-design@e-corp.com",
     "first_name": "Alice",
@@ -318,6 +326,8 @@ A JSON object containing the project information with properties like:
 | info_notes           | String | Notes on the project                                                                             |
 | info_number          | String | File number that appears at the bottom of the project record. Not to be confused with reference! |
 | currency             | String | Default currency of the project                                                                  |
+| created_at           | String | Date of creation                                                                                 |
+| updated_at           | String | Date of the last update                                                                          |
 | sales_manager        | JSON   | JSON object representing the sales manager ([User](#user))                                       |
 | project_manager      | JSON   | JSON object representing the project manager ([User](#user))                                     |
 | alternatives         | Array  | Array of JSON alternatives ([Alternatives](#alternatives))                                       |
