@@ -252,8 +252,8 @@ axios.get(baseUrl + "/project?reference=project_reference", headers);
   "info_notes": "Jane has verbally confirmed our quotation",
   "info_number": "202306001-P",
   "currency": "€",
-  "created_at": "2024-06-18 15:45:00",
-  "updated_at": "2024-06-19 17:25:10",
+  "created_at": "2024-06-18",
+  "updated_at": "2024-06-19",
   "sales_manager": {
     "email": "travel-design@e-corp.com",
     "first_name": "Alice",
