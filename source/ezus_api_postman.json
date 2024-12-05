@@ -75,8 +75,25 @@
               "disabled": true
             },
             {
-              "key": "project_manager",
-              "value": "John Doe",
+              "key": "created_at",
+              "value": "2024-11-01",
+              "disabled": true
+            },
+            {
+              "key": "updated_at",
+              "value": "2024-11-01,2024-11-20",
+              "disabled": true
+            },
+
+            {
+              "key": "trip_date_in",
+              "value": "2024-11-01",
+              "disabled": true
+            },
+
+            {
+              "key": "trip_date_out",
+              "value": "2024-11-01,2024-11-20",
               "disabled": true
             }
           ]
