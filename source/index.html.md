@@ -163,8 +163,8 @@ axios.get(baseUrl + "/projects", headers);
       "info_notes": "Jane has verbally confirmed our quotation",
       "info_number": "202306001-P",
       "currency": "€",
-      "created_at": "2024-06-18 15:45:00",
-      "updated_at": "2024-06-19 17:25:10",
+      "created_at": "2024-06-18",
+      "updated_at": "2024-06-19",
       "sales_manager": {
         "email": "travel-design@e-corp.com",
         "first_name": "Alice",
@@ -195,16 +195,16 @@ axios.get(baseUrl + "/projects", headers);
 
 ### Query Parameters
 
-| Parameter            | Type   | Description                                                                                                                                    |
-| -------------------- | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------- |
-| next_token           | String | Specify this parameter if you want to retrieve the following elements of a given list query                                                    |
-| sales_manager        | String | You can filter projects assigned to a specific sales manager. Expected format: email (john.doe@e-corp.com)                                     |
-| project_manager      | String | You can filter projects assigned to a specific project manager. Expected format: email (john.doe@e-corp.com)                                   |
-| info_stage_reference | String | You can filter projects that are in a specific stage. The stage of the project must be indicated by its technical name                         |
-| created_at           | Date   | You can filter projects assigned to a specific or an intersection of creation date. Expected format: “YYYY-MM-DD” or “YYYY-MM-DD,YYYY-MM-DD”   |
-| updated_at           | Date   | You can filter projects assigned to a specific or an intersection of updated date. Expected format: “YYYY-MM-DD” or “YYYY-MM-DD,YYYY-MM-DD”    |
-| trip_date_in         | Date   | You can filter projects assigned to a specific or an intersection of trip start date. Expected format: “YYYY-MM-DD” or “YYYY-MM-DD,YYYY-MM-DD” |
-| trip_date_out        | Date   | You can filter projects assigned to a specific or an intersection of trip end date. Expected format: “YYYY-MM-DD” or “YYYY-MM-DD,YYYY-MM-DD”   |
+| Parameter            | Type   | Description                                                                                                                                                                                        |
+| -------------------- | ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| next_token           | String | Specify this parameter if you want to retrieve the following elements of a given list query                                                                                                        |
+| sales_manager        | String | You can filter projects assigned to a specific sales manager. Expected format: email (john.doe@e-corp.com)                                                                                         |
+| project_manager      | String | You can filter projects assigned to a specific project manager. Expected format: email (john.doe@e-corp.com)                                                                                       |
+| info_stage_reference | String | You can filter projects that are in a specific stage. The stage of the project must be indicated by its technical name                                                                             |
+| created_at           | Date   | You can filter projects assigned to a specific or an intersection of creation date. Expected format: “YYYY-MM-DD” or “YYYY-MM-DD,YYYY-MM-DD”. See [Date Format](#date-format) for more details.    |
+| updated_at           | Date   | You can filter projects assigned to a specific or an intersection of last update date. Expected format: “YYYY-MM-DD” or “YYYY-MM-DD,YYYY-MM-DD”. See [Date Format](#date-format) for more details. |
+| trip_date_in         | Date   | You can filter projects assigned to a specific or an intersection of trip start date. Expected format: “YYYY-MM-DD” or “YYYY-MM-DD,YYYY-MM-DD”. See [Date Format](#date-format) for more details.  |
+| trip_date_out        | Date   | You can filter projects assigned to a specific or an intersection of trip end date. Expected format: “YYYY-MM-DD” or “YYYY-MM-DD,YYYY-MM-DD”. See [Date Format](#date-format) for more details.    |
 
 ### Response
 
@@ -3168,6 +3168,24 @@ This event is triggered whenever a file is added to a supplier invoice.
 | supplier_reference | String | The reference of the supplier linked to this supplier invoice                                                                                                                                                     |
 | project_reference  | String | The reference of the project linked to this supplier invoice                                                                                                                                                      |
 | alternative        | JSON   | JSON including: `sort_order` and `title`                                                                                                                                                                          |
+
+# Date Format
+
+All dates in our API follow the `YYYY-MM-DD` format. While our database stores both date and time, the API only returns the date, excluding the time.
+
+### Date Format Details
+
+- `YYYY`: Represents the year in four digits (e.g., 2023).
+- `MM`: Represents the month in two digits, with leading zeros if necessary (e.g., 01 for January, 12 for December).
+- `DD`: Represents the day of the month in two digits, with leading zeros if necessary (e.g., 01 to 31).
+
+### Date Filters
+
+Date filters can be applied in two ways:
+
+1. **Single Date Filter**: If the user provides a single date, the API returns all objects with the matching date, regardless of the time. The results are sorted by time.
+
+2. **Date Range Filter**: If the user provides two dates, the API returns all objects with dates between the two provided dates, inclusive.
 
 # Rate Limits
 
