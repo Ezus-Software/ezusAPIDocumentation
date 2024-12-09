@@ -3188,9 +3188,8 @@ Date filters allow you to retrieve objects based on specific dates or date range
 **Single date filter**:
 
 - Retrieves all objects for a specific date
-- Date format: YYYY-MM-DD (Year-Month-Day)
-- Returns results sorted by time
-- Example: `"2024-12-01"` will return all objects from December 1st, 2024
+- Format: `"YYYY-MM-DD"` (Year-Month-Day)
+- Example: `"2024-12-01"` will return all objects dated December 1st, 2024
 
 **Date range filter**:
 
