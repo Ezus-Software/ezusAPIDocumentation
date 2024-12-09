@@ -3171,21 +3171,33 @@ This event is triggered whenever a file is added to a supplier invoice.
 
 # Date Format
 
-All dates in our API follow the `YYYY-MM-DD` format. While our database stores both date and time, the API only returns the date, excluding the time.
+All dates in our API follow the `YYYY-MM-DD` format. Our database stores dates in Central European Time (CET/CEST - UTC+1/UTC+2).
 
-### Date Format Details
+### Date format specifications
 
-- `YYYY`: Represents the year in four digits (e.g., 2023).
-- `MM`: Represents the month in two digits, with leading zeros if necessary (e.g., 01 for January, 12 for December).
-- `DD`: Represents the day of the month in two digits, with leading zeros if necessary (e.g., 01 to 31).
+- The API returns dates without specific time information
+- Dates are stored and processed in Paris local time
+- Date conversions automatically account for daylight saving time changes
+- A date like `2024-12-01` represents the full day in Central European Time
+  - `2024-11-30 23:30:00 UTC+0` will be considered as `2024-12-01` for instance
 
-### Date Filters
+### Date filters
 
-Date filters can be applied in two ways:
+Date filters allow you to retrieve objects based on specific dates or date ranges.
 
-1. **Single Date Filter**: If the user provides a single date, the API returns all objects with the matching date, regardless of the time. The results are sorted by time.
+**Single date filter**:
 
-2. **Date Range Filter**: If the user provides two dates, the API returns all objects with dates between the two provided dates, inclusive.
+- Retrieves all objects for a specific date
+- Date format: YYYY-MM-DD (Year-Month-Day)
+- Returns results sorted by time
+- Example: `"2024-12-01"` will return all objects from December 1st, 2024
+
+**Date range filter**:
+
+- Retrieves objects within a specified date range
+- Includes both start and end dates
+- Format: `"start_date,end_date"`
+- Example: `"2024-12-01,2024-12-31"` returns all objects from December 1st to December 31st, 2024
 
 # Rate Limits
 
