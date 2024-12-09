@@ -514,6 +514,17 @@
               </ul>
           </li>
           <li>
+            <a href="#date-format" class="toc-h1 toc-link" data-title="Date Format">Date Format</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#date-format-details" class="toc-h2 toc-link" data-title="Date Format Details">Date Format Details</a>
+                  </li>
+                  <li>
+                    <a href="#date-filters" class="toc-h2 toc-link" data-title="Date Filters">Date Filters</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
             <a href="#rate-limits" class="toc-h1 toc-link" data-title="Rate Limits">Rate Limits</a>
               <ul class="toc-list-h2">
                   <li>
@@ -676,6 +687,8 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
       </span><span class="nl">"info_notes"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Jane has verbally confirmed our quotation"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"info_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"202306001-P"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"€"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-06-18"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-06-19"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"sales_manager"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"travel-design@e-corp.com"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Alice"</span><span class="p">,</span><span class="w">
@@ -739,6 +752,26 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <td>info_stage_reference</td>
 <td>String</td>
 <td>You can filter projects that are in a specific stage. The stage of the project must be indicated by its technical name</td>
+</tr>
+<tr>
+<td>created_at</td>
+<td>Date</td>
+<td>You can filter projects assigned to a specific or an intersection of creation date. Expected format: “YYYY-MM-DD” or “YYYY-MM-DD,YYYY-MM-DD”. See <a href="#date-format">Date Format</a> for more details.</td>
+</tr>
+<tr>
+<td>updated_at</td>
+<td>Date</td>
+<td>You can filter projects assigned to a specific or an intersection of last update date. Expected format: “YYYY-MM-DD” or “YYYY-MM-DD,YYYY-MM-DD”. See <a href="#date-format">Date Format</a> for more details.</td>
+</tr>
+<tr>
+<td>trip_date_in</td>
+<td>Date</td>
+<td>You can filter projects assigned to a specific or an intersection of trip start date. Expected format: “YYYY-MM-DD” or “YYYY-MM-DD,YYYY-MM-DD”. See <a href="#date-format">Date Format</a> for more details.</td>
+</tr>
+<tr>
+<td>trip_date_out</td>
+<td>Date</td>
+<td>You can filter projects assigned to a specific or an intersection of trip end date. Expected format: “YYYY-MM-DD” or “YYYY-MM-DD,YYYY-MM-DD”. See <a href="#date-format">Date Format</a> for more details.</td>
 </tr>
 </tbody></table>
 <h3 id='response-2'>Response</h3>
@@ -804,6 +837,8 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
   </span><span class="nl">"info_notes"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Jane has verbally confirmed our quotation"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"info_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"202306001-P"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"€"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-06-18"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-06-19"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"sales_manager"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"travel-design@e-corp.com"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Alice"</span><span class="p">,</span><span class="w">
@@ -923,6 +958,16 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <td>currency</td>
 <td>String</td>
 <td>Default currency of the project</td>
+</tr>
+<tr>
+<td>created_at</td>
+<td>Date</td>
+<td>Date of creation</td>
+</tr>
+<tr>
+<td>updated_at</td>
+<td>Date</td>
+<td>Date of the last update</td>
 </tr>
 <tr>
 <td>sales_manager</td>
@@ -4252,12 +4297,12 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 </tr>
 <tr>
 <td>trip_date_in</td>
-<td>String</td>
+<td>Date</td>
 <td>Date of the beginning of this alternative, in a &quot;YYYY-MM-DD&quot; format string. If it&#39;s empty, the project has no dates</td>
 </tr>
 <tr>
 <td>trip_date_out</td>
-<td>String</td>
+<td>Date</td>
 <td>Date of the end of this alternative, in a &quot;YYYY-MM-DD&quot; format string. If it&#39;s empty, the project has no dates</td>
 </tr>
 <tr>
@@ -5237,6 +5282,21 @@ The name of custom fields refers to their technical name, not their display name
 <td>JSON including: <code>sort_order</code> and <code>title</code></td>
 </tr>
 </tbody></table>
+<h1 id='date-format'>Date Format</h1>
+<p>All dates in our API follow the <code>YYYY-MM-DD</code> format. While our database stores both date and time, the API only returns the date, excluding the time.</p>
+<h3 id='date-format-details'>Date Format Details</h3>
+<ul>
+<li><code>YYYY</code>: Represents the year in four digits (e.g., 2023).</li>
+<li><code>MM</code>: Represents the month in two digits, with leading zeros if necessary (e.g., 01 for January, 12 for December).</li>
+<li><code>DD</code>: Represents the day of the month in two digits, with leading zeros if necessary (e.g., 01 to 31).</li>
+</ul>
+<h3 id='date-filters'>Date Filters</h3>
+<p>Date filters can be applied in two ways:</p>
+
+<ol>
+<li><p><strong>Single Date Filter</strong>: If the user provides a single date, the API returns all objects with the matching date, regardless of the time. The results are sorted by time.</p></li>
+<li><p><strong>Date Range Filter</strong>: If the user provides two dates, the API returns all objects with dates between the two provided dates, inclusive.</p></li>
+</ol>
 <h1 id='rate-limits'>Rate Limits</h1><h3 id='daily-rate-limit'>Daily rate limit</h3>
 <p>For security reasons, the API allows you to make 10,000 calls per day period.
 What does this &quot;day period&quot; mean? It means we limit to 10,000 requests per day from the first request made. This limit is called later &quot;daily rate limit&quot; and is reset once the day is over.</p>
