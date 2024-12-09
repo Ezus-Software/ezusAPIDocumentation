@@ -517,10 +517,10 @@
             <a href="#date-format" class="toc-h1 toc-link" data-title="Date Format">Date Format</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#date-format-details" class="toc-h2 toc-link" data-title="Date Format Details">Date Format Details</a>
+                    <a href="#date-format-specifications" class="toc-h2 toc-link" data-title="Date format specifications">Date format specifications</a>
                   </li>
                   <li>
-                    <a href="#date-filters" class="toc-h2 toc-link" data-title="Date Filters">Date Filters</a>
+                    <a href="#date-filters" class="toc-h2 toc-link" data-title="Date filters">Date filters</a>
                   </li>
               </ul>
           </li>
@@ -5283,20 +5283,38 @@ The name of custom fields refers to their technical name, not their display name
 </tr>
 </tbody></table>
 <h1 id='date-format'>Date Format</h1>
-<p>All dates in our API follow the <code>YYYY-MM-DD</code> format. While our database stores both date and time, the API only returns the date, excluding the time.</p>
-<h3 id='date-format-details'>Date Format Details</h3>
+<p>All dates in our API follow the <code>YYYY-MM-DD</code> format. Our database stores dates in Central European Time (CET/CEST - UTC+1/UTC+2).</p>
+<h3 id='date-format-specifications'>Date format specifications</h3>
 <ul>
-<li><code>YYYY</code>: Represents the year in four digits (e.g., 2023).</li>
-<li><code>MM</code>: Represents the month in two digits, with leading zeros if necessary (e.g., 01 for January, 12 for December).</li>
-<li><code>DD</code>: Represents the day of the month in two digits, with leading zeros if necessary (e.g., 01 to 31).</li>
-</ul>
-<h3 id='date-filters'>Date Filters</h3>
-<p>Date filters can be applied in two ways:</p>
+<li>The API returns dates without specific time information</li>
+<li>Dates are stored and processed in Paris local time</li>
+<li>Date conversions automatically account for daylight saving time changes</li>
+<li>A date like <code>2024-12-01</code> represents the full day in Central European Time
 
-<ol>
-<li><p><strong>Single Date Filter</strong>: If the user provides a single date, the API returns all objects with the matching date, regardless of the time. The results are sorted by time.</p></li>
-<li><p><strong>Date Range Filter</strong>: If the user provides two dates, the API returns all objects with dates between the two provided dates, inclusive.</p></li>
-</ol>
+<ul>
+<li><code>2024-11-30 23:30:00 UTC+0</code> will be considered as <code>2024-12-01</code> for instance</li>
+</ul></li>
+</ul>
+<h3 id='date-filters'>Date filters</h3>
+<p>Date filters allow you to retrieve objects based on specific dates or date ranges.</p>
+
+<p><strong>Single date filter</strong>:</p>
+
+<ul>
+<li>Retrieves all objects for a specific date</li>
+<li>Date format: YYYY-MM-DD (Year-Month-Day)</li>
+<li>Returns results sorted by time</li>
+<li>Example: <code>&quot;2024-12-01&quot;</code> will return all objects from December 1st, 2024</li>
+</ul>
+
+<p><strong>Date range filter</strong>:</p>
+
+<ul>
+<li>Retrieves objects within a specified date range</li>
+<li>Includes both start and end dates</li>
+<li>Format: <code>&quot;start_date,end_date&quot;</code></li>
+<li>Example: <code>&quot;2024-12-01,2024-12-31&quot;</code> returns all objects from December 1st to December 31st, 2024</li>
+</ul>
 <h1 id='rate-limits'>Rate Limits</h1><h3 id='daily-rate-limit'>Daily rate limit</h3>
 <p>For security reasons, the API allows you to make 10,000 calls per day period.
 What does this &quot;day period&quot; mean? It means we limit to 10,000 requests per day from the first request made. This limit is called later &quot;daily rate limit&quot; and is reset once the day is over.</p>
