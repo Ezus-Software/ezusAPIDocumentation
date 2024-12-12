@@ -877,6 +877,8 @@ curl --location 'https://api.ezus.app/clients-upsert' \
     "company_name": "MOKE INTERNATIONAL LIMITED",
     "website": "www.moke_ltd.com",
     "user": "sam@proton.me",
+    "company_number": "362 521 879 00034",
+    "vat_number": "FR 32 123456789",
     "contact": {
         "email": "contact@moke-international.com",
         "first_name": "Jane",
@@ -908,6 +910,8 @@ const body = {
   company_name: "MOKE INTERNATIONAL LIMITED",
   website: "www.moke_ltd.com",
   user: "sam@proton.me",
+  company_number: "362 521 879 00034",
+  vat_number: "FR 32 123456789",
   contact: {
     email: "contact@moke-international.com",
     first_name: "Jane",
