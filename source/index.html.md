@@ -9,6 +9,7 @@ toc_footers:
   - <a href='https://ezus.io/' target="_blank">Documentation Powered by Ezus</a>
 
 includes:
+  - warnings
   - errors
 
 search: true
