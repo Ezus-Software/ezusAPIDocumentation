@@ -512,6 +512,7 @@ curl --location 'https://api.ezus.app/projects-upsert' \
     "trip_date_out": "2023-03-09",
     "sales_manager_email": "travel-design@e-corp.com",
     "client_reference": "client_reference",
+    "info_number": "202306001-P",
     "custom_fields": [
         {"name": "field_name", "value": "field_value" }
     ]
@@ -532,6 +533,7 @@ const body = {
   trip_date_out: "2023-03-09",
   sales_manager_email: "travel-design@e-corp.com",
   client_reference: "client_reference",
+  info_number: "202306001-P",
   custom_fields: [{ name: "field_name", value: "field_value" }],
 };
 const headers = {
@@ -577,6 +579,7 @@ axios.post(baseUrl + "/projects-upsert", body, headers);
 | trip_date_out        | Date   | Date of the project's end in "YYYY-MM-DD" format (only settable when creating a new project). If not provided or if not formatted correctly, or if duration > 40 days or if trip_date_in > trip_date_out, project will be set as 1 day and trip_date_out as today.  |
 | sales_manager_email  | Email  | Email of the Ezus user to be set as the sales manager of the project                                                                                                                                                                                                |
 | client_reference     | String | Reference or email of an existing client in your Ezus account to link to the project (only settable when creating a new project)                                                                                                                                    |
+| info_number          | String | File number that appears at the bottom of the project record. Not to be confused with reference!                                                                                                                                                                    |
 | custom_fields        | JSON   | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                                                                                                                       |
 
 ### Response
@@ -893,6 +896,7 @@ curl --location 'https://api.ezus.app/clients-upsert' \
         "country": "France",
         "zip": "75010"
     },
+    "info_number": "202306001-C",
     "custom_fields": [
         {"name": "field_name", "value": "field_value"}
     ]
@@ -924,6 +928,7 @@ const body = {
     country: "France",
     zip: "75010",
   },
+  info_number: "202306001-P",
   custom_fields: [{ name: "field_name", value: "field_value" }],
 };
 const headers = {
@@ -966,6 +971,7 @@ axios.post(baseUrl + "/clients-upsert", body, headers);
 | user          | Email  | Email of the Ezus user to be set as the owner of the client                                                                                                                                                            |
 | contact       | JSON   | A single JSON element ([Contacts](#contacts)) representing the main                                                                                                                                                    |
 | address       | JSON   | JSON object address ([Address](#address)) To reset the address, you can put `'0'`                                                                                                                                      |
+| info_number   | String | File number that appears at the bottom of the project record. Not to be confused with reference!                                                                                                                       |
 | custom_fields | JSON   | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                                                                          |
 
 ### Response
@@ -1232,6 +1238,7 @@ curl --location 'https://api.ezus.app/suppliers-upsert' \
         "country": "France",
         "zip": "75010"
     },
+    "info_number": "202306001-S",
     "custom_fields": [
         {"name": "field_name", "value": "field_value"}
     ]
@@ -1264,6 +1271,7 @@ const body = {
     country: "France",
     zip: "75010",
   },
+  info_number: "202306001-S",
   custom_fields: [
     { name: "field_name", value: "field_value" }
   ],
@@ -1307,6 +1315,7 @@ axios.post(baseUrl + "/suppliers-upsert", body, headers);
 | type          | String | Either `undefined` or a combination of these 3 options: `accom`, `activity`, `transport`. You can select multiple options by separating them with comas ("accom, activity" for instance). Enter "undefined" if you want to reset this parameter. |
 | contact       | JSON   | Contact is a single JSON and email is needed. Note that only one contact can be upsert this way (the main contact of the supplier) ([Contact](#contacts)) To reset the main contact, you can put `'0'`                                           |
 | address       | JSON   | JSON object address ([Address](#address)) To reset the address, you can put `'0'`                                                                                                                                                                |
+| info_number   | String | File number that appears at the bottom of the project record. Not to be confused with reference!                                                                                                                                                 |
 | custom_fields | JSON   | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                                                                                                    |
 
 ### Response
@@ -1562,6 +1571,7 @@ curl --location 'https://api.ezus.app/products-upsert' \
         "commission_regime": "percent",
         "value": 10
     },
+    "info_number": "202306001-PR",
     "custom_fields": [
         {"name": "field_name", "value": "field_value"}
     ],
@@ -1590,6 +1600,7 @@ const body = {
     commission_regime: "percent",
     value: "10",
   },
+  info_number: "202306001-PR",
   custom_fields: [{ name: "field_name", value: "field_value" }],
 };
 const headers = {
@@ -1639,6 +1650,7 @@ axios.post(baseUrl + "/products-upsert", body, headers);
 | vat_rate           | Number | Default VAT rate. If empty or not provided, your default account VAT rate will be set                                                                                                                                                                                   |
 | currency           | String | The ISO 4217 code of the currency of this product (<a href="https://docs.google.com/spreadsheets/d/1b7BNOwKyN1hMOouve6xhFZ2R2zrH4Sj1L-646j755fU/edit?usp=sharing" target="_blank">Link to Doc</a>). If empty or not provided, your default account currency will be set |
 | commission         | JSON   | A JSON object containing `value`, `commission_regime` ("percent" or "amount"), `commission_mode` ("sales" or "purchase")                                                                                                                                                |
+| info_number        | String | File number that appears at the bottom of the project record. Not to be confused with reference!                                                                                                                                                                        |
 | custom_fields      | JSON   | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                                                                                                                           |
 
 ### Response
@@ -1777,6 +1789,7 @@ curl --location 'https://api.ezus.app/packages-upsert' \
     "reference": "package_reference",
     "title": "The best package",
     "capacity": "2",
+    "info_number": "202306001-PK",
     "custom_fields": [
         {"name": "field_name", "value": "field_value"}
     ]
@@ -1792,6 +1805,7 @@ const body = {
   reference: "package_reference",
   title: "The best package",
   capacity: "2",
+  info_number: "202306001-PK",
   custom_fields: [{ name: "field_name", value: "field_value" }],
 };
 const headers = {
@@ -1831,6 +1845,7 @@ axios.post(baseUrl + "/packages-upsert", body, headers);
 | reference     | String | If provided, the unique Ezus Reference associated to the package you want to update or create (in case the one you provided has never been used). If no reference is provided, a package will be created with a random one. |
 | title         | String | This parameter is required if you create a new package                                                                                                                                                                      |
 | capacity      | Number | Maximum number of people for which the package can be used . Leave blank `''` if not relevant                                                                                                                               |
+| info_number   | String | File number that appears at the bottom of the project record. Not to be confused with reference!                                                                                                                            |
 | custom_fields | JSON   | Array of JSON custom fields [Custom fields](#custom-fields)                                                                                                                                                                 |
 
 ### Response
