@@ -2140,12 +2140,12 @@ axios.put(baseUrl + "/invoices-update", body, headers);
 
 ### Body Parameters (application/json)
 
-| Parameter     | Type   | Description                                                                                         |
-| ------------- | ------ | --------------------------------------------------------------------------------------------------- |
-| reference     | String | The reference of the invoice you want to update                                                     |
-| stage         | String | stage can be updated only if the invoice is a draft, the stage can be `completed` or `paid`         |
-| due_date      | String | due_date can be updated only if the invoice is a draft, due_date can be only on format `YYYY-MM-DD` |
-| custom_fields | JSON   | Array of JSON custom fields ([Custom fields](#custom-fields))                                       |
+| Parameter     | Type   | Description                                                                                                                                                                                                             |
+| ------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| reference     | String | The reference of the invoice you want to update                                                                                                                                                                         |
+| stage         | String | The stage can be updated as follows: you can move from `draft` to `paid` or `completed`, from `paid` to `completed` and vice versa, but it is not possible to revert to `draft` once the stage is `paid` or `completed` |
+| due_date      | String | due_date can be updated only if the invoice is a draft, due_date can be only on format `YYYY-MM-DD`                                                                                                                     |
+| custom_fields | JSON   | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                                                                           |
 
 ### Response
 
