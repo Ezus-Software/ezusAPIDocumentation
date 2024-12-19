@@ -317,21 +317,21 @@ axios.get(baseUrl + "/project?reference=project_reference", headers);
 
 A JSON object containing the project information with properties like:
 
-| Property             | Type   | Description                                                                                      |
-| -------------------- | ------ | ------------------------------------------------------------------------------------------------ |
-| reference            | String | The reference of the project                                                                     |
-| info_title           | String | The title of the project                                                                         |
-| info_stage           | String | The stage of the project (Confirmed, Received, Paid...)                                          |
-| info_stage_reference | String | Technical name of the stage of the project (confirmed, received, paid...)                        |
-| info_notes           | String | Notes on the project                                                                             |
-| info_number          | String | File number that appears at the bottom of the project record. Not to be confused with reference! |
-| currency             | String | Default currency of the project                                                                  |
-| created_at           | Date   | Date of creation                                                                                 |
-| updated_at           | Date   | Date of the last update                                                                          |
-| sales_manager        | JSON   | JSON object representing the sales manager ([User](#user))                                       |
-| project_manager      | JSON   | JSON object representing the project manager ([User](#user))                                     |
-| alternatives         | Array  | Array of JSON alternatives ([Alternatives](#alternatives))                                       |
-| custom_fields        | Array  | Array of JSON custom fields ([Custom fields](#custom-fields))                                    |
+| Property             | Type   | Description                                                                        |
+| -------------------- | ------ | ---------------------------------------------------------------------------------- |
+| reference            | String | The reference of the project                                                       |
+| info_title           | String | The title of the project                                                           |
+| info_stage           | String | The stage of the project (Confirmed, Received, Paid...)                            |
+| info_stage_reference | String | Technical name of the stage of the project (confirmed, received, paid...)          |
+| info_notes           | String | Notes on the project                                                               |
+| info_number          | String | File number that appears in the project record. Not to be confused with reference! |
+| currency             | String | Default currency of the project                                                    |
+| created_at           | Date   | Date of creation                                                                   |
+| updated_at           | Date   | Date of the last update                                                            |
+| sales_manager        | JSON   | JSON object representing the sales manager ([User](#user))                         |
+| project_manager      | JSON   | JSON object representing the project manager ([User](#user))                       |
+| alternatives         | Array  | Array of JSON alternatives ([Alternatives](#alternatives))                         |
+| custom_fields        | Array  | Array of JSON custom fields ([Custom fields](#custom-fields))                      |
 
 ## GET project-documents
 
@@ -551,7 +551,9 @@ axios.post(baseUrl + "/projects-upsert", body, headers);
   "error": "false",
   "message": "ok",
   "action": "Project successfully created",
-  "reference": "project_reference"
+  "reference": "project_reference",
+  "client_reference": "client_reference",
+  "info_number": "202306001-P"
 }
 ```
 
@@ -579,12 +581,19 @@ axios.post(baseUrl + "/projects-upsert", body, headers);
 | trip_date_out        | Date   | Date of the project's end in "YYYY-MM-DD" format (only settable when creating a new project). If not provided or if not formatted correctly, or if duration > 40 days or if trip_date_in > trip_date_out, project will be set as 1 day and trip_date_out as today.  |
 | sales_manager_email  | Email  | Email of the Ezus user to be set as the sales manager of the project                                                                                                                                                                                                |
 | client_reference     | String | Reference or email of an existing client in your Ezus account to link to the project (only settable when creating a new project)                                                                                                                                    |
-| info_number          | String | File number that appears at the bottom of the project record. Not to be confused with reference!                                                                                                                                                                    |
+| info_number          | String | File number that appears in the project record. Not to be confused with reference!                                                                                                                                                                                  |
 | custom_fields        | JSON   | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                                                                                                                       |
 
 ### Response
 
-A JSON object indicating whether an error occurred during the process, along with the associated message. If successful, it also returns a `reference` for the project, which you should store for future updates or retrievals.
+A JSON object indicating whether an error occurred during the process and containing properties about your created or updated project:
+
+| Property         | Type   | Description                                                                                        |
+| ---------------- | ------ | -------------------------------------------------------------------------------------------------- |
+| action           | String | A string describing the action you have performed.                                                 |
+| reference        | String | The unique reference of the project, which should be stored for future updates or retrievals.      |
+| client_reference | String | The reference of the client associated with your project.                                          |
+| info_number      | String | The file number that appears in the project record. Not to be confused with the project reference! |
 
 ## POST projects-documents-create
 
@@ -847,24 +856,24 @@ axios.get(baseUrl + "/client?reference=client_reference", headers);
 
 A JSON object containing the client information with properties like:
 
-| Property      | Type   | Description                                                                                     |
-| ------------- | ------ | ----------------------------------------------------------------------------------------------- |
-| reference     | String | The reference of the client                                                                     |
-| type          | String | The type of the client (either "enterprise" or "individual")                                    |
-| company_name  | String | Name of the client's company (if applicable)                                                    |
-| website       | String | Website of the client                                                                           |
-| first_name    | String | First name of the main contact at the client's organization                                     |
-| last_name     | String | Last name of the main contact at the client's organization                                      |
-| email         | String | Email of the main contact at the client's organization                                          |
-| vat_number    | String | VAT number of the client (only for "enterprise" clients)                                        |
-| siret         | String | Company registration number of the client (only for "enterprise" clients)                       |
-| info_notes    | String | Notes on the client                                                                             |
-| info_number   | String | File number that appears at the bottom of the client record. Not to be confused with reference! |
-| user          | JSON   | JSON object representing the user ([User](#user)) associated with the client                    |
-| address       | JSON   | JSON object representing the address ([Address](#address)) of the client                        |
-| projects      | JSON   | Projects linked to the client (returns the first 10 projects)                                   |
-| contacts      | Array  | An array of JSON contacts ([Contacts](#contacts)) associated with the client                    |
-| custom_fields | Array  | An array of JSON custom fields ([Custom fields](#custom-fields)) for the client                 |
+| Property      | Type   | Description                                                                       |
+| ------------- | ------ | --------------------------------------------------------------------------------- |
+| reference     | String | The reference of the client                                                       |
+| type          | String | The type of the client (either "enterprise" or "individual")                      |
+| company_name  | String | Name of the client's company (if applicable)                                      |
+| website       | String | Website of the client                                                             |
+| first_name    | String | First name of the main contact at the client's organization                       |
+| last_name     | String | Last name of the main contact at the client's organization                        |
+| email         | String | Email of the main contact at the client's organization                            |
+| vat_number    | String | VAT number of the client (only for "enterprise" clients)                          |
+| siret         | String | Company registration number of the client (only for "enterprise" clients)         |
+| info_notes    | String | Notes on the client                                                               |
+| info_number   | String | File number that appears in the client record. Not to be confused with reference! |
+| user          | JSON   | JSON object representing the user ([User](#user)) associated with the client      |
+| address       | JSON   | JSON object representing the address ([Address](#address)) of the client          |
+| projects      | JSON   | Projects linked to the client (returns the first 10 projects)                     |
+| contacts      | Array  | An array of JSON contacts ([Contacts](#contacts)) associated with the client      |
+| custom_fields | Array  | An array of JSON custom fields ([Custom fields](#custom-fields)) for the client   |
 
 ## POST clients-upsert
 
@@ -971,7 +980,7 @@ axios.post(baseUrl + "/clients-upsert", body, headers);
 | user          | Email  | Email of the Ezus user to be set as the owner of the client                                                                                                                                                            |
 | contact       | JSON   | A single JSON element ([Contacts](#contacts)) representing the main                                                                                                                                                    |
 | address       | JSON   | JSON object address ([Address](#address)) To reset the address, you can put `'0'`                                                                                                                                      |
-| info_number   | String | File number that appears at the bottom of the project record. Not to be confused with reference!                                                                                                                       |
+| info_number   | String | File number that appears in client record. Not to be confused with reference!                                                                                                                                          |
 | custom_fields | JSON   | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                                                                          |
 
 ### Response
@@ -1197,7 +1206,7 @@ A JSON object containing the supplier information with properties like:
 | capacity      | String | Maximum number of people for which the supplier can be used                                                                                                  |
 | type          | String | 3 options: `accom`, `activity`, `transport`. A supplier can have no type, 1 type or several types. In this case, the different types are separated by commas |
 | info_notes    | String | The notes about the product                                                                                                                                  |
-| info_number   | String | File number that appears at the bottom of the supplier record. Not to be confused with reference!                                                            |
+| info_number   | String | File number that appears in the supplier record. Not to be confused with reference!                                                                          |
 | visual_url    | String | URL of the Google Slides visual linked to the supplier                                                                                                       |
 | user          | JSON   | JSON object user ([User](#user))                                                                                                                             |
 | address       | JSON   | JSON object address ([Address](#address))                                                                                                                    |
@@ -1315,7 +1324,7 @@ axios.post(baseUrl + "/suppliers-upsert", body, headers);
 | type          | String | Either `undefined` or a combination of these 3 options: `accom`, `activity`, `transport`. You can select multiple options by separating them with comas ("accom, activity" for instance). Enter "undefined" if you want to reset this parameter. |
 | contact       | JSON   | Contact is a single JSON and email is needed. Note that only one contact can be upsert this way (the main contact of the supplier) ([Contact](#contacts)) To reset the main contact, you can put `'0'`                                           |
 | address       | JSON   | JSON object address ([Address](#address)) To reset the address, you can put `'0'`                                                                                                                                                                |
-| info_number   | String | File number that appears at the bottom of the project record. Not to be confused with reference!                                                                                                                                                 |
+| info_number   | String | File number that appears in the supplier record. Not to be confused with reference!                                                                                                                                                              |
 | custom_fields | JSON   | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                                                                                                    |
 
 ### Response
@@ -1533,7 +1542,7 @@ A JSON object containing the product information with properties like:
 | budget_text     | String | This is an empty string `""` if the product is not marked as an option in the budget, otherwise it is the custom label of the option to which the product is associated                                                                  |
 | buget_form      | String | `Important`, `Normal`, `Low` represent how the product will be highlight on the budget By Default                                                                                                                                        |
 | budget_variable | String | `Display`, `Do not Display`, this option tells if the product will be displayed or not in the budget                                                                                                                                     |
-| info_number     | String | File number that appears at the bottom of the product record. Not to be confused with reference!                                                                                                                                         |
+| info_number     | String | File number that appears in the product record. Not to be confused with reference!                                                                                                                                                       |
 | visual_url      | String | URL of the Google Slides visual linked to the product                                                                                                                                                                                    |
 | supplier        | JSON   | A JSON object containing `reference`, `company_name`                                                                                                                                                                                     |
 | package         | JSON   | A JSON object containing `reference`, `title`                                                                                                                                                                                            |
@@ -1650,7 +1659,7 @@ axios.post(baseUrl + "/products-upsert", body, headers);
 | vat_rate           | Number | Default VAT rate. If empty or not provided, your default account VAT rate will be set                                                                                                                                                                                   |
 | currency           | String | The ISO 4217 code of the currency of this product (<a href="https://docs.google.com/spreadsheets/d/1b7BNOwKyN1hMOouve6xhFZ2R2zrH4Sj1L-646j755fU/edit?usp=sharing" target="_blank">Link to Doc</a>). If empty or not provided, your default account currency will be set |
 | commission         | JSON   | A JSON object containing `value`, `commission_regime` ("percent" or "amount"), `commission_mode` ("sales" or "purchase")                                                                                                                                                |
-| info_number        | String | File number that appears at the bottom of the project record. Not to be confused with reference!                                                                                                                                                                        |
+| info_number        | String | File number that appears in the product record. Not to be confused with reference!                                                                                                                                                                                      |
 | custom_fields      | JSON   | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                                                                                                                           |
 
 ### Response
@@ -1762,19 +1771,19 @@ axios.get(baseUrl + "/package?reference=package_reference", headers);
 
 A JSON object containing the package information with properties like:
 
-| Property      | Type   | Description                                                                                      |
-| ------------- | ------ | ------------------------------------------------------------------------------------------------ |
-| reference     | String | The reference of the package                                                                     |
-| title         | String | Name of the package                                                                              |
-| capacity      | String | Maximum number of people for which the package can be used                                       |
-| info_notes    | String | Notes on the package                                                                             |
-| info_number   | String | File number that appears at the bottom of the package record. Not to be confused with reference! |
-| visual_url    | String | URL of the Google Slides visual linked to the package                                            |
-| products      | JSON   | JSON object products ([Products](#products))                                                     |
-| suppliers     | JSON   | JSON object suppliers ([Suppliers](#suppliers))                                                  |
-| medias        | JSON   | JSON object medias ([Medias](#medias))                                                           |
-| langs         | Array  | Array of JSON langs ([Langs](#langs))                                                            |
-| custom_fields | Array  | Array of JSON custom fields [Custom fields](#custom-fields)                                      |
+| Property      | Type   | Description                                                                        |
+| ------------- | ------ | ---------------------------------------------------------------------------------- |
+| reference     | String | The reference of the package                                                       |
+| title         | String | Name of the package                                                                |
+| capacity      | String | Maximum number of people for which the package can be used                         |
+| info_notes    | String | Notes on the package                                                               |
+| info_number   | String | File number that appears in the package record. Not to be confused with reference! |
+| visual_url    | String | URL of the Google Slides visual linked to the package                              |
+| products      | JSON   | JSON object products ([Products](#products))                                       |
+| suppliers     | JSON   | JSON object suppliers ([Suppliers](#suppliers))                                    |
+| medias        | JSON   | JSON object medias ([Medias](#medias))                                             |
+| langs         | Array  | Array of JSON langs ([Langs](#langs))                                              |
+| custom_fields | Array  | Array of JSON custom fields [Custom fields](#custom-fields)                        |
 
 ## POST packages-upsert
 
@@ -1845,7 +1854,7 @@ axios.post(baseUrl + "/packages-upsert", body, headers);
 | reference     | String | If provided, the unique Ezus Reference associated to the package you want to update or create (in case the one you provided has never been used). If no reference is provided, a package will be created with a random one. |
 | title         | String | This parameter is required if you create a new package                                                                                                                                                                      |
 | capacity      | Number | Maximum number of people for which the package can be used . Leave blank `''` if not relevant                                                                                                                               |
-| info_number   | String | File number that appears at the bottom of the project record. Not to be confused with reference!                                                                                                                            |
+| info_number   | String | File number that appears in the package record. Not to be confused with reference!                                                                                                                                          |
 | custom_fields | JSON   | Array of JSON custom fields [Custom fields](#custom-fields)                                                                                                                                                                 |
 
 ### Response
@@ -3018,7 +3027,7 @@ This event is triggered whenever a project is either created or duplicated.
 | trip_date_in  | String | Date of the beginning of this alternative, in a "YYYY-MM-DD" format string. If it's empty, the project has no dates. |
 | trip_date_out | String | Date of the end of this alternative, in a "YYYY-MM-DD" format string. If it's empty, the project has no dates.       |
 | trip_duration | String | Number of days this project lasts                                                                                    |
-| info_number   | String | File number that appears at the bottom of the project record. Not to be confused with reference!                     |
+| info_number   | String | File number that appears in the project record. Not to be confused with reference!                                   |
 
 ## projects.updated
 
@@ -3034,11 +3043,11 @@ This event is triggered whenever a project is updated. This event is triggered o
 }
 ```
 
-| Property    | Type   | Description                                                                                      |
-| ----------- | ------ | ------------------------------------------------------------------------------------------------ |
-| reference   | String | The reference of the project                                                                     |
-| info_title  | String | The title of the project                                                                         |
-| info_number | String | File number that appears at the bottom of the project record. Not to be confused with reference! |
+| Property    | Type   | Description                                                                        |
+| ----------- | ------ | ---------------------------------------------------------------------------------- |
+| reference   | String | The reference of the project                                                       |
+| info_title  | String | The title of the project                                                           |
+| info_number | String | File number that appears in the project record. Not to be confused with reference! |
 
 ## clients.created
 
@@ -3061,18 +3070,18 @@ This event is triggered whenever a client is created.
 }
 ```
 
-| Property     | Type   | Description                                                                                     |
-| ------------ | ------ | ----------------------------------------------------------------------------------------------- |
-| reference    | String | The reference of the client                                                                     |
-| type         | String | The type of the client can be either "enterprise" or "individual"                               |
-| company_name | String | Name of the company of the client                                                               |
-| first_name   | String | First name of the main contact of the client                                                    |
-| last_name    | String | Last name of the main contact of the client                                                     |
-| email        | String | Email of the main contact of the client                                                         |
-| gender       | String | `Mr`, `Ms` or `Undefined`                                                                       |
-| phone        | String | Phone number of the contact as a string                                                         |
-| birth_date   | String | Contact's date of birth in a "YYYY-MM-DD" format string                                         |
-| info_number  | String | File number that appears at the bottom of the client record. Not to be confused with reference! |
+| Property     | Type   | Description                                                                       |
+| ------------ | ------ | --------------------------------------------------------------------------------- |
+| reference    | String | The reference of the client                                                       |
+| type         | String | The type of the client can be either "enterprise" or "individual"                 |
+| company_name | String | Name of the company of the client                                                 |
+| first_name   | String | First name of the main contact of the client                                      |
+| last_name    | String | Last name of the main contact of the client                                       |
+| email        | String | Email of the main contact of the client                                           |
+| gender       | String | `Mr`, `Ms` or `Undefined`                                                         |
+| phone        | String | Phone number of the contact as a string                                           |
+| birth_date   | String | Contact's date of birth in a "YYYY-MM-DD" format string                           |
+| info_number  | String | File number that appears in the client record. Not to be confused with reference! |
 
 ## clients.updated
 
@@ -3088,11 +3097,11 @@ This event is triggered whenever a client is updated. This event is triggered on
 }
 ```
 
-| Property     | Type   | Description                                                                                     |
-| ------------ | ------ | ----------------------------------------------------------------------------------------------- |
-| reference    | String | The reference of the client                                                                     |
-| company_name | String | Name of the client's company                                                                    |
-| info_number  | String | File number that appears at the bottom of the client record. Not to be confused with reference! |
+| Property     | Type   | Description                                                                       |
+| ------------ | ------ | --------------------------------------------------------------------------------- |
+| reference    | String | The reference of the client                                                       |
+| company_name | String | Name of the client's company                                                      |
+| info_number  | String | File number that appears in the client record. Not to be confused with reference! |
 
 ## invoices.finalized
 
