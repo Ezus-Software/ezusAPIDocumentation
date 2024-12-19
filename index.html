@@ -3599,7 +3599,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <tr>
 <td>stage</td>
 <td>String</td>
-<td>stage can be updated only if the invoice is a draft, the stage can be <code>completed</code> or <code>paid</code></td>
+<td>Represents the stage of the invoice. Allowed updates: you can move from <code>draft</code> to <code>paid</code> or <code>completed</code>. Once set to paid or completed, switching between these stages is allowed. Reverting back to draft is not permitted</td>
 </tr>
 <tr>
 <td>due_date</td>
