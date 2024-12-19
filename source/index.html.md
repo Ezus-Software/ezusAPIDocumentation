@@ -586,14 +586,7 @@ axios.post(baseUrl + "/projects-upsert", body, headers);
 
 ### Response
 
-A JSON object indicating whether an error occurred during the process and containing properties about your created or updated project:
-
-| Property         | Type   | Description                                                                                        |
-| ---------------- | ------ | -------------------------------------------------------------------------------------------------- |
-| action           | String | A string describing the action you have performed.                                                 |
-| reference        | String | The unique reference of the project, which should be stored for future updates or retrievals.      |
-| client_reference | String | The reference of the client associated with your project.                                          |
-| info_number      | String | The file number that appears in the project record. Not to be confused with the project reference! |
+A JSON object indicating whether an error occurred during the process, along with the associated message. If successful, it also returns a `reference` for the project, which you should store for future updates or retrievals.
 
 ## POST projects-documents-create
 
