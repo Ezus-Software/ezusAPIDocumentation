@@ -980,7 +980,7 @@ axios.post(baseUrl + "/clients-upsert", body, headers);
 | user          | Email  | Email of the Ezus user to be set as the owner of the client                                                                                                                                                            |
 | contact       | JSON   | A single JSON element ([Contacts](#contacts)) representing the main                                                                                                                                                    |
 | address       | JSON   | JSON object address ([Address](#address)) To reset the address, you can put `'0'`                                                                                                                                      |
-| info_number   | String | File number that appears in client record. Not to be confused with reference!                                                                                                                                          |
+| info_number   | String | File number that appears in the client record. Not to be confused with reference!                                                                                                                                      |
 | custom_fields | JSON   | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                                                                          |
 
 ### Response
