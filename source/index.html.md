@@ -1841,7 +1841,7 @@ A JSON object indicating whether an error occurred during the process, along wit
 
 ## GET destinations
 
-Returns a list of all destinations and sub-destinations. The list is not paginated and is theoretically limited to 1000 objects (destinations + sub-destinations), although higher limits may work depending on the payload size. The order of the destinations and sub-destinations matches their order in Ezus.
+Returns a list of all destinations and sub-destinations. The list is not paginated and is theoretically limited to 1000 objects (destinations and sub-destinations), although higher limits may work depending on the payload size. The order of the destinations and sub-destinations matches their order in Ezus.
 
 ```shell
 curl --location 'https://api.ezus.app/destinations' \
