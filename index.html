@@ -536,6 +536,9 @@
               </ul>
           </li>
           <li>
+            <a href="#warnings" class="toc-h1 toc-link" data-title="Warnings">Warnings</a>
+          </li>
+          <li>
             <a href="#errors" class="toc-h1 toc-link" data-title="Errors">Errors</a>
           </li>
       </ul>
@@ -1755,6 +1758,8 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
     "company_name": "MOKE INTERNATIONAL LIMITED",
     "website": "www.moke_ltd.com",
     "user": "sam@proton.me",
+    "company_number": "362 521 879 00034",
+    "vat_number": "FR 32 123456789",
     "contact": {
         "email": "contact@moke-international.com",
         "first_name": "Jane",
@@ -1783,6 +1788,8 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
   <span class="na">company_name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">MOKE INTERNATIONAL LIMITED</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">website</span><span class="p">:</span> <span class="dl">"</span><span class="s2">www.moke_ltd.com</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">user</span><span class="p">:</span> <span class="dl">"</span><span class="s2">sam@proton.me</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">company_number</span><span class="p">:</span> <span class="dl">"</span><span class="s2">362 521 879 00034</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">vat_number</span><span class="p">:</span> <span class="dl">"</span><span class="s2">FR 32 123456789</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">contact</span><span class="p">:</span> <span class="p">{</span>
     <span class="na">email</span><span class="p">:</span> <span class="dl">"</span><span class="s2">contact@moke-international.com</span><span class="dl">"</span><span class="p">,</span>
     <span class="na">first_name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Jane</span><span class="dl">"</span><span class="p">,</span>
@@ -1865,6 +1872,16 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <td>user</td>
 <td>Email</td>
 <td>Email of the Ezus user to be set as the owner of the client</td>
+</tr>
+<tr>
+<td>company_number</td>
+<td>String</td>
+<td>Company registration number of the client (only for &quot;enterprise&quot; clients)</td>
+</tr>
+<tr>
+<td>vat_number</td>
+<td>String</td>
+<td>VAT number of the client (only for &quot;enterprise&quot; clients)</td>
 </tr>
 <tr>
 <td>contact</td>
@@ -5319,6 +5336,24 @@ The name of custom fields refers to their technical name, not their display name
 What does this &quot;day period&quot; mean? It means we limit to 10,000 requests per day from the first request made. This limit is called later &quot;daily rate limit&quot; and is reset once the day is over.</p>
 <h3 id='burst-rate-limit'>Burst rate limit</h3>
 <p>Additionally, the API is protected by a burst rate limit. This means you can&#39;t make more than 100 requests per second.</p>
+<h1 id='warnings'>Warnings</h1>
+<aside class="notice">
+Classic Warning messages
+</aside>
+
+<p>The Ezus API uses the following warning messages:</p>
+
+<table><thead>
+<tr>
+<th>Error Message</th>
+<th>Meaning</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Warning: skipped &lt;&#39;FIELD&#39;&gt; (only enterprise clients can have a &lt;&#39;FIELD&#39;&gt;)</td>
+<td>You have sent a field that cannot be modified for the enterprise client type. Therefore, the changes about this field have been ignored</td>
+</tr>
+</tbody></table>
 <h1 id='errors'>Errors</h1>
 <aside class="notice">
 Classic Error codes
