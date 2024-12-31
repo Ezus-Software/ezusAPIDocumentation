@@ -955,7 +955,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <tr>
 <td>info_number</td>
 <td>String</td>
-<td>File number that appears at the bottom of the project record. Not to be confused with reference!</td>
+<td>File number that appears in the project record. Not to be confused with reference!</td>
 </tr>
 <tr>
 <td>currency</td>
@@ -1227,6 +1227,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
     "trip_date_out": "2023-03-09",
     "sales_manager_email": "travel-design@e-corp.com",
     "client_reference": "client_reference",
+    "info_number": "202306001-P",
     "custom_fields": [
         {"name": "field_name", "value": "field_value" }
     ]
@@ -1244,6 +1245,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
   <span class="na">trip_date_out</span><span class="p">:</span> <span class="dl">"</span><span class="s2">2023-03-09</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">sales_manager_email</span><span class="p">:</span> <span class="dl">"</span><span class="s2">travel-design@e-corp.com</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">client_reference</span><span class="p">:</span> <span class="dl">"</span><span class="s2">client_reference</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">info_number</span><span class="p">:</span> <span class="dl">"</span><span class="s2">202306001-P</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">custom_fields</span><span class="p">:</span> <span class="p">[{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">field_name</span><span class="dl">"</span><span class="p">,</span> <span class="na">value</span><span class="p">:</span> <span class="dl">"</span><span class="s2">field_value</span><span class="dl">"</span> <span class="p">}],</span>
 <span class="p">};</span>
 <span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
@@ -1260,7 +1262,9 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
   </span><span class="nl">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">"false"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ok"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Project successfully created"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"project_reference"</span><span class="w">
+  </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"project_reference"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"client_reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"client_reference"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"info_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"202306001-P"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h3 id='http-endpoint-6'>HTTP Endpoint</h3>
 <p><code>POST https://api.ezus.app/projects-upsert</code></p>
@@ -1335,6 +1339,11 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <td>client_reference</td>
 <td>String</td>
 <td>Reference or email of an existing client in your Ezus account to link to the project (only settable when creating a new project)</td>
+</tr>
+<tr>
+<td>info_number</td>
+<td>String</td>
+<td>File number that appears in the project record. Not to be confused with reference!</td>
 </tr>
 <tr>
 <td>custom_fields</td>
@@ -1719,7 +1728,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <tr>
 <td>info_number</td>
 <td>String</td>
-<td>File number that appears at the bottom of the client record. Not to be confused with reference!</td>
+<td>File number that appears in the client record. Not to be confused with reference!</td>
 </tr>
 <tr>
 <td>user</td>
@@ -1776,6 +1785,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
         "country": "France",
         "zip": "75010"
     },
+    "info_number": "202306001-C",
     "custom_fields": [
         {"name": "field_name", "value": "field_value"}
     ]
@@ -1806,6 +1816,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
     <span class="na">country</span><span class="p">:</span> <span class="dl">"</span><span class="s2">France</span><span class="dl">"</span><span class="p">,</span>
     <span class="na">zip</span><span class="p">:</span> <span class="dl">"</span><span class="s2">75010</span><span class="dl">"</span><span class="p">,</span>
   <span class="p">},</span>
+  <span class="na">info_number</span><span class="p">:</span> <span class="dl">"</span><span class="s2">202306001-P</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">custom_fields</span><span class="p">:</span> <span class="p">[{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">field_name</span><span class="dl">"</span><span class="p">,</span> <span class="na">value</span><span class="p">:</span> <span class="dl">"</span><span class="s2">field_value</span><span class="dl">"</span> <span class="p">}],</span>
 <span class="p">};</span>
 <span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
@@ -1892,6 +1903,11 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <td>address</td>
 <td>JSON</td>
 <td>JSON object address (<a href="#address">Address</a>) To reset the address, you can put <code>&#39;0&#39;</code></td>
+</tr>
+<tr>
+<td>info_number</td>
+<td>String</td>
+<td>File number that appears in the client record. Not to be confused with reference!</td>
 </tr>
 <tr>
 <td>custom_fields</td>
@@ -2191,7 +2207,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <tr>
 <td>info_number</td>
 <td>String</td>
-<td>File number that appears at the bottom of the supplier record. Not to be confused with reference!</td>
+<td>File number that appears in the supplier record. Not to be confused with reference!</td>
 </tr>
 <tr>
 <td>visual_url</td>
@@ -2262,6 +2278,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
         "country": "France",
         "zip": "75010"
     },
+    "info_number": "202306001-S",
     "custom_fields": [
         {"name": "field_name", "value": "field_value"}
     ]
@@ -2291,6 +2308,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
     <span class="na">country</span><span class="p">:</span> <span class="dl">"</span><span class="s2">France</span><span class="dl">"</span><span class="p">,</span>
     <span class="na">zip</span><span class="p">:</span> <span class="dl">"</span><span class="s2">75010</span><span class="dl">"</span><span class="p">,</span>
   <span class="p">},</span>
+  <span class="na">info_number</span><span class="p">:</span> <span class="dl">"</span><span class="s2">202306001-S</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">custom_fields</span><span class="p">:</span> <span class="p">[</span>
     <span class="p">{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">field_name</span><span class="dl">"</span><span class="p">,</span> <span class="na">value</span><span class="p">:</span> <span class="dl">"</span><span class="s2">field_value</span><span class="dl">"</span> <span class="p">}</span>
   <span class="p">],</span>
@@ -2376,6 +2394,11 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <td>address</td>
 <td>JSON</td>
 <td>JSON object address (<a href="#address">Address</a>) To reset the address, you can put <code>&#39;0&#39;</code></td>
+</tr>
+<tr>
+<td>info_number</td>
+<td>String</td>
+<td>File number that appears in the supplier record. Not to be confused with reference!</td>
 </tr>
 <tr>
 <td>custom_fields</td>
@@ -2687,7 +2710,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <tr>
 <td>info_number</td>
 <td>String</td>
-<td>File number that appears at the bottom of the product record. Not to be confused with reference!</td>
+<td>File number that appears in the product record. Not to be confused with reference!</td>
 </tr>
 <tr>
 <td>visual_url</td>
@@ -2759,6 +2782,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
         "commission_regime": "percent",
         "value": 10
     },
+    "info_number": "202306001-PR",
     "custom_fields": [
         {"name": "field_name", "value": "field_value"}
     ],
@@ -2784,6 +2808,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
     <span class="na">commission_regime</span><span class="p">:</span> <span class="dl">"</span><span class="s2">percent</span><span class="dl">"</span><span class="p">,</span>
     <span class="na">value</span><span class="p">:</span> <span class="dl">"</span><span class="s2">10</span><span class="dl">"</span><span class="p">,</span>
   <span class="p">},</span>
+  <span class="na">info_number</span><span class="p">:</span> <span class="dl">"</span><span class="s2">202306001-PR</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">custom_fields</span><span class="p">:</span> <span class="p">[{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">field_name</span><span class="dl">"</span><span class="p">,</span> <span class="na">value</span><span class="p">:</span> <span class="dl">"</span><span class="s2">field_value</span><span class="dl">"</span> <span class="p">}],</span>
 <span class="p">};</span>
 <span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
@@ -2895,6 +2920,11 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <td>commission</td>
 <td>JSON</td>
 <td>A JSON object containing <code>value</code>, <code>commission_regime</code> (&quot;percent&quot; or &quot;amount&quot;), <code>commission_mode</code> (&quot;sales&quot; or &quot;purchase&quot;)</td>
+</tr>
+<tr>
+<td>info_number</td>
+<td>String</td>
+<td>File number that appears in the product record. Not to be confused with reference!</td>
 </tr>
 <tr>
 <td>custom_fields</td>
@@ -3045,7 +3075,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <tr>
 <td>info_number</td>
 <td>String</td>
-<td>File number that appears at the bottom of the package record. Not to be confused with reference!</td>
+<td>File number that appears in the package record. Not to be confused with reference!</td>
 </tr>
 <tr>
 <td>visual_url</td>
@@ -3088,6 +3118,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
     "reference": "package_reference",
     "title": "The best package",
     "capacity": "2",
+    "info_number": "202306001-PK",
     "custom_fields": [
         {"name": "field_name", "value": "field_value"}
     ]
@@ -3100,6 +3131,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
   <span class="na">reference</span><span class="p">:</span> <span class="dl">"</span><span class="s2">package_reference</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">title</span><span class="p">:</span> <span class="dl">"</span><span class="s2">The best package</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">capacity</span><span class="p">:</span> <span class="dl">"</span><span class="s2">2</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">info_number</span><span class="p">:</span> <span class="dl">"</span><span class="s2">202306001-PK</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">custom_fields</span><span class="p">:</span> <span class="p">[{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">field_name</span><span class="dl">"</span><span class="p">,</span> <span class="na">value</span><span class="p">:</span> <span class="dl">"</span><span class="s2">field_value</span><span class="dl">"</span> <span class="p">}],</span>
 <span class="p">};</span>
 <span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
@@ -3161,6 +3193,11 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <td>capacity</td>
 <td>Number</td>
 <td>Maximum number of people for which the package can be used . Leave blank <code>&#39;&#39;</code> if not relevant</td>
+</tr>
+<tr>
+<td>info_number</td>
+<td>String</td>
+<td>File number that appears in the package record. Not to be confused with reference!</td>
 </tr>
 <tr>
 <td>custom_fields</td>
@@ -4951,7 +4988,7 @@ The name of custom fields refers to their technical name, not their display name
 <tr>
 <td>info_number</td>
 <td>String</td>
-<td>File number that appears at the bottom of the project record. Not to be confused with reference!</td>
+<td>File number that appears in the project record. Not to be confused with reference!</td>
 </tr>
 </tbody></table>
 <h2 id='projects-updated'>projects.updated</h2>
@@ -4984,7 +5021,7 @@ The name of custom fields refers to their technical name, not their display name
 <tr>
 <td>info_number</td>
 <td>String</td>
-<td>File number that appears at the bottom of the project record. Not to be confused with reference!</td>
+<td>File number that appears in the project record. Not to be confused with reference!</td>
 </tr>
 </tbody></table>
 <h2 id='clients-created'>clients.created</h2>
@@ -5059,7 +5096,7 @@ The name of custom fields refers to their technical name, not their display name
 <tr>
 <td>info_number</td>
 <td>String</td>
-<td>File number that appears at the bottom of the client record. Not to be confused with reference!</td>
+<td>File number that appears in the client record. Not to be confused with reference!</td>
 </tr>
 </tbody></table>
 <h2 id='clients-updated'>clients.updated</h2>
@@ -5092,7 +5129,7 @@ The name of custom fields refers to their technical name, not their display name
 <tr>
 <td>info_number</td>
 <td>String</td>
-<td>File number that appears at the bottom of the client record. Not to be confused with reference!</td>
+<td>File number that appears in the client record. Not to be confused with reference!</td>
 </tr>
 </tbody></table>
 <h2 id='invoices-finalized'>invoices.finalized</h2>
