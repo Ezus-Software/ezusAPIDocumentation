@@ -9,6 +9,7 @@ toc_footers:
   - <a href='https://ezus.io/' target="_blank">Documentation Powered by Ezus</a>
 
 includes:
+  - warnings
   - errors
 
 search: true
@@ -882,6 +883,8 @@ curl --location 'https://api.ezus.app/clients-upsert' \
     "company_name": "MOKE INTERNATIONAL LIMITED",
     "website": "www.moke_ltd.com",
     "user": "sam@proton.me",
+    "company_number": "362 521 879 00034",
+    "vat_number": "FR 32 123456789",
     "contact": {
         "email": "contact@moke-international.com",
         "first_name": "Jane",
@@ -914,6 +917,8 @@ const body = {
   company_name: "MOKE INTERNATIONAL LIMITED",
   website: "www.moke_ltd.com",
   user: "sam@proton.me",
+  company_number: "362 521 879 00034",
+  vat_number: "FR 32 123456789",
   contact: {
     email: "contact@moke-international.com",
     first_name: "Jane",
@@ -965,16 +970,18 @@ axios.post(baseUrl + "/clients-upsert", body, headers);
 
 ### Body Parameters (application/json)
 
-| Parameter     | Type   | Description                                                                                                                                                                                                            |
-| ------------- | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| reference     | String | If provided, the unique reference associated with the client you want to update or create (or a random one will be generated).                                                                                         |
-| company_name  | String | <span style="color:red">(Required)</span> Name of the client's company (if applicable). If empty, the client will be considered an individual, and the name of the client will be the same as the name of the contact. |
-| website       | String | Website of the client                                                                                                                                                                                                  |
-| user          | Email  | Email of the Ezus user to be set as the owner of the client                                                                                                                                                            |
-| contact       | JSON   | A single JSON element ([Contacts](#contacts)) representing the main                                                                                                                                                    |
-| address       | JSON   | JSON object address ([Address](#address)) To reset the address, you can put `'0'`                                                                                                                                      |
-| info_number   | String | File number that appears in the client record. Not to be confused with reference!                                                                                                                                      |
-| custom_fields | JSON   | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                                                                          |
+| Parameter      | Type   | Description                                                                                                                                                                                                            |
+| -------------- | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| reference      | String | If provided, the unique reference associated with the client you want to update or create (or a random one will be generated).                                                                                         |
+| company_name   | String | <span style="color:red">(Required)</span> Name of the client's company (if applicable). If empty, the client will be considered an individual, and the name of the client will be the same as the name of the contact. |
+| website        | String | Website of the client                                                                                                                                                                                                  |
+| user           | Email  | Email of the Ezus user to be set as the owner of the client                                                                                                                                                            |
+| company_number | String | Company registration number of the client (only for "enterprise" clients)                                                                                                                                              |
+| vat_number     | String | VAT number of the client (only for "enterprise" clients)                                                                                                                                                               |
+| contact        | JSON   | A single JSON element ([Contacts](#contacts)) representing the main                                                                                                                                                    |
+| address        | JSON   | JSON object address ([Address](#address)) To reset the address, you can put `'0'`
+| info_number   | String | File number that appears in the client record. Not to be confused with reference!
+| custom_fields  | JSON   | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                                                                          |
 
 ### Response
 
@@ -2157,12 +2164,12 @@ axios.put(baseUrl + "/invoices-update", body, headers);
 
 ### Body Parameters (application/json)
 
-| Parameter     | Type   | Description                                                                                         |
-| ------------- | ------ | --------------------------------------------------------------------------------------------------- |
-| reference     | String | The reference of the invoice you want to update                                                     |
-| stage         | String | stage can be updated only if the invoice is a draft, the stage can be `completed` or `paid`         |
-| due_date      | String | due_date can be updated only if the invoice is a draft, due_date can be only on format `YYYY-MM-DD` |
-| custom_fields | JSON   | Array of JSON custom fields ([Custom fields](#custom-fields))                                       |
+| Parameter     | Type   | Description                                                                                                                                                                                                                  |
+| ------------- | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| reference     | String | The reference of the invoice you want to update                                                                                                                                                                              |
+| stage         | String | Represents the stage of the invoice. Allowed updates: you can move from `draft` to `paid` or `completed`. Once set to paid or completed, switching between these stages is allowed. Reverting back to draft is not permitted |
+| due_date      | String | due_date can be updated only if the invoice is a draft, due_date can be only on format `YYYY-MM-DD`                                                                                                                          |
+| custom_fields | JSON   | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                                                                                |
 
 ### Response
 
