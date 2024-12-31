@@ -1897,10 +1897,10 @@ axios.get(baseUrl + "/destinations", headers);
 
 A JSON object containing the destination information with properties like:
 
-| Property     | Type   | Description                                                                                    |
-| ------------ | ------ | ---------------------------------------------------------------------------------------------- |
-| size         | Number | The total number of destinations                                                               |
-| destinations | Array  | An array of JSON objects, each representing a destination with its associated sub-destinations |
+| Property     | Type   | Description                                                  |
+| ------------ | ------ | ------------------------------------------------------------ |
+| size         | Number | The total number of destinations                             |
+| destinations | Array  | Array of JSON destinations ([Destinations](#destinations-2)) |
 
 ## GET subdestination
 
@@ -2911,6 +2911,31 @@ The technical name of a custom field can be found in the custom field edit modal
 | Checkbox          | String | The checkbox must be a string: "true" (checked) OR "false" (unchecked)                                                                                                                         |
 | Number            | String | Number type should be a Number without other character                                                                                                                                         |
 | File              | String | File must be a valid URL, and supported file extensions include: .pdf, .jpg, .jpeg, .png, .bmp, .gif, .docx, .doc, .msg, .odt, .rtf, .txt, .ppt, .pptx, .pptm, .csv, .xlsx                     |
+
+### Destinations
+
+```json
+"destinations": [
+    {
+      "reference": "destination_reference",
+      "name": "France",
+      "subdestinations": [
+        {
+          "reference": "subdestination_reference",
+          "name": "Paris"
+        }
+      ]
+    },
+]
+```
+
+Each objects represents a destination with its associated sub-destinations
+
+| Property        | Type   | Description                                                                                     |
+| --------------- | ------ | ----------------------------------------------------------------------------------------------- |
+| reference       | String | The reference of the destination                                                                |
+| name            | String | Name of the destination                                                                         |
+| subdestinations | Array  | An array of JSON objects, each representing a sub-destination along with its name and reference |
 
 ### Invoices Amounts
 
