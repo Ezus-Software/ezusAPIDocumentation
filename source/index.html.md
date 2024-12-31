@@ -2929,7 +2929,7 @@ The technical name of a custom field can be found in the custom field edit modal
 ]
 ```
 
-Each objects represents a destination with its associated sub-destinations
+Each object represents a destination with its associated sub-destinations
 
 | Property        | Type   | Description                                                                                     |
 | --------------- | ------ | ----------------------------------------------------------------------------------------------- |
