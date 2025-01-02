@@ -270,12 +270,15 @@ axios.get(baseUrl + "/project?reference=project_reference", headers);
   "alternatives": [
     {
       "alternative_title": "Main Alternative",
-      "budget_actual": "88750",
-      "trip_budget": "90000",
+      "budget_actual": 88750,
+      "budget_actual_excl_taxes ": 77950,
+      "budget_margin_gross": 2500,
+      "budget_margin_net": 1000,
+      "trip_budget": 90000,
       "trip_people": "15",
       "trip_date_in": "2024-03-01",
       "trip_date_out": "2024-03-09",
-      "trip_duration": "9",
+      "trip_duration": 9,
       "trip_destination": "France",
       "trip_subdestination": "Paris",
       "client": {
@@ -2656,12 +2659,15 @@ A JSON object indicating whether an error occurred during the process, along wit
   "alternatives": [
     {
       "alternative_title": "Main Alternative",
-      "budget_actual": "88750",
-      "trip_budget": "90000",
+      "budget_actual": 88750,
+      "budget_actual_excl_taxes ": 77950,
+      "budget_margin_gross": 2500,
+      "budget_margin_net": 1000,
+      "trip_budget": 90000,
       "trip_people": "15",
       "trip_date_in": "2024-03-01",
       "trip_date_out": "2024-03-09",
-      "trip_duration": "9",
+      "trip_duration": 9,
       "trip_destination": "France",
       "trip_subdestination": "Paris",
       "client": {
@@ -2676,18 +2682,21 @@ A JSON object indicating whether an error occurred during the process, along wit
   ]
 ```
 
-| Property            | Type   | Description                                                                                                               |
-| ------------------- | ------ | ------------------------------------------------------------------------------------------------------------------------- |
-| alternative_title   | String | Title of the alternative                                                                                                  |
-| budget_actual       | String | Actual budget for the alternative (corresponding to its associated Ezus program)                                          |
-| trip_budget         | Number | Forecasted budget for the alternative (the one that is entered manually not the actual one)                               |
-| trip_people         | String | Number of people                                                                                                          |
-| trip_date_in        | Date   | Date of the beginning of this alternative, in a "YYYY-MM-DD" format string. If it's empty, the project has no dates       |
-| trip_date_out       | Date   | Date of the end of this alternative, in a "YYYY-MM-DD" format string. If it's empty, the project has no dates             |
-| trip_duration       | String | Number of days this alternative lasts                                                                                     |
-| trip_destination    | String | Destination of the alternative. Note: For multi-destination alternatives, only the primary destination is returned.       |
-| trip_subdestination | String | Subdestination of the alternative. Note: For multi-destination alternatives, only the primary subdestination is returned. |
-| client              | JSON   | JSON including: `reference`, `type` (enterprise or individual), `company_name`, `first_name`, `last_name` and `email`     |
+| Property                 | Type   | Description                                                                                                               |
+| ------------------------ | ------ | ------------------------------------------------------------------------------------------------------------------------- |
+| alternative_title        | String | Title of the alternative                                                                                                  |
+| budget_actual            | Number | Actual budget for the alternative, inclusive of taxes                                                                     |
+| budget_actual_excl_taxes | Number | Actual budget for the alternative, excluding taxes                                                                        |
+| budget_margin_gross      | Number | Gross margin for the alternative                                                                                          |
+| budget_margin_net        | Number | Net margin for the alternative                                                                                            |
+| trip_budget              | Number | Forecasted budget for the alternative (the one that is entered manually not the actual one)                               |
+| trip_people              | String | Number of people                                                                                                          |
+| trip_date_in             | Date   | Date of the beginning of this alternative, in a "YYYY-MM-DD" format string. If it's empty, the project has no dates       |
+| trip_date_out            | Date   | Date of the end of this alternative, in a "YYYY-MM-DD" format string. If it's empty, the project has no dates             |
+| trip_duration            | Number | Number of days this alternative lasts                                                                                     |
+| trip_destination         | String | Destination of the alternative. Note: For multi-destination alternatives, only the primary destination is returned.       |
+| trip_subdestination      | String | Subdestination of the alternative. Note: For multi-destination alternatives, only the primary subdestination is returned. |
+| client                   | JSON   | JSON including: `reference`, `type` (enterprise or individual), `company_name`, `first_name`, `last_name` and `email`     |
 
 ### Contacts
 
