@@ -515,6 +515,50 @@
       "response": []
     },
     {
+      "name": "destinations",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "X-API-KEY",
+            "value": "{{<YOUR_API_KEY>}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/destinations",
+          "host": ["{{baseUrl}}"],
+          "path": ["destinations"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "subdestination",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "X-API-KEY",
+            "value": "{{<YOUR_API_KEY>}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/subdestination?reference=subdestination_reference",
+          "host": ["{{baseUrl}}"],
+          "path": ["subdestination"],
+          "query": [
+            {
+              "key": "reference",
+              "value": "subdestination_reference"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
       "name": "invoices",
       "request": {
         "method": "GET",

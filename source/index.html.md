@@ -1864,6 +1864,157 @@ axios.post(baseUrl + "/packages-upsert", body, headers);
 
 A JSON object indicating whether an error occurred during the process, along with the associated message. If successful, it also returns a `reference` for the project, which you should store for future updates or retrievals.
 
+# Destinations
+
+## GET destinations
+
+Returns a list of all destinations and sub-destinations. The list is not paginated and is theoretically limited to 1000 objects (destinations and sub-destinations), although higher limits may work depending on the payload size. The order of the destinations and sub-destinations matches their order in Ezus.
+
+```shell
+curl --location 'https://api.ezus.app/destinations' \
+--header 'x-api-key: <YOUR_API_KEY>' \
+--header 'Authorization: Bearer <YOUR_TOKEN>'
+```
+
+```javascript
+const axios = require("axios");
+const baseUrl = "https://api.ezus.app";
+
+const headers = {
+  "x-api-key": "<YOUR_API_KEY>",
+  Authorization: "Bearer <YOUR_TOKEN>",
+};
+
+axios.get(baseUrl + "/destinations", headers);
+```
+
+> This request returns a structured JSON object:
+
+```json
+{
+  "error": "false",
+  "size": 32,
+  "destinations": [
+    {
+      "reference": "destination_reference",
+      "name": "France",
+      "subdestinations": [
+        {
+          "reference": "subdestination_reference",
+          "name": "Paris"
+        }
+      ]
+    },...
+  ]
+}
+```
+
+### HTTP Endpoint
+
+`GET https://api.ezus.app/destinations`
+
+### Header Parameters
+
+| Parameter     | Type   | Description                                                 |
+| ------------- | ------ | ----------------------------------------------------------- |
+| x-api-key     | String | <span style="color:red">(Required)</span> Your Ezus API key |
+| Authorization | String | <span style="color:red">(Required)</span> Your Bearer token |
+
+### Response
+
+A JSON object containing the destination information with properties like:
+
+| Property     | Type   | Description                                                  |
+| ------------ | ------ | ------------------------------------------------------------ |
+| size         | Number | The total number of destinations                             |
+| destinations | Array  | Array of JSON destinations ([Destinations](#destinations-2)) |
+
+## GET subdestination
+
+This API endpoint retrieves detailed information about a specific sub-destination in Ezus.
+
+```shell
+curl --location 'https://api.ezus.app/subdestination?reference=subdestination_reference' \
+--header 'x-api-key: <YOUR_API_KEY>' \
+--header 'Authorization: Bearer <YOUR_TOKEN>'
+```
+
+```javascript
+const axios = require("axios");
+const baseUrl = "https://api.ezus.app";
+
+const headers = {
+  "x-api-key": "<YOUR_API_KEY>",
+  Authorization: "Bearer <YOUR_TOKEN>",
+};
+
+axios.get(
+  baseUrl + "/subdestination?reference=subdestination_reference",
+  headers
+);
+```
+
+> This request returns a structured JSON object:
+
+```json
+{
+  "error": "false",
+  "reference": "subdestination_reference",
+  "name": "Paris",
+  "destination_reference": "destination_reference",
+  "destination_name": "France",
+  "visual_url": "https://docs.google.com/presentation/d/10GoT7nVkSIScaHUQEPh-EyUms5o6D7bcgUYsJlyql94",
+  "medias": {
+    "data": [
+      {
+        "media_name": "img.jpeg",
+        "path_full": "https://link-img.jpeg"
+      },...
+    ],
+    "size": 1
+  },
+  "langs": [
+    {
+      "lang": "french",
+      "name": "Chambre à 2 lits avec petit déjeuner",
+      "short_description": "",
+      "long_description": ""
+    },...
+  ]
+}
+```
+
+### HTTP Endpoint
+
+`GET https://api.ezus.app/subdestination`
+
+### Header Parameters
+
+| Parameter     | Type   | Description                                                 |
+| ------------- | ------ | ----------------------------------------------------------- |
+| x-api-key     | String | <span style="color:red">(Required)</span> Your Ezus API key |
+| Authorization | String | <span style="color:red">(Required)</span> Your Bearer token |
+
+### Body Parameters (application/json)
+
+| Parameter | Type   | Description                          |
+| --------- | ------ | ------------------------------------ |
+| reference | String | The reference of the sub-destination |
+
+### Response
+
+A JSON object containing the sub-destination information with properties like:
+
+| Property              | Type   | Description                                                   |
+| --------------------- | ------ | ------------------------------------------------------------- |
+| reference             | String | The reference of the sub-destination                          |
+| name                  | String | Name of the sub-destination                                   |
+| destination_reference | String | The reference of the destination                              |
+| destination_name      | String | Name of the destination                                       |
+| visual_url            | String | URL of the Google Slides visual linked to the sub-destination |
+| medias                | JSON   | JSON object medias ([Medias](#medias))                        |
+| langs                 | Array  | Array of JSON langs ([Langs](#langs))                         |
+
 # Invoices
 
 ## GET invoices
@@ -2793,6 +2944,31 @@ The technical name of a custom field can be found in the custom field edit modal
 | Checkbox          | String | The checkbox must be a string: "true" (checked) OR "false" (unchecked)                                                                                                                         |
 | Number            | String | Number type should be a Number without other character                                                                                                                                         |
 | File              | String | File must be a valid URL, and supported file extensions include: .pdf, .jpg, .jpeg, .png, .bmp, .gif, .docx, .doc, .msg, .odt, .rtf, .txt, .ppt, .pptx, .pptm, .csv, .xlsx                     |
+
+### Destinations
+
+```json
+"destinations": [
+    {
+      "reference": "destination_reference",
+      "name": "France",
+      "subdestinations": [
+        {
+          "reference": "subdestination_reference",
+          "name": "Paris"
+        }
+      ]
+    },
+]
+```
+
+Each object represents a destination with its associated sub-destinations
+
+| Property        | Type   | Description                                                                                     |
+| --------------- | ------ | ----------------------------------------------------------------------------------------------- |
+| reference       | String | The reference of the destination                                                                |
+| name            | String | Name of the destination                                                                         |
+| subdestinations | Array  | An array of JSON objects, each representing a sub-destination along with its name and reference |
 
 ### Invoices Amounts
 
