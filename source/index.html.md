@@ -982,8 +982,8 @@ axios.post(baseUrl + "/clients-upsert", body, headers);
 | company_number | String | Company registration number of the client (only for "enterprise" clients)                                                                                                                                              |
 | vat_number     | String | VAT number of the client (only for "enterprise" clients)                                                                                                                                                               |
 | contact        | JSON   | A single JSON element ([Contacts](#contacts)) representing the main                                                                                                                                                    |
-| address        | JSON   | JSON object address ([Address](#address)) To reset the address, you can put `'0'`
-| info_number   | String | File number that appears in the client record. Not to be confused with reference!
+| address        | JSON   | JSON object address ([Address](#address)) To reset the address, you can put `'0'`                                                                                                                                      |
+| info_number    | String | File number that appears in the client record. Not to be confused with reference!                                                                                                                                      |
 | custom_fields  | JSON   | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                                                                          |
 
 ### Response
@@ -1112,7 +1112,7 @@ axios.get(baseUrl + "/supplier?reference=supplier_reference", headers);
   "type": "accom, activity",
   "info_notes": "Emily confirmed: this hotel really is the best in town.",
   "info_number": "202306001-S",
-  "visual_url": "",
+  "visual_url": "https://docs.google.com/presentation/d/10GoT7nVkSIScaHUQEPh-EyUms5o6D7bcgUYsJlyql94",
   "user": {
     "email": "travel-design@e-corp.com",
     "first_name": "Alice",
@@ -1460,7 +1460,7 @@ axios.get(baseUrl + "/product?reference=product_reference", headers);
   "budget_form": "Important",
   "budget_variable": "Display",
   "info_number": "202306001-PR",
-  "visual_url": "",
+  "visual_url": "https://docs.google.com/presentation/d/10GoT7nVkSIScaHUQEPh-EyUms5o6D7bcgUYsJlyql94",
   "supplier": {
     "reference": "supplier_reference",
     "company_name": "The best hotel"
@@ -1703,7 +1703,7 @@ axios.get(baseUrl + "/package?reference=package_reference", headers);
   "capacity": "2",
   "info_notes": "A classical day in Paris",
   "info_number": "202306001-PK",
-  "visual_url": "",
+  "visual_url": "https://docs.google.com/presentation/d/10GoT7nVkSIScaHUQEPh-EyUms5o6D7bcgUYsJlyql94",
   "products": {
     "data": [
       {
