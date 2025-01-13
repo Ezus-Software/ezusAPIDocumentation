@@ -700,7 +700,7 @@ axios.get(baseUrl + "/clients", headers);
       "last_name": "Doe",
       "email": "contact@moke-international.com",
       "vat_number": "GB 240-635-038",
-      "siret": "09728676",
+      "company_number": "09728676",
       "info_notes": "This prospect looks interesting to follow",
       "info_number": "202306001-C",
       "user": {
@@ -784,7 +784,7 @@ axios.get(baseUrl + "/client?reference=client_reference", headers);
   "last_name": "Doe",
   "email": "contact@moke-international.com",
   "vat_number": "GB 240-635-038",
-  "siret": "09728676",
+  "company_number": "09728676",
   "info_notes": "This prospect looks interesting to follow",
   "info_number": "202306001-C",
   "user": {
@@ -853,24 +853,24 @@ axios.get(baseUrl + "/client?reference=client_reference", headers);
 
 A JSON object containing the client information with properties like:
 
-| Property      | Type   | Description                                                                       |
-| ------------- | ------ | --------------------------------------------------------------------------------- |
-| reference     | String | The reference of the client                                                       |
-| type          | String | The type of the client (either "enterprise" or "individual")                      |
-| company_name  | String | Name of the client's company (if applicable)                                      |
-| website       | String | Website of the client                                                             |
-| first_name    | String | First name of the main contact at the client's organization                       |
-| last_name     | String | Last name of the main contact at the client's organization                        |
-| email         | String | Email of the main contact at the client's organization                            |
-| vat_number    | String | VAT number of the client (only for "enterprise" clients)                          |
-| siret         | String | Company registration number of the client (only for "enterprise" clients)         |
-| info_notes    | String | Notes on the client                                                               |
-| info_number   | String | File number that appears in the client record. Not to be confused with reference! |
-| user          | JSON   | JSON object representing the user ([User](#user)) associated with the client      |
-| address       | JSON   | JSON object representing the address ([Address](#address)) of the client          |
-| projects      | JSON   | Projects linked to the client (returns the first 10 projects)                     |
-| contacts      | Array  | An array of JSON contacts ([Contacts](#contacts)) associated with the client      |
-| custom_fields | Array  | An array of JSON custom fields ([Custom fields](#custom-fields)) for the client   |
+| Property       | Type   | Description                                                                       |
+| -------------- | ------ | --------------------------------------------------------------------------------- |
+| reference      | String | The reference of the client                                                       |
+| type           | String | The type of the client (either "enterprise" or "individual")                      |
+| company_name   | String | Name of the client's company (if applicable)                                      |
+| website        | String | Website of the client                                                             |
+| first_name     | String | First name of the main contact at the client's organization                       |
+| last_name      | String | Last name of the main contact at the client's organization                        |
+| email          | String | Email of the main contact at the client's organization                            |
+| vat_number     | String | VAT number of the client (only for "enterprise" clients)                          |
+| company_number | String | Company registration number of the client (only for "enterprise" clients)         |
+| info_notes     | String | Notes on the client                                                               |
+| info_number    | String | File number that appears in the client record. Not to be confused with reference! |
+| user           | JSON   | JSON object representing the user ([User](#user)) associated with the client      |
+| address        | JSON   | JSON object representing the address ([Address](#address)) of the client          |
+| projects       | JSON   | Projects linked to the client (returns the first 10 projects)                     |
+| contacts       | Array  | An array of JSON contacts ([Contacts](#contacts)) associated with the client      |
+| custom_fields  | Array  | An array of JSON custom fields ([Custom fields](#custom-fields)) for the client   |
 
 ## POST clients-upsert
 
@@ -3270,7 +3270,7 @@ This event is triggered whenever a client is created.
 
 ## clients.updated
 
-This event is triggered whenever a client is updated. This event is triggered only by specific fields within clients, including: `company_name`, `website`, `vat_number`, `siret`, `info_notes`, `info_number` and `user`.
+This event is triggered whenever a client is updated. This event is triggered only by specific fields within clients, including: `company_name`, `website`, `vat_number`, `company_number`, `info_notes`, `info_number` and `user`.
 
 ```json
 {
