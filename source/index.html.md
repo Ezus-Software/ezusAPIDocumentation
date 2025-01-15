@@ -460,7 +460,7 @@ axios.get(baseUrl + "/project-steps?reference=project_reference", headers);
       "images": ["https://image.jpg", "https://image2.jpg"],
       "items": [
         {
-          "name": "productTitle",
+          "name": "item_title",
           "quantity": 2,
           "purchase_price": 150,
           "purchase_price_excl_taxes": 125,
@@ -3015,7 +3015,7 @@ Those objects provides insights into the invoice amounts, differentiating betwee
 ```json
 "items": [
   {
-    "name": "productTitle",
+    "name": "item_title",
     "quantity": 2,
     "purchase_price": 150,
     "purchase_price_excl_taxes": 125,
@@ -3026,15 +3026,20 @@ Those objects provides insights into the invoice amounts, differentiating betwee
 ]
 ```
 
-Those objects provides insights into the invoice amounts, differentiating between actual figures and forecasts. Actual figures are available when the associated project is closed and the invoice is marked as `completed` or `paid`. Otherwise, `null` values are displayed.
+The items array represents a collection of items associated with a step.
+The fields `purchase_price`, `purchase_price_excl_taxes`, `sales_price`, and `sales_price_excl_taxes` **represent the price per unit of the item**. To calculate the total cost or total sales value for an item, multiply the unit price by the quantity.
 
-| Property     | Type    | Description                                                                              |
-| ------------ | ------- | ---------------------------------------------------------------------------------------- |
-| is_automatic | Boolean | Automatically use the figures of the project to which this invoice/credit_note is linked |
-| purchase     | Number  | Forecasted / Actual purchase                                                             |
-| commission   | Number  | Forecasted / Actual commission                                                           |
-| vat_deducted | Number  | Forecasted / Actual deductible VAT                                                       |
-| amount_ht    | Number  | Forecasted / Actual amount excluding taxes                                               |
+**All prices returned by this endpoint are expressed in the project’s currency**. If the items are in different currencies, conversion must be performed using the exchange rates available in the project’s currency library.
+
+| Property                  | Type    | Description                                                                                                             |
+| ------------------------- | ------- | ----------------------------------------------------------------------------------------------------------------------- |
+| name                      | String  | Name of the item                                                                                                        |
+| quantity                  | Number  | Quantity of the item                                                                                                    |
+| purchase_price            | Number  | The unit purchase price of the item (including taxes)                                                                   |
+| purchase_price_excl_taxes | Number  | The unit purchase price of the item (excluding taxes)                                                                   |
+| sales_price               | Number  | The unit sales price of the item (including taxes)                                                                      |
+| sales_price_excl_taxes    | Number  | The unit sales price of the item (excluding taxes)                                                                      |
+| is_optional               | Boolean | Indicates whether the item is optional. **If true, the item does not contribute to the final purchase or sales price.** |
 
 ### Langs
 
@@ -3126,7 +3131,7 @@ The steps are sorted by their creation date, with the most recently created appe
     "images": ["https://image.jpg", "https://image2.jpg"],
     "items": [
       {
-        "name": "productTitle",
+        "name": "item_title",
         "quantity": 2,
         "purchase_price": 150,
         "purchase_price_excl_taxes": 125,
