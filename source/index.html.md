@@ -502,11 +502,11 @@ axios.get(baseUrl + "/project-steps?reference=project_reference", headers);
 
 A JSON object containing the project documents information with properties like:
 
-| Property          | Type   | Description                                                                                                                                                                                                                                                                                                     |
-| ----------------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| reference         | String | The reference of the project                                                                                                                                                                                                                                                                                    |
-| alternative_order | Number | The alternative order; 0 is for main alternative                                                                                                                                                                                                                                                                |
-| steps             | Array  | An array of JSON objects, each representing a step. The steps are sorted by their creation date, with the most recently created appearing first. Each step includes the following fields: name, `type`, `category`,`date_start`, `date_end`, `people`, `address`, `description`, `images`, and `custom_fields`. |
+| Property          | Type   | Description                                      |
+| ----------------- | ------ | ------------------------------------------------ |
+| reference         | String | The reference of the project                     |
+| alternative_order | Number | The alternative order; 0 is for main alternative |
+| steps             | Array  | Array of JSON steps ([Steps](#steps))            |
 
 ## POST projects-upsert
 
@@ -3100,6 +3100,8 @@ Only the last 10 products are returned in this object.
 
 ### Steps
 
+The steps are sorted by their creation date, with the most recently created appearing first.
+
 ```json
 "steps": [
   {
@@ -3143,19 +3145,19 @@ Only the last 10 products are returned in this object.
 ]
 ```
 
-| Property      | Type   | Description                                                                                                                                                                        |
-| ------------- | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| name          | String | The reference of the supplier                                                                                                                                                      |
-| type          | String | The reference of the supplier                                                                                                                                                      |
-| category      | String | The reference of the supplier                                                                                                                                                      |
-| date_start    | String | The reference of the supplier                                                                                                                                                      |
-| date_end      | String | The reference of the supplier                                                                                                                                                      |
-| people        | String | The reference of the supplier                                                                                                                                                      |
-| address       | JSON   | JSON object representing the address ([Address](#address)) of the activity, including longitude and latitude. Note: Longitude and latitude are only returned by this steps object. |
-| description   | String | The reference of the supplier                                                                                                                                                      |
-| images        | String | The reference of the supplier                                                                                                                                                      |
-| items         | Array  | Array of JSON items ([Items](#items))                                                                                                                                              |
-| custom_fields | Array  | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                                      |
+| Property      | Type   | Description                                                                                                                                                                   |
+| ------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| name          | String | Name of the step                                                                                                                                                              |
+| type          | String | Type of the step `activity` `accommodation` `transport` or `extra`                                                                                                            |
+| category      | String | Category of the step                                                                                                                                                          |
+| date_start    | String | Date of the beginning of this step, in a "YYYY-MM-DD HH:MM:SS" format string. If it's empty, the step has no dates.                                                           |
+| date_end      | String | Date of the end of this step, in a "YYYY-MM-DD HH:MM:SS" format string. If it's empty, the step has no dates or no end.                                                       |
+| people        | Number | Number of people                                                                                                                                                              |
+| address       | JSON   | JSON object representing the address ([Address](#address)) of the step, including longitude and latitude. Note: Longitude and latitude are only returned by this step object. |
+| description   | JSON   | JSON object representing the short and long description of the step                                                                                                           |
+| images        | Array  | Array of strings representing the images URLs associated with the step                                                                                                        |
+| items         | Array  | Array of JSON items ([Items](#items))                                                                                                                                         |
+| custom_fields | Array  | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                                 |
 
 ### Suppliers
 
