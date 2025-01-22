@@ -1484,7 +1484,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
       </span><span class="nl">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Doe"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"contact@moke-international.com"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"vat_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GB 240-635-038"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"siret"</span><span class="p">:</span><span class="w"> </span><span class="s2">"09728676"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"company_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"09728676"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"info_notes"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This prospect looks interesting to follow"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"info_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"202306001-C"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -1601,7 +1601,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
   </span><span class="nl">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Doe"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"contact@moke-international.com"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"vat_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GB 240-635-038"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"siret"</span><span class="p">:</span><span class="w"> </span><span class="s2">"09728676"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"company_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"09728676"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"info_notes"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This prospect looks interesting to follow"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"info_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"202306001-C"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -1733,7 +1733,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <td>VAT number of the client (only for &quot;enterprise&quot; clients)</td>
 </tr>
 <tr>
-<td>siret</td>
+<td>company_number</td>
 <td>String</td>
 <td>Company registration number of the client (only for &quot;enterprise&quot; clients)</td>
 </tr>
@@ -5376,7 +5376,7 @@ The name of custom fields refers to their technical name, not their display name
 </tr>
 </tbody></table>
 <h2 id='clients-updated'>clients.updated</h2>
-<p>This event is triggered whenever a client is updated. This event is triggered only by specific fields within clients, including: <code>company_name</code>, <code>website</code>, <code>vat_number</code>, <code>siret</code>, <code>info_notes</code>, <code>info_number</code> and <code>user</code>.</p>
+<p>This event is triggered whenever a client is updated. This event is triggered only by specific fields within clients, including: <code>company_name</code>, <code>website</code>, <code>vat_number</code>, <code>company_number</code>, <code>info_notes</code>, <code>info_number</code> and <code>user</code>.</p>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"client_reference"</span><span class="p">,</span><span class="w">
