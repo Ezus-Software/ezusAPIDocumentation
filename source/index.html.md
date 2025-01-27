@@ -457,7 +457,7 @@ axios.get(baseUrl + "/project-steps?reference=project_reference", headers);
         "short": "Short description of the activity",
         "long": "Long description of the activity"
       },
-      "images": ["https://image.jpg", "https://image2.jpg"],
+      "medias": ["https://image.jpg", "https://image2.jpg"],
       "custom_fields": [
         {
           "name": "CustomField",
@@ -495,7 +495,7 @@ A JSON object containing the project documents information with properties like:
 | ----------------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | reference         | String | The reference of the project                                                                                                                                                                                                                                                                                    |
 | alternative_order | Number | The alternative order; 0 is for main alternative                                                                                                                                                                                                                                                                |
-| steps             | Array  | An array of JSON objects, each representing a step. The steps are sorted by their creation date, with the most recently created appearing first. Each step includes the following fields: name, `type`, `category`,`date_start`, `date_end`, `people`, `address`, `description`, `images`, and `custom_fields`. |
+| steps             | Array  | An array of JSON objects, each representing a step. The steps are sorted by their creation date, with the most recently created appearing first. Each step includes the following fields: name, `type`, `category`,`date_start`, `date_end`, `people`, `address`, `description`, `medias`, and `custom_fields`. |
 
 ## POST projects-upsert
 
