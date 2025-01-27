@@ -449,9 +449,7 @@ axios.get(baseUrl + "/project-steps?reference=project_reference", headers);
         "label": "58 Rue de Paradis",
         "zip": "75010",
         "city": "Paris",
-        "country": "France",
-        "latitude": 50.861796,
-        "longitude": 4.359988
+        "country": "France"
       },
       "description": {
         "short": "Short description of the activity",
