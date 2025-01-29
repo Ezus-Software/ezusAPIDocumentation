@@ -449,7 +449,11 @@ axios.get(baseUrl + "/project-steps?reference=project_reference", headers);
         "label": "58 Rue de Paradis",
         "zip": "75010",
         "city": "Paris",
-        "country": "France"
+        "country": "France",
+        "geo": {
+          "x": 48.875761,
+          "y": 2.348727
+        }
       },
       "description": {
         "short": "Short description of the activity",
@@ -722,7 +726,11 @@ axios.get(baseUrl + "/clients", headers);
         "label": "58 Rue de Paradis",
         "zip": "75010",
         "city": "Paris",
-        "country": "France"
+        "country": "France",
+        "geo": {
+          "x": 48.875761,
+          "y": 2.348727
+        }
       }
     },...
   ]
@@ -806,7 +814,11 @@ axios.get(baseUrl + "/client?reference=client_reference", headers);
     "label": "58 Rue de Paradis",
     "zip": "75010",
     "city": "Paris",
-    "country": "France"
+    "country": "France",
+    "geo": {
+      "x": 48.875761,
+      "y": 2.348727
+    }
   },
   "projects": {
     "data": [
@@ -991,7 +1003,7 @@ axios.post(baseUrl + "/clients-upsert", body, headers);
 | company_number | String | Company registration number of the client (only for "enterprise" clients)                                                                                                                                              |
 | vat_number     | String | VAT number of the client (only for "enterprise" clients)                                                                                                                                                               |
 | contact        | JSON   | A single JSON element ([Contacts](#contacts)) representing the main                                                                                                                                                    |
-| address        | JSON   | JSON object address ([Address](#address)) To reset the address, you can put `'0'`                                                                                                                                      |
+| address        | JSON   | JSON object address ([Address](#address)) To reset the address, you can put `'0'`. **Geolocation data cannot be modified during an upsert**.                                                                           |
 | info_number    | String | File number that appears in the client record. Not to be confused with reference!                                                                                                                                      |
 | custom_fields  | JSON   | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                                                                          |
 
@@ -1132,7 +1144,11 @@ axios.get(baseUrl + "/supplier?reference=supplier_reference", headers);
     "label": "58 Rue de Paradis",
     "zip": "75010",
     "city": "Paris",
-    "country": "France"
+    "country": "France",
+    "geo": {
+      "x": 48.875761,
+      "y": 2.348727
+    }
   },
   "products": {
     "data": [
@@ -1335,7 +1351,7 @@ axios.post(baseUrl + "/suppliers-upsert", body, headers);
 | user          | Email  | Email of the Ezus user that will be set as the owner of the supplier. By default, if no owner is provided or the provided email do not match any user on this account, the owner will be assigned to everyone                                    |
 | type          | String | Either `undefined` or a combination of these 3 options: `accom`, `activity`, `transport`. You can select multiple options by separating them with comas ("accom, activity" for instance). Enter "undefined" if you want to reset this parameter. |
 | contact       | JSON   | Contact is a single JSON and email is needed. Note that only one contact can be upsert this way (the main contact of the supplier) ([Contact](#contacts)) To reset the main contact, you can put `'0'`                                           |
-| address       | JSON   | JSON object address ([Address](#address)) To reset the address, you can put `'0'`                                                                                                                                                                |
+| address       | JSON   | JSON object address ([Address](#address)) To reset the address, you can put `'0'`. **Geolocation data cannot be modified during an upsert**.                                                                                                     |
 | info_number   | String | File number that appears in the supplier record. Not to be confused with reference!                                                                                                                                                              |
 | custom_fields | JSON   | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                                                                                                    |
 
@@ -2802,16 +2818,21 @@ A JSON object indicating whether an error occurred during the process, along wit
   "label": "58 Rue de Paradis",
   "zip": "75010",
   "city": "Paris",
-  "country": "France"
+  "country": "France",
+  "geo": {
+    "x": 48.875761,
+    "y": 2.348727
+  }
 }
 ```
 
-| Property | Type   | Description          |
-| -------- | ------ | -------------------- |
-| label    | String | Label of the address |
-| city     | String | Name of the city     |
-| country  | String | Name of the country  |
-| zip      | String | Post code            |
+| Property | Type   | Description                                                                                                                                                                                    |
+| -------- | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| label    | String | Label of the address                                                                                                                                                                           |
+| city     | String | Name of the city                                                                                                                                                                               |
+| country  | String | Name of the country                                                                                                                                                                            |
+| zip      | String | Post code                                                                                                                                                                                      |
+| geo      | JSON   | Represents the geographical coordinates of the address or `null` if not geolocated. If provided, it consists of `x` (latitude) and `y` (longitude), both returning a `Number` with 6 decimals. |
 
 ### Alternatives
 
@@ -3119,8 +3140,10 @@ The steps are sorted by their creation date, with the most recently created appe
       "zip": "75010",
       "city": "Paris",
       "country": "France",
-      "latitude": 50.861796,
-      "longitude": 4.359988
+      "geo": {
+        "x": 48.875761,
+        "y": 2.348727
+      }
     },
     "description": {
       "short": "Short description of the activity",
