@@ -479,6 +479,9 @@
                     <a href="#invoices-amounts" class="toc-h2 toc-link" data-title="Invoices Amounts">Invoices Amounts</a>
                   </li>
                   <li>
+                    <a href="#items" class="toc-h2 toc-link" data-title="Items">Items</a>
+                  </li>
+                  <li>
                     <a href="#langs" class="toc-h2 toc-link" data-title="Langs">Langs</a>
                   </li>
                   <li>
@@ -486,6 +489,9 @@
                   </li>
                   <li>
                     <a href="#products-2" class="toc-h2 toc-link" data-title="Products">Products</a>
+                  </li>
+                  <li>
+                    <a href="#steps" class="toc-h2 toc-link" data-title="Steps">Steps</a>
                   </li>
                   <li>
                     <a href="#suppliers-2" class="toc-h2 toc-link" data-title="Suppliers">Suppliers</a>
@@ -1151,6 +1157,17 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
         </span><span class="nl">"long"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Long description of the activity"</span><span class="w">
       </span><span class="p">},</span><span class="w">
       </span><span class="nl">"medias"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"https://image.jpg"</span><span class="p">,</span><span class="w"> </span><span class="s2">"https://image2.jpg"</span><span class="p">],</span><span class="w">
+      </span><span class="nl">"items"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"item_title"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"purchase_price"</span><span class="p">:</span><span class="w"> </span><span class="mi">150</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"purchase_price_excl_taxes"</span><span class="p">:</span><span class="w"> </span><span class="mi">125</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"sales_price"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"sales_price_excl_taxes"</span><span class="p">:</span><span class="w"> </span><span class="mf">166.67</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"is_optional"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">],</span><span class="w">
       </span><span class="nl">"custom_fields"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="p">{</span><span class="w">
           </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CustomField"</span><span class="p">,</span><span class="w">
@@ -1223,7 +1240,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <tr>
 <td>steps</td>
 <td>Array</td>
-<td>An array of JSON objects, each representing a step. The steps are sorted by their creation date, with the most recently created appearing first. Each step includes the following fields: name, <code>type</code>, <code>category</code>,<code>date_start</code>, <code>date_end</code>, <code>people</code>, <code>address</code>, <code>description</code>, <code>medias</code>, and <code>custom_fields</code>.</td>
+<td>Array of JSON steps (<a href="#steps">Steps</a>)</td>
 </tr>
 </tbody></table>
 <h2 id='post-projects-upsert'>POST projects-upsert</h2>
@@ -4483,12 +4500,12 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 </tbody></table>
 <h3 id='response-29'>Response</h3>
 <p>A JSON object indicating whether an error occurred during the process, along with the associated message.</p>
-<h1 id='nested-resources'>Nested Resources</h1><h3 id='address'>Address</h3><div class="highlight"><pre class="highlight json tab-json"><code><span class="w">   </span><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"58 Rue de Paradis"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"zip"</span><span class="p">:</span><span class="w"> </span><span class="s2">"75010"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Paris"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"France"</span><span class="w">
-  </span><span class="p">}</span><span class="err">,</span><span class="w">
+<h1 id='nested-resources'>Nested Resources</h1><h3 id='address'>Address</h3><div class="highlight"><pre class="highlight json tab-json"><code><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="nl">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"58 Rue de Paradis"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"zip"</span><span class="p">:</span><span class="w"> </span><span class="s2">"75010"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Paris"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"France"</span><span class="w">
+</span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <table><thead>
 <tr>
@@ -4518,30 +4535,30 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <td>Post code</td>
 </tr>
 </tbody></table>
-<h3 id='alternatives'>Alternatives</h3><div class="highlight"><pre class="highlight json tab-json"><code><span class="w">  </span><span class="nl">"alternatives"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"alternative_title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Main Alternative"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"budget_actual"</span><span class="p">:</span><span class="w"> </span><span class="mi">88750</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"budget_actual_excl_taxes "</span><span class="p">:</span><span class="w"> </span><span class="mi">77950</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"budget_margin_gross"</span><span class="p">:</span><span class="w"> </span><span class="mi">2500</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"budget_margin_net"</span><span class="p">:</span><span class="w"> </span><span class="mi">1000</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"trip_budget"</span><span class="p">:</span><span class="w"> </span><span class="mi">90000</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"trip_people"</span><span class="p">:</span><span class="w"> </span><span class="s2">"15"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"trip_date_in"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-03-01"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"trip_date_out"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-03-09"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"trip_duration"</span><span class="p">:</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"trip_destination"</span><span class="p">:</span><span class="w"> </span><span class="s2">"France"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"trip_subdestination"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Paris"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"client"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"client_reference"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"enterprise"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"company_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MOKE INTERNATIONAL LIMITED"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Jane"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Doe"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"contact@moke-international.com"</span><span class="w">
-      </span><span class="p">}</span><span class="w">
+<h3 id='alternatives'>Alternatives</h3><div class="highlight"><pre class="highlight json tab-json"><code><span class="nl">"alternatives"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"alternative_title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Main Alternative"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"budget_actual"</span><span class="p">:</span><span class="w"> </span><span class="mi">88750</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"budget_actual_excl_taxes "</span><span class="p">:</span><span class="w"> </span><span class="mi">77950</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"budget_margin_gross"</span><span class="p">:</span><span class="w"> </span><span class="mi">2500</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"budget_margin_net"</span><span class="p">:</span><span class="w"> </span><span class="mi">1000</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"trip_budget"</span><span class="p">:</span><span class="w"> </span><span class="mi">90000</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"trip_people"</span><span class="p">:</span><span class="w"> </span><span class="s2">"15"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"trip_date_in"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-03-01"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"trip_date_out"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-03-09"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"trip_duration"</span><span class="p">:</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"trip_destination"</span><span class="p">:</span><span class="w"> </span><span class="s2">"France"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"trip_subdestination"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Paris"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"client"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"client_reference"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"enterprise"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"company_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MOKE INTERNATIONAL LIMITED"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Jane"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Doe"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"contact@moke-international.com"</span><span class="w">
     </span><span class="p">}</span><span class="w">
-  </span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
 </span></code></pre></div>
 <table><thead>
 <tr>
@@ -4619,20 +4636,20 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <h3 id='contacts'>Contacts</h3>
 <p>Only the last 10 contacts are returned in this object. Note that for upsert endpoints, only one contact is required (equivalent to a single JSON element in the contacts.data Array below).</p>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="nl">"contacts"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-      </span><span class="p">{</span><span class="w">
-  </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"elliot@fsociety.org"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Elliot"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Alderson"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Developer"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"gender"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Mr"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"phone2"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"birth_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1986-09-17"</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-    </span><span class="p">],</span><span class="w">
-    </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
-  </span><span class="p">}</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"elliot@fsociety.org"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Elliot"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Alderson"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Developer"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"gender"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Mr"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"phone2"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"birth_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1986-09-17"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <table><thead>
 <tr>
@@ -4682,48 +4699,48 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <td>Contact&#39;s date of birth in a &quot;YYYY-MM-DD&quot; format string (supplier contacts have no date of birth)</td>
 </tr>
 </tbody></table>
-<h3 id='custom-fields'>Custom Fields</h3><div class="highlight"><pre class="highlight json tab-json"><code><span class="w">  </span><span class="nl">"custom_fields"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Text"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Value"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Number"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"42"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Text area"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Value of the text Area"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Date"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2012-12-21"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Time"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2006-10-07T12:06:56.568+01:00"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"URL link"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://urllink.com"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"File"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://urllink.com/files/document.pdf"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Checkbox"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"true"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Dropdown"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ExactOption"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MultipleDropdown"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ExactOption1/-/ExactOption2"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">]</span><span class="w">
+<h3 id='custom-fields'>Custom Fields</h3><div class="highlight"><pre class="highlight json tab-json"><code><span class="nl">"custom_fields"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Text"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Value"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Number"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"42"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Text area"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Value of the text Area"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Date"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2012-12-21"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Time"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2006-10-07T12:06:56.568+01:00"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"URL link"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://urllink.com"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"File"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://urllink.com/files/document.pdf"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Checkbox"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"true"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Dropdown"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ExactOption"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MultipleDropdown"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ExactOption1/-/ExactOption2"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
 </span></code></pre></div>
 <aside class="warning">
 The name of custom fields refers to their technical name, not their display name.
@@ -4780,16 +4797,16 @@ The name of custom fields refers to their technical name, not their display name
 </tr>
 </tbody></table>
 <h3 id='destinations-2'>Destinations</h3><div class="highlight"><pre class="highlight json tab-json"><code><span class="nl">"destinations"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"destination_reference"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"France"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"subdestinations"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-          </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"subdestination_reference"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Paris"</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-      </span><span class="p">]</span><span class="w">
-    </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"destination_reference"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"France"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"subdestinations"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"subdestination_reference"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Paris"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">},</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
 <p>Each object represents a destination with its associated sub-destinations</p>
@@ -4867,6 +4884,66 @@ The name of custom fields refers to their technical name, not their display name
 <td>Forecasted / Actual amount excluding taxes</td>
 </tr>
 </tbody></table>
+<h3 id='items'>Items</h3><div class="highlight"><pre class="highlight json tab-json"><code><span class="nl">"items"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"item_title"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"purchase_price"</span><span class="p">:</span><span class="w"> </span><span class="mi">150</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"purchase_price_excl_taxes"</span><span class="p">:</span><span class="w"> </span><span class="mi">125</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"sales_price"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"sales_price_excl_taxes"</span><span class="p">:</span><span class="w"> </span><span class="mf">166.67</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"is_optional"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div>
+<p>The items array represents a collection of items associated with a step.
+The fields <code>purchase_price</code>, <code>purchase_price_excl_taxes</code>, <code>sales_price</code>, and <code>sales_price_excl_taxes</code> <strong>represent the price per unit of the item</strong>. To calculate the total cost or total sales value for an item, multiply the unit price by the quantity.</p>
+
+<p><strong>All prices returned by this endpoint are expressed in the project’s currency</strong>. If the items are in different currencies, conversion must be performed using the exchange rates available in the project’s currency library.</p>
+
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>Name of the item</td>
+</tr>
+<tr>
+<td>quantity</td>
+<td>Number</td>
+<td>Quantity of the item</td>
+</tr>
+<tr>
+<td>purchase_price</td>
+<td>Number</td>
+<td>The unit purchase price of the item (including taxes)</td>
+</tr>
+<tr>
+<td>purchase_price_excl_taxes</td>
+<td>Number</td>
+<td>The unit purchase price of the item (excluding taxes)</td>
+</tr>
+<tr>
+<td>sales_price</td>
+<td>Number</td>
+<td>The unit sales price of the item (including taxes)</td>
+</tr>
+<tr>
+<td>sales_price_excl_taxes</td>
+<td>Number</td>
+<td>The unit sales price of the item (excluding taxes)</td>
+</tr>
+<tr>
+<td>is_optional</td>
+<td>Boolean</td>
+<td>Indicates whether the item is optional. <strong>If true, the item does not contribute to the final purchase or sales price.</strong></td>
+</tr>
+</tbody></table>
 <h3 id='langs'>Langs</h3><div class="highlight"><pre class="highlight json tab-json"><code><span class="nl">"langs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
     </span><span class="nl">"lang"</span><span class="p">:</span><span class="w"> </span><span class="s2">"american"</span><span class="p">,</span><span class="w">
@@ -4874,7 +4951,7 @@ The name of custom fields refers to their technical name, not their display name
     </span><span class="nl">"short_description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Short American Description"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"long_description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Long American Description"</span><span class="w">
   </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="err">,</span><span class="w">
+</span><span class="p">]</span><span class="w">
 </span></code></pre></div>
 <table><thead>
 <tr>
@@ -4907,14 +4984,14 @@ The name of custom fields refers to their technical name, not their display name
 <h3 id='medias'>Medias</h3>
 <p>Only the last 10 medias are returned in this object.</p>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="nl">"medias"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-      </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"media_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"img.jpeg"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"path_full"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://link-img.jpeg"</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">],</span><span class="w">
-    </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
-  </span><span class="p">}</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"media_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"img.jpeg"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"path_full"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://link-img.jpeg"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <table><thead>
 <tr>
@@ -4937,14 +5014,14 @@ The name of custom fields refers to their technical name, not their display name
 <h3 id='products-2'>Products</h3>
 <p>Only the last 10 products are returned in this object.</p>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="nl">"products"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-      </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"product_reference"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2-bed room with breakfast"</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">],</span><span class="w">
-    </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
-  </span><span class="p">}</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"product_reference"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2-bed room with breakfast"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <table><thead>
 <tr>
@@ -4964,17 +5041,123 @@ The name of custom fields refers to their technical name, not their display name
 <td>The title of the product</td>
 </tr>
 </tbody></table>
-<h3 id='suppliers-2'>Suppliers</h3>
-<p>Only the last 10 suppliers are returned in this object.</p>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="w"> </span><span class="nl">"suppliers"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+<h3 id='steps'>Steps</h3>
+<p>The steps are sorted by their creation date, with the most recently created appearing first.</p>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="nl">"steps"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"activityTitle"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"activity"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"category"</span><span class="p">:</span><span class="w"> </span><span class="s2">"restaurant"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"date_start"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-10-01 10:00:00"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"date_end"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-10-01 12:00:00"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"people"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"58 Rue de Paradis"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"zip"</span><span class="p">:</span><span class="w"> </span><span class="s2">"75010"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Paris"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"France"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"latitude"</span><span class="p">:</span><span class="w"> </span><span class="mf">50.861796</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"longitude"</span><span class="p">:</span><span class="w"> </span><span class="mf">4.359988</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"short"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Short description of the activity"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"long"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Long description of the activity"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"images"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"https://image.jpg"</span><span class="p">,</span><span class="w"> </span><span class="s2">"https://image2.jpg"</span><span class="p">],</span><span class="w">
+    </span><span class="nl">"items"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
       </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"supplier_reference"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"company_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The best hotel"</span><span class="w">
+        </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"item_title"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"purchase_price"</span><span class="p">:</span><span class="w"> </span><span class="mi">150</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"purchase_price_excl_taxes"</span><span class="p">:</span><span class="w"> </span><span class="mi">125</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"sales_price"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"sales_price_excl_taxes"</span><span class="p">:</span><span class="w"> </span><span class="mf">166.67</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"is_optional"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">],</span><span class="w">
-    </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+    </span><span class="nl">"custom_fields"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CustomField"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Value"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
   </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div>
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>Name of the step</td>
+</tr>
+<tr>
+<td>type</td>
+<td>String</td>
+<td>Type of the step <code>activity</code> <code>accommodation</code> <code>transport</code> or <code>extra</code></td>
+</tr>
+<tr>
+<td>category</td>
+<td>String</td>
+<td>Category of the step</td>
+</tr>
+<tr>
+<td>date_start</td>
+<td>String</td>
+<td>Date of the beginning of this step, in a &quot;YYYY-MM-DD HH:MM:SS&quot; format string. If it&#39;s empty, the step has no dates.</td>
+</tr>
+<tr>
+<td>date_end</td>
+<td>String</td>
+<td>Date of the end of this step, in a &quot;YYYY-MM-DD HH:MM:SS&quot; format string. If it&#39;s empty, the step has no dates or no end.</td>
+</tr>
+<tr>
+<td>people</td>
+<td>Number</td>
+<td>Number of people</td>
+</tr>
+<tr>
+<td>address</td>
+<td>JSON</td>
+<td>JSON object representing the address (<a href="#address">Address</a>) of the step, including longitude and latitude. Note: Longitude and latitude are only returned by this step object.</td>
+</tr>
+<tr>
+<td>description</td>
+<td>JSON</td>
+<td>JSON object representing the short and long description of the step</td>
+</tr>
+<tr>
+<td>images</td>
+<td>Array</td>
+<td>Array of strings representing the images URLs associated with the step</td>
+</tr>
+<tr>
+<td>items</td>
+<td>Array</td>
+<td>Array of JSON items (<a href="#items">Items</a>)</td>
+</tr>
+<tr>
+<td>custom_fields</td>
+<td>Array</td>
+<td>Array of JSON custom fields (<a href="#custom-fields">Custom fields</a>)</td>
+</tr>
+</tbody></table>
+<h3 id='suppliers-2'>Suppliers</h3>
+<p>Only the last 10 suppliers are returned in this object.</p>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="nl">"suppliers"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"supplier_reference"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"company_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The best hotel"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <table><thead>
 <tr>
@@ -4994,17 +5177,17 @@ The name of custom fields refers to their technical name, not their display name
 <td>The company name of the supplier</td>
 </tr>
 </tbody></table>
-<h3 id='tariffs'>Tariffs</h3><div class="highlight"><pre class="highlight json tab-json"><code><span class="w">  </span><span class="nl">"tariffs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tariff_reference"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"default"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"purchase_price"</span><span class="p">:</span><span class="w"> </span><span class="mf">100.0</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"margin_rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">50.0</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"sales_price"</span><span class="p">:</span><span class="w"> </span><span class="mf">200.0</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"childs"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">]</span><span class="err">,</span><span class="w">
+<h3 id='tariffs'>Tariffs</h3><div class="highlight"><pre class="highlight json tab-json"><code><span class="nl">"tariffs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tariff_reference"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"default"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"purchase_price"</span><span class="p">:</span><span class="w"> </span><span class="mf">100.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"margin_rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">50.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"sales_price"</span><span class="p">:</span><span class="w"> </span><span class="mf">200.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"childs"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
 </span></code></pre></div>
 <table><thead>
 <tr>
@@ -5052,10 +5235,10 @@ The name of custom fields refers to their technical name, not their display name
 <h3 id='user'>User</h3>
 <p>One of the following options: <code>None</code>, <code>Everyone</code>, <code>User Group</code> or the following JSON object corresponding to an active Ezus user of this account.</p>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="nl">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tommy@e-corp.com"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Tommy"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Atkins"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"agency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Paris Agency"</span><span class="w">
+  </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tommy@e-corp.com"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Tommy"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Atkins"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"agency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Paris Agency"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <table><thead>
