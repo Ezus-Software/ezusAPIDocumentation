@@ -456,6 +456,17 @@ axios.get(baseUrl + "/project-steps?reference=project_reference", headers);
         "long": "Long description of the activity"
       },
       "medias": ["https://image.jpg", "https://image2.jpg"],
+      "items": [
+        {
+          "name": "item_title",
+          "quantity": 2,
+          "purchase_price": 150,
+          "purchase_price_excl_taxes": 125,
+          "sales_price": 200,
+          "sales_price_excl_taxes": 166.67,
+          "is_optional": false
+        }
+      ],
       "custom_fields": [
         {
           "name": "CustomField",
@@ -489,11 +500,11 @@ axios.get(baseUrl + "/project-steps?reference=project_reference", headers);
 
 A JSON object containing the project documents information with properties like:
 
-| Property          | Type   | Description                                                                                                                                                                                                                                                                                                     |
-| ----------------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| reference         | String | The reference of the project                                                                                                                                                                                                                                                                                    |
-| alternative_order | Number | The alternative order; 0 is for main alternative                                                                                                                                                                                                                                                                |
-| steps             | Array  | An array of JSON objects, each representing a step. The steps are sorted by their creation date, with the most recently created appearing first. Each step includes the following fields: name, `type`, `category`,`date_start`, `date_end`, `people`, `address`, `description`, `medias`, and `custom_fields`. |
+| Property          | Type   | Description                                      |
+| ----------------- | ------ | ------------------------------------------------ |
+| reference         | String | The reference of the project                     |
+| alternative_order | Number | The alternative order; 0 is for main alternative |
+| steps             | Array  | Array of JSON steps ([Steps](#steps))            |
 
 ## POST projects-upsert
 
@@ -2787,12 +2798,12 @@ A JSON object indicating whether an error occurred during the process, along wit
 ### Address
 
 ```json
-   "address": {
-    "label": "58 Rue de Paradis",
-    "zip": "75010",
-    "city": "Paris",
-    "country": "France"
-  },
+"address": {
+  "label": "58 Rue de Paradis",
+  "zip": "75010",
+  "city": "Paris",
+  "country": "France"
+}
 ```
 
 | Property | Type   | Description          |
@@ -2805,30 +2816,30 @@ A JSON object indicating whether an error occurred during the process, along wit
 ### Alternatives
 
 ```json
-  "alternatives": [
-    {
-      "alternative_title": "Main Alternative",
-      "budget_actual": 88750,
-      "budget_actual_excl_taxes ": 77950,
-      "budget_margin_gross": 2500,
-      "budget_margin_net": 1000,
-      "trip_budget": 90000,
-      "trip_people": "15",
-      "trip_date_in": "2024-03-01",
-      "trip_date_out": "2024-03-09",
-      "trip_duration": 9,
-      "trip_destination": "France",
-      "trip_subdestination": "Paris",
-      "client": {
-        "reference": "client_reference",
-        "type": "enterprise",
-        "company_name": "MOKE INTERNATIONAL LIMITED",
-        "first_name": "Jane",
-        "last_name": "Doe",
-        "email": "contact@moke-international.com"
-      }
+"alternatives": [
+  {
+    "alternative_title": "Main Alternative",
+    "budget_actual": 88750,
+    "budget_actual_excl_taxes ": 77950,
+    "budget_margin_gross": 2500,
+    "budget_margin_net": 1000,
+    "trip_budget": 90000,
+    "trip_people": "15",
+    "trip_date_in": "2024-03-01",
+    "trip_date_out": "2024-03-09",
+    "trip_duration": 9,
+    "trip_destination": "France",
+    "trip_subdestination": "Paris",
+    "client": {
+      "reference": "client_reference",
+      "type": "enterprise",
+      "company_name": "MOKE INTERNATIONAL LIMITED",
+      "first_name": "Jane",
+      "last_name": "Doe",
+      "email": "contact@moke-international.com"
     }
-  ]
+  }
+]
 ```
 
 | Property                 | Type   | Description                                                                                                               |
@@ -2853,20 +2864,20 @@ Only the last 10 contacts are returned in this object. Note that for upsert endp
 
 ```json
 "contacts": {
-    "data": [
-      {
-  "email": "elliot@fsociety.org",
-  "first_name": "Elliot",
-  "last_name": "Alderson",
-  "title": "Developer",
-  "gender": "Mr",
-  "phone": "",
-  "phone2": "",
-  "birth_date": "1986-09-17"
-  }
-    ],
-    "size": 1
-  }
+  "data": [
+    {
+      "email": "elliot@fsociety.org",
+      "first_name": "Elliot",
+      "last_name": "Alderson",
+      "title": "Developer",
+      "gender": "Mr",
+      "phone": "",
+      "phone2": "",
+      "birth_date": "1986-09-17"
+    }
+  ],
+  "size": 1
+}
 ```
 
 | Property   | Type   | Description                                                                                       |
@@ -2883,48 +2894,48 @@ Only the last 10 contacts are returned in this object. Note that for upsert endp
 ### Custom Fields
 
 ```json
-  "custom_fields": [
-    {
-      "name": "Text",
-      "value": "Value"
-    },
-    {
-      "name": "Number",
-      "value": "42"
-    },
-    {
-      "name": "Text area",
-      "value": "Value of the text Area"
-    },
-    {
-      "name": "Date",
-      "value": "2012-12-21"
-    },
-    {
-      "name": "Time",
-      "value": "2006-10-07T12:06:56.568+01:00"
-    },
-    {
-      "name": "URL link",
-      "value": "https://urllink.com"
-    },
-    {
-      "name": "File",
-      "value": "https://urllink.com/files/document.pdf"
-    },
-    {
-      "name": "Checkbox",
-      "value": "true"
-    },
-    {
-      "name": "Dropdown",
-      "value": "ExactOption"
-    },
-    {
-      "name": "MultipleDropdown",
-      "value": "ExactOption1/-/ExactOption2"
-    }
-  ]
+"custom_fields": [
+  {
+    "name": "Text",
+    "value": "Value"
+  },
+  {
+    "name": "Number",
+    "value": "42"
+  },
+  {
+    "name": "Text area",
+    "value": "Value of the text Area"
+  },
+  {
+    "name": "Date",
+    "value": "2012-12-21"
+  },
+  {
+    "name": "Time",
+    "value": "2006-10-07T12:06:56.568+01:00"
+  },
+  {
+    "name": "URL link",
+    "value": "https://urllink.com"
+  },
+  {
+    "name": "File",
+    "value": "https://urllink.com/files/document.pdf"
+  },
+  {
+    "name": "Checkbox",
+    "value": "true"
+  },
+  {
+    "name": "Dropdown",
+    "value": "ExactOption"
+  },
+  {
+    "name": "MultipleDropdown",
+    "value": "ExactOption1/-/ExactOption2"
+  }
+]
 ```
 
 <aside class="warning">
@@ -2947,16 +2958,16 @@ The technical name of a custom field can be found in the custom field edit modal
 
 ```json
 "destinations": [
-    {
-      "reference": "destination_reference",
-      "name": "France",
-      "subdestinations": [
-        {
-          "reference": "subdestination_reference",
-          "name": "Paris"
-        }
-      ]
-    },
+  {
+    "reference": "destination_reference",
+    "name": "France",
+    "subdestinations": [
+      {
+        "reference": "subdestination_reference",
+        "name": "Paris"
+      }
+    ]
+  },
 ]
 ```
 
@@ -2997,6 +3008,37 @@ Those objects provides insights into the invoice amounts, differentiating betwee
 | vat_deducted | Number  | Forecasted / Actual deductible VAT                                                       |
 | amount_ht    | Number  | Forecasted / Actual amount excluding taxes                                               |
 
+### Items
+
+```json
+"items": [
+  {
+    "name": "item_title",
+    "quantity": 2,
+    "purchase_price": 150,
+    "purchase_price_excl_taxes": 125,
+    "sales_price": 200,
+    "sales_price_excl_taxes": 166.67,
+    "is_optional": false
+  }
+]
+```
+
+The items array represents a collection of items associated with a step.
+The fields `purchase_price`, `purchase_price_excl_taxes`, `sales_price`, and `sales_price_excl_taxes` **represent the price per unit of the item**. To calculate the total cost or total sales value for an item, multiply the unit price by the quantity.
+
+**All prices returned by this endpoint are expressed in the project’s currency**. If the items are in different currencies, conversion must be performed using the exchange rates available in the project’s currency library.
+
+| Property                  | Type    | Description                                                                                                             |
+| ------------------------- | ------- | ----------------------------------------------------------------------------------------------------------------------- |
+| name                      | String  | Name of the item                                                                                                        |
+| quantity                  | Number  | Quantity of the item                                                                                                    |
+| purchase_price            | Number  | The unit purchase price of the item (including taxes)                                                                   |
+| purchase_price_excl_taxes | Number  | The unit purchase price of the item (excluding taxes)                                                                   |
+| sales_price               | Number  | The unit sales price of the item (including taxes)                                                                      |
+| sales_price_excl_taxes    | Number  | The unit sales price of the item (excluding taxes)                                                                      |
+| is_optional               | Boolean | Indicates whether the item is optional. **If true, the item does not contribute to the final purchase or sales price.** |
+
 ### Langs
 
 ```json
@@ -3007,7 +3049,7 @@ Those objects provides insights into the invoice amounts, differentiating betwee
     "short_description": "Short American Description",
     "long_description": "Long American Description"
   }
-],
+]
 ```
 
 | Property          | Type   | Description                                      |
@@ -3023,14 +3065,14 @@ Only the last 10 medias are returned in this object.
 
 ```json
 "medias": {
-    "data": [
-      {
-        "media_name": "img.jpeg",
-        "path_full": "https://link-img.jpeg"
-      }
-    ],
-    "size": 1
-  }
+  "data": [
+    {
+      "media_name": "img.jpeg",
+      "path_full": "https://link-img.jpeg"
+    }
+  ],
+  "size": 1
+}
 ```
 
 | Property   | Type   | Description                                                       |
@@ -3044,14 +3086,14 @@ Only the last 10 products are returned in this object.
 
 ```json
 "products": {
-    "data": [
-      {
-        "reference": "product_reference",
-        "title": "2-bed room with breakfast"
-      }
-    ],
-    "size": 1
-  }
+  "data": [
+    {
+      "reference": "product_reference",
+      "title": "2-bed room with breakfast"
+    }
+  ],
+  "size": 1
+}
 ```
 
 | Property  | Type   | Description                  |
@@ -3059,20 +3101,81 @@ Only the last 10 products are returned in this object.
 | reference | String | The reference of the product |
 | title     | String | The title of the product     |
 
+### Steps
+
+The steps are sorted by their creation date, with the most recently created appearing first.
+
+```json
+"steps": [
+  {
+    "name": "activityTitle",
+    "type": "activity",
+    "category": "restaurant",
+    "date_start": "2024-10-01 10:00:00",
+    "date_end": "2024-10-01 12:00:00",
+    "people": 4,
+    "address": {
+      "label": "58 Rue de Paradis",
+      "zip": "75010",
+      "city": "Paris",
+      "country": "France",
+      "latitude": 50.861796,
+      "longitude": 4.359988
+    },
+    "description": {
+      "short": "Short description of the activity",
+      "long": "Long description of the activity"
+    },
+    "images": ["https://image.jpg", "https://image2.jpg"],
+    "items": [
+      {
+        "name": "item_title",
+        "quantity": 2,
+        "purchase_price": 150,
+        "purchase_price_excl_taxes": 125,
+        "sales_price": 200,
+        "sales_price_excl_taxes": 166.67,
+        "is_optional": false
+      }
+    ],
+    "custom_fields": [
+      {
+        "name": "CustomField",
+        "value": "Value"
+      }
+    ]
+  }
+]
+```
+
+| Property      | Type   | Description                                                                                                                                                                   |
+| ------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| name          | String | Name of the step                                                                                                                                                              |
+| type          | String | Type of the step `activity` `accommodation` `transport` or `extra`                                                                                                            |
+| category      | String | Category of the step                                                                                                                                                          |
+| date_start    | String | Date of the beginning of this step, in a "YYYY-MM-DD HH:MM:SS" format string. If it's empty, the step has no dates.                                                           |
+| date_end      | String | Date of the end of this step, in a "YYYY-MM-DD HH:MM:SS" format string. If it's empty, the step has no dates or no end.                                                       |
+| people        | Number | Number of people                                                                                                                                                              |
+| address       | JSON   | JSON object representing the address ([Address](#address)) of the step, including longitude and latitude. Note: Longitude and latitude are only returned by this step object. |
+| description   | JSON   | JSON object representing the short and long description of the step                                                                                                           |
+| images        | Array  | Array of strings representing the images URLs associated with the step                                                                                                        |
+| items         | Array  | Array of JSON items ([Items](#items))                                                                                                                                         |
+| custom_fields | Array  | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                                 |
+
 ### Suppliers
 
 Only the last 10 suppliers are returned in this object.
 
 ```json
- "suppliers": {
-    "data": [
-      {
-        "reference": "supplier_reference",
-        "company_name": "The best hotel"
-      }
-    ],
-    "size": 1
-  }
+"suppliers": {
+  "data": [
+    {
+      "reference": "supplier_reference",
+      "company_name": "The best hotel"
+    }
+  ],
+  "size": 1
+}
 ```
 
 | Property     | Type   | Description                      |
@@ -3083,17 +3186,17 @@ Only the last 10 suppliers are returned in this object.
 ### Tariffs
 
 ```json
-  "tariffs": [
-    {
-      "reference": "tariff_reference",
-      "type": "default",
-      "name": "",
-      "purchase_price": 100.0,
-      "margin_rate": 50.0,
-      "sales_price": 200.0,
-      "childs": []
-    }
-  ],
+"tariffs": [
+  {
+    "reference": "tariff_reference",
+    "type": "default",
+    "name": "",
+    "purchase_price": 100.0,
+    "margin_rate": 50.0,
+    "sales_price": 200.0,
+    "childs": []
+  }
+]
 ```
 
 | Property       | Type   | Description                                                                           |
@@ -3112,10 +3215,10 @@ One of the following options: `None`, `Everyone`, `User Group` or the following 
 
 ```json
 "user": {
-    "email": "tommy@e-corp.com",
-    "first_name": "Tommy",
-    "last_name": "Atkins",
-    "agency": "Paris Agency"
+  "email": "tommy@e-corp.com",
+  "first_name": "Tommy",
+  "last_name": "Atkins",
+  "agency": "Paris Agency"
 }
 ```
 
