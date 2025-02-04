@@ -1059,11 +1059,15 @@ axios.get(baseUrl + "/suppliers", headers);
         "last_name": "Tate",
         "agency": "Paris Agency"
       },
-      "address":  {
+      "address": {
         "label": "58 Rue de Paradis",
         "zip": "75010",
         "city": "Paris",
-        "country": "France"
+        "country": "France",
+        "geo": {
+          "x": 48.875761,
+          "y": 2.348727
+        }
       }
     },...
   ]
