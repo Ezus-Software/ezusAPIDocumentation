@@ -583,6 +583,7 @@ A JSON object containing the project documents information with properties like:
 | ----------------- | ------ | ---------------------------------------------------- |
 | reference         | String | The reference of the project                         |
 | alternative_order | Number | The alternative order; 0 is for main alternative     |
+| size              | Number | Total travellers in the project                      |
 | travellers        | Array  | Array of JSON travellers ([Travellers](#travellers)) |
 
 ## POST projects-upsert
