@@ -947,7 +947,7 @@ const body = {
     country: "France",
     zip: "75010",
   },
-  info_number: "202306001-P",
+  info_number: "202306001-C",
   custom_fields: [{ name: "field_name", value: "field_value" }],
 };
 const headers = {
