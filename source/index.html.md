@@ -570,14 +570,14 @@ axios.get(baseUrl + "/project-travellers?reference=project_reference", headers);
 
 ### Query Parameters
 
-| Parameter         | Type   | Description                                                                                                                    |
-| ----------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------ |
-| reference         | String | <span style="color:red">(Required)</span> The reference of the project to retrieve documents from                              |
-| alternative_order | Number | Specifies the alternative order in the project to retrieve documents from. If not provided, defaults to 0 for main alternative |
+| Parameter         | Type   | Description                                                                                                                     |
+| ----------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------- |
+| reference         | String | <span style="color:red">(Required)</span> The reference of the project to retrieve travellers from                              |
+| alternative_order | Number | Specifies the alternative order in the project to retrieve travellers from. If not provided, defaults to 0 for main alternative |
 
 ### Response
 
-A JSON object containing the project documents information with properties like:
+A JSON object containing the project travellers information with properties like:
 
 | Property          | Type   | Description                                          |
 | ----------------- | ------ | ---------------------------------------------------- |
