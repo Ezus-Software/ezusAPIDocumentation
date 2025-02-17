@@ -3270,7 +3270,7 @@ The steps are sorted by their creation date, with the most recently created appe
 | first_name    | String | The first name of the traveller                                                 |
 | last_name     | String | The last name of the traveller                                                  |
 | email         | String | The email of the traveller                                                      |
-| phone         | String | the phone number of the traveller                                               |     |
+| phone         | String | The phone number of the traveller                                               |     |
 | custom_fields | String | The custom fields and the assigned values. Varies with number of custom fields. |
 
 ### Suppliers
