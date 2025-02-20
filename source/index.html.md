@@ -510,6 +510,86 @@ A JSON object containing the project documents information with properties like:
 | alternative_order | Number | The alternative order; 0 is for main alternative |
 | steps             | Array  | Array of JSON steps ([Steps](#steps))            |
 
+## GET project-travellers
+
+Returns the list of travellers in your project.
+
+```shell
+curl --location 'https://api.ezus.app/project-travellers?reference=project_reference' \
+--header 'x-api-key: <YOUR_API_KEY>' \
+--header 'Authorization: Bearer <YOUR_TOKEN>'
+```
+
+```javascript
+const axios = require("axios");
+const baseUrl = "https://api.ezus.app";
+
+const headers = {
+  "x-api-key": "<YOUR_API_KEY>",
+  Authorization: "Bearer <YOUR_TOKEN>",
+};
+
+axios.get(baseUrl + "/project-travellers?reference=project_reference", headers);
+```
+
+> This request returns a structured JSON object:
+
+```json
+{
+  "error": "false",
+  "reference": "project_reference",
+  "alternative_order": 0,
+  "size": "2",
+  "travellers": [
+    {
+      "first_name": "Emily",
+      "name": "Johnson",
+      "email": "emily.johnson@example.com",
+      "phone": "+1-555-123-4567",
+      "custom_field1": "value1.1",
+      "custom_field2": "value2.1"
+    },
+    {
+      "first_name": "Michael",
+      "name": "Smith",
+      "email": "michael.smith@example.com",
+      "phone": "+1-555-987-6543",
+      "custom_field1": "value1.2",
+      "custom_field2": "value2.2"
+    }
+  ]
+}
+```
+
+### HTTP Endpoint
+
+`GET https://api.ezus.app/project-travellers`
+
+### Header Parameters
+
+| Parameter     | Type   | Description                                                 |
+| ------------- | ------ | ----------------------------------------------------------- |
+| x-api-key     | String | <span style="color:red">(Required)</span> Your Ezus API key |
+| Authorization | String | <span style="color:red">(Required)</span> Your Bearer token |
+
+### Query Parameters
+
+| Parameter         | Type   | Description                                                                                                                     |
+| ----------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------- |
+| reference         | String | <span style="color:red">(Required)</span> The reference of the project to retrieve travellers from                              |
+| alternative_order | Number | Specifies the alternative order in the project to retrieve travellers from. If not provided, defaults to 0 for main alternative |
+
+### Response
+
+A JSON object containing the project travellers information with properties like:
+
+| Property          | Type   | Description                                          |
+| ----------------- | ------ | ---------------------------------------------------- |
+| reference         | String | The reference of the project                         |
+| alternative_order | Number | The alternative order; 0 is for main alternative     |
+| size              | Number | Total travellers in the project                      |
+| travellers        | Array  | Array of JSON travellers ([Travellers](#travellers)) |
+
 ## POST projects-upsert
 
 This API endpoint updates a project record if the provided reference matches an existing project in your account. If no match is found, a new project record is created with the provided reference, or a randomly generated one if no reference is supplied.
@@ -3188,6 +3268,37 @@ The steps are sorted by their creation date, with the most recently created appe
 | images        | Array  | Array of strings representing the images URLs associated with the step                                                                                                        |
 | items         | Array  | Array of JSON items ([Items](#items))                                                                                                                                         |
 | custom_fields | Array  | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                                 |
+
+### Travellers
+
+```json
+"travellers": [
+    {
+      "first_name": "Emily",
+      "name": "Johnson",
+      "email": "emily.johnson@example.com",
+      "phone": "+1-555-123-4567",
+      "custom_field1": "value1.1",
+      "custom_field2": "value2.1"
+    },
+    {
+      "first_name": "Michael",
+      "name": "Smith",
+      "email": "michael.smith@example.com",
+      "phone": "+1-555-987-6543",
+      "custom_field1": "value1.2",
+      "custom_field2": "value2.2"
+    }
+  ]
+```
+
+| Property      | Type   | Description                                                                     |
+| ------------- | ------ | ------------------------------------------------------------------------------- | --- |
+| first_name    | String | The first name of the traveller                                                 |
+| last_name     | String | The last name of the traveller                                                  |
+| email         | String | The email of the traveller                                                      |
+| phone         | String | The phone number of the traveller                                               |     |
+| custom_fields | String | The custom fields and the assigned values. Varies with number of custom fields. |
 
 ### Suppliers
 
