@@ -344,6 +344,9 @@
                     <a href="#get-project-steps" class="toc-h2 toc-link" data-title="GET project-steps">GET project-steps</a>
                   </li>
                   <li>
+                    <a href="#get-project-travellers" class="toc-h2 toc-link" data-title="GET project-travellers">GET project-travellers</a>
+                  </li>
+                  <li>
                     <a href="#post-projects-upsert" class="toc-h2 toc-link" data-title="POST projects-upsert">POST projects-upsert</a>
                   </li>
                   <li>
@@ -492,6 +495,9 @@
                   </li>
                   <li>
                     <a href="#steps" class="toc-h2 toc-link" data-title="Steps">Steps</a>
+                  </li>
+                  <li>
+                    <a href="#travellers" class="toc-h2 toc-link" data-title="Travellers">Travellers</a>
                   </li>
                   <li>
                     <a href="#suppliers-2" class="toc-h2 toc-link" data-title="Suppliers">Suppliers</a>
@@ -1247,6 +1253,119 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <td>Array of JSON steps (<a href="#steps">Steps</a>)</td>
 </tr>
 </tbody></table>
+<h2 id='get-project-travellers'>GET project-travellers</h2>
+<p>Returns the list of travellers in your project.</p>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="s1">'https://api.ezus.app/project-travellers?reference=project_reference'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'x-api-key: &lt;YOUR_API_KEY&gt;'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Bearer &lt;YOUR_TOKEN&gt;'</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">axios</span><span class="dl">"</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">baseUrl</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">https://api.ezus.app</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="dl">"</span><span class="s2">x-api-key</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">&lt;YOUR_API_KEY&gt;</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">Authorization</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Bearer &lt;YOUR_TOKEN&gt;</span><span class="dl">"</span><span class="p">,</span>
+<span class="p">};</span>
+
+<span class="nx">axios</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="nx">baseUrl</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">/project-travellers?reference=project_reference</span><span class="dl">"</span><span class="p">,</span> <span class="nx">headers</span><span class="p">);</span>
+</code></pre></div>
+<blockquote>
+<p>This request returns a structured JSON object:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">"false"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"project_reference"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"alternative_order"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"travellers"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Emily"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Johnson"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"emily.johnson@example.com"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"+1-555-123-4567"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"custom_field1"</span><span class="p">:</span><span class="w"> </span><span class="s2">"value1.1"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"custom_field2"</span><span class="p">:</span><span class="w"> </span><span class="s2">"value2.1"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Michael"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Smith"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"michael.smith@example.com"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"+1-555-987-6543"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"custom_field1"</span><span class="p">:</span><span class="w"> </span><span class="s2">"value1.2"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"custom_field2"</span><span class="p">:</span><span class="w"> </span><span class="s2">"value2.2"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='http-endpoint-6'>HTTP Endpoint</h3>
+<p><code>GET https://api.ezus.app/project-travellers</code></p>
+<h3 id='header-parameters-6'>Header Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>x-api-key</td>
+<td>String</td>
+<td><span style="color:red">(Required)</span> Your Ezus API key</td>
+</tr>
+<tr>
+<td>Authorization</td>
+<td>String</td>
+<td><span style="color:red">(Required)</span> Your Bearer token</td>
+</tr>
+</tbody></table>
+<h3 id='query-parameters-5'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>reference</td>
+<td>String</td>
+<td><span style="color:red">(Required)</span> The reference of the project to retrieve travellers from</td>
+</tr>
+<tr>
+<td>alternative_order</td>
+<td>Number</td>
+<td>Specifies the alternative order in the project to retrieve travellers from. If not provided, defaults to 0 for main alternative</td>
+</tr>
+</tbody></table>
+<h3 id='response-6'>Response</h3>
+<p>A JSON object containing the project travellers information with properties like:</p>
+
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>reference</td>
+<td>String</td>
+<td>The reference of the project</td>
+</tr>
+<tr>
+<td>alternative_order</td>
+<td>Number</td>
+<td>The alternative order; 0 is for main alternative</td>
+</tr>
+<tr>
+<td>size</td>
+<td>Number</td>
+<td>Total travellers in the project</td>
+</tr>
+<tr>
+<td>travellers</td>
+<td>Array</td>
+<td>Array of JSON travellers (<a href="#travellers">Travellers</a>)</td>
+</tr>
+</tbody></table>
 <h2 id='post-projects-upsert'>POST projects-upsert</h2>
 <p>This API endpoint updates a project record if the provided reference matches an existing project in your account. If no match is found, a new project record is created with the provided reference, or a randomly generated one if no reference is supplied.</p>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="s1">'https://api.ezus.app/projects-upsert'</span> <span class="se">\</span>
@@ -1302,9 +1421,9 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
   </span><span class="nl">"client_reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"client_reference"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"info_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"202306001-P"</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='http-endpoint-6'>HTTP Endpoint</h3>
+</span></code></pre></div><h3 id='http-endpoint-7'>HTTP Endpoint</h3>
 <p><code>POST https://api.ezus.app/projects-upsert</code></p>
-<h3 id='header-parameters-6'>Header Parameters</h3>
+<h3 id='header-parameters-7'>Header Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -1387,7 +1506,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <td>Array of JSON custom fields (<a href="#custom-fields">Custom fields</a>)</td>
 </tr>
 </tbody></table>
-<h3 id='response-6'>Response</h3>
+<h3 id='response-7'>Response</h3>
 <p>A JSON object indicating whether an error occurred during the process, along with the associated message. If successful, it also returns a <code>reference</code> for the project, which you should store for future updates or retrievals.</p>
 <h2 id='post-projects-documents-create'>POST projects-documents-create</h2>
 <p>This API endpoint generates a PDF document from a given link within the specified project.</p>
@@ -1422,9 +1541,9 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
   </span><span class="nl">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">"false"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ok"</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='http-endpoint-7'>HTTP Endpoint</h3>
+</span></code></pre></div><h3 id='http-endpoint-8'>HTTP Endpoint</h3>
 <p><code>POST https://api.ezus.app/projects-documents-create</code></p>
-<h3 id='header-parameters-7'>Header Parameters</h3>
+<h3 id='header-parameters-8'>Header Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -1467,7 +1586,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <td><span style="color:red">(Required)</span> URL of the document (only supports PDF format and must be publicly accessible)</td>
 </tr>
 </tbody></table>
-<h3 id='response-7'>Response</h3>
+<h3 id='response-8'>Response</h3>
 <p>A JSON object indicating whether an error occurred during the process, along with the associated message.</p>
 <h1 id='clients'>Clients</h1><h2 id='get-clients'>GET clients</h2>
 <p>Returns a list of your clients, sorted from the newest to the oldest, with the most recent clients appearing first. The list of clients returned is paginated (50 per 50): to call the 50 next items in the list, call the route with the <code>next_token</code> query parameter.</p>
@@ -1525,9 +1644,9 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
     </span><span class="p">},</span><span class="err">...</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='http-endpoint-8'>HTTP Endpoint</h3>
+</span></code></pre></div><h3 id='http-endpoint-9'>HTTP Endpoint</h3>
 <p><code>GET https://api.ezus.app/clients</code></p>
-<h3 id='header-parameters-8'>Header Parameters</h3>
+<h3 id='header-parameters-9'>Header Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -1546,7 +1665,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <td><span style="color:red">(Required)</span> Your Bearer token</td>
 </tr>
 </tbody></table>
-<h3 id='query-parameters-5'>Query Parameters</h3>
+<h3 id='query-parameters-6'>Query Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -1560,7 +1679,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <td>Specify this parameter if you want to retrieve the following elements of a given list query.</td>
 </tr>
 </tbody></table>
-<h3 id='response-8'>Response</h3>
+<h3 id='response-9'>Response</h3>
 <p>A JSON object containing the client information with properties like:</p>
 
 <table><thead>
@@ -1674,9 +1793,9 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='http-endpoint-9'>HTTP Endpoint</h3>
+</span></code></pre></div><h3 id='http-endpoint-10'>HTTP Endpoint</h3>
 <p><code>GET https://api.ezus.app/client</code></p>
-<h3 id='header-parameters-9'>Header Parameters</h3>
+<h3 id='header-parameters-10'>Header Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -1695,7 +1814,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <td><span style="color:red">(Required)</span> Your Bearer token</td>
 </tr>
 </tbody></table>
-<h3 id='query-parameters-6'>Query Parameters</h3>
+<h3 id='query-parameters-7'>Query Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -1709,7 +1828,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <td><span style="color:red">(Required)</span> The reference of the client to retrieve</td>
 </tr>
 </tbody></table>
-<h3 id='response-9'>Response</h3>
+<h3 id='response-10'>Response</h3>
 <p>A JSON object containing the client information with properties like:</p>
 
 <table><thead>
@@ -1879,9 +1998,9 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
   </span><span class="nl">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Client successfully created"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"client_reference"</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='http-endpoint-10'>HTTP Endpoint</h3>
+</span></code></pre></div><h3 id='http-endpoint-11'>HTTP Endpoint</h3>
 <p><code>POST https://api.ezus.app/clients-upsert</code></p>
-<h3 id='header-parameters-10'>Header Parameters</h3>
+<h3 id='header-parameters-11'>Header Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -1959,7 +2078,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <td>Array of JSON custom fields (<a href="#custom-fields">Custom fields</a>)</td>
 </tr>
 </tbody></table>
-<h3 id='response-10'>Response</h3>
+<h3 id='response-11'>Response</h3>
 <p>A JSON object indicating whether an error occurred during the process, along with the associated message. If successful, it also returns a <code>reference</code> for the project, which you should store for future updates or retrievals.</p>
 <h1 id='suppliers'>Suppliers</h1><h2 id='get-suppliers'>GET suppliers</h2>
 <p>Returns a list of your suppliers, sorted by creation date from newest to oldest, with the most recent suppliers appearing first. The list of suppliers returned is paginated (50 per 50): to call the 50 next items in the list, call the route with the <code>next_token</code> query parameter.</p>
@@ -2013,9 +2132,9 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
     </span><span class="p">},</span><span class="err">...</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='http-endpoint-11'>HTTP Endpoint</h3>
+</span></code></pre></div><h3 id='http-endpoint-12'>HTTP Endpoint</h3>
 <p><code>GET https://api.ezus.app/suppliers</code></p>
-<h3 id='header-parameters-11'>Header Parameters</h3>
+<h3 id='header-parameters-12'>Header Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -2034,7 +2153,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <td><span style="color:red">(Required)</span> Your Bearer token</td>
 </tr>
 </tbody></table>
-<h3 id='query-parameters-7'>Query Parameters</h3>
+<h3 id='query-parameters-8'>Query Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -2048,7 +2167,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <td>Specify this parameter if you want to retrieve the following elements of a given list query.</td>
 </tr>
 </tbody></table>
-<h3 id='response-11'>Response</h3>
+<h3 id='response-12'>Response</h3>
 <p>A JSON object containing the supplier information with properties like:</p>
 
 <table><thead>
@@ -2181,9 +2300,9 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='http-endpoint-12'>HTTP Endpoint</h3>
+</span></code></pre></div><h3 id='http-endpoint-13'>HTTP Endpoint</h3>
 <p><code>GET https://api.ezus.app/supplier</code></p>
-<h3 id='header-parameters-12'>Header Parameters</h3>
+<h3 id='header-parameters-13'>Header Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -2202,7 +2321,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <td><span style="color:red">(Required)</span> Your Bearer token</td>
 </tr>
 </tbody></table>
-<h3 id='query-parameters-8'>Query Parameters</h3>
+<h3 id='query-parameters-9'>Query Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -2216,7 +2335,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <td><span style="color:red">(Required)</span> The reference of the supplier to retrieve</td>
 </tr>
 </tbody></table>
-<h3 id='response-12'>Response</h3>
+<h3 id='response-13'>Response</h3>
 <p>A JSON object containing the supplier information with properties like:</p>
 
 <table><thead>
@@ -2378,9 +2497,9 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
   </span><span class="nl">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Supplier successfully created"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"supplier_reference"</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='http-endpoint-13'>HTTP Endpoint</h3>
+</span></code></pre></div><h3 id='http-endpoint-14'>HTTP Endpoint</h3>
 <p><code>POST https://api.ezus.app/suppliers-upsert</code></p>
-<h3 id='header-parameters-13'>Header Parameters</h3>
+<h3 id='header-parameters-14'>Header Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -2458,7 +2577,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <td>Array of JSON custom fields (<a href="#custom-fields">Custom fields</a>)</td>
 </tr>
 </tbody></table>
-<h3 id='response-13'>Response</h3>
+<h3 id='response-14'>Response</h3>
 <p>A JSON object indicating whether an error occurred during the process, along with the associated message. If successful, it also returns a <code>reference</code> for the project, which you should store for future updates or retrievals.</p>
 <h1 id='products'>Products</h1><h2 id='get-products'>GET products</h2>
 <p>Returns a list of your products, sorted by creation date from newest to oldest, with the most recent products appearing first. The list of products returned is paginated (50 per 50): to call the 50 next items in the list, call the route with the <code>next_token</code> query parameter.</p>
@@ -2507,9 +2626,9 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
     </span><span class="p">},</span><span class="err">...</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='http-endpoint-14'>HTTP Endpoint</h3>
+</span></code></pre></div><h3 id='http-endpoint-15'>HTTP Endpoint</h3>
 <p><code>GET https://api.ezus.app/products</code></p>
-<h3 id='header-parameters-14'>Header Parameters</h3>
+<h3 id='header-parameters-15'>Header Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -2528,7 +2647,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <td><span style="color:red">(Required)</span> Your Bearer token</td>
 </tr>
 </tbody></table>
-<h3 id='query-parameters-9'>Query Parameters</h3>
+<h3 id='query-parameters-10'>Query Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -2542,7 +2661,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <td>Specify this parameter if you want to retrieve the following elements of a given list query.</td>
 </tr>
 </tbody></table>
-<h3 id='response-14'>Response</h3>
+<h3 id='response-15'>Response</h3>
 <p>A JSON object containing the product information with properties like:</p>
 
 <table><thead>
@@ -2659,9 +2778,9 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='http-endpoint-15'>HTTP Endpoint</h3>
+</span></code></pre></div><h3 id='http-endpoint-16'>HTTP Endpoint</h3>
 <p><code>GET https://api.ezus.app/product</code></p>
-<h3 id='header-parameters-15'>Header Parameters</h3>
+<h3 id='header-parameters-16'>Header Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -2680,7 +2799,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <td><span style="color:red">(Required)</span> Your Bearer token</td>
 </tr>
 </tbody></table>
-<h3 id='query-parameters-10'>Query Parameters</h3>
+<h3 id='query-parameters-11'>Query Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -2694,7 +2813,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <td><span style="color:red">(Required)</span> The reference of the product to retrieve</td>
 </tr>
 </tbody></table>
-<h3 id='response-15'>Response</h3>
+<h3 id='response-16'>Response</h3>
 <p>A JSON object containing the product information with properties like:</p>
 
 <table><thead>
@@ -2879,9 +2998,9 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
   </span><span class="nl">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Product successfully created"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"product_reference"</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='http-endpoint-16'>HTTP Endpoint</h3>
+</span></code></pre></div><h3 id='http-endpoint-17'>HTTP Endpoint</h3>
 <p><code>POST https://api.ezus.app/products-upsert</code></p>
-<h3 id='header-parameters-16'>Header Parameters</h3>
+<h3 id='header-parameters-17'>Header Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -2984,7 +3103,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <td>Array of JSON custom fields (<a href="#custom-fields">Custom fields</a>)</td>
 </tr>
 </tbody></table>
-<h3 id='response-16'>Response</h3>
+<h3 id='response-17'>Response</h3>
 <p>A JSON object indicating whether an error occurred during the process, along with the associated message. If successful, it also returns a <code>reference</code> for the project, which you should store for future updates or retrievals.</p>
 <h1 id='packages'>Packages</h1><h2 id='get-package'>GET package</h2>
 <p>This API endpoint retrieves detailed information about a specific package in Ezus.</p>
@@ -3059,9 +3178,9 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='http-endpoint-17'>HTTP Endpoint</h3>
+</span></code></pre></div><h3 id='http-endpoint-18'>HTTP Endpoint</h3>
 <p><code>GET https://api.ezus.app/package</code></p>
-<h3 id='header-parameters-17'>Header Parameters</h3>
+<h3 id='header-parameters-18'>Header Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -3080,7 +3199,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <td><span style="color:red">(Required)</span> Your Bearer token</td>
 </tr>
 </tbody></table>
-<h3 id='query-parameters-11'>Query Parameters</h3>
+<h3 id='query-parameters-12'>Query Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -3094,7 +3213,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <td><span style="color:red">(Required)</span> The reference of the package to retrieve</td>
 </tr>
 </tbody></table>
-<h3 id='response-17'>Response</h3>
+<h3 id='response-18'>Response</h3>
 <p>A JSON object containing the package information with properties like:</p>
 
 <table><thead>
@@ -3202,9 +3321,9 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
   </span><span class="nl">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Package successfully created"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"package_reference"</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='http-endpoint-18'>HTTP Endpoint</h3>
+</span></code></pre></div><h3 id='http-endpoint-19'>HTTP Endpoint</h3>
 <p><code>POST https://api.ezus.app/packages-upsert</code></p>
-<h3 id='header-parameters-18'>Header Parameters</h3>
+<h3 id='header-parameters-19'>Header Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -3257,7 +3376,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <td>Array of JSON custom fields <a href="#custom-fields">Custom fields</a></td>
 </tr>
 </tbody></table>
-<h3 id='response-18'>Response</h3>
+<h3 id='response-19'>Response</h3>
 <p>A JSON object indicating whether an error occurred during the process, along with the associated message. If successful, it also returns a <code>reference</code> for the project, which you should store for future updates or retrievals.</p>
 <h1 id='destinations'>Destinations</h1><h2 id='get-destinations'>GET destinations</h2>
 <p>Returns a list of all destinations and sub-destinations. The list is not paginated and is theoretically limited to 1000 objects (destinations and sub-destinations), although higher limits may work depending on the payload size. The order of the destinations and sub-destinations matches their order in Ezus.</p>
@@ -3293,9 +3412,9 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
     </span><span class="p">},</span><span class="err">...</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='http-endpoint-19'>HTTP Endpoint</h3>
+</span></code></pre></div><h3 id='http-endpoint-20'>HTTP Endpoint</h3>
 <p><code>GET https://api.ezus.app/destinations</code></p>
-<h3 id='header-parameters-19'>Header Parameters</h3>
+<h3 id='header-parameters-20'>Header Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -3314,7 +3433,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <td><span style="color:red">(Required)</span> Your Bearer token</td>
 </tr>
 </tbody></table>
-<h3 id='response-19'>Response</h3>
+<h3 id='response-20'>Response</h3>
 <p>A JSON object containing the destination information with properties like:</p>
 
 <table><thead>
@@ -3381,9 +3500,9 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
     </span><span class="p">},</span><span class="err">...</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='http-endpoint-20'>HTTP Endpoint</h3>
+</span></code></pre></div><h3 id='http-endpoint-21'>HTTP Endpoint</h3>
 <p><code>GET https://api.ezus.app/subdestination</code></p>
-<h3 id='header-parameters-20'>Header Parameters</h3>
+<h3 id='header-parameters-21'>Header Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -3416,7 +3535,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <td>The reference of the sub-destination</td>
 </tr>
 </tbody></table>
-<h3 id='response-20'>Response</h3>
+<h3 id='response-21'>Response</h3>
 <p>A JSON object containing the sub-destination information with properties like:</p>
 
 <table><thead>
@@ -3541,9 +3660,9 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
     </span><span class="p">},</span><span class="err">...</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='http-endpoint-21'>HTTP Endpoint</h3>
+</span></code></pre></div><h3 id='http-endpoint-22'>HTTP Endpoint</h3>
 <p><code>GET https://api.ezus.app/invoices</code></p>
-<h3 id='header-parameters-21'>Header Parameters</h3>
+<h3 id='header-parameters-22'>Header Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -3562,7 +3681,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <td><span style="color:red">(Required)</span> Your Bearer token</td>
 </tr>
 </tbody></table>
-<h3 id='query-parameters-12'>Query Parameters</h3>
+<h3 id='query-parameters-13'>Query Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -3586,7 +3705,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <td>You can filter invoices according to one of their custom fields by adding the <code>technical_name</code> of the custom field as a query parameter and the desired value as a value.</td>
 </tr>
 </tbody></table>
-<h3 id='response-21'>Response</h3>
+<h3 id='response-22'>Response</h3>
 <p>A JSON object containing the invoice information with properties like:</p>
 
 <table><thead>
@@ -3692,9 +3811,9 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
     </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"contact@moke-international.com"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='http-endpoint-22'>HTTP Endpoint</h3>
+</span></code></pre></div><h3 id='http-endpoint-23'>HTTP Endpoint</h3>
 <p><code>GET https://api.ezus.app/invoice</code></p>
-<h3 id='header-parameters-22'>Header Parameters</h3>
+<h3 id='header-parameters-23'>Header Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -3713,7 +3832,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <td><span style="color:red">(Required)</span> Your Bearer token</td>
 </tr>
 </tbody></table>
-<h3 id='query-parameters-13'>Query Parameters</h3>
+<h3 id='query-parameters-14'>Query Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -3727,7 +3846,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <td><span style="color:red">(Required)</span> The reference of the invoice to retrieve</td>
 </tr>
 </tbody></table>
-<h3 id='response-22'>Response</h3>
+<h3 id='response-23'>Response</h3>
 <p>A JSON object containing the invoice information with properties like:</p>
 
 <table><thead>
@@ -3871,9 +3990,9 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
   </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ok"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"invoice_reference"</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='http-endpoint-23'>HTTP Endpoint</h3>
+</span></code></pre></div><h3 id='http-endpoint-24'>HTTP Endpoint</h3>
 <p><code>PUT https://api.ezus.app/invoices-update</code></p>
-<h3 id='header-parameters-23'>Header Parameters</h3>
+<h3 id='header-parameters-24'>Header Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -3921,7 +4040,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <td>Array of JSON custom fields (<a href="#custom-fields">Custom fields</a>)</td>
 </tr>
 </tbody></table>
-<h3 id='response-23'>Response</h3>
+<h3 id='response-24'>Response</h3>
 <p>A JSON object indicating whether an error occurred during the process, along with the associated message. If successful, it also returns a <code>reference</code> for the project, which you should store for future updates or retrievals.</p>
 <h2 id='get-invoice-supplier'>GET invoice-supplier</h2>
 <p>This API endpoint retrieves detailed information about a specific purchase invoice in Ezus.</p>
@@ -3998,9 +4117,9 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
     </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"contact@moke-international.com"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='http-endpoint-24'>HTTP Endpoint</h3>
+</span></code></pre></div><h3 id='http-endpoint-25'>HTTP Endpoint</h3>
 <p><code>GET https://api.ezus.app/invoice-supplier</code></p>
-<h3 id='header-parameters-24'>Header Parameters</h3>
+<h3 id='header-parameters-25'>Header Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -4019,7 +4138,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <td><span style="color:red">(Required)</span> Your Bearer token</td>
 </tr>
 </tbody></table>
-<h3 id='query-parameters-14'>Query Parameters</h3>
+<h3 id='query-parameters-15'>Query Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -4033,7 +4152,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <td><span style="color:red">(Required)</span> The reference of the invoice to retrieve</td>
 </tr>
 </tbody></table>
-<h3 id='response-24'>Response</h3>
+<h3 id='response-25'>Response</h3>
 <p>A JSON object containing the supplier invoice information with properties like:</p>
 
 <table><thead>
@@ -4155,9 +4274,9 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
   </span><span class="nl">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">"false"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ok"</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='http-endpoint-25'>HTTP Endpoint</h3>
+</span></code></pre></div><h3 id='http-endpoint-26'>HTTP Endpoint</h3>
 <p><code>POST https://api.ezus.app/deposits-create</code></p>
-<h3 id='header-parameters-25'>Header Parameters</h3>
+<h3 id='header-parameters-26'>Header Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -4220,7 +4339,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <td>Note attributed to the payment, this note is limited to 100 characters, all additional characters will not be saved.</td>
 </tr>
 </tbody></table>
-<h3 id='response-25'>Response</h3>
+<h3 id='response-26'>Response</h3>
 <p>A JSON object indicating whether an error occurred during the process, along with the associated message.</p>
 <h1 id='webhooks'>Webhooks</h1><h2 id='get-webhooks'>GET webhooks</h2>
 <p>Retrieves a list of webhook endpoints, sorted by creation date from newest to oldest.</p>
@@ -4252,9 +4371,9 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='http-endpoint-26'>HTTP Endpoint</h3>
+</span></code></pre></div><h3 id='http-endpoint-27'>HTTP Endpoint</h3>
 <p><code>GET https://api.ezus.app/webhooks</code></p>
-<h3 id='header-parameters-26'>Header Parameters</h3>
+<h3 id='header-parameters-27'>Header Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -4273,7 +4392,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <td><span style="color:red">(Required)</span> Your Bearer token</td>
 </tr>
 </tbody></table>
-<h3 id='response-26'>Response</h3>
+<h3 id='response-27'>Response</h3>
 <p>An array of JSON that contains your webhooks information.</p>
 
 <table><thead>
@@ -4319,9 +4438,9 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
   </span><span class="nl">"new_value"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
   </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='http-endpoint-27'>HTTP Endpoint</h3>
+</span></code></pre></div><h3 id='http-endpoint-28'>HTTP Endpoint</h3>
 <p><code>GET https://api.ezus.app/webhooks-last</code></p>
-<h3 id='header-parameters-27'>Header Parameters</h3>
+<h3 id='header-parameters-28'>Header Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -4340,7 +4459,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <td><span style="color:red">(Required)</span> Your Bearer token</td>
 </tr>
 </tbody></table>
-<h3 id='query-parameters-15'>Query Parameters</h3>
+<h3 id='query-parameters-16'>Query Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -4354,7 +4473,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <td><span style="color:red">(Required)</span> The event type to retrieve</td>
 </tr>
 </tbody></table>
-<h3 id='response-27'>Response</h3>
+<h3 id='response-28'>Response</h3>
 <p>A JSON object indicating whether an error occurred during the process, along with the associated message. If successful, it returns the latest event occurrence of a specified event type (<a href="#events">Events</a>).</p>
 <h2 id='post-webhooks-upsert'>POST webhooks-upsert</h2>
 <p>It updates a webhook record if the provided reference or endpoint does match one of the webhooks in your account, otherwise it creates a new webhook record with the provided reference (or with a random one if no reference is provided).</p>
@@ -4393,9 +4512,9 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
   </span><span class="nl">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Webhook successfully created"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"webhook_reference"</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='http-endpoint-28'>HTTP Endpoint</h3>
+</span></code></pre></div><h3 id='http-endpoint-29'>HTTP Endpoint</h3>
 <p><code>POST https://api.ezus.app/webhooks-upsert</code></p>
-<h3 id='header-parameters-28'>Header Parameters</h3>
+<h3 id='header-parameters-29'>Header Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -4443,7 +4562,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <td>The list of events to enable for this endpoint. At least 1 required, separated by commas if more than one. (<a href="#events">Events</a>)</td>
 </tr>
 </tbody></table>
-<h3 id='response-28'>Response</h3>
+<h3 id='response-29'>Response</h3>
 <p>A JSON object indicating whether an error occurred during the process, along with the associated message. If successful, it also returns a reference for the webhook, which you should store for future updates or retrievals.</p>
 <h2 id='delete-webhooks-delete'>DELETE webhooks-delete</h2>
 <p>It deletes a webhook record if the provided reference or endpoint does match one of the webhooks in your account.</p>
@@ -4478,9 +4597,9 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
   </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ok"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Webhook successfully deleted"</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='http-endpoint-29'>HTTP Endpoint</h3>
+</span></code></pre></div><h3 id='http-endpoint-30'>HTTP Endpoint</h3>
 <p><code>DELETE https://api.ezus.app/webhooks-delete</code></p>
-<h3 id='header-parameters-29'>Header parameters</h3>
+<h3 id='header-parameters-30'>Header parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -4518,7 +4637,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <td>If provided, the endpoint associated to the webhook you want to delete</td>
 </tr>
 </tbody></table>
-<h3 id='response-29'>Response</h3>
+<h3 id='response-30'>Response</h3>
 <p>A JSON object indicating whether an error occurred during the process, along with the associated message.</p>
 <h1 id='nested-resources'>Nested Resources</h1><h3 id='address'>Address</h3><div class="highlight"><pre class="highlight json tab-json"><code><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
   </span><span class="nl">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"58 Rue de Paradis"</span><span class="p">,</span><span class="w">
@@ -5176,6 +5295,58 @@ The fields <code>purchase_price</code>, <code>purchase_price_excl_taxes</code>, 
 <td>custom_fields</td>
 <td>Array</td>
 <td>Array of JSON custom fields (<a href="#custom-fields">Custom fields</a>)</td>
+</tr>
+</tbody></table>
+<h3 id='travellers'>Travellers</h3><div class="highlight"><pre class="highlight json tab-json"><code><span class="nl">"travellers"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Emily"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Johnson"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"emily.johnson@example.com"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"+1-555-123-4567"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"custom_field1"</span><span class="p">:</span><span class="w"> </span><span class="s2">"value1.1"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"custom_field2"</span><span class="p">:</span><span class="w"> </span><span class="s2">"value2.1"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Michael"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Smith"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"michael.smith@example.com"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"+1-555-987-6543"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"custom_field1"</span><span class="p">:</span><span class="w"> </span><span class="s2">"value1.2"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"custom_field2"</span><span class="p">:</span><span class="w"> </span><span class="s2">"value2.2"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span></code></pre></div>
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>first_name</td>
+<td>String</td>
+<td>The first name of the traveller</td>
+</tr>
+<tr>
+<td>last_name</td>
+<td>String</td>
+<td>The last name of the traveller</td>
+</tr>
+<tr>
+<td>email</td>
+<td>String</td>
+<td>The email of the traveller</td>
+</tr>
+<tr>
+<td>phone</td>
+<td>String</td>
+<td>The phone number of the traveller</td>
+</tr>
+<tr>
+<td>custom_fields</td>
+<td>String</td>
+<td>The custom fields and the assigned values. Varies with number of custom fields.</td>
 </tr>
 </tbody></table>
 <h3 id='suppliers-2'>Suppliers</h3>
