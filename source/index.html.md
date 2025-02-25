@@ -1139,6 +1139,12 @@ axios.get(baseUrl + "/suppliers", headers);
         "last_name": "Tate",
         "agency": "Paris Agency"
       },
+      "destination": {
+        "reference": "destination_reference",
+        "name": "Destination Name",
+        "subdestination_reference": "subdestination_reference",
+        "subdestination_name": "Subdestination Name"
+      },
       "address": {
         "label": "58 Rue de Paradis",
         "zip": "75010",
@@ -1223,6 +1229,12 @@ axios.get(baseUrl + "/supplier?reference=supplier_reference", headers);
     "first_name": "Alice",
     "last_name": "Tate",
     "agency": "Paris Agency"
+  },
+  "destination": {
+    "reference": "destination_reference",
+    "name": "Destination Name",
+    "subdestination_reference": "subdestination_reference",
+    "subdestination_name": "Subdestination Name"
   },
   "address": {
     "label": "58 Rue de Paradis",
@@ -1321,6 +1333,7 @@ A JSON object containing the supplier information with properties like:
 | info_number   | String | File number that appears in the supplier record. Not to be confused with reference!                                                                          |
 | visual_url    | String | URL of the Google Slides visual linked to the supplier                                                                                                       |
 | user          | JSON   | JSON object user ([User](#user))                                                                                                                             |
+| destination   | JSON   | JSON object with destination and subdestination details ([Destination](#destination))                                                                        |
 | address       | JSON   | JSON object address ([Address](#address))                                                                                                                    |
 | products      | JSON   | JSON object products ([Products](#products))                                                                                                                 |
 | contacts      | Array  | Array of JSON contacts ([Contacts](#contacts))                                                                                                               |
@@ -1491,6 +1504,12 @@ axios.get(baseUrl + "/products", headers);
     "info_number": "202306001-PR",
     "supplier_reference": "supplier_reference",
     "package_reference": "package_reference",
+    "destination": {
+      "reference": "destination_reference",
+      "name": "Destination Name",
+      "subdestination_reference": "subdestination_reference",
+      "subdestination_name": "Subdestination Name"
+    },
     "commission": {
       "commission_mode": "purchase",
       "commission_regime": "percent",
@@ -1600,6 +1619,12 @@ axios.get(baseUrl + "/product?reference=product_reference", headers);
       "long_description": ""
     }
   ],
+  "destination": {
+    "reference": "destination_reference",
+    "name": "Destination Name",
+    "subdestination_reference": "subdestination_reference",
+    "subdestination_name": "Subdestination Name"
+  },
   "tariffs": [
     {
       "reference": "tariff_reference",
@@ -1661,6 +1686,7 @@ A JSON object containing the product information with properties like:
 | commission      | JSON   | A JSON object containing `value`, `commission_regime` ("percent" or "amount"), `commission_mode` ("sales" or "purchase")`                                                                                                                |
 | medias          | JSON   | JSON object medias ([Medias](#medias))                                                                                                                                                                                                   |
 | langs           | Array  | Array of JSON langs ([Langs](#langs))                                                                                                                                                                                                    |
+| destination     | JSON   | JSON object with destination and subdestination details ([Destination](#destination))                                                                                                                                                    |
 | tariffs         | Array  | Array of JSON tariffs ([Tariffs](#tariffs))                                                                                                                                                                                              |
 | custom_fields   | Array  | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                                                                                            |
 |                 |
@@ -3058,6 +3084,24 @@ The technical name of a custom field can be found in the custom field edit modal
 | Checkbox          | String | The checkbox must be a string: "true" (checked) OR "false" (unchecked)                                                                                                                         |
 | Number            | String | Number type should be a Number without other character                                                                                                                                         |
 | File              | String | File must be a valid URL, and supported file extensions include: .pdf, .jpg, .jpeg, .png, .bmp, .gif, .docx, .doc, .msg, .odt, .rtf, .txt, .ppt, .pptx, .pptm, .csv, .xlsx                     |
+
+### Destination
+
+```json
+ "destination": {
+    "reference": "destination_reference",
+    "name": "Destination Name",
+    "subdestination_reference": "subdestination_reference",
+    "subdestination_name": "Subdestination Name"
+  }
+```
+
+| Property                 | Type   | Description                          |
+| ------------------------ | ------ | ------------------------------------ |
+| reference                | String | The reference of the destination     |
+| name                     | String | Name of the destination              |
+| subdestination_reference | String | The reference of the sub-destination |
+| subdestination_name      | String | Name of the sub-destination          |
 
 ### Destinations
 
