@@ -151,21 +151,21 @@ axios.get(baseUrl + "/projects", headers);
 ```json
 {
   "error": "false",
-  "next_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJtZW51X211bG11bCI6Im9wdDEiLCJudW1iZXIiOiIyMDAwMCIsInBhZ2UiOjEsInBlcnNvX2ludm9pY2UiOiJHRyIsInN0YWdlIjoicGFpZCIsIl9fdGltZSI6MTY5NzQ0NjEzNX0.jEs7aL3UzCNrjzwDtAUbq4Rt4T64nu2LBYC0NnQhHiA",
+  "next_token": "<NEXT_TOKEN>",
   "size": 338,
   "data_size": 50,
   "page": 1,
   "projects": [
     {
       "reference": "project_reference",
-      "info_title": "Paris fashion week 2024",
-      "info_stage": "Confirmed",
-      "info_stage_reference": "confirmed",
-      "info_notes": "Jane has verbally confirmed our quotation",
       "info_number": "202306001-P",
-      "currency": "€",
+      "info_title": "Paris fashion week 2024",
+      "info_stage_reference": "confirmed",
+      "info_stage": "Confirmed",
+      "info_notes": "Jane has verbally confirmed our quotation",
       "created_at": "2024-06-18",
       "updated_at": "2024-06-19",
+      "currency": "€",
       "sales_manager": {
         "email": "travel-design@e-corp.com",
         "first_name": "Alice",
@@ -178,7 +178,7 @@ axios.get(baseUrl + "/projects", headers);
         "last_name": "Shmoe",
         "agency": "Paris Agency"
       }
-    },...
+    }
   ]
 }
 ```
@@ -247,14 +247,14 @@ axios.get(baseUrl + "/project?reference=project_reference", headers);
 {
   "error": "false",
   "reference": "project_reference",
-  "info_title": "Paris fashion week 2024",
-  "info_stage": "Confirmed",
-  "info_stage_reference": "confirmed",
-  "info_notes": "Jane has verbally confirmed our quotation",
   "info_number": "202306001-P",
-  "currency": "€",
+  "info_title": "Paris fashion week 2024",
+  "info_stage_reference": "confirmed",
+  "info_stage": "Confirmed",
+  "info_notes": "Jane has verbally confirmed our quotation",
   "created_at": "2024-06-18",
   "updated_at": "2024-06-19",
+  "currency": "€",
   "sales_manager": {
     "email": "travel-design@e-corp.com",
     "first_name": "Alice",
@@ -270,17 +270,15 @@ axios.get(baseUrl + "/project?reference=project_reference", headers);
   "alternatives": [
     {
       "alternative_title": "Main Alternative",
+      "trip_date_in": "2024-03-01",
+      "trip_date_out": "2024-03-09",
+      "trip_duration": 9,
+      "trip_budget": 90000,
       "budget_actual": 88750,
       "budget_actual_excl_taxes ": 77950,
       "budget_margin_gross": 2500,
       "budget_margin_net": 1000,
-      "trip_budget": 90000,
       "trip_people": "15",
-      "trip_date_in": "2024-03-01",
-      "trip_date_out": "2024-03-09",
-      "trip_duration": 9,
-      "trip_destination": "France",
-      "trip_subdestination": "Paris",
       "client": {
         "reference": "client_reference",
         "type": "enterprise",
@@ -288,7 +286,9 @@ axios.get(baseUrl + "/project?reference=project_reference", headers);
         "first_name": "Jane",
         "last_name": "Doe",
         "email": "contact@moke-international.com"
-      }
+      },
+      "trip_destination": "France",
+      "trip_subdestination": "Paris"
     }
   ],
   "custom_fields": [
@@ -368,8 +368,8 @@ axios.get(baseUrl + "/project-documents?reference=project_reference", headers);
   "alternative_order": "0",
   "documents": [
     {
-      "title": "documentName",
       "type": "custom",
+      "title": "documentName",
       "url": "https://ezus.io/2023_101010.pdf"
     }
   ]
@@ -431,25 +431,25 @@ axios.get(baseUrl + "/project-steps?reference=project_reference", headers);
 ```json
 {
   "error": "false",
-  "reference": "project_reference",
-  "alternative_order": "0",
-  "next_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJtZW51X211bG11bCI6Im9wdDEiLCJudW1iZXIiOiIyMDAwMCIsInBhZ2UiOjEsInBlcnNvX2ludm9pY2UiOiJHRyIsInN0YWdlIjoicGFpZCIsIl9fdGltZSI6MTY5NzQ0NjEzNX0.jEs7aL3UzCNrjzwDtAUbq4Rt4T64nu2LBYC0NnQhHiA",
+  "next_token": "<NEXT_TOKEN>",
   "size": 1,
   "data_size": 1,
   "page": 1,
+  "reference": "project_reference",
+  "alternative_order": "0",
   "steps": [
     {
-      "name": "activityTitle",
       "type": "activity",
+      "name": "activityTitle",
       "category": "restaurant",
       "date_start": "2024-10-01 10:00:00",
       "date_end": "2024-10-01 12:00:00",
       "people": 4,
       "address": {
         "label": "58 Rue de Paradis",
-        "zip": "75010",
         "city": "Paris",
         "country": "France",
+        "zip": "75010",
         "geo": {
           "x": 48.875761,
           "y": 2.348727
@@ -459,7 +459,6 @@ axios.get(baseUrl + "/project-steps?reference=project_reference", headers);
         "short": "Short description of the activity",
         "long": "Long description of the activity"
       },
-      "medias": ["https://image.jpg", "https://image2.jpg"],
       "items": [
         {
           "name": "item_title",
@@ -471,6 +470,7 @@ axios.get(baseUrl + "/project-steps?reference=project_reference", headers);
           "is_optional": false
         }
       ],
+      "medias": ["https://image.jpg", "https://image2.jpg"],
       "custom_fields": [
         {
           "name": "CustomField",
@@ -542,17 +542,17 @@ axios.get(baseUrl + "/project-travellers?reference=project_reference", headers);
   "size": "2",
   "travellers": [
     {
+      "email": "emily.johnson@example.com",
       "first_name": "Emily",
       "name": "Johnson",
-      "email": "emily.johnson@example.com",
       "phone": "+1-555-123-4567",
       "custom_field1": "value1.1",
       "custom_field2": "value2.1"
     },
     {
+      "email": "michael.smith@example.com",
       "first_name": "Michael",
       "name": "Smith",
-      "email": "michael.smith@example.com",
       "phone": "+1-555-987-6543",
       "custom_field1": "value1.2",
       "custom_field2": "value2.2"
@@ -649,8 +649,8 @@ axios.post(baseUrl + "/projects-upsert", body, headers);
   "message": "ok",
   "action": "Project successfully created",
   "reference": "project_reference",
-  "client_reference": "client_reference",
-  "info_number": "202306001-P"
+  "info_number": "202306001-P",
+  "client_reference": "client_reference"
 }
 ```
 
@@ -779,40 +779,40 @@ axios.get(baseUrl + "/clients", headers);
 ```json
 {
   "error": "false",
-  "next_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJtZW51X211bG11bCI6Im9wdDEiLCJudW1iZXIiOiIyMDAwMCIsInBhZ2UiOjEsInBlcnNvX2ludm9pY2UiOiJHRyIsInN0YWdlIjoicGFpZCIsIl9fdGltZSI6MTY5NzQ0NjEzNX0.jEs7aL3UzCNrjzwDtAUbq4Rt4T64nu2LBYC0NnQhHiA",
+  "next_token": "<NEXT_TOKEN>",
   "size": 338,
   "data_size": 50,
   "page": 1,
   "clients": [
     {
       "reference": "client_reference",
+      "info_number": "202306001-C",
       "type": "enterprise",
       "company_name": "MOKE INTERNATIONAL LIMITED",
-      "website": "www.moke_ltd.com",
-      "first_name": "Jane",
-      "last_name": "Doe",
-      "email": "contact@moke-international.com",
-      "vat_number": "GB 240-635-038",
-      "company_number": "09728676",
       "info_notes": "This prospect looks interesting to follow",
-      "info_number": "202306001-C",
+      "website": "www.moke_ltd.com",
       "user": {
         "email": "tommy@e-corp.com",
         "first_name": "Tommy",
         "last_name": "Atkins",
         "agency": "Paris Agency"
       },
+      "email": "contact@moke-international.com",
+      "first_name": "Jane",
+      "last_name": "Doe",
       "address": {
         "label": "58 Rue de Paradis",
-        "zip": "75010",
         "city": "Paris",
         "country": "France",
+        "zip": "75010",
         "geo": {
           "x": 48.875761,
           "y": 2.348727
         }
-      }
-    },...
+      },
+      "vat_number": "GB 240-635-038",
+      "company_number": "09728676"
+    }
   ]
 }
 ```
@@ -874,27 +874,27 @@ axios.get(baseUrl + "/client?reference=client_reference", headers);
 {
   "error": "false",
   "reference": "client_reference",
+  "info_number": "202306001-C",
   "type": "enterprise",
   "company_name": "MOKE INTERNATIONAL LIMITED",
+  "info_notes": "This prospect looks interesting to follow",
   "website": "www.moke_ltd.com",
-  "first_name": "Jane",
-  "last_name": "Doe",
-  "email": "contact@moke-international.com",
   "vat_number": "GB 240-635-038",
   "company_number": "09728676",
-  "info_notes": "This prospect looks interesting to follow",
-  "info_number": "202306001-C",
   "user": {
     "email": "tommy@e-corp.com",
     "first_name": "Tommy",
     "last_name": "Atkins",
     "agency": "Paris Agency"
   },
+  "email": "contact@moke-international.com",
+  "first_name": "Jane",
+  "last_name": "Doe",
   "address": {
     "label": "58 Rue de Paradis",
-    "zip": "75010",
     "city": "Paris",
     "country": "France",
+    "zip": "75010",
     "geo": {
       "x": 48.875761,
       "y": 2.348727
@@ -1120,19 +1120,19 @@ axios.get(baseUrl + "/suppliers", headers);
 ```json
 {
   "error": "false",
-  "next_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJtZW51X211bG11bCI6Im9wdDEiLCJudW1iZXIiOiIyMDAwMCIsInBhZ2UiOjEsInBlcnNvX2ludm9pY2UiOiJHRyIsInN0YWdlIjoicGFpZCIsIl9fdGltZSI6MTY5NzQ0NjEzNX0.jEs7aL3UzCNrjzwDtAUbq4Rt4T64nu2LBYC0NnQhHiA",
+  "next_token": "<NEXT_TOKEN>",
   "size": 338,
   "data_size": 50,
   "page": 1,
   "suppliers": [
     {
       "reference": "supplier_reference",
+      "info_number": "202306001-S",
+      "type": "accom, activity",
       "company_name": "The best hotel",
+      "info_notes": "Emily confirmed: this hotel really is the best in town.",
       "website": "www.the_best_hotel.com",
       "capacity": "200",
-      "type": "accom, activity",
-      "info_notes": "Emily confirmed: this hotel really is the best in town.",
-      "info_number": "202306001-S",
       "user": {
         "email": "travel-design@e-corp.com",
         "first_name": "Alice",
@@ -1147,15 +1147,15 @@ axios.get(baseUrl + "/suppliers", headers);
       },
       "address": {
         "label": "58 Rue de Paradis",
-        "zip": "75010",
         "city": "Paris",
         "country": "France",
+        "zip": "75010",
         "geo": {
           "x": 48.875761,
           "y": 2.348727
         }
       }
-    },...
+    }
   ]
 }
 ```
@@ -1217,13 +1217,12 @@ axios.get(baseUrl + "/supplier?reference=supplier_reference", headers);
 {
   "error": "false",
   "reference": "supplier_reference",
+  "info_number": "202306001-S",
+  "type": "accom, activity",
   "company_name": "The best hotel",
+  "info_notes": "Emily confirmed: this hotel really is the best in town.",
   "website": "www.the_best_hotel.com",
   "capacity": "200",
-  "type": "accom, activity",
-  "info_notes": "Emily confirmed: this hotel really is the best in town.",
-  "info_number": "202306001-S",
-  "visual_url": "https://docs.google.com/presentation/d/10GoT7nVkSIScaHUQEPh-EyUms5o6D7bcgUYsJlyql94",
   "user": {
     "email": "travel-design@e-corp.com",
     "first_name": "Alice",
@@ -1238,13 +1237,22 @@ axios.get(baseUrl + "/supplier?reference=supplier_reference", headers);
   },
   "address": {
     "label": "58 Rue de Paradis",
-    "zip": "75010",
     "city": "Paris",
     "country": "France",
+    "zip": "75010",
     "geo": {
       "x": 48.875761,
       "y": 2.348727
     }
+  },
+  "medias": {
+    "data": [
+      {
+        "media_name": "The lobby",
+        "path_full": "www.the_best_hotel.com/media/loby.jpg"
+      }
+    ],
+    "size": 1
   },
   "products": {
     "data": [
@@ -1269,15 +1277,6 @@ axios.get(baseUrl + "/supplier?reference=supplier_reference", headers);
     ],
     "size": 1
   },
-  "medias": {
-    "data": [
-      {
-        "media_name": "The lobby",
-        "path_full": "www.the_best_hotel.com/media/loby.jpg"
-      }
-    ],
-    "size": 1
-  },
   "langs": [
     {
       "lang": "american",
@@ -1297,7 +1296,8 @@ axios.get(baseUrl + "/supplier?reference=supplier_reference", headers);
       "name": "Stars",
       "value": "5"
     }
-  ]
+  ],
+  "visual_url": "https://docs.google.com/presentation/d/10GoT7nVkSIScaHUQEPh-EyUms5o6D7bcgUYsJlyql94"
 }
 ```
 
@@ -1485,37 +1485,37 @@ axios.get(baseUrl + "/products", headers);
 ```json
 {
   "error": "false",
-  "next_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJtZW51X211bG11bCI6Im9wdDEiLCJudW1iZXIiOiIyMDAwMCIsInBhZ2UiOjEsInBlcnNvX2ludm9pY2UiOiJHRyIsInN0YWdlIjoicGFpZCIsIl9fdGltZSI6MTY5NzQ0NjEzNX0.jEs7aL3UzCNrjzwDtAUbq4Rt4T64nu2LBYC0NnQhHiA",
+  "next_token": "<NEXT_TOKEN>",
   "size": 338,
   "data_size": 50,
   "page": 1,
   "products": [
     {
-    "reference": "product_reference",
-    "title": "2-bed room with breakfast",
-    "capacity": "2",
-    "quantity": "1",
-    "vat_regime": "margin",
-    "vat_rate": 20.0,
-    "currency": "EUR",
-    "budget_text": "Option",
-    "budget_form": "Important",
-    "budget_variable": "Display",
-    "info_number": "202306001-PR",
-    "supplier_reference": "supplier_reference",
-    "package_reference": "package_reference",
-    "destination": {
-      "reference": "destination_reference",
-      "name": "France",
-      "subdestination_reference": "subdestination_reference",
-      "subdestination_name": "Paris"
-    },
-    "commission": {
-      "commission_mode": "purchase",
-      "commission_regime": "percent",
-      "value": "10"
-      }
-    },...
+      "reference": "product_reference",
+      "info_number": "202306001-PR",
+      "title": "2-bed room with breakfast",
+      "capacity": "2",
+      "quantity": "1",
+      "currency": "EUR",
+      "vat_rate": 20.0,
+      "vat_regime": "margin",
+      "commission": {
+        "commission_mode": "purchase",
+        "commission_regime": "percent",
+        "value": "10"
+      },
+      "supplier_reference": "supplier_reference",
+      "package_reference": "package_reference",
+      "destination": {
+        "reference": "destination_reference",
+        "name": "France",
+        "subdestination_reference": "subdestination_reference",
+        "subdestination_name": "Paris"
+      },
+      "budget_form": "Important",
+      "budget_text": "Option",
+      "budget_variable": "Display"
+    }
   ]
 }
 ```
@@ -1577,18 +1577,19 @@ axios.get(baseUrl + "/product?reference=product_reference", headers);
 {
   "error": "false",
   "reference": "product_reference",
+  "info_number": "202306001-PR",
   "title": "2-bed room with breakfast",
   "info_notes": "Product's notes",
   "capacity": "2",
   "quantity": "1",
-  "vat_regime": "margin",
-  "vat_rate": 20.0,
   "currency": "EUR",
-  "budget_text": "Option",
-  "budget_form": "Important",
-  "budget_variable": "Display",
-  "info_number": "202306001-PR",
-  "visual_url": "https://docs.google.com/presentation/d/10GoT7nVkSIScaHUQEPh-EyUms5o6D7bcgUYsJlyql94",
+  "vat_rate": 20.0,
+  "vat_regime": "margin",
+  "commission": {
+    "commission_mode": "purchase",
+    "commission_regime": "percent",
+    "value": "10"
+  },
   "supplier": {
     "reference": "supplier_reference",
     "company_name": "The best hotel"
@@ -1597,10 +1598,11 @@ axios.get(baseUrl + "/product?reference=product_reference", headers);
     "reference": "package_reference",
     "title": "packages_title"
   },
-  "commission": {
-    "commission_mode": "purchase",
-    "commission_regime": "percent",
-    "value": "10"
+  "destination": {
+    "reference": "destination_reference",
+    "name": "France",
+    "subdestination_reference": "subdestination_reference",
+    "subdestination_name": "Paris"
   },
   "medias": {
     "data": [
@@ -1619,12 +1621,6 @@ axios.get(baseUrl + "/product?reference=product_reference", headers);
       "long_description": ""
     }
   ],
-  "destination": {
-    "reference": "destination_reference",
-    "name": "France",
-    "subdestination_reference": "subdestination_reference",
-    "subdestination_name": "Paris"
-  },
   "tariffs": [
     {
       "reference": "tariff_reference",
@@ -1641,7 +1637,11 @@ axios.get(baseUrl + "/product?reference=product_reference", headers);
       "name": "View",
       "value": "Parking"
     }
-  ]
+  ],
+  "budget_form": "Important",
+  "budget_text": "Option",
+  "budget_variable": "Display",
+  "visual_url": "https://docs.google.com/presentation/d/10GoT7nVkSIScaHUQEPh-EyUms5o6D7bcgUYsJlyql94"
 }
 ```
 
@@ -1834,24 +1834,10 @@ axios.get(baseUrl + "/package?reference=package_reference", headers);
 {
   "error": "false",
   "reference": "package_reference",
-  "title": "The best package",
-  "capacity": "2",
-  "info_notes": "A classical day in Paris",
   "info_number": "202306001-PK",
-  "visual_url": "https://docs.google.com/presentation/d/10GoT7nVkSIScaHUQEPh-EyUms5o6D7bcgUYsJlyql94",
-  "products": {
-    "data": [
-      {
-        "reference": "product_reference",
-        "title": "2-bed room with breakfast"
-      },
-      {
-        "reference": "product_reference_1235",
-        "title": "A gourmet menu for 2"
-      }
-    ],
-    "size": 2
-  },
+  "title": "The best package",
+  "info_notes": "A classical day in Paris",
+  "capacity": "2",
   "suppliers": {
     "data": [
       {
@@ -1864,6 +1850,19 @@ axios.get(baseUrl + "/package?reference=package_reference", headers);
   "medias": {
     "data": [],
     "size": 0
+  },
+  "products": {
+    "data": [
+      {
+        "reference": "product_reference",
+        "title": "2-bed room with breakfast"
+      },
+      {
+        "reference": "product_reference_1235",
+        "title": "A gourmet menu for 2"
+      }
+    ],
+    "size": 2
   },
   "langs": [
     {
@@ -1884,7 +1883,8 @@ axios.get(baseUrl + "/package?reference=package_reference", headers);
       "name": "Is for children?",
       "value": "False"
     }
-  ]
+  ],
+  "visual_url": "https://docs.google.com/presentation/d/10GoT7nVkSIScaHUQEPh-EyUms5o6D7bcgUYsJlyql94"
 }
 ```
 
@@ -2039,7 +2039,7 @@ axios.get(baseUrl + "/destinations", headers);
           "name": "Paris"
         }
       ]
-    },...
+    }
   ]
 }
 ```
@@ -2098,13 +2098,12 @@ axios.get(
   "name": "Paris",
   "destination_reference": "destination_reference",
   "destination_name": "France",
-  "visual_url": "https://docs.google.com/presentation/d/10GoT7nVkSIScaHUQEPh-EyUms5o6D7bcgUYsJlyql94",
   "medias": {
     "data": [
       {
         "media_name": "img.jpeg",
         "path_full": "https://link-img.jpeg"
-      },...
+      }
     ],
     "size": 1
   },
@@ -2114,8 +2113,9 @@ axios.get(
       "name": "Chambre à 2 lits avec petit déjeuner",
       "short_description": "",
       "long_description": ""
-    },...
-  ]
+    }
+  ],
+  "visual_url": "https://docs.google.com/presentation/d/10GoT7nVkSIScaHUQEPh-EyUms5o6D7bcgUYsJlyql94"
 }
 ```
 
@@ -2179,7 +2179,7 @@ axios.get(baseUrl + "/invoices?stage=completed", headers);
 ```json
 {
   "error": "false",
-  "next_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJtZW51X211bG11bCI6Im9wdDEiLCJudW1iZXIiOiIyMDAwMCIsInBhZ2UiOjEsInBlcnNvX2ludm9pY2UiOiJHRyIsInN0YWdlIjoicGFpZCIsIl9fdGltZSI6MTY5NzQ0NjEzNX0.jEs7aL3UzCNrjzwDtAUbq4Rt4T64nu2LBYC0NnQhHiA",
+  "next_token": "<NEXT_TOKEN>",
   "size": 338,
   "data_size": 50,
   "page": 1,
@@ -2188,38 +2188,23 @@ axios.get(baseUrl + "/invoices?stage=completed", headers);
       "error": "false",
       "reference": "invoice_reference",
       "info_number": "2023_101010",
-      "url": "https://ezus.io/2023_101010.pdf",
-      "stage": "completed",
       "type": "credit_note",
       "origin_reference": "origin_reference",
       "origin_info_number": "2023_101009",
+      "stage": "completed",
       "created_date": "2023-10-10",
       "send_date": "2023-10-10",
       "due_date": "2023-10-10",
+      "currency": "EUR",
       "amount_ttc": 1200.0,
       "amount_ht": 1000.0,
       "vat": 200.0,
-      "currency": "EUR",
-      "forecast": {
-        "is_automatic": true,
-        "purchase": 0.0,
-        "commission": 0.0,
-        "vat_deducted": 0.0,
-        "amount_ht": 1000.0
-      },
-      "actual": {
-        "is_automatic": true,
-        "purchase": null,
-        "commission": null,
-        "vat_deducted": null,
-        "amount_ht": null
-      },
       "project": {
         "reference": "project_reference",
-        "info_title": "Paris fashion week 2024",
-        "info_stage": "Confirmed",
-        "info_stage_reference": "confirmed",
         "info_number": "202306001-P",
+        "info_title": "Paris fashion week 2024",
+        "info_stage_reference": "confirmed",
+        "info_stage": "Confirmed",
         "currency": "EUR",
         "is_closed": false
       },
@@ -2234,8 +2219,23 @@ axios.get(baseUrl + "/invoices?stage=completed", headers);
         "first_name": "Jane",
         "last_name": "Doe",
         "email": "contact@moke-international.com"
-      }
-    },...
+      },
+      "forecast": {
+        "is_automatic": true,
+        "purchase": 0.0,
+        "commission": 0.0,
+        "vat_deducted": 0.0,
+        "amount_ht": 1000.0
+      },
+      "actual": {
+        "is_automatic": true,
+        "purchase": null,
+        "commission": null,
+        "vat_deducted": null,
+        "amount_ht": null
+      },
+      "url": "https://ezus.io/2023_101010.pdf"
+    }
   ]
 }
 ```
@@ -2300,38 +2300,23 @@ axios.get(baseUrl + "/invoice?reference=invoice_reference", headers);
   "error": "false",
   "reference": "invoice_reference",
   "info_number": "2023_101010",
-  "url": "https://ezus.io/2023_101010.pdf",
-  "stage": "draft",
   "type": "credit_note",
   "origin_reference": "origin_reference",
   "origin_info_number": "2023_101009",
+  "stage": "draft",
   "created_date": "2023-10-10",
   "send_date": "2023-10-10",
   "due_date": "2023-10-10",
+  "currency": "EUR",
   "amount_ttc": 1200.0,
   "amount_ht": 1000.0,
   "vat": 200.0,
-  "currency": "EUR",
-  "forecast": {
-    "is_automatic": true,
-    "purchase": 0.0,
-    "commission": 0.0,
-    "vat_deducted": 0.0,
-    "amount_ht": 1000.0
-  },
-  "actual": {
-    "is_automatic": true,
-    "purchase": null,
-    "commission": null,
-    "vat_deducted": null,
-    "amount_ht": null
-  },
   "project": {
     "reference": "project_reference",
-    "info_title": "Paris fashion week 2024",
-    "info_stage": "Confirmed",
-    "info_stage_reference": "confirmed",
     "info_number": "202306001-P",
+    "info_title": "Paris fashion week 2024",
+    "info_stage_reference": "confirmed",
+    "info_stage": "Confirmed",
     "currency": "EUR",
     "is_closed": false
   },
@@ -2346,7 +2331,22 @@ axios.get(baseUrl + "/invoice?reference=invoice_reference", headers);
     "first_name": "Jane",
     "last_name": "Doe",
     "email": "contact@moke-international.com"
-  }
+  },
+  "forecast": {
+    "is_automatic": true,
+    "purchase": 0.0,
+    "commission": 0.0,
+    "vat_deducted": 0.0,
+    "amount_ht": 1000.0
+  },
+  "actual": {
+    "is_automatic": true,
+    "purchase": null,
+    "commission": null,
+    "vat_deducted": null,
+    "amount_ht": null
+  },
+  "url": "https://ezus.io/2023_101010.pdf"
 }
 ```
 
@@ -2495,13 +2495,38 @@ axios.get(
 {
   "error": "false",
   "reference": "invoice_supplier_reference",
-  "url": "https://ezus.io/2023_101010.pdf",
   "created_date": "2023-10-10",
   "due_date": "2023-10-20",
+  "currency": "EUR",
   "amount_ttc": 1200.0,
   "amount_ht": 1000.0,
   "vat": 200.0,
-  "currency": "EUR",
+  "supplier": {
+    "reference": "supplier_reference",
+    "company_name": "The best hotel",
+    "website": "www.the_best_hotel.com"
+  },
+  "project": {
+    "reference": "project_reference",
+    "info_number": "202306001-P",
+    "info_title": "Paris fashion week 2024",
+    "info_stage_reference": "confirmed",
+    "info_stage": "Confirmed",
+    "currency": "EUR",
+    "is_closed": false
+  },
+  "alternative": {
+    "sort_order": "0",
+    "title": "Main Alternative"
+  },
+  "client": {
+    "reference": "client_reference",
+    "type": "enterprise",
+    "company_name": "MOKE INTERNATIONAL LIMITED",
+    "first_name": "Jane",
+    "last_name": "Doe",
+    "email": "contact@moke-international.com"
+  },
   "payments": [
     {
       "date": "2023-10-10",
@@ -2519,32 +2544,7 @@ axios.get(
       "payment_method": "Check"
     }
   ],
-  "supplier": {
-    "reference": "supplier_reference",
-    "company_name": "The best hotel",
-    "website": "www.the_best_hotel.com"
-  },
-  "project": {
-    "reference": "project_reference",
-    "info_title": "Paris fashion week 2024",
-    "info_stage": "Confirmed",
-    "info_stage_reference": "confirmed",
-    "info_number": "202306001-P",
-    "currency": "EUR",
-    "is_closed": false
-  },
-  "alternative": {
-    "sort_order": "0",
-    "title": "Main Alternative"
-  },
-  "client": {
-    "reference": "client_reference",
-    "type": "enterprise",
-    "company_name": "MOKE INTERNATIONAL LIMITED",
-    "first_name": "Jane",
-    "last_name": "Doe",
-    "email": "contact@moke-international.com"
-  }
+  "url": "https://ezus.io/2023_101010.pdf"
 }
 ```
 
@@ -2698,8 +2698,8 @@ axios.get(baseUrl + "/webhooks", headers);
     {
       "reference": "webhook_reference",
       "endpoint": "webhook_endpoint",
-      "is_active": "true",
       "events_types": "projects.created,clients.created",
+      "is_active": "true",
       "last_called_at": "2023-01-01 01:01:01"
     }
   ]
@@ -2754,12 +2754,12 @@ axios.get(baseUrl + "/webhooks-last?event_type=projects.created", headers);
   "id": "event_id",
   "object": "event",
   "type": "projects.created",
-  "created": 1234567890,
-  "trigger_reference": "pro.ezus.io;projects-create",
-  "is_duplication": false,
   "field": "",
   "old_value": "",
   "new_value": "",
+  "created": 1234567890,
+  "trigger_reference": "pro.ezus.io;projects-create",
+  "is_duplication": false,
   "data": {...}
 }
 ```
@@ -2926,9 +2926,9 @@ A JSON object indicating whether an error occurred during the process, along wit
 ```json
 "address": {
   "label": "58 Rue de Paradis",
-  "zip": "75010",
   "city": "Paris",
   "country": "France",
+  "zip": "75010",
   "geo": {
     "x": 48.875761,
     "y": 2.348727
@@ -2950,17 +2950,15 @@ A JSON object indicating whether an error occurred during the process, along wit
 "alternatives": [
   {
     "alternative_title": "Main Alternative",
+    "trip_date_in": "2024-03-01",
+    "trip_date_out": "2024-03-09",
+    "trip_duration": 9,
+    "trip_budget": 90000,
     "budget_actual": 88750,
     "budget_actual_excl_taxes ": 77950,
     "budget_margin_gross": 2500,
     "budget_margin_net": 1000,
-    "trip_budget": 90000,
     "trip_people": "15",
-    "trip_date_in": "2024-03-01",
-    "trip_date_out": "2024-03-09",
-    "trip_duration": 9,
-    "trip_destination": "France",
-    "trip_subdestination": "Paris",
     "client": {
       "reference": "client_reference",
       "type": "enterprise",
@@ -2968,7 +2966,9 @@ A JSON object indicating whether an error occurred during the process, along wit
       "first_name": "Jane",
       "last_name": "Doe",
       "email": "contact@moke-international.com"
-    }
+    },
+    "trip_destination": "France",
+    "trip_subdestination": "Paris"
   }
 ]
 ```
@@ -3257,17 +3257,17 @@ The steps are sorted by their creation date, with the most recently created appe
 ```json
 "steps": [
   {
-    "name": "activityTitle",
     "type": "activity",
+    "name": "activityTitle",
     "category": "restaurant",
     "date_start": "2024-10-01 10:00:00",
     "date_end": "2024-10-01 12:00:00",
     "people": 4,
     "address": {
       "label": "58 Rue de Paradis",
-      "zip": "75010",
       "city": "Paris",
       "country": "France",
+      "zip": "75010",
       "geo": {
         "x": 48.875761,
         "y": 2.348727
@@ -3277,11 +3277,10 @@ The steps are sorted by their creation date, with the most recently created appe
       "short": "Short description of the activity",
       "long": "Long description of the activity"
     },
-    "images": ["https://image.jpg", "https://image2.jpg"],
     "items": [
       {
         "name": "item_title",
-        "product_reference" : "product_esus_reference",
+        "product_reference": "product_esus_reference",
         "quantity": 2,
         "purchase_price": 150,
         "purchase_price_excl_taxes": 125,
@@ -3290,6 +3289,7 @@ The steps are sorted by their creation date, with the most recently created appe
         "is_optional": false
       }
     ],
+    "images": ["https://image.jpg", "https://image2.jpg"],
     "custom_fields": [
       {
         "name": "CustomField",
@@ -3319,23 +3319,23 @@ The steps are sorted by their creation date, with the most recently created appe
 
 ```json
 "travellers": [
-    {
-      "first_name": "Emily",
-      "name": "Johnson",
-      "email": "emily.johnson@example.com",
-      "phone": "+1-555-123-4567",
-      "custom_field1": "value1.1",
-      "custom_field2": "value2.1"
-    },
-    {
-      "first_name": "Michael",
-      "name": "Smith",
-      "email": "michael.smith@example.com",
-      "phone": "+1-555-987-6543",
-      "custom_field1": "value1.2",
-      "custom_field2": "value2.2"
-    }
-  ]
+  {
+    "email": "emily.johnson@example.com",
+    "first_name": "Emily",
+    "name": "Johnson",
+    "phone": "+1-555-123-4567",
+    "custom_field1": "value1.1",
+    "custom_field2": "value2.1"
+  },
+  {
+    "email": "michael.smith@example.com",
+    "first_name": "Michael",
+    "name": "Smith",
+    "phone": "+1-555-987-6543",
+    "custom_field1": "value1.2",
+    "custom_field2": "value2.2"
+  }
+]
 ```
 
 | Property      | Type   | Description                                                                     |
@@ -3420,10 +3420,10 @@ One of the following options: `None`, `Everyone`, `User Group` or the following 
   {
     "reference": "webhook_reference",
     "endpoint": "webhook_endpoint",
-    "is_active": "true",
     "events_types": "projects.created,clients.created",
+    "is_active": "true",
     "last_called_at": "2023-01-01 01:01:01"
-  },
+  }
 ]
 ```
 
@@ -3446,12 +3446,12 @@ This section provides an overview of the fundamental details related to a webhoo
   "id": "event_id",
   "object": "event",
   "type": "projects.created",
-  "created": 1234567890,
-  "trigger_reference": "pro.ezus.io;projects-create",
-  "is_duplication": false,
   "field": "",
   "old_value": "",
   "new_value": "",
+  "created": 1234567890,
+  "trigger_reference": "pro.ezus.io;projects-create",
+  "is_duplication": false,
   "data": {...}
 }
 ```
@@ -3477,13 +3477,13 @@ This event is triggered whenever a project is either created or duplicated.
 {
   "data": {
     "reference": "project_reference",
+    "info_number": "202306001-P",
     "info_title": "Paris fashion week 2024",
-    "trip_budget": "90000",
-    "trip_people": "15",
     "trip_date_in": "2024-03-01",
     "trip_date_out": "2024-03-09",
     "trip_duration": "9",
-    "info_number": "202306001-P"
+    "trip_budget": "90000",
+    "trip_people": "15"
   }
 }
 ```
@@ -3507,8 +3507,8 @@ This event is triggered whenever a project is updated. This event is triggered o
 {
   "data": {
     "reference": "project_reference",
-    "info_title": "Paris fashion week 2024",
-    "info_number": "202306001-P"
+    "info_number": "202306001-P",
+    "info_title": "Paris fashion week 2024"
   }
 }
 ```
@@ -3527,15 +3527,15 @@ This event is triggered whenever a client is created.
 {
   "data": {
     "reference": "client_reference",
+    "info_number": "202306001-C",
     "type": "enterprise",
     "company_name": "MOKE INTERNATIONAL LIMITED",
+    "email": "contact@moke-international.com",
     "first_name": "Jane",
     "last_name": "Doe",
-    "email": "contact@moke-international.com",
     "gender": "Ms",
     "phone": "0101010101",
-    "birth_date": "1986-09-17",
-    "info_number": "202306001-C"
+    "birth_date": "1986-09-17"
   }
 }
 ```
@@ -3561,8 +3561,8 @@ This event is triggered whenever a client is updated. This event is triggered on
 {
   "data": {
     "reference": "client_reference",
-    "company_name": "MOKE INTERNATIONAL LIMITED",
-    "info_number": "202306001-C"
+    "info_number": "202306001-C",
+    "company_name": "MOKE INTERNATIONAL LIMITED"
   }
 }
 ```
@@ -3582,23 +3582,23 @@ This event is triggered whenever an invoice is finalized (its stage goes from `d
   "data": {
     "reference": "invoice_reference",
     "info_number": "2023_101010",
-    "url": "https://ezus.io/2023_101010.pdf",
-    "stage": "completed",
     "type": "credit_note",
     "origin_reference": "origin_reference",
     "origin_info_number": "2023_101009",
+    "stage": "completed",
     "created_date": "2023-10-10",
     "send_date": "2023-10-10",
     "due_date": "2023-10-10",
+    "currency": "EUR",
     "amount_ttc": 1200.0,
     "amount_ht": 1000.0,
     "vat": 200.0,
-    "currency": "EUR",
     "project_reference": "project_reference",
     "alternative": {
       "sort_order": "0",
       "title": "Main Alternative"
-    }
+    },
+    "url": "https://ezus.io/2023_101010.pdf"
   }
 }
 ```
