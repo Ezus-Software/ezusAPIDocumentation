@@ -3284,6 +3284,7 @@ The steps are sorted by their creation date, with the most recently created appe
     "items": [
       {
         "name": "item_title",
+        "product_reference": "product_esus_reference",
         "quantity": 2,
         "purchase_price": 150,
         "purchase_price_excl_taxes": 125,
