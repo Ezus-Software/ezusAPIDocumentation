@@ -65,13 +65,13 @@
           "path": ["projects"],
           "query": [
             {
-              "key": "info_stage_reference",
-              "value": "received",
+              "key": "next_token",
+              "value": "",
               "disabled": true
             },
             {
-              "key": "sales_manager",
-              "value": "john.doe@e-corp.com",
+              "key": "info_stage_reference",
+              "value": "received",
               "disabled": true
             },
             {
@@ -84,7 +84,6 @@
               "value": "2024-11-01,2024-11-20",
               "disabled": true
             },
-
             {
               "key": "trip_date_in",
               "value": "2024-11-01",
@@ -94,6 +93,16 @@
             {
               "key": "trip_date_out",
               "value": "2024-11-01,2024-11-20",
+              "disabled": true
+            },
+            {
+              "key": "sales_manager",
+              "value": "john.doe@e-corp.com",
+              "disabled": true
+            },
+            {
+              "key": "project_manager",
+              "value": "john.doe@e-corp.com",
               "disabled": true
             }
           ]
@@ -287,7 +296,13 @@
           "raw": "{{baseUrl}}/clients",
           "host": ["{{baseUrl}}"],
           "path": ["clients"],
-          "query": []
+          "query": [
+            {
+              "key": "next_token",
+              "value": "",
+              "disabled": true
+            }
+          ]
         }
       },
       "response": []
@@ -360,7 +375,12 @@
           "raw": "{{baseUrl}}/suppliers",
           "host": ["{{baseUrl}}"],
           "path": ["suppliers"],
-          "query": []
+          "query": [
+            {
+              "key": "next_token",
+              "value": "",
+              "disabled": true
+        }]
         }
       },
       "response": []
@@ -433,7 +453,13 @@
           "raw": "{{baseUrl}}/products",
           "host": ["{{baseUrl}}"],
           "path": ["products"],
-          "query": []
+          "query": [
+            {
+              "key": "next_token",
+              "value": "",
+              "disabled": true
+            }
+          ]
         }
       },
       "response": []
@@ -605,8 +631,18 @@
           "path": ["invoices"],
           "query": [
             {
+              "key": "next_token",
+              "value": "",
+              "disabled": true
+            },
+            {
               "key": "stage",
               "value": "completed",
+              "disabled": true
+            },
+            {
+              "key": "technical_name",
+              "value": "technical_name",
               "disabled": true
             }
           ]
@@ -688,6 +724,31 @@
           "raw": "{{baseUrl}}/invoices-update",
           "host": ["{{baseUrl}}"],
           "path": ["invoices-update"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "invoice-supplier",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "X-API-KEY",
+            "value": "{{<YOUR_API_KEY>}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/invoice-supplier?reference=invoice_reference",
+          "host": ["{{baseUrl}}"],
+          "path": ["invoice-supplier"],
+          "query": [
+            {
+              "key": "reference",
+              "value": "invoice_reference"
+            }
+          ]
         }
       },
       "response": []
