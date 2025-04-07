@@ -488,6 +488,7 @@ axios.get(baseUrl + "/project-steps?reference=project_reference", headers);
       "items": [
         {
           "name": "item_title",
+          "product_reference": "product_esus_reference",
           "quantity": 2,
           "purchase_price": 150,
           "purchase_price_excl_taxes": 125,
@@ -3216,6 +3217,7 @@ Those objects provides insights into the invoice amounts, differentiating betwee
 "items": [
   {
     "name": "item_title",
+    "product_reference": "product_esus_reference",
     "quantity": 2,
     "purchase_price": 150,
     "purchase_price_excl_taxes": 125,
@@ -3234,6 +3236,7 @@ The fields `purchase_price`, `purchase_price_excl_taxes`, `sales_price`, and `sa
 | Property                  | Type    | Description                                                                                                             |
 | ------------------------- | ------- | ----------------------------------------------------------------------------------------------------------------------- |
 | name                      | String  | Name of the item                                                                                                        |
+| product_reference         | String  | The product reference associated with the item                                                                          |
 | quantity                  | Number  | Quantity of the item                                                                                                    |
 | purchase_price            | Number  | The unit purchase price of the item (including taxes)                                                                   |
 | purchase_price_excl_taxes | Number  | The unit purchase price of the item (excluding taxes)                                                                   |
@@ -3334,6 +3337,7 @@ The steps are sorted by their creation date, with the most recently created appe
     "items": [
       {
         "name": "item_title",
+        "product_reference": "product_esus_reference",
         "quantity": 2,
         "purchase_price": 150,
         "purchase_price_excl_taxes": 125,
