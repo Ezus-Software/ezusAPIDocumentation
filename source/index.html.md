@@ -279,6 +279,36 @@ axios.get(baseUrl + "/project?reference=project_reference", headers);
       "budget_margin_gross": 2500,
       "budget_margin_net": 1000,
       "trip_people": "15",
+      "trip_date_in": "2024-03-01",
+      "trip_date_out": "2024-03-09",
+      "trip_duration": 9,
+      "trip_destination_reference": "destination_reference",
+      "trip_destination": "France",
+      "trip_subdestination_reference ": "subdestination_reference",
+      "trip_subdestination": "Paris",
+      "destinations": {
+        "size": 3,
+        "data": [
+          {
+            "reference": "destination_reference",
+            "name": "France",
+            "subdestination_reference": "subdestination_reference",
+            "subdestination_name": "Paris"
+          },
+          {
+            "reference": "destination_reference",
+            "name": "France",
+            "subdestination_reference": "subdestination_reference1-2",
+            "subdestination_name": "Lyon"
+          },
+          {
+            "reference": "destination_reference2",
+            "name": "Italy",
+            "subdestination_reference": "subdestination_reference2-1",
+            "subdestination_name": "Milan"
+          }
+        ]
+      },
       "client": {
         "reference": "client_reference",
         "type": "enterprise",
@@ -462,6 +492,7 @@ axios.get(baseUrl + "/project-steps?reference=project_reference", headers);
       "items": [
         {
           "name": "item_title",
+          "product_reference": "product_esus_reference",
           "quantity": 2,
           "purchase_price": 150,
           "purchase_price_excl_taxes": 125,
@@ -2964,6 +2995,36 @@ A JSON object indicating whether an error occurred during the process, along wit
     "budget_margin_gross": 2500,
     "budget_margin_net": 1000,
     "trip_people": "15",
+    "trip_date_in": "2024-03-01",
+    "trip_date_out": "2024-03-09",
+    "trip_duration": 9,
+    "trip_destination_reference": "destination_reference",
+    "trip_destination": "France",
+    "trip_subdestination_reference ": "subdestination_reference",
+    "trip_subdestination": "Paris",
+    "destinations": {
+      "size": 3,
+      "data": [
+        {
+          "reference": "destination_reference",
+          "name": "France",
+          "subdestination_reference": "subdestination_reference",
+          "subdestination_name": "Paris"
+        },
+        {
+          "reference": "destination_reference",
+          "name": "France",
+          "subdestination_reference": "subdestination_reference1-2",
+          "subdestination_name": "Lyon"
+        },
+        {
+          "reference": "destination_reference2",
+          "name": "Italy",
+          "subdestination_reference": "subdestination_reference2-1",
+          "subdestination_name": "Milan"
+        }
+      ]
+    },
     "client": {
       "reference": "client_reference",
       "type": "enterprise",
@@ -3168,6 +3229,7 @@ Those objects provides insights into the invoice amounts, differentiating betwee
 "items": [
   {
     "name": "item_title",
+    "product_reference": "product_esus_reference",
     "quantity": 2,
     "purchase_price": 150,
     "purchase_price_excl_taxes": 125,
@@ -3186,6 +3248,7 @@ The fields `purchase_price`, `purchase_price_excl_taxes`, `sales_price`, and `sa
 | Property                  | Type    | Description                                                                                                             |
 | ------------------------- | ------- | ----------------------------------------------------------------------------------------------------------------------- |
 | name                      | String  | Name of the item                                                                                                        |
+| product_reference         | String  | The product reference associated with the item                                                                          |
 | quantity                  | Number  | Quantity of the item                                                                                                    |
 | purchase_price            | Number  | The unit purchase price of the item (including taxes)                                                                   |
 | purchase_price_excl_taxes | Number  | The unit purchase price of the item (excluding taxes)                                                                   |
