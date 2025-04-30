@@ -93,8 +93,8 @@ axios.post(baseUrl + "/login", body, headers);
 
 ```json
 {
-  "message": "ok",
   "error": "false",
+  "message": "ok",
   "token": "<YOUR_TOKEN>"
 }
 ```
@@ -286,6 +286,14 @@ axios.get(baseUrl + "/project?reference=project_reference", headers);
       "trip_destination": "France",
       "trip_subdestination_reference ": "subdestination_reference",
       "trip_subdestination": "Paris",
+      "client": {
+        "reference": "client_reference",
+        "type": "enterprise",
+        "company_name": "MOKE INTERNATIONAL LIMITED",
+        "first_name": "Jane",
+        "last_name": "Doe",
+        "email": "contact@moke-international.com"
+      },
       "destinations": {
         "size": 3,
         "data": [
@@ -308,17 +316,7 @@ axios.get(baseUrl + "/project?reference=project_reference", headers);
             "subdestination_name": "Milan"
           }
         ]
-      },
-      "client": {
-        "reference": "client_reference",
-        "type": "enterprise",
-        "company_name": "MOKE INTERNATIONAL LIMITED",
-        "first_name": "Jane",
-        "last_name": "Doe",
-        "email": "contact@moke-international.com"
-      },
-      "trip_destination": "France",
-      "trip_subdestination": "Paris"
+      }
     }
   ],
   "custom_fields": [
@@ -432,7 +430,7 @@ A JSON object containing the project documents information with properties like:
 | ----------------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | reference         | String | The reference of the project                                                                                                                                                                                                      |
 | alternative_order | Number | The alternative order; 0 is for main alternative                                                                                                                                                                                  |
-| documents         | Array  | An array of JSON objects, each representing a document. The documents are sorted by their creation date, with the most recently created appearing first. Each document includes the following fields: `title`, `type`, and `url`. |
+| documents         | Array  | An array of JSON objects, each representing a document. The documents are sorted by their creation date, with the most recently created appearing first. Each document includes the following fields: `type`, `title`, and `url`. |
 
 ## GET project-steps
 
@@ -462,11 +460,11 @@ axios.get(baseUrl + "/project-steps?reference=project_reference", headers);
 {
   "error": "false",
   "next_token": "<NEXT_TOKEN>",
+  "reference": "project_reference",
+  "alternative_order": "0",
   "size": 1,
   "data_size": 1,
   "page": 1,
-  "reference": "project_reference",
-  "alternative_order": "0",
   "steps": [
     {
       "type": "activity",
@@ -538,11 +536,11 @@ A JSON object containing the project documents information with properties like:
 | Property          | Type   | Description                                                                                                              |
 | ----------------- | ------ | ------------------------------------------------------------------------------------------------------------------------ |
 | next_token        | String | A token will be returned if all projects have not been returned. Use it in another call to access the following projects |
+| reference         | String | The reference of the project                                                                                             |
+| alternative_order | Number | The alternative order; 0 is for main alternative                                                                         |
 | size              | Number | The total number of projects available with these filters                                                                |
 | data_size         | Number | Number of projects returned on the current page                                                                          |
 | page              | Number | The page number                                                                                                          |
-| reference         | String | The reference of the project                                                                                             |
-| alternative_order | Number | The alternative order; 0 is for main alternative                                                                         |
 | steps             | Array  | Array of JSON steps ([Steps](#steps))                                                                                    |
 
 ## GET project-travellers
@@ -743,7 +741,8 @@ const baseUrl = "https://api.ezus.app";
 const body = {
   project_reference: "project_reference",
   title: "Document PDF",
-  link: "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
+  result:
+    "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
 };
 const headers = {
   "x-api-key": "<YOUR_API_KEY>",
@@ -758,7 +757,7 @@ axios.post(baseUrl + "/projects-documents-create", body, headers);
 ```json
 {
   "error": "false",
-  "message": "ok"
+  "result": "<LINK>"
 }
 ```
 
@@ -1549,7 +1548,6 @@ axios.get(baseUrl + "/products", headers);
         "subdestination_name": "Paris"
       },
       "budget_form": "Important",
-      "budget_text": "Option",
       "budget_variable": "Display"
     }
   ]
@@ -1640,6 +1638,9 @@ axios.get(baseUrl + "/product?reference=product_reference", headers);
     "subdestination_reference": "subdestination_reference",
     "subdestination_name": "Paris"
   },
+  "budget_form": "Important",
+  "budget_text": "Option",
+  "budget_variable": "Display",
   "medias": {
     "data": [
       {
@@ -1674,9 +1675,6 @@ axios.get(baseUrl + "/product?reference=product_reference", headers);
       "value": "Parking"
     }
   ],
-  "budget_form": "Important",
-  "budget_text": "Option",
-  "budget_variable": "Display",
   "visual_url": "https://docs.google.com/presentation/d/10GoT7nVkSIScaHUQEPh-EyUms5o6D7bcgUYsJlyql94"
 }
 ```
@@ -1952,9 +1950,9 @@ A JSON object containing the package information with properties like:
 | title         | String | Name of the package                                                                |
 | info_notes    | String | Notes on the package                                                               |
 | capacity      | String | Maximum number of people for which the package can be used                         |
-| suppliers     | JSON   | JSON object suppliers ([Suppliers](#suppliers))                                    |
+| suppliers     | JSON   | JSON object suppliers ([Suppliers](#suppliers-2))                                  |
 | medias        | JSON   | JSON object medias ([Medias](#medias))                                             |
-| products      | JSON   | JSON object products ([Products](#products))                                       |
+| products      | JSON   | JSON object products ([Products](#products-2))                                     |
 | langs         | Array  | Array of JSON langs ([Langs](#langs))                                              |
 | custom_fields | Array  | Array of JSON custom fields [Custom fields](#custom-fields)                        |
 | visual_url    | String | URL of the Google Slides visual linked to the package                              |
@@ -2422,7 +2420,7 @@ A JSON object containing the invoice information with properties like:
 | amount_ttc         | Number | Amount of the invoice including taxes                                                                                                                                                                             |
 | amount_ht          | Number | Amount of the invoice excluding taxes                                                                                                                                                                             |
 | vat                | Number | VAT amount of the invoice                                                                                                                                                                                         |
-| project            | JSON   | JSON including: `reference`, `info_title`, `info_stage`, `info_stage_reference`, `info_number`, `currency` and `is_closed`                                                                                        |
+| project            | JSON   | JSON including: `reference`, `info_number`, `info_title`, `info_stage_reference`, `info_stage`, `currency` and `is_closed`                                                                                        |
 | alternative        | JSON   | JSON including: `sort_order` and `title`                                                                                                                                                                          |
 | client             | JSON   | JSON including: `reference`, `type` (enterprise or individual), `company_name`, `first_name`, `last_name` and `email`                                                                                             |
 | forecast           | JSON   | JSON object forecast ([Invoices Amounts](#invoices-amounts))                                                                                                                                                      |
@@ -2531,6 +2529,7 @@ axios.get(
 {
   "error": "false",
   "reference": "invoice_supplier_reference",
+  "filename": "File Name",
   "created_date": "2023-10-10",
   "due_date": "2023-10-20",
   "currency": "EUR",
@@ -3002,6 +3001,14 @@ A JSON object indicating whether an error occurred during the process, along wit
     "trip_destination": "France",
     "trip_subdestination_reference ": "subdestination_reference",
     "trip_subdestination": "Paris",
+    "client": {
+      "reference": "client_reference",
+      "type": "enterprise",
+      "company_name": "MOKE INTERNATIONAL LIMITED",
+      "first_name": "Jane",
+      "last_name": "Doe",
+      "email": "contact@moke-international.com"
+    },
     "destinations": {
       "size": 3,
       "data": [
@@ -3024,36 +3031,25 @@ A JSON object indicating whether an error occurred during the process, along wit
           "subdestination_name": "Milan"
         }
       ]
-    },
-    "client": {
-      "reference": "client_reference",
-      "type": "enterprise",
-      "company_name": "MOKE INTERNATIONAL LIMITED",
-      "first_name": "Jane",
-      "last_name": "Doe",
-      "email": "contact@moke-international.com"
-    },
-    "trip_destination": "France",
-    "trip_subdestination": "Paris"
+    }
   }
 ]
 ```
 
-| Property                 | Type   | Description                                                                                                               |
-| ------------------------ | ------ | ------------------------------------------------------------------------------------------------------------------------- |
-| alternative_title        | String | Title of the alternative                                                                                                  |
-| trip_date_in             | Date   | Date of the beginning of this alternative, in a "YYYY-MM-DD" format string. If it's empty, the project has no dates       |
-| trip_date_out            | Date   | Date of the end of this alternative, in a "YYYY-MM-DD" format string. If it's empty, the project has no dates             |
-| trip_duration            | Number | Number of days this alternative lasts                                                                                     |
-| trip_budget              | Number | Forecasted budget for the alternative (the one that is entered manually not the actual one)                               |
-| budget_actual            | Number | Actual budget for the alternative, inclusive of taxes                                                                     |
-| budget_actual_excl_taxes | Number | Actual budget for the alternative, excluding taxes                                                                        |
-| budget_margin_gross      | Number | Gross margin for the alternative                                                                                          |
-| budget_margin_net        | Number | Net margin for the alternative                                                                                            |
-| trip_people              | String | Number of people                                                                                                          |
-| client                   | JSON   | JSON including: `reference`, `type` (enterprise or individual), `company_name`, `first_name`, `last_name` and `email`     |
-| trip_destination         | String | Destination of the alternative. Note: For multi-destination alternatives, only the primary destination is returned.       |
-| trip_subdestination      | String | Subdestination of the alternative. Note: For multi-destination alternatives, only the primary subdestination is returned. |
+| Property                 | Type   | Description                                                                                                           |
+| ------------------------ | ------ | --------------------------------------------------------------------------------------------------------------------- |
+| alternative_title        | String | Title of the alternative                                                                                              |
+| trip_date_in             | Date   | Date of the beginning of this alternative, in a "YYYY-MM-DD" format string. If it's empty, the project has no dates   |
+| trip_date_out            | Date   | Date of the end of this alternative, in a "YYYY-MM-DD" format string. If it's empty, the project has no dates         |
+| trip_duration            | Number | Number of days this alternative lasts                                                                                 |
+| trip_budget              | Number | Forecasted budget for the alternative (the one that is entered manually not the actual one)                           |
+| budget_actual            | Number | Actual budget for the alternative, inclusive of taxes                                                                 |
+| budget_actual_excl_taxes | Number | Actual budget for the alternative, excluding taxes                                                                    |
+| budget_margin_gross      | Number | Gross margin for the alternative                                                                                      |
+| budget_margin_net        | Number | Net margin for the alternative                                                                                        |
+| trip_people              | String | Number of people                                                                                                      |
+| client                   | JSON   | JSON including: `reference`, `type` (enterprise or individual), `company_name`, `first_name`, `last_name` and `email` |
+| destinations             | JSON   | JSON including: `reference`, `name`, `subdestination_reference` and `subdestination_name`                             |
 
 ### Contacts
 
@@ -3297,7 +3293,7 @@ Only the last 10 medias are returned in this object.
 | media_name | String | Title of the media                                                |
 | path_full  | String | Media URL. This is a pre-signed URL that expires after 30 minutes |
 
-### Products
+### Products <a name="products-two"></a>
 
 Only the last 10 products are returned in this object.
 
@@ -3661,11 +3657,11 @@ This event is triggered whenever an invoice is finalized (its stage goes from `d
     "amount_ht": 1000.0,
     "vat": 200.0,
     "project_reference": "project_reference",
+    "url": "https://ezus.io/2023_101010.pdf",
     "alternative": {
       "sort_order": "0",
       "title": "Main Alternative"
-    },
-    "url": "https://ezus.io/2023_101010.pdf"
+    }
   }
 }
 ```
@@ -3686,8 +3682,8 @@ This event is triggered whenever an invoice is finalized (its stage goes from `d
 | amount_ht          | Number | Amount of the invoice excluding taxes                                                                                                                                                                             |
 | vat                | Number | VAT amount of the invoice                                                                                                                                                                                         |
 | project_reference  | String | The reference of the project linked to this invoice                                                                                                                                                               |
-| alternative        | JSON   | JSON including: `sort_order` and `title`                                                                                                                                                                          |
 | url                | String | URL of the invoice `.pdf` file                                                                                                                                                                                    |
+| alternative        | JSON   | JSON including: `sort_order` and `title`                                                                                                                                                                          |
 
 ## invoices_suppliers.attached
 
