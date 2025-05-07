@@ -3399,7 +3399,7 @@ The steps are sorted by their creation date, with the most recently created appe
         "is_optional": false
       }
     ],
-    "images": ["https://image.jpg", "https://image2.jpg"],
+    "medias": ["https://image.jpg", "https://image2.jpg"],
     "custom_fields": [
       {
         "name": "CustomField",
