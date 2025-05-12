@@ -2501,7 +2501,7 @@ axios.put(baseUrl + "/invoices-update", body, headers);
 {
   "error": "false",
   "message": "ok",
-  "action": "invoice successfully updated",
+  "action": "Invoice successfully updated",
   "reference": "invoice_reference"
 }
 ```
