@@ -2501,6 +2501,7 @@ axios.put(baseUrl + "/invoices-update", body, headers);
 {
   "error": "false",
   "message": "ok",
+  "action": "invoice successfully updated",
   "reference": "invoice_reference"
 }
 ```
@@ -3040,13 +3041,6 @@ A JSON object indicating whether an error occurred during the process, along wit
     "budget_margin_gross": 2500,
     "budget_margin_net": 1000,
     "trip_people": "15",
-    "trip_date_in": "2024-03-01",
-    "trip_date_out": "2024-03-09",
-    "trip_duration": 9,
-    "trip_destination_reference": "destination_reference",
-    "trip_destination": "France",
-    "trip_subdestination_reference ": "subdestination_reference",
-    "trip_subdestination": "Paris",
     "client": {
       "reference": "client_reference",
       "type": "enterprise",
@@ -3055,6 +3049,10 @@ A JSON object indicating whether an error occurred during the process, along wit
       "last_name": "Doe",
       "email": "contact@moke-international.com"
     },
+    "trip_destination_reference": "destination_reference",
+    "trip_destination": "France",
+    "trip_subdestination_reference ": "subdestination_reference",
+    "trip_subdestination": "Paris",
     "destinations": {
       "size": 3,
       "data": [
@@ -3082,20 +3080,24 @@ A JSON object indicating whether an error occurred during the process, along wit
 ]
 ```
 
-| Property                 | Type   | Description                                                                                                           |
-| ------------------------ | ------ | --------------------------------------------------------------------------------------------------------------------- |
-| alternative_title        | String | Title of the alternative                                                                                              |
-| trip_date_in             | Date   | Date of the beginning of this alternative, in a "YYYY-MM-DD" format string. If it's empty, the project has no dates   |
-| trip_date_out            | Date   | Date of the end of this alternative, in a "YYYY-MM-DD" format string. If it's empty, the project has no dates         |
-| trip_duration            | Number | Number of days this alternative lasts                                                                                 |
-| trip_budget              | Number | Forecasted budget for the alternative (the one that is entered manually not the actual one)                           |
-| budget_actual            | Number | Actual budget for the alternative, inclusive of taxes                                                                 |
-| budget_actual_excl_taxes | Number | Actual budget for the alternative, excluding taxes                                                                    |
-| budget_margin_gross      | Number | Gross margin for the alternative                                                                                      |
-| budget_margin_net        | Number | Net margin for the alternative                                                                                        |
-| trip_people              | String | Number of people                                                                                                      |
-| client                   | JSON   | JSON including: `reference`, `type` (enterprise or individual), `company_name`, `first_name`, `last_name` and `email` |
-| destinations             | JSON   | JSON including: `reference`, `name`, `subdestination_reference` and `subdestination_name`                             |
+| Property                      | Type   | Description                                                                                                                                                |
+| ----------------------------- | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| alternative_title             | String | Title of the alternative                                                                                                                                   |
+| trip_date_in                  | Date   | Date of the beginning of this alternative, in a "YYYY-MM-DD" format string. If it's empty, the project has no dates                                        |
+| trip_date_out                 | Date   | Date of the end of this alternative, in a "YYYY-MM-DD" format string. If it's empty, the project has no dates                                              |
+| trip_duration                 | Number | Number of days this alternative lasts                                                                                                                      |
+| trip_budget                   | Number | Forecasted budget for the alternative (the one that is entered manually not the actual one)                                                                |
+| budget_actual                 | Number | Actual budget for the alternative, inclusive of taxes                                                                                                      |
+| budget_actual_excl_taxes      | Number | Actual budget for the alternative, excluding taxes                                                                                                         |
+| budget_margin_gross           | Number | Gross margin for the alternative                                                                                                                           |
+| budget_margin_net             | Number | Net margin for the alternative                                                                                                                             |
+| trip_people                   | String | Number of people                                                                                                                                           |
+| client                        | JSON   | JSON including: `reference`, `type` (enterprise or individual), `company_name`, `first_name`, `last_name` and `email`                                      |
+| trip_destination_reference    | String | Destination reference of the alternative. Note: For multi-destination alternatives, only the primary destination is returned.                              |
+| trip_destination              | String | Destination of the alternative. Note: For multi-destination alternatives, only the primary destination is returned.                                        |
+| trip_subdestination_reference | String | Subdestination reference of the alternative. Note: For multi-destination alternatives, only the primary subdestination is returned.                        |
+| trip_subdestination           | String | Subdestination of the alternative. Note: For multi-destination alternatives, only the primary subdestination is returned.                                  |
+| destinations                  | JSON   | JSON including: `size`, Array of all destination (`reference` and `name`) and subdestination (`subdestination_reference` and `subdestination_name`) values |
 
 ### Contacts
 
@@ -3716,10 +3718,10 @@ This event is triggered whenever an invoice is finalized (its stage goes from `d
 | ------------------ | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | reference          | String | The reference of the invoice                                                                                                                                                                                      |
 | info_number        | String | Title of the invoice                                                                                                                                                                                              |
-| stage              | String | Stage of the invoice `draft` `completed` or `paid`                                                                                                                                                                |
 | type               | String | Type of the invoice `invoice` or `credit_note`                                                                                                                                                                    |
 | origin_reference   | String | This is only displayed if the type of the invoice is a `credit_note`. The reference of the origin invoice.                                                                                                        |
 | origin_info_number | String | This is only displayed if the type of the invoice is a `credit_note`. Title of the origin invoice.                                                                                                                |
+| stage              | String | Stage of the invoice `draft` `completed` or `paid`                                                                                                                                                                |
 | created_date       | String | Date of the creation of this invoice, in a "YYYY-MM-DD" format                                                                                                                                                    |
 | send_date          | String | Sent date of this invoice, in a "YYYY-MM-DD" format                                                                                                                                                               |
 | due_date           | String | Due date of this invoice, in a "YYYY-MM-DD" format                                                                                                                                                                |
