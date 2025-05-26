@@ -1273,6 +1273,7 @@ axios.get(baseUrl + "/supplier?reference=supplier_reference", headers);
   "info_notes": "Emily confirmed: this hotel really is the best in town.",
   "website": "www.the_best_hotel.com",
   "capacity": "200",
+  "visual_url": "https://docs.google.com/presentation/d/10GoT7nVkSIScaHUQEPh-EyUms5o6D7bcgUYsJlyql94",
   "user": {
     "email": "travel-design@e-corp.com",
     "first_name": "Alice",
@@ -1346,8 +1347,7 @@ axios.get(baseUrl + "/supplier?reference=supplier_reference", headers);
       "name": "Stars",
       "value": "5"
     }
-  ],
-  "visual_url": "https://docs.google.com/presentation/d/10GoT7nVkSIScaHUQEPh-EyUms5o6D7bcgUYsJlyql94"
+  ]
 }
 ```
 
@@ -1381,6 +1381,7 @@ A JSON object containing the supplier information with properties like:
 | info_notes    | String | The notes about the product                                                                                                                                  |
 | website       | String | Website of the supplier                                                                                                                                      |
 | capacity      | String | Maximum number of people for which the supplier can be used                                                                                                  |
+| visual_url    | String | URL of the Google Slides visual linked to the supplier                                                                                                       |
 | user          | JSON   | JSON object user ([User](#user))                                                                                                                             |
 | destination   | JSON   | JSON object destination ([Destination](#destination))                                                                                                        |
 | address       | JSON   | JSON object address ([Address](#address))                                                                                                                    |
@@ -1389,7 +1390,6 @@ A JSON object containing the supplier information with properties like:
 | contacts      | Array  | Array of JSON contacts ([Contacts](#contacts))                                                                                                               |
 | langs         | Array  | Array of JSON langs ([Langs](#langs))                                                                                                                        |
 | custom_fields | Array  | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                |
-| visual_url    | String | URL of the Google Slides visual linked to the supplier                                                                                                       |
 
 ## POST suppliers-upsert
 
@@ -1640,6 +1640,7 @@ axios.get(baseUrl + "/product?reference=product_reference", headers);
   "currency": "EUR",
   "vat_rate": 20.0,
   "vat_regime": "margin",
+  "visual_url": "https://docs.google.com/presentation/d/10GoT7nVkSIScaHUQEPh-EyUms5o6D7bcgUYsJlyql94",
   "commission": {
     "commission_mode": "purchase",
     "commission_regime": "percent",
@@ -1695,8 +1696,7 @@ axios.get(baseUrl + "/product?reference=product_reference", headers);
       "name": "View",
       "value": "Parking"
     }
-  ],
-  "visual_url": "https://docs.google.com/presentation/d/10GoT7nVkSIScaHUQEPh-EyUms5o6D7bcgUYsJlyql94"
+  ]
 }
 ```
 
@@ -1732,6 +1732,7 @@ A JSON object containing the product information with properties like:
 | currency        | String | The ISO 4217 currency code representing the currency you utilize (<a href="https://docs.google.com/spreadsheets/d/1b7BNOwKyN1hMOouve6xhFZ2R2zrH4Sj1L-646j755fU/edit?usp=sharing" target="_blank">Link to doc</a>)                        |
 | vat_rate        | Number | Default % of the VAT on the product                                                                                                                                                                                                      |
 | vat_regime      | String | Can be either `classic` (common law VAT), `margin` (VAT on the margin), `none` (Non applicable VAT)                                                                                                                                      |
+| visual_url      | String | URL of the Google Slides visual linked to the product                                                                                                                                                                                    |
 | commission      | JSON   | A JSON object containing `commission_mode` ("sales" or "purchase"), `commission_regime` ("percent" or "amount"), `value`                                                                                                                 |
 | supplier        | JSON   | A JSON object containing `reference`, `company_name`                                                                                                                                                                                     |
 | package         | JSON   | A JSON object containing `reference`, `title`                                                                                                                                                                                            |
@@ -1743,7 +1744,6 @@ A JSON object containing the product information with properties like:
 | langs           | Array  | Array of JSON langs ([Langs](#langs))                                                                                                                                                                                                    |
 | tariffs         | Array  | Array of JSON tariffs ([Tariffs](#tariffs))                                                                                                                                                                                              |
 | custom_fields   | Array  | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                                                                                            |
-| visual_url      | String | URL of the Google Slides visual linked to the product                                                                                                                                                                                    |
 |                 |
 
 ## POST products-upsert
@@ -1898,6 +1898,7 @@ axios.get(baseUrl + "/package?reference=package_reference", headers);
   "title": "The best package",
   "info_notes": "A classical day in Paris",
   "capacity": "2",
+  "visual_url": "https://docs.google.com/presentation/d/10GoT7nVkSIScaHUQEPh-EyUms5o6D7bcgUYsJlyql94",
   "suppliers": {
     "data": [
       {
@@ -1943,8 +1944,7 @@ axios.get(baseUrl + "/package?reference=package_reference", headers);
       "name": "Is for children?",
       "value": "False"
     }
-  ],
-  "visual_url": "https://docs.google.com/presentation/d/10GoT7nVkSIScaHUQEPh-EyUms5o6D7bcgUYsJlyql94"
+  ]
 }
 ```
 
@@ -1976,12 +1976,12 @@ A JSON object containing the package information with properties like:
 | title         | String | Name of the package                                                               |
 | info_notes    | String | Notes on the package                                                              |
 | capacity      | String | Maximum number of people for which the package can be used                        |
+| visual_url    | String | URL of the Google Slides visual linked to the package                             |
 | suppliers     | JSON   | JSON object suppliers ([Suppliers](#suppliers-2))                                 |
 | medias        | JSON   | JSON object medias ([Medias](#medias))                                            |
 | products      | JSON   | JSON object products ([Products](#products-2))                                    |
 | langs         | Array  | Array of JSON langs ([Langs](#langs))                                             |
 | custom_fields | Array  | Array of JSON custom fields [Custom fields](#custom-fields)                       |
-| visual_url    | String | URL of the Google Slides visual linked to the package                             |
 
 ## POST packages-upsert
 
@@ -2163,6 +2163,7 @@ axios.get(
   "name": "Paris",
   "destination_reference": "destination_reference",
   "destination_name": "France",
+  "visual_url": "https://docs.google.com/presentation/d/10GoT7nVkSIScaHUQEPh-EyUms5o6D7bcgUYsJlyql94",
   "medias": {
     "data": [
       {
@@ -2179,8 +2180,7 @@ axios.get(
       "short_description": "",
       "long_description": ""
     }
-  ],
-  "visual_url": "https://docs.google.com/presentation/d/10GoT7nVkSIScaHUQEPh-EyUms5o6D7bcgUYsJlyql94"
+  ]
 }
 ```
 
@@ -2211,9 +2211,9 @@ A JSON object containing the sub-destination information with properties like:
 | name                  | String | Name of the sub-destination                                   |
 | destination_reference | String | The reference of the destination                              |
 | destination_name      | String | Name of the destination                                       |
+| visual_url            | String | URL of the Google Slides visual linked to the sub-destination |
 | medias                | JSON   | JSON object medias ([Medias](#medias))                        |
 | langs                 | Array  | Array of JSON langs ([Langs](#langs))                         |
-| visual_url            | String | URL of the Google Slides visual linked to the sub-destination |
 
 # Invoices
 
@@ -2376,6 +2376,7 @@ axios.get(baseUrl + "/invoice?reference=invoice_reference", headers);
   "amount_ttc": 1200.0,
   "amount_ht": 1000.0,
   "vat": 200.0,
+  "url": "https://ezus.io/2023_101010.pdf",
   "project": {
     "reference": "project_reference",
     "info_number": "202306001-P",
@@ -2410,8 +2411,7 @@ axios.get(baseUrl + "/invoice?reference=invoice_reference", headers);
     "commission": null,
     "vat_deducted": null,
     "amount_ht": null
-  },
-  "url": "https://ezus.io/2023_101010.pdf"
+  }
 }
 ```
 
@@ -2451,12 +2451,12 @@ A JSON object containing the invoice information with properties like:
 | amount_ttc         | Number | Amount of the invoice including taxes                                                                                                                                                                             |
 | amount_ht          | Number | Amount of the invoice excluding taxes                                                                                                                                                                             |
 | vat                | Number | VAT amount of the invoice                                                                                                                                                                                         |
+| url                | String | URL of the invoice `.pdf` file                                                                                                                                                                                    |
 | project            | JSON   | JSON including: `reference`, `info_number`, `info_title`, `info_stage_reference`, `info_stage`, `currency` and `is_closed`                                                                                        |
 | alternative        | JSON   | JSON including: `sort_order` and `title`                                                                                                                                                                          |
 | client             | JSON   | JSON including: `reference`, `type` (enterprise or individual), `company_name`, `first_name`, `last_name` and `email`                                                                                             |
 | forecast           | JSON   | JSON object forecast ([Invoices Amounts](#invoices-amounts))                                                                                                                                                      |
 | actual             | JSON   | JSON object actual ([Invoices Amounts](#invoices-amounts))                                                                                                                                                        |
-| url                | String | URL of the invoice `.pdf` file                                                                                                                                                                                    |
 
 ## PUT invoices-update
 
@@ -2573,6 +2573,7 @@ axios.get(
   "amount_ttc": 1200.0,
   "amount_ht": 1000.0,
   "vat": 200.0,
+  "url": "https://ezus.io/2023_101010.pdf",
   "supplier": {
     "reference": "supplier_reference",
     "company_name": "The best hotel",
@@ -2615,8 +2616,7 @@ axios.get(
       "amount": 200.0,
       "payment_method": "Check"
     }
-  ],
-  "url": "https://ezus.io/2023_101010.pdf"
+  ]
 }
 ```
 
@@ -2651,12 +2651,12 @@ A JSON object containing the supplier invoice information with properties like:
 | amount_ttc   | Number | Amount of the supplier invoice excluding taxes                                                                                                                                                                    |
 | amount_ht    | Number | Amount of the supplier invoice including taxes                                                                                                                                                                    |
 | vat          | Number | VAT amount of the supplier invoice                                                                                                                                                                                |
+| url          | String | URL of the supplier invoice file                                                                                                                                                                                  |
 | supplier     | JSON   | JSON including: `reference`, `company_name` and `website`                                                                                                                                                         |
 | project      | JSON   | JSON including: `reference`, `info_title`, `info_stage`, `info_stage_reference`, `info_number`, `currency` and `is_closed`                                                                                        |
 | alternative  | JSON   | JSON including: `sort_order` and `title`                                                                                                                                                                          |
 | client       | JSON   | JSON including: `reference`, `type` (enterprise or individual), `company_name`, `first_name`, `last_name` and `email`                                                                                             |
 | payments     | Array  | Array of JSON including: `date`, `amount` and `payment_method`                                                                                                                                                    |
-| url          | String | URL of the supplier invoice file                                                                                                                                                                                  |
 
 # Deposits
 
@@ -3748,13 +3748,13 @@ This event is triggered whenever a file is added to a supplier invoice.
     "amount_ttc": 1200.0,
     "amount_ht": 1000.0,
     "vat": 200.0,
+    "url": "https://ezus.io/2023_101010.pdf",
     "supplier_reference": "supplier_reference",
     "project_reference": "project_reference",
     "alternative": {
       "sort_order": "0",
       "title": "Main Alternative"
-    },
-    "url": "https://ezus.io/2023_101010.pdf"
+    }
   }
 }
 ```
@@ -3769,10 +3769,10 @@ This event is triggered whenever a file is added to a supplier invoice.
 | amount_ttc         | Number | Amount of the supplier invoice including taxes                                                                                                                                                                    |
 | amount_ht          | Number | Amount of the supplier invoice excluding taxes                                                                                                                                                                    |
 | vat                | Number | VAT amount of the supplier invoice                                                                                                                                                                                |
+| url                | String | URL of the supplier invoice file                                                                                                                                                                                  |
 | supplier_reference | String | The reference of the supplier linked to this supplier invoice                                                                                                                                                     |
 | project_reference  | String | The reference of the project linked to this supplier invoice                                                                                                                                                      |
 | alternative        | JSON   | JSON including: `sort_order` and `title`                                                                                                                                                                          |
-| url                | String | URL of the supplier invoice file                                                                                                                                                                                  |
 
 # Date Format
 
