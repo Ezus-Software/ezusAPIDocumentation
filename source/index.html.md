@@ -93,8 +93,8 @@ axios.post(baseUrl + "/login", body, headers);
 
 ```json
 {
-  "message": "ok",
   "error": "false",
+  "message": "ok",
   "token": "<YOUR_TOKEN>"
 }
 ```
@@ -151,21 +151,21 @@ axios.get(baseUrl + "/projects", headers);
 ```json
 {
   "error": "false",
-  "next_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJtZW51X211bG11bCI6Im9wdDEiLCJudW1iZXIiOiIyMDAwMCIsInBhZ2UiOjEsInBlcnNvX2ludm9pY2UiOiJHRyIsInN0YWdlIjoicGFpZCIsIl9fdGltZSI6MTY5NzQ0NjEzNX0.jEs7aL3UzCNrjzwDtAUbq4Rt4T64nu2LBYC0NnQhHiA",
+  "next_token": "<NEXT_TOKEN>",
   "size": 338,
   "data_size": 50,
   "page": 1,
   "projects": [
     {
       "reference": "project_reference",
-      "info_title": "Paris fashion week 2024",
-      "info_stage": "Confirmed",
-      "info_stage_reference": "confirmed",
-      "info_notes": "Jane has verbally confirmed our quotation",
       "info_number": "202306001-P",
-      "currency": "€",
+      "info_title": "Paris fashion week 2024",
+      "info_stage_reference": "confirmed",
+      "info_stage": "Confirmed",
+      "info_notes": "Jane has verbally confirmed our quotation",
       "created_at": "2024-06-18",
       "updated_at": "2024-06-19",
+      "currency": "€",
       "sales_manager": {
         "email": "travel-design@e-corp.com",
         "first_name": "Alice",
@@ -178,7 +178,7 @@ axios.get(baseUrl + "/projects", headers);
         "last_name": "Shmoe",
         "agency": "Paris Agency"
       }
-    },...
+    }
   ]
 }
 ```
@@ -199,13 +199,13 @@ axios.get(baseUrl + "/projects", headers);
 | Parameter            | Type   | Description                                                                                                                                                                                        |
 | -------------------- | ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | next_token           | String | Specify this parameter if you want to retrieve the following elements of a given list query                                                                                                        |
-| sales_manager        | String | You can filter projects assigned to a specific sales manager. Expected format: email (john.doe@e-corp.com)                                                                                         |
-| project_manager      | String | You can filter projects assigned to a specific project manager. Expected format: email (john.doe@e-corp.com)                                                                                       |
 | info_stage_reference | String | You can filter projects that are in a specific stage. The stage of the project must be indicated by its technical name                                                                             |
 | created_at           | Date   | You can filter projects assigned to a specific or an intersection of creation date. Expected format: “YYYY-MM-DD” or “YYYY-MM-DD,YYYY-MM-DD”. See [Date Format](#date-format) for more details.    |
 | updated_at           | Date   | You can filter projects assigned to a specific or an intersection of last update date. Expected format: “YYYY-MM-DD” or “YYYY-MM-DD,YYYY-MM-DD”. See [Date Format](#date-format) for more details. |
 | trip_date_in         | Date   | You can filter projects assigned to a specific or an intersection of trip start date. Expected format: “YYYY-MM-DD” or “YYYY-MM-DD,YYYY-MM-DD”. See [Date Format](#date-format) for more details.  |
 | trip_date_out        | Date   | You can filter projects assigned to a specific or an intersection of trip end date. Expected format: “YYYY-MM-DD” or “YYYY-MM-DD,YYYY-MM-DD”. See [Date Format](#date-format) for more details.    |
+| sales_manager        | String | You can filter projects assigned to a specific sales manager. Expected format: email (john.doe@e-corp.com)                                                                                         |
+| project_manager      | String | You can filter projects assigned to a specific project manager. Expected format: email (john.doe@e-corp.com)                                                                                       |
 
 ### Response
 
@@ -247,14 +247,14 @@ axios.get(baseUrl + "/project?reference=project_reference", headers);
 {
   "error": "false",
   "reference": "project_reference",
-  "info_title": "Paris fashion week 2024",
-  "info_stage": "Confirmed",
-  "info_stage_reference": "confirmed",
-  "info_notes": "Jane has verbally confirmed our quotation",
   "info_number": "202306001-P",
-  "currency": "€",
+  "info_title": "Paris fashion week 2024",
+  "info_stage_reference": "confirmed",
+  "info_stage": "Confirmed",
+  "info_notes": "Jane has verbally confirmed our quotation",
   "created_at": "2024-06-18",
   "updated_at": "2024-06-19",
+  "currency": "€",
   "sales_manager": {
     "email": "travel-design@e-corp.com",
     "first_name": "Alice",
@@ -270,11 +270,14 @@ axios.get(baseUrl + "/project?reference=project_reference", headers);
   "alternatives": [
     {
       "alternative_title": "Main Alternative",
+      "trip_date_in": "2024-03-01",
+      "trip_date_out": "2024-03-09",
+      "trip_duration": 9,
+      "trip_budget": 90000,
       "budget_actual": 88750,
       "budget_actual_excl_taxes ": 77950,
       "budget_margin_gross": 2500,
       "budget_margin_net": 1000,
-      "trip_budget": 90000,
       "trip_people": "15",
       "trip_date_in": "2024-03-01",
       "trip_date_out": "2024-03-09",
@@ -283,6 +286,14 @@ axios.get(baseUrl + "/project?reference=project_reference", headers);
       "trip_destination": "France",
       "trip_subdestination_reference ": "subdestination_reference",
       "trip_subdestination": "Paris",
+      "client": {
+        "reference": "client_reference",
+        "type": "enterprise",
+        "company_name": "MOKE INTERNATIONAL LIMITED",
+        "first_name": "Jane",
+        "last_name": "Doe",
+        "email": "contact@moke-international.com"
+      },
       "destinations": {
         "size": 3,
         "data": [
@@ -305,14 +316,6 @@ axios.get(baseUrl + "/project?reference=project_reference", headers);
             "subdestination_name": "Milan"
           }
         ]
-      },
-      "client": {
-        "reference": "client_reference",
-        "type": "enterprise",
-        "company_name": "MOKE INTERNATIONAL LIMITED",
-        "first_name": "Jane",
-        "last_name": "Doe",
-        "email": "contact@moke-international.com"
       }
     }
   ],
@@ -346,21 +349,21 @@ axios.get(baseUrl + "/project?reference=project_reference", headers);
 
 A JSON object containing the project information with properties like:
 
-| Property             | Type   | Description                                                                        |
-| -------------------- | ------ | ---------------------------------------------------------------------------------- |
-| reference            | String | The reference of the project                                                       |
-| info_title           | String | The title of the project                                                           |
-| info_stage           | String | The stage of the project (Confirmed, Received, Paid...)                            |
-| info_stage_reference | String | Technical name of the stage of the project (confirmed, received, paid...)          |
-| info_notes           | String | Notes on the project                                                               |
-| info_number          | String | File number that appears in the project record. Not to be confused with reference! |
-| currency             | String | Default currency of the project                                                    |
-| created_at           | Date   | Date of creation                                                                   |
-| updated_at           | Date   | Date of the last update                                                            |
-| sales_manager        | JSON   | JSON object representing the sales manager ([User](#user))                         |
-| project_manager      | JSON   | JSON object representing the project manager ([User](#user))                       |
-| alternatives         | Array  | Array of JSON alternatives ([Alternatives](#alternatives))                         |
-| custom_fields        | Array  | Array of JSON custom fields ([Custom fields](#custom-fields))                      |
+| Property             | Type   | Description                                                                       |
+| -------------------- | ------ | --------------------------------------------------------------------------------- |
+| reference            | String | The reference of the project                                                      |
+| info_number          | String | File number that appears in the project record. Not to be confused with reference |
+| info_title           | String | The title of the project                                                          |
+| info_stage_reference | String | Technical name of the stage of the project (confirmed, received, paid...)         |
+| info_stage           | String | The stage of the project (Confirmed, Received, Paid...)                           |
+| info_notes           | String | Notes on the project                                                              |
+| created_at           | Date   | Date of creation                                                                  |
+| updated_at           | Date   | Date of the last update                                                           |
+| currency             | String | Default currency of the project                                                   |
+| sales_manager        | JSON   | JSON object representing the sales manager ([User](#user))                        |
+| project_manager      | JSON   | JSON object representing the project manager ([User](#user))                      |
+| alternatives         | Array  | Array of JSON alternatives ([Alternatives](#alternatives))                        |
+| custom_fields        | Array  | Array of JSON custom fields ([Custom fields](#custom-fields))                     |
 
 ## GET project-documents
 
@@ -393,8 +396,8 @@ axios.get(baseUrl + "/project-documents?reference=project_reference", headers);
   "alternative_order": "0",
   "documents": [
     {
-      "title": "documentName",
       "type": "custom",
+      "title": "documentName",
       "url": "https://ezus.io/2023_101010.pdf"
     }
   ]
@@ -427,7 +430,7 @@ A JSON object containing the project documents information with properties like:
 | ----------------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | reference         | String | The reference of the project                                                                                                                                                                                                      |
 | alternative_order | Number | The alternative order; 0 is for main alternative                                                                                                                                                                                  |
-| documents         | Array  | An array of JSON objects, each representing a document. The documents are sorted by their creation date, with the most recently created appearing first. Each document includes the following fields: `title`, `type`, and `url`. |
+| documents         | Array  | An array of JSON objects, each representing a document. The documents are sorted by their creation date, with the most recently created appearing first. Each document includes the following fields: `type`, `title`, and `url`. |
 
 ## GET project-steps
 
@@ -456,25 +459,25 @@ axios.get(baseUrl + "/project-steps?reference=project_reference", headers);
 ```json
 {
   "error": "false",
+  "next_token": "<NEXT_TOKEN>",
   "reference": "project_reference",
   "alternative_order": "0",
-  "next_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJtZW51X211bG11bCI6Im9wdDEiLCJudW1iZXIiOiIyMDAwMCIsInBhZ2UiOjEsInBlcnNvX2ludm9pY2UiOiJHRyIsInN0YWdlIjoicGFpZCIsIl9fdGltZSI6MTY5NzQ0NjEzNX0.jEs7aL3UzCNrjzwDtAUbq4Rt4T64nu2LBYC0NnQhHiA",
   "size": 1,
   "data_size": 1,
   "page": 1,
   "steps": [
     {
-      "name": "activityTitle",
       "type": "activity",
+      "name": "activityTitle",
       "category": "restaurant",
       "date_start": "2024-10-01 10:00:00",
       "date_end": "2024-10-01 12:00:00",
       "people": 4,
       "address": {
         "label": "58 Rue de Paradis",
-        "zip": "75010",
         "city": "Paris",
         "country": "France",
+        "zip": "75010",
         "geo": {
           "x": 48.875761,
           "y": 2.348727
@@ -484,7 +487,6 @@ axios.get(baseUrl + "/project-steps?reference=project_reference", headers);
         "short": "Short description of the activity",
         "long": "Long description of the activity"
       },
-      "medias": ["https://image.jpg", "https://image2.jpg"],
       "items": [
         {
           "name": "item_title",
@@ -497,6 +499,7 @@ axios.get(baseUrl + "/project-steps?reference=project_reference", headers);
           "is_optional": false
         }
       ],
+      "medias": ["https://image.jpg", "https://image2.jpg"],
       "custom_fields": [
         {
           "name": "CustomField",
@@ -530,11 +533,15 @@ axios.get(baseUrl + "/project-steps?reference=project_reference", headers);
 
 A JSON object containing the project documents information with properties like:
 
-| Property          | Type   | Description                                      |
-| ----------------- | ------ | ------------------------------------------------ |
-| reference         | String | The reference of the project                     |
-| alternative_order | Number | The alternative order; 0 is for main alternative |
-| steps             | Array  | Array of JSON steps ([Steps](#steps))            |
+| Property          | Type   | Description                                                                                                              |
+| ----------------- | ------ | ------------------------------------------------------------------------------------------------------------------------ |
+| next_token        | String | A token will be returned if all projects have not been returned. Use it in another call to access the following projects |
+| reference         | String | The reference of the project                                                                                             |
+| alternative_order | Number | The alternative order; 0 is for main alternative                                                                         |
+| size              | Number | The total number of projects available with these filters                                                                |
+| data_size         | Number | Number of projects returned on the current page                                                                          |
+| page              | Number | The page number                                                                                                          |
+| steps             | Array  | Array of JSON steps ([Steps](#steps))                                                                                    |
 
 ## GET project-travellers
 
@@ -568,17 +575,17 @@ axios.get(baseUrl + "/project-travellers?reference=project_reference", headers);
   "size": "2",
   "travellers": [
     {
-      "first_name": "Emily",
-      "name": "Johnson",
       "email": "emily.johnson@example.com",
+      "first_name": "Emily",
+      "last_name": "Johnson",
       "phone": "+1-555-123-4567",
       "custom_field1": "value1.1",
       "custom_field2": "value2.1"
     },
     {
+      "email": "michael.smith@example.com",
       "first_name": "Michael",
       "name": "Smith",
-      "email": "michael.smith@example.com",
       "phone": "+1-555-987-6543",
       "custom_field1": "value1.2",
       "custom_field2": "value2.2"
@@ -627,15 +634,15 @@ curl --location 'https://api.ezus.app/projects-upsert' \
 --header 'Authorization: Bearer <YOUR_TOKEN>' \
 --data-raw '{
     "reference": "project_reference",
+    "info_number": "202306001-P",
     "info_title": "Paris fashion week 2024",
     "info_stage_reference": "received",
-    "trip_budget": "90000",
-    "trip_people": "15",
     "trip_date_in": "2023-03-01",
     "trip_date_out": "2023-03-09",
+    "trip_budget": "90000",
+    "trip_people": "15",
     "sales_manager_email": "travel-design@e-corp.com",
     "client_reference": "client_reference",
-    "info_number": "202306001-P",
     "custom_fields": [
         {"name": "field_name", "value": "field_value" }
     ]
@@ -648,15 +655,15 @@ const baseUrl = "https://api.ezus.app";
 
 const body = {
   reference: "project_reference",
+  info_number: "202306001-P",
   info_title: "Paris fashion week 2024",
   info_stage_reference: "received",
-  trip_budget: "90000",
-  trip_people: "15",
   trip_date_in: "2023-03-01",
   trip_date_out: "2023-03-09",
+  trip_budget: "90000",
+  trip_people: "15",
   sales_manager_email: "travel-design@e-corp.com",
   client_reference: "client_reference",
-  info_number: "202306001-P",
   custom_fields: [{ name: "field_name", value: "field_value" }],
 };
 const headers = {
@@ -675,8 +682,8 @@ axios.post(baseUrl + "/projects-upsert", body, headers);
   "message": "ok",
   "action": "Project successfully created",
   "reference": "project_reference",
-  "client_reference": "client_reference",
-  "info_number": "202306001-P"
+  "info_number": "202306001-P",
+  "client_reference": "client_reference"
 }
 ```
 
@@ -696,20 +703,27 @@ axios.post(baseUrl + "/projects-upsert", body, headers);
 | Parameter            | Type   | Description                                                                                                                                                                                                                                                         |
 | -------------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | reference            | String | If provided, the unique reference associated with the project you want to update or create (or a random one will be generated).                                                                                                                                     |
+| info_number          | String | File number that appears in the project record. Not to be confused with reference                                                                                                                                                                                   |
 | info_title           | String | Title of the project. This parameter is required if you create a new project                                                                                                                                                                                        |
 | info_stage_reference | String | Stage of the project: Please use the technical name of the stage you intend to apply. If no specific stage is found, a default stage will be automatically assigned upon adding the project.                                                                        |
-| trip_budget          | Number | Forecasted budget for the project                                                                                                                                                                                                                                   |
-| trip_people          | Number | Number of people in the project (only settable when creating a new project)                                                                                                                                                                                         |
 | trip_date_in         | Date   | Date of the project's start in "YYYY-MM-DD" format (only settable when creating a new project). If not provided or if not formatted correctly, or if duration > 40 days or if trip_date_in > trip_date_out, project will be set as 1 day and trip_date_in as today. |
 | trip_date_out        | Date   | Date of the project's end in "YYYY-MM-DD" format (only settable when creating a new project). If not provided or if not formatted correctly, or if duration > 40 days or if trip_date_in > trip_date_out, project will be set as 1 day and trip_date_out as today.  |
+| trip_budget          | Number | Forecasted budget for the project                                                                                                                                                                                                                                   |
+| trip_people          | Number | Number of people in the project (only settable when creating a new project)                                                                                                                                                                                         |
 | sales_manager_email  | Email  | Email of the Ezus user to be set as the sales manager of the project                                                                                                                                                                                                |
 | client_reference     | String | Reference or email of an existing client in your Ezus account to link to the project (only settable when creating a new project)                                                                                                                                    |
-| info_number          | String | File number that appears in the project record. Not to be confused with reference!                                                                                                                                                                                  |
 | custom_fields        | JSON   | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                                                                                                                       |
 
 ### Response
 
-A JSON object indicating whether an error occurred during the process, along with the associated message. If successful, it also returns a `reference` for the project, which you should store for future updates or retrievals.
+A JSON object indicating whether an error occurred during the process, along with the associated message.
+
+| Property         | Type   | Description                                                                              |
+| ---------------- | ------ | ---------------------------------------------------------------------------------------- |
+| action           | String | Indicates type of project action was created                                             |
+| reference        | String | The `reference` for the project, which you should store for future updates or retrievals |
+| info_number      | String | File number that appears in the project record. Not to be confused with reference        |
+| client_reference | String | The `reference` for the client, which you should store for future updates or retrievals  |
 
 ## POST projects-documents-create
 
@@ -734,7 +748,8 @@ const baseUrl = "https://api.ezus.app";
 const body = {
   project_reference: "project_reference",
   title: "Document PDF",
-  link: "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
+  result:
+    "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
 };
 const headers = {
   "x-api-key": "<YOUR_API_KEY>",
@@ -749,7 +764,7 @@ axios.post(baseUrl + "/projects-documents-create", body, headers);
 ```json
 {
   "error": "false",
-  "message": "ok"
+  "result": "<LINK>"
 }
 ```
 
@@ -775,6 +790,10 @@ axios.post(baseUrl + "/projects-documents-create", body, headers);
 ### Response
 
 A JSON object indicating whether an error occurred during the process, along with the associated message.
+
+| Property | Type | Description                                                |
+| -------- | ---- | ---------------------------------------------------------- |
+| result   | Link | The URL link of the ddocument after uploading the document |
 
 # Clients
 
@@ -805,40 +824,40 @@ axios.get(baseUrl + "/clients", headers);
 ```json
 {
   "error": "false",
-  "next_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJtZW51X211bG11bCI6Im9wdDEiLCJudW1iZXIiOiIyMDAwMCIsInBhZ2UiOjEsInBlcnNvX2ludm9pY2UiOiJHRyIsInN0YWdlIjoicGFpZCIsIl9fdGltZSI6MTY5NzQ0NjEzNX0.jEs7aL3UzCNrjzwDtAUbq4Rt4T64nu2LBYC0NnQhHiA",
+  "next_token": "<NEXT_TOKEN>",
   "size": 338,
   "data_size": 50,
   "page": 1,
   "clients": [
     {
       "reference": "client_reference",
+      "info_number": "202306001-C",
       "type": "enterprise",
       "company_name": "MOKE INTERNATIONAL LIMITED",
+      "info_notes": "This prospect looks interesting to follow",
       "website": "www.moke_ltd.com",
-      "first_name": "Jane",
-      "last_name": "Doe",
-      "email": "contact@moke-international.com",
       "vat_number": "GB 240-635-038",
       "company_number": "09728676",
-      "info_notes": "This prospect looks interesting to follow",
-      "info_number": "202306001-C",
       "user": {
         "email": "tommy@e-corp.com",
         "first_name": "Tommy",
         "last_name": "Atkins",
         "agency": "Paris Agency"
       },
+      "email": "contact@moke-international.com",
+      "first_name": "Jane",
+      "last_name": "Doe",
       "address": {
         "label": "58 Rue de Paradis",
-        "zip": "75010",
         "city": "Paris",
         "country": "France",
+        "zip": "75010",
         "geo": {
           "x": 48.875761,
           "y": 2.348727
         }
       }
-    },...
+    }
   ]
 }
 ```
@@ -900,27 +919,27 @@ axios.get(baseUrl + "/client?reference=client_reference", headers);
 {
   "error": "false",
   "reference": "client_reference",
+  "info_number": "202306001-C",
   "type": "enterprise",
   "company_name": "MOKE INTERNATIONAL LIMITED",
+  "info_notes": "This prospect looks interesting to follow",
   "website": "www.moke_ltd.com",
-  "first_name": "Jane",
-  "last_name": "Doe",
-  "email": "contact@moke-international.com",
   "vat_number": "GB 240-635-038",
   "company_number": "09728676",
-  "info_notes": "This prospect looks interesting to follow",
-  "info_number": "202306001-C",
   "user": {
     "email": "tommy@e-corp.com",
     "first_name": "Tommy",
     "last_name": "Atkins",
     "agency": "Paris Agency"
   },
+  "email": "contact@moke-international.com",
+  "first_name": "Jane",
+  "last_name": "Doe",
   "address": {
     "label": "58 Rue de Paradis",
-    "zip": "75010",
     "city": "Paris",
     "country": "France",
+    "zip": "75010",
     "geo": {
       "x": 48.875761,
       "y": 2.348727
@@ -980,24 +999,24 @@ axios.get(baseUrl + "/client?reference=client_reference", headers);
 
 A JSON object containing the client information with properties like:
 
-| Property       | Type   | Description                                                                       |
-| -------------- | ------ | --------------------------------------------------------------------------------- |
-| reference      | String | The reference of the client                                                       |
-| type           | String | The type of the client (either "enterprise" or "individual")                      |
-| company_name   | String | Name of the client's company (if applicable)                                      |
-| website        | String | Website of the client                                                             |
-| first_name     | String | First name of the main contact at the client's organization                       |
-| last_name      | String | Last name of the main contact at the client's organization                        |
-| email          | String | Email of the main contact at the client's organization                            |
-| vat_number     | String | VAT number of the client (only for "enterprise" clients)                          |
-| company_number | String | Company registration number of the client (only for "enterprise" clients)         |
-| info_notes     | String | Notes on the client                                                               |
-| info_number    | String | File number that appears in the client record. Not to be confused with reference! |
-| user           | JSON   | JSON object representing the user ([User](#user)) associated with the client      |
-| address        | JSON   | JSON object representing the address ([Address](#address)) of the client          |
-| projects       | JSON   | Projects linked to the client (returns the first 10 projects)                     |
-| contacts       | Array  | An array of JSON contacts ([Contacts](#contacts)) associated with the client      |
-| custom_fields  | Array  | An array of JSON custom fields ([Custom fields](#custom-fields)) for the client   |
+| Property       | Type   | Description                                                                      |
+| -------------- | ------ | -------------------------------------------------------------------------------- |
+| reference      | String | The reference of the client                                                      |
+| info_number    | String | File number that appears in the client record. Not to be confused with reference |
+| type           | String | The type of the client (either "enterprise" or "individual")                     |
+| company_name   | String | Name of the client's company (if applicable)                                     |
+| info_notes     | String | Notes on the client                                                              |
+| website        | String | Website of the client                                                            |
+| vat_number     | String | VAT number of the client (only for "enterprise" clients)                         |
+| company_number | String | Company registration number of the client (only for "enterprise" clients)        |
+| user           | JSON   | JSON object representing the user ([User](#user)) associated with the client     |
+| email          | String | Email of the main contact at the client's organization                           |
+| first_name     | String | First name of the main contact at the client's organization                      |
+| last_name      | String | Last name of the main contact at the client's organization                       |
+| address        | JSON   | JSON object representing the address ([Address](#address)) of the client         |
+| projects       | JSON   | Projects linked to the client (returns the first 10 projects)                    |
+| contacts       | Array  | An array of JSON contacts ([Contacts](#contacts)) associated with the client     |
+| custom_fields  | Array  | An array of JSON custom fields ([Custom fields](#custom-fields)) for the client  |
 
 ## POST clients-upsert
 
@@ -1010,11 +1029,12 @@ curl --location 'https://api.ezus.app/clients-upsert' \
 --header 'Authorization: Bearer <YOUR_TOKEN>' \
 --data-raw '{
     "reference": "client_reference",
+    "info_number": "202306001-C",
     "company_name": "MOKE INTERNATIONAL LIMITED",
     "website": "www.moke_ltd.com",
-    "user": "sam@proton.me",
-    "company_number": "362 521 879 00034",
     "vat_number": "FR 32 123456789",
+    "company_number": "362 521 879 00034",
+    "user": "sam@proton.me",
     "contact": {
         "email": "contact@moke-international.com",
         "first_name": "Jane",
@@ -1031,7 +1051,6 @@ curl --location 'https://api.ezus.app/clients-upsert' \
         "country": "France",
         "zip": "75010"
     },
-    "info_number": "202306001-C",
     "custom_fields": [
         {"name": "field_name", "value": "field_value"}
     ]
@@ -1044,11 +1063,12 @@ const baseUrl = "https://api.ezus.app";
 
 const body = {
   reference: "client_reference",
+  info_number: "202306001-C",
   company_name: "MOKE INTERNATIONAL LIMITED",
   website: "www.moke_ltd.com",
-  user: "sam@proton.me",
-  company_number: "362 521 879 00034",
   vat_number: "FR 32 123456789",
+  company_number: "362 521 879 00034",
+  user: "sam@proton.me",
   contact: {
     email: "contact@moke-international.com",
     first_name: "Jane",
@@ -1065,7 +1085,6 @@ const body = {
     country: "France",
     zip: "75010",
   },
-  info_number: "202306001-C",
   custom_fields: [{ name: "field_name", value: "field_value" }],
 };
 const headers = {
@@ -1103,19 +1122,24 @@ axios.post(baseUrl + "/clients-upsert", body, headers);
 | Parameter      | Type   | Description                                                                                                                                                                                                            |
 | -------------- | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | reference      | String | If provided, the unique reference associated with the client you want to update or create (or a random one will be generated).                                                                                         |
+| info_number    | String | File number that appears in the client record. Not to be confused with reference                                                                                                                                       |
 | company_name   | String | <span style="color:red">(Required)</span> Name of the client's company (if applicable). If empty, the client will be considered an individual, and the name of the client will be the same as the name of the contact. |
 | website        | String | Website of the client                                                                                                                                                                                                  |
-| user           | Email  | Email of the Ezus user to be set as the owner of the client                                                                                                                                                            |
-| company_number | String | Company registration number of the client (only for "enterprise" clients)                                                                                                                                              |
 | vat_number     | String | VAT number of the client (only for "enterprise" clients)                                                                                                                                                               |
+| company_number | String | Company registration number of the client (only for "enterprise" clients)                                                                                                                                              |
+| user           | Email  | Email of the Ezus user to be set as the owner of the client                                                                                                                                                            |
 | contact        | JSON   | A single JSON element ([Contacts](#contacts)) representing the main                                                                                                                                                    |
 | address        | JSON   | JSON object address ([Address](#address)) To reset the address, you can put `'0'`. **Geolocation data cannot be modified during an upsert**.                                                                           |
-| info_number    | String | File number that appears in the client record. Not to be confused with reference!                                                                                                                                      |
 | custom_fields  | JSON   | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                                                                          |
 
 ### Response
 
-A JSON object indicating whether an error occurred during the process, along with the associated message. If successful, it also returns a `reference` for the project, which you should store for future updates or retrievals.
+A JSON object indicating whether an error occurred during the process, along with the associated message.
+
+| Property  | Type   | Description                                                                             |
+| --------- | ------ | --------------------------------------------------------------------------------------- |
+| action    | String | Indicates type of client action was created                                             |
+| reference | String | The `reference` for the client, which you should store for future updates or retrievals |
 
 # Suppliers
 
@@ -1146,19 +1170,19 @@ axios.get(baseUrl + "/suppliers", headers);
 ```json
 {
   "error": "false",
-  "next_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJtZW51X211bG11bCI6Im9wdDEiLCJudW1iZXIiOiIyMDAwMCIsInBhZ2UiOjEsInBlcnNvX2ludm9pY2UiOiJHRyIsInN0YWdlIjoicGFpZCIsIl9fdGltZSI6MTY5NzQ0NjEzNX0.jEs7aL3UzCNrjzwDtAUbq4Rt4T64nu2LBYC0NnQhHiA",
+  "next_token": "<NEXT_TOKEN>",
   "size": 338,
   "data_size": 50,
   "page": 1,
   "suppliers": [
     {
       "reference": "supplier_reference",
+      "info_number": "202306001-S",
+      "type": "accom, activity",
       "company_name": "The best hotel",
+      "info_notes": "Emily confirmed: this hotel really is the best in town.",
       "website": "www.the_best_hotel.com",
       "capacity": "200",
-      "type": "accom, activity",
-      "info_notes": "Emily confirmed: this hotel really is the best in town.",
-      "info_number": "202306001-S",
       "user": {
         "email": "travel-design@e-corp.com",
         "first_name": "Alice",
@@ -1173,15 +1197,15 @@ axios.get(baseUrl + "/suppliers", headers);
       },
       "address": {
         "label": "58 Rue de Paradis",
-        "zip": "75010",
         "city": "Paris",
         "country": "France",
+        "zip": "75010",
         "geo": {
           "x": 48.875761,
           "y": 2.348727
         }
       }
-    },...
+    }
   ]
 }
 ```
@@ -1243,12 +1267,12 @@ axios.get(baseUrl + "/supplier?reference=supplier_reference", headers);
 {
   "error": "false",
   "reference": "supplier_reference",
+  "info_number": "202306001-S",
+  "type": "accom, activity",
   "company_name": "The best hotel",
+  "info_notes": "Emily confirmed: this hotel really is the best in town.",
   "website": "www.the_best_hotel.com",
   "capacity": "200",
-  "type": "accom, activity",
-  "info_notes": "Emily confirmed: this hotel really is the best in town.",
-  "info_number": "202306001-S",
   "visual_url": "https://docs.google.com/presentation/d/10GoT7nVkSIScaHUQEPh-EyUms5o6D7bcgUYsJlyql94",
   "user": {
     "email": "travel-design@e-corp.com",
@@ -1264,13 +1288,22 @@ axios.get(baseUrl + "/supplier?reference=supplier_reference", headers);
   },
   "address": {
     "label": "58 Rue de Paradis",
-    "zip": "75010",
     "city": "Paris",
     "country": "France",
+    "zip": "75010",
     "geo": {
       "x": 48.875761,
       "y": 2.348727
     }
+  },
+  "medias": {
+    "data": [
+      {
+        "media_name": "The lobby",
+        "path_full": "www.the_best_hotel.com/media/loby.jpg"
+      }
+    ],
+    "size": 1
   },
   "products": {
     "data": [
@@ -1295,27 +1328,18 @@ axios.get(baseUrl + "/supplier?reference=supplier_reference", headers);
     ],
     "size": 1
   },
-  "medias": {
-    "data": [
-      {
-        "media_name": "The lobby",
-        "path_full": "www.the_best_hotel.com/media/loby.jpg"
-      }
-    ],
-    "size": 1
-  },
   "langs": [
     {
       "lang": "american",
       "name": "The best hotel",
       "short_description": "The best hotel: Parisian luxury redefined.",
-      "long_description": "Welcome to The best hotel, a luxurious Parisian hotel nestled in the heart of the City of Lights. Indulge in timeless elegance, where opulent suites, Michelin-starred dining, and breathtaking views of the Eiffel Tower create an unforgettable experience. Immerse yourself in the rich history and artistry of Paris, while our impeccable service caters to your every desire. Discover the epitome of sophistication at The best hotel where dreams become reality."
+      "long_description": "Welcome to The best hotel, a luxurious Parisian hotel nestled in the heart of..."
     },
     {
       "lang": "spanish",
       "name": "The best hotel",
       "short_description": "Luz y lujo en París: The best hotel.",
-      "long_description": "Bienvenido a The best hotel, un lujoso hotel parisino ubicado en el corazón de la Ciudad de las Luces. Disfruta de la elegancia atemporal, donde suites opulentas, gastronomía de estrella Michelin y vistas impresionantes de la Torre Eiffel crean una experiencia inolvidable. Sumérgete en la rica historia y artesanía de París, mientras nuestro servicio impecable atiende cada uno de tus deseos. Descubre la cúspide de la sofisticación en The best hotel donde los sueños se hacen realidad."
+      "long_description": "Bienvenido a The best hotel, un lujoso hotel parisino ubicado en el corazón de..."
     }
   ],
   "custom_fields": [
@@ -1351,19 +1375,19 @@ A JSON object containing the supplier information with properties like:
 | Property      | Type   | Description                                                                                                                                                  |
 | ------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | reference     | String | The reference of the supplier                                                                                                                                |
+| info_number   | String | File number that appears in the supplier record. Not to be confused with reference                                                                           |
+| type          | String | 3 options: `accom`, `activity`, `transport`. A supplier can have no type, 1 type or several types. In this case, the different types are separated by commas |
 | company_name  | String | Name of the company of the supplier                                                                                                                          |
+| info_notes    | String | The notes about the product                                                                                                                                  |
 | website       | String | Website of the supplier                                                                                                                                      |
 | capacity      | String | Maximum number of people for which the supplier can be used                                                                                                  |
-| type          | String | 3 options: `accom`, `activity`, `transport`. A supplier can have no type, 1 type or several types. In this case, the different types are separated by commas |
-| info_notes    | String | The notes about the product                                                                                                                                  |
-| info_number   | String | File number that appears in the supplier record. Not to be confused with reference!                                                                          |
 | visual_url    | String | URL of the Google Slides visual linked to the supplier                                                                                                       |
 | user          | JSON   | JSON object user ([User](#user))                                                                                                                             |
 | destination   | JSON   | JSON object destination ([Destination](#destination))                                                                                                        |
 | address       | JSON   | JSON object address ([Address](#address))                                                                                                                    |
-| products      | JSON   | JSON object products ([Products](#products))                                                                                                                 |
-| contacts      | Array  | Array of JSON contacts ([Contacts](#contacts))                                                                                                               |
 | medias        | JSON   | JSON object medias ([Medias](#medias))                                                                                                                       |
+| products      | JSON   | JSON object products ([Products](#products-2))                                                                                                               |
+| contacts      | Array  | Array of JSON contacts ([Contacts](#contacts))                                                                                                               |
 | langs         | Array  | Array of JSON langs ([Langs](#langs))                                                                                                                        |
 | custom_fields | Array  | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                |
 
@@ -1377,32 +1401,32 @@ curl --location 'https://api.ezus.app/suppliers-upsert' \
 --header 'Content-Type: application/json' \
 --header 'Authorization: Bearer <YOUR_TOKEN>' \
 --data-raw '{
-    "reference": "supplier_reference",
-    "company_name": "The best hotel",
-    "website": "www.the_best_hotel.com",
-    "capacity": "200",
-    "user": "sam@proton.me",
-    "type": "accom, activity",
-    "contact": {
-        "email": "bob@proton.me",
-        "first_name": "Bob",
-        "last_name": "Morane",
-        "title": "Project Manager",
-        "gender": "Mr",
-        "phone": "0606060606",
-        "phone2": "0707070707",
-    },
-    "address": {
-        "label": "58 Rue de Paradis",
-        "city": "Paris",
-        "country": "France",
-        "zip": "75010"
-    },
-    "info_number": "202306001-S",
-    "custom_fields": [
-        {"name": "field_name", "value": "field_value"}
-    ]
-}'
+  "reference": "supplier_reference",
+  "info_number": "202306001-S",
+  "type": "accom, activity",
+  "company_name": "The best hotel",
+  "website": "www.the_best_hotel.com",
+  "capacity": "200",
+  "user": "sam@proton.me",
+  "contact": {
+      "email": "bob@proton.me",
+      "first_name": "Bob",
+      "last_name": "Morane",
+      "title": "Project Manager",
+      "gender": "Mr",
+      "phone": "0606060606",
+      "phone2": "0707070707"
+  },
+  "address": {
+      "label": "58 Rue de Paradis",
+      "city": "Paris",
+      "country": "France",
+      "zip": "75010"
+  },
+  "custom_fields": [
+      {"name": "field_name", "value": "field_value"}
+  ]
+}
 ```
 
 ```javascript
@@ -1411,32 +1435,33 @@ const baseUrl = "https://api.ezus.app";
 
 const body = {
   reference: "supplier_reference",
+  info_number: "202306001-S",
+  type: "accom, activity",
   company_name: "The best hotel",
   website: "www.the_best_hotel.com",
   capacity: 200,
   user: "sam@proton.me",
-  type: "accom, activity"
   contact: {
     email: "bob@proton.me",
-      first_name: "Bob",
-      last_name: "Morane",
-      title: "Project Manager",
-      gender: "Mr",
-      phone: "0606060606",
-      phone2: "0707070707",
-    },
+    first_name: "Bob",
+    last_name: "Morane",
+    title: "Project Manager",
+    gender: "Mr",
+    phone: "0606060606",
+    phone2: "0707070707",
+  },
   address: {
     label: "58 Rue de Paradis",
     city: "Paris",
     country: "France",
     zip: "75010",
   },
-  info_number: "202306001-S",
-  custom_fields: [
-    { name: "field_name", value: "field_value" }
-  ],
+  custom_fields: [{ name: "field_name", value: "field_value" }],
 };
-const headers = { "x-api-key": "<YOUR_API_KEY>", "Authorization": "Bearer <YOUR_TOKEN>" };
+const headers = {
+  "x-api-key": "<YOUR_API_KEY>",
+  Authorization: "Bearer <YOUR_TOKEN>",
+};
 
 axios.post(baseUrl + "/suppliers-upsert", body, headers);
 ```
@@ -1468,19 +1493,24 @@ axios.post(baseUrl + "/suppliers-upsert", body, headers);
 | Parameter     | Type   | Description                                                                                                                                                                                                                                      |
 | ------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --- |
 | reference     | String | If provided, the unique reference associated to the supplier you want to update or create (in case the one you provided has never been used). If no reference is provided, a supplier will be created with a random one.                         |
+| info_number   | String | File number that appears in the supplier record. Not to be confused with reference                                                                                                                                                               |
+| type          | String | Either `undefined` or a combination of these 3 options: `accom`, `activity`, `transport`. You can select multiple options by separating them with comas ("accom, activity" for instance). Enter "undefined" if you want to reset this parameter. |
 | company_name  | String | <span style="color:red">(Required)</span> Name of the supplier. This parameter is required if you create a new supplier                                                                                                                          |     |
 | website       | String | Website of the supplier                                                                                                                                                                                                                          |
 | capacity      | Number | Maximum number of people for which the supplier can be used. Leave blank `''` if not relevant                                                                                                                                                    |
 | user          | Email  | Email of the Ezus user that will be set as the owner of the supplier. By default, if no owner is provided or the provided email do not match any user on this account, the owner will be assigned to everyone                                    |
-| type          | String | Either `undefined` or a combination of these 3 options: `accom`, `activity`, `transport`. You can select multiple options by separating them with comas ("accom, activity" for instance). Enter "undefined" if you want to reset this parameter. |
 | contact       | JSON   | Contact is a single JSON and email is needed. Note that only one contact can be upsert this way (the main contact of the supplier) ([Contact](#contacts)) To reset the main contact, you can put `'0'`                                           |
 | address       | JSON   | JSON object address ([Address](#address)) To reset the address, you can put `'0'`. **Geolocation data cannot be modified during an upsert**.                                                                                                     |
-| info_number   | String | File number that appears in the supplier record. Not to be confused with reference!                                                                                                                                                              |
 | custom_fields | JSON   | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                                                                                                    |
 
 ### Response
 
-A JSON object indicating whether an error occurred during the process, along with the associated message. If successful, it also returns a `reference` for the project, which you should store for future updates or retrievals.
+A JSON object indicating whether an error occurred during the process, along with the associated message.
+
+| Property  | Type   | Description                                                                               |
+| --------- | ------ | ----------------------------------------------------------------------------------------- |
+| action    | String | Indicates type of supplier action was created                                             |
+| reference | String | The `reference` for the supplier, which you should store for future updates or retrievals |
 
 # Products
 
@@ -1511,37 +1541,36 @@ axios.get(baseUrl + "/products", headers);
 ```json
 {
   "error": "false",
-  "next_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJtZW51X211bG11bCI6Im9wdDEiLCJudW1iZXIiOiIyMDAwMCIsInBhZ2UiOjEsInBlcnNvX2ludm9pY2UiOiJHRyIsInN0YWdlIjoicGFpZCIsIl9fdGltZSI6MTY5NzQ0NjEzNX0.jEs7aL3UzCNrjzwDtAUbq4Rt4T64nu2LBYC0NnQhHiA",
+  "next_token": "<NEXT_TOKEN>",
   "size": 338,
   "data_size": 50,
   "page": 1,
   "products": [
     {
-    "reference": "product_reference",
-    "title": "2-bed room with breakfast",
-    "capacity": "2",
-    "quantity": "1",
-    "vat_regime": "margin",
-    "vat_rate": 20.0,
-    "currency": "EUR",
-    "budget_text": "Option",
-    "budget_form": "Important",
-    "budget_variable": "Display",
-    "info_number": "202306001-PR",
-    "supplier_reference": "supplier_reference",
-    "package_reference": "package_reference",
-    "destination": {
-      "reference": "destination_reference",
-      "name": "France",
-      "subdestination_reference": "subdestination_reference",
-      "subdestination_name": "Paris"
-    },
-    "commission": {
-      "commission_mode": "purchase",
-      "commission_regime": "percent",
-      "value": "10"
-      }
-    },...
+      "reference": "product_reference",
+      "info_number": "202306001-PR",
+      "title": "2-bed room with breakfast",
+      "capacity": "2",
+      "quantity": "1",
+      "currency": "EUR",
+      "vat_rate": 20.0,
+      "vat_regime": "margin",
+      "commission": {
+        "commission_mode": "purchase",
+        "commission_regime": "percent",
+        "value": "10"
+      },
+      "supplier_reference": "supplier_reference",
+      "package_reference": "package_reference",
+      "destination": {
+        "reference": "destination_reference",
+        "name": "France",
+        "subdestination_reference": "subdestination_reference",
+        "subdestination_name": "Paris"
+      },
+      "budget_form": "Important",
+      "budget_variable": "Display"
+    }
   ]
 }
 ```
@@ -1603,18 +1632,20 @@ axios.get(baseUrl + "/product?reference=product_reference", headers);
 {
   "error": "false",
   "reference": "product_reference",
+  "info_number": "202306001-PR",
   "title": "2-bed room with breakfast",
   "info_notes": "Product's notes",
   "capacity": "2",
   "quantity": "1",
-  "vat_regime": "margin",
-  "vat_rate": 20.0,
   "currency": "EUR",
-  "budget_text": "Option",
-  "budget_form": "Important",
-  "budget_variable": "Display",
-  "info_number": "202306001-PR",
+  "vat_rate": 20.0,
+  "vat_regime": "margin",
   "visual_url": "https://docs.google.com/presentation/d/10GoT7nVkSIScaHUQEPh-EyUms5o6D7bcgUYsJlyql94",
+  "commission": {
+    "commission_mode": "purchase",
+    "commission_regime": "percent",
+    "value": "10"
+  },
   "supplier": {
     "reference": "supplier_reference",
     "company_name": "The best hotel"
@@ -1623,11 +1654,15 @@ axios.get(baseUrl + "/product?reference=product_reference", headers);
     "reference": "package_reference",
     "title": "packages_title"
   },
-  "commission": {
-    "commission_mode": "purchase",
-    "commission_regime": "percent",
-    "value": "10"
+  "destination": {
+    "reference": "destination_reference",
+    "name": "France",
+    "subdestination_reference": "subdestination_reference",
+    "subdestination_name": "Paris"
   },
+  "budget_form": "Important",
+  "budget_text": "Option",
+  "budget_variable": "Display",
   "medias": {
     "data": [
       {
@@ -1645,12 +1680,6 @@ axios.get(baseUrl + "/product?reference=product_reference", headers);
       "long_description": ""
     }
   ],
-  "destination": {
-    "reference": "destination_reference",
-    "name": "France",
-    "subdestination_reference": "subdestination_reference",
-    "subdestination_name": "Paris"
-  },
   "tariffs": [
     {
       "reference": "tariff_reference",
@@ -1695,24 +1724,24 @@ A JSON object containing the product information with properties like:
 | Property        | Type   | Description                                                                                                                                                                                                                              |
 | --------------- | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --- |
 | reference       | String | The reference of the product                                                                                                                                                                                                             |
+| info_number     | String | File number that appears in the product record. Not to be confused with reference                                                                                                                                                        |
 | title           | String | Name of the product                                                                                                                                                                                                                      |
 | info_notes      | String | Notes about your product                                                                                                                                                                                                                 |     |
 | capacity        | Number | Maximum number of people for which the product can be used                                                                                                                                                                               |
 | quantity        | String | The default number for this product when it is added to a project. It can either be a Number or one of these letters (`P` = Number of people in the project, `D` = Number of days in the project, `N` = Number of nights in the project) |
-| vat_regime      | String | Can be either `classic` (common law VAT), `margin` (VAT on the margin), `none` (Non applicable VAT)                                                                                                                                      |
-| vat_rate        | Number | Default % of the VAT on the product                                                                                                                                                                                                      |
 | currency        | String | The ISO 4217 currency code representing the currency you utilize (<a href="https://docs.google.com/spreadsheets/d/1b7BNOwKyN1hMOouve6xhFZ2R2zrH4Sj1L-646j755fU/edit?usp=sharing" target="_blank">Link to doc</a>)                        |
-| budget_text     | String | This is an empty string `""` if the product is not marked as an option in the budget, otherwise it is the custom label of the option to which the product is associated                                                                  |
-| buget_form      | String | `Important`, `Normal`, `Low` represent how the product will be highlight on the budget By Default                                                                                                                                        |
-| budget_variable | String | `Display`, `Do not Display`, this option tells if the product will be displayed or not in the budget                                                                                                                                     |
-| info_number     | String | File number that appears in the product record. Not to be confused with reference!                                                                                                                                                       |
+| vat_rate        | Number | Default % of the VAT on the product                                                                                                                                                                                                      |
+| vat_regime      | String | Can be either `classic` (common law VAT), `margin` (VAT on the margin), `none` (Non applicable VAT)                                                                                                                                      |
 | visual_url      | String | URL of the Google Slides visual linked to the product                                                                                                                                                                                    |
+| commission      | JSON   | A JSON object containing `commission_mode` ("sales" or "purchase"), `commission_regime` ("percent" or "amount"), `value`                                                                                                                 |
 | supplier        | JSON   | A JSON object containing `reference`, `company_name`                                                                                                                                                                                     |
 | package         | JSON   | A JSON object containing `reference`, `title`                                                                                                                                                                                            |
-| commission      | JSON   | A JSON object containing `value`, `commission_regime` ("percent" or "amount"), `commission_mode` ("sales" or "purchase")`                                                                                                                |
+| destination     | JSON   | JSON object destination ([Destination](#destination))                                                                                                                                                                                    |
+| buget_form      | String | `Important`, `Normal`, `Low` represent how the product will be highlight on the budget By Default                                                                                                                                        |
+| budget_text     | String | This is an empty string `""` if the product is not marked as an option in the budget, otherwise it is the custom label of the option to which the product is associated                                                                  |
+| budget_variable | String | `Display`, `Do not Display`, this option tells if the product will be displayed or not in the budget                                                                                                                                     |
 | medias          | JSON   | JSON object medias ([Medias](#medias))                                                                                                                                                                                                   |
 | langs           | Array  | Array of JSON langs ([Langs](#langs))                                                                                                                                                                                                    |
-| destination     | JSON   | JSON object destination ([Destination](#destination))                                                                                                                                                                                    |
 | tariffs         | Array  | Array of JSON tariffs ([Tariffs](#tariffs))                                                                                                                                                                                              |
 | custom_fields   | Array  | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                                                                                            |
 |                 |
@@ -1728,26 +1757,26 @@ curl --location 'https://api.ezus.app/products-upsert' \
 --header 'Authorization: Bearer <YOUR_TOKEN>' \
 --data '{
     "reference": "product_reference",
+    "info_number": "202306001-PR",
     "title": "2-bed room with breakfast",
     "info_notes": "The notes about the product",
-    "quantity": "1",
     "capacity": "2",
-    "supplier_reference": "supplier_reference",
-    "package_reference": "package_reference",
+    "quantity": "1",
+    "currency": "USD",
     "purchase_price": "42",
     "sales_price": "84",
-    "vat_regime": "none",
     "vat_rate": 20,
-    "currency": "USD",
+    "vat_regime": "none",
     "commission": {
         "commission_mode": "purchase",
         "commission_regime": "percent",
         "value": 10
     },
-    "info_number": "202306001-PR",
+    "supplier_reference": "supplier_reference",
+    "package_reference": "package_reference",
     "custom_fields": [
         {"name": "field_name", "value": "field_value"}
-    ],
+    ]
 }'
 ```
 
@@ -1757,23 +1786,23 @@ const baseUrl = "https://api.ezus.app";
 
 const body = {
   reference: "product_reference",
+  info_number: "202306001-PR",
   title: "2-bed room with breakfast",
   info_notes: "Product's notes",
-  quantity: "1",
   capacity: 2,
-  supplier_reference: "supplier_reference",
-  package_reference: "package_reference",
+  quantity: "1",
+  currency: "USD",
   purchase_price: "42",
   sales_price: "84",
-  vat_regime: "none",
   vat_rate: "20",
-  currency: "USD",
+  vat_regime: "none",
   commission: {
     commission_mode: "purchase",
     commission_regime: "percent",
     value: "10",
   },
-  info_number: "202306001-PR",
+  supplier_reference: "supplier_reference",
+  package_reference: "package_reference",
   custom_fields: [{ name: "field_name", value: "field_value" }],
 };
 const headers = {
@@ -1811,24 +1840,29 @@ axios.post(baseUrl + "/products-upsert", body, headers);
 | Parameter          | Type   | Description                                                                                                                                                                                                                                                             |
 | ------------------ | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | reference          | String | If provided, the unique reference associated to the product you want to update or create (in case the one you provided has never been used). If no reference is provided, a product will be created with a random one.                                                  |
+| info_number        | String | File number that appears in the product record. Not to be confused with reference                                                                                                                                                                                       |
 | title              | String | Title of your product. This parameter is required if you create a new product                                                                                                                                                                                           |
 | info_notes         | String | Notes about your product. This parameter is not required if you create or update a product                                                                                                                                                                              |
-| quantity           | String | The default number for this product when it is added to a project. It can either be a Number or one of these letters (`P` = Number of people in the project, `D` = Number of days in the project, `N` = Number of nights in the project)                                |
 | capacity           | Number | Maximum number of people for which the product can be used. Leave blank `''` if not relevant                                                                                                                                                                            |
-| supplier_reference | String | If you give an adequate supplier reference, the product will be added in this supplier. If you want to update the supplier's product to None, you must enter 0.                                                                                                         |
-| package_reference  | String | If you give an adequate package reference, the product will be added in this package. If you want to update the package's product to None, you must enter 0.                                                                                                            |
+| quantity           | String | The default number for this product when it is added to a project. It can either be a Number or one of these letters (`P` = Number of people in the project, `D` = Number of days in the project, `N` = Number of nights in the project)                                |
+| currency           | String | The ISO 4217 code of the currency of this product (<a href="https://docs.google.com/spreadsheets/d/1b7BNOwKyN1hMOouve6xhFZ2R2zrH4Sj1L-646j755fU/edit?usp=sharing" target="_blank">Link to Doc</a>). If empty or not provided, your default account currency will be set |
 | purchase_price     | Number | Purchase price as a number                                                                                                                                                                                                                                              |
 | sales_price        | Number | Sales price as a number                                                                                                                                                                                                                                                 |
-| vat_regime         | String | Can be either `classic` (common law VAT), `margin` (VAT on the margin), `none` (Non applicable VAT). If empty or not provided, your default account VAT regime will be set                                                                                              |
 | vat_rate           | Number | Default VAT rate. If empty or not provided, your default account VAT rate will be set                                                                                                                                                                                   |
-| currency           | String | The ISO 4217 code of the currency of this product (<a href="https://docs.google.com/spreadsheets/d/1b7BNOwKyN1hMOouve6xhFZ2R2zrH4Sj1L-646j755fU/edit?usp=sharing" target="_blank">Link to Doc</a>). If empty or not provided, your default account currency will be set |
-| commission         | JSON   | A JSON object containing `value`, `commission_regime` ("percent" or "amount"), `commission_mode` ("sales" or "purchase")                                                                                                                                                |
-| info_number        | String | File number that appears in the product record. Not to be confused with reference!                                                                                                                                                                                      |
+| vat_regime         | String | Can be either `classic` (common law VAT), `margin` (VAT on the margin), `none` (Non applicable VAT). If empty or not provided, your default account VAT regime will be set                                                                                              |
+| commission         | JSON   | A JSON object containing `commission_mode` ("sales" or "purchase"), `commission_regime` ("percent" or "amount"), `value`                                                                                                                                                |
+| supplier_reference | String | If you give an adequate supplier reference, the product will be added in this supplier. If you want to update the supplier's product to None, you must enter 0.                                                                                                         |
+| package_reference  | String | If you give an adequate package reference, the product will be added in this package. If you want to update the package's product to None, you must enter 0.                                                                                                            |
 | custom_fields      | JSON   | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                                                                                                                           |
 
 ### Response
 
-A JSON object indicating whether an error occurred during the process, along with the associated message. If successful, it also returns a `reference` for the project, which you should store for future updates or retrievals.
+A JSON object indicating whether an error occurred during the process, along with the associated message.
+
+| Property  | Type   | Description                                                                              |
+| --------- | ------ | ---------------------------------------------------------------------------------------- |
+| action    | String | Indicates type of product action was created                                             |
+| reference | String | The `reference` for the product, which you should store for future updates or retrievals |
 
 # Packages
 
@@ -1860,24 +1894,11 @@ axios.get(baseUrl + "/package?reference=package_reference", headers);
 {
   "error": "false",
   "reference": "package_reference",
-  "title": "The best package",
-  "capacity": "2",
-  "info_notes": "A classical day in Paris",
   "info_number": "202306001-PK",
+  "title": "The best package",
+  "info_notes": "A classical day in Paris",
+  "capacity": "2",
   "visual_url": "https://docs.google.com/presentation/d/10GoT7nVkSIScaHUQEPh-EyUms5o6D7bcgUYsJlyql94",
-  "products": {
-    "data": [
-      {
-        "reference": "product_reference",
-        "title": "2-bed room with breakfast"
-      },
-      {
-        "reference": "product_reference_1235",
-        "title": "A gourmet menu for 2"
-      }
-    ],
-    "size": 2
-  },
   "suppliers": {
     "data": [
       {
@@ -1890,6 +1911,19 @@ axios.get(baseUrl + "/package?reference=package_reference", headers);
   "medias": {
     "data": [],
     "size": 0
+  },
+  "products": {
+    "data": [
+      {
+        "reference": "product_reference",
+        "title": "2-bed room with breakfast"
+      },
+      {
+        "reference": "product_reference_1235",
+        "title": "A gourmet menu for 2"
+      }
+    ],
+    "size": 2
   },
   "langs": [
     {
@@ -1935,19 +1969,19 @@ axios.get(baseUrl + "/package?reference=package_reference", headers);
 
 A JSON object containing the package information with properties like:
 
-| Property      | Type   | Description                                                                        |
-| ------------- | ------ | ---------------------------------------------------------------------------------- |
-| reference     | String | The reference of the package                                                       |
-| title         | String | Name of the package                                                                |
-| capacity      | String | Maximum number of people for which the package can be used                         |
-| info_notes    | String | Notes on the package                                                               |
-| info_number   | String | File number that appears in the package record. Not to be confused with reference! |
-| visual_url    | String | URL of the Google Slides visual linked to the package                              |
-| products      | JSON   | JSON object products ([Products](#products))                                       |
-| suppliers     | JSON   | JSON object suppliers ([Suppliers](#suppliers))                                    |
-| medias        | JSON   | JSON object medias ([Medias](#medias))                                             |
-| langs         | Array  | Array of JSON langs ([Langs](#langs))                                              |
-| custom_fields | Array  | Array of JSON custom fields [Custom fields](#custom-fields)                        |
+| Property      | Type   | Description                                                                       |
+| ------------- | ------ | --------------------------------------------------------------------------------- |
+| reference     | String | The reference of the package                                                      |
+| info_number   | String | File number that appears in the package record. Not to be confused with reference |
+| title         | String | Name of the package                                                               |
+| info_notes    | String | Notes on the package                                                              |
+| capacity      | String | Maximum number of people for which the package can be used                        |
+| visual_url    | String | URL of the Google Slides visual linked to the package                             |
+| suppliers     | JSON   | JSON object suppliers ([Suppliers](#suppliers-2))                                 |
+| medias        | JSON   | JSON object medias ([Medias](#medias))                                            |
+| products      | JSON   | JSON object products ([Products](#products-2))                                    |
+| langs         | Array  | Array of JSON langs ([Langs](#langs))                                             |
+| custom_fields | Array  | Array of JSON custom fields [Custom fields](#custom-fields)                       |
 
 ## POST packages-upsert
 
@@ -1960,9 +1994,9 @@ curl --location 'https://api.ezus.app/packages-upsert' \
 --header 'Authorization: Bearer <YOUR_TOKEN>' \
 --data '{
     "reference": "package_reference",
+    "info_number": "202306001-PK",
     "title": "The best package",
     "capacity": "2",
-    "info_number": "202306001-PK",
     "custom_fields": [
         {"name": "field_name", "value": "field_value"}
     ]
@@ -1976,9 +2010,9 @@ const baseUrl = "https://api.ezus.app";
 
 const body = {
   reference: "package_reference",
+  info_number: "202306001-PK",
   title: "The best package",
   capacity: "2",
-  info_number: "202306001-PK",
   custom_fields: [{ name: "field_name", value: "field_value" }],
 };
 const headers = {
@@ -2016,14 +2050,19 @@ axios.post(baseUrl + "/packages-upsert", body, headers);
 | Parameter     | Type   | Description                                                                                                                                                                                                                 |
 | ------------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | reference     | String | If provided, the unique Ezus Reference associated to the package you want to update or create (in case the one you provided has never been used). If no reference is provided, a package will be created with a random one. |
+| info_number   | String | File number that appears in the package record. Not to be confused with reference                                                                                                                                           |
 | title         | String | This parameter is required if you create a new package                                                                                                                                                                      |
 | capacity      | Number | Maximum number of people for which the package can be used . Leave blank `''` if not relevant                                                                                                                               |
-| info_number   | String | File number that appears in the package record. Not to be confused with reference!                                                                                                                                          |
 | custom_fields | JSON   | Array of JSON custom fields [Custom fields](#custom-fields)                                                                                                                                                                 |
 
 ### Response
 
-A JSON object indicating whether an error occurred during the process, along with the associated message. If successful, it also returns a `reference` for the project, which you should store for future updates or retrievals.
+A JSON object indicating whether an error occurred during the process, along with the associated message.
+
+| Property  | Type   | Description                                                                              |
+| --------- | ------ | ---------------------------------------------------------------------------------------- |
+| action    | String | Indicates type of package action was created                                             |
+| reference | String | The `reference` for the package, which you should store for future updates or retrievals |
 
 # Destinations
 
@@ -2065,7 +2104,7 @@ axios.get(baseUrl + "/destinations", headers);
           "name": "Paris"
         }
       ]
-    },...
+    }
   ]
 }
 ```
@@ -2130,7 +2169,7 @@ axios.get(
       {
         "media_name": "img.jpeg",
         "path_full": "https://link-img.jpeg"
-      },...
+      }
     ],
     "size": 1
   },
@@ -2140,7 +2179,7 @@ axios.get(
       "name": "Chambre à 2 lits avec petit déjeuner",
       "short_description": "",
       "long_description": ""
-    },...
+    }
   ]
 }
 ```
@@ -2205,7 +2244,7 @@ axios.get(baseUrl + "/invoices?stage=completed", headers);
 ```json
 {
   "error": "false",
-  "next_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJtZW51X211bG11bCI6Im9wdDEiLCJudW1iZXIiOiIyMDAwMCIsInBhZ2UiOjEsInBlcnNvX2ludm9pY2UiOiJHRyIsInN0YWdlIjoicGFpZCIsIl9fdGltZSI6MTY5NzQ0NjEzNX0.jEs7aL3UzCNrjzwDtAUbq4Rt4T64nu2LBYC0NnQhHiA",
+  "next_token": "<NEXT_TOKEN>",
   "size": 338,
   "data_size": 50,
   "page": 1,
@@ -2214,38 +2253,23 @@ axios.get(baseUrl + "/invoices?stage=completed", headers);
       "error": "false",
       "reference": "invoice_reference",
       "info_number": "2023_101010",
-      "url": "https://ezus.io/2023_101010.pdf",
-      "stage": "completed",
       "type": "credit_note",
       "origin_reference": "origin_reference",
       "origin_info_number": "2023_101009",
+      "stage": "completed",
       "created_date": "2023-10-10",
       "send_date": "2023-10-10",
       "due_date": "2023-10-10",
+      "currency": "EUR",
       "amount_ttc": 1200.0,
       "amount_ht": 1000.0,
       "vat": 200.0,
-      "currency": "EUR",
-      "forecast": {
-        "is_automatic": true,
-        "purchase": 0.0,
-        "commission": 0.0,
-        "vat_deducted": 0.0,
-        "amount_ht": 1000.0
-      },
-      "actual": {
-        "is_automatic": true,
-        "purchase": null,
-        "commission": null,
-        "vat_deducted": null,
-        "amount_ht": null
-      },
       "project": {
         "reference": "project_reference",
-        "info_title": "Paris fashion week 2024",
-        "info_stage": "Confirmed",
-        "info_stage_reference": "confirmed",
         "info_number": "202306001-P",
+        "info_title": "Paris fashion week 2024",
+        "info_stage_reference": "confirmed",
+        "info_stage": "Confirmed",
         "currency": "EUR",
         "is_closed": false
       },
@@ -2260,8 +2284,23 @@ axios.get(baseUrl + "/invoices?stage=completed", headers);
         "first_name": "Jane",
         "last_name": "Doe",
         "email": "contact@moke-international.com"
-      }
-    },...
+      },
+      "forecast": {
+        "is_automatic": true,
+        "purchase": 0.0,
+        "commission": 0.0,
+        "vat_deducted": 0.0,
+        "amount_ht": 1000.0
+      },
+      "actual": {
+        "is_automatic": true,
+        "purchase": null,
+        "commission": null,
+        "vat_deducted": null,
+        "amount_ht": null
+      },
+      "url": "https://ezus.io/2023_101010.pdf"
+    }
   ]
 }
 ```
@@ -2326,38 +2365,24 @@ axios.get(baseUrl + "/invoice?reference=invoice_reference", headers);
   "error": "false",
   "reference": "invoice_reference",
   "info_number": "2023_101010",
-  "url": "https://ezus.io/2023_101010.pdf",
-  "stage": "draft",
   "type": "credit_note",
   "origin_reference": "origin_reference",
   "origin_info_number": "2023_101009",
+  "stage": "draft",
   "created_date": "2023-10-10",
   "send_date": "2023-10-10",
   "due_date": "2023-10-10",
+  "currency": "EUR",
   "amount_ttc": 1200.0,
   "amount_ht": 1000.0,
   "vat": 200.0,
-  "currency": "EUR",
-  "forecast": {
-    "is_automatic": true,
-    "purchase": 0.0,
-    "commission": 0.0,
-    "vat_deducted": 0.0,
-    "amount_ht": 1000.0
-  },
-  "actual": {
-    "is_automatic": true,
-    "purchase": null,
-    "commission": null,
-    "vat_deducted": null,
-    "amount_ht": null
-  },
+  "url": "https://ezus.io/2023_101010.pdf",
   "project": {
     "reference": "project_reference",
-    "info_title": "Paris fashion week 2024",
-    "info_stage": "Confirmed",
-    "info_stage_reference": "confirmed",
     "info_number": "202306001-P",
+    "info_title": "Paris fashion week 2024",
+    "info_stage_reference": "confirmed",
+    "info_stage": "Confirmed",
     "currency": "EUR",
     "is_closed": false
   },
@@ -2372,6 +2397,20 @@ axios.get(baseUrl + "/invoice?reference=invoice_reference", headers);
     "first_name": "Jane",
     "last_name": "Doe",
     "email": "contact@moke-international.com"
+  },
+  "forecast": {
+    "is_automatic": true,
+    "purchase": 0.0,
+    "commission": 0.0,
+    "vat_deducted": 0.0,
+    "amount_ht": 1000.0
+  },
+  "actual": {
+    "is_automatic": true,
+    "purchase": null,
+    "commission": null,
+    "vat_deducted": null,
+    "amount_ht": null
   }
 }
 ```
@@ -2401,23 +2440,23 @@ A JSON object containing the invoice information with properties like:
 | ------------------ | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | reference          | String | The reference of the invoice                                                                                                                                                                                      |
 | info_number        | String | Title of the invoice                                                                                                                                                                                              |
-| url                | String | URL of the invoice `.pdf` file                                                                                                                                                                                    |
-| stage              | String | Stage of the invoice `draft` `completed` or `paid`                                                                                                                                                                |
 | type               | String | Type of the invoice `invoice` or `credit_note`                                                                                                                                                                    |
 | origin_reference   | String | This is only displayed if the type of the invoice is a `credit_note`. The reference of the origin invoice.                                                                                                        |
 | origin_info_number | String | This is only displayed if the type of the invoice is a `credit_note`. Title of the origin invoice.                                                                                                                |
+| stage              | String | Stage of the invoice `draft` `completed` or `paid`                                                                                                                                                                |
 | created_date       | String | Date of the creation of this invoice, in a "YYYY-MM-DD" format                                                                                                                                                    |
 | send_date          | String | Sent date of this invoice, in a "YYYY-MM-DD" format                                                                                                                                                               |
 | due_date           | String | Due date of this invoice, in a "YYYY-MM-DD" format                                                                                                                                                                |
+| currency           | String | The ISO 4217 currency code representing the currency you utilize (<a href="https://docs.google.com/spreadsheets/d/1b7BNOwKyN1hMOouve6xhFZ2R2zrH4Sj1L-646j755fU/edit?usp=sharing" target="_blank">Link to doc</a>) |
 | amount_ttc         | Number | Amount of the invoice including taxes                                                                                                                                                                             |
 | amount_ht          | Number | Amount of the invoice excluding taxes                                                                                                                                                                             |
 | vat                | Number | VAT amount of the invoice                                                                                                                                                                                         |
-| currency           | String | The ISO 4217 currency code representing the currency you utilize (<a href="https://docs.google.com/spreadsheets/d/1b7BNOwKyN1hMOouve6xhFZ2R2zrH4Sj1L-646j755fU/edit?usp=sharing" target="_blank">Link to doc</a>) |
-| forecast           | JSON   | JSON object forecast ([Invoices Amounts](#invoices-amounts))                                                                                                                                                      |
-| actual             | JSON   | JSON object actual ([Invoices Amounts](#invoices-amounts))                                                                                                                                                        |
-| project            | JSON   | JSON including: `reference`, `info_title`, `info_stage`, `info_stage_reference`, `info_number`, `currency` and `is_closed`                                                                                        |
+| url                | String | URL of the invoice `.pdf` file                                                                                                                                                                                    |
+| project            | JSON   | JSON including: `reference`, `info_number`, `info_title`, `info_stage_reference`, `info_stage`, `currency` and `is_closed`                                                                                        |
 | alternative        | JSON   | JSON including: `sort_order` and `title`                                                                                                                                                                          |
 | client             | JSON   | JSON including: `reference`, `type` (enterprise or individual), `company_name`, `first_name`, `last_name` and `email`                                                                                             |
+| forecast           | JSON   | JSON object forecast ([Invoices Amounts](#invoices-amounts))                                                                                                                                                      |
+| actual             | JSON   | JSON object actual ([Invoices Amounts](#invoices-amounts))                                                                                                                                                        |
 
 ## PUT invoices-update
 
@@ -2462,6 +2501,7 @@ axios.put(baseUrl + "/invoices-update", body, headers);
 {
   "error": "false",
   "message": "ok",
+  "action": "Invoice successfully updated",
   "reference": "invoice_reference"
 }
 ```
@@ -2488,7 +2528,12 @@ axios.put(baseUrl + "/invoices-update", body, headers);
 
 ### Response
 
-A JSON object indicating whether an error occurred during the process, along with the associated message. If successful, it also returns a `reference` for the project, which you should store for future updates or retrievals.
+A JSON object indicating whether an error occurred during the process, along with the associated message.
+
+| Property  | Type   | Description                                                                              |
+| --------- | ------ | ---------------------------------------------------------------------------------------- |
+| action    | String | Indicates type of invoice action was created                                             |
+| reference | String | The `reference` for the invoice, which you should store for future updates or retrievals |
 
 ## GET invoice-supplier
 
@@ -2521,13 +2566,40 @@ axios.get(
 {
   "error": "false",
   "reference": "invoice_supplier_reference",
-  "url": "https://ezus.io/2023_101010.pdf",
+  "filename": "File Name",
   "created_date": "2023-10-10",
   "due_date": "2023-10-20",
+  "currency": "EUR",
   "amount_ttc": 1200.0,
   "amount_ht": 1000.0,
   "vat": 200.0,
-  "currency": "EUR",
+  "url": "https://ezus.io/2023_101010.pdf",
+  "supplier": {
+    "reference": "supplier_reference",
+    "company_name": "The best hotel",
+    "website": "www.the_best_hotel.com"
+  },
+  "project": {
+    "reference": "project_reference",
+    "info_number": "202306001-P",
+    "info_title": "Paris fashion week 2024",
+    "info_stage_reference": "confirmed",
+    "info_stage": "Confirmed",
+    "currency": "EUR",
+    "is_closed": false
+  },
+  "alternative": {
+    "sort_order": "0",
+    "title": "Main Alternative"
+  },
+  "client": {
+    "reference": "client_reference",
+    "type": "enterprise",
+    "company_name": "MOKE INTERNATIONAL LIMITED",
+    "first_name": "Jane",
+    "last_name": "Doe",
+    "email": "contact@moke-international.com"
+  },
   "payments": [
     {
       "date": "2023-10-10",
@@ -2544,33 +2616,7 @@ axios.get(
       "amount": 200.0,
       "payment_method": "Check"
     }
-  ],
-  "supplier": {
-    "reference": "supplier_reference",
-    "company_name": "The best hotel",
-    "website": "www.the_best_hotel.com"
-  },
-  "project": {
-    "reference": "project_reference",
-    "info_title": "Paris fashion week 2024",
-    "info_stage": "Confirmed",
-    "info_stage_reference": "confirmed",
-    "info_number": "202306001-P",
-    "currency": "EUR",
-    "is_closed": false
-  },
-  "alternative": {
-    "sort_order": "0",
-    "title": "Main Alternative"
-  },
-  "client": {
-    "reference": "client_reference",
-    "type": "enterprise",
-    "company_name": "MOKE INTERNATIONAL LIMITED",
-    "first_name": "Jane",
-    "last_name": "Doe",
-    "email": "contact@moke-international.com"
-  }
+  ]
 }
 ```
 
@@ -2598,19 +2644,19 @@ A JSON object containing the supplier invoice information with properties like:
 | Property     | Type   | Description                                                                                                                                                                                                       |
 | ------------ | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | reference    | String | The reference of the supplier invoice                                                                                                                                                                             |
-| url          | String | URL of the supplier invoice file                                                                                                                                                                                  |
 | filename     | String | Filename of the supplier invoice                                                                                                                                                                                  |
 | created_date | String | Date of the creation of the supplier invoice, in a "YYYY-MM-DD" format                                                                                                                                            |
 | due_date     | String | Due date of the supplier invoice, in a "YYYY-MM-DD" format                                                                                                                                                        |
+| currency     | String | The ISO 4217 currency code representing the currency you utilize (<a href="https://docs.google.com/spreadsheets/d/1b7BNOwKyN1hMOouve6xhFZ2R2zrH4Sj1L-646j755fU/edit?usp=sharing" target="_blank">Link to doc</a>) |
 | amount_ttc   | Number | Amount of the supplier invoice excluding taxes                                                                                                                                                                    |
 | amount_ht    | Number | Amount of the supplier invoice including taxes                                                                                                                                                                    |
 | vat          | Number | VAT amount of the supplier invoice                                                                                                                                                                                |
-| currency     | String | The ISO 4217 currency code representing the currency you utilize (<a href="https://docs.google.com/spreadsheets/d/1b7BNOwKyN1hMOouve6xhFZ2R2zrH4Sj1L-646j755fU/edit?usp=sharing" target="_blank">Link to doc</a>) |
-| payments     | Array  | Array of JSON including: `date`, `amount` and `payment_method`                                                                                                                                                    |
+| url          | String | URL of the supplier invoice file                                                                                                                                                                                  |
 | supplier     | JSON   | JSON including: `reference`, `company_name` and `website`                                                                                                                                                         |
 | project      | JSON   | JSON including: `reference`, `info_title`, `info_stage`, `info_stage_reference`, `info_number`, `currency` and `is_closed`                                                                                        |
 | alternative  | JSON   | JSON including: `sort_order` and `title`                                                                                                                                                                          |
 | client       | JSON   | JSON including: `reference`, `type` (enterprise or individual), `company_name`, `first_name`, `last_name` and `email`                                                                                             |
+| payments     | Array  | Array of JSON including: `date`, `amount` and `payment_method`                                                                                                                                                    |
 
 # Deposits
 
@@ -2626,11 +2672,11 @@ curl --location 'https://api.ezus.app/deposits-create' \
 --data-raw '{
     "project_reference": "project_reference",
     "alternative_order": "0",
-    "amount": 6855,
     "type": "deposit",
-    "date": "2023-05-25",
-    "payment_method": "card",
     "notes": "Up-front payment 2023-05-25",
+    "date": "2023-05-25",
+    "amount": 6855,
+    "payment_method": "card"
 }'
 ```
 
@@ -2641,11 +2687,11 @@ const baseUrl = "https://api.ezus.app";
 const body = {
   project_reference: "project_reference",
   alternative_order: "0",
-  amount: 6855,
   type: "deposit",
-  date: "2023-05-25",
-  payment_method: "card",
   notes: "Up-front payment 2023-05-25",
+  date: "2023-05-25",
+  amount: 6855,
+  payment_method: "card",
 };
 const headers = {
   "x-api-key": "<YOUR_API_KEY>",
@@ -2660,7 +2706,8 @@ axios.post(baseUrl + "/deposits-create", body, headers);
 ```json
 {
   "error": "false",
-  "message": "ok"
+  "message": "ok",
+  "action": "Deposit successfully created"
 }
 ```
 
@@ -2681,15 +2728,19 @@ axios.post(baseUrl + "/deposits-create", body, headers);
 | ----------------- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
 | project_reference | String  | <span style="color:red">(Required)</span> The reference is mandatory and refers to the project to which the payment will be added.        |
 | alternative_order | String  | Alternative number, if not entered, the payment will be added to the project's main alternative.                                          |
-| amount            | Integer | The deposit amount in cents.                                                                                                              |
 | type              | String  | Type can be `deposit`, `payment`, `final_payment`, `extra_paid`. By default the deposits will be a `deposit`                              |
-| date              | String  | The date must be a string in "YYYY-MM-DD" format. If it is not filled in or is invalid, the payment will be assigned to the current date. |
-| payment_method    | String  | Technical name of the payment method, you can find it in Settings - Custom fields                                                         |
 | notes             | String  | Note attributed to the payment, this note is limited to 100 characters, all additional characters will not be saved.                      |
+| date              | String  | The date must be a string in "YYYY-MM-DD" format. If it is not filled in or is invalid, the payment will be assigned to the current date. |
+| amount            | Integer | The deposit amount in cents.                                                                                                              |
+| payment_method    | String  | Technical name of the payment method, you can find it in Settings - Custom fields                                                         |
 
 ### Response
 
 A JSON object indicating whether an error occurred during the process, along with the associated message.
+
+| Property | Type   | Description                                  |
+| -------- | ------ | -------------------------------------------- |
+| action   | String | Indicates type of deposit action was created |
 
 # Webhooks
 
@@ -2724,8 +2775,8 @@ axios.get(baseUrl + "/webhooks", headers);
     {
       "reference": "webhook_reference",
       "endpoint": "webhook_endpoint",
-      "is_active": "true",
       "events_types": "projects.created,clients.created",
+      "is_active": "true",
       "last_called_at": "2023-01-01 01:01:01"
     }
   ]
@@ -2780,12 +2831,12 @@ axios.get(baseUrl + "/webhooks-last?event_type=projects.created", headers);
   "id": "event_id",
   "object": "event",
   "type": "projects.created",
-  "created": 1234567890,
-  "trigger_reference": "pro.ezus.io;projects-create",
-  "is_duplication": false,
   "field": "",
   "old_value": "",
   "new_value": "",
+  "created": 1234567890,
+  "trigger_reference": "pro.ezus.io;projects-create",
+  "is_duplication": false,
   "data": {...}
 }
 ```
@@ -2879,7 +2930,12 @@ axios.post(baseUrl + "/webhooks-upsert", body, headers);
 
 ### Response
 
-A JSON object indicating whether an error occurred during the process, along with the associated message. If successful, it also returns a reference for the webhook, which you should store for future updates or retrievals.
+A JSON object indicating whether an error occurred during the process, along with the associated message.
+
+| Property  | Type   | Description                                                                              |
+| --------- | ------ | ---------------------------------------------------------------------------------------- |
+| action    | String | Indicates type of webhook action was created                                             |
+| reference | String | The `reference` for the webhook, which you should store for future updates or retrievals |
 
 ## DELETE webhooks-delete
 
@@ -2952,9 +3008,9 @@ A JSON object indicating whether an error occurred during the process, along wit
 ```json
 "address": {
   "label": "58 Rue de Paradis",
-  "zip": "75010",
   "city": "Paris",
   "country": "France",
+  "zip": "75010",
   "geo": {
     "x": 48.875761,
     "y": 2.348727
@@ -2976,15 +3032,23 @@ A JSON object indicating whether an error occurred during the process, along wit
 "alternatives": [
   {
     "alternative_title": "Main Alternative",
+    "trip_date_in": "2024-03-01",
+    "trip_date_out": "2024-03-09",
+    "trip_duration": 9,
+    "trip_budget": 90000,
     "budget_actual": 88750,
     "budget_actual_excl_taxes ": 77950,
     "budget_margin_gross": 2500,
     "budget_margin_net": 1000,
-    "trip_budget": 90000,
     "trip_people": "15",
-    "trip_date_in": "2024-03-01",
-    "trip_date_out": "2024-03-09",
-    "trip_duration": 9,
+    "client": {
+      "reference": "client_reference",
+      "type": "enterprise",
+      "company_name": "MOKE INTERNATIONAL LIMITED",
+      "first_name": "Jane",
+      "last_name": "Doe",
+      "email": "contact@moke-international.com"
+    },
     "trip_destination_reference": "destination_reference",
     "trip_destination": "France",
     "trip_subdestination_reference ": "subdestination_reference",
@@ -3011,37 +3075,29 @@ A JSON object indicating whether an error occurred during the process, along wit
           "subdestination_name": "Milan"
         }
       ]
-    },
-    "client": {
-      "reference": "client_reference",
-      "type": "enterprise",
-      "company_name": "MOKE INTERNATIONAL LIMITED",
-      "first_name": "Jane",
-      "last_name": "Doe",
-      "email": "contact@moke-international.com"
     }
   }
 ]
 ```
 
-| Property                      | Type   | Description                                                                                                                         |
-| ----------------------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------- |
-| alternative_title             | String | Title of the alternative                                                                                                            |
-| budget_actual                 | Number | Actual budget for the alternative, inclusive of taxes                                                                               |
-| budget_actual_excl_taxes      | Number | Actual budget for the alternative, excluding taxes                                                                                  |
-| budget_margin_gross           | Number | Gross margin for the alternative                                                                                                    |
-| budget_margin_net             | Number | Net margin for the alternative                                                                                                      |
-| trip_budget                   | Number | Forecasted budget for the alternative (the one that is entered manually not the actual one)                                         |
-| trip_people                   | String | Number of people                                                                                                                    |
-| trip_date_in                  | Date   | Date of the beginning of this alternative, in a "YYYY-MM-DD" format string. If it's empty, the project has no dates                 |
-| trip_date_out                 | Date   | Date of the end of this alternative, in a "YYYY-MM-DD" format string. If it's empty, the project has no dates                       |
-| trip_duration                 | Number | Number of days this alternative lasts                                                                                               |
-| trip_destination_reference    | String | Destination reference of the alternative. Note: For multi-destination alternatives, only the primary destination is returned.       |
-| trip_destination              | String | Destination of the alternative. Note: For multi-destination alternatives, only the primary destination is returned.                 |
-| trip_subdestination_reference | String | Subdestination reference of the alternative. Note: For multi-destination alternatives, only the primary subdestination is returned. |
-| trip_subdestination           | String | Subdestination of the alternative. Note: For multi-destination alternatives, only the primary subdestination is returned.           |
-| destinations                  | JSON   | JSON including: `size`, `data` an array of [Destination](#destination)                                                              |
-| client                        | JSON   | JSON including: `reference`, `type` (enterprise or individual), `company_name`, `first_name`, `last_name` and `email`               |
+| Property                      | Type   | Description                                                                                                                                                |
+| ----------------------------- | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| alternative_title             | String | Title of the alternative                                                                                                                                   |
+| trip_date_in                  | Date   | Date of the beginning of this alternative, in a "YYYY-MM-DD" format string. If it's empty, the project has no dates                                        |
+| trip_date_out                 | Date   | Date of the end of this alternative, in a "YYYY-MM-DD" format string. If it's empty, the project has no dates                                              |
+| trip_duration                 | Number | Number of days this alternative lasts                                                                                                                      |
+| trip_budget                   | Number | Forecasted budget for the alternative (the one that is entered manually not the actual one)                                                                |
+| budget_actual                 | Number | Actual budget for the alternative, inclusive of taxes                                                                                                      |
+| budget_actual_excl_taxes      | Number | Actual budget for the alternative, excluding taxes                                                                                                         |
+| budget_margin_gross           | Number | Gross margin for the alternative                                                                                                                           |
+| budget_margin_net             | Number | Net margin for the alternative                                                                                                                             |
+| trip_people                   | String | Number of people                                                                                                                                           |
+| client                        | JSON   | JSON including: `reference`, `type` (enterprise or individual), `company_name`, `first_name`, `last_name` and `email`                                      |
+| trip_destination_reference    | String | Destination reference of the alternative. Note: For multi-destination alternatives, only the primary destination is returned.                              |
+| trip_destination              | String | Destination of the alternative. Note: For multi-destination alternatives, only the primary destination is returned.                                        |
+| trip_subdestination_reference | String | Subdestination reference of the alternative. Note: For multi-destination alternatives, only the primary subdestination is returned.                        |
+| trip_subdestination           | String | Subdestination of the alternative. Note: For multi-destination alternatives, only the primary subdestination is returned.                                  |
+| destinations                  | JSON   | JSON including: `size`, Array of all destination (`reference` and `name`) and subdestination (`subdestination_reference` and `subdestination_name`) values |
 
 ### Contacts
 
@@ -3285,7 +3341,7 @@ Only the last 10 medias are returned in this object.
 | media_name | String | Title of the media                                                |
 | path_full  | String | Media URL. This is a pre-signed URL that expires after 30 minutes |
 
-### Products
+### Products <a name="products-two"></a>
 
 Only the last 10 products are returned in this object.
 
@@ -3313,17 +3369,17 @@ The steps are sorted by their creation date, with the most recently created appe
 ```json
 "steps": [
   {
-    "name": "activityTitle",
     "type": "activity",
+    "name": "activityTitle",
     "category": "restaurant",
     "date_start": "2024-10-01 10:00:00",
     "date_end": "2024-10-01 12:00:00",
     "people": 4,
     "address": {
       "label": "58 Rue de Paradis",
-      "zip": "75010",
       "city": "Paris",
       "country": "France",
+      "zip": "75010",
       "geo": {
         "x": 48.875761,
         "y": 2.348727
@@ -3333,7 +3389,6 @@ The steps are sorted by their creation date, with the most recently created appe
       "short": "Short description of the activity",
       "long": "Long description of the activity"
     },
-    "images": ["https://image.jpg", "https://image2.jpg"],
     "items": [
       {
         "name": "item_title",
@@ -3346,6 +3401,7 @@ The steps are sorted by their creation date, with the most recently created appe
         "is_optional": false
       }
     ],
+    "medias": ["https://image.jpg", "https://image2.jpg"],
     "custom_fields": [
       {
         "name": "CustomField",
@@ -3358,46 +3414,46 @@ The steps are sorted by their creation date, with the most recently created appe
 
 | Property      | Type   | Description                                                                                                                                                                   |
 | ------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| name          | String | Name of the step                                                                                                                                                              |
 | type          | String | Type of the step `activity` `accommodation` `transport` or `extra`                                                                                                            |
+| name          | String | Name of the step                                                                                                                                                              |
 | category      | String | Category of the step                                                                                                                                                          |
 | date_start    | String | Date of the beginning of this step, in a "YYYY-MM-DD HH:MM:SS" format string. If it's empty, the step has no dates.                                                           |
 | date_end      | String | Date of the end of this step, in a "YYYY-MM-DD HH:MM:SS" format string. If it's empty, the step has no dates or no end.                                                       |
 | people        | Number | Number of people                                                                                                                                                              |
 | address       | JSON   | JSON object representing the address ([Address](#address)) of the step, including longitude and latitude. Note: Longitude and latitude are only returned by this step object. |
 | description   | JSON   | JSON object representing the short and long description of the step                                                                                                           |
-| images        | Array  | Array of strings representing the images URLs associated with the step                                                                                                        |
 | items         | Array  | Array of JSON items ([Items](#items))                                                                                                                                         |
+| medias        | Array  | Array of strings representing the images URLs associated with the step                                                                                                        |
 | custom_fields | Array  | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                                 |
 
 ### Travellers
 
 ```json
 "travellers": [
-    {
-      "first_name": "Emily",
-      "name": "Johnson",
-      "email": "emily.johnson@example.com",
-      "phone": "+1-555-123-4567",
-      "custom_field1": "value1.1",
-      "custom_field2": "value2.1"
-    },
-    {
-      "first_name": "Michael",
-      "name": "Smith",
-      "email": "michael.smith@example.com",
-      "phone": "+1-555-987-6543",
-      "custom_field1": "value1.2",
-      "custom_field2": "value2.2"
-    }
-  ]
+  {
+    "email": "emily.johnson@example.com",
+    "first_name": "Emily",
+    "last_name": "Johnson",
+    "phone": "+1-555-123-4567",
+    "custom_field1": "value1.1",
+    "custom_field2": "value2.1"
+  },
+  {
+    "email": "michael.smith@example.com",
+    "first_name": "Michael",
+    "name": "Smith",
+    "phone": "+1-555-987-6543",
+    "custom_field1": "value1.2",
+    "custom_field2": "value2.2"
+  }
+]
 ```
 
 | Property      | Type   | Description                                                                     |
 | ------------- | ------ | ------------------------------------------------------------------------------- | --- |
+| email         | String | The email of the traveller                                                      |
 | first_name    | String | The first name of the traveller                                                 |
 | last_name     | String | The last name of the traveller                                                  |
-| email         | String | The email of the traveller                                                      |
 | phone         | String | The phone number of the traveller                                               |     |
 | custom_fields | String | The custom fields and the assigned values. Varies with number of custom fields. |
 
@@ -3475,10 +3531,10 @@ One of the following options: `None`, `Everyone`, `User Group` or the following 
   {
     "reference": "webhook_reference",
     "endpoint": "webhook_endpoint",
-    "is_active": "true",
     "events_types": "projects.created,clients.created",
+    "is_active": "true",
     "last_called_at": "2023-01-01 01:01:01"
-  },
+  }
 ]
 ```
 
@@ -3486,8 +3542,8 @@ One of the following options: `None`, `Everyone`, `User Group` or the following 
 | -------------- | ------ | --------------------------------------------------------------------- |
 | reference      | String | The reference of the webhook                                          |
 | endpoint       | String | The endpoint URL of the webhook                                       |
-| is_active      | String | The status of the webhook `true` or `false`                           |
 | events_types   | String | The list of events for this endpoint ([Events](#events))              |
+| is_active      | String | The status of the webhook `true` or `false`                           |
 | last_called_at | String | The webhook last called date in a "YYYY-MM-DD hh:mm:ss" format string |
 
 # Events
@@ -3501,12 +3557,12 @@ This section provides an overview of the fundamental details related to a webhoo
   "id": "event_id",
   "object": "event",
   "type": "projects.created",
-  "created": 1234567890,
-  "trigger_reference": "pro.ezus.io;projects-create",
-  "is_duplication": false,
   "field": "",
   "old_value": "",
   "new_value": "",
+  "created": 1234567890,
+  "trigger_reference": "pro.ezus.io;projects-create",
+  "is_duplication": false,
   "data": {...}
 }
 ```
@@ -3516,12 +3572,12 @@ This section provides an overview of the fundamental details related to a webhoo
 | id                | String  | Unique identifier for the event                                                                                                                                                |
 | object            | String  | The object of the event. The event's target object is currently limited to `event` but in the future, webhooks will become capable of being triggered by various other events. |
 | type              | String  | The type of the event                                                                                                                                                          |
-| created           | Number  | Time at which the object was created. Measured in seconds since the Unix epoch.                                                                                                |
-| trigger_reference | String  | The trigger of the event. Indicates the source or origin from which the event was initiated.                                                                                   |
-| is_duplication    | Boolean | Indicates whether the event originates from a duplication                                                                                                                      |
 | field             | String  | This is only displayed if the event is an update. The name of the field that was updated.                                                                                      |
 | old_value         | String  | This is only displayed if the event is an update. The previous value of the updated field.                                                                                     |
 | new_value         | String  | This is only displayed if the event is an update. The updated field's new value.                                                                                               |
+| created           | Number  | Time at which the object was created. Measured in seconds since the Unix epoch.                                                                                                |
+| trigger_reference | String  | The trigger of the event. Indicates the source or origin from which the event was initiated.                                                                                   |
+| is_duplication    | Boolean | Indicates whether the event originates from a duplication                                                                                                                      |
 | data              | String  | Detailed information about the event. For more in-depth details, please refer to the sections below.                                                                           |
 
 ## projects.created
@@ -3532,13 +3588,13 @@ This event is triggered whenever a project is either created or duplicated.
 {
   "data": {
     "reference": "project_reference",
+    "info_number": "202306001-P",
     "info_title": "Paris fashion week 2024",
-    "trip_budget": "90000",
-    "trip_people": "15",
     "trip_date_in": "2024-03-01",
     "trip_date_out": "2024-03-09",
     "trip_duration": "9",
-    "info_number": "202306001-P"
+    "trip_budget": "90000",
+    "trip_people": "15"
   }
 }
 ```
@@ -3546,13 +3602,13 @@ This event is triggered whenever a project is either created or duplicated.
 | Property      | Type   | Description                                                                                                          |
 | ------------- | ------ | -------------------------------------------------------------------------------------------------------------------- |
 | reference     | String | The reference of the project                                                                                         |
+| info_number   | String | File number that appears in the project record. Not to be confused with reference                                    |
 | info_title    | String | The title of the project                                                                                             |
-| trip_budget   | String | Forecasted budget for the alternative (the one that is entered manually not the actual one)                          |
-| trip_people   | String | Number of people                                                                                                     |
 | trip_date_in  | String | Date of the beginning of this alternative, in a "YYYY-MM-DD" format string. If it's empty, the project has no dates. |
 | trip_date_out | String | Date of the end of this alternative, in a "YYYY-MM-DD" format string. If it's empty, the project has no dates.       |
 | trip_duration | String | Number of days this project lasts                                                                                    |
-| info_number   | String | File number that appears in the project record. Not to be confused with reference!                                   |
+| trip_budget   | String | Forecasted budget for the alternative (the one that is entered manually not the actual one)                          |
+| trip_people   | String | Number of people                                                                                                     |
 
 ## projects.updated
 
@@ -3562,17 +3618,17 @@ This event is triggered whenever a project is updated. This event is triggered o
 {
   "data": {
     "reference": "project_reference",
-    "info_title": "Paris fashion week 2024",
-    "info_number": "202306001-P"
+    "info_number": "202306001-P",
+    "info_title": "Paris fashion week 2024"
   }
 }
 ```
 
-| Property    | Type   | Description                                                                        |
-| ----------- | ------ | ---------------------------------------------------------------------------------- |
-| reference   | String | The reference of the project                                                       |
-| info_title  | String | The title of the project                                                           |
-| info_number | String | File number that appears in the project record. Not to be confused with reference! |
+| Property    | Type   | Description                                                                       |
+| ----------- | ------ | --------------------------------------------------------------------------------- |
+| reference   | String | The reference of the project                                                      |
+| info_number | String | File number that appears in the project record. Not to be confused with reference |
+| info_title  | String | The title of the project                                                          |
 
 ## clients.created
 
@@ -3582,31 +3638,31 @@ This event is triggered whenever a client is created.
 {
   "data": {
     "reference": "client_reference",
+    "info_number": "202306001-C",
     "type": "enterprise",
     "company_name": "MOKE INTERNATIONAL LIMITED",
+    "email": "contact@moke-international.com",
     "first_name": "Jane",
     "last_name": "Doe",
-    "email": "contact@moke-international.com",
     "gender": "Ms",
     "phone": "0101010101",
-    "birth_date": "1986-09-17",
-    "info_number": "202306001-C"
+    "birth_date": "1986-09-17"
   }
 }
 ```
 
-| Property     | Type   | Description                                                                       |
-| ------------ | ------ | --------------------------------------------------------------------------------- |
-| reference    | String | The reference of the client                                                       |
-| type         | String | The type of the client can be either "enterprise" or "individual"                 |
-| company_name | String | Name of the company of the client                                                 |
-| first_name   | String | First name of the main contact of the client                                      |
-| last_name    | String | Last name of the main contact of the client                                       |
-| email        | String | Email of the main contact of the client                                           |
-| gender       | String | `Mr`, `Ms` or `Undefined`                                                         |
-| phone        | String | Phone number of the contact as a string                                           |
-| birth_date   | String | Contact's date of birth in a "YYYY-MM-DD" format string                           |
-| info_number  | String | File number that appears in the client record. Not to be confused with reference! |
+| Property     | Type   | Description                                                                      |
+| ------------ | ------ | -------------------------------------------------------------------------------- |
+| reference    | String | The reference of the client                                                      |
+| info_number  | String | File number that appears in the client record. Not to be confused with reference |
+| type         | String | The type of the client can be either "enterprise" or "individual"                |
+| company_name | String | Name of the company of the client                                                |
+| email        | String | Email of the main contact of the client                                          |
+| first_name   | String | First name of the main contact of the client                                     |
+| last_name    | String | Last name of the main contact of the client                                      |
+| gender       | String | `Mr`, `Ms` or `Undefined`                                                        |
+| phone        | String | Phone number of the contact as a string                                          |
+| birth_date   | String | Contact's date of birth in a "YYYY-MM-DD" format string                          |
 
 ## clients.updated
 
@@ -3616,17 +3672,17 @@ This event is triggered whenever a client is updated. This event is triggered on
 {
   "data": {
     "reference": "client_reference",
-    "company_name": "MOKE INTERNATIONAL LIMITED",
-    "info_number": "202306001-C"
+    "info_number": "202306001-C",
+    "company_name": "MOKE INTERNATIONAL LIMITED"
   }
 }
 ```
 
-| Property     | Type   | Description                                                                       |
-| ------------ | ------ | --------------------------------------------------------------------------------- |
-| reference    | String | The reference of the client                                                       |
-| company_name | String | Name of the client's company                                                      |
-| info_number  | String | File number that appears in the client record. Not to be confused with reference! |
+| Property     | Type   | Description                                                                      |
+| ------------ | ------ | -------------------------------------------------------------------------------- |
+| reference    | String | The reference of the client                                                      |
+| info_number  | String | File number that appears in the client record. Not to be confused with reference |
+| company_name | String | Name of the client's company                                                     |
 
 ## invoices.finalized
 
@@ -3637,19 +3693,19 @@ This event is triggered whenever an invoice is finalized (its stage goes from `d
   "data": {
     "reference": "invoice_reference",
     "info_number": "2023_101010",
-    "url": "https://ezus.io/2023_101010.pdf",
-    "stage": "completed",
     "type": "credit_note",
     "origin_reference": "origin_reference",
     "origin_info_number": "2023_101009",
+    "stage": "completed",
     "created_date": "2023-10-10",
     "send_date": "2023-10-10",
     "due_date": "2023-10-10",
+    "currency": "EUR",
     "amount_ttc": 1200.0,
     "amount_ht": 1000.0,
     "vat": 200.0,
-    "currency": "EUR",
     "project_reference": "project_reference",
+    "url": "https://ezus.io/2023_101010.pdf",
     "alternative": {
       "sort_order": "0",
       "title": "Main Alternative"
@@ -3662,19 +3718,19 @@ This event is triggered whenever an invoice is finalized (its stage goes from `d
 | ------------------ | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | reference          | String | The reference of the invoice                                                                                                                                                                                      |
 | info_number        | String | Title of the invoice                                                                                                                                                                                              |
-| url                | String | URL of the invoice `.pdf` file                                                                                                                                                                                    |
-| stage              | String | Stage of the invoice `draft` `completed` or `paid`                                                                                                                                                                |
 | type               | String | Type of the invoice `invoice` or `credit_note`                                                                                                                                                                    |
 | origin_reference   | String | This is only displayed if the type of the invoice is a `credit_note`. The reference of the origin invoice.                                                                                                        |
 | origin_info_number | String | This is only displayed if the type of the invoice is a `credit_note`. Title of the origin invoice.                                                                                                                |
+| stage              | String | Stage of the invoice `draft` `completed` or `paid`                                                                                                                                                                |
 | created_date       | String | Date of the creation of this invoice, in a "YYYY-MM-DD" format                                                                                                                                                    |
 | send_date          | String | Sent date of this invoice, in a "YYYY-MM-DD" format                                                                                                                                                               |
 | due_date           | String | Due date of this invoice, in a "YYYY-MM-DD" format                                                                                                                                                                |
+| currency           | String | The ISO 4217 currency code representing the currency you utilize (<a href="https://docs.google.com/spreadsheets/d/1b7BNOwKyN1hMOouve6xhFZ2R2zrH4Sj1L-646j755fU/edit?usp=sharing" target="_blank">Link to doc</a>) |
 | amount_ttc         | Number | Amount of the invoice including taxes                                                                                                                                                                             |
 | amount_ht          | Number | Amount of the invoice excluding taxes                                                                                                                                                                             |
 | vat                | Number | VAT amount of the invoice                                                                                                                                                                                         |
-| currency           | String | The ISO 4217 currency code representing the currency you utilize (<a href="https://docs.google.com/spreadsheets/d/1b7BNOwKyN1hMOouve6xhFZ2R2zrH4Sj1L-646j755fU/edit?usp=sharing" target="_blank">Link to doc</a>) |
 | project_reference  | String | The reference of the project linked to this invoice                                                                                                                                                               |
+| url                | String | URL of the invoice `.pdf` file                                                                                                                                                                                    |
 | alternative        | JSON   | JSON including: `sort_order` and `title`                                                                                                                                                                          |
 
 ## invoices_suppliers.attached
@@ -3685,14 +3741,14 @@ This event is triggered whenever a file is added to a supplier invoice.
 {
   "data": {
     "reference": "invoice_supplier_reference",
-    "url": "https://ezus.io/2023_101010.pdf",
     "filename": "2023_101010.pdf",
     "created_date": "2023-10-10",
     "due_date": "2023-10-20",
+    "currency": "EUR",
     "amount_ttc": 1200.0,
     "amount_ht": 1000.0,
     "vat": 200.0,
-    "currency": "EUR",
+    "url": "https://ezus.io/2023_101010.pdf",
     "supplier_reference": "supplier_reference",
     "project_reference": "project_reference",
     "alternative": {
@@ -3706,14 +3762,14 @@ This event is triggered whenever a file is added to a supplier invoice.
 | Property           | Type   | Description                                                                                                                                                                                                       |
 | ------------------ | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | reference          | String | The reference of the supplier invoice                                                                                                                                                                             |
-| url                | String | URL of the supplier invoice file                                                                                                                                                                                  |
 | filename           | String | Filename of the supplier invoice                                                                                                                                                                                  |
 | created_date       | String | Date of the creation of this supplier invoice, in a "YYYY-MM-DD" format                                                                                                                                           |
 | due_date           | String | Due date of this supplier invoice, in a "YYYY-MM-DD" format                                                                                                                                                       |
+| currency           | String | The ISO 4217 currency code representing the currency you utilize (<a href="https://docs.google.com/spreadsheets/d/1b7BNOwKyN1hMOouve6xhFZ2R2zrH4Sj1L-646j755fU/edit?usp=sharing" target="_blank">Link to doc</a>) |
 | amount_ttc         | Number | Amount of the supplier invoice including taxes                                                                                                                                                                    |
 | amount_ht          | Number | Amount of the supplier invoice excluding taxes                                                                                                                                                                    |
 | vat                | Number | VAT amount of the supplier invoice                                                                                                                                                                                |
-| currency           | String | The ISO 4217 currency code representing the currency you utilize (<a href="https://docs.google.com/spreadsheets/d/1b7BNOwKyN1hMOouve6xhFZ2R2zrH4Sj1L-646j755fU/edit?usp=sharing" target="_blank">Link to doc</a>) |
+| url                | String | URL of the supplier invoice file                                                                                                                                                                                  |
 | supplier_reference | String | The reference of the supplier linked to this supplier invoice                                                                                                                                                     |
 | project_reference  | String | The reference of the project linked to this supplier invoice                                                                                                                                                      |
 | alternative        | JSON   | JSON including: `sort_order` and `title`                                                                                                                                                                          |
