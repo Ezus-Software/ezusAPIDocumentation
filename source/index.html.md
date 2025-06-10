@@ -793,7 +793,7 @@ A JSON object indicating whether an error occurred during the process, along wit
 
 | Property | Type | Description                                                |
 | -------- | ---- | ---------------------------------------------------------- |
-| result   | Link | The URL link of the document after uploading the document |
+| result   | Link | The URL link of the document after uploading the document  |
 
 # Clients
 
