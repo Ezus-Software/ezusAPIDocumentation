@@ -793,7 +793,7 @@ A JSON object indicating whether an error occurred during the process, along wit
 
 | Property | Type | Description                                                |
 | -------- | ---- | ---------------------------------------------------------- |
-| result   | Link | The URL link of the ddocument after uploading the document |
+| result   | Link | The URL link of the document after uploading the document  |
 
 # Clients
 
@@ -3257,7 +3257,7 @@ Each object represents a destination with its associated sub-destinations
 }
 ```
 
-Those objects provides insights into the invoice amounts, differentiating between actual figures and forecasts. Actual figures are available when the associated project is closed and the invoice is marked as `completed` or `paid`. Otherwise, `null` values are displayed.
+These objects provides insights into the invoice amounts, differentiating between actual figures and forecasts. Actual figures are available when the associated project is closed and the invoice is marked as `completed` or `paid`. Otherwise, `null` values are displayed.
 
 | Property     | Type    | Description                                                                              |
 | ------------ | ------- | ---------------------------------------------------------------------------------------- |
