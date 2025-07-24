@@ -1030,7 +1030,7 @@ curl --location 'https://api.ezus.app/clients-upsert' \
 --data-raw '{
     "reference": "client_reference",
     "info_number": "202306001-C",
-    "type": "company",
+    "type": "enterprise",
     "company_name": "MOKE INTERNATIONAL LIMITED",
     "website": "www.moke_ltd.com",
     "vat_number": "FR 32 123456789",
@@ -1065,7 +1065,7 @@ const baseUrl = "https://api.ezus.app";
 const body = {
   reference: "client_reference",
   info_number: "202306001-C",
-  type: "company",
+  type: "enterprise",
   company_name: "MOKE INTERNATIONAL LIMITED",
   website: "www.moke_ltd.com",
   vat_number: "FR 32 123456789",
