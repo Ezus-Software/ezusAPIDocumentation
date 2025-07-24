@@ -791,9 +791,9 @@ axios.post(baseUrl + "/projects-documents-create", body, headers);
 
 A JSON object indicating whether an error occurred during the process, along with the associated message.
 
-| Property | Type | Description                                                |
-| -------- | ---- | ---------------------------------------------------------- |
-| result   | Link | The URL link of the document after uploading the document  |
+| Property | Type | Description                                               |
+| -------- | ---- | --------------------------------------------------------- |
+| result   | Link | The URL link of the document after uploading the document |
 
 # Clients
 
@@ -1030,6 +1030,7 @@ curl --location 'https://api.ezus.app/clients-upsert' \
 --data-raw '{
     "reference": "client_reference",
     "info_number": "202306001-C",
+    "type": "company",
     "company_name": "MOKE INTERNATIONAL LIMITED",
     "website": "www.moke_ltd.com",
     "vat_number": "FR 32 123456789",
@@ -1064,6 +1065,7 @@ const baseUrl = "https://api.ezus.app";
 const body = {
   reference: "client_reference",
   info_number: "202306001-C",
+  type: "company",
   company_name: "MOKE INTERNATIONAL LIMITED",
   website: "www.moke_ltd.com",
   vat_number: "FR 32 123456789",
@@ -1123,6 +1125,7 @@ axios.post(baseUrl + "/clients-upsert", body, headers);
 | -------------- | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | reference      | String | If provided, the unique reference associated with the client you want to update or create (or a random one will be generated).                                                                                         |
 | info_number    | String | File number that appears in the client record. Not to be confused with reference                                                                                                                                       |
+| type           | String | Optionnal parameter. Specifies the client type (`enterprise` or `individual`). If `enterprise`, `company_name` is required. If `individual`, provide contact.first_name or contact.last_name.                          |
 | company_name   | String | <span style="color:red">(Required)</span> Name of the client's company (if applicable). If empty, the client will be considered an individual, and the name of the client will be the same as the name of the contact. |
 | website        | String | Website of the client                                                                                                                                                                                                  |
 | vat_number     | String | VAT number of the client (only for "enterprise" clients)                                                                                                                                                               |
