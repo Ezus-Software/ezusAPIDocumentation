@@ -467,6 +467,7 @@ axios.get(baseUrl + "/project-steps?reference=project_reference", headers);
   "page": 1,
   "steps": [
     {
+      "reference": "activity_reference",
       "type": "activity",
       "name": "activityTitle",
       "category": "restaurant",
@@ -489,6 +490,7 @@ axios.get(baseUrl + "/project-steps?reference=project_reference", headers);
       },
       "items": [
         {
+          "reference": "item_reference",
           "name": "item_title",
           "product_reference": "product_esus_reference",
           "quantity": 2,
