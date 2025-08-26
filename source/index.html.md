@@ -3421,21 +3421,20 @@ The steps are sorted by their creation date, with the most recently created appe
 ]
 ```
 
-| Property  | Type   | Description                   |
-| --------- | ------ | ----------------------------- |
-| reference | String | The reference of the activity |
-
-| type | String | Type of the step `activity` `accommodation` `transport` or `extra` |
-| name | String | Name of the step |
-| category | String | Category of the step |
-| date_start | String | Date of the beginning of this step, in a "YYYY-MM-DD HH:MM:SS" format string. If it's empty, the step has no dates. |
-| date_end | String | Date of the end of this step, in a "YYYY-MM-DD HH:MM:SS" format string. If it's empty, the step has no dates or no end. |
-| people | Number | Number of people |
-| address | JSON | JSON object representing the address ([Address](#address)) of the step, including longitude and latitude. Note: Longitude and latitude are only returned by this step object. |
-| description | JSON | JSON object representing the short and long description of the step |
-| items | Array | Array of JSON items ([Items](#items)) |
-| medias | Array | Array of strings representing the images URLs associated with the step |
-| custom_fields | Array | Array of JSON custom fields ([Custom fields](#custom-fields)) |
+| Property      | Type   | Description                                                                                                                                                                   |
+| ------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| reference     | String | The reference of the activity                                                                                                                                                 |
+| type          | String | Type of the step `activity` `accommodation` `transport` or `extra`                                                                                                            |
+| name          | String | Name of the step                                                                                                                                                              |
+| category      | String | Category of the step                                                                                                                                                          |
+| date_start    | String | Date of the beginning of this step, in a "YYYY-MM-DD HH:MM:SS" format string. If it's empty, the step has no dates.                                                           |
+| date_end      | String | Date of the end of this step, in a "YYYY-MM-DD HH:MM:SS" format string. If it's empty, the step has no dates or no end.                                                       |
+| people        | Number | Number of people                                                                                                                                                              |
+| address       | JSON   | JSON object representing the address ([Address](#address)) of the step, including longitude and latitude. Note: Longitude and latitude are only returned by this step object. |
+| description   | JSON   | JSON object representing the short and long description of the step                                                                                                           |
+| items         | Array  | Array of JSON items ([Items](#items))                                                                                                                                         |
+| medias        | Array  | Array of strings representing the images URLs associated with the step                                                                                                        |
+| custom_fields | Array  | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                                 |
 
 ### Travellers
 
