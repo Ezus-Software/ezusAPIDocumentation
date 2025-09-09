@@ -535,15 +535,15 @@ axios.get(baseUrl + "/project-steps?reference=project_reference", headers);
 
 A JSON object containing the project documents information with properties like:
 
-| Property          | Type   | Description                                                                                                              |
-| ----------------- | ------ | ------------------------------------------------------------------------------------------------------------------------ |
-| next_token        | String | A token will be returned if all projects have not been returned. Use it in another call to access the following projects |
-| reference         | String | The reference of the project                                                                                             |
-| alternative_order | Number | The alternative order; 0 is for main alternative                                                                         |
-| size              | Number | The total number of projects available with these filters                                                                |
-| data_size         | Number | Number of projects returned on the current page                                                                          |
-| page              | Number | The page number                                                                                                          |
-| steps             | Array  | Array of JSON steps ([Steps](#steps))                                                                                    |
+| Property          | Type   | Description                                                                                                               |
+| ----------------- | ------ | ------------------------------------------------------------------------------------------------------------------------- |
+| next_token        | String | A token will be returned if all project steps have not been returned. Use it in another call to access the following ones |
+| reference         | String | The reference of the project                                                                                              |
+| alternative_order | Number | The alternative order; 0 is for main alternative                                                                          |
+| size              | Number | The total number of projects available with these filters                                                                 |
+| data_size         | Number | Number of projects returned on the current page                                                                           |
+| page              | Number | The page number                                                                                                           |
+| steps             | Array  | Array of JSON steps ([Steps](#steps))                                                                                     |
 
 ## GET project-travellers
 
