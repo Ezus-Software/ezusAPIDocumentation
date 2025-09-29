@@ -877,9 +877,13 @@ axios.get(baseUrl + "/clients", headers);
 
 ### Query Parameters
 
-| Parameter  | Type   | Description                                                                                  |
-| ---------- | ------ | -------------------------------------------------------------------------------------------- |
-| next_token | String | Specify this parameter if you want to retrieve the following elements of a given list query. |
+| Parameter   | Type   | Description                                                                                                                               |
+| ----------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| next_token  | String | Specify this parameter if you want to retrieve the following elements of a given list query.                                              |
+| reference   | String | You can filter clients with a specific reference                                                                                          |
+| info_number | String | You can filter clients with a specific info_number, file number that appears in the client record. Not to be confused with reference      |
+| type        | String | You can filter clients by their type. Either `enterprise` or `individual`                                                                 |
+| email       | String | You can filter clients by email. This filter works for both `enterprise` clients (uses the main contact’s email) and `individual` clients |
 
 ### Response
 
