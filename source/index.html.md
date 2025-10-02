@@ -1869,7 +1869,7 @@ axios.post(baseUrl + "/products-upsert", body, headers);
 | supplier_reference       | String | If you give an adequate supplier reference, the product will be added in this supplier. If you want to update the supplier's product to None, you must enter 0.                                                                                                         |
 | package_reference        | String | If you give an adequate package reference, the product will be added in this package. If you want to update the package's product to None, you must enter 0.                                                                                                            |
 | destination_reference    | String | Reference of the destination to link to the product. To reset the destination, you can put `'0'`.                                                                                                                                                                       |
-| subdestination_reference | String | Reference of the sub-destination to link to the supplier. To reset the sub-destination, you can put `'0'`. If the `destination_reference` is not provided, the `subdestination_reference` will be ignored.                                                              |
+| subdestination_reference | String | Reference of the sub-destination to link to the product. To reset the sub-destination, you can put `'0'`. If the `destination_reference` is not provided, the `subdestination_reference` will be ignored.                                                               |
 | custom_fields            | JSON   | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                                                                                                                           |
 
 ### Response
@@ -2075,7 +2075,7 @@ axios.post(baseUrl + "/packages-upsert", body, headers);
 | title                    | String | This parameter is required if you create a new package                                                                                                                                                                      |
 | capacity                 | Number | Maximum number of people for which the package can be used . Leave blank `''` if not relevant                                                                                                                               |
 | destination_reference    | String | Reference of the destination to link to the package. To reset the destination, you can put `'0'`.                                                                                                                           |
-| subdestination_reference | String | Reference of the sub-destination to link to the supplier. To reset the sub-destination, you can put `'0'`. If the `destination_reference` is not provided, the `subdestination_reference` will be ignored.                  |
+| subdestination_reference | String | Reference of the sub-destination to link to the package. To reset the sub-destination, you can put `'0'`. If the `destination_reference` is not provided, the `subdestination_reference` will be ignored.                   |
 | custom_fields            | JSON   | Array of JSON custom fields [Custom fields](#custom-fields)                                                                                                                                                                 |
 
 ### Response
