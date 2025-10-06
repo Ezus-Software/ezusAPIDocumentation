@@ -2192,7 +2192,7 @@ axios.post(baseUrl + "/destinations-upsert", body, headers);
 | Parameter | Type   | Description                                                                                                                                                                                                                         |
 | --------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | reference | String | If provided, the unique Ezus Reference associated to the destination you want to update or create (in case the one you provided has never been used). If no reference is provided, a destination will be created with a random one. |
-| name      | String | This parameter is required. Name of the destination to create or update.                                                                                                                                                            |
+| name      | String | This parameter is required. Name of the destination to create or update. If a destination already exists with this name, it will return an error.                                                                                   |
 
 ### Response
 
