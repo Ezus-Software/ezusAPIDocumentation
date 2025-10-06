@@ -2134,6 +2134,75 @@ A JSON object containing the destination information with properties like:
 | size         | Number | The total number of destinations                             |
 | destinations | Array  | Array of JSON destinations ([Destinations](#destinations-2)) |
 
+## POST destinations-upsert
+
+It updates a destination record if the provided reference does match one of the destination references in your account, otherwise it creates a new destination record with the provided reference (or with a random one if no reference is provided).
+
+```shell
+curl --location 'https://api.ezus.app/destinations-upsert' \
+--header 'x-api-key: <YOUR_API_KEY>' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer <YOUR_TOKEN>'
+--data '{
+    "reference": "destination_reference",
+    "name": "France"
+}'
+```
+
+```javascript
+const axios = require("axios");
+const baseUrl = "https://api.ezus.app";
+
+const body = {
+  reference: "destination_reference",
+  name: "France",
+};
+const headers = {
+  "x-api-key": "<YOUR_API_KEY>",
+  Authorization: "Bearer <YOUR_TOKEN>",
+};
+
+axios.post(baseUrl + "/destinations-upsert", body, headers);
+```
+
+> This request returns a structured JSON object:
+
+```json
+{
+  "error": "false",
+  "message": "ok",
+  "action": "Destination successfully created",
+  "reference": "destination_reference"
+}
+```
+
+### HTTP Endpoint
+
+`POST https://api.ezus.app/destinations-upsert`
+
+### Header Parameters
+
+| Parameter     | Type   | Description                                                 |
+| ------------- | ------ | ----------------------------------------------------------- |
+| x-api-key     | String | <span style="color:red">(Required)</span> Your Ezus API key |
+| Authorization | String | <span style="color:red">(Required)</span> Your Bearer token |
+
+### Body Parameters (application/json)
+
+| Parameter | Type   | Description                                                                                                                                                                                                                         |
+| --------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| reference | String | If provided, the unique Ezus Reference associated to the destination you want to update or create (in case the one you provided has never been used). If no reference is provided, a destination will be created with a random one. |
+| name      | String | This parameter is required. Name of the destination to create or update.                                                                                                                                                            |
+
+### Response
+
+A JSON object indicating whether an error occurred during the process, along with the associated message.
+
+| Property  | Type   | Description                                                                                  |
+| --------- | ------ | -------------------------------------------------------------------------------------------- |
+| action    | String | Indicates type of destination action was created                                             |
+| reference | String | The `reference` for the destination, which you should store for future updates or retrievals |
+
 ## GET subdestination
 
 This API endpoint retrieves detailed information about a specific sub-destination in Ezus.
@@ -2219,6 +2288,78 @@ A JSON object containing the sub-destination information with properties like:
 | visual_url            | String | URL of the Google Slides visual linked to the sub-destination |
 | medias                | JSON   | JSON object medias ([Medias](#medias))                        |
 | langs                 | Array  | Array of JSON langs ([Langs](#langs))                         |
+
+## POST subdestinations-upsert
+
+It updates a sub-destination record if the provided reference does match one of the sub-destination references in your account, otherwise it creates a new sub-destination record with the provided reference (or with a random one if no reference is provided).
+
+```shell
+curl --location 'https://api.ezus.app/subdestinations-upsert' \
+--header 'x-api-key: <YOUR_API_KEY>' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer <YOUR_TOKEN>'
+--data '{
+    "reference": "subdestination_reference",
+    "destination_reference": "destination_reference",
+    "name": "France"
+}'
+```
+
+```javascript
+const axios = require("axios");
+const baseUrl = "https://api.ezus.app";
+
+const body = {
+  reference: "subdestination_reference",
+  destination_reference: "destination_reference"
+  name: "France",
+};
+const headers = {
+  "x-api-key": "<YOUR_API_KEY>",
+  Authorization: "Bearer <YOUR_TOKEN>",
+};
+
+axios.post(baseUrl + "/subdestinations-upsert", body, headers);
+```
+
+> This request returns a structured JSON object:
+
+```json
+{
+  "error": "false",
+  "message": "ok",
+  "action": "Subdestination successfully created",
+  "reference": "subdestination_reference"
+}
+```
+
+### HTTP Endpoint
+
+`POST https://api.ezus.app/subdestinations-upsert`
+
+### Header Parameters
+
+| Parameter     | Type   | Description                                                 |
+| ------------- | ------ | ----------------------------------------------------------- |
+| x-api-key     | String | <span style="color:red">(Required)</span> Your Ezus API key |
+| Authorization | String | <span style="color:red">(Required)</span> Your Bearer token |
+
+### Body Parameters (application/json)
+
+| Parameter             | Type   | Description                                                                                                                                                                                                                                 |
+| --------------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| reference             | String | If provided, the unique Ezus Reference associated to the sub-destination you want to update or create (in case the one you provided has never been used). If no reference is provided, a sub-destination will be created with a random one. |
+| destination_reference | String | This parameter is required and must match an existing destination.                                                                                                                                                                          |
+| name                  | String | This parameter is required. Name of the sub-destination to create or update. If a sub-destination already exists with this name, it will return an error.                                                                                   |
+
+### Response
+
+A JSON object indicating whether an error occurred during the process, along with the associated message.
+
+| Property  | Type   | Description                                                                                      |
+| --------- | ------ | ------------------------------------------------------------------------------------------------ |
+| action    | String | Indicates type of sub-destination action was created                                             |
+| reference | String | The `reference` for the sub-destination, which you should store for future updates or retrievals |
 
 # Invoices
 
