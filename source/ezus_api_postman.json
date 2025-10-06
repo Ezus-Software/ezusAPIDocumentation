@@ -656,7 +656,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\n    \"reference\": \"subdestination_reference\",\n    \"destination_reference\": \"destination_reference\",\n    \"name\": \"France\"\n}",
+          "raw": "{\n    \"reference\": \"subdestination_reference\",\n    \"destination_reference\": \"destination_reference\",\n    \"name\": \"Paris\"\n}",
           "options": {
             "raw": {
               "language": "json"

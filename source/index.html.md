@@ -2301,7 +2301,7 @@ curl --location 'https://api.ezus.app/subdestinations-upsert' \
 --data '{
     "reference": "subdestination_reference",
     "destination_reference": "destination_reference",
-    "name": "France"
+    "name": "Paris"
 }'
 ```
 
@@ -2312,7 +2312,7 @@ const baseUrl = "https://api.ezus.app";
 const body = {
   reference: "subdestination_reference",
   destination_reference: "destination_reference"
-  name: "France",
+  name: "Paris",
 };
 const headers = {
   "x-api-key": "<YOUR_API_KEY>",
