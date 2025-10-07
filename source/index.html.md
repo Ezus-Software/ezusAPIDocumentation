@@ -493,6 +493,7 @@ axios.get(baseUrl + "/project-steps?reference=project_reference", headers);
           "reference": "item_reference",
           "name": "item_title",
           "product_reference": "product_reference",
+          "supplier_reference": "supplier_reference",
           "quantity": 2,
           "purchase_price": 150,
           "purchase_price_excl_taxes": 125,
@@ -3284,6 +3285,7 @@ These objects provides insights into the invoice amounts, differentiating betwee
     "reference": "item_reference",
     "name": "item_title",
     "product_reference": "product_reference",
+    "supplier_reference": "supplier_reference",
     "quantity": 2,
     "purchase_price": 150,
     "purchase_price_excl_taxes": 125,
@@ -3304,6 +3306,7 @@ The fields `purchase_price`, `purchase_price_excl_taxes`, `sales_price`, and `sa
 | reference                 | String  | The reference of the item                                                                                               |
 | name                      | String  | Name of the item                                                                                                        |
 | product_reference         | String  | The product reference associated with the item                                                                          |
+| supplier_reference        | String  | The supplier reference associated with the item                                                                         |
 | quantity                  | Number  | Quantity of the item                                                                                                    |
 | purchase_price            | Number  | The unit purchase price of the item (including taxes)                                                                   |
 | purchase_price_excl_taxes | Number  | The unit purchase price of the item (excluding taxes)                                                                   |
@@ -3406,6 +3409,7 @@ The steps are sorted by their creation date, with the most recently created appe
         "reference": "item_reference",
         "name": "item_title",
         "product_reference": "product_reference",
+        "supplier_reference": "supplier_reference",
         "quantity": 2,
         "purchase_price": 150,
         "purchase_price_excl_taxes": 125,
