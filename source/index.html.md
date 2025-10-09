@@ -727,12 +727,12 @@ A JSON object indicating whether an error occurred during the process, along wit
 | info_number      | String | File number that appears in the project record. Not to be confused with reference        |
 | client_reference | String | The `reference` for the client, which you should store for future updates or retrievals  |
 
-## POST projects-documents-create
+## POST project-documents-create
 
 This API endpoint generates a PDF document from a given link within the specified project.
 
 ```shell
-curl --location 'https://api.ezus.app/projects-documents-create' \
+curl --location 'https://api.ezus.app/project-documents-create' \
 --header 'x-api-key: <YOUR_API_KEY>' \
 --header 'Content-Type: application/json' \
 --header 'Authorization: Bearer <YOUR_TOKEN>' \
@@ -758,7 +758,7 @@ const headers = {
   Authorization: "Bearer <YOUR_TOKEN>",
 };
 
-axios.post(baseUrl + "/projects-documents-create", body, headers);
+axios.post(baseUrl + "/project-documents-create", body, headers);
 ```
 
 > This request returns a structured JSON object:
@@ -772,7 +772,7 @@ axios.post(baseUrl + "/projects-documents-create", body, headers);
 
 ### HTTP Endpoint
 
-`POST https://api.ezus.app/projects-documents-create`
+`POST https://api.ezus.app/project-documents-create`
 
 ### Header Parameters
 
