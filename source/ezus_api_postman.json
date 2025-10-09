@@ -254,7 +254,7 @@
       "response": []
     },
     {
-      "name": "projects-documents-create",
+      "name": "project-documents-create",
       "request": {
         "method": "POST",
         "header": [
@@ -274,9 +274,9 @@
           }
         },
         "url": {
-          "raw": "{{baseUrl}}/projects-documents-create",
+          "raw": "{{baseUrl}}/project-documents-create",
           "host": ["{{baseUrl}}"],
-          "path": ["projects-documents-create"]
+          "path": ["project-documents-create"]
         }
       },
       "response": []
