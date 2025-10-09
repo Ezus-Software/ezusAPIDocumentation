@@ -963,14 +963,28 @@ axios.get(baseUrl + "/client?reference=client_reference", headers);
   "contacts": {
     "data": [
       {
-        "email": "contact@moke-international.com",
+        "reference": "contact_reference",
+        "email": "contact@moke.com",
         "first_name": "Jane",
         "last_name": "Doe",
         "title": "CEO",
         "gender": "Ms",
         "phone": "0101010101",
         "phone2": "0606060606",
-        "birth_date": "1986-09-17"
+        "birth_date": "1986-09-17",
+        "is_main": true
+      },
+      {
+        "reference": "contact_reference",
+        "email": "bob@proton.me",
+        "first_name": "Bob",
+        "last_name": "Morane",
+        "title": "Project Manager",
+        "gender": "Mr",
+        "phone": "0202020202",
+        "phone2": "0707070707",
+        "birth_date": "1985-10-18",
+        "is_main": false
       }
     ],
     "size": 1
@@ -1326,16 +1340,31 @@ axios.get(baseUrl + "/supplier?reference=supplier_reference", headers);
   "contacts": {
     "data": [
       {
+        "reference": "contact_reference",
+        "email": "contact@moke.com",
+        "first_name": "Jane",
+        "last_name": "Doe",
+        "title": "CEO",
+        "gender": "Ms",
+        "phone": "0101010101",
+        "phone2": "0606060606",
+        "birth_date": "1986-09-17",
+        "is_main": true
+      },
+      {
+        "reference": "contact_reference",
         "email": "bob@proton.me",
         "first_name": "Bob",
         "last_name": "Morane",
         "title": "Project Manager",
         "gender": "Mr",
         "phone": "0202020202",
-        "phone2": "0707070707"
+        "phone2": "0707070707",
+        "birth_date": "1985-10-18",
+        "is_main": false
       }
     ],
-    "size": 1
+    "size": 2
   },
   "langs": [
     {
@@ -3116,17 +3145,31 @@ Only the last 10 contacts are returned in this object. Note that for upsert endp
 "contacts": {
   "data": [
     {
-      "email": "elliot@fsociety.org",
-      "first_name": "Elliot",
-      "last_name": "Alderson",
-      "title": "Developer",
+      "reference": "contact_reference",
+      "email": "contact@moke.com",
+      "first_name": "Jane",
+      "last_name": "Doe",
+      "title": "CEO",
+      "gender": "Ms",
+      "phone": "0101010101",
+      "phone2": "0606060606",
+      "birth_date": "1986-09-17",
+      "is_main": true
+    },
+    {
+      "reference": "contact_reference",
+      "email": "bob@proton.me",
+      "first_name": "Bob",
+      "last_name": "Morane",
+      "title": "Project Manager",
       "gender": "Mr",
-      "phone": "",
-      "phone2": "",
-      "birth_date": "1986-09-17"
+      "phone": "0202020202",
+      "phone2": "0707070707",
+      "birth_date": "1985-10-18",
+      "is_main": false
     }
   ],
-  "size": 1
+  "size": 2
 }
 ```
 
