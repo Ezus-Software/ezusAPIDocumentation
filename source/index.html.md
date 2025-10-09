@@ -987,7 +987,7 @@ axios.get(baseUrl + "/client?reference=client_reference", headers);
         "is_main": false
       }
     ],
-    "size": 1
+    "size": 2
   },
   "custom_fields": [
     {
