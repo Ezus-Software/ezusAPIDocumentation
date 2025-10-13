@@ -3182,7 +3182,7 @@ Only the last 10 contacts are returned in this object. Note that for upsert endp
 | phone      | String  | Phone number of the contact as a string                                                           |
 | phone2     | String  | Second phone number of the contact as a string                                                    |
 | birth_date | String  | Contact's date of birth in a "YYYY-MM-DD" format string (supplier contacts have no date of birth) |
-| is_main    | Boolean | If the contact is the main contact for the parent's resource                                      |
+| is_main    | Boolean | True if this contact is the primary contact for the parent resource                               |
 
 ### Custom Fields
 
