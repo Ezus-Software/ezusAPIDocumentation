@@ -5,8 +5,8 @@ Classic Warning messages
 </aside>
 The Ezus API uses the following warning message format in the message field: `{code}_{field}`. Where:
 
-- `{code}` is the warning code
-- `{field}` is the field name that caused the warning
+- `code` is the warning code
+- `field` is the field name that caused the warning
 
 Multiple warnings are separated by a comma.
 
