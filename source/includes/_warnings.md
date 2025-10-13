@@ -6,9 +6,10 @@ Classic Warning messages
 The Ezus API uses the following warning message format: `{code}_field`.
 
 The Ezus API uses the following warning codes:
-| Warning Code | Meaning |
-| ------------------ | --------------------------------------------- |
-| skip | A field has been skipped |
+
+| Warning Code | Meaning                  |
+| ------------ | ------------------------ |
+| skip         | A field has been skipped |
 
 <aside class="notice">
 Warning messages examples
