@@ -963,17 +963,31 @@ axios.get(baseUrl + "/client?reference=client_reference", headers);
   "contacts": {
     "data": [
       {
-        "email": "contact@moke-international.com",
+        "reference": "contact_reference",
+        "email": "contact@moke.com",
         "first_name": "Jane",
         "last_name": "Doe",
         "title": "CEO",
         "gender": "Ms",
         "phone": "0101010101",
         "phone2": "0606060606",
-        "birth_date": "1986-09-17"
+        "birth_date": "1986-09-17",
+        "is_main": true
+      },
+      {
+        "reference": "contact_reference",
+        "email": "bob@proton.me",
+        "first_name": "Bob",
+        "last_name": "Morane",
+        "title": "Project Manager",
+        "gender": "Mr",
+        "phone": "0202020202",
+        "phone2": "0707070707",
+        "birth_date": "1985-10-18",
+        "is_main": false
       }
     ],
-    "size": 1
+    "size": 2
   },
   "custom_fields": [
     {
@@ -1326,16 +1340,29 @@ axios.get(baseUrl + "/supplier?reference=supplier_reference", headers);
   "contacts": {
     "data": [
       {
+        "reference": "contact_reference",
+        "email": "contact@moke.com",
+        "first_name": "Jane",
+        "last_name": "Doe",
+        "title": "CEO",
+        "gender": "Ms",
+        "phone": "0101010101",
+        "phone2": "0606060606",
+        "is_main": true
+      },
+      {
+        "reference": "contact_reference",
         "email": "bob@proton.me",
         "first_name": "Bob",
         "last_name": "Morane",
         "title": "Project Manager",
         "gender": "Mr",
         "phone": "0202020202",
-        "phone2": "0707070707"
+        "phone2": "0707070707",
+        "is_main": false
       }
     ],
-    "size": 1
+    "size": 2
   },
   "langs": [
     {
@@ -3119,30 +3146,46 @@ Only the last 10 contacts are returned in this object. Note that for upsert endp
 "contacts": {
   "data": [
     {
-      "email": "elliot@fsociety.org",
-      "first_name": "Elliot",
-      "last_name": "Alderson",
-      "title": "Developer",
+      "reference": "contact_reference",
+      "email": "contact@moke.com",
+      "first_name": "Jane",
+      "last_name": "Doe",
+      "title": "CEO",
+      "gender": "Ms",
+      "phone": "0101010101",
+      "phone2": "0606060606",
+      "birth_date": "1986-09-17",
+      "is_main": true
+    },
+    {
+      "reference": "contact_reference",
+      "email": "bob@proton.me",
+      "first_name": "Bob",
+      "last_name": "Morane",
+      "title": "Project Manager",
       "gender": "Mr",
-      "phone": "",
-      "phone2": "",
-      "birth_date": "1986-09-17"
+      "phone": "0202020202",
+      "phone2": "0707070707",
+      "birth_date": "1985-10-18",
+      "is_main": false
     }
   ],
-  "size": 1
+  "size": 2
 }
 ```
 
-| Property   | Type   | Description                                                                                       |
-| ---------- | ------ | ------------------------------------------------------------------------------------------------- |
-| email      | String | Email of the contact                                                                              |
-| first_name | String | First name of the contact as a string                                                             |
-| last_name  | String | Last name of the contact as a string                                                              |
-| title      | String | Title of the contact as a string                                                                  |
-| gender     | String | `Mr`, `Ms` or `Undefined`                                                                         |
-| phone      | String | Phone number of the contact as a string                                                           |
-| phone2     | String | Second phone number of the contact as a string                                                    |
-| birth_date | String | Contact's date of birth in a "YYYY-MM-DD" format string (supplier contacts have no date of birth) |
+| Property   | Type    | Description                                                                                       |
+| ---------- | ------- | ------------------------------------------------------------------------------------------------- |
+| reference  | String  | Reference of the contact                                                                          |
+| email      | String  | Email of the contact                                                                              |
+| first_name | String  | First name of the contact as a string                                                             |
+| last_name  | String  | Last name of the contact as a string                                                              |
+| title      | String  | Title of the contact as a string                                                                  |
+| gender     | String  | `Mr`, `Ms` or `Undefined`                                                                         |
+| phone      | String  | Phone number of the contact as a string                                                           |
+| phone2     | String  | Second phone number of the contact as a string                                                    |
+| birth_date | String  | Contact's date of birth in a "YYYY-MM-DD" format string (supplier contacts have no date of birth) |
+| is_main    | Boolean | True if this contact is the primary contact for the parent resource                               |
 
 ### Custom Fields
 
