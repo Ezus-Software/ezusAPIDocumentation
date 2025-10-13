@@ -2611,16 +2611,19 @@ axios.get(
   },
   "payments": [
     {
+      "reference": "payment_reference",
       "date": "2023-10-10",
       "amount": 500.0,
       "payment_method": "Credit Card"
     },
     {
+      "reference": "payment_reference",
       "date": "2023-10-11",
       "amount": 500.0,
       "payment_method": "Wire"
     },
     {
+      "reference": "payment_reference",
       "date": "2023-10-12",
       "amount": 200.0,
       "payment_method": "Check"
@@ -2665,7 +2668,7 @@ A JSON object containing the supplier invoice information with properties like:
 | project      | JSON   | JSON including: `reference`, `info_title`, `info_stage`, `info_stage_reference`, `info_number`, `currency` and `is_closed`                                                                                        |
 | alternative  | JSON   | JSON including: `sort_order` and `title`                                                                                                                                                                          |
 | client       | JSON   | JSON including: `reference`, `type` (enterprise or individual), `company_name`, `first_name`, `last_name` and `email`                                                                                             |
-| payments     | Array  | Array of JSON including: `date`, `amount` and `payment_method`                                                                                                                                                    |
+| payments     | Array  | Array of JSON including: `reference`, `date`, `amount` and `payment_method`                                                                                                                                       |
 
 # Deposits
 
