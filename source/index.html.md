@@ -2052,13 +2052,13 @@ axios.post(baseUrl + "/packages-upsert", body, headers);
 
 ### Body Parameters (application/json)
 
-| Parameter     | Type   | Description                                                                                                                                                                                                                 |
-| ------------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| reference     | String | If provided, the unique Ezus Reference associated to the package you want to update or create (in case the one you provided has never been used). If no reference is provided, a package will be created with a random one. |
-| info_number   | String | File number that appears in the package record. Not to be confused with reference                                                                                                                                           |
-| title         | String | This parameter is required if you create a new package                                                                                                                                                                      |
-| capacity      | Number | Maximum number of people for which the package can be used . Leave blank `''` if not relevant                                                                                                                               |
-| custom_fields | JSON   | Array of JSON custom fields [Custom fields](#custom-fields)                                                                                                                                                                 |
+| Parameter     | Type   | Description                                                                                                                                                                                                            |
+| ------------- | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| reference     | String | If provided, the unique reference associated to the package you want to update or create (in case the one you provided has never been used). If no reference is provided, a package will be created with a random one. |
+| info_number   | String | File number that appears in the package record. Not to be confused with reference                                                                                                                                      |
+| title         | String | This parameter is required if you create a new package                                                                                                                                                                 |
+| capacity      | Number | Maximum number of people for which the package can be used . Leave blank `''` if not relevant                                                                                                                          |
+| custom_fields | JSON   | Array of JSON custom fields [Custom fields](#custom-fields)                                                                                                                                                            |
 
 ### Response
 
@@ -2189,10 +2189,10 @@ axios.post(baseUrl + "/destinations-upsert", body, headers);
 
 ### Body Parameters (application/json)
 
-| Parameter | Type   | Description                                                                                                                                                                                                                         |
-| --------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| reference | String | If provided, the unique Ezus Reference associated to the destination you want to update or create (in case the one you provided has never been used). If no reference is provided, a destination will be created with a random one. |
-| name      | String | This parameter is required. Name of the destination to create or update. If a destination already exists with this name, it will return an error.                                                                                   |
+| Parameter | Type   | Description                                                                                                                                                                                                                    |
+| --------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| reference | String | If provided, the unique reference associated to the destination you want to update or create (in case the one you provided has never been used). If no reference is provided, a destination will be created with a random one. |
+| name      | String | This parameter is required. Name of the destination to create or update. If a destination already exists with this name, it will return an error.                                                                              |
 
 ### Response
 
@@ -2346,11 +2346,11 @@ axios.post(baseUrl + "/subdestinations-upsert", body, headers);
 
 ### Body Parameters (application/json)
 
-| Parameter             | Type   | Description                                                                                                                                                                                                                                 |
-| --------------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| reference             | String | If provided, the unique Ezus Reference associated to the sub-destination you want to update or create (in case the one you provided has never been used). If no reference is provided, a sub-destination will be created with a random one. |
-| destination_reference | String | This parameter is required and must match an existing destination.                                                                                                                                                                          |
-| name                  | String | This parameter is required. Name of the sub-destination to create or update. If a sub-destination already exists with this name, it will return an error.                                                                                   |
+| Parameter             | Type   | Description                                                                                                                                                                                                                            |
+| --------------------- | ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| reference             | String | If provided, the unique reference associated to the sub-destination you want to update or create (in case the one you provided has never been used). If no reference is provided, a sub-destination will be created with a random one. |
+| destination_reference | String | This parameter is required and must match an existing destination.                                                                                                                                                                     |
+| name                  | String | This parameter is required. Name of the sub-destination to create or update. If a sub-destination already exists with this name, it will return an error.                                                                              |
 
 ### Response
 
@@ -3069,7 +3069,7 @@ axios.post(baseUrl + "/webhooks-upsert", body, headers);
 
 | Parameter    | Type   | Description                                                                                                                                                                                                                                                              |
 | ------------ | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| reference    | String | If provided, the unique Ezus Reference associated to the webhook you want to update or create (in case the one you provided has never been used). If no reference is provided, a webhook will be created with a random one.                                              |
+| reference    | String | If provided, the unique reference associated to the webhook you want to update or create (in case the one you provided has never been used). If no reference is provided, a webhook will be created with a random one.                                                   |
 | endpoint     | String | If provided, the endpoint associated to the webhook you want to update or create (in case the one you provided has never been used). This parameter is required if you create a new webhook and has to be unique. You cannot update the endpoint of an existing webhook. |
 | is_active    | String | Status of the webhook `true` or `false`                                                                                                                                                                                                                                  |
 | events_types | JSON   | The list of events to enable for this endpoint. At least 1 required, separated by commas if more than one. ([Events](#events))                                                                                                                                           |
@@ -3140,7 +3140,7 @@ axios.delete(baseUrl + "/webhooks-delete", body, headers);
 
 | Parameter | Type   | Description                                                                         |
 | --------- | ------ | ----------------------------------------------------------------------------------- |
-| reference | String | If provided, the unique Ezus Reference associated to the webhook you want to delete |
+| reference | String | If provided, the unique reference associated to the webhook you want to delete |
 | endpoint  | String | If provided, the endpoint associated to the webhook you want to delete              |
 
 ### Response
