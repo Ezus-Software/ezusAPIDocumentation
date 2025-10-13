@@ -3,7 +3,7 @@
 <aside class="notice">
 Classic Warning messages
 </aside>
-The Ezus API uses the following warning message format: `{code}_field`.
+The Ezus API uses the following warning message format: `{code}_field` in the message field. Multiple warnings are separated by a comma.
 
 The Ezus API uses the following warning codes:
 
