@@ -15,12 +15,13 @@ The Ezus API uses the following warning codes:
 Warning messages examples
 </aside>
 Here is a warning message example:
+
 ```json
 {
-    "error": "false",
-    "message": "skip_company_number,skip_vat_number",
-    "action": "Client successfully updated",
-    "reference": "client_reference"
+  "error": "false",
+  "message": "skip_company_number,skip_vat_number",
+  "action": "Client successfully updated",
+  "reference": "client_reference"
 }
 ```
 
