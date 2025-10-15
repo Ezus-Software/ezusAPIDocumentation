@@ -865,18 +865,18 @@ axios.post(baseUrl + "/project-steps-upsert", body, headers);
 
 ### Body Parameters (application/json)
 
-| Parameter         | Type   | Description                                                                                                                     |
-|-------------------|--------|---------------------------------------------------------------------------------------------------------------------------------|
-| reference         | String | The reference of the project to retrieve activity, If Reference is filled in and it exists, then it will update your activity.  |
-| project_reference | String | The project reference in which you want to create a activity                                                                    |
-| alternative_order | String | Specifies the alternative order in the project to retrieve documents from. If not provided, defaults to 0 for main alternative  |
-| type              | String | 3 options: `accom`, `activity`, `transport`. This field is <span style="color:red">(Required)</span> for create activity        |
-| name              | String | Title of the activity. This field is <span style="color:red">(Required)</span> for create activity                              |
-| category          | String | Category of the activity, If this is not specified during creation, the default value will be the main category of the account. |
-| date_start        | String | Date start of the activity. This field is <span style="color:red">(Required)</span> for create activity                         |
-| date_end          | String | Date end of the activity. This field is <span style="color:red">(Required)</span> for create activity                           |
-| people            | Int    | Number of people on activity, if not specified for creation, the default value will be `P`.                                     |
-| address           | Object | JSON object address ([Address](#address))                                                                                       |
+| Parameter         | Type   | Description                                                                                                                                                                   |
+|-------------------|--------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| reference         | String | The reference of the project to retrieve activity, If Reference is filled in and it exists, then it will update your activity.                                                |
+| project_reference | String | The project reference in which you want to create a activity                                                                                                                  |
+| alternative_order | String | Specifies the alternative order in the project to retrieve documents from. If not provided, defaults to 0 for main alternative. This field is (Required) for create activity  |
+| type              | String | 3 options: `accom`, `activity`, `transport`. This field is <span style="color:red">(Required)</span> for create activity                                                      |
+| name              | String | Title of the activity. This field is <span style="color:red">(Required)</span> for create activity                                                                            |
+| category          | String | Category of the activity, If this is not specified during creation, the default value will be the main category of the account.                                               |
+| date_start        | String | Date start of the activity. This field is <span style="color:red">(Required)</span> for create activity                                                                       |
+| date_end          | String | Date end of the activity. This field is <span style="color:red">(Required)</span> for create activity                                                                         |
+| people            | Int    | Number of people on activity, if not specified for creation, the default value will be `P`.                                                                                   |
+| address           | Object | JSON object address ([Address](#address))                                                                                                                                     |
 
 ### Response
 
