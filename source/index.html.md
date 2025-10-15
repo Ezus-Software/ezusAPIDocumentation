@@ -802,8 +802,91 @@ axios.post(baseUrl + "/project-documents-create", body, headers);
 A JSON object indicating whether an error occurred during the process, along with the associated message.
 
 | Property | Type | Description                                               |
-| -------- | ---- | --------------------------------------------------------- |
+|----------|------|-----------------------------------------------------------|
 | result   | Link | The URL link of the document after uploading the document |
+
+## POST project-steps-upsert
+
+This API endpoint create or update a project step in the EzusAPI system. It is used to define or modify an step within a project.
+
+```shell
+curl --location 'https://api.ezus.app/project-steps-upsert' \
+--header 'x-api-key: <YOUR_API_KEY>' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer <YOUR_TOKEN>' \
+--data '{
+    "project_reference": "project_reference",
+    "name": "activity Title",
+    "date_start": "2025-10-03 10:00:00",
+    "date_end": "2025-10-03 12:00:00",
+    "link": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
+}'
+```
+
+```javascript
+const axios = require("axios");
+const baseUrl = "https://api.ezus.app";
+
+const body = {
+  project_reference: "project_reference",
+  name: "activity Title",
+  date_start: "2025-10-03 10:00:00",
+  date_end: "2025-10-03 12:00:00",
+  result:
+    "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
+};
+const headers = {
+  "x-api-key": "<YOUR_API_KEY>",
+  Authorization: "Bearer <YOUR_TOKEN>",
+};
+
+axios.post(baseUrl + "/project-steps-upsert", body, headers);
+```
+
+> This request returns a structured JSON object:
+
+```json
+{
+  "error": "false",
+  "result": "<LINK>"
+}
+```
+
+### HTTP Endpoint
+
+`POST https://api.ezus.app/project-steps-upsert`
+
+### Header Parameters
+
+| Parameter     | Type   | Description                                                 |
+|---------------|--------|-------------------------------------------------------------|
+| x-api-key     | String | <span style="color:red">(Required)</span> Your Ezus API key |
+| Authorization | String | <span style="color:red">(Required)</span> Your Bearer token |
+
+### Body Parameters (application/json)
+
+| Parameter         | Type   | Description                                                                                                                     |
+|-------------------|--------|---------------------------------------------------------------------------------------------------------------------------------|
+| reference         | String | The reference of the project to retrieve activity, If Reference is filled in and it exists, then it will update your activity.  |
+| project_reference | String | The project reference in which you want to create a activity                                                                    |
+| alternative_order | String | Specifies the alternative order in the project to retrieve documents from. If not provided, defaults to 0 for main alternative  |
+| type              | String | 3 options: `accom`, `activity`, `transport`. This field is <span style="color:red">(Required)</span> for create activity        |
+| name              | String | Title of the activity. This field is <span style="color:red">(Required)</span> for create activity                              |
+| category          | String | Category of the activity, If this is not specified during creation, the default value will be the main category of the account. |
+| date_start        | String | Date start of the activity. This field is <span style="color:red">(Required)</span> for create activity                         |
+| date_end          | String | Date end of the activity. This field is <span style="color:red">(Required)</span> for create activity                           |
+| people            | Int    | Number of people on activity, if not specified for creation, the default value will be `P`.                                     |
+| address           | Object | JSON object address ([Address](#address))                                                                                       |
+
+### Response
+
+A JSON object indicating whether an error occurred during the process, along with the associated message.
+
+| Property  | Type   | Description                                               |
+|-----------|--------|-----------------------------------------------------------|
+| action    | String | The URL link of the document after uploading the document |
+| reference | String | The URL link of the document after uploading the document |
+
 
 # Clients
 
