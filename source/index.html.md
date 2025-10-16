@@ -3851,7 +3851,7 @@ If it’s defined as a dynamic filter, you can use different comparison operator
 
 | Operator    | Suffix    | Description                                     | Example                                   |
 | ----------- | --------- | ----------------------------------------------- | ----------------------------------------- |
-| Equal to    |           | Default behaviour without using dynamic filters | `email=contact@moke-international.com`    |
+| No operator |           | Default behaviour without using dynamic filters | `email=contact@moke-international.com`    |
 | Equal to    | `_eq`     | Exact match                                     | `email_eq=contact@moke-international.com` |
 | Starts with | `_starts` | Field value starts with...                      | `email_starts=contact`                    |
 | Ends with   | `_ends`   | Field value ends with...                        | `email_ends=international.com`            |
