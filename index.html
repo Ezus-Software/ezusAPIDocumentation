@@ -2055,6 +2055,16 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 </tbody></table>
 <h2 id='post-clients-upsert'>POST clients-upsert</h2>
 <p>This API endpoint updates a client record if the provided reference or email matches an existing client in your account. If no match is found, a new client record is created with the provided reference, or a randomly generated one if no reference is supplied. The client&#39;s email can be used as the primary key for upsert operations.</p>
+<h3 id='duplicate-prevention-rules'>Duplicate Prevention Rules</h3>
+<ul>
+<li><strong>Enterprise clients</strong>: A client cannot be created or updated if another enterprise client already exists with the same <strong>company name</strong>.</li>
+<li><strong>Individual clients</strong>: A client cannot be created or updated if another individual client already exists with the same <strong>first and last name</strong>.</li>
+</ul>
+<h3 id='error-messages'>Error messages</h3>
+<ul>
+<li>Enterprise client duplication → <code>A client with this name already exists</code></li>
+<li>Individual client duplication → <code>A client with this name already exists</code></li>
+</ul>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="s1">'https://api.ezus.app/clients-upsert'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'x-api-key: &lt;YOUR_API_KEY&gt;'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
