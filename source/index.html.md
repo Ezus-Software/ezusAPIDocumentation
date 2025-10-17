@@ -807,7 +807,7 @@ A JSON object indicating whether an error occurred during the process, along wit
 
 ## POST project-steps-upsert
 
-This API endpoint create or update a project step in the EzusAPI system. It is used to define or modify an step within a project.
+This API endpoint create or update a project step. It is used to define or modify an step within a project.
 
 ```shell
 curl --location 'https://api.ezus.app/project-steps-upsert' \
@@ -815,8 +815,23 @@ curl --location 'https://api.ezus.app/project-steps-upsert' \
 --header 'Content-Type: application/json' \
 --header 'Authorization: Bearer <YOUR_TOKEN>' \
 --data '{
+    "reference": "reference",
     "project_reference": "project_reference",
+    "alternative_order": "0",
     "name": "activity Title",
+    "type": "activity",
+    "category": "restaurant",
+    "people": 4,
+    "address": {
+        "label": "58 Rue de Paradis",
+        "city": "Paris",
+        "country": "France",
+        "zip": "75010",
+        "geo": {
+            "x": 48.875761,
+            "y": 2.348727
+        }
+    },
     "date_start": "2025-10-03 10:00:00",
     "date_end": "2025-10-03 12:00:00",
     "link": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
@@ -865,27 +880,33 @@ axios.post(baseUrl + "/project-steps-upsert", body, headers);
 
 ### Body Parameters (application/json)
 
-| Parameter         | Type   | Description                                                                                                                                                                   |
-|-------------------|--------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| reference         | String | The reference of the project to retrieve activity, If Reference is filled in and it exists, then it will update your activity.                                                |
-| project_reference | String | The project reference in which you want to create a activity                                                                                                                  |
-| alternative_order | String | Specifies the alternative order in the project to retrieve documents from. If not provided, defaults to 0 for main alternative. This field is (Required) for create activity  |
-| type              | String | 3 options: `accom`, `activity`, `transport`. This field is <span style="color:red">(Required)</span> for create activity                                                      |
-| name              | String | Title of the activity. This field is <span style="color:red">(Required)</span> for create activity                                                                            |
-| category          | String | Category of the activity, If this is not specified during creation, the default value will be the main category of the account.                                               |
-| date_start        | String | Date start of the activity. This field is <span style="color:red">(Required)</span> for create activity                                                                       |
-| date_end          | String | Date end of the activity. This field is <span style="color:red">(Required)</span> for create activity                                                                         |
-| people            | Int    | Number of people on activity, if not specified for creation, the default value will be `P`.                                                                                   |
-| address           | Object | JSON object address ([Address](#address))                                                                                                                                     |
+| Parameter         | Type   | Description                                                                                                                                                                                                   |
+|-------------------|--------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| reference         | String | The reference of the project to retrieve activity, If Reference is filled in and it exists, then it will update your activity.                                                                                |
+| project_reference | String | The project reference in which you want to create a activity. This field is ignored on update                                                                                                                 |
+| alternative_order | String | Specifies the alternative order in the project to retrieve documents from. If not provided, defaults to 0 for main alternative. This field is (Required) for create activity. This field is ignored on update |
+| type              | String | 3 options: `accom`, `activity`, `transport`. This field is <span style="color:red">(Required)</span> for create activity. This field is ignored on update                                                     |
+| name              | String | Title of the activity. This field is <span style="color:red">(Required)</span> for create activity                                                                                                            |
+| category          | String | Category of the activity, If this is not specified during creation, the default value will be the main category of the account.                                                                               |
+| date_start        | String | Date start of the activity. This field is <span style="color:red">(Required)</span> for create activity. The date format must be as follows, e.g.: `2024-10-01 12:00:00`                                      |
+| date_end          | String | Date end of the activity. This field is <span style="color:red">(Required)</span> for create activity. The date format must be as follows, e.g.: `2024-10-01 12:00`                                           |
+| people            | Int    | Number of people on activity, if not specified for creation, the default value will be `P`.                                                                                                                   |
+| address           | Object | JSON object address ([Address](#address))                                                                                                                                                                     |
 
 ### Response
 
 A JSON object indicating whether an error occurred during the process, along with the associated message.
 
-| Property  | Type   | Description                                               |
-|-----------|--------|-----------------------------------------------------------|
-| action    | String | The URL link of the document after uploading the document |
-| reference | String | The URL link of the document after uploading the document |
+| Property  | Type   | Description                                                                   |
+|-----------|--------|-------------------------------------------------------------------------------|
+| error     | String | If there was an error during creation or update                               |
+| message   | String | the return message ‘ok’ if everything went well, otherwise the error message  |
+| action    | String | If the project has been updated and created                                   |
+| reference | String | The ID of the activity that was created or updated                            |
+    "error": "false",
+    "message": "ok",
+    "action": "Project step successfully updated",
+    "reference": "0c69370a-d733-4873-af84-75ebcabbd7e8"
 
 
 # Clients
