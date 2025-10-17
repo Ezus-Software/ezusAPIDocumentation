@@ -679,3 +679,22 @@ body {
 .copy-clipboard:hover {
   opacity: 0.8;
 }
+
+.label {
+  border-radius: 2px;
+  text-transform: uppercase;
+  font-style: normal;
+  white-space: nowrap;
+  font-weight: 700;
+  font-size: 0.7rem;
+  padding: 2px 4px;
+}
+
+.label-grey {
+  background: #efefef;
+  color: #999;
+}
+
+.float-right {
+  float: right;
+}
