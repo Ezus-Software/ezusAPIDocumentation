@@ -1024,11 +1024,10 @@ A JSON object containing the client information with properties like:
 
 This API endpoint updates a client record if the provided reference or email matches an existing client in your account. If no match is found, a new client record is created with the provided reference, or a randomly generated one if no reference is supplied. The client's email can be used as the primary key for upsert operations.
 
-### Duplication rules
+### Duplicate Prevention Rules
 
-- **Enterprise clients**: you cannot create or update a client if another enterprise client already exists with the same name
-- **Individual clients**: you cannot create or update a client if another individual client already exists with the same name
-- **Important**: if a duplication error occurs, <span style="color:red">**no update is applied**</span>
+- **Enterprise clients**: A client cannot be created or updated if another enterprise client already exists with the same **company name**.
+- **Individual clients**: A client cannot be created or updated if another individual client already exists with the same **first and last name**.
 
 ### Error messages
 
