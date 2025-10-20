@@ -879,13 +879,13 @@ axios.get(baseUrl + "/clients", headers);
 
 ### Query Parameters
 
-| Parameter   | Type   | Description                                                                                                                                                                                                                    |
-| ----------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| next_token  | String | Specify this parameter if you want to retrieve the following elements of a given list query.                                                                                                                                   |
-| reference   | String | [<span class="label label-grey float-right">Dynamic-filter</span>](#dynamic-filters) You can filter clients with a specific reference                                                                                          |
-| info_number | String | [<span class="label label-grey float-right">Dynamic-filter</span>](#dynamic-filters) You can filter clients with a specific info_number, file number that appears in the client record. Not to be confused with reference      |
-| type        | String | You can filter clients by their type. Either `enterprise` or `individual`                                                                                                                                                      |
-| email       | String | [<span class="label label-grey float-right">Dynamic-filter</span>](#dynamic-filters) You can filter clients by email. This filter works for both `enterprise` clients (uses the main contact’s email) and `individual` clients |
+| Parameter   | Type                               | Description                                                                                                                               |
+| ----------- | ---------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| next_token  | String                             | Specify this parameter if you want to retrieve the following elements of a given list query.                                              |
+| reference   | [Dynamic-filter](#dynamic-filters) | You can filter clients with a specific reference                                                                                          |
+| info_number | [Dynamic-filter](#dynamic-filters) | You can filter clients with a specific info_number, file number that appears in the client record. Not to be confused with reference      |
+| type        | String                             | You can filter clients by their type. Either `enterprise` or `individual`                                                                 |
+| email       | [Dynamic-filter](#dynamic-filters) | You can filter clients by email. This filter works for both `enterprise` clients (uses the main contact’s email) and `individual` clients |
 
 ### Response
 
@@ -3843,19 +3843,19 @@ This event is triggered whenever a file is added to a supplier invoice.
 
 # Dynamic Filters
 
-Some filters can be marked as <span class="label label-grey">Dynamic-filter</span>.
-When a filter is dynamic, you can add operator suffixes directly to the query parameter name.
+Some filters can be marked as Dynamic-filter.
+When a filter is dynamic, it only accepts **String** values, and you can append operator suffixes directly to the query parameter name.
 
 Let’s take the `email` field as an example.  
 If it’s defined as a dynamic filter, you can use different comparison operators in the query parameter name:
 
-| Operator    | Suffix    | Description                                     | Example                                   |
-| ----------- | --------- | ----------------------------------------------- | ----------------------------------------- |
-| No operator |           | Default behaviour without using dynamic filters | `email=contact@moke-international.com`    |
-| Equal to    | `_eq`     | Exact match                                     | `email_eq=contact@moke-international.com` |
-| Starts with | `_starts` | Field value starts with...                      | `email_starts=contact`                    |
-| Ends with   | `_ends`   | Field value ends with...                        | `email_ends=international.com`            |
-| Contains    | `_like`   | Field value contains...                         | `email_like=moke`                         |
+| Operator    | Suffix    | Description                                                                                   | Example                                   |
+| ----------- | --------- | --------------------------------------------------------------------------------------------- | ----------------------------------------- |
+| Equals      |           | Filters that aren’t marked as dynamic default to equals, meaning it will match values exactly | `email=contact@moke-international.com`    |
+| Equals      | `_eq`     | Exact match                                                                                   | `email_eq=contact@moke-international.com` |
+| Starts with | `_starts` | Field value starts with...                                                                    | `email_starts=contact`                    |
+| Ends with   | `_ends`   | Field value ends with...                                                                      | `email_ends=international.com`            |
+| Contains    | `_like`   | Field value contains...                                                                       | `email_like=moke`                         |
 
 # Date Format
 
