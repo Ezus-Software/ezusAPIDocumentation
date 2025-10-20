@@ -254,7 +254,7 @@
       "response": []
     },
     {
-      "name": "projects-documents-create",
+      "name": "project-documents-create",
       "request": {
         "method": "POST",
         "header": [
@@ -274,9 +274,9 @@
           }
         },
         "url": {
-          "raw": "{{baseUrl}}/projects-documents-create",
+          "raw": "{{baseUrl}}/project-documents-create",
           "host": ["{{baseUrl}}"],
-          "path": ["projects-documents-create"]
+          "path": ["project-documents-create"]
         }
       },
       "response": []
@@ -300,6 +300,26 @@
             {
               "key": "next_token",
               "value": "",
+              "disabled": true
+            },
+            {
+              "key": "reference",
+              "value": "client_reference",
+              "disabled": true
+            },
+            {
+              "key": "info_number",
+              "value": "202306001-C",
+              "disabled": true
+            },
+            {
+              "key": "type",
+              "value": "enterprise",
+              "disabled": true
+            },
+            {
+              "key": "email",
+              "value": "contact@moke-international.com",
               "disabled": true
             }
           ]
@@ -591,6 +611,34 @@
       "response": []
     },
     {
+      "name": "destinations-upsert",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "X-API-KEY",
+            "value": "{{<YOUR_API_KEY>}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"reference\": \"destination_reference\",\n    \"name\": \"France\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/destinations-upsert",
+          "host": ["{{baseUrl}}"],
+          "path": ["destinations-upsert"]
+        }
+      },
+      "response": []
+    },
+    {
       "name": "subdestination",
       "request": {
         "method": "GET",
@@ -611,6 +659,34 @@
               "value": "subdestination_reference"
             }
           ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "subdestinations-upsert",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "X-API-KEY",
+            "value": "{{<YOUR_API_KEY>}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"reference\": \"subdestination_reference\",\n    \"destination_reference\": \"destination_reference\",\n    \"name\": \"Paris\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/subdestinations-upsert",
+          "host": ["{{baseUrl}}"],
+          "path": ["subdestinations-upsert"]
         }
       },
       "response": []

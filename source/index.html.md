@@ -270,6 +270,7 @@ axios.get(baseUrl + "/project?reference=project_reference", headers);
   "alternatives": [
     {
       "alternative_title": "Main Alternative",
+      "is_main": true,
       "trip_date_in": "2024-03-01",
       "trip_date_out": "2024-03-09",
       "trip_duration": 9,
@@ -493,6 +494,7 @@ axios.get(baseUrl + "/project-steps?reference=project_reference", headers);
           "reference": "item_reference",
           "name": "item_title",
           "product_reference": "product_reference",
+          "supplier_reference": "supplier_reference",
           "quantity": 2,
           "purchase_price": 150,
           "purchase_price_excl_taxes": 125,
@@ -727,12 +729,12 @@ A JSON object indicating whether an error occurred during the process, along wit
 | info_number      | String | File number that appears in the project record. Not to be confused with reference        |
 | client_reference | String | The `reference` for the client, which you should store for future updates or retrievals  |
 
-## POST projects-documents-create
+## POST project-documents-create
 
 This API endpoint generates a PDF document from a given link within the specified project.
 
 ```shell
-curl --location 'https://api.ezus.app/projects-documents-create' \
+curl --location 'https://api.ezus.app/project-documents-create' \
 --header 'x-api-key: <YOUR_API_KEY>' \
 --header 'Content-Type: application/json' \
 --header 'Authorization: Bearer <YOUR_TOKEN>' \
@@ -758,7 +760,7 @@ const headers = {
   Authorization: "Bearer <YOUR_TOKEN>",
 };
 
-axios.post(baseUrl + "/projects-documents-create", body, headers);
+axios.post(baseUrl + "/project-documents-create", body, headers);
 ```
 
 > This request returns a structured JSON object:
@@ -772,7 +774,7 @@ axios.post(baseUrl + "/projects-documents-create", body, headers);
 
 ### HTTP Endpoint
 
-`POST https://api.ezus.app/projects-documents-create`
+`POST https://api.ezus.app/project-documents-create`
 
 ### Header Parameters
 
@@ -877,9 +879,13 @@ axios.get(baseUrl + "/clients", headers);
 
 ### Query Parameters
 
-| Parameter  | Type   | Description                                                                                  |
-| ---------- | ------ | -------------------------------------------------------------------------------------------- |
-| next_token | String | Specify this parameter if you want to retrieve the following elements of a given list query. |
+| Parameter   | Type   | Description                                                                                                                               |
+| ----------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| next_token  | String | Specify this parameter if you want to retrieve the following elements of a given list query.                                              |
+| reference   | String | You can filter clients with a specific reference                                                                                          |
+| info_number | String | You can filter clients with a specific info_number, file number that appears in the client record. Not to be confused with reference      |
+| type        | String | You can filter clients by their type. Either `enterprise` or `individual`                                                                 |
+| email       | String | You can filter clients by email. This filter works for both `enterprise` clients (uses the main contact’s email) and `individual` clients |
 
 ### Response
 
@@ -959,17 +965,31 @@ axios.get(baseUrl + "/client?reference=client_reference", headers);
   "contacts": {
     "data": [
       {
-        "email": "contact@moke-international.com",
+        "reference": "contact_reference",
+        "email": "contact@moke.com",
         "first_name": "Jane",
         "last_name": "Doe",
         "title": "CEO",
         "gender": "Ms",
         "phone": "0101010101",
         "phone2": "0606060606",
-        "birth_date": "1986-09-17"
+        "birth_date": "1986-09-17",
+        "is_main": true
+      },
+      {
+        "reference": "contact_reference",
+        "email": "bob@proton.me",
+        "first_name": "Bob",
+        "last_name": "Morane",
+        "title": "Project Manager",
+        "gender": "Mr",
+        "phone": "0202020202",
+        "phone2": "0707070707",
+        "birth_date": "1985-10-18",
+        "is_main": false
       }
     ],
-    "size": 1
+    "size": 2
   },
   "custom_fields": [
     {
@@ -1023,6 +1043,16 @@ A JSON object containing the client information with properties like:
 ## POST clients-upsert
 
 This API endpoint updates a client record if the provided reference or email matches an existing client in your account. If no match is found, a new client record is created with the provided reference, or a randomly generated one if no reference is supplied. The client's email can be used as the primary key for upsert operations.
+
+### Duplicate Prevention Rules
+
+- **Enterprise clients**: A client cannot be created or updated if another enterprise client already exists with the same **company name**.
+- **Individual clients**: A client cannot be created or updated if another individual client already exists with the same **first and last name**.
+
+### Error messages
+
+- Enterprise client duplication → `A client with this name already exists`
+- Individual client duplication → `A client with this name already exists`
 
 ```shell
 curl --location 'https://api.ezus.app/clients-upsert' \
@@ -1322,16 +1352,29 @@ axios.get(baseUrl + "/supplier?reference=supplier_reference", headers);
   "contacts": {
     "data": [
       {
+        "reference": "contact_reference",
+        "email": "contact@moke.com",
+        "first_name": "Jane",
+        "last_name": "Doe",
+        "title": "CEO",
+        "gender": "Ms",
+        "phone": "0101010101",
+        "phone2": "0606060606",
+        "is_main": true
+      },
+      {
+        "reference": "contact_reference",
         "email": "bob@proton.me",
         "first_name": "Bob",
         "last_name": "Morane",
         "title": "Project Manager",
         "gender": "Mr",
         "phone": "0202020202",
-        "phone2": "0707070707"
+        "phone2": "0707070707",
+        "is_main": false
       }
     ],
-    "size": 1
+    "size": 2
   },
   "langs": [
     {
@@ -2070,10 +2113,10 @@ axios.post(baseUrl + "/packages-upsert", body, headers);
 
 | Parameter                | Type   | Description                                                                                                                                                                                                                 |
 | ------------------------ | ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| reference                | String | If provided, the unique Ezus Reference associated to the package you want to update or create (in case the one you provided has never been used). If no reference is provided, a package will be created with a random one. |
+| reference                | String | If provided, the unique reference associated to the package you want to update or create (in case the one you provided has never been used). If no reference is provided, a package will be created with a random one.      |
 | info_number              | String | File number that appears in the package record. Not to be confused with reference                                                                                                                                           |
 | title                    | String | This parameter is required if you create a new package                                                                                                                                                                      |
-| capacity                 | Number | Maximum number of people for which the package can be used . Leave blank `''` if not relevant                                                                                                                               |
+| capacity                 | Number  Maximum number of people for which the package can be used . Leave blank `''` if not relevant                                                                                                                                |
 | destination_reference    | String | Reference of the destination to link to the package. To reset the destination, you can put `'0'`.                                                                                                                           |
 | subdestination_reference | String | Reference of the sub-destination to link to the package. To reset the sub-destination, you can put `'0'`. If the `destination_reference` is not provided, the `subdestination_reference` will be ignored.                   |
 | custom_fields            | JSON   | Array of JSON custom fields [Custom fields](#custom-fields)                                                                                                                                                                 |
@@ -2151,6 +2194,75 @@ A JSON object containing the destination information with properties like:
 | ------------ | ------ | ------------------------------------------------------------ |
 | size         | Number | The total number of destinations                             |
 | destinations | Array  | Array of JSON destinations ([Destinations](#destinations-2)) |
+
+## POST destinations-upsert
+
+It updates a destination record if the provided reference does match one of the destination references in your account, otherwise it creates a new destination record with the provided reference (or with a random one if no reference is provided).
+
+```shell
+curl --location 'https://api.ezus.app/destinations-upsert' \
+--header 'x-api-key: <YOUR_API_KEY>' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer <YOUR_TOKEN>'
+--data '{
+    "reference": "destination_reference",
+    "name": "France"
+}'
+```
+
+```javascript
+const axios = require("axios");
+const baseUrl = "https://api.ezus.app";
+
+const body = {
+  reference: "destination_reference",
+  name: "France",
+};
+const headers = {
+  "x-api-key": "<YOUR_API_KEY>",
+  Authorization: "Bearer <YOUR_TOKEN>",
+};
+
+axios.post(baseUrl + "/destinations-upsert", body, headers);
+```
+
+> This request returns a structured JSON object:
+
+```json
+{
+  "error": "false",
+  "message": "ok",
+  "action": "Destination successfully created",
+  "reference": "destination_reference"
+}
+```
+
+### HTTP Endpoint
+
+`POST https://api.ezus.app/destinations-upsert`
+
+### Header Parameters
+
+| Parameter     | Type   | Description                                                 |
+| ------------- | ------ | ----------------------------------------------------------- |
+| x-api-key     | String | <span style="color:red">(Required)</span> Your Ezus API key |
+| Authorization | String | <span style="color:red">(Required)</span> Your Bearer token |
+
+### Body Parameters (application/json)
+
+| Parameter | Type   | Description                                                                                                                                                                                                                    |
+| --------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| reference | String | If provided, the unique reference associated to the destination you want to update or create (in case the one you provided has never been used). If no reference is provided, a destination will be created with a random one. |
+| name      | String | This parameter is required. Name of the destination to create or update. If a destination already exists with this name, it will return an error.                                                                              |
+
+### Response
+
+A JSON object indicating whether an error occurred during the process, along with the associated message.
+
+| Property  | Type   | Description                                                                                  |
+| --------- | ------ | -------------------------------------------------------------------------------------------- |
+| action    | String | Indicates type of destination action was created                                             |
+| reference | String | The `reference` for the destination, which you should store for future updates or retrievals |
 
 ## GET subdestination
 
@@ -2237,6 +2349,78 @@ A JSON object containing the sub-destination information with properties like:
 | visual_url            | String | URL of the Google Slides visual linked to the sub-destination |
 | medias                | JSON   | JSON object medias ([Medias](#medias))                        |
 | langs                 | Array  | Array of JSON langs ([Langs](#langs))                         |
+
+## POST subdestinations-upsert
+
+It updates a sub-destination record if the provided reference does match one of the sub-destination references in your account, otherwise it creates a new sub-destination record with the provided reference (or with a random one if no reference is provided).
+
+```shell
+curl --location 'https://api.ezus.app/subdestinations-upsert' \
+--header 'x-api-key: <YOUR_API_KEY>' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer <YOUR_TOKEN>'
+--data '{
+    "reference": "subdestination_reference",
+    "destination_reference": "destination_reference",
+    "name": "Paris"
+}'
+```
+
+```javascript
+const axios = require("axios");
+const baseUrl = "https://api.ezus.app";
+
+const body = {
+  reference: "subdestination_reference",
+  destination_reference: "destination_reference"
+  name: "Paris",
+};
+const headers = {
+  "x-api-key": "<YOUR_API_KEY>",
+  Authorization: "Bearer <YOUR_TOKEN>",
+};
+
+axios.post(baseUrl + "/subdestinations-upsert", body, headers);
+```
+
+> This request returns a structured JSON object:
+
+```json
+{
+  "error": "false",
+  "message": "ok",
+  "action": "Subdestination successfully created",
+  "reference": "subdestination_reference"
+}
+```
+
+### HTTP Endpoint
+
+`POST https://api.ezus.app/subdestinations-upsert`
+
+### Header Parameters
+
+| Parameter     | Type   | Description                                                 |
+| ------------- | ------ | ----------------------------------------------------------- |
+| x-api-key     | String | <span style="color:red">(Required)</span> Your Ezus API key |
+| Authorization | String | <span style="color:red">(Required)</span> Your Bearer token |
+
+### Body Parameters (application/json)
+
+| Parameter             | Type   | Description                                                                                                                                                                                                                            |
+| --------------------- | ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| reference             | String | If provided, the unique reference associated to the sub-destination you want to update or create (in case the one you provided has never been used). If no reference is provided, a sub-destination will be created with a random one. |
+| destination_reference | String | This parameter is required and must match an existing destination.                                                                                                                                                                     |
+| name                  | String | This parameter is required. Name of the sub-destination to create or update. If a sub-destination already exists with this name, it will return an error.                                                                              |
+
+### Response
+
+A JSON object indicating whether an error occurred during the process, along with the associated message.
+
+| Property  | Type   | Description                                                                                      |
+| --------- | ------ | ------------------------------------------------------------------------------------------------ |
+| action    | String | Indicates type of sub-destination action was created                                             |
+| reference | String | The `reference` for the sub-destination, which you should store for future updates or retrievals |
 
 # Invoices
 
@@ -2625,16 +2809,19 @@ axios.get(
   },
   "payments": [
     {
+      "reference": "payment_reference",
       "date": "2023-10-10",
       "amount": 500.0,
       "payment_method": "Credit Card"
     },
     {
+      "reference": "payment_reference",
       "date": "2023-10-11",
       "amount": 500.0,
       "payment_method": "Wire"
     },
     {
+      "reference": "payment_reference",
       "date": "2023-10-12",
       "amount": 200.0,
       "payment_method": "Check"
@@ -2679,7 +2866,7 @@ A JSON object containing the supplier invoice information with properties like:
 | project      | JSON   | JSON including: `reference`, `info_title`, `info_stage`, `info_stage_reference`, `info_number`, `currency` and `is_closed`                                                                                        |
 | alternative  | JSON   | JSON including: `sort_order` and `title`                                                                                                                                                                          |
 | client       | JSON   | JSON including: `reference`, `type` (enterprise or individual), `company_name`, `first_name`, `last_name` and `email`                                                                                             |
-| payments     | Array  | Array of JSON including: `date`, `amount` and `payment_method`                                                                                                                                                    |
+| payments     | Array  | Array of JSON including: `reference`, `date`, `amount` and `payment_method`                                                                                                                                       |
 
 # Deposits
 
@@ -2946,7 +3133,7 @@ axios.post(baseUrl + "/webhooks-upsert", body, headers);
 
 | Parameter    | Type   | Description                                                                                                                                                                                                                                                              |
 | ------------ | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| reference    | String | If provided, the unique Ezus Reference associated to the webhook you want to update or create (in case the one you provided has never been used). If no reference is provided, a webhook will be created with a random one.                                              |
+| reference    | String | If provided, the unique reference associated to the webhook you want to update or create (in case the one you provided has never been used). If no reference is provided, a webhook will be created with a random one.                                                   |
 | endpoint     | String | If provided, the endpoint associated to the webhook you want to update or create (in case the one you provided has never been used). This parameter is required if you create a new webhook and has to be unique. You cannot update the endpoint of an existing webhook. |
 | is_active    | String | Status of the webhook `true` or `false`                                                                                                                                                                                                                                  |
 | events_types | JSON   | The list of events to enable for this endpoint. At least 1 required, separated by commas if more than one. ([Events](#events))                                                                                                                                           |
@@ -3017,7 +3204,7 @@ axios.delete(baseUrl + "/webhooks-delete", body, headers);
 
 | Parameter | Type   | Description                                                                         |
 | --------- | ------ | ----------------------------------------------------------------------------------- |
-| reference | String | If provided, the unique Ezus Reference associated to the webhook you want to delete |
+| reference | String | If provided, the unique reference associated to the webhook you want to delete |
 | endpoint  | String | If provided, the endpoint associated to the webhook you want to delete              |
 
 ### Response
@@ -3055,6 +3242,7 @@ A JSON object indicating whether an error occurred during the process, along wit
 "alternatives": [
   {
     "alternative_title": "Main Alternative",
+    "is_main": true,
     "trip_date_in": "2024-03-01",
     "trip_date_out": "2024-03-09",
     "trip_duration": 9,
@@ -3103,24 +3291,25 @@ A JSON object indicating whether an error occurred during the process, along wit
 ]
 ```
 
-| Property                      | Type   | Description                                                                                                                                                |
-| ----------------------------- | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| alternative_title             | String | Title of the alternative                                                                                                                                   |
-| trip_date_in                  | Date   | Date of the beginning of this alternative, in a "YYYY-MM-DD" format string. If it's empty, the project has no dates                                        |
-| trip_date_out                 | Date   | Date of the end of this alternative, in a "YYYY-MM-DD" format string. If it's empty, the project has no dates                                              |
-| trip_duration                 | Number | Number of days this alternative lasts                                                                                                                      |
-| trip_budget                   | Number | Forecasted budget for the alternative (the one that is entered manually not the actual one)                                                                |
-| budget_actual                 | Number | Actual budget for the alternative, inclusive of taxes                                                                                                      |
-| budget_actual_excl_taxes      | Number | Actual budget for the alternative, excluding taxes                                                                                                         |
-| budget_margin_gross           | Number | Gross margin for the alternative                                                                                                                           |
-| budget_margin_net             | Number | Net margin for the alternative                                                                                                                             |
-| trip_people                   | String | Number of people                                                                                                                                           |
-| client                        | JSON   | JSON including: `reference`, `type` (enterprise or individual), `company_name`, `first_name`, `last_name` and `email`                                      |
-| trip_destination_reference    | String | Destination reference of the alternative. Note: For multi-destination alternatives, only the primary destination is returned.                              |
-| trip_destination              | String | Destination of the alternative. Note: For multi-destination alternatives, only the primary destination is returned.                                        |
-| trip_subdestination_reference | String | Subdestination reference of the alternative. Note: For multi-destination alternatives, only the primary subdestination is returned.                        |
-| trip_subdestination           | String | Subdestination of the alternative. Note: For multi-destination alternatives, only the primary subdestination is returned.                                  |
-| destinations                  | JSON   | JSON including: `size`, Array of all destination (`reference` and `name`) and subdestination (`subdestination_reference` and `subdestination_name`) values |
+| Property                      | Type    | Description                                                                                                                                                |
+|-------------------------------|---------| ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| alternative_title             | String  | Title of the alternative                                                                                                                                   |
+| is_main                       | Boolean | If the alternative is the main alternative                                                                                                                               |
+| trip_date_in                  | Date    | Date of the beginning of this alternative, in a "YYYY-MM-DD" format string. If it's empty, the project has no dates                                        |
+| trip_date_out                 | Date    | Date of the end of this alternative, in a "YYYY-MM-DD" format string. If it's empty, the project has no dates                                              |
+| trip_duration                 | Number  | Number of days this alternative lasts                                                                                                                      |
+| trip_budget                   | Number  | Forecasted budget for the alternative (the one that is entered manually not the actual one)                                                                |
+| budget_actual                 | Number  | Actual budget for the alternative, inclusive of taxes                                                                                                      |
+| budget_actual_excl_taxes      | Number  | Actual budget for the alternative, excluding taxes                                                                                                         |
+| budget_margin_gross           | Number  | Gross margin for the alternative                                                                                                                           |
+| budget_margin_net             | Number  | Net margin for the alternative                                                                                                                             |
+| trip_people                   | String  | Number of people                                                                                                                                           |
+| client                        | JSON    | JSON including: `reference`, `type` (enterprise or individual), `company_name`, `first_name`, `last_name` and `email`                                      |
+| trip_destination_reference    | String  | Destination reference of the alternative. Note: For multi-destination alternatives, only the primary destination is returned.                              |
+| trip_destination              | String  | Destination of the alternative. Note: For multi-destination alternatives, only the primary destination is returned.                                        |
+| trip_subdestination_reference | String  | Subdestination reference of the alternative. Note: For multi-destination alternatives, only the primary subdestination is returned.                        |
+| trip_subdestination           | String  | Subdestination of the alternative. Note: For multi-destination alternatives, only the primary subdestination is returned.                                  |
+| destinations                  | JSON    | JSON including: `size`, Array of all destination (`reference` and `name`) and subdestination (`subdestination_reference` and `subdestination_name`) values |
 
 ### Contacts
 
@@ -3130,30 +3319,46 @@ Only the last 10 contacts are returned in this object. Note that for upsert endp
 "contacts": {
   "data": [
     {
-      "email": "elliot@fsociety.org",
-      "first_name": "Elliot",
-      "last_name": "Alderson",
-      "title": "Developer",
+      "reference": "contact_reference",
+      "email": "contact@moke.com",
+      "first_name": "Jane",
+      "last_name": "Doe",
+      "title": "CEO",
+      "gender": "Ms",
+      "phone": "0101010101",
+      "phone2": "0606060606",
+      "birth_date": "1986-09-17",
+      "is_main": true
+    },
+    {
+      "reference": "contact_reference",
+      "email": "bob@proton.me",
+      "first_name": "Bob",
+      "last_name": "Morane",
+      "title": "Project Manager",
       "gender": "Mr",
-      "phone": "",
-      "phone2": "",
-      "birth_date": "1986-09-17"
+      "phone": "0202020202",
+      "phone2": "0707070707",
+      "birth_date": "1985-10-18",
+      "is_main": false
     }
   ],
-  "size": 1
+  "size": 2
 }
 ```
 
-| Property   | Type   | Description                                                                                       |
-| ---------- | ------ | ------------------------------------------------------------------------------------------------- |
-| email      | String | Email of the contact                                                                              |
-| first_name | String | First name of the contact as a string                                                             |
-| last_name  | String | Last name of the contact as a string                                                              |
-| title      | String | Title of the contact as a string                                                                  |
-| gender     | String | `Mr`, `Ms` or `Undefined`                                                                         |
-| phone      | String | Phone number of the contact as a string                                                           |
-| phone2     | String | Second phone number of the contact as a string                                                    |
-| birth_date | String | Contact's date of birth in a "YYYY-MM-DD" format string (supplier contacts have no date of birth) |
+| Property   | Type    | Description                                                                                       |
+| ---------- | ------- | ------------------------------------------------------------------------------------------------- |
+| reference  | String  | Reference of the contact                                                                          |
+| email      | String  | Email of the contact                                                                              |
+| first_name | String  | First name of the contact as a string                                                             |
+| last_name  | String  | Last name of the contact as a string                                                              |
+| title      | String  | Title of the contact as a string                                                                  |
+| gender     | String  | `Mr`, `Ms` or `Undefined`                                                                         |
+| phone      | String  | Phone number of the contact as a string                                                           |
+| phone2     | String  | Second phone number of the contact as a string                                                    |
+| birth_date | String  | Contact's date of birth in a "YYYY-MM-DD" format string (supplier contacts have no date of birth) |
+| is_main    | Boolean | True if this contact is the primary contact for the parent resource                               |
 
 ### Custom Fields
 
@@ -3298,6 +3503,7 @@ These objects provides insights into the invoice amounts, differentiating betwee
     "reference": "item_reference",
     "name": "item_title",
     "product_reference": "product_reference",
+    "supplier_reference": "supplier_reference",
     "quantity": 2,
     "purchase_price": 150,
     "purchase_price_excl_taxes": 125,
@@ -3318,6 +3524,7 @@ The fields `purchase_price`, `purchase_price_excl_taxes`, `sales_price`, and `sa
 | reference                 | String  | The reference of the item                                                                                               |
 | name                      | String  | Name of the item                                                                                                        |
 | product_reference         | String  | The product reference associated with the item                                                                          |
+| supplier_reference        | String  | The supplier reference associated with the item                                                                         |
 | quantity                  | Number  | Quantity of the item                                                                                                    |
 | purchase_price            | Number  | The unit purchase price of the item (including taxes)                                                                   |
 | purchase_price_excl_taxes | Number  | The unit purchase price of the item (excluding taxes)                                                                   |
@@ -3420,6 +3627,7 @@ The steps are sorted by their creation date, with the most recently created appe
         "reference": "item_reference",
         "name": "item_title",
         "product_reference": "product_reference",
+        "supplier_reference": "supplier_reference",
         "quantity": 2,
         "purchase_price": 150,
         "purchase_price_excl_taxes": 125,
