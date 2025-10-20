@@ -1471,6 +1471,8 @@ curl --location 'https://api.ezus.app/suppliers-upsert' \
       "country": "France",
       "zip": "75010"
   },
+  "destination_reference": "destination_reference",
+  "subdestination_reference": "subdestination_reference",
   "custom_fields": [
       {"name": "field_name", "value": "field_value"}
   ]
@@ -1504,6 +1506,8 @@ const body = {
     country: "France",
     zip: "75010",
   },
+  destination_reference: "destination_reference",
+  subdestination_reference: "subdestination_reference",
   custom_fields: [{ name: "field_name", value: "field_value" }],
 };
 const headers = {
@@ -1538,18 +1542,20 @@ axios.post(baseUrl + "/suppliers-upsert", body, headers);
 
 ### Body Parameters (application/json)
 
-| Parameter     | Type   | Description                                                                                                                                                                                                                                      |
-| ------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --- |
-| reference     | String | If provided, the unique reference associated to the supplier you want to update or create (in case the one you provided has never been used). If no reference is provided, a supplier will be created with a random one.                         |
-| info_number   | String | File number that appears in the supplier record. Not to be confused with reference                                                                                                                                                               |
-| type          | String | Either `undefined` or a combination of these 3 options: `accom`, `activity`, `transport`. You can select multiple options by separating them with comas ("accom, activity" for instance). Enter "undefined" if you want to reset this parameter. |
-| company_name  | String | <span style="color:red">(Required)</span> Name of the supplier. This parameter is required if you create a new supplier                                                                                                                          |     |
-| website       | String | Website of the supplier                                                                                                                                                                                                                          |
-| capacity      | Number | Maximum number of people for which the supplier can be used. Leave blank `''` if not relevant                                                                                                                                                    |
-| user          | Email  | Email of the Ezus user that will be set as the owner of the supplier. By default, if no owner is provided or the provided email do not match any user on this account, the owner will be assigned to everyone                                    |
-| contact       | JSON   | Contact is a single JSON and email is needed. Note that only one contact can be upsert this way (the main contact of the supplier) ([Contact](#contacts)) To reset the main contact, you can put `'0'`                                           |
-| address       | JSON   | JSON object address ([Address](#address)) To reset the address, you can put `'0'`. **Geolocation data cannot be modified during an upsert**.                                                                                                     |
-| custom_fields | JSON   | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                                                                                                    |
+| Parameter                | Type   | Description                                                                                                                                                                                                                                      |
+| ------------------------ | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --- |
+| reference                | String | If provided, the unique reference associated to the supplier you want to update or create (in case the one you provided has never been used). If no reference is provided, a supplier will be created with a random one.                         |
+| info_number              | String | File number that appears in the supplier record. Not to be confused with reference                                                                                                                                                               |
+| type                     | String | Either `undefined` or a combination of these 3 options: `accom`, `activity`, `transport`. You can select multiple options by separating them with comas ("accom, activity" for instance). Enter "undefined" if you want to reset this parameter. |
+| company_name             | String | <span style="color:red">(Required)</span> Name of the supplier. This parameter is required if you create a new supplier                                                                                                                          |     |
+| website                  | String | Website of the supplier                                                                                                                                                                                                                          |
+| capacity                 | Number | Maximum number of people for which the supplier can be used. Leave blank `''` if not relevant                                                                                                                                                    |
+| user                     | Email  | Email of the Ezus user that will be set as the owner of the supplier. By default, if no owner is provided or the provided email do not match any user on this account, the owner will be assigned to everyone                                    |
+| contact                  | JSON   | Contact is a single JSON and email is needed. Note that only one contact can be upsert this way (the main contact of the supplier) ([Contact](#contacts)) To reset the main contact, you can put `'0'`                                           |
+| address                  | JSON   | JSON object address ([Address](#address)) To reset the address, you can put `'0'`. **Geolocation data cannot be modified during an upsert**.                                                                                                     |
+| destination_reference    | String | Reference of the destination to link to the supplier. To reset the destination, you can put `'0'`.                                                                                                                                               |
+| subdestination_reference | String | Reference of the sub-destination to link to the supplier. To reset the sub-destination, you can put `'0'`. If the `destination_reference` is not provided, the `subdestination_reference` will be ignored.                                       |
+| custom_fields            | JSON   | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                                                                                                    |
 
 ### Response
 
@@ -1822,6 +1828,8 @@ curl --location 'https://api.ezus.app/products-upsert' \
     },
     "supplier_reference": "supplier_reference",
     "package_reference": "package_reference",
+    "destination_reference": "destination_reference",
+    "subdestination_reference": "subdestination_reference",
     "custom_fields": [
         {"name": "field_name", "value": "field_value"}
     ]
@@ -1851,6 +1859,8 @@ const body = {
   },
   supplier_reference: "supplier_reference",
   package_reference: "package_reference",
+  destination_reference: "destination_reference",
+  subdestination_reference: "subdestination_reference",
   custom_fields: [{ name: "field_name", value: "field_value" }],
 };
 const headers = {
@@ -1885,23 +1895,25 @@ axios.post(baseUrl + "/products-upsert", body, headers);
 
 ### Body Parameters (application/json)
 
-| Parameter          | Type   | Description                                                                                                                                                                                                                                                             |
-| ------------------ | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| reference          | String | If provided, the unique reference associated to the product you want to update or create (in case the one you provided has never been used). If no reference is provided, a product will be created with a random one.                                                  |
-| info_number        | String | File number that appears in the product record. Not to be confused with reference                                                                                                                                                                                       |
-| title              | String | Title of your product. This parameter is required if you create a new product                                                                                                                                                                                           |
-| info_notes         | String | Notes about your product. This parameter is not required if you create or update a product                                                                                                                                                                              |
-| capacity           | Number | Maximum number of people for which the product can be used. Leave blank `''` if not relevant                                                                                                                                                                            |
-| quantity           | String | The default number for this product when it is added to a project. It can either be a Number or one of these letters (`P` = Number of people in the project, `D` = Number of days in the project, `N` = Number of nights in the project)                                |
-| currency           | String | The ISO 4217 code of the currency of this product (<a href="https://docs.google.com/spreadsheets/d/1b7BNOwKyN1hMOouve6xhFZ2R2zrH4Sj1L-646j755fU/edit?usp=sharing" target="_blank">Link to Doc</a>). If empty or not provided, your default account currency will be set |
-| purchase_price     | Number | Purchase price as a number                                                                                                                                                                                                                                              |
-| sales_price        | Number | Sales price as a number                                                                                                                                                                                                                                                 |
-| vat_rate           | Number | Default VAT rate. If empty or not provided, your default account VAT rate will be set                                                                                                                                                                                   |
-| vat_regime         | String | Can be either `classic` (common law VAT), `margin` (VAT on the margin), `none` (Non applicable VAT). If empty or not provided, your default account VAT regime will be set                                                                                              |
-| commission         | JSON   | A JSON object containing `commission_mode` ("sales" or "purchase"), `commission_regime` ("percent" or "amount"), `value`                                                                                                                                                |
-| supplier_reference | String | If you give an adequate supplier reference, the product will be added in this supplier. If you want to update the supplier's product to None, you must enter 0.                                                                                                         |
-| package_reference  | String | If you give an adequate package reference, the product will be added in this package. If you want to update the package's product to None, you must enter 0.                                                                                                            |
-| custom_fields      | JSON   | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                                                                                                                           |
+| Parameter                | Type   | Description                                                                                                                                                                                                                                                             |
+| ------------------------ | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| reference                | String | If provided, the unique reference associated to the product you want to update or create (in case the one you provided has never been used). If no reference is provided, a product will be created with a random one.                                                  |
+| info_number              | String | File number that appears in the product record. Not to be confused with reference                                                                                                                                                                                       |
+| title                    | String | Title of your product. This parameter is required if you create a new product                                                                                                                                                                                           |
+| info_notes               | String | Notes about your product. This parameter is not required if you create or update a product                                                                                                                                                                              |
+| capacity                 | Number | Maximum number of people for which the product can be used. Leave blank `''` if not relevant                                                                                                                                                                            |
+| quantity                 | String | The default number for this product when it is added to a project. It can either be a Number or one of these letters (`P` = Number of people in the project, `D` = Number of days in the project, `N` = Number of nights in the project)                                |
+| currency                 | String | The ISO 4217 code of the currency of this product (<a href="https://docs.google.com/spreadsheets/d/1b7BNOwKyN1hMOouve6xhFZ2R2zrH4Sj1L-646j755fU/edit?usp=sharing" target="_blank">Link to Doc</a>). If empty or not provided, your default account currency will be set |
+| purchase_price           | Number | Purchase price as a number                                                                                                                                                                                                                                              |
+| sales_price              | Number | Sales price as a number                                                                                                                                                                                                                                                 |
+| vat_rate                 | Number | Default VAT rate. If empty or not provided, your default account VAT rate will be set                                                                                                                                                                                   |
+| vat_regime               | String | Can be either `classic` (common law VAT), `margin` (VAT on the margin), `none` (Non applicable VAT). If empty or not provided, your default account VAT regime will be set                                                                                              |
+| commission               | JSON   | A JSON object containing `commission_mode` ("sales" or "purchase"), `commission_regime` ("percent" or "amount"), `value`                                                                                                                                                |
+| supplier_reference       | String | If you give an adequate supplier reference, the product will be added in this supplier. If you want to update the supplier's product to None, you must enter 0.                                                                                                         |
+| package_reference        | String | If you give an adequate package reference, the product will be added in this package. If you want to update the package's product to None, you must enter 0.                                                                                                            |
+| destination_reference    | String | Reference of the destination to link to the product. To reset the destination, you can put `'0'`.                                                                                                                                                                       |
+| subdestination_reference | String | Reference of the sub-destination to link to the product. To reset the sub-destination, you can put `'0'`. If the `destination_reference` is not provided, the `subdestination_reference` will be ignored.                                                               |
+| custom_fields            | JSON   | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                                                                                                                           |
 
 ### Response
 
@@ -2045,6 +2057,8 @@ curl --location 'https://api.ezus.app/packages-upsert' \
     "info_number": "202306001-PK",
     "title": "The best package",
     "capacity": "2",
+    "destination_reference": "destination_reference",
+    "subdestination_reference": "subdestination_reference",
     "custom_fields": [
         {"name": "field_name", "value": "field_value"}
     ]
@@ -2061,6 +2075,8 @@ const body = {
   info_number: "202306001-PK",
   title: "The best package",
   capacity: "2",
+  destination_reference: "destination_reference",
+  subdestination_reference: "subdestination_reference",
   custom_fields: [{ name: "field_name", value: "field_value" }],
 };
 const headers = {
@@ -2095,13 +2111,15 @@ axios.post(baseUrl + "/packages-upsert", body, headers);
 
 ### Body Parameters (application/json)
 
-| Parameter     | Type   | Description                                                                                                                                                                                                            |
-| ------------- | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| reference     | String | If provided, the unique reference associated to the package you want to update or create (in case the one you provided has never been used). If no reference is provided, a package will be created with a random one. |
-| info_number   | String | File number that appears in the package record. Not to be confused with reference                                                                                                                                      |
-| title         | String | This parameter is required if you create a new package                                                                                                                                                                 |
-| capacity      | Number | Maximum number of people for which the package can be used . Leave blank `''` if not relevant                                                                                                                          |
-| custom_fields | JSON   | Array of JSON custom fields [Custom fields](#custom-fields)                                                                                                                                                            |
+| Parameter                | Type   | Description                                                                                                                                                                                                                 |
+| ------------------------ | ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| reference                | String | If provided, the unique reference associated to the package you want to update or create (in case the one you provided has never been used). If no reference is provided, a package will be created with a random one.      |
+| info_number              | String | File number that appears in the package record. Not to be confused with reference                                                                                                                                           |
+| title                    | String | This parameter is required if you create a new package                                                                                                                                                                      |
+| capacity                 | Number  Maximum number of people for which the package can be used . Leave blank `''` if not relevant                                                                                                                                |
+| destination_reference    | String | Reference of the destination to link to the package. To reset the destination, you can put `'0'`.                                                                                                                           |
+| subdestination_reference | String | Reference of the sub-destination to link to the package. To reset the sub-destination, you can put `'0'`. If the `destination_reference` is not provided, the `subdestination_reference` will be ignored.                   |
+| custom_fields            | JSON   | Array of JSON custom fields [Custom fields](#custom-fields)                                                                                                                                                                 |
 
 ### Response
 
