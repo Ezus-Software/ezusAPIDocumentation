@@ -2656,6 +2656,8 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
       "country": "France",
       "zip": "75010"
   },
+  "destination_reference": "destination_reference",
+  "subdestination_reference": "subdestination_reference",
   "custom_fields": [
       {"name": "field_name", "value": "field_value"}
   ]
@@ -2686,6 +2688,8 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
     <span class="na">country</span><span class="p">:</span> <span class="dl">"</span><span class="s2">France</span><span class="dl">"</span><span class="p">,</span>
     <span class="na">zip</span><span class="p">:</span> <span class="dl">"</span><span class="s2">75010</span><span class="dl">"</span><span class="p">,</span>
   <span class="p">},</span>
+  <span class="na">destination_reference</span><span class="p">:</span> <span class="dl">"</span><span class="s2">destination_reference</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">subdestination_reference</span><span class="p">:</span> <span class="dl">"</span><span class="s2">subdestination_reference</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">custom_fields</span><span class="p">:</span> <span class="p">[{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">field_name</span><span class="dl">"</span><span class="p">,</span> <span class="na">value</span><span class="p">:</span> <span class="dl">"</span><span class="s2">field_value</span><span class="dl">"</span> <span class="p">}],</span>
 <span class="p">};</span>
 <span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
@@ -2777,6 +2781,16 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <td>address</td>
 <td>JSON</td>
 <td>JSON object address (<a href="#address">Address</a>) To reset the address, you can put <code>&#39;0&#39;</code>. <strong>Geolocation data cannot be modified during an upsert</strong>.</td>
+</tr>
+<tr>
+<td>destination_reference</td>
+<td>String</td>
+<td>Reference of the destination to link to the supplier. To reset the destination, you can put <code>&#39;0&#39;</code>.</td>
+</tr>
+<tr>
+<td>subdestination_reference</td>
+<td>String</td>
+<td>Reference of the sub-destination to link to the supplier. To reset the sub-destination, you can put <code>&#39;0&#39;</code>. If the <code>destination_reference</code> is not provided, the <code>subdestination_reference</code> will be ignored.</td>
 </tr>
 <tr>
 <td>custom_fields</td>
@@ -3196,6 +3210,8 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
     },
     "supplier_reference": "supplier_reference",
     "package_reference": "package_reference",
+    "destination_reference": "destination_reference",
+    "subdestination_reference": "subdestination_reference",
     "custom_fields": [
         {"name": "field_name", "value": "field_value"}
     ]
@@ -3222,6 +3238,8 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
   <span class="p">},</span>
   <span class="na">supplier_reference</span><span class="p">:</span> <span class="dl">"</span><span class="s2">supplier_reference</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">package_reference</span><span class="p">:</span> <span class="dl">"</span><span class="s2">package_reference</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">destination_reference</span><span class="p">:</span> <span class="dl">"</span><span class="s2">destination_reference</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">subdestination_reference</span><span class="p">:</span> <span class="dl">"</span><span class="s2">subdestination_reference</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">custom_fields</span><span class="p">:</span> <span class="p">[{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">field_name</span><span class="dl">"</span><span class="p">,</span> <span class="na">value</span><span class="p">:</span> <span class="dl">"</span><span class="s2">field_value</span><span class="dl">"</span> <span class="p">}],</span>
 <span class="p">};</span>
 <span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
@@ -3338,6 +3356,16 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <td>package_reference</td>
 <td>String</td>
 <td>If you give an adequate package reference, the product will be added in this package. If you want to update the package&#39;s product to None, you must enter 0.</td>
+</tr>
+<tr>
+<td>destination_reference</td>
+<td>String</td>
+<td>Reference of the destination to link to the product. To reset the destination, you can put <code>&#39;0&#39;</code>.</td>
+</tr>
+<tr>
+<td>subdestination_reference</td>
+<td>String</td>
+<td>Reference of the sub-destination to link to the product. To reset the sub-destination, you can put <code>&#39;0&#39;</code>. If the <code>destination_reference</code> is not provided, the <code>subdestination_reference</code> will be ignored.</td>
 </tr>
 <tr>
 <td>custom_fields</td>
@@ -3551,6 +3579,8 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
     "info_number": "202306001-PK",
     "title": "The best package",
     "capacity": "2",
+    "destination_reference": "destination_reference",
+    "subdestination_reference": "subdestination_reference",
     "custom_fields": [
         {"name": "field_name", "value": "field_value"}
     ]
@@ -3564,6 +3594,8 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
   <span class="na">info_number</span><span class="p">:</span> <span class="dl">"</span><span class="s2">202306001-PK</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">title</span><span class="p">:</span> <span class="dl">"</span><span class="s2">The best package</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">capacity</span><span class="p">:</span> <span class="dl">"</span><span class="s2">2</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">destination_reference</span><span class="p">:</span> <span class="dl">"</span><span class="s2">destination_reference</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">subdestination_reference</span><span class="p">:</span> <span class="dl">"</span><span class="s2">subdestination_reference</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">custom_fields</span><span class="p">:</span> <span class="p">[{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">field_name</span><span class="dl">"</span><span class="p">,</span> <span class="na">value</span><span class="p">:</span> <span class="dl">"</span><span class="s2">field_value</span><span class="dl">"</span> <span class="p">}],</span>
 <span class="p">};</span>
 <span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
@@ -3628,8 +3660,18 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 </tr>
 <tr>
 <td>capacity</td>
-<td>Number</td>
-<td>Maximum number of people for which the package can be used . Leave blank <code>&#39;&#39;</code> if not relevant</td>
+<td>Number  Maximum number of people for which the package can be used . Leave blank <code>&#39;&#39;</code> if not relevant</td>
+<td></td>
+</tr>
+<tr>
+<td>destination_reference</td>
+<td>String</td>
+<td>Reference of the destination to link to the package. To reset the destination, you can put <code>&#39;0&#39;</code>.</td>
+</tr>
+<tr>
+<td>subdestination_reference</td>
+<td>String</td>
+<td>Reference of the sub-destination to link to the package. To reset the sub-destination, you can put <code>&#39;0&#39;</code>. If the <code>destination_reference</code> is not provided, the <code>subdestination_reference</code> will be ignored.</td>
 </tr>
 <tr>
 <td>custom_fields</td>
