@@ -6744,19 +6744,42 @@ What does this &quot;day period&quot; mean? It means we limit to 10,000 requests
 Classic Warning messages
 </aside>
 
-<p>The Ezus API uses the following warning messages:</p>
+<p>The Ezus API uses the following warning message format in the message field: <code>{code}_{field}</code>. Where:</p>
+
+<ul>
+<li><code>code</code> is the warning code</li>
+<li><code>field</code> is the field name that caused the warning</li>
+</ul>
+
+<p>Multiple warnings are separated by a comma.</p>
+
+<p>The Ezus API uses the following warning codes:</p>
 
 <table><thead>
 <tr>
-<th>Error Message</th>
+<th>Warning Code</th>
 <th>Meaning</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>Warning: skipped &lt;&#39;FIELD&#39;&gt; (only enterprise clients can have a &lt;&#39;FIELD&#39;&gt;)</td>
-<td>You have sent a field that cannot be modified for the enterprise client type. Therefore, the changes about this field have been ignored</td>
+<td>skip</td>
+<td>A field has been skipped</td>
 </tr>
 </tbody></table>
+
+<aside class="notice">
+Warning messages examples
+</aside>
+
+<p>Here is a warning message example:</p>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">"false"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"skip_company_number,skip_vat_number"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Client successfully updated"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"client_reference"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>In this case, the fields <code>company_number</code> and <code>vat_number</code> have been skipped during the update of the client. This is due to the fact that these fields are not used for an <code>individual</code> client type. Therefore, these fields have been ignored and not updated.</p>
 <h1 id='errors'>Errors</h1>
 <aside class="notice">
 Classic Error codes
