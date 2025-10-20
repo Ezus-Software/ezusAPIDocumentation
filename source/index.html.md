@@ -2111,15 +2111,15 @@ axios.post(baseUrl + "/packages-upsert", body, headers);
 
 ### Body Parameters (application/json)
 
-| Parameter                | Type   | Description                                                                                                                                                                                                                 |
-| ------------------------ | ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| reference                | String | If provided, the unique reference associated to the package you want to update or create (in case the one you provided has never been used). If no reference is provided, a package will be created with a random one.      |
-| info_number              | String | File number that appears in the package record. Not to be confused with reference                                                                                                                                           |
-| title                    | String | This parameter is required if you create a new package                                                                                                                                                                      |
-| capacity                 | Number  Maximum number of people for which the package can be used . Leave blank `''` if not relevant                                                                                                                                |
-| destination_reference    | String | Reference of the destination to link to the package. To reset the destination, you can put `'0'`.                                                                                                                           |
-| subdestination_reference | String | Reference of the sub-destination to link to the package. To reset the sub-destination, you can put `'0'`. If the `destination_reference` is not provided, the `subdestination_reference` will be ignored.                   |
-| custom_fields            | JSON   | Array of JSON custom fields [Custom fields](#custom-fields)                                                                                                                                                                 |
+| Parameter                | Type   | Description                                                                                                                                                                                                            |
+| ------------------------ | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| reference                | String | If provided, the unique reference associated to the package you want to update or create (in case the one you provided has never been used). If no reference is provided, a package will be created with a random one. |
+| info_number              | String | File number that appears in the package record. Not to be confused with reference                                                                                                                                      |
+| title                    | String | This parameter is required if you create a new package                                                                                                                                                                 |
+| capacity                 | Number | Maximum number of people for which the package can be used . Leave blank `''` if not relevant                                                                                                                          |
+| destination_reference    | String | Reference of the destination to link to the package. To reset the destination, you can put `'0'`.                                                                                                                      |
+| subdestination_reference | String | Reference of the sub-destination to link to the package. To reset the sub-destination, you can put `'0'`. If the `destination_reference` is not provided, the `subdestination_reference` will be ignored.              |
+| custom_fields            | JSON   | Array of JSON custom fields [Custom fields](#custom-fields)                                                                                                                                                            |
 
 ### Response
 
@@ -3202,10 +3202,10 @@ axios.delete(baseUrl + "/webhooks-delete", body, headers);
 
 ### Body parameters (application/json)
 
-| Parameter | Type   | Description                                                                         |
-| --------- | ------ | ----------------------------------------------------------------------------------- |
+| Parameter | Type   | Description                                                                    |
+| --------- | ------ | ------------------------------------------------------------------------------ |
 | reference | String | If provided, the unique reference associated to the webhook you want to delete |
-| endpoint  | String | If provided, the endpoint associated to the webhook you want to delete              |
+| endpoint  | String | If provided, the endpoint associated to the webhook you want to delete         |
 
 ### Response
 
@@ -3292,9 +3292,9 @@ A JSON object indicating whether an error occurred during the process, along wit
 ```
 
 | Property                      | Type    | Description                                                                                                                                                |
-|-------------------------------|---------| ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ----------------------------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | alternative_title             | String  | Title of the alternative                                                                                                                                   |
-| is_main                       | Boolean | If the alternative is the main alternative                                                                                                                               |
+| is_main                       | Boolean | If the alternative is the main alternative                                                                                                                 |
 | trip_date_in                  | Date    | Date of the beginning of this alternative, in a "YYYY-MM-DD" format string. If it's empty, the project has no dates                                        |
 | trip_date_out                 | Date    | Date of the end of this alternative, in a "YYYY-MM-DD" format string. If it's empty, the project has no dates                                              |
 | trip_duration                 | Number  | Number of days this alternative lasts                                                                                                                      |
