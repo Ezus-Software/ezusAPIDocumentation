@@ -107,16 +107,16 @@ axios.post(baseUrl + "/login", body, headers);
 
 ### Header Parameters
 
-| Parameter | Type   | Description                                                 |
-| --------- | ------ | ----------------------------------------------------------- |
-| x-api-key | String | <span style="color:red">(Required)</span> Your Ezus API key |
+| Parameter | Type   | Description                                                                 |
+| --------- | ------ | --------------------------------------------------------------------------- |
+| x-api-key | String | <span class="label label-red float-right">Required</span> Your Ezus API key |
 
 ### Body Parameters (application/json)
 
-| Parameter | Type   | Description                                                     |
-| --------- | ------ | --------------------------------------------------------------- |
-| email     | String | <span style="color:red">(Required)</span> Your account email    |
-| password  | String | <span style="color:red">(Required)</span> Your account password |
+| Parameter | Type   | Description                                                                     |
+| --------- | ------ | ------------------------------------------------------------------------------- |
+| email     | String | <span class="label label-red float-right">Required</span> Your account email    |
+| password  | String | <span class="label label-red float-right">Required</span> Your account password |
 
 ### Response
 
@@ -189,10 +189,10 @@ axios.get(baseUrl + "/projects", headers);
 
 ### Header Parameters
 
-| Parameter     | Type   | Description                                                 |
-| ------------- | ------ | ----------------------------------------------------------- |
-| x-api-key     | String | <span style="color:red">(Required)</span> Your Ezus API key |
-| Authorization | String | <span style="color:red">(Required)</span> Your Bearer token |
+| Parameter     | Type   | Description                                                                 |
+| ------------- | ------ | --------------------------------------------------------------------------- |
+| x-api-key     | String | <span class="label label-red float-right">Required</span> Your Ezus API key |
+| Authorization | String | <span class="label label-red float-right">Required</span> Your Bearer token |
 
 ### Query Parameters
 
@@ -335,16 +335,16 @@ axios.get(baseUrl + "/project?reference=project_reference", headers);
 
 ### Header Parameters
 
-| Parameter     | Type   | Description                                                 |
-| ------------- | ------ | ----------------------------------------------------------- |
-| x-api-key     | String | <span style="color:red">(Required)</span> Your Ezus API key |
-| Authorization | String | <span style="color:red">(Required)</span> Your Bearer token |
+| Parameter     | Type   | Description                                                                 |
+| ------------- | ------ | --------------------------------------------------------------------------- |
+| x-api-key     | String | <span class="label label-red float-right">Required</span> Your Ezus API key |
+| Authorization | String | <span class="label label-red float-right">Required</span> Your Bearer token |
 
 ### Query Parameters
 
-| Parameter | Type   | Description                                                                        |
-| --------- | ------ | ---------------------------------------------------------------------------------- |
-| reference | String | <span style="color:red">(Required)</span> The reference of the project to retrieve |
+| Parameter | Type   | Description                                                                                        |
+| --------- | ------ | -------------------------------------------------------------------------------------------------- |
+| reference | String | <span class="label label-red float-right">Required</span> The reference of the project to retrieve |
 
 ### Response
 
@@ -411,16 +411,16 @@ axios.get(baseUrl + "/project-documents?reference=project_reference", headers);
 
 ### Header Parameters
 
-| Parameter     | Type   | Description                                                 |
-| ------------- | ------ | ----------------------------------------------------------- |
-| x-api-key     | String | <span style="color:red">(Required)</span> Your Ezus API key |
-| Authorization | String | <span style="color:red">(Required)</span> Your Bearer token |
+| Parameter     | Type   | Description                                                                 |
+| ------------- | ------ | --------------------------------------------------------------------------- |
+| x-api-key     | String | <span class="label label-red float-right">Required</span> Your Ezus API key |
+| Authorization | String | <span class="label label-red float-right">Required</span> Your Bearer token |
 
 ### Query Parameters
 
 | Parameter         | Type   | Description                                                                                                                    |
 | ----------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------ |
-| reference         | String | <span style="color:red">(Required)</span> The reference of the project to retrieve documents from                              |
+| reference         | String | <span class="label label-red float-right">Required</span> The reference of the project to retrieve documents from              |
 | alternative_order | Number | Specifies the alternative order in the project to retrieve documents from. If not provided, defaults to 0 for main alternative |
 
 ### Response
@@ -521,16 +521,16 @@ axios.get(baseUrl + "/project-steps?reference=project_reference", headers);
 
 ### Header Parameters
 
-| Parameter     | Type   | Description                                                 |
-| ------------- | ------ | ----------------------------------------------------------- |
-| x-api-key     | String | <span style="color:red">(Required)</span> Your Ezus API key |
-| Authorization | String | <span style="color:red">(Required)</span> Your Bearer token |
+| Parameter     | Type   | Description                                                                 |
+| ------------- | ------ | --------------------------------------------------------------------------- |
+| x-api-key     | String | <span class="label label-red float-right">Required</span> Your Ezus API key |
+| Authorization | String | <span class="label label-red float-right">Required</span> Your Bearer token |
 
 ### Query Parameters
 
 | Parameter         | Type   | Description                                                                                                                    |
 | ----------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------ |
-| reference         | String | <span style="color:red">(Required)</span> The reference of the project to retrieve documents from                              |
+| reference         | String | <span class="label label-red float-right">Required</span> The reference of the project to retrieve documents from              |
 | alternative_order | Number | Specifies the alternative order in the project to retrieve documents from. If not provided, defaults to 0 for main alternative |
 
 ### Response
@@ -604,16 +604,16 @@ axios.get(baseUrl + "/project-travellers?reference=project_reference", headers);
 
 ### Header Parameters
 
-| Parameter     | Type   | Description                                                 |
-| ------------- | ------ | ----------------------------------------------------------- |
-| x-api-key     | String | <span style="color:red">(Required)</span> Your Ezus API key |
-| Authorization | String | <span style="color:red">(Required)</span> Your Bearer token |
+| Parameter     | Type   | Description                                                                 |
+| ------------- | ------ | --------------------------------------------------------------------------- |
+| x-api-key     | String | <span class="label label-red float-right">Required</span> Your Ezus API key |
+| Authorization | String | <span class="label label-red float-right">Required</span> Your Bearer token |
 
 ### Query Parameters
 
 | Parameter         | Type   | Description                                                                                                                     |
 | ----------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------- |
-| reference         | String | <span style="color:red">(Required)</span> The reference of the project to retrieve travellers from                              |
+| reference         | String | <span class="label label-red float-right">Required</span> The reference of the project to retrieve travellers from              |
 | alternative_order | Number | Specifies the alternative order in the project to retrieve travellers from. If not provided, defaults to 0 for main alternative |
 
 ### Response
@@ -697,10 +697,10 @@ axios.post(baseUrl + "/projects-upsert", body, headers);
 
 ### Header Parameters
 
-| Parameter     | Type   | Description                                                 |
-| ------------- | ------ | ----------------------------------------------------------- |
-| x-api-key     | String | <span style="color:red">(Required)</span> Your Ezus API key |
-| Authorization | String | <span style="color:red">(Required)</span> Your Bearer token |
+| Parameter     | Type   | Description                                                                 |
+| ------------- | ------ | --------------------------------------------------------------------------- |
+| x-api-key     | String | <span class="label label-red float-right">Required</span> Your Ezus API key |
+| Authorization | String | <span class="label label-red float-right">Required</span> Your Bearer token |
 
 ### Body Parameters (application/json)
 
@@ -778,18 +778,18 @@ axios.post(baseUrl + "/project-documents-create", body, headers);
 
 ### Header Parameters
 
-| Parameter     | Type   | Description                                                 |
-| ------------- | ------ | ----------------------------------------------------------- |
-| x-api-key     | String | <span style="color:red">(Required)</span> Your Ezus API key |
-| Authorization | String | <span style="color:red">(Required)</span> Your Bearer token |
+| Parameter     | Type   | Description                                                                 |
+| ------------- | ------ | --------------------------------------------------------------------------- |
+| x-api-key     | String | <span class="label label-red float-right">Required</span> Your Ezus API key |
+| Authorization | String | <span class="label label-red float-right">Required</span> Your Bearer token |
 
 ### Body Parameters (application/json)
 
-| Parameter         | Type   | Description                                                                                                              |
-| ----------------- | ------ | ------------------------------------------------------------------------------------------------------------------------ |
-| project_reference | String | <span style="color:red">(Required)</span> The project reference in which you want to create a document                   |
-| title             | String | Title of the document                                                                                                    |
-| link              | Link   | <span style="color:red">(Required)</span> URL of the document (only supports PDF format and must be publicly accessible) |
+| Parameter         | Type   | Description                                                                                                                              |
+| ----------------- | ------ | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| project_reference | String | <span class="label label-red float-right">Required</span> The project reference in which you want to create a document                   |
+| title             | String | Title of the document                                                                                                                    |
+| link              | Link   | <span class="label label-red float-right">Required</span> URL of the document (only supports PDF format and must be publicly accessible) |
 
 ### Response
 
@@ -872,10 +872,10 @@ axios.get(baseUrl + "/clients", headers);
 
 ### Header Parameters
 
-| Parameter     | Type   | Description                                                 |
-| ------------- | ------ | ----------------------------------------------------------- |
-| x-api-key     | String | <span style="color:red">(Required)</span> Your Ezus API key |
-| Authorization | String | <span style="color:red">(Required)</span> Your Bearer token |
+| Parameter     | Type   | Description                                                                 |
+| ------------- | ------ | --------------------------------------------------------------------------- |
+| x-api-key     | String | <span class="label label-red float-right">Required</span> Your Ezus API key |
+| Authorization | String | <span class="label label-red float-right">Required</span> Your Bearer token |
 
 ### Query Parameters
 
@@ -1006,16 +1006,16 @@ axios.get(baseUrl + "/client?reference=client_reference", headers);
 
 ### Header Parameters
 
-| Parameter     | Type   | Description                                                 |
-| ------------- | ------ | ----------------------------------------------------------- |
-| x-api-key     | String | <span style="color:red">(Required)</span> Your Ezus API key |
-| Authorization | String | <span style="color:red">(Required)</span> Your Bearer token |
+| Parameter     | Type   | Description                                                                 |
+| ------------- | ------ | --------------------------------------------------------------------------- |
+| x-api-key     | String | <span class="label label-red float-right">Required</span> Your Ezus API key |
+| Authorization | String | <span class="label label-red float-right">Required</span> Your Bearer token |
 
 ### Query Parameters
 
-| Parameter | Type   | Description                                                                       |
-| --------- | ------ | --------------------------------------------------------------------------------- |
-| reference | String | <span style="color:red">(Required)</span> The reference of the client to retrieve |
+| Parameter | Type   | Description                                                                                       |
+| --------- | ------ | ------------------------------------------------------------------------------------------------- |
+| reference | String | <span class="label label-red float-right">Required</span> The reference of the client to retrieve |
 
 ### Response
 
@@ -1146,26 +1146,26 @@ axios.post(baseUrl + "/clients-upsert", body, headers);
 
 ### Header Parameters
 
-| Parameter     | Type   | Description                                                 |
-| ------------- | ------ | ----------------------------------------------------------- |
-| x-api-key     | String | <span style="color:red">(Required)</span> Your Ezus API key |
-| Authorization | String | <span style="color:red">(Required)</span> Your Bearer token |
+| Parameter     | Type   | Description                                                                 |
+| ------------- | ------ | --------------------------------------------------------------------------- |
+| x-api-key     | String | <span class="label label-red float-right">Required</span> Your Ezus API key |
+| Authorization | String | <span class="label label-red float-right">Required</span> Your Bearer token |
 
 ### Body Parameters (application/json)
 
-| Parameter      | Type   | Description                                                                                                                                                                                                            |
-| -------------- | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| reference      | String | If provided, the unique reference associated with the client you want to update or create (or a random one will be generated).                                                                                         |
-| info_number    | String | File number that appears in the client record. Not to be confused with reference                                                                                                                                       |
-| type           | String | Optional parameter. Specifies the client type (`enterprise` or `individual`). If `enterprise`, `company_name` is required. If `individual`, provide contact.first_name or contact.last_name.                           |
-| company_name   | String | <span style="color:red">(Required)</span> Name of the client's company (if applicable). If empty, the client will be considered an individual, and the name of the client will be the same as the name of the contact. |
-| website        | String | Website of the client                                                                                                                                                                                                  |
-| vat_number     | String | VAT number of the client (only for "enterprise" clients)                                                                                                                                                               |
-| company_number | String | Company registration number of the client (only for "enterprise" clients)                                                                                                                                              |
-| user           | Email  | Email of the Ezus user to be set as the owner of the client                                                                                                                                                            |
-| contact        | JSON   | A single JSON element ([Contacts](#contacts)) representing the main                                                                                                                                                    |
-| address        | JSON   | JSON object address ([Address](#address)) To reset the address, you can put `'0'`. **Geolocation data cannot be modified during an upsert**.                                                                           |
-| custom_fields  | JSON   | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                                                                          |
+| Parameter      | Type   | Description                                                                                                                                                                                                                            |
+| -------------- | ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| reference      | String | If provided, the unique reference associated with the client you want to update or create (or a random one will be generated).                                                                                                         |
+| info_number    | String | File number that appears in the client record. Not to be confused with reference                                                                                                                                                       |
+| type           | String | Optional parameter. Specifies the client type (`enterprise` or `individual`). If `enterprise`, `company_name` is required. If `individual`, provide contact.first_name or contact.last_name.                                           |
+| company_name   | String | <span class="label label-red float-right">Required</span> Name of the client's company (if applicable). If empty, the client will be considered an individual, and the name of the client will be the same as the name of the contact. |
+| website        | String | Website of the client                                                                                                                                                                                                                  |
+| vat_number     | String | VAT number of the client (only for "enterprise" clients)                                                                                                                                                                               |
+| company_number | String | Company registration number of the client (only for "enterprise" clients)                                                                                                                                                              |
+| user           | Email  | Email of the Ezus user to be set as the owner of the client                                                                                                                                                                            |
+| contact        | JSON   | A single JSON element ([Contacts](#contacts)) representing the main                                                                                                                                                                    |
+| address        | JSON   | JSON object address ([Address](#address)) To reset the address, you can put `'0'`. **Geolocation data cannot be modified during an upsert**.                                                                                           |
+| custom_fields  | JSON   | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                                                                                          |
 
 ### Response
 
@@ -1251,10 +1251,10 @@ axios.get(baseUrl + "/suppliers", headers);
 
 ### Header Parameters
 
-| Parameter     | Type   | Description                                                 |
-| ------------- | ------ | ----------------------------------------------------------- |
-| x-api-key     | String | <span style="color:red">(Required)</span> Your Ezus API key |
-| Authorization | String | <span style="color:red">(Required)</span> Your Bearer token |
+| Parameter     | Type   | Description                                                                 |
+| ------------- | ------ | --------------------------------------------------------------------------- |
+| x-api-key     | String | <span class="label label-red float-right">Required</span> Your Ezus API key |
+| Authorization | String | <span class="label label-red float-right">Required</span> Your Bearer token |
 
 ### Query Parameters
 
@@ -1405,16 +1405,16 @@ axios.get(baseUrl + "/supplier?reference=supplier_reference", headers);
 
 ### Header Parameters
 
-| Parameter     | Type   | Description                                                 |
-| ------------- | ------ | ----------------------------------------------------------- |
-| x-api-key     | String | <span style="color:red">(Required)</span> Your Ezus API key |
-| Authorization | String | <span style="color:red">(Required)</span> Your Bearer token |
+| Parameter     | Type   | Description                                                                 |
+| ------------- | ------ | --------------------------------------------------------------------------- |
+| x-api-key     | String | <span class="label label-red float-right">Required</span> Your Ezus API key |
+| Authorization | String | <span class="label label-red float-right">Required</span> Your Bearer token |
 
 ### Query Parameters
 
-| Parameter | Type   | Description                                                                         |
-| --------- | ------ | ----------------------------------------------------------------------------------- |
-| reference | String | <span style="color:red">(Required)</span> The reference of the supplier to retrieve |
+| Parameter | Type   | Description                                                                                         |
+| --------- | ------ | --------------------------------------------------------------------------------------------------- |
+| reference | String | <span class="label label-red float-right">Required</span> The reference of the supplier to retrieve |
 
 ### Response
 
@@ -1535,10 +1535,10 @@ axios.post(baseUrl + "/suppliers-upsert", body, headers);
 
 ### Header Parameters
 
-| Parameter     | Type   | Description                                                 |
-| ------------- | ------ | ----------------------------------------------------------- |
-| x-api-key     | String | <span style="color:red">(Required)</span> Your Ezus API key |
-| Authorization | String | <span style="color:red">(Required)</span> Your Bearer token |
+| Parameter     | Type   | Description                                                                 |
+| ------------- | ------ | --------------------------------------------------------------------------- |
+| x-api-key     | String | <span class="label label-red float-right">Required</span> Your Ezus API key |
+| Authorization | String | <span class="label label-red float-right">Required</span> Your Bearer token |
 
 ### Body Parameters (application/json)
 
@@ -1547,7 +1547,7 @@ axios.post(baseUrl + "/suppliers-upsert", body, headers);
 | reference                | String | If provided, the unique reference associated to the supplier you want to update or create (in case the one you provided has never been used). If no reference is provided, a supplier will be created with a random one.                         |
 | info_number              | String | File number that appears in the supplier record. Not to be confused with reference                                                                                                                                                               |
 | type                     | String | Either `undefined` or a combination of these 3 options: `accom`, `activity`, `transport`. You can select multiple options by separating them with comas ("accom, activity" for instance). Enter "undefined" if you want to reset this parameter. |
-| company_name             | String | <span style="color:red">(Required)</span> Name of the supplier. This parameter is required if you create a new supplier                                                                                                                          |     |
+| company_name             | String | <span class="label label-red float-right">Required</span> Name of the supplier. This parameter is required if you create a new supplier                                                                                                          |     |
 | website                  | String | Website of the supplier                                                                                                                                                                                                                          |
 | capacity                 | Number | Maximum number of people for which the supplier can be used. Leave blank `''` if not relevant                                                                                                                                                    |
 | user                     | Email  | Email of the Ezus user that will be set as the owner of the supplier. By default, if no owner is provided or the provided email do not match any user on this account, the owner will be assigned to everyone                                    |
@@ -1635,10 +1635,10 @@ axios.get(baseUrl + "/products", headers);
 
 ### Header Parameters
 
-| Parameter     | Type   | Description                                                 |
-| ------------- | ------ | ----------------------------------------------------------- |
-| x-api-key     | String | <span style="color:red">(Required)</span> Your Ezus API key |
-| Authorization | String | <span style="color:red">(Required)</span> Your Bearer token |
+| Parameter     | Type   | Description                                                                 |
+| ------------- | ------ | --------------------------------------------------------------------------- |
+| x-api-key     | String | <span class="label label-red float-right">Required</span> Your Ezus API key |
+| Authorization | String | <span class="label label-red float-right">Required</span> Your Bearer token |
 
 ### Query Parameters
 
@@ -1760,16 +1760,16 @@ axios.get(baseUrl + "/product?reference=product_reference", headers);
 
 ### Header Parameters
 
-| Parameter     | Type   | Description                                                 |
-| ------------- | ------ | ----------------------------------------------------------- |
-| x-api-key     | String | <span style="color:red">(Required)</span> Your Ezus API key |
-| Authorization | String | <span style="color:red">(Required)</span> Your Bearer token |
+| Parameter     | Type   | Description                                                                 |
+| ------------- | ------ | --------------------------------------------------------------------------- |
+| x-api-key     | String | <span class="label label-red float-right">Required</span> Your Ezus API key |
+| Authorization | String | <span class="label label-red float-right">Required</span> Your Bearer token |
 
 ### Query Parameters
 
-| Parameter | Type   | Description                                                                        |
-| --------- | ------ | ---------------------------------------------------------------------------------- |
-| reference | String | <span style="color:red">(Required)</span> The reference of the product to retrieve |
+| Parameter | Type   | Description                                                                                        |
+| --------- | ------ | -------------------------------------------------------------------------------------------------- |
+| reference | String | <span class="label label-red float-right">Required</span> The reference of the product to retrieve |
 
 ### Response
 
@@ -1888,10 +1888,10 @@ axios.post(baseUrl + "/products-upsert", body, headers);
 
 ### Header Parameters
 
-| Parameter     | Type   | Description                                                 |
-| ------------- | ------ | ----------------------------------------------------------- |
-| x-api-key     | String | <span style="color:red">(Required)</span> Your Ezus API key |
-| Authorization | String | <span style="color:red">(Required)</span> Your Bearer token |
+| Parameter     | Type   | Description                                                                 |
+| ------------- | ------ | --------------------------------------------------------------------------- |
+| x-api-key     | String | <span class="label label-red float-right">Required</span> Your Ezus API key |
+| Authorization | String | <span class="label label-red float-right">Required</span> Your Bearer token |
 
 ### Body Parameters (application/json)
 
@@ -2014,16 +2014,16 @@ axios.get(baseUrl + "/package?reference=package_reference", headers);
 
 ### Header Parameters
 
-| Parameter     | Type   | Description                                                 |
-| ------------- | ------ | ----------------------------------------------------------- |
-| x-api-key     | String | <span style="color:red">(Required)</span> Your Ezus API key |
-| Authorization | String | <span style="color:red">(Required)</span> Your Bearer token |
+| Parameter     | Type   | Description                                                                 |
+| ------------- | ------ | --------------------------------------------------------------------------- |
+| x-api-key     | String | <span class="label label-red float-right">Required</span> Your Ezus API key |
+| Authorization | String | <span class="label label-red float-right">Required</span> Your Bearer token |
 
 ### Query Parameters
 
-| Parameter | Type   | Description                                                                        |
-| --------- | ------ | ---------------------------------------------------------------------------------- |
-| reference | String | <span style="color:red">(Required)</span> The reference of the package to retrieve |
+| Parameter | Type   | Description                                                                                        |
+| --------- | ------ | -------------------------------------------------------------------------------------------------- |
+| reference | String | <span class="label label-red float-right">Required</span> The reference of the package to retrieve |
 
 ### Response
 
@@ -2104,10 +2104,10 @@ axios.post(baseUrl + "/packages-upsert", body, headers);
 
 ### Header Parameters
 
-| Parameter     | Type   | Description                                                 |
-| ------------- | ------ | ----------------------------------------------------------- |
-| x-api-key     | String | <span style="color:red">(Required)</span> Your Ezus API key |
-| Authorization | String | <span style="color:red">(Required)</span> Your Bearer token |
+| Parameter     | Type   | Description                                                                 |
+| ------------- | ------ | --------------------------------------------------------------------------- |
+| x-api-key     | String | <span class="label label-red float-right">Required</span> Your Ezus API key |
+| Authorization | String | <span class="label label-red float-right">Required</span> Your Bearer token |
 
 ### Body Parameters (application/json)
 
@@ -2181,10 +2181,10 @@ axios.get(baseUrl + "/destinations", headers);
 
 ### Header Parameters
 
-| Parameter     | Type   | Description                                                 |
-| ------------- | ------ | ----------------------------------------------------------- |
-| x-api-key     | String | <span style="color:red">(Required)</span> Your Ezus API key |
-| Authorization | String | <span style="color:red">(Required)</span> Your Bearer token |
+| Parameter     | Type   | Description                                                                 |
+| ------------- | ------ | --------------------------------------------------------------------------- |
+| x-api-key     | String | <span class="label label-red float-right">Required</span> Your Ezus API key |
+| Authorization | String | <span class="label label-red float-right">Required</span> Your Bearer token |
 
 ### Response
 
@@ -2243,10 +2243,10 @@ axios.post(baseUrl + "/destinations-upsert", body, headers);
 
 ### Header Parameters
 
-| Parameter     | Type   | Description                                                 |
-| ------------- | ------ | ----------------------------------------------------------- |
-| x-api-key     | String | <span style="color:red">(Required)</span> Your Ezus API key |
-| Authorization | String | <span style="color:red">(Required)</span> Your Bearer token |
+| Parameter     | Type   | Description                                                                 |
+| ------------- | ------ | --------------------------------------------------------------------------- |
+| x-api-key     | String | <span class="label label-red float-right">Required</span> Your Ezus API key |
+| Authorization | String | <span class="label label-red float-right">Required</span> Your Bearer token |
 
 ### Body Parameters (application/json)
 
@@ -2325,10 +2325,10 @@ axios.get(
 
 ### Header Parameters
 
-| Parameter     | Type   | Description                                                 |
-| ------------- | ------ | ----------------------------------------------------------- |
-| x-api-key     | String | <span style="color:red">(Required)</span> Your Ezus API key |
-| Authorization | String | <span style="color:red">(Required)</span> Your Bearer token |
+| Parameter     | Type   | Description                                                                 |
+| ------------- | ------ | --------------------------------------------------------------------------- |
+| x-api-key     | String | <span class="label label-red float-right">Required</span> Your Ezus API key |
+| Authorization | String | <span class="label label-red float-right">Required</span> Your Bearer token |
 
 ### Body Parameters (application/json)
 
@@ -2400,10 +2400,10 @@ axios.post(baseUrl + "/subdestinations-upsert", body, headers);
 
 ### Header Parameters
 
-| Parameter     | Type   | Description                                                 |
-| ------------- | ------ | ----------------------------------------------------------- |
-| x-api-key     | String | <span style="color:red">(Required)</span> Your Ezus API key |
-| Authorization | String | <span style="color:red">(Required)</span> Your Bearer token |
+| Parameter     | Type   | Description                                                                 |
+| ------------- | ------ | --------------------------------------------------------------------------- |
+| x-api-key     | String | <span class="label label-red float-right">Required</span> Your Ezus API key |
+| Authorization | String | <span class="label label-red float-right">Required</span> Your Bearer token |
 
 ### Body Parameters (application/json)
 
@@ -2518,10 +2518,10 @@ axios.get(baseUrl + "/invoices?stage=completed", headers);
 
 ### Header Parameters
 
-| Parameter     | Type   | Description                                                 |
-| ------------- | ------ | ----------------------------------------------------------- |
-| x-api-key     | String | <span style="color:red">(Required)</span> Your Ezus API key |
-| Authorization | String | <span style="color:red">(Required)</span> Your Bearer token |
+| Parameter     | Type   | Description                                                                 |
+| ------------- | ------ | --------------------------------------------------------------------------- |
+| x-api-key     | String | <span class="label label-red float-right">Required</span> Your Ezus API key |
+| Authorization | String | <span class="label label-red float-right">Required</span> Your Bearer token |
 
 ### Query Parameters
 
@@ -2628,16 +2628,16 @@ axios.get(baseUrl + "/invoice?reference=invoice_reference", headers);
 
 ### Header Parameters
 
-| Parameter     | Type   | Description                                                 |
-| ------------- | ------ | ----------------------------------------------------------- |
-| x-api-key     | String | <span style="color:red">(Required)</span> Your Ezus API key |
-| Authorization | String | <span style="color:red">(Required)</span> Your Bearer token |
+| Parameter     | Type   | Description                                                                 |
+| ------------- | ------ | --------------------------------------------------------------------------- |
+| x-api-key     | String | <span class="label label-red float-right">Required</span> Your Ezus API key |
+| Authorization | String | <span class="label label-red float-right">Required</span> Your Bearer token |
 
 ### Query Parameters
 
-| Parameter | Type   | Description                                                                        |
-| --------- | ------ | ---------------------------------------------------------------------------------- |
-| reference | String | <span style="color:red">(Required)</span> The reference of the invoice to retrieve |
+| Parameter | Type   | Description                                                                                        |
+| --------- | ------ | -------------------------------------------------------------------------------------------------- |
+| reference | String | <span class="label label-red float-right">Required</span> The reference of the invoice to retrieve |
 
 ### Response
 
@@ -2719,10 +2719,10 @@ axios.put(baseUrl + "/invoices-update", body, headers);
 
 ### Header Parameters
 
-| Parameter     | Type   | Description                                                 |
-| ------------- | ------ | ----------------------------------------------------------- |
-| x-api-key     | String | <span style="color:red">(Required)</span> Your Ezus API key |
-| Authorization | String | <span style="color:red">(Required)</span> Your Bearer token |
+| Parameter     | Type   | Description                                                                 |
+| ------------- | ------ | --------------------------------------------------------------------------- |
+| x-api-key     | String | <span class="label label-red float-right">Required</span> Your Ezus API key |
+| Authorization | String | <span class="label label-red float-right">Required</span> Your Bearer token |
 
 ### Body Parameters (application/json)
 
@@ -2836,16 +2836,16 @@ axios.get(
 
 ### Header Parameters
 
-| Parameter     | Type   | Description                                                 |
-| ------------- | ------ | ----------------------------------------------------------- |
-| x-api-key     | String | <span style="color:red">(Required)</span> Your Ezus API key |
-| Authorization | String | <span style="color:red">(Required)</span> Your Bearer token |
+| Parameter     | Type   | Description                                                                 |
+| ------------- | ------ | --------------------------------------------------------------------------- |
+| x-api-key     | String | <span class="label label-red float-right">Required</span> Your Ezus API key |
+| Authorization | String | <span class="label label-red float-right">Required</span> Your Bearer token |
 
 ### Query Parameters
 
-| Parameter | Type   | Description                                                                        |
-| --------- | ------ | ---------------------------------------------------------------------------------- |
-| reference | String | <span style="color:red">(Required)</span> The reference of the invoice to retrieve |
+| Parameter | Type   | Description                                                                                        |
+| --------- | ------ | -------------------------------------------------------------------------------------------------- |
+| reference | String | <span class="label label-red float-right">Required</span> The reference of the invoice to retrieve |
 
 ### Response
 
@@ -2927,22 +2927,22 @@ axios.post(baseUrl + "/deposits-create", body, headers);
 
 ### Header Parameters
 
-| Parameter     | Type   | Description                                                 |
-| ------------- | ------ | ----------------------------------------------------------- |
-| x-api-key     | String | <span style="color:red">(Required)</span> Your Ezus API key |
-| Authorization | String | <span style="color:red">(Required)</span> Your Bearer token |
+| Parameter     | Type   | Description                                                                 |
+| ------------- | ------ | --------------------------------------------------------------------------- |
+| x-api-key     | String | <span class="label label-red float-right">Required</span> Your Ezus API key |
+| Authorization | String | <span class="label label-red float-right">Required</span> Your Bearer token |
 
 ### Body Parameters (application/json)
 
-| Parameter         | Type    | Description                                                                                                                               |
-| ----------------- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| project_reference | String  | <span style="color:red">(Required)</span> The reference is mandatory and refers to the project to which the payment will be added.        |
-| alternative_order | String  | Alternative number, if not entered, the payment will be added to the project's main alternative.                                          |
-| type              | String  | Type can be `deposit`, `payment`, `final_payment`, `extra_paid`. By default the deposits will be a `deposit`                              |
-| notes             | String  | Note attributed to the payment, this note is limited to 100 characters, all additional characters will not be saved.                      |
-| date              | String  | The date must be a string in "YYYY-MM-DD" format. If it is not filled in or is invalid, the payment will be assigned to the current date. |
-| amount            | Integer | The deposit amount in cents.                                                                                                              |
-| payment_method    | String  | Technical name of the payment method, you can find it in Settings - Custom fields                                                         |
+| Parameter         | Type    | Description                                                                                                                                        |
+| ----------------- | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| project_reference | String  | <span class="label label-red float-right">Required</span> The reference is mandatory and refers to the project to which the payment will be added. |
+| alternative_order | String  | Alternative number, if not entered, the payment will be added to the project's main alternative.                                                   |
+| type              | String  | Type can be `deposit`, `payment`, `final_payment`, `extra_paid`. By default the deposits will be a `deposit`                                       |
+| notes             | String  | Note attributed to the payment, this note is limited to 100 characters, all additional characters will not be saved.                               |
+| date              | String  | The date must be a string in "YYYY-MM-DD" format. If it is not filled in or is invalid, the payment will be assigned to the current date.          |
+| amount            | Integer | The deposit amount in cents.                                                                                                                       |
+| payment_method    | String  | Technical name of the payment method, you can find it in Settings - Custom fields                                                                  |
 
 ### Response
 
@@ -2999,10 +2999,10 @@ axios.get(baseUrl + "/webhooks", headers);
 
 ### Header Parameters
 
-| Parameter     | Type   | Description                                                 |
-| ------------- | ------ | ----------------------------------------------------------- |
-| X-API-KEY     | String | <span style="color:red">(Required)</span> Your Ezus API key |
-| Authorization | String | <span style="color:red">(Required)</span> Your Bearer token |
+| Parameter     | Type   | Description                                                                 |
+| ------------- | ------ | --------------------------------------------------------------------------- |
+| X-API-KEY     | String | <span class="label label-red float-right">Required</span> Your Ezus API key |
+| Authorization | String | <span class="label label-red float-right">Required</span> Your Bearer token |
 
 ### Response
 
@@ -3057,16 +3057,16 @@ axios.get(baseUrl + "/webhooks-last?event_type=projects.created", headers);
 
 ### Header Parameters
 
-| Parameter     | Type   | Description                                                 |
-| ------------- | ------ | ----------------------------------------------------------- |
-| X-API-KEY     | String | <span style="color:red">(Required)</span> Your Ezus API key |
-| Authorization | String | <span style="color:red">(Required)</span> Your Bearer token |
+| Parameter     | Type   | Description                                                                 |
+| ------------- | ------ | --------------------------------------------------------------------------- |
+| X-API-KEY     | String | <span class="label label-red float-right">Required</span> Your Ezus API key |
+| Authorization | String | <span class="label label-red float-right">Required</span> Your Bearer token |
 
 ### Query Parameters
 
-| Parameter  | Type   | Description                                                          |
-| ---------- | ------ | -------------------------------------------------------------------- |
-| event_type | String | <span style="color:red">(Required)</span> The event type to retrieve |
+| Parameter  | Type   | Description                                                                          |
+| ---------- | ------ | ------------------------------------------------------------------------------------ |
+| event_type | String | <span class="label label-red float-right">Required</span> The event type to retrieve |
 
 ### Response
 
@@ -3124,10 +3124,10 @@ axios.post(baseUrl + "/webhooks-upsert", body, headers);
 
 ### Header Parameters
 
-| Parameter     | Type   | Description                                                 |
-| ------------- | ------ | ----------------------------------------------------------- |
-| X-API-KEY     | String | <span style="color:red">(Required)</span> Your Ezus API key |
-| Authorization | String | <span style="color:red">(Required)</span> Your Bearer token |
+| Parameter     | Type   | Description                                                                 |
+| ------------- | ------ | --------------------------------------------------------------------------- |
+| X-API-KEY     | String | <span class="label label-red float-right">Required</span> Your Ezus API key |
+| Authorization | String | <span class="label label-red float-right">Required</span> Your Bearer token |
 
 ### Body Parameters (application/json)
 
@@ -3195,10 +3195,10 @@ axios.delete(baseUrl + "/webhooks-delete", body, headers);
 
 ### Header parameters
 
-| Parameter     | Type   | Description                                                 |
-| ------------- | ------ | ----------------------------------------------------------- |
-| X-API-KEY     | String | <span style="color:red">(Required)</span> Your Ezus API key |
-| Authorization | String | <span style="color:red">(Required)</span> Your Bearer token |
+| Parameter     | Type   | Description                                                                 |
+| ------------- | ------ | --------------------------------------------------------------------------- |
+| X-API-KEY     | String | <span class="label label-red float-right">Required</span> Your Ezus API key |
+| Authorization | String | <span class="label label-red float-right">Required</span> Your Bearer token |
 
 ### Body parameters (application/json)
 
