@@ -549,6 +549,9 @@
               </ul>
           </li>
           <li>
+            <a href="#dynamic-filters" class="toc-h1 toc-link" data-title="Dynamic Filters">Dynamic Filters</a>
+          </li>
+          <li>
             <a href="#date-format" class="toc-h1 toc-link" data-title="Date Format">Date Format</a>
               <ul class="toc-list-h2">
                   <li>
@@ -1786,12 +1789,12 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 </tr>
 <tr>
 <td>reference</td>
-<td>String</td>
+<td><a href="#dynamic-filters">Dynamic-filter</a></td>
 <td>You can filter clients with a specific reference</td>
 </tr>
 <tr>
 <td>info_number</td>
-<td>String</td>
+<td><a href="#dynamic-filters">Dynamic-filter</a></td>
 <td>You can filter clients with a specific info_number, file number that appears in the client record. Not to be confused with reference</td>
 </tr>
 <tr>
@@ -1801,7 +1804,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 </tr>
 <tr>
 <td>email</td>
-<td>String</td>
+<td><a href="#dynamic-filters">Dynamic-filter</a></td>
 <td>You can filter clients by email. This filter works for both <code>enterprise</code> clients (uses the main contact’s email) and <code>individual</code> clients</td>
 </tr>
 </tbody></table>
@@ -6700,6 +6703,52 @@ The fields <code>purchase_price</code>, <code>purchase_price_excl_taxes</code>, 
 <td>alternative</td>
 <td>JSON</td>
 <td>JSON including: <code>sort_order</code> and <code>title</code></td>
+</tr>
+</tbody></table>
+<h1 id='dynamic-filters'>Dynamic Filters</h1>
+<p>Some filters can be marked as Dynamic-filter.
+When a filter is dynamic, it only accepts <strong>String</strong> values, and you can append operator suffixes directly to the query parameter name.</p>
+
+<p>Let’s take the <code>email</code> field as an example.<br>
+If it’s defined as a dynamic filter, you can use different comparison operators in the query parameter name:</p>
+
+<table><thead>
+<tr>
+<th>Operator</th>
+<th>Suffix</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Equals</td>
+<td></td>
+<td>Filters that aren’t marked as dynamic default to equals, meaning it will match values exactly</td>
+<td><code>email=contact@moke-international.com</code></td>
+</tr>
+<tr>
+<td>Equals</td>
+<td><code>_eq</code></td>
+<td>Exact match</td>
+<td><code>email_eq=contact@moke-international.com</code></td>
+</tr>
+<tr>
+<td>Starts with</td>
+<td><code>_starts</code></td>
+<td>Field value starts with...</td>
+<td><code>email_starts=contact</code></td>
+</tr>
+<tr>
+<td>Ends with</td>
+<td><code>_ends</code></td>
+<td>Field value ends with...</td>
+<td><code>email_ends=international.com</code></td>
+</tr>
+<tr>
+<td>Contains</td>
+<td><code>_like</code></td>
+<td>Field value contains...</td>
+<td><code>email_like=moke</code></td>
 </tr>
 </tbody></table>
 <h1 id='date-format'>Date Format</h1>
