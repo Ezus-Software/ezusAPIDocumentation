@@ -1058,7 +1058,7 @@ This API endpoint updates a client record if the provided reference or email mat
 ### Error messages
 
 - Enterprise client duplication → `A client with this name already exists`
-- Individual client duplication → `A client with this name already exists`
+- Individual client duplication → `A client with this first name, last name and email already exists`
 
 ```shell
 curl --location 'https://api.ezus.app/clients-upsert' \
