@@ -3716,7 +3716,7 @@ Only the last 10 suppliers are returned in this object.
 ```
 
 | Property     | Type   | Description                      |
-| ------------ | ------ | -------------------------------- |
+|--------------|--------|----------------------------------|
 | reference    | String | The reference of the supplier    |
 | company_name | String | The company name of the supplier |
 
@@ -3731,20 +3731,26 @@ Only the last 10 suppliers are returned in this object.
     "purchase_price": 100.0,
     "margin_rate": 50.0,
     "sales_price": 200.0,
+    "limit_start": "2025-10-21",
+    "limit_end": "2025-10-31",
+    "is_yearly": false,
     "childs": []
   }
 ]
 ```
 
-| Property       | Type   | Description                                                                           |
-| -------------- | ------ | ------------------------------------------------------------------------------------- |
-| reference      | String | An unique reference of this tariff                                                    |
-| type           | String | A tariff can be `default`, `custom` OR `season`.                                      |
-| name           | String | Name of the tariff (only season tariffs can have a name)                              |
-| purchase_price | Number | Purchase price including taxes                                                        |
-| margin_rate    | Number | The margin rate is based on the sales price                                           |
-| sales_price    | Number | Sales price including taxes                                                           |
-| childs         | Array  | Childs are sub-tariffs contained by this tariff (only season tariffs can have childs) |
+| Property       | Type    | Description                                                                           |
+|----------------|---------|---------------------------------------------------------------------------------------|
+| reference      | String  | An unique reference of this tariff                                                    |
+| type           | String  | A tariff can be `default`, `custom` OR `season`.                                      |
+| name           | String  | Name of the tariff (only season tariffs can have a name)                              |
+| purchase_price | Number  | Purchase price including taxes                                                        |
+| margin_rate    | Number  | The margin rate is based on the sales price                                           |
+| sales_price    | Number  | Sales price including taxes                                                           |
+| limit_start    | String  | A limit_start can be `''`, `17`, `2025-10-31`                                         |
+| limit_end      | String  | A limit_end  can be `''`, `17`, `Infinity`, `2025-10-31`                              |
+| is_yearly      | Boolean | Is it recurring from one year to the next?                                            |
+| childs         | Array   | Childs are sub-tariffs contained by this tariff (only season tariffs can have childs) |
 
 ### User
 
@@ -3760,7 +3766,7 @@ One of the following options: `None`, `Everyone`, `User Group` or the following 
 ```
 
 | Property   | Type   | Description              |
-| ---------- | ------ | ------------------------ |
+|------------|--------|--------------------------|
 | email      | String | Email of the user        |
 | first_name | String | First name of the user   |
 | last_name  | String | Last name of the user    |
@@ -3781,7 +3787,7 @@ One of the following options: `None`, `Everyone`, `User Group` or the following 
 ```
 
 | Property       | Type   | Description                                                           |
-| -------------- | ------ | --------------------------------------------------------------------- |
+|----------------|--------|-----------------------------------------------------------------------|
 | reference      | String | The reference of the webhook                                          |
 | endpoint       | String | The endpoint URL of the webhook                                       |
 | events_types   | String | The list of events for this endpoint ([Events](#events))              |
