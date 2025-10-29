@@ -842,8 +842,23 @@ const axios = require("axios");
 const baseUrl = "https://api.ezus.app";
 
 const body = {
+  reference: "reference",
   project_reference: "project_reference",
+  alternative_order: "0",
   name: "activity Title",
+  type: "activity",
+  category: "restaurant",
+  people: 4, 
+  address: {
+    label: "58 Rue de Paradis",
+    city: "Paris",
+    country: "France",
+    zip: "75010",
+    geo: {
+      x: 48.875761,
+      y: 2.348727
+    }
+  },
   date_start: "2025-10-03 10:00:00",
   date_end: "2025-10-03 12:00:00",
 };
