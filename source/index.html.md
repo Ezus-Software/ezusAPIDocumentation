@@ -638,6 +638,7 @@ curl --location 'https://api.ezus.app/projects-upsert' \
 --header 'Authorization: Bearer <YOUR_TOKEN>' \
 --data-raw '{
     "reference": "project_reference",
+    "project_reference": "esus_reference",
     "info_number": "202306001-P",
     "info_title": "Paris fashion week 2024",
     "info_stage_reference": "received",
@@ -661,6 +662,7 @@ const baseUrl = "https://api.ezus.app";
 
 const body = {
   reference: "project_reference",
+  project_reference: "esus_reference",
   info_number: "202306001-P",
   info_title: "Paris fashion week 2024",
   info_stage_reference: "received",
@@ -702,15 +704,16 @@ axios.post(baseUrl + "/projects-upsert", body, headers);
 ### Header Parameters
 
 | Parameter     | Type   | Description                                                                 |
-| ------------- | ------ | --------------------------------------------------------------------------- |
+|---------------|--------|-----------------------------------------------------------------------------|
 | x-api-key     | String | <span class="label label-red float-right">Required</span> Your Ezus API key |
 | Authorization | String | <span class="label label-red float-right">Required</span> Your Bearer token |
 
 ### Body Parameters (application/json)
 
 | Parameter                     | Type   | Description                                                                                                                                                                                                                                                         |
-| ----------------------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|-------------------------------|--------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | reference                     | String | If provided, the unique reference associated with the project you want to update or create (or a random one will be generated).                                                                                                                                     |
+| project_reference             | String | If provided, the project_reference is used to duplicate an existing project. If the fields info_number, info_title, info_stage_reference, trip_budget, trip_people, sales_manager_email, and client_reference are filled in, then they are overridden.              |
 | info_number                   | String | File number that appears in the project record. Not to be confused with reference                                                                                                                                                                                   |
 | info_title                    | String | Title of the project. This parameter is required if you create a new project                                                                                                                                                                                        |
 | info_stage_reference          | String | Stage of the project: Please use the technical name of the stage you intend to apply. If no specific stage is found, a default stage will be automatically assigned upon adding the project.                                                                        |
@@ -729,7 +732,7 @@ axios.post(baseUrl + "/projects-upsert", body, headers);
 A JSON object indicating whether an error occurred during the process, along with the associated message.
 
 | Property         | Type   | Description                                                                              |
-| ---------------- | ------ | ---------------------------------------------------------------------------------------- |
+|------------------|--------|------------------------------------------------------------------------------------------|
 | action           | String | Indicates type of project action was created                                             |
 | reference        | String | The `reference` for the project, which you should store for future updates or retrievals |
 | info_number      | String | File number that appears in the project record. Not to be confused with reference        |
