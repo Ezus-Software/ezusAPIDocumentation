@@ -877,7 +877,7 @@ axios.post(baseUrl + "/project-steps-upsert", body, headers);
   "error": "false",
   "message": "ok",
   "action": "Project step successfully created",
-  "reference": "0c69370a-d733-4873-af84-75ebcabbd7e8"
+  "reference": "steps_reference"
 }
 ```
 
@@ -904,7 +904,7 @@ axios.post(baseUrl + "/project-steps-upsert", body, headers);
 | category          | String  | Category of the activity, If this is not specified during creation, the default value will be the main category of the account.                                                                               |
 | date_start        | String  | Date start of the activity. This field is <span style="color:red">(Required)</span> for create activity. The date format must be as follows, e.g.: `2024-10-01 12:00:00`                                      |
 | date_end          | String  | Date end of the activity. This field is <span style="color:red">(Required)</span> for create activity. The date format must be as follows, e.g.: `2024-10-01 12:00`                                           |
-| people            | Number  | Number of people on activity, if not specified for creation, the default value will be `P`.                                                                                                                   |
+| people            | Number  | Number of people on activity, if not specified for creation, `P` will be the default number of people in the project.                                                                                         |
 | address           | Object  | JSON object address ([Address](#address))                                                                                                                                                                     |
 
 ### Response
@@ -917,10 +917,6 @@ A JSON object indicating whether an error occurred during the process, along wit
 | message   | String | the return message ‘ok’ if everything went well, otherwise the error message  |
 | action    | String | If the project has been updated and created                                   |
 | reference | String | The ID of the activity that was created or updated                            |
-    "error": "false",
-    "message": "ok",
-    "action": "Project step successfully updated",
-    "reference": "0c69370a-d733-4873-af84-75ebcabbd7e8"
 
 
 # Clients
