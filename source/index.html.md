@@ -834,7 +834,6 @@ curl --location 'https://api.ezus.app/project-steps-upsert' \
     },
     "date_start": "2025-10-03 10:00:00",
     "date_end": "2025-10-03 12:00:00",
-    "link": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
 }'
 ```
 
@@ -847,8 +846,6 @@ const body = {
   name: "activity Title",
   date_start: "2025-10-03 10:00:00",
   date_end: "2025-10-03 12:00:00",
-  result:
-    "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
 };
 const headers = {
   "x-api-key": "<YOUR_API_KEY>",
@@ -863,7 +860,9 @@ axios.post(baseUrl + "/project-steps-upsert", body, headers);
 ```json
 {
   "error": "false",
-  "result": "<LINK>"
+  "message": "ok",
+  "action": "Project step successfully created",
+  "reference": "0c69370a-d733-4873-af84-75ebcabbd7e8"
 }
 ```
 
@@ -880,18 +879,18 @@ axios.post(baseUrl + "/project-steps-upsert", body, headers);
 
 ### Body Parameters (application/json)
 
-| Parameter         | Type   | Description                                                                                                                                                                                                   |
-|-------------------|--------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| reference         | String | The reference of the project to retrieve activity, If Reference is filled in and it exists, then it will update your activity.                                                                                |
-| project_reference | String | The project reference in which you want to create a activity. This field is ignored on update                                                                                                                 |
-| alternative_order | String | Specifies the alternative order in the project to retrieve documents from. If not provided, defaults to 0 for main alternative. This field is (Required) for create activity. This field is ignored on update |
-| type              | String | 3 options: `accom`, `activity`, `transport`. This field is <span style="color:red">(Required)</span> for create activity. This field is ignored on update                                                     |
-| name              | String | Title of the activity. This field is <span style="color:red">(Required)</span> for create activity                                                                                                            |
-| category          | String | Category of the activity, If this is not specified during creation, the default value will be the main category of the account.                                                                               |
-| date_start        | String | Date start of the activity. This field is <span style="color:red">(Required)</span> for create activity. The date format must be as follows, e.g.: `2024-10-01 12:00:00`                                      |
-| date_end          | String | Date end of the activity. This field is <span style="color:red">(Required)</span> for create activity. The date format must be as follows, e.g.: `2024-10-01 12:00`                                           |
-| people            | Int    | Number of people on activity, if not specified for creation, the default value will be `P`.                                                                                                                   |
-| address           | Object | JSON object address ([Address](#address))                                                                                                                                                                     |
+| Parameter         | Type    | Description                                                                                                                                                                                                   |
+|-------------------|---------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| reference         | String  | The reference of the project to retrieve activity, If Reference is filled in and it exists, then it will update your activity.                                                                                |
+| project_reference | String  | The project reference in which you want to create a activity. This field is ignored on update                                                                                                                 |
+| alternative_order | String  | Specifies the alternative order in the project to retrieve documents from. If not provided, defaults to 0 for main alternative. This field is (Required) for create activity. This field is ignored on update |
+| type              | String  | 3 options: `accom`, `activity`, `transport`. This field is <span style="color:red">(Required)</span> for create activity. This field is ignored on update                                                     |
+| name              | String  | Title of the activity. This field is <span style="color:red">(Required)</span> for create activity                                                                                                            |
+| category          | String  | Category of the activity, If this is not specified during creation, the default value will be the main category of the account.                                                                               |
+| date_start        | String  | Date start of the activity. This field is <span style="color:red">(Required)</span> for create activity. The date format must be as follows, e.g.: `2024-10-01 12:00:00`                                      |
+| date_end          | String  | Date end of the activity. This field is <span style="color:red">(Required)</span> for create activity. The date format must be as follows, e.g.: `2024-10-01 12:00`                                           |
+| people            | Number  | Number of people on activity, if not specified for creation, the default value will be `P`.                                                                                                                   |
+| address           | Object  | JSON object address ([Address](#address))                                                                                                                                                                     |
 
 ### Response
 
