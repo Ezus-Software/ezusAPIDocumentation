@@ -1748,6 +1748,9 @@ axios.get(baseUrl + "/product?reference=product_reference", headers);
       "purchase_price": 100.0,
       "margin_rate": 50.0,
       "sales_price": 200.0,
+      "limit_start": "2025-10-21",
+      "limit_end": "2025-10-31",
+      "is_yearly": false,
       "childs": []
     }
   ],
@@ -1767,14 +1770,14 @@ axios.get(baseUrl + "/product?reference=product_reference", headers);
 ### Header Parameters
 
 | Parameter     | Type   | Description                                                                 |
-| ------------- | ------ | --------------------------------------------------------------------------- |
+|---------------|--------|-----------------------------------------------------------------------------|
 | x-api-key     | String | <span class="label label-red float-right">Required</span> Your Ezus API key |
 | Authorization | String | <span class="label label-red float-right">Required</span> Your Bearer token |
 
 ### Query Parameters
 
 | Parameter | Type   | Description                                                                                        |
-| --------- | ------ | -------------------------------------------------------------------------------------------------- |
+|-----------|--------|----------------------------------------------------------------------------------------------------|
 | reference | String | <span class="label label-red float-right">Required</span> The reference of the product to retrieve |
 
 ### Response
