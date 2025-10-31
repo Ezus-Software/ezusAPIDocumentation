@@ -1745,11 +1745,61 @@ axios.get(baseUrl + "/product?reference=product_reference", headers);
       "reference": "tariff_reference",
       "type": "default",
       "name": "",
-      "purchase_price": 100.0,
-      "margin_rate": 50.0,
-      "sales_price": 200.0,
-      "childs": []
-    }
+      "purchase_price": "100.0",
+      "margin_rate": "50.0",
+      "sales_price": "200.0",
+      "limit_start": "",
+      "limit_end": "",
+      "is_yearly": false,
+      "childs": [ 
+        { 
+          "reference": "",  
+          "type": "custom",   
+          "name": "",   
+          "purchase_price": "159.6",  
+          "margin_rate": "0",   
+          "sales_price": "159.6",   
+          "limit_start": "0",   
+          "limit_end": "13",  
+          "is_yearly": false
+        }
+      ]
+    },
+    {
+      "reference": "tariff_reference",
+      "type": "season",
+      "name": "",
+      "purchase_price": "100.0",
+      "margin_rate": "50.0",
+      "sales_price": "200.0",
+      "limit_start": "2026-05-01",
+      "limit_end": "2026-08-31",
+      "is_yearly": true,
+      "childs": [ 
+        { 
+          "reference": "",  
+          "type": "custom",   
+          "name": "",   
+          "purchase_price": "159.6",  
+          "margin_rate": "0",   
+          "sales_price": "159.6",   
+          "limit_start": "0",   
+          "limit_end": "14",  
+          "is_yearly": false
+        },
+        { 
+          "reference": "",  
+          "type": "custom",   
+          "name": "",   
+          "purchase_price": "159.6",  
+          "margin_rate": "0",   
+          "sales_price": "159.6",   
+          "limit_start": "15",   
+          "limit_end": "Infinity",  
+          "is_yearly": false
+        }
+      ]
+  }
   ],
   "custom_fields": [
     {
@@ -1767,14 +1817,14 @@ axios.get(baseUrl + "/product?reference=product_reference", headers);
 ### Header Parameters
 
 | Parameter     | Type   | Description                                                                 |
-| ------------- | ------ | --------------------------------------------------------------------------- |
+|---------------|--------|-----------------------------------------------------------------------------|
 | x-api-key     | String | <span class="label label-red float-right">Required</span> Your Ezus API key |
 | Authorization | String | <span class="label label-red float-right">Required</span> Your Bearer token |
 
 ### Query Parameters
 
 | Parameter | Type   | Description                                                                                        |
-| --------- | ------ | -------------------------------------------------------------------------------------------------- |
+|-----------|--------|----------------------------------------------------------------------------------------------------|
 | reference | String | <span class="label label-red float-right">Required</span> The reference of the product to retrieve |
 
 ### Response
@@ -3716,7 +3766,7 @@ Only the last 10 suppliers are returned in this object.
 ```
 
 | Property     | Type   | Description                      |
-| ------------ | ------ | -------------------------------- |
+|--------------|--------|----------------------------------|
 | reference    | String | The reference of the supplier    |
 | company_name | String | The company name of the supplier |
 
@@ -3728,23 +3778,76 @@ Only the last 10 suppliers are returned in this object.
     "reference": "tariff_reference",
     "type": "default",
     "name": "",
-    "purchase_price": 100.0,
-    "margin_rate": 50.0,
-    "sales_price": 200.0,
-    "childs": []
+    "purchase_price": "100.0",
+    "margin_rate": "50.0",
+    "sales_price": "200.0",
+    "limit_start": "",
+    "limit_end": "",
+    "is_yearly": false,
+    "childs": [ 
+      { 
+        "reference": "",  
+        "type": "custom",   
+        "name": "",   
+        "purchase_price": "159.6",  
+        "margin_rate": "0",   
+        "sales_price": "159.6",   
+        "limit_start": "0",   
+        "limit_end": "13",  
+        "is_yearly": false
+      },
+    ]
+  },
+  {
+    "reference": "tariff_reference",
+    "type": "season",
+    "name": "",
+    "purchase_price": "100.0",
+    "margin_rate": "50.0",
+    "sales_price": "200.0"",
+    "limit_start": "2026-05-01",
+    "limit_end": "2026-08-31",
+    "is_yearly": true,
+    "childs": [ 
+      { 
+        "reference": "",  
+        "type": "custom",   
+        "name": "",   
+        "purchase_price": "159.6",  
+        "margin_rate": "0",   
+        "sales_price": "159.6",   
+        "limit_start": "0",   
+        "limit_end": "14",  
+        "is_yearly": false
+      },
+      { 
+        "reference": "",  
+        "type": "custom",   
+        "name": "",   
+        "purchase_price": "159.6",  
+        "margin_rate": "0",   
+        "sales_price": "159.6",   
+        "limit_start": "15",   
+        "limit_end": "Infinity",  
+        "is_yearly": false
+      }
+    ]
   }
 ]
 ```
 
-| Property       | Type   | Description                                                                           |
-| -------------- | ------ | ------------------------------------------------------------------------------------- |
-| reference      | String | An unique reference of this tariff                                                    |
-| type           | String | A tariff can be `default`, `custom` OR `season`.                                      |
-| name           | String | Name of the tariff (only season tariffs can have a name)                              |
-| purchase_price | Number | Purchase price including taxes                                                        |
-| margin_rate    | Number | The margin rate is based on the sales price                                           |
-| sales_price    | Number | Sales price including taxes                                                           |
-| childs         | Array  | Childs are sub-tariffs contained by this tariff (only season tariffs can have childs) |
+| Property       | Type    | Description                                                                                                                                                                                                                                                                |
+|----------------|---------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| reference      | String  | An unique reference of this tariff                                                                                                                                                                                                                                         |
+| type           | String  | A tariff can be `default`, `custom` OR `season`.                                                                                                                                                                                                                           |
+| name           | String  | Name of the tariff (only season tariffs can have a name)                                                                                                                                                                                                                   |
+| purchase_price | String  | Purchase price including taxes                                                                                                                                                                                                                                             |
+| margin_rate    | String  | The margin rate is based on the sales price                                                                                                                                                                                                                                |
+| sales_price    | String  | Sales price including taxes                                                                                                                                                                                                                                                |
+| limit_start    | String  | Empty on a default tariff: `''`, for a seasonal tariff, it indicates the start date of the season: `2025-10-31`, and on a child tariff these are the different levels of tariff: `''`, `17`.                                                                               |
+| limit_end      | String  | Empty on a default tariff: `''`, for a seasonal tariff it indicates the end date of the season: `2025-10-31`, and on a child tariff these are the different levels of tariff: `18`, `Infinity`. When it's `Infinity`, it means that it is the last level of a flat tariff. |
+| is_yearly      | Boolean | Is it recurring from one year to the next?, it's only for `season` tariffs                                                                                                                                                                                                 |
+| childs         | Array   | Childs are sub-tariffs contained by this tariff. They may be seasonal tariff or default tariff when they are flat rate tariff.                                                                                                                                             |
 
 ### User
 
@@ -3760,7 +3863,7 @@ One of the following options: `None`, `Everyone`, `User Group` or the following 
 ```
 
 | Property   | Type   | Description              |
-| ---------- | ------ | ------------------------ |
+|------------|--------|--------------------------|
 | email      | String | Email of the user        |
 | first_name | String | First name of the user   |
 | last_name  | String | Last name of the user    |
@@ -3781,7 +3884,7 @@ One of the following options: `None`, `Everyone`, `User Group` or the following 
 ```
 
 | Property       | Type   | Description                                                           |
-| -------------- | ------ | --------------------------------------------------------------------- |
+|----------------|--------|-----------------------------------------------------------------------|
 | reference      | String | The reference of the webhook                                          |
 | endpoint       | String | The endpoint URL of the webhook                                       |
 | events_types   | String | The list of events for this endpoint ([Events](#events))              |
