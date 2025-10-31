@@ -1745,9 +1745,9 @@ axios.get(baseUrl + "/product?reference=product_reference", headers);
       "reference": "tariff_reference",
       "type": "default",
       "name": "",
-      "purchase_price": 100.0,
-      "margin_rate": 50.0,
-      "sales_price": 200.0,
+      "purchase_price": "100.0",
+      "margin_rate": "50.0",
+      "sales_price": "200.0",
       "limit_start": "",
       "limit_end": "",
       "is_yearly": false,
@@ -3802,9 +3802,9 @@ Only the last 10 suppliers are returned in this object.
     "reference": "tariff_reference",
     "type": "season",
     "name": "",
-    "purchase_price": 100.0,
-    "margin_rate": 50.0,
-    "sales_price": 200.0,
+    "purchase_price": "100.0",
+    "margin_rate": "50.0",
+    "sales_price": "200.0"",
     "limit_start": "2026-05-01",
     "limit_end": "2026-08-31",
     "is_yearly": true,
@@ -3841,9 +3841,9 @@ Only the last 10 suppliers are returned in this object.
 | reference      | String  | An unique reference of this tariff                                                                                                                                                                                                                                         |
 | type           | String  | A tariff can be `default`, `custom` OR `season`.                                                                                                                                                                                                                           |
 | name           | String  | Name of the tariff (only season tariffs can have a name)                                                                                                                                                                                                                   |
-| purchase_price | Number  | Purchase price including taxes                                                                                                                                                                                                                                             |
-| margin_rate    | Number  | The margin rate is based on the sales price                                                                                                                                                                                                                                |
-| sales_price    | Number  | Sales price including taxes                                                                                                                                                                                                                                                |
+| purchase_price | String  | Purchase price including taxes                                                                                                                                                                                                                                             |
+| margin_rate    | String  | The margin rate is based on the sales price                                                                                                                                                                                                                                |
+| sales_price    | String  | Sales price including taxes                                                                                                                                                                                                                                                |
 | limit_start    | String  | Empty on a default tariff: `''`, for a seasonal tariff, it indicates the start date of the season: `2025-10-31`, and on a child tariff these are the different levels of tariff: `''`, `17`.                                                                               |
 | limit_end      | String  | Empty on a default tariff: `''`, for a seasonal tariff it indicates the end date of the season: `2025-10-31`, and on a child tariff these are the different levels of tariff: `18`, `Infinity`. When it's `Infinity`, it means that it is the last level of a flat tariff. |
 | is_yearly      | Boolean | Is it recurring from one year to the next?, it's only for `season` tariffs                                                                                                                                                                                                 |
