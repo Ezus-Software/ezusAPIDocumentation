@@ -3750,8 +3750,8 @@ Only the last 10 suppliers are returned in this object.
 | purchase_price | Number  | Purchase price including taxes                                                        |
 | margin_rate    | Number  | The margin rate is based on the sales price                                           |
 | sales_price    | Number  | Sales price including taxes                                                           |
-| limit_start    | String  | A limit_start can be `''`, `17`, `2025-10-31`                                         |
-| limit_end      | String  | A limit_end  can be `''`, `17`, `Infinity`, `2025-10-31`                              |
+| limit_start    | String  | A limit_start can be `''`, `17`, `2025-10-31`.                                        |
+| limit_end      | String  | A limit_end can be `''`, `17`, `Infinity`, `2025-10-31`.                              |
 | is_yearly      | Boolean | Is it recurring from one year to the next?                                            |
 | childs         | Array   | Childs are sub-tariffs contained by this tariff (only season tariffs can have childs) |
 
