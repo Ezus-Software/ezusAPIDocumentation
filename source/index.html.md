@@ -1053,12 +1053,12 @@ This API endpoint updates a client record if the provided reference or email mat
 ### Duplicate Prevention Rules
 
 - **Enterprise clients**: A client cannot be created or updated if another enterprise client already exists with the same **company name**.
-- **Individual clients**: A client cannot be created or updated if another individual client already exists with the same **first and last name**.
+- **Individual clients**: A client cannot be created or updated if another individual client already exists with the same **first name, last name, and email**.
 
 ### Error messages
 
 - Enterprise client duplication → `A client with this name already exists`
-- Individual client duplication → `A client with this name already exists`
+- Individual client duplication → `A client with this first name, last name and email already exists`
 
 ```shell
 curl --location 'https://api.ezus.app/clients-upsert' \
