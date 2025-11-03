@@ -1751,7 +1751,7 @@ axios.get(baseUrl + "/product?reference=product_reference", headers);
       "limit_start": "",
       "limit_end": "",
       "is_yearly": false,
-      "childs": [ 
+      "children": [ 
         { 
           "reference": "",  
           "type": "custom",   
@@ -1775,7 +1775,7 @@ axios.get(baseUrl + "/product?reference=product_reference", headers);
       "limit_start": "2026-05-01",
       "limit_end": "2026-08-31",
       "is_yearly": true,
-      "childs": [ 
+      "children": [ 
         { 
           "reference": "",  
           "type": "custom",   
@@ -3784,7 +3784,7 @@ Only the last 10 suppliers are returned in this object.
     "limit_start": "",
     "limit_end": "",
     "is_yearly": false,
-    "childs": [ 
+    "children": [ 
       { 
         "reference": "",  
         "type": "custom",   
@@ -3808,7 +3808,7 @@ Only the last 10 suppliers are returned in this object.
     "limit_start": "2026-05-01",
     "limit_end": "2026-08-31",
     "is_yearly": true,
-    "childs": [ 
+    "children": [ 
       { 
         "reference": "",  
         "type": "custom",   
@@ -3847,7 +3847,7 @@ Only the last 10 suppliers are returned in this object.
 | limit_start    | String  | Empty on a default tariff: `''`, for a seasonal tariff, it indicates the start date of the season: `2025-10-31`, and on a child tariff these are the different levels of tariff: `''`, `17`.                                                                               |
 | limit_end      | String  | Empty on a default tariff: `''`, for a seasonal tariff it indicates the end date of the season: `2025-10-31`, and on a child tariff these are the different levels of tariff: `18`, `Infinity`. When it's `Infinity`, it means that it is the last level of a flat tariff. |
 | is_yearly      | Boolean | Is it recurring from one year to the next?, it's only for `season` tariffs                                                                                                                                                                                                 |
-| childs         | Array   | Childs are sub-tariffs contained by this tariff. They may be seasonal tariff or default tariff when they are flat rate tariff.                                                                                                                                             |
+| children       | Array   | Children are sub-tariffs contained by this tariff. They may be seasonal tariff or default tariff when they are flat rate tariff.                                                                                                                                           |
 
 ### User
 
