@@ -877,7 +877,7 @@ axios.post(baseUrl + "/project-steps-upsert", body, headers);
   "error": "false",
   "message": "ok",
   "action": "Project step successfully created",
-  "reference": "steps_reference"
+  "reference": "project_step_reference"
 }
 ```
 
