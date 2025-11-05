@@ -1745,22 +1745,33 @@ axios.get(baseUrl + "/product?reference=product_reference", headers);
       "reference": "tariff_reference",
       "type": "default",
       "name": "",
-      "purchase_price": "100.0",
-      "margin_rate": "50.0",
-      "sales_price": "200.0",
+      "purchase_price": "100",
+      "margin_rate": "33.33333333333333",
+      "sales_price": "150",
       "limit_start": "",
       "limit_end": "",
       "is_yearly": false,
-      "children": [ 
-        { 
-          "reference": "",  
-          "type": "custom",   
-          "name": "",   
-          "purchase_price": "159.6",  
-          "margin_rate": "0",   
-          "sales_price": "159.6",   
-          "limit_start": "0",   
-          "limit_end": "13",  
+      "children": [
+        {
+          "reference": "",
+          "type": "custom",
+          "name": "",
+          "purchase_price": "100",
+          "margin_rate": "33.33333333333333",
+          "sales_price": "150",
+          "limit_start": "0",
+          "limit_end": "11",
+          "is_yearly": false
+        },
+        {
+          "reference": "",
+          "type": "custom",
+          "name": "",
+          "purchase_price": "100",
+          "margin_rate": "23.076923076923077",
+          "sales_price": "130",
+          "limit_start": "12",
+          "limit_end": "Infinity",
           "is_yearly": false
         }
       ]
@@ -1776,26 +1787,26 @@ axios.get(baseUrl + "/product?reference=product_reference", headers);
       "limit_end": "2026-08-31",
       "is_yearly": true,
       "children": [ 
-        { 
-          "reference": "",  
-          "type": "custom",   
-          "name": "",   
-          "purchase_price": "159.6",  
-          "margin_rate": "0",   
-          "sales_price": "159.6",   
-          "limit_start": "0",   
-          "limit_end": "14",  
+        {
+          "reference": "",
+          "type": "custom",
+          "name": "",
+          "purchase_price": "100",
+          "margin_rate": "9.090909090909092",
+          "sales_price": "110",
+          "limit_start": "0",
+          "limit_end": "10",
           "is_yearly": false
         },
-        { 
-          "reference": "",  
-          "type": "custom",   
-          "name": "",   
-          "purchase_price": "159.6",  
-          "margin_rate": "0",   
-          "sales_price": "159.6",   
-          "limit_start": "15",   
-          "limit_end": "Infinity",  
+        {
+          "reference": "",
+          "type": "custom",
+          "name": "",
+          "purchase_price": "100",
+          "margin_rate": "16.666666666666668",
+          "sales_price": "120",
+          "limit_start": "11",
+          "limit_end": "Infinity",
           "is_yearly": false
         }
       ]
@@ -3778,57 +3789,68 @@ Only the last 10 suppliers are returned in this object.
     "reference": "tariff_reference",
     "type": "default",
     "name": "",
-    "purchase_price": "100.0",
-    "margin_rate": "50.0",
-    "sales_price": "200.0",
+    "purchase_price": "100",
+    "margin_rate": "33.33333333333333",
+    "sales_price": "150",
     "limit_start": "",
     "limit_end": "",
     "is_yearly": false,
-    "children": [ 
-      { 
-        "reference": "",  
-        "type": "custom",   
-        "name": "",   
-        "purchase_price": "159.6",  
-        "margin_rate": "0",   
-        "sales_price": "159.6",   
-        "limit_start": "0",   
-        "limit_end": "13",  
+    "children": [
+      {
+        "reference": "",
+        "type": "custom",
+        "name": "",
+        "purchase_price": "100",
+        "margin_rate": "33.33333333333333",
+        "sales_price": "150",
+        "limit_start": "0",
+        "limit_end": "11",
         "is_yearly": false
       },
+      {
+        "reference": "",
+        "type": "custom",
+        "name": "",
+        "purchase_price": "100",
+        "margin_rate": "23.076923076923077",
+        "sales_price": "130",
+        "limit_start": "12",
+        "limit_end": "Infinity",
+        "is_yearly": false
+      }
     ]
   },
   {
     "reference": "tariff_reference",
     "type": "season",
     "name": "",
-    "purchase_price": "100.0",
-    "margin_rate": "50.0",
-    "sales_price": "200.0"",
+    "purchase_price": "100",
+    "margin_rate": "16.666666666666668",
+    "sales_price": "120",
     "limit_start": "2026-05-01",
     "limit_end": "2026-08-31",
     "is_yearly": true,
     "children": [ 
-      { 
-        "reference": "",  
-        "type": "custom",   
-        "name": "",   
-        "purchase_price": "159.6",  
-        "margin_rate": "0",   
-        "sales_price": "159.6",   
-        "limit_start": "0",   
-        "limit_end": "14",  
+      {
+        "reference": "",
+        "type": "custom",
+        "name": "",
+        "purchase_price": "100",
+        "margin_rate": "9.090909090909092",
+        "sales_price": "110",
+        "limit_start": "0",
+        "limit_end": "10",
         "is_yearly": false
       },
-      { 
-        "reference": "",  
-        "type": "custom",   
-        "name": "",   
-        "purchase_price": "159.6",  
-        "margin_rate": "0",   
-        "sales_price": "159.6",   
-        "limit_start": "15",   
-        "limit_end": "Infinity",  
+      {
+        "reference": "",
+        "type": "custom",
+        "name": "",
+        "purchase_price": "100",
+        "margin_rate": "16.666666666666668",
+        "sales_price": "120",
+        "limit_start": "11",
+        "limit_end": "Infinity",
         "is_yearly": false
       }
     ]
