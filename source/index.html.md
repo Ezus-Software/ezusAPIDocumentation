@@ -255,6 +255,7 @@ axios.get(baseUrl + "/project?reference=project_reference", headers);
   "created_at": "2024-06-18",
   "updated_at": "2024-06-19",
   "currency": "€",
+  "lang": "fr-FR",
   "sales_manager": {
     "email": "travel-design@e-corp.com",
     "first_name": "Alice",
@@ -279,6 +280,11 @@ axios.get(baseUrl + "/project?reference=project_reference", headers);
       "budget_actual_excl_taxes ": 77950,
       "budget_margin_gross": 2500,
       "budget_margin_net": 1000,
+      "budget_purchases": 74500,
+      "financial_invoiced": 48000,
+      "financial_collected": 48000,
+      "financial_purchases": 72820,
+      "financial_spendings": 12820,
       "trip_people": "15",
       "trip_date_in": "2024-03-01",
       "trip_date_out": "2024-03-09",
@@ -361,6 +367,7 @@ A JSON object containing the project information with properties like:
 | created_at           | Date   | Date of creation                                                                  |
 | updated_at           | Date   | Date of the last update                                                           |
 | currency             | String | Default currency of the project                                                   |
+| lang                 | String | Project locale code (e.g. fr-FR, en-GB)                                           |
 | sales_manager        | JSON   | JSON object representing the sales manager ([User](#user))                        |
 | project_manager      | JSON   | JSON object representing the project manager ([User](#user))                      |
 | alternatives         | Array  | Array of JSON alternatives ([Alternatives](#alternatives))                        |
@@ -3257,6 +3264,11 @@ A JSON object indicating whether an error occurred during the process, along wit
     "budget_actual_excl_taxes ": 77950,
     "budget_margin_gross": 2500,
     "budget_margin_net": 1000,
+    "budget_purchases": 74500,
+    "financial_invoiced": 48000,
+    "financial_collected": 48000,
+    "financial_purchases": 72820,
+    "financial_spendings": 12820,
     "trip_people": "15",
     "client": {
       "reference": "client_reference",
@@ -3309,6 +3321,11 @@ A JSON object indicating whether an error occurred during the process, along wit
 | budget_actual_excl_taxes      | Number  | Actual budget for the alternative, excluding taxes                                                                                                         |
 | budget_margin_gross           | Number  | Gross margin for the alternative                                                                                                                           |
 | budget_margin_net             | Number  | Net margin for the alternative                                                                                                                             |
+| budget_purchases              | Number  | Planned supplier purchases for the alternative                                                                                                             |
+| financial_invoiced            | Number  | Amount invoiced to the client for the alternative                                                                                                          |
+| financial_collected           | Number  | Amount collected from the client for the alternative                                                                                                       |
+| financial_purchases           | Number  | Actual supplier purchase costs for the alternative                                                                                                         |
+| financial_spendings           | Number  | Actual spendings recorded for the alternative                                                                                                              |
 | trip_people                   | String  | Number of people                                                                                                                                           |
 | client                        | JSON    | JSON including: `reference`, `type` (enterprise or individual), `company_name`, `first_name`, `last_name` and `email`                                      |
 | trip_destination_reference    | String  | Destination reference of the alternative. Note: For multi-destination alternatives, only the primary destination is returned.                              |
