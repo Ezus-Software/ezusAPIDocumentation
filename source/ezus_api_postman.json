@@ -294,7 +294,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"reference\": \"\",\n    \"project_reference\": \"project-reference\",\n    \"alternative_order\": \"0\",\n    \"type\": \"activity\",\n    \"name\": \"activityTitle\",\n    \"category\": \"2\",\n    \"people\": 2,\n   \"date_start\": \"2025-10-03 10:00:00\",\n    \"date_end\": \"2025-10-03 12:00:00\",\n    \"address\": {\n        \"label\": \"58 Rue de Paradis\",\n        \"city\": \"Paris\",\n        \"country\": \"France\",\n        \"zip\": \"75010\",\n        \"geo\": {\n            \"x\": 48.875761,\n            \"y\": 2.348727\n        }\n    }\n}",
+					"raw": "{\n    \"reference\": \"project-step-reference\",\n    \"project_reference\": \"project-reference\",\n    \"alternative_order\": \"0\",\n    \"type\": \"activity\",\n    \"name\": \"activity Title\",\n    \"category\": \"restaurant\",\n    \"people\": 4,\n    \"date_start\": \"2025-10-03 10:00:00\",\n    \"date_end\": \"2025-10-03 12:00:00\",\n    \"address\": {\n        \"label\": \"58 Rue de Paradis\",\n        \"city\": \"Paris\",\n        \"country\": \"France\",\n        \"zip\": \"75010\",\n        \"geo\": {\n            \"x\": 48.875761,\n            \"y\": 2.348727\n        }\n    }\n}",
 					"options": {
 						"raw": {
 							"language": "json"
