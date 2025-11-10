@@ -255,7 +255,6 @@ axios.get(baseUrl + "/project?reference=project_reference", headers);
   "created_at": "2024-06-18",
   "updated_at": "2024-06-19",
   "currency": "€",
-  "lang": "fr-FR",
   "sales_manager": {
     "email": "travel-design@e-corp.com",
     "first_name": "Alice",
@@ -271,6 +270,7 @@ axios.get(baseUrl + "/project?reference=project_reference", headers);
   "alternatives": [
     {
       "alternative_title": "Main Alternative",
+      "lang": "fr-FR",
       "is_main": true,
       "trip_date_in": "2024-03-01",
       "trip_date_out": "2024-03-09",
@@ -367,7 +367,6 @@ A JSON object containing the project information with properties like:
 | created_at           | Date   | Date of creation                                                                  |
 | updated_at           | Date   | Date of the last update                                                           |
 | currency             | String | Default currency of the project                                                   |
-| lang                 | String | Project locale code (e.g. fr-FR, en-GB)                                           |
 | sales_manager        | JSON   | JSON object representing the sales manager ([User](#user))                        |
 | project_manager      | JSON   | JSON object representing the project manager ([User](#user))                      |
 | alternatives         | Array  | Array of JSON alternatives ([Alternatives](#alternatives))                        |
@@ -3255,6 +3254,7 @@ A JSON object indicating whether an error occurred during the process, along wit
 "alternatives": [
   {
     "alternative_title": "Main Alternative",
+    "lang": "fr-FR",
     "is_main": true,
     "trip_date_in": "2024-03-01",
     "trip_date_out": "2024-03-09",
@@ -3312,6 +3312,7 @@ A JSON object indicating whether an error occurred during the process, along wit
 | Property                      | Type    | Description                                                                                                                                                |
 | ----------------------------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | alternative_title             | String  | Title of the alternative                                                                                                                                   |
+| lang                          | String  | Alternative locale code (e.g. fr-FR, en-GB)                                                                                                                |
 | is_main                       | Boolean | If the alternative is the main alternative                                                                                                                 |
 | trip_date_in                  | Date    | Date of the beginning of this alternative, in a "YYYY-MM-DD" format string. If it's empty, the project has no dates                                        |
 | trip_date_out                 | Date    | Date of the end of this alternative, in a "YYYY-MM-DD" format string. If it's empty, the project has no dates                                              |
@@ -3322,7 +3323,7 @@ A JSON object indicating whether an error occurred during the process, along wit
 | budget_margin_gross           | Number  | Gross margin for the alternative                                                                                                                           |
 | budget_margin_net             | Number  | Net margin for the alternative                                                                                                                             |
 | budget_purchases              | Number  | Planned supplier purchases for the alternative                                                                                                             |
-| financial_invoiced            | Number  | Amount invoiced to the client for the alternative                                                                                                          |
+| financial_invoiced            | Number  | Amount invoiced to the client for the alternative (draft invoices not taken into account)                                                                  |
 | financial_collected           | Number  | Amount collected from the client for the alternative                                                                                                       |
 | financial_purchases           | Number  | Actual supplier purchase costs for the alternative                                                                                                         |
 | financial_spendings           | Number  | Actual spendings recorded for the alternative                                                                                                              |
