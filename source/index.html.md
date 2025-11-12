@@ -802,7 +802,7 @@ axios.post(baseUrl + "/project-documents-create", body, headers);
 A JSON object indicating whether an error occurred during the process, along with the associated message.
 
 | Property | Type | Description                                               |
-|----------|------|-----------------------------------------------------------|
+| -------- | ---- | --------------------------------------------------------- |
 | result   | Link | The URL link of the document after uploading the document |
 
 ## POST project-steps-upsert
@@ -848,7 +848,7 @@ const body = {
   name: "activity Title",
   type: "activity",
   category: "restaurant",
-  people: 4, 
+  people: 4,
   address: {
     label: "58 Rue de Paradis",
     city: "Paris",
@@ -856,8 +856,8 @@ const body = {
     zip: "75010",
     geo: {
       x: 48.875761,
-      y: 2.348727
-    }
+      y: 2.348727,
+    },
   },
   date_start: "2025-10-03 10:00:00",
   date_end: "2025-10-03 12:00:00",
@@ -888,36 +888,35 @@ axios.post(baseUrl + "/project-steps-upsert", body, headers);
 ### Header Parameters
 
 | Parameter     | Type   | Description                                                                 |
-|---------------|--------|-----------------------------------------------------------------------------|
+| ------------- | ------ | --------------------------------------------------------------------------- |
 | x-api-key     | String | <span class="label label-red float-right">Required</span> Your Ezus API key |
 | Authorization | String | <span class="label label-red float-right">Required</span> Your Bearer token |
 
 ### Body Parameters (application/json)
 
-| Parameter         | Type   | Description                                                                                                                                                                                                                                                                 |
-|-------------------|--------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| reference         | String | The project reference used to retrieve the activity. If the reference is provided and exists, the activity will be updated.                                                                                                                                                 |
-| project_reference | String | The project reference in which you want to create an activity. This field is ignored on update.                                                                                                                                                                             |
-| alternative_order | String | Specifies the alternative project order from which to create or update the activity. If not provided, defaults to `0` for main alternative. This field is <span class="label label-red float-right">Required</span> to create an activity. This field is ignored on update. |
-| type              | String | 3 options: `accom`, `activity`, `transport`. This field is <span class="label label-red float-right">Required</span> to create an activity. This field is ignored on update.                                                                                                |
-| name              | String | Title of the activity. This field is <span class="label label-red float-right">Required</span> to create an activity. This field is optional on update.                                                                                                                     |
-| category          | String | Category of the activity, If this is not specified during creation, the default value will be the main category of the account.                                                                                                                                             |
-| date_start        | String | Start date of the activity. This field is <span class="label label-red float-right">Required</span> to create an activity. This field is ignored on update. The date format must be as follows, e.g.: `2024-10-01 12:00:00`.                                                |
-| date_end          | String | End Date of the activity. This field is <span class="label label-red float-right">Required</span> to create an activity. This field is ignored on update. The date format must be as follows, e.g.: `2024-10-01 12:00:00`.                                                  |
-| people            | Number | Number of people in the activity. If not specified during creation, P will be used as the default number of people for the project.                                                                                                                                         |
-| address           | Object | JSON object address ([Address](#address))                                                                                                                                                                                                                                   |
+| Parameter         | Type   | Description                                                                                                                                                                                                                                                                      |
+| ----------------- | ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| reference         | String | The project reference used to retrieve the activity. If the reference is provided and exists, the activity will be updated.                                                                                                                                                      |
+| project_reference | String | The project reference in which you want to create an activity. This field is ignored on update.                                                                                                                                                                                  |
+| alternative_order | String | Specifies the alternative project order from which to create or update the activity. If not provided, defaults to `0` for main alternative. This field is used <span class="label label-red float-right">Required</span> to create an activity. This field is ignored on update. |
+| type              | String | Three options exist: `accom`, `activity`, `transport`. This field is used <span class="label label-red float-right">Required</span> to create an activity. This field is ignored on update.                                                                                      |
+| name              | String | Title of the activity. This field is used <span class="label label-red float-right">Required</span> to create an activity. This field is optional on update.                                                                                                                     |
+| category          | String | Category of the activity, If this is not specified during creation, the default value will be the main category of the account.                                                                                                                                                  |
+| date_start        | String | Start date of the activity. This field is used <span class="label label-red float-right">Required</span> to create an activity. This field is ignored on update. The date format must be as follows, e.g.: `2024-10-01 12:00:00`.                                                |
+| date_end          | String | End date of the activity. This field is used <span class="label label-red float-right">Required</span> to create an activity. This field is ignored on update. The date format must be as follows, e.g.: `2024-10-01 12:00:00`.                                                  |
+| people            | Number | Number of people in the activity. If not specified during creation, P will be used as the default number of people for the project.                                                                                                                                              |
+| address           | Object | JSON object address ([Address](#address))                                                                                                                                                                                                                                        |
 
 ### Response
 
 A JSON object indicating whether an error occurred during the process, along with the associated message.
 
 | Property  | Type   | Description                                                                  |
-|-----------|--------|------------------------------------------------------------------------------|
+| --------- | ------ | ---------------------------------------------------------------------------- |
 | error     | String | If there was an error during creation or update                              |
 | message   | String | The return message ‘ok’ if everything went well, otherwise the error message |
 | action    | String | If the project has been updated and created                                  |
 | reference | String | The reference of the activity that was created or updated                    |
-
 
 # Clients
 
