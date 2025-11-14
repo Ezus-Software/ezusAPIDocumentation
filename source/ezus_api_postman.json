@@ -831,6 +831,29 @@
       "response": []
     },
     {
+      "name": "invoices-supplier",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "X-API-KEY",
+            "value": "{{<YOUR_API_KEY>}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/invoices-supplier",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "invoices-supplier"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
       "name": "deposits-create",
       "request": {
         "method": "POST",
