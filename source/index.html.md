@@ -528,11 +528,11 @@ axios.get(baseUrl + "/project-steps?reference=project_reference", headers);
 
 ### Query Parameters
 
-| Parameter          | Type    | Description                                                                                                                    |
-| ------------------ | ------- | ------------------------------------------------------------------------------------------------------------------------------ |
-| reference          | String  | <span class="label label-red float-right">Required</span> The reference of the project to retrieve documents from              |
-| alternative_order  | Number  | Specifies the alternative order in the project to retrieve documents from. If not provided, defaults to 0 for main alternative |
-| from_steps_catalog | Boolean | Retrieves sample steps. Optional, defaults to false. If true, overrides reference and alternative_order query parameters       |
+| Parameter          | Type    | Description                                                                                                                              |
+| ------------------ | ------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| reference          | String  | <span class="label label-red float-right">Required</span> The reference of the project to retrieve documents from                        |
+| alternative_order  | Number  | Specifies the alternative order in the project to retrieve documents from. If not provided, defaults to 0 for main alternative           |
+| from_steps_catalog | Boolean | Optional. Defaults to false. When set to true, retrieves sample steps and overrides the reference and alternative_order query parameters |
 
 ### Response
 
