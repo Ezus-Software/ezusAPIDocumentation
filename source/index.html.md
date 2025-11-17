@@ -1732,14 +1732,6 @@ axios.get(baseUrl + "/product?reference=product_reference", headers);
     ],
     "size": 1
   },
-  "langs": [
-    {
-      "lang": "french",
-      "name": "Chambre à 2 lits avec petit déjeuner",
-      "short_description": "",
-      "long_description": ""
-    }
-  ],
   "tariffs": [
     {
       "reference": "tariff_reference",
@@ -1810,7 +1802,15 @@ axios.get(baseUrl + "/product?reference=product_reference", headers);
           "is_yearly": false
         }
       ]
-  }
+    }
+  ],
+  "langs": [
+    {
+      "lang": "french",
+      "name": "Chambre à 2 lits avec petit déjeuner",
+      "short_description": "",
+      "long_description": ""
+    }
   ],
   "custom_fields": [
     {
@@ -3867,7 +3867,7 @@ Only the last 10 suppliers are returned in this object.
 | sales_price    | String  | Sales price including taxes                                                                                                                                                                                                                                                     |
 | limit_start    | String  | Empty on a default tariff: `''`, for a seasonal tariff, it indicates the start date of the season: `2025-10-31`, and on a child tariff these are the different levels of tariff: `''`, `17`.                                                                                    |
 | limit_end      | String  | Empty on a default tariff: `''`, for a seasonal tariff it indicates the end date of the season: `2025-10-31`, and on a child tariff these are the different levels of tariff: `18`, `Infinity`. When it's `Infinity`, it means that it is the last level of a flat rate tariff. |
-| is_yearly      | Boolean | Is it recurring from one year to the next? it's only for `season` tariffs                                                                                                                                                                                                       |
+| is_yearly      | Boolean | Indicates whether the seasonal pricing repeats yearly. This field is only applicable when `type` is `season`, For `default` or `custom` tariffs, this field is always `false`.                                                                                                  |Is it recurring from one year to the next?                                                                                        |
 | children       | Array   | Children are sub-tariffs contained by this tariff. They may be seasonal tariff or default tariff when they are flat rate tariff.                                                                                                                                                |
 
 ### User
