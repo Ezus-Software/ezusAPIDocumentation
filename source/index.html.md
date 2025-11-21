@@ -2792,6 +2792,7 @@ axios.get(baseUrl + "/invoices-supplier", headers);
       "url": "https://ezus.io/2023_101010.pdf",
       "supplier_reference": "supplier_reference",
       "project_reference": "project_reference",
+      "alternative_order": "0",
       "paid": 120.0
     }
   ]
@@ -2845,6 +2846,7 @@ Each `invoice-supplier` of the `invoices-supplier` list is a JSON object contain
 | url                | String | URL of the supplier invoice file                                                                                                                                                                                  |
 | supplier_reference | String | Ezus reference of the related supplier                                                                                                                                                                            |
 | project_reference  | String | Ezus reference of the related project                                                                                                                                                                             |
+| alternative_order  | String | Alternative order / index of the related project                                                                                                                                                                  |
 | paid               | Number | Sum of the amounts already paid on the invoice                                                                                                                                                                    |
 |                    |
 
