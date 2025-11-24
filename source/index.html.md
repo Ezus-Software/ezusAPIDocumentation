@@ -3796,7 +3796,7 @@ Only the last 10 suppliers are returned in this object.
     "is_yearly": false,
     "children": [
       {
-        "reference": "",
+        "reference": "tariff_reference",
         "type": "custom",
         "name": "",
         "purchase_price": "100",
@@ -3807,11 +3807,11 @@ Only the last 10 suppliers are returned in this object.
         "is_yearly": false
       },
       {
-        "reference": "",
+        "reference": "tariff_reference",
         "type": "custom",
         "name": "",
         "purchase_price": "100",
-        "margin_rate": "23.07",
+        "margin_rate": "23.08",
         "sales_price": "130",
         "limit_start": "12",
         "limit_end": "Infinity",
@@ -3822,7 +3822,7 @@ Only the last 10 suppliers are returned in this object.
   {
     "reference": "tariff_reference",
     "type": "season",
-    "name": "",
+    "name": "tariff season",
     "purchase_price": "100",
     "margin_rate": "16.66",
     "sales_price": "120",
@@ -3831,7 +3831,7 @@ Only the last 10 suppliers are returned in this object.
     "is_yearly": true,
     "children": [ 
       {
-        "reference": "",
+        "reference": "tariff_reference",
         "type": "custom",
         "name": "",
         "purchase_price": "100",
@@ -3842,7 +3842,7 @@ Only the last 10 suppliers are returned in this object.
         "is_yearly": false
       },
       {
-        "reference": "",
+        "reference": "tariff_reference",
         "type": "custom",
         "name": "",
         "purchase_price": "100",
@@ -3857,18 +3857,18 @@ Only the last 10 suppliers are returned in this object.
 ]
 ```
 
-| Property       | Type    | Description                                                                                                                                                                                                                                                                     |
-|----------------|---------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| reference      | String  | A unique reference of this tariff                                                                                                                                                                                                                                               |
-| type           | String  | A tariff can be `default`, `custom` OR `season`.                                                                                                                                                                                                                                |
-| name           | String  | Name of the tariff (only seasonal tariffs can have a name)                                                                                                                                                                                                                      |
-| purchase_price | String  | Purchase price including taxes                                                                                                                                                                                                                                                  |
-| margin_rate    | String  | The margin rate is based on the sales price                                                                                                                                                                                                                                     |
-| sales_price    | String  | Sales price including taxes                                                                                                                                                                                                                                                     |
-| limit_start    | String  | Empty on a default tariff: `''`, for a seasonal tariff, it indicates the start date of the season: `2025-10-31`, and on a child tariff these are the different levels of tariff: `''`, `17`.                                                                                    |
-| limit_end      | String  | Empty on a default tariff: `''`, for a seasonal tariff it indicates the end date of the season: `2025-10-31`, and on a child tariff these are the different levels of tariff: `18`, `Infinity`. When it's `Infinity`, it means that it is the last level of a flat rate tariff. |
-| is_yearly      | Boolean | Indicates whether the seasonal pricing repeats yearly. This field is only applicable when `type` is `season`, For `default` or `custom` tariffs, this field is always `false`.                                                                                                  |Is it recurring from one year to the next?                                                                                        |
-| children       | Array   | Children are sub-tariffs contained by this tariff. They may be seasonal tariff or default tariff when they are flat rate tariff.                                                                                                                                                |
+| Property       | Type    | Description                                                                                                                                                                                                                   |
+|----------------|---------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| reference      | String  | A unique reference of this tariff                                                                                                                                                                                             |
+| type           | String  | A tariff can be `default`, `custom` OR `season`.                                                                                                                                                                              |
+| name           | String  | Name of the tariff (only seasonal tariffs have a name)                                                                                                                                                                        |
+| purchase_price | String  | Purchase price including taxes                                                                                                                                                                                                |
+| margin_rate    | String  | The margin rate is based on the sales price                                                                                                                                                                                   |
+| sales_price    | String  | Sales price including taxes                                                                                                                                                                                                   |
+| limit_start    | String  | Indicates the starting point of a tariff rule either the start date of a seasonal tariff or the lower bound of a level for a custom tariff.                                                                                   |
+| limit_end      | String  | Indicates the end point of a tariff rule either the end date of a seasonal tariff or the upper bound of a level for a custom tariff. When set to Infinity, it designates the final level of a flat-rate or open-ended tariff. |
+| is_yearly      | Boolean | Indicates whether the seasonal pricing repeats yearly. This field is only applicable when `type` is `season`, For `default` or `custom` tariffs, this field is always `false`.                                                |Is it recurring from one year to the next?                                                                                        |
+| children       | Array   | Children are sub-tariffs contained by this tariff. They may be seasonal tariff or default tariff when they are flat rate tariff.                                                                                              |
 
 ### User
 
