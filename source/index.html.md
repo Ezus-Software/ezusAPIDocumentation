@@ -1760,7 +1760,7 @@ axios.get(baseUrl + "/product?reference=product_reference", headers);
           "type": "custom",
           "name": "",
           "purchase_price": "100",
-          "margin_rate": "23.07",
+          "margin_rate": "23.08",
           "sales_price": "130",
           "limit_start": "12",
           "limit_end": "Infinity",
