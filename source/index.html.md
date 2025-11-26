@@ -802,7 +802,7 @@ axios.post(baseUrl + "/project-documents-create", body, headers);
 A JSON object indicating whether an error occurred during the process, along with the associated message.
 
 | Property | Type | Description                                               |
-|----------|------|-----------------------------------------------------------|
+| -------- | ---- | --------------------------------------------------------- |
 | result   | Link | The URL link of the document after uploading the document |
 
 ## POST project-steps-upsert
@@ -848,7 +848,7 @@ const body = {
   name: "activity Title",
   type: "activity",
   category: "restaurant",
-  people: 4, 
+  people: 4,
   address: {
     label: "58 Rue de Paradis",
     city: "Paris",
@@ -856,8 +856,8 @@ const body = {
     zip: "75010",
     geo: {
       x: 48.875761,
-      y: 2.348727
-    }
+      y: 2.348727,
+    },
   },
   date_start: "2025-10-03 10:00:00",
   date_end: "2025-10-03 12:00:00",
@@ -894,18 +894,18 @@ axios.post(baseUrl + "/project-steps-upsert", body, headers);
 
 ### Body Parameters (application/json)
 
-| Parameter         | Type   | Description                                                                                                                                                                                                                      |
-|-------------------|--------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| reference         | String | The step reference used to retrieve the step. If the step reference is provided and exists, the step will be updated.                                                                                                            |
-| project_reference | String | The project reference in which you want to create an step. This field is ignored on update.                                                                                                                                      |
-| alternative_order | String | Specifies the alternative project order from which to create or update the step. If not provided, defaults to `0` for main alternative. This field is required to create an step. This field is ignored on update.               |
-| type              | String | 3 options: `accom`, `activity`, `transport`. This field is required to create an step. This field is ignored on update.                                                                                                          |
-| name              | String | Title of the step. This field is required to create an step. This field is optional on update.                                                                                                                                   |
-| category          | String | Category of the step, If this is not specified during creation, the default value will be the main category of the account.                                                                                                      |
-| date_start        | String | Start date and time of the step. Must be within the dates of the alternative where the step is created. Required when creating an step. Ignored on update. Expected format: `YYYY-MM-DD HH:MM:SS` (e.g.: `2024-10-01 12:00:00`). |
-| date_end          | String | End date and time of the step. Must be within the dates of the alternative where the step is created. Required when creating an step. Ignored on update. Expected format: `YYYY-MM-DD HH:MM:SS` (e.g.: `2024-10-01 12:00:00`).   |
-| people            | String | Number of people in the activity. You can use a `number` or `P`. If not specified when creating, `P` will be used as the default value. `P` represents the number of people in the project.                                      |
-| address           | Object | JSON object address ([Address](#address))                                                                                                                                                                                        |
+| Parameter         | Type   | Description                                                                                                                                                                                                                                         |
+|-------------------|--------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| reference         | String | The step reference used to retrieve the step. If the step reference is provided and exists, the step will be updated.                                                                                                                               |
+| project_reference | String | The project reference in which you want to create an step. This field is ignored on update.                                                                                                                                                         |
+| alternative_order | String | Specifies the alternative project order from which to create or update the step. If not provided, defaults to `0` for main alternative. This field is required to create an step. This field is ignored on update.                                  |
+| type              | String | Three options exist: `accom`, `activity`, `transport`. This field is required to create an step. This field is ignored on update.                                                                                                                   |
+| name              | String | Title of the step. This field is required to create an step. This field is optional on update.                                                                                                                                                      |
+| category          | String | Category of the step, If this is not specified during creation, the default value will be the main category of the account.                                                                                                                         |
+| date_start        | String | Start date and time of the step. Must be within the dates of the alternative where the step is created. This field is required to create an step. This field is ignored on update. The date format must be as follows, e.g.: `2024-10-01 12:00:00`. |
+| date_end          | String | End date and time of the step. Must be within the dates of the alternative where the step is created. This field is required to create an step. This field is ignored on update. The date format must be as follows, e.g.: `2024-10-01 12:00:00`.   |
+| people            | String | Number of people in the activity. You can use a `number` or `P`. If not specified during creating, `P` will be used as the default value. `P` represents the number of people in the project.                                                       |
+| address           | Object | JSON object address ([Address](#address))                                                                                                                                                                                                           |
 
 ### Response
 
@@ -917,7 +917,6 @@ A JSON object indicating whether an error occurred during the process, along wit
 | message   | String | The return message ‘ok’ if everything went well, otherwise the error message |
 | action    | String | If the project has been updated and created                                  |
 | reference | String | The reference of the activity that was created or updated                    |
-
 
 # Clients
 
