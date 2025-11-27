@@ -2846,7 +2846,7 @@ Each `invoice-supplier` of the `invoices-supplier` list is a JSON object contain
 | url                | String | URL of the supplier invoice file                                                                                                                                                                                  |
 | supplier_reference | String | Reference of the related supplier                                                                                                                                                                                 |
 | project_reference  | String | Reference of the related project                                                                                                                                                                                  |
-| alternative_order  | String | Alternative order / index of the related project                                                                                                                                                                  |
+| alternative_order  | Number | Alternative order / index of the related project                                                                                                                                                                  |
 | paid               | Number | Sum of the payments already made on the invoice                                                                                                                                                                   |
 |                    |
 
