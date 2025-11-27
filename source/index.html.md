@@ -1236,6 +1236,12 @@ axios.get(baseUrl + "/suppliers", headers);
         "subdestination_reference": "subdestination_reference",
         "subdestination_name": "Paris"
       },
+      "category": {
+        "reference": "category_reference",
+        "name": "Transport",
+        "subcategory_reference": "subcategory_reference",
+        "subcategory_name": "Avion"
+      },
       "address": {
         "label": "58 Rue de Paradis",
         "city": "Paris",
@@ -1258,14 +1264,14 @@ axios.get(baseUrl + "/suppliers", headers);
 ### Header Parameters
 
 | Parameter     | Type   | Description                                                                 |
-| ------------- | ------ | --------------------------------------------------------------------------- |
+|---------------|--------|-----------------------------------------------------------------------------|
 | x-api-key     | String | <span class="label label-red float-right">Required</span> Your Ezus API key |
 | Authorization | String | <span class="label label-red float-right">Required</span> Your Bearer token |
 
 ### Query Parameters
 
 | Parameter  | Type   | Description                                                                                  |
-| ---------- | ------ | -------------------------------------------------------------------------------------------- |
+|------------|--------|----------------------------------------------------------------------------------------------|
 | next_token | String | Specify this parameter if you want to retrieve the following elements of a given list query. |
 
 ### Response
@@ -1273,7 +1279,7 @@ axios.get(baseUrl + "/suppliers", headers);
 A JSON object containing the supplier information with properties like:
 
 | Property   | Type   | Description                                                                                                                                                                                     |
-| ---------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|------------|--------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | next_token | String | A token will be returned if all suppliers have not been returned. Use it in another call to access the following suppliers                                                                      |
 | size       | Number | The total number of suppliers available with these filters                                                                                                                                      |
 | data_size  | Number | Number of suppliers returned on the current page                                                                                                                                                |
@@ -1326,6 +1332,12 @@ axios.get(baseUrl + "/supplier?reference=supplier_reference", headers);
     "name": "France",
     "subdestination_reference": "subdestination_reference",
     "subdestination_name": "Paris"
+  },
+  "category": {
+    "reference": "category_reference",
+    "name": "Transport",
+    "subcategory_reference": "subcategory_reference",
+    "subcategory_name": "Avion"
   },
   "address": {
     "label": "58 Rue de Paradis",
@@ -1412,14 +1424,14 @@ axios.get(baseUrl + "/supplier?reference=supplier_reference", headers);
 ### Header Parameters
 
 | Parameter     | Type   | Description                                                                 |
-| ------------- | ------ | --------------------------------------------------------------------------- |
+|---------------|--------|-----------------------------------------------------------------------------|
 | x-api-key     | String | <span class="label label-red float-right">Required</span> Your Ezus API key |
 | Authorization | String | <span class="label label-red float-right">Required</span> Your Bearer token |
 
 ### Query Parameters
 
 | Parameter | Type   | Description                                                                                         |
-| --------- | ------ | --------------------------------------------------------------------------------------------------- |
+|-----------|--------|-----------------------------------------------------------------------------------------------------|
 | reference | String | <span class="label label-red float-right">Required</span> The reference of the supplier to retrieve |
 
 ### Response
@@ -1427,7 +1439,7 @@ axios.get(baseUrl + "/supplier?reference=supplier_reference", headers);
 A JSON object containing the supplier information with properties like:
 
 | Property      | Type   | Description                                                                                                                                                  |
-| ------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+|---------------|--------|--------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | reference     | String | The reference of the supplier                                                                                                                                |
 | info_number   | String | File number that appears in the supplier record. Not to be confused with reference                                                                           |
 | type          | String | 3 options: `accom`, `activity`, `transport`. A supplier can have no type, 1 type or several types. In this case, the different types are separated by commas |
@@ -1438,6 +1450,7 @@ A JSON object containing the supplier information with properties like:
 | visual_url    | String | URL of the Google Slides visual linked to the supplier                                                                                                       |
 | user          | JSON   | JSON object user ([User](#user))                                                                                                                             |
 | destination   | JSON   | JSON object destination ([Destination](#destination))                                                                                                        |
+| category      | JSON   | JSON object category ([Category](#category))                                                                                                                 |               |        |                                                                                                                                                              |
 | address       | JSON   | JSON object address ([Address](#address))                                                                                                                    |
 | medias        | JSON   | JSON object medias ([Medias](#medias))                                                                                                                       |
 | products      | JSON   | JSON object products ([Products](#products-2))                                                                                                               |
@@ -1479,6 +1492,8 @@ curl --location 'https://api.ezus.app/suppliers-upsert' \
   },
   "destination_reference": "destination_reference",
   "subdestination_reference": "subdestination_reference",
+  "category_reference": "category_reference",
+  "subcategory_reference": "subcategory_reference",
   "custom_fields": [
       {"name": "field_name", "value": "field_value"}
   ]
@@ -1514,6 +1529,8 @@ const body = {
   },
   destination_reference: "destination_reference",
   subdestination_reference: "subdestination_reference",
+  category_reference: "category_reference",
+  subcategory_reference: "subcategory_reference",
   custom_fields: [{ name: "field_name", value: "field_value" }],
 };
 const headers = {
@@ -1542,7 +1559,7 @@ axios.post(baseUrl + "/suppliers-upsert", body, headers);
 ### Header Parameters
 
 | Parameter     | Type   | Description                                                                 |
-| ------------- | ------ | --------------------------------------------------------------------------- |
+|---------------|--------|-----------------------------------------------------------------------------|
 | x-api-key     | String | <span class="label label-red float-right">Required</span> Your Ezus API key |
 | Authorization | String | <span class="label label-red float-right">Required</span> Your Bearer token |
 
@@ -1561,6 +1578,8 @@ axios.post(baseUrl + "/suppliers-upsert", body, headers);
 | address                  | JSON   | JSON object address ([Address](#address)) To reset the address, you can put `'0'`. **Geolocation data cannot be modified during an upsert**.                                                                                                     |
 | destination_reference    | String | Reference of the destination to link to the supplier. To reset the destination, you can put `'0'`.                                                                                                                                               |
 | subdestination_reference | String | Reference of the sub-destination to link to the supplier. To reset the sub-destination, you can put `'0'`. If the `destination_reference` is not provided, the `subdestination_reference` will be ignored.                                       |
+| category_reference       | String | Reference of the category to link to the supplier. To reset the category, you can put `'0'`.                                                                                                                                                                             
+| subcategory_reference    | String | Reference of the sub-category to link to the supplier. To reset the sub-category, you can put `'0'`. If the `category_reference` is not provided, the `subcategory_reference` will be ignored.        
 | custom_fields            | JSON   | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                                                                                                    |
 
 ### Response
@@ -1568,7 +1587,7 @@ axios.post(baseUrl + "/suppliers-upsert", body, headers);
 A JSON object indicating whether an error occurred during the process, along with the associated message.
 
 | Property  | Type   | Description                                                                               |
-| --------- | ------ | ----------------------------------------------------------------------------------------- |
+|-----------|--------|-------------------------------------------------------------------------------------------|
 | action    | String | Indicates type of supplier action was created                                             |
 | reference | String | The `reference` for the supplier, which you should store for future updates or retrievals |
 
@@ -1628,6 +1647,12 @@ axios.get(baseUrl + "/products", headers);
         "subdestination_reference": "subdestination_reference",
         "subdestination_name": "Paris"
       },
+      "category": {
+        "reference": "category_reference",
+        "name": "Transport",
+        "subcategory_reference": "subcategory_reference",
+        "subcategory_name": "Avion"
+      },
       "budget_form": "Important",
       "budget_variable": "Display"
     }
@@ -1642,14 +1667,14 @@ axios.get(baseUrl + "/products", headers);
 ### Header Parameters
 
 | Parameter     | Type   | Description                                                                 |
-| ------------- | ------ | --------------------------------------------------------------------------- |
+|---------------|--------|-----------------------------------------------------------------------------|
 | x-api-key     | String | <span class="label label-red float-right">Required</span> Your Ezus API key |
 | Authorization | String | <span class="label label-red float-right">Required</span> Your Bearer token |
 
 ### Query Parameters
 
 | Parameter  | Type   | Description                                                                                  |
-| ---------- | ------ | -------------------------------------------------------------------------------------------- |
+|------------|--------|----------------------------------------------------------------------------------------------|
 | next_token | String | Specify this parameter if you want to retrieve the following elements of a given list query. |
 
 ### Response
@@ -1657,7 +1682,7 @@ axios.get(baseUrl + "/products", headers);
 A JSON object containing the product information with properties like:
 
 | Property   | Type   | Description                                                                                                                                                                                 |
-| ---------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|------------|--------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | next_token | String | A token will be returned if all products have not been returned. Use it in another call to access the following products                                                                    |
 | size       | Number | The total number of products available with these filters                                                                                                                                   |
 | data_size  | Number | Number of products returned on the current page                                                                                                                                             |
@@ -1720,6 +1745,12 @@ axios.get(baseUrl + "/product?reference=product_reference", headers);
     "subdestination_reference": "subdestination_reference",
     "subdestination_name": "Paris"
   },
+  "category": {
+    "reference": "category_reference",
+    "name": "Transport",
+    "subcategory_reference": "subcategory_reference",
+    "subcategory_name": "Avion"
+  },
   "budget_form": "Important",
   "budget_text": "Option",
   "budget_variable": "Display",
@@ -1767,14 +1798,14 @@ axios.get(baseUrl + "/product?reference=product_reference", headers);
 ### Header Parameters
 
 | Parameter     | Type   | Description                                                                 |
-| ------------- | ------ | --------------------------------------------------------------------------- |
+|---------------|--------|-----------------------------------------------------------------------------|
 | x-api-key     | String | <span class="label label-red float-right">Required</span> Your Ezus API key |
 | Authorization | String | <span class="label label-red float-right">Required</span> Your Bearer token |
 
 ### Query Parameters
 
 | Parameter | Type   | Description                                                                                        |
-| --------- | ------ | -------------------------------------------------------------------------------------------------- |
+|-----------|--------|----------------------------------------------------------------------------------------------------|
 | reference | String | <span class="label label-red float-right">Required</span> The reference of the product to retrieve |
 
 ### Response
@@ -1797,6 +1828,7 @@ A JSON object containing the product information with properties like:
 | supplier        | JSON   | A JSON object containing `reference`, `company_name`                                                                                                                                                                                     |
 | package         | JSON   | A JSON object containing `reference`, `title`                                                                                                                                                                                            |
 | destination     | JSON   | JSON object destination ([Destination](#destination))                                                                                                                                                                                    |
+| category        | JSON   | JSON object category ([Category](#category))                                                                                                                                                                                    |
 | buget_form      | String | `Important`, `Normal`, `Low` represent how the product will be highlight on the budget By Default                                                                                                                                        |
 | budget_text     | String | This is an empty string `""` if the product is not marked as an option in the budget, otherwise it is the custom label of the option to which the product is associated                                                                  |
 | budget_variable | String | `Display`, `Do not Display`, this option tells if the product will be displayed or not in the budget                                                                                                                                     |
@@ -1836,6 +1868,8 @@ curl --location 'https://api.ezus.app/products-upsert' \
     "package_reference": "package_reference",
     "destination_reference": "destination_reference",
     "subdestination_reference": "subdestination_reference",
+    "category_reference": "category_reference",
+    "subcategory_reference": "subcategory_reference",
     "custom_fields": [
         {"name": "field_name", "value": "field_value"}
     ]
@@ -1867,6 +1901,8 @@ const body = {
   package_reference: "package_reference",
   destination_reference: "destination_reference",
   subdestination_reference: "subdestination_reference",
+  category_reference: "category_reference",
+  subcategory_reference: "subcategory_reference",
   custom_fields: [{ name: "field_name", value: "field_value" }],
 };
 const headers = {
@@ -1895,14 +1931,14 @@ axios.post(baseUrl + "/products-upsert", body, headers);
 ### Header Parameters
 
 | Parameter     | Type   | Description                                                                 |
-| ------------- | ------ | --------------------------------------------------------------------------- |
+|---------------|--------|-----------------------------------------------------------------------------|
 | x-api-key     | String | <span class="label label-red float-right">Required</span> Your Ezus API key |
 | Authorization | String | <span class="label label-red float-right">Required</span> Your Bearer token |
 
 ### Body Parameters (application/json)
 
 | Parameter                | Type   | Description                                                                                                                                                                                                                                                             |
-| ------------------------ | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|--------------------------|--------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | reference                | String | If provided, the unique reference associated to the product you want to update or create (in case the one you provided has never been used). If no reference is provided, a product will be created with a random one.                                                  |
 | info_number              | String | File number that appears in the product record. Not to be confused with reference                                                                                                                                                                                       |
 | title                    | String | Title of your product. This parameter is required if you create a new product                                                                                                                                                                                           |
@@ -1919,6 +1955,8 @@ axios.post(baseUrl + "/products-upsert", body, headers);
 | package_reference        | String | If you give an adequate package reference, the product will be added in this package. If you want to update the package's product to None, you must enter 0.                                                                                                            |
 | destination_reference    | String | Reference of the destination to link to the product. To reset the destination, you can put `'0'`.                                                                                                                                                                       |
 | subdestination_reference | String | Reference of the sub-destination to link to the product. To reset the sub-destination, you can put `'0'`. If the `destination_reference` is not provided, the `subdestination_reference` will be ignored.                                                               |
+| category_reference       | String | Reference of the category to link to the product. To reset the category, you can put `'0'`.                                                                                                                                                                             |                                                                                                                                                                                                                                               | destination_reference    | String | Reference of the destination to link to the product. To reset the destination, you can put `'0'`.                                                                                                                                                                                                                                                                            || destination_reference    | String | Reference of the destination to link to the product. To reset the destination, you can put `'0'`.                                                                                                                                                                       |
+| subcategory_reference    | String | Reference of the sub-category to link to the product. To reset the sub-category, you can put `'0'`. If the `category_reference` is not provided, the `subcategory_reference` will be ignored.                                                                           |
 | custom_fields            | JSON   | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                                                                                                                           |
 
 ### Response
@@ -1926,7 +1964,7 @@ axios.post(baseUrl + "/products-upsert", body, headers);
 A JSON object indicating whether an error occurred during the process, along with the associated message.
 
 | Property  | Type   | Description                                                                              |
-| --------- | ------ | ---------------------------------------------------------------------------------------- |
+|-----------|--------|------------------------------------------------------------------------------------------|
 | action    | String | Indicates type of product action was created                                             |
 | reference | String | The `reference` for the product, which you should store for future updates or retrievals |
 
@@ -1973,6 +2011,12 @@ axios.get(baseUrl + "/package?reference=package_reference", headers);
       }
     ],
     "size": 1
+  },
+  "categories": {
+    "reference": "category_reference",
+    "name": "Transports",
+    "subcategory_reference": "subcategory_reference",
+    "subcategory_name": "Avion"
   },
   "medias": {
     "data": [],
@@ -2021,14 +2065,14 @@ axios.get(baseUrl + "/package?reference=package_reference", headers);
 ### Header Parameters
 
 | Parameter     | Type   | Description                                                                 |
-| ------------- | ------ | --------------------------------------------------------------------------- |
+|---------------|--------|-----------------------------------------------------------------------------|
 | x-api-key     | String | <span class="label label-red float-right">Required</span> Your Ezus API key |
 | Authorization | String | <span class="label label-red float-right">Required</span> Your Bearer token |
 
 ### Query Parameters
 
 | Parameter | Type   | Description                                                                                        |
-| --------- | ------ | -------------------------------------------------------------------------------------------------- |
+|-----------|--------|----------------------------------------------------------------------------------------------------|
 | reference | String | <span class="label label-red float-right">Required</span> The reference of the package to retrieve |
 
 ### Response
@@ -2036,7 +2080,7 @@ axios.get(baseUrl + "/package?reference=package_reference", headers);
 A JSON object containing the package information with properties like:
 
 | Property      | Type   | Description                                                                       |
-| ------------- | ------ | --------------------------------------------------------------------------------- |
+|---------------|--------|-----------------------------------------------------------------------------------|
 | reference     | String | The reference of the package                                                      |
 | info_number   | String | File number that appears in the package record. Not to be confused with reference |
 | title         | String | Name of the package                                                               |
@@ -2044,6 +2088,7 @@ A JSON object containing the package information with properties like:
 | capacity      | String | Maximum number of people for which the package can be used                        |
 | visual_url    | String | URL of the Google Slides visual linked to the package                             |
 | suppliers     | JSON   | JSON object suppliers ([Suppliers](#suppliers-2))                                 |
+| category      | JSON   | JSON object category ([Category](#category))                                      |        |                                                                                   |
 | medias        | JSON   | JSON object medias ([Medias](#medias))                                            |
 | products      | JSON   | JSON object products ([Products](#products-2))                                    |
 | langs         | Array  | Array of JSON langs ([Langs](#langs))                                             |
@@ -2065,6 +2110,8 @@ curl --location 'https://api.ezus.app/packages-upsert' \
     "capacity": "2",
     "destination_reference": "destination_reference",
     "subdestination_reference": "subdestination_reference",
+    "category_reference": "category_reference",
+    "subcategory_reference": "subcategory_reference",    
     "custom_fields": [
         {"name": "field_name", "value": "field_value"}
     ]
@@ -2083,6 +2130,8 @@ const body = {
   capacity: "2",
   destination_reference: "destination_reference",
   subdestination_reference: "subdestination_reference",
+  category_reference: "category_reference",
+  subcategory_reference: "subcategory_reference",
   custom_fields: [{ name: "field_name", value: "field_value" }],
 };
 const headers = {
@@ -2111,20 +2160,22 @@ axios.post(baseUrl + "/packages-upsert", body, headers);
 ### Header Parameters
 
 | Parameter     | Type   | Description                                                                 |
-| ------------- | ------ | --------------------------------------------------------------------------- |
+|---------------|--------|-----------------------------------------------------------------------------|
 | x-api-key     | String | <span class="label label-red float-right">Required</span> Your Ezus API key |
 | Authorization | String | <span class="label label-red float-right">Required</span> Your Bearer token |
 
 ### Body Parameters (application/json)
 
 | Parameter                | Type   | Description                                                                                                                                                                                                            |
-| ------------------------ | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|--------------------------|--------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | reference                | String | If provided, the unique reference associated to the package you want to update or create (in case the one you provided has never been used). If no reference is provided, a package will be created with a random one. |
 | info_number              | String | File number that appears in the package record. Not to be confused with reference                                                                                                                                      |
 | title                    | String | This parameter is required if you create a new package                                                                                                                                                                 |
 | capacity                 | Number | Maximum number of people for which the package can be used . Leave blank `''` if not relevant                                                                                                                          |
 | destination_reference    | String | Reference of the destination to link to the package. To reset the destination, you can put `'0'`.                                                                                                                      |
 | subdestination_reference | String | Reference of the sub-destination to link to the package. To reset the sub-destination, you can put `'0'`. If the `destination_reference` is not provided, the `subdestination_reference` will be ignored.              |
+| category_reference       | String | Reference of the category to link to the package. To reset the category, you can put `'0'`.                                                                                                                            |
+| subcategory_reference    | String | Reference of the sub-category to link to the package. To reset the sub-category, you can put `'0'`. If the `category_reference` is not provided, the `subcategory_reference` will be ignored.                          |        |                                                                                                                                                                                                                        |
 | custom_fields            | JSON   | Array of JSON custom fields [Custom fields](#custom-fields)                                                                                                                                                            |
 
 ### Response
@@ -2132,7 +2183,7 @@ axios.post(baseUrl + "/packages-upsert", body, headers);
 A JSON object indicating whether an error occurred during the process, along with the associated message.
 
 | Property  | Type   | Description                                                                              |
-| --------- | ------ | ---------------------------------------------------------------------------------------- |
+|-----------|--------|------------------------------------------------------------------------------------------|
 | action    | String | Indicates type of package action was created                                             |
 | reference | String | The `reference` for the package, which you should store for future updates or retrievals |
 
@@ -3316,6 +3367,24 @@ A JSON object indicating whether an error occurred during the process, along wit
 | trip_subdestination_reference | String  | Subdestination reference of the alternative. Note: For multi-destination alternatives, only the primary subdestination is returned.                        |
 | trip_subdestination           | String  | Subdestination of the alternative. Note: For multi-destination alternatives, only the primary subdestination is returned.                                  |
 | destinations                  | JSON    | JSON including: `size`, Array of all destination (`reference` and `name`) and subdestination (`subdestination_reference` and `subdestination_name`) values |
+
+### Category
+
+```json
+"category": {
+  "reference": "category_reference",
+  "name": "Transport",
+  "subcategory_reference": "subcategory_reference",
+  "subcategory_name": "Avion"
+},
+```
+
+| Property              | Type   | Description                       |
+|-----------------------|--------|-----------------------------------|
+| reference             | String | The reference of the category     |
+| name                  | String | Name of the category              |
+| subcategory_reference | String | The reference of the sub-category |
+| subcategory_name      | String | Name of the sub-category          |
 
 ### Contacts
 
