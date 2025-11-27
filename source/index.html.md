@@ -821,7 +821,7 @@ curl --location 'https://api.ezus.app/project-steps-upsert' \
     "name": "activity Title",
     "type": "activity",
     "category": "restaurant",
-    "people": 4,
+    "people": "4",
     "address": {
         "label": "58 Rue de Paradis",
         "city": "Paris",
@@ -848,7 +848,7 @@ const body = {
   name: "activity Title",
   type: "activity",
   category: "restaurant",
-  people: 4,
+  people: "4",
   address: {
     label: "58 Rue de Paradis",
     city: "Paris",
