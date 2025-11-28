@@ -2776,8 +2776,8 @@ axios.get(baseUrl + "/invoices-supplier", headers);
 {
   "error": "false",
   "next_token": "",
-  "size": 50,
-  "data_size": 1240,
+  "size": 1240,
+  "data_size": 50,
   "page": 1,
   "invoices-supplier": [
     {
