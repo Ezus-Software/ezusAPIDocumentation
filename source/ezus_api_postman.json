@@ -104,6 +104,11 @@
               "key": "project_manager",
               "value": "john.doe@e-corp.com",
               "disabled": true
+            },
+            {
+              "key": "from_programs_catalog",
+              "value": false,
+              "disabled": true
             }
           ]
         }

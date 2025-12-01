@@ -196,16 +196,17 @@ axios.get(baseUrl + "/projects", headers);
 
 ### Query Parameters
 
-| Parameter            | Type   | Description                                                                                                                                                                                        |
-| -------------------- | ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| next_token           | String | Specify this parameter if you want to retrieve the following elements of a given list query                                                                                                        |
-| info_stage_reference | String | You can filter projects that are in a specific stage. The stage of the project must be indicated by its technical name                                                                             |
-| created_at           | Date   | You can filter projects assigned to a specific or an intersection of creation date. Expected format: “YYYY-MM-DD” or “YYYY-MM-DD,YYYY-MM-DD”. See [Date Format](#date-format) for more details.    |
-| updated_at           | Date   | You can filter projects assigned to a specific or an intersection of last update date. Expected format: “YYYY-MM-DD” or “YYYY-MM-DD,YYYY-MM-DD”. See [Date Format](#date-format) for more details. |
-| trip_date_in         | Date   | You can filter projects assigned to a specific or an intersection of trip start date. Expected format: “YYYY-MM-DD” or “YYYY-MM-DD,YYYY-MM-DD”. See [Date Format](#date-format) for more details.  |
-| trip_date_out        | Date   | You can filter projects assigned to a specific or an intersection of trip end date. Expected format: “YYYY-MM-DD” or “YYYY-MM-DD,YYYY-MM-DD”. See [Date Format](#date-format) for more details.    |
-| sales_manager        | String | You can filter projects assigned to a specific sales manager. Expected format: email (john.doe@e-corp.com)                                                                                         |
-| project_manager      | String | You can filter projects assigned to a specific project manager. Expected format: email (john.doe@e-corp.com)                                                                                       |
+| Parameter             | Type    | Description                                                                                                                                                                                        |
+|-----------------------|---------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| next_token            | String  | Specify this parameter if you want to retrieve the following elements of a given list query                                                                                                        |
+| info_stage_reference  | String  | You can filter projects that are in a specific stage. The stage of the project must be indicated by its technical name                                                                             |
+| created_at            | Date    | You can filter projects assigned to a specific or an intersection of creation date. Expected format: “YYYY-MM-DD” or “YYYY-MM-DD,YYYY-MM-DD”. See [Date Format](#date-format) for more details.    |
+| updated_at            | Date    | You can filter projects assigned to a specific or an intersection of last update date. Expected format: “YYYY-MM-DD” or “YYYY-MM-DD,YYYY-MM-DD”. See [Date Format](#date-format) for more details. |
+| trip_date_in          | Date    | You can filter projects assigned to a specific or an intersection of trip start date. Expected format: “YYYY-MM-DD” or “YYYY-MM-DD,YYYY-MM-DD”. See [Date Format](#date-format) for more details.  |
+| trip_date_out         | Date    | You can filter projects assigned to a specific or an intersection of trip end date. Expected format: “YYYY-MM-DD” or “YYYY-MM-DD,YYYY-MM-DD”. See [Date Format](#date-format) for more details.    |
+| sales_manager         | String  | You can filter projects assigned to a specific sales manager. Expected format: email (john.doe@e-corp.com)                                                                                         |
+| project_manager       | String  | You can filter projects assigned to a specific project manager. Expected format: email (john.doe@e-corp.com)                                                                                       |
+| from_programs_catalog | Boolean | Optional. Defaults to false. When set to true, retrieves all projects type (project templates) from the programs catalog instead.                                                                  |
 
 ### Response
 
