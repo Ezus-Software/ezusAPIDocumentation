@@ -206,7 +206,7 @@ axios.get(baseUrl + "/projects", headers);
 | trip_date_out         | Date    | You can filter projects assigned to a specific or an intersection of trip end date. Expected format: “YYYY-MM-DD” or “YYYY-MM-DD,YYYY-MM-DD”. See [Date Format](#date-format) for more details.    |
 | sales_manager         | String  | You can filter projects assigned to a specific sales manager. Expected format: email (john.doe@e-corp.com)                                                                                         |
 | project_manager       | String  | You can filter projects assigned to a specific project manager. Expected format: email (john.doe@e-corp.com)                                                                                       |
-| from_programs_catalog | Boolean | Optional. Defaults to false. When set to true, retrieves all projects type (project templates) from the programs catalog instead.                                                                  |
+| from_programs_catalog | Boolean | Optional. Defaults to false. When set to true, retrieves all projects type (project templates) from the programs catalog.                                                                          |
 
 ### Response
 
