@@ -1240,7 +1240,7 @@ axios.get(baseUrl + "/suppliers", headers);
         "reference": "category_reference",
         "name": "Transport",
         "subcategory_reference": "subcategory_reference",
-        "subcategory_name": "Avion"
+        "subcategory_name": "Plane"
       },
       "address": {
         "label": "58 Rue de Paradis",
@@ -1337,7 +1337,7 @@ axios.get(baseUrl + "/supplier?reference=supplier_reference", headers);
     "reference": "category_reference",
     "name": "Transport",
     "subcategory_reference": "subcategory_reference",
-    "subcategory_name": "Avion"
+    "subcategory_name": "Plane"
   },
   "address": {
     "label": "58 Rue de Paradis",
@@ -1651,7 +1651,7 @@ axios.get(baseUrl + "/products", headers);
         "reference": "category_reference",
         "name": "Transport",
         "subcategory_reference": "subcategory_reference",
-        "subcategory_name": "Avion"
+        "subcategory_name": "Plane"
       },
       "budget_form": "Important",
       "budget_variable": "Display"
@@ -1749,7 +1749,7 @@ axios.get(baseUrl + "/product?reference=product_reference", headers);
     "reference": "category_reference",
     "name": "Transport",
     "subcategory_reference": "subcategory_reference",
-    "subcategory_name": "Avion"
+    "subcategory_name": "Plane"
   },
   "budget_form": "Important",
   "budget_text": "Option",
@@ -2014,9 +2014,9 @@ axios.get(baseUrl + "/package?reference=package_reference", headers);
   },
   "categories": {
     "reference": "category_reference",
-    "name": "Transports",
+    "name": "Transport",
     "subcategory_reference": "subcategory_reference",
-    "subcategory_name": "Avion"
+    "subcategory_name": "Plane"
   },
   "medias": {
     "data": [],
@@ -3375,7 +3375,7 @@ A JSON object indicating whether an error occurred during the process, along wit
   "reference": "category_reference",
   "name": "Transport",
   "subcategory_reference": "subcategory_reference",
-  "subcategory_name": "Avion"
+  "subcategory_name": "Plane"
 },
 ```
 
