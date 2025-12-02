@@ -1779,7 +1779,7 @@ axios.get(baseUrl + "/product?reference=product_reference", headers);
       "limit_start": "2026-05-01",
       "limit_end": "2026-08-31",
       "is_yearly": true,
-      "children": [ 
+      "children": [
         {
           "reference": "",
           "type": "custom",
@@ -1829,14 +1829,14 @@ axios.get(baseUrl + "/product?reference=product_reference", headers);
 ### Header Parameters
 
 | Parameter     | Type   | Description                                                                 |
-|---------------|--------|-----------------------------------------------------------------------------|
+| ------------- | ------ | --------------------------------------------------------------------------- |
 | x-api-key     | String | <span class="label label-red float-right">Required</span> Your Ezus API key |
 | Authorization | String | <span class="label label-red float-right">Required</span> Your Bearer token |
 
 ### Query Parameters
 
 | Parameter | Type   | Description                                                                                        |
-|-----------|--------|----------------------------------------------------------------------------------------------------|
+| --------- | ------ | -------------------------------------------------------------------------------------------------- |
 | reference | String | <span class="label label-red float-right">Required</span> The reference of the product to retrieve |
 
 ### Response
@@ -2803,6 +2803,9 @@ axios.put(baseUrl + "/invoices-update", body, headers);
 ### Response
 
 A JSON object indicating whether an error occurred during the process, along with the associated message.
+
+Please note that invoice finalization (the step that occurs when moving an invoice from the `draft` stage to `paid` or `completed`) can occasionally be busy if another finalization is already in progress.
+In such cases, the response message will indicate that the process is busy, and the client simply needs to retry the request after a short delay.
 
 | Property  | Type   | Description                                                                              |
 | --------- | ------ | ---------------------------------------------------------------------------------------- |
@@ -3777,7 +3780,7 @@ Only the last 10 suppliers are returned in this object.
 ```
 
 | Property     | Type   | Description                      |
-|--------------|--------|----------------------------------|
+| ------------ | ------ | -------------------------------- |
 | reference    | String | The reference of the supplier    |
 | company_name | String | The company name of the supplier |
 
@@ -3830,7 +3833,7 @@ Only the last 10 suppliers are returned in this object.
     "limit_start": "2026-05-01",
     "limit_end": "2026-08-31",
     "is_yearly": true,
-    "children": [ 
+    "children": [
       {
         "reference": "tariff_reference",
         "type": "custom",
@@ -3859,7 +3862,7 @@ Only the last 10 suppliers are returned in this object.
 ```
 
 | Property       | Type    | Description                                                                                                                                                                                                                   |
-|----------------|---------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| -------------- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------ |
 | reference      | String  | A unique reference of this tariff                                                                                                                                                                                             |
 | type           | String  | A tariff can be `default`, `custom` OR `season`.                                                                                                                                                                              |
 | name           | String  | Name of the tariff (only seasonal tariffs have a name)                                                                                                                                                                        |
@@ -3868,7 +3871,7 @@ Only the last 10 suppliers are returned in this object.
 | sales_price    | String  | Sales price including taxes                                                                                                                                                                                                   |
 | limit_start    | String  | Indicates the starting point of a tariff rule either the start date of a seasonal tariff or the lower bound of a level for a custom tariff.                                                                                   |
 | limit_end      | String  | Indicates the end point of a tariff rule either the end date of a seasonal tariff or the upper bound of a level for a custom tariff. When set to Infinity, it designates the final level of a flat-rate or open-ended tariff. |
-| is_yearly      | Boolean | Indicates whether the seasonal pricing repeats yearly. This field is only applicable when `type` is `season`, For `default` or `custom` tariffs, this field is always `false`.                                                |Is it recurring from one year to the next?                                                                                        |
+| is_yearly      | Boolean | Indicates whether the seasonal pricing repeats yearly. This field is only applicable when `type` is `season`, For `default` or `custom` tariffs, this field is always `false`.                                                | Is it recurring from one year to the next? |
 | children       | Array   | Children are sub-tariffs contained by this tariff. They may be seasonal tariff or default tariff when they are flat rate tariff.                                                                                              |
 
 ### User
@@ -3885,7 +3888,7 @@ One of the following options: `None`, `Everyone`, `User Group` or the following 
 ```
 
 | Property   | Type   | Description              |
-|------------|--------|--------------------------|
+| ---------- | ------ | ------------------------ |
 | email      | String | Email of the user        |
 | first_name | String | First name of the user   |
 | last_name  | String | Last name of the user    |
@@ -3906,7 +3909,7 @@ One of the following options: `None`, `Everyone`, `User Group` or the following 
 ```
 
 | Property       | Type   | Description                                                           |
-|----------------|--------|-----------------------------------------------------------------------|
+| -------------- | ------ | --------------------------------------------------------------------- |
 | reference      | String | The reference of the webhook                                          |
 | endpoint       | String | The endpoint URL of the webhook                                       |
 | events_types   | String | The list of events for this endpoint ([Events](#events))              |
