@@ -3323,10 +3323,10 @@ A JSON object indicating whether an error occurred during the process, along wit
 | budget_margin_gross           | Number  | Gross margin for the alternative                                                                                                                           |
 | budget_margin_net             | Number  | Net margin for the alternative                                                                                                                             |
 | budget_purchases              | Number  | Planned supplier purchases amount for the alternative (in project currency). This is a forecasted value, not actual spending                               |
-| financial_invoiced            | Number  | Total amount invoiced to the client for the alternative (in project currency). Draft invoices are not included in this calculation                         |
-| financial_collected           | Number  | Total amount collected from the client for the alternative (in project currency). Represents actual payments received                                      |
+| financial_invoiced            | Number  | Total amount invoiced to clients for the alternative (in project currency). Draft invoices are not included in this calculation                            |
+| financial_collected           | Number  | Total amount collected from clients for the alternative (in project currency). Represents actual payments received                                         |
 | financial_purchases           | Number  | Actual supplier purchase costs for the alternative (in project currency). Corresponds to recorded supplier invoices                                        |
-| financial_spendings           | Number  | Actual spendings recorded for the alternative (in project currency). Includes all types of expenses (purchases, fees, etc.)                                |
+| financial_spendings           | Number  | Actual spendings recorded for the alternative (in project currency). Includes all types of supplier payments (purchases, fees, etc.)                       |
 | trip_people                   | String  | Number of people                                                                                                                                           |
 | client                        | JSON    | JSON including: `reference`, `type` (enterprise or individual), `company_name`, `first_name`, `last_name` and `email`                                      |
 | trip_destination_reference    | String  | Destination reference of the alternative. Note: For multi-destination alternatives, only the primary destination is returned.                              |
