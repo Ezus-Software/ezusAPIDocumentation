@@ -3071,7 +3071,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
       </span><span class="nl">"limit_start"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2026-05-01"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"limit_end"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2026-08-31"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"is_yearly"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"children"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> 
+      </span><span class="nl">"children"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="p">{</span><span class="w">
           </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
           </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"custom"</span><span class="p">,</span><span class="w">
@@ -4638,6 +4638,9 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 </tbody></table>
 <h3 id='response-26'>Response</h3>
 <p>A JSON object indicating whether an error occurred during the process, along with the associated message.</p>
+
+<p>Please note that invoice finalization (the step that occurs when moving an invoice from the <code>draft</code> stage to <code>paid</code> or <code>completed</code>) can occasionally be busy if another finalization is already in progress.
+In such cases, the response message will indicate that the process is busy, and the client simply needs to retry the request after a short delay.</p>
 
 <table><thead>
 <tr>
@@ -6210,7 +6213,7 @@ The fields <code>purchase_price</code>, <code>purchase_price_excl_taxes</code>, 
     </span><span class="nl">"limit_start"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2026-05-01"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"limit_end"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2026-08-31"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"is_yearly"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"children"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> 
+    </span><span class="nl">"children"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
       </span><span class="p">{</span><span class="w">
         </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tariff_reference"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"custom"</span><span class="p">,</span><span class="w">
