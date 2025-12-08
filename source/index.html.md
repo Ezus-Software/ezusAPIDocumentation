@@ -1076,6 +1076,7 @@ curl --location 'https://api.ezus.app/clients-upsert' \
     "company_number": "362 521 879 00034",
     "user": "sam@proton.me",
     "contact": {
+        "mode": "upsert_main",
         "email": "contact@moke-international.com",
         "first_name": "Jane",
         "last_name": "Doe",
@@ -1111,6 +1112,7 @@ const body = {
   company_number: "362 521 879 00034",
   user: "sam@proton.me",
   contact: {
+    mode: "upsert_main",
     email: "contact@moke-international.com",
     first_name: "Jane",
     last_name: "Doe",
@@ -3417,18 +3419,19 @@ Only the last 10 contacts are returned in this object. Note that for upsert endp
 }
 ```
 
-| Property   | Type    | Description                                                                                       |
-| ---------- | ------- | ------------------------------------------------------------------------------------------------- |
-| reference  | String  | Reference of the contact                                                                          |
-| email      | String  | Email of the contact                                                                              |
-| first_name | String  | First name of the contact as a string                                                             |
-| last_name  | String  | Last name of the contact as a string                                                              |
-| title      | String  | Title of the contact as a string                                                                  |
-| gender     | String  | `Mr`, `Ms` or `Undefined`                                                                         |
-| phone      | String  | Phone number of the contact as a string                                                           |
-| phone2     | String  | Second phone number of the contact as a string                                                    |
-| birth_date | String  | Contact's date of birth in a "YYYY-MM-DD" format string (supplier contacts have no date of birth) |
-| is_main    | Boolean | True if this contact is the primary contact for the parent resource                               |
+| Property   | Type    | Description                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| ---------- | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| reference  | String  | Reference of the contact                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| email      | String  | Email of the contact                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| first_name | String  | First name of the contact as a string                                                                                                                                                                                                                                                                                                                                                                                                        |
+| last_name  | String  | Last name of the contact as a string                                                                                                                                                                                                                                                                                                                                                                                                         |
+| title      | String  | Title of the contact as a string                                                                                                                                                                                                                                                                                                                                                                                                             |
+| gender     | String  | `Mr`, `Ms` or `Undefined`                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| phone      | String  | Phone number of the contact as a string                                                                                                                                                                                                                                                                                                                                                                                                      |
+| phone2     | String  | Second phone number of the contact as a string                                                                                                                                                                                                                                                                                                                                                                                               |
+| birth_date | String  | Contact's date of birth in a "YYYY-MM-DD" format string (supplier contacts have no date of birth)                                                                                                                                                                                                                                                                                                                                            |
+| is_main    | Boolean | True if this contact is the primary contact for the parent resource                                                                                                                                                                                                                                                                                                                                                                          |
+| mode       | String  | Write only option - only available withing the scope of the 'clients-upsert' endpoint. Allowed values: 'insert_main' (default) & 'upsert_main'. If the value specified for the contact mode is 'insert_main', a new contact (of a client) will added and will be set as the main contact. If the mode is 'upsert_main', if a main contact already exists for the client, it will be updated. Otherwise, a new contact will still be created. |
 
 ### Custom Fields
 
