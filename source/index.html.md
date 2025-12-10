@@ -500,7 +500,8 @@ axios.get(baseUrl + "/project-steps?reference=project_reference", headers);
           "purchase_price_excl_taxes": 125,
           "sales_price": 200,
           "sales_price_excl_taxes": 166.67,
-          "is_optional": false
+          "is_optional": false,
+          "notes": "Notes about the item"
         }
       ],
       "medias": ["https://image.jpg", "https://image2.jpg"],
@@ -3579,7 +3580,8 @@ These objects provides insights into the invoice amounts, differentiating betwee
     "purchase_price_excl_taxes": 125,
     "sales_price": 200,
     "sales_price_excl_taxes": 166.67,
-    "is_optional": false
+    "is_optional": false,
+    "notes": "Notes about the item"
   }
 ]
 ```
@@ -3703,7 +3705,8 @@ The steps are sorted by their creation date, with the most recently created appe
         "purchase_price_excl_taxes": 125,
         "sales_price": 200,
         "sales_price_excl_taxes": 166.67,
-        "is_optional": false
+        "is_optional": false,
+        "notes": "Notes about the item"
       }
     ],
     "medias": ["https://image.jpg", "https://image2.jpg"],
