@@ -2775,7 +2775,7 @@ axios.get(baseUrl + "/invoices-supplier", headers);
 ```json
 {
   "error": "false",
-  "next_token": "",
+  "next_token": "<NEXT_TOKEN>",
   "size": 1240,
   "data_size": 50,
   "page": 1,
@@ -2783,17 +2783,17 @@ axios.get(baseUrl + "/invoices-supplier", headers);
     {
       "reference": "invoice_supplier_reference",
       "filename": "2023_101010.pdf",
-      "created_date": "2024-10-10",
-      "due_date": "2024-10-10",
+      "created_date": "2023-10-10",
+      "due_date": "2023-10-10",
       "currency": "EUR",
-      "amount_ttc": 100.0,
-      "amount_ht": 80.0,
-      "vat": 20.0,
+      "amount_ttc": 160.0,
+      "amount_ht": 120.0,
+      "vat": 40.0,
       "url": "https://ezus.io/2023_101010.pdf",
       "supplier_reference": "supplier_reference",
       "project_reference": "project_reference",
       "alternative_order": "0",
-      "paid": 120.0
+      "paid": 150.0
     }
   ]
 }
@@ -2846,7 +2846,6 @@ Each `invoice-supplier` of the `invoices-supplier` list is a JSON object contain
 | url                | String | URL of the supplier invoice file                                                                                                                                                                                  |
 | supplier_reference | String | Reference of the related supplier                                                                                                                                                                                 |
 | project_reference  | String | Reference of the related project                                                                                                                                                                                  |
-| alternative_order  | Number | Alternative order / index of the related project                                                                                                                                                                  |
 | paid               | Number | Sum of the payments already made on the invoice                                                                                                                                                                   |
 |                    |
 
