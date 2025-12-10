@@ -848,6 +848,28 @@
           ],
           "path": [
             "invoices-supplier"
+          ],
+          "query": [
+            {
+              "key": "next_token",
+              "value": "",
+              "disabled": true
+            },
+            {
+              "key": "project_reference",
+              "value": "project_reference",
+              "disabled": true
+            },
+            {
+              "key": "supplier_reference",
+              "value": "supplier_reference",
+              "disabled": true
+            },
+            {
+              "key": "alternative_order",
+              "value": "0",
+              "disabled": true
+            }
           ]
         }
       },
