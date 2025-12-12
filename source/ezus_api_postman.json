@@ -843,12 +843,8 @@
         ],
         "url": {
           "raw": "{{baseUrl}}/invoices-supplier",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "invoices-supplier"
-          ],
+          "host": ["{{baseUrl}}"],
+          "path": ["invoices-supplier"],
           "query": [
             {
               "key": "next_token",
@@ -856,13 +852,13 @@
               "disabled": true
             },
             {
-              "key": "project_reference",
-              "value": "project_reference",
+              "key": "supplier_reference",
+              "value": "supplier_reference",
               "disabled": true
             },
             {
-              "key": "supplier_reference",
-              "value": "supplier_reference",
+              "key": "project_reference",
+              "value": "project_reference",
               "disabled": true
             },
             {
