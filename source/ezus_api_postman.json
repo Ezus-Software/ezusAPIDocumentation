@@ -806,31 +806,6 @@
       "response": []
     },
     {
-      "name": "invoice-supplier",
-      "request": {
-        "method": "GET",
-        "header": [
-          {
-            "key": "X-API-KEY",
-            "value": "{{<YOUR_API_KEY>}}",
-            "type": "text"
-          }
-        ],
-        "url": {
-          "raw": "{{baseUrl}}/invoice-supplier?reference=invoice_reference",
-          "host": ["{{baseUrl}}"],
-          "path": ["invoice-supplier"],
-          "query": [
-            {
-              "key": "reference",
-              "value": "invoice_reference"
-            }
-          ]
-        }
-      },
-      "response": []
-    },
-    {
       "name": "invoices-supplier",
       "request": {
         "method": "GET",
@@ -865,6 +840,31 @@
               "key": "alternative_order",
               "value": "0",
               "disabled": true
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "invoice-supplier",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "X-API-KEY",
+            "value": "{{<YOUR_API_KEY>}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/invoice-supplier?reference=invoice_reference",
+          "host": ["{{baseUrl}}"],
+          "path": ["invoice-supplier"],
+          "query": [
+            {
+              "key": "reference",
+              "value": "invoice_reference"
             }
           ]
         }
