@@ -2812,12 +2812,14 @@ axios.get(baseUrl + "/invoices-supplier", headers);
 
 ### Query Parameters
 
-| Parameter          | Type   | Description                                                                                                                                             |
-| ------------------ | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| next_token         | String | Specify this parameter if you want to retrieve the following elements of a given list query. If this parameter is filled, other parameters are ignored. |
-| supplier_reference | String | Filter invoices by the given supplier reference                                                                                                         |
-| project_reference  | String | Filter invoices by the given project reference                                                                                                          |
-| alternative_order  | Number | The alternative order; 0 is for main (by default, if not provided) <br/><i>Note: If not 0, a 'project_reference' must be given.</i>                     |
+| Parameter          | Type   | Description                                                                                                                                                                                                                                                                                                                              |
+| ------------------ | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| next_token         | String | Specify this parameter if you want to retrieve the following elements of a given list query. If this parameter is filled, other parameters are ignored.                                                                                                                                                                                  |
+| supplier_reference | String | Filter invoices by the given supplier reference                                                                                                                                                                                                                                                                                          |
+| project_reference  | String | Filter invoices by the given project reference                                                                                                                                                                                                                                                                                           |
+| alternative_order  | Number | If <code>project_reference</code> is not provided, this parameter is ignored and the query applies to all alternatives of all projects.<br />If <code>project_reference</code> is provided, <code>alternative_order</code> must be a non-negative number: 0 targets the main alternative and the value falls back to 0 if not specified. |
+
+|
 
 ### Response
 
