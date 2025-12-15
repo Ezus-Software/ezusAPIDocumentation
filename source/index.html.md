@@ -806,6 +806,118 @@ A JSON object indicating whether an error occurred during the process, along wit
 | -------- | ---- | --------------------------------------------------------- |
 | result   | Link | The URL link of the document after uploading the document |
 
+## POST project-steps-upsert
+
+This endpoint updates an existing step when the provided reference matches a step in your account. If no match is found, a new step is created using the provided reference, or a randomly generated one if none is supplied.
+Note that the following fields are used only during creation and are ignored on update: `project_reference`, `alternative_order`, `type`, `date_start`, `date_end`.
+
+```shell
+curl --location 'https://api.ezus.app/project-steps-upsert' \
+--header 'x-api-key: <YOUR_API_KEY>' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer <YOUR_TOKEN>' \
+--data '{
+    "reference": "project_step_reference",
+    "project_reference": "project_reference",
+    "alternative_order": "0",
+    "name": "activity Title",
+    "type": "activity",
+    "category": "restaurant",
+    "people": "4",
+    "date_start": "2025-10-03 10:00:00",
+    "date_end": "2025-10-03 12:00:00",
+    "address": {
+        "label": "58 Rue de Paradis",
+        "city": "Paris",
+        "country": "France",
+        "zip": "75010",
+        "geo": {
+            "x": 48.875761,
+            "y": 2.348727
+        }
+    },
+}'
+```
+
+```javascript
+const axios = require("axios");
+const baseUrl = "https://api.ezus.app";
+
+const body = {
+  reference: "project_step_reference",
+  project_reference: "project_reference",
+  alternative_order: "0",
+  name: "activity Title",
+  type: "activity",
+  category: "restaurant",
+  people: "4",
+  date_start: "2025-10-03 10:00:00",
+  date_end: "2025-10-03 12:00:00",
+  address: {
+    label: "58 Rue de Paradis",
+    city: "Paris",
+    country: "France",
+    zip: "75010",
+    geo: {
+      x: 48.875761,
+      y: 2.348727,
+    },
+  },
+};
+const headers = {
+  "x-api-key": "<YOUR_API_KEY>",
+  Authorization: "Bearer <YOUR_TOKEN>",
+};
+
+axios.post(baseUrl + "/project-steps-upsert", body, headers);
+```
+
+> This request returns a structured JSON object:
+
+```json
+{
+  "error": "false",
+  "message": "ok",
+  "action": "Project step successfully created",
+  "reference": "project_step_reference"
+}
+```
+
+### HTTP Endpoint
+
+`POST https://api.ezus.app/project-steps-upsert`
+
+### Header Parameters
+
+| Parameter     | Type   | Description                                                                 |
+| ------------- | ------ | --------------------------------------------------------------------------- |
+| x-api-key     | String | <span class="label label-red float-right">Required</span> Your Ezus API key |
+| Authorization | String | <span class="label label-red float-right">Required</span> Your Bearer token |
+
+### Body Parameters (application/json)
+
+| Parameter         | Type   | Description                                                                                                                                                                                                                                        |
+| ----------------- | ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| reference         | String | If provided, the unique reference associated to the step you want to update. If you specify a reference during creation, this value will be used as the step reference. It must be a maximum of 64 characters.                                     |
+| project_reference | String | The project reference in which you want to create an step. This field is ignored on update.                                                                                                                                                        |
+| alternative_order | String | Specifies the alternative project order from which to create or update the step. If not provided, defaults to `0` for main alternative. This field is required to create a step. This field is ignored on update.                                  |
+| name              | String | Title of the step. This field is required to create a step. This field is optional on update.                                                                                                                                                      |
+| type              | String | Three options exist: `accom`, `activity`, `transport`. This field is required to create a step. This field is ignored on update.                                                                                                                   |
+| category          | String | Category of the step. You must provide the technical name of the category. If not specified during creation, the default value will be the main category of the account.                                                                           |
+| people            | String | Number of people in the activity. You can use a `number` or `P`. If not specified during creation, `P` will be used as the default value. `P` represents the number of people in the project.                                                      |
+| date_start        | String | Start date and time of the step. Must be within the dates of the alternative where the step is created. This field is required to create a step. This field is ignored on update. The date format must be as follows, e.g.: `2024-10-01 12:00:00`. |
+| date_end          | String | End date and time of the step. Must be within the dates of the alternative where the step is created. This field is required to create a step. This field is ignored on update. The date format must be as follows, e.g.: `2024-10-01 12:00:00`.   |
+| address           | Object | JSON object address ([Address](#address))                                                                                                                                                                                                          |
+
+### Response
+
+A JSON object indicating whether an error occurred during the process, along with the associated message.
+
+| Property  | Type   | Description                                               |
+| --------- | ------ | --------------------------------------------------------- |
+| action    | String | If the project has been updated and created               |
+| reference | String | The reference of the activity that was created or updated |
+
 # Clients
 
 ## GET clients
