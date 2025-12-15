@@ -3603,7 +3603,7 @@ The fields `purchase_price`, `purchase_price_excl_taxes`, `sales_price`, and `sa
 | sales_price               | Number  | The unit sales price of the item (including taxes)                                                                      |
 | sales_price_excl_taxes    | Number  | The unit sales price of the item (excluding taxes)                                                                      |
 | is_optional               | Boolean | Indicates whether the item is optional. **If true, the item does not contribute to the final purchase or sales price.** |
-| notes                     | String  | Notes of the item                                                                                                       |
+| notes                     | String  | Notes about the item                                                                                                    |
 
 ### Langs
 
