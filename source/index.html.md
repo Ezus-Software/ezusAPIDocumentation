@@ -506,7 +506,8 @@ axios.get(baseUrl + "/project-steps?reference=project_reference", headers);
           "purchase_price_excl_taxes": 125,
           "sales_price": 200,
           "sales_price_excl_taxes": 166.67,
-          "is_optional": false
+          "is_optional": false,
+          "notes": "Notes about the item"
         }
       ],
       "medias": ["https://image.jpg", "https://image2.jpg"],
@@ -3709,7 +3710,8 @@ These objects provides insights into the invoice amounts, differentiating betwee
     "purchase_price_excl_taxes": 125,
     "sales_price": 200,
     "sales_price_excl_taxes": 166.67,
-    "is_optional": false
+    "is_optional": false,
+    "notes": "Notes about the item"
   }
 ]
 ```
@@ -3731,6 +3733,7 @@ The fields `purchase_price`, `purchase_price_excl_taxes`, `sales_price`, and `sa
 | sales_price               | Number  | The unit sales price of the item (including taxes)                                                                      |
 | sales_price_excl_taxes    | Number  | The unit sales price of the item (excluding taxes)                                                                      |
 | is_optional               | Boolean | Indicates whether the item is optional. **If true, the item does not contribute to the final purchase or sales price.** |
+| notes                     | String  | Notes about the item                                                                                                    |
 
 ### Langs
 
@@ -3833,7 +3836,8 @@ The steps are sorted by their creation date, with the most recently created appe
         "purchase_price_excl_taxes": 125,
         "sales_price": 200,
         "sales_price_excl_taxes": 166.67,
-        "is_optional": false
+        "is_optional": false,
+        "notes": "Notes about the item"
       }
     ],
     "medias": ["https://image.jpg", "https://image2.jpg"],
