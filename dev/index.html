@@ -898,6 +898,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
   </span><span class="nl">"alternatives"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
       </span><span class="nl">"alternative_title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Main Alternative"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"lang"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fr-FR"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"is_main"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
       </span><span class="nl">"trip_date_in"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-03-01"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"trip_date_out"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-03-09"</span><span class="p">,</span><span class="w">
@@ -907,6 +908,11 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
       </span><span class="nl">"budget_actual_excl_taxes "</span><span class="p">:</span><span class="w"> </span><span class="mi">77950</span><span class="p">,</span><span class="w">
       </span><span class="nl">"budget_margin_gross"</span><span class="p">:</span><span class="w"> </span><span class="mi">2500</span><span class="p">,</span><span class="w">
       </span><span class="nl">"budget_margin_net"</span><span class="p">:</span><span class="w"> </span><span class="mi">1000</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"budget_purchases"</span><span class="p">:</span><span class="w"> </span><span class="mi">74500</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"financial_invoiced"</span><span class="p">:</span><span class="w"> </span><span class="mi">48000</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"financial_collected"</span><span class="p">:</span><span class="w"> </span><span class="mi">48000</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"financial_purchases"</span><span class="p">:</span><span class="w"> </span><span class="mi">72820</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"financial_spendings"</span><span class="p">:</span><span class="w"> </span><span class="mi">12820</span><span class="p">,</span><span class="w">
       </span><span class="nl">"trip_people"</span><span class="p">:</span><span class="w"> </span><span class="s2">"15"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"trip_date_in"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-03-01"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"trip_date_out"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-03-09"</span><span class="p">,</span><span class="w">
@@ -5514,6 +5520,7 @@ In such cases, the response message will indicate that the process is busy, and 
 <h3 id='alternatives'>Alternatives</h3><div class="highlight"><pre class="highlight json tab-json"><code><span class="nl">"alternatives"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
     </span><span class="nl">"alternative_title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Main Alternative"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"lang"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fr-FR"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"is_main"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
     </span><span class="nl">"trip_date_in"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-03-01"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"trip_date_out"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-03-09"</span><span class="p">,</span><span class="w">
@@ -5523,6 +5530,11 @@ In such cases, the response message will indicate that the process is busy, and 
     </span><span class="nl">"budget_actual_excl_taxes "</span><span class="p">:</span><span class="w"> </span><span class="mi">77950</span><span class="p">,</span><span class="w">
     </span><span class="nl">"budget_margin_gross"</span><span class="p">:</span><span class="w"> </span><span class="mi">2500</span><span class="p">,</span><span class="w">
     </span><span class="nl">"budget_margin_net"</span><span class="p">:</span><span class="w"> </span><span class="mi">1000</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"budget_purchases"</span><span class="p">:</span><span class="w"> </span><span class="mi">74500</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"financial_invoiced"</span><span class="p">:</span><span class="w"> </span><span class="mi">48000</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"financial_collected"</span><span class="p">:</span><span class="w"> </span><span class="mi">48000</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"financial_purchases"</span><span class="p">:</span><span class="w"> </span><span class="mi">72820</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"financial_spendings"</span><span class="p">:</span><span class="w"> </span><span class="mi">12820</span><span class="p">,</span><span class="w">
     </span><span class="nl">"trip_people"</span><span class="p">:</span><span class="w"> </span><span class="s2">"15"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"client"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"client_reference"</span><span class="p">,</span><span class="w">
@@ -5575,6 +5587,11 @@ In such cases, the response message will indicate that the process is busy, and 
 <td>Title of the alternative</td>
 </tr>
 <tr>
+<td>lang</td>
+<td>String</td>
+<td>Alternative locale code (e.g. fr-FR, en-GB)</td>
+</tr>
+<tr>
 <td>is_main</td>
 <td>Boolean</td>
 <td>If the alternative is the main alternative</td>
@@ -5618,6 +5635,31 @@ In such cases, the response message will indicate that the process is busy, and 
 <td>budget_margin_net</td>
 <td>Number</td>
 <td>Net margin for the alternative</td>
+</tr>
+<tr>
+<td>budget_purchases</td>
+<td>Number</td>
+<td>Planned supplier purchases amount for the alternative (in project currency). This is a forecasted value, not actual spending</td>
+</tr>
+<tr>
+<td>financial_invoiced</td>
+<td>Number</td>
+<td>Total amount invoiced to clients for the alternative (in project currency). Draft invoices are not included in this calculation</td>
+</tr>
+<tr>
+<td>financial_collected</td>
+<td>Number</td>
+<td>Total amount collected from clients for the alternative (in project currency). Represents actual payments received</td>
+</tr>
+<tr>
+<td>financial_purchases</td>
+<td>Number</td>
+<td>Actual supplier purchase costs for the alternative (in project currency). Corresponds to recorded supplier invoices</td>
+</tr>
+<tr>
+<td>financial_spendings</td>
+<td>Number</td>
+<td>Actual spendings recorded for the alternative (in project currency). Includes all types of supplier payments (purchases, fees, etc.)</td>
 </tr>
 <tr>
 <td>trip_people</td>
