@@ -1,0 +1,1018 @@
+{
+  "info": {
+    "name": "EzusAPI Mock",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "login",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "var jsonData = JSON.parse(responseBody);\r",
+              "\r",
+              "pm.collectionVariables.set(\"<YOUR_TOKEN>\", jsonData.token);"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "X-API-KEY",
+            "value": "{{<YOUR_API_KEY>}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"email\": \"{{<YOUR_EMAIL>}}\",\n    \"password\": \"{{<YOUR_PASSWORD>}}\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/login",
+          "host": ["{{baseUrl}}"],
+          "path": ["login"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "projects",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "X-API-KEY",
+            "value": "{{<YOUR_API_KEY>}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/projects",
+          "host": ["{{baseUrl}}"],
+          "path": ["projects"],
+          "query": [
+            {
+              "key": "next_token",
+              "value": "",
+              "disabled": true
+            },
+            {
+              "key": "info_stage_reference",
+              "value": "received",
+              "disabled": true
+            },
+            {
+              "key": "created_at",
+              "value": "2024-11-01",
+              "disabled": true
+            },
+            {
+              "key": "updated_at",
+              "value": "2024-11-01,2024-11-20",
+              "disabled": true
+            },
+            {
+              "key": "trip_date_in",
+              "value": "2024-11-01",
+              "disabled": true
+            },
+            {
+              "key": "trip_date_out",
+              "value": "2024-11-01,2024-11-20",
+              "disabled": true
+            },
+            {
+              "key": "sales_manager",
+              "value": "john.doe@e-corp.com",
+              "disabled": true
+            },
+            {
+              "key": "project_manager",
+              "value": "john.doe@e-corp.com",
+              "disabled": true
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "project",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "X-API-KEY",
+            "value": "{{<YOUR_API_KEY>}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/project?reference=project_reference",
+          "host": ["{{baseUrl}}"],
+          "path": ["project"],
+          "query": [
+            {
+              "key": "reference",
+              "value": "project_reference"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "project-documents",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "X-API-KEY",
+            "value": "{{<YOUR_API_KEY>}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/project-documents?reference=project_reference",
+          "host": ["{{baseUrl}}"],
+          "path": ["project-documents"],
+          "query": [
+            {
+              "key": "reference",
+              "value": "project_reference"
+            },
+            {
+              "key": "alternative_order",
+              "value": "0",
+              "disabled": true
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "project-steps",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "X-API-KEY",
+            "value": "{{<YOUR_API_KEY>}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/project-steps?reference=project_reference",
+          "host": ["{{baseUrl}}"],
+          "path": ["project-steps"],
+          "query": [
+            {
+              "key": "reference",
+              "value": "project_reference"
+            },
+            {
+              "key": "alternative_order",
+              "value": "0",
+              "disabled": true
+            },
+            {
+              "key": "from_steps_catalog",
+              "value": "true",
+              "disabled": true
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "project-travellers",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "X-API-KEY",
+            "value": "{{<YOUR_API_KEY>}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/project-travellers?reference=project_reference",
+          "host": ["{{baseUrl}}"],
+          "path": ["project-travellers"],
+          "query": [
+            {
+              "key": "reference",
+              "value": "project_reference"
+            },
+            {
+              "key": "alternative_order",
+              "value": "0",
+              "disabled": true
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "projects-upsert",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "X-API-KEY",
+            "value": "{{<YOUR_API_KEY>}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"reference\": \"project_reference\",\n    \"info_number\": \"202306001-P\",\n    \"info_title\": \"Paris fashion week 2024\",\n    \"info_stage_reference\": \"received\",\n    \"trip_date_in\": \"2023-03-01\",\n    \"trip_date_out\": \"2023-03-09\",\n    \"trip_budget\": \"90000\",\n    \"trip_people\": \"15\",\n    \"sales_manager_email\": \"travel-design@e-corp.com\",\n    \"client_reference\": \"client_reference\",\n    \"trip_destination_reference\": \"destination_reference\",\n    \"trip_subdestination_reference\": \"subdestination_reference\",\n    \"custom_fields\": [\n        {\"name\": \"field_name\", \"value\": \"field_value\" }\n    ]\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/projects-upsert",
+          "host": ["{{baseUrl}}"],
+          "path": ["projects-upsert"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "project-documents-create",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "X-API-KEY",
+            "value": "{{<YOUR_API_KEY>}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"project_reference\": \"project_reference\",\n    \"title\": \"Document PDF\",\n    \"link\": \"https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/project-documents-create",
+          "host": ["{{baseUrl}}"],
+          "path": ["project-documents-create"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "clients",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "X-API-KEY",
+            "value": "{{<YOUR_API_KEY>}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/clients",
+          "host": ["{{baseUrl}}"],
+          "path": ["clients"],
+          "query": [
+            {
+              "key": "next_token",
+              "value": "",
+              "disabled": true
+            },
+            {
+              "key": "reference",
+              "value": "client_reference",
+              "disabled": true
+            },
+            {
+              "key": "info_number",
+              "value": "202306001-C",
+              "disabled": true
+            },
+            {
+              "key": "type",
+              "value": "enterprise",
+              "disabled": true
+            },
+            {
+              "key": "email",
+              "value": "contact@moke-international.com",
+              "disabled": true
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "client",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "X-API-KEY",
+            "value": "{{<YOUR_API_KEY>}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/client?reference=client_reference",
+          "host": ["{{baseUrl}}"],
+          "path": ["client"],
+          "query": [
+            {
+              "key": "reference",
+              "value": "client_reference"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "clients-upsert",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "X-API-KEY",
+            "value": "{{<YOUR_API_KEY>}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"reference\": \"client_reference\",\n    \"info_number\": \"202306001-C\",\n    \"type\": \"enterprise\",\n    \"company_name\": \"MOKE INTERNATIONAL LIMITED\",\n    \"website\": \"www.moke_ltd.com\",\n    \"vat_number\": \"FR 32 123456789\",\n    \"company_number\": \"362 521 879 00034\",\n    \"user\": \"sam@proton.me\",\n    \"contact\": {\n        \"email\": \"contact@moke-international.com\",\n        \"first_name\": \"Jane\",\n        \"last_name\": \"Doe\",\n        \"title\": \"CEO\",\n        \"gender\": \"Ms\",\n        \"phone\": \"0101010101\",\n        \"phone2\": \"0606060606\",\n        \"birth_date\": \"1986-09-17\"\n    },\n    \"address\": {\n        \"label\": \"58 Rue de Paradis\",\n        \"city\": \"Paris\",\n        \"country\": \"France\",\n        \"zip\": \"75010\"\n    },\n    \"custom_fields\": [\n        {\"name\": \"field_name\", \"value\": \"field_value\"}\n    ]\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/clients-upsert",
+          "host": ["{{baseUrl}}"],
+          "path": ["clients-upsert"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "suppliers",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "X-API-KEY",
+            "value": "{{<YOUR_API_KEY>}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/suppliers",
+          "host": ["{{baseUrl}}"],
+          "path": ["suppliers"],
+          "query": [
+            {
+              "key": "next_token",
+              "value": "",
+              "disabled": true
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "supplier",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "X-API-KEY",
+            "value": "{{<YOUR_API_KEY>}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/supplier?reference=supplier_reference",
+          "host": ["{{baseUrl}}"],
+          "path": ["supplier"],
+          "query": [
+            {
+              "key": "reference",
+              "value": "supplier_reference"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "suppliers-upsert",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "X-API-KEY",
+            "value": "{{<YOUR_API_KEY>}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"reference\": \"supplier_reference\",\n    \"info_number\": \"202306001-S\",\n    \"type\": \"accom, activity\",\n    \"company_name\": \"The best hotel\",\n    \"website\": \"www.the_best_hotel.com\",\n    \"capacity\": 200,\n    \"user\": \"sam@proton.me\",\n    \"contact\": {\n        \"email\": \"bob@proton.me\",\n        \"first_name\": \"Bob\",\n        \"last_name\": \"Morane\",\n        \"title\": \"Project Manager\",\n        \"gender\": \"Mr\",\n        \"phone\": \"0606060606\",\n        \"phone2\": \"0707070707\",\n    },\n    \"address\": {\n        \"label\": \"58 Rue de Paradis\",\n        \"city\": \"Paris\",\n        \"country\": \"France\",\n        \"zip\": \"75009\"\n    },\n    \"destination_reference\": \"destination_reference\",\n    \"subdestination_reference\": \"subdestination_reference\",\n    \"custom_fields\": [\n        {\"name\": \"field_name\", \"value\": \"field_value\"}\n    ]\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/suppliers-upsert",
+          "host": ["{{baseUrl}}"],
+          "path": ["suppliers-upsert"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "products",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "X-API-KEY",
+            "value": "{{<YOUR_API_KEY>}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/products",
+          "host": ["{{baseUrl}}"],
+          "path": ["products"],
+          "query": [
+            {
+              "key": "next_token",
+              "value": "",
+              "disabled": true
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "product",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "X-API-KEY",
+            "value": "{{<YOUR_API_KEY>}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/product?reference=product_reference",
+          "host": ["{{baseUrl}}"],
+          "path": ["product"],
+          "query": [
+            {
+              "key": "reference",
+              "value": "product_reference"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "products-upsert",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "X-API-KEY",
+            "value": "{{<YOUR_API_KEY>}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"reference\": \"product_reference\",\n    \"info_number\": \"202306001-PR\",\n    \"title\": \"2-bed room with breakfast\",\n    \"info_notes\": \"Product's notes\",\n    \"capacity\": 2,\n    \"quantity\": \"1\",\n    \"currency\": \"USD\",\n    \"purchase_price\": 42,\n    \"sales_price\": 84,\n    \"vat_rate\": 20,\n    \"vat_regime\": \"none\",\n    \"commission\": {\n       \"commission_mode\": \"purchase\",\n    \"commission_regime\": \"percent\",\n     \"value\": 10\n    },\n    \"supplier_reference\": \"supplier_reference\",\n    \"package_reference\": \"package_reference\",\n    \"destination_reference\": \"destination_reference\",\n    \"subdestination_reference\": \"subdestination_reference\",\n    \"custom_fields\": [\n        {\"name\": \"field_name\", \"value\": \"field_value\"}\n    ]\n }",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/products-upsert",
+          "host": ["{{baseUrl}}"],
+          "path": ["products-upsert"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "package",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "X-API-KEY",
+            "value": "{{<YOUR_API_KEY>}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/package?reference=package_reference",
+          "host": ["{{baseUrl}}"],
+          "path": ["package"],
+          "query": [
+            {
+              "key": "reference",
+              "value": "package_reference"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "packages-upsert",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "X-API-KEY",
+            "value": "{{<YOUR_API_KEY>}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"reference\": \"package_reference\",\n    \"info_number\": \"202306001-PK\",\n    \"title\": \"The best package\",\n    \"capacity\": \"2\",\n    \"destination_reference\": \"destination_reference\",\n    \"subdestination_reference\": \"subdestination_reference\",\n    \"custom_fields\": [\n        {\"name\": \"field_name\", \"value\": \"field_value\"}\n    ]\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/packages-upsert",
+          "host": ["{{baseUrl}}"],
+          "path": ["packages-upsert"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "destinations",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "X-API-KEY",
+            "value": "{{<YOUR_API_KEY>}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/destinations",
+          "host": ["{{baseUrl}}"],
+          "path": ["destinations"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "destinations-upsert",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "X-API-KEY",
+            "value": "{{<YOUR_API_KEY>}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"reference\": \"destination_reference\",\n    \"name\": \"France\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/destinations-upsert",
+          "host": ["{{baseUrl}}"],
+          "path": ["destinations-upsert"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "subdestination",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "X-API-KEY",
+            "value": "{{<YOUR_API_KEY>}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/subdestination?reference=subdestination_reference",
+          "host": ["{{baseUrl}}"],
+          "path": ["subdestination"],
+          "query": [
+            {
+              "key": "reference",
+              "value": "subdestination_reference"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "subdestinations-upsert",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "X-API-KEY",
+            "value": "{{<YOUR_API_KEY>}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"reference\": \"subdestination_reference\",\n    \"destination_reference\": \"destination_reference\",\n    \"name\": \"Paris\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/subdestinations-upsert",
+          "host": ["{{baseUrl}}"],
+          "path": ["subdestinations-upsert"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "invoices",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "X-API-KEY",
+            "value": "{{<YOUR_API_KEY>}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/invoices",
+          "host": ["{{baseUrl}}"],
+          "path": ["invoices"],
+          "query": [
+            {
+              "key": "next_token",
+              "value": "",
+              "disabled": true
+            },
+            {
+              "key": "stage",
+              "value": "completed",
+              "disabled": true
+            },
+            {
+              "key": "technical_name",
+              "value": "technical_name",
+              "disabled": true
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "invoice",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "X-API-KEY",
+            "value": "{{<YOUR_API_KEY>}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/invoice?reference=invoice_reference",
+          "host": ["{{baseUrl}}"],
+          "path": ["invoice"],
+          "query": [
+            {
+              "key": "reference",
+              "value": "invoice_reference"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "invoice-supplier",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "X-API-KEY",
+            "value": "{{<YOUR_API_KEY>}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/invoice-supplier?reference=invoice_supplier_reference",
+          "host": ["{{baseUrl}}"],
+          "path": ["invoice-supplier"],
+          "query": [
+            {
+              "key": "reference",
+              "value": "invoice_supplier_reference"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "invoices-update",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "X-API-KEY",
+            "value": "{{<YOUR_API_KEY>}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"reference\": \"invoice_reference\",\n    \"stage\": \"paid\",\n    \"due_date\": \"2023-09-29\",\n    \"custom_fields\": [\n        {\"name\": \"field_name\", \"value\": \"field_value\"}\n    ]\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/invoices-update",
+          "host": ["{{baseUrl}}"],
+          "path": ["invoices-update"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "invoice-supplier",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "X-API-KEY",
+            "value": "{{<YOUR_API_KEY>}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/invoice-supplier?reference=invoice_reference",
+          "host": ["{{baseUrl}}"],
+          "path": ["invoice-supplier"],
+          "query": [
+            {
+              "key": "reference",
+              "value": "invoice_reference"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "deposits-create",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "X-API-KEY",
+            "value": "{{<YOUR_API_KEY>}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"project_reference\": \"project_reference\",\n    \"alternative_order\": \"0\",\n    \"type\": \"deposit\",\n    \"notes\": \"Up-front payment 2023-05-25\",\n    \"date\": \"2023-05-25\",\n    \"amount\": 6855,\n    \"payment_method\": \"card\"\n }",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/deposits-create",
+          "host": ["{{baseUrl}}"],
+          "path": ["deposits-create"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "webhooks",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "X-API-KEY",
+            "value": "{{<YOUR_API_KEY>}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/webhooks",
+          "host": ["{{baseUrl}}"],
+          "path": ["webhooks"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "webhooks-last",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "X-API-KEY",
+            "value": "{{<YOUR_API_KEY>}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/webhooks-last?event_type=projects.created",
+          "host": ["{{baseUrl}}"],
+          "path": ["webhooks-last"],
+          "query": [
+            {
+              "key": "event_type",
+              "value": "projects.created"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "webhooks-upsert",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "X-API-KEY",
+            "value": "{{<YOUR_API_KEY>}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"reference\": \"webhook_reference\",\n    \"endpoint\": \"https://webhook.webhook/\",\n    \"is_active\": \"true\",\n    \"events_types\": \"projects.created,projects.updated,clients.created,invoices.finalized,invoices_suppliers.attached\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/webhooks-upsert",
+          "host": ["{{baseUrl}}"],
+          "path": ["webhooks-upsert"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "webhooks-delete",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "X-API-KEY",
+            "value": "{{<YOUR_API_KEY>}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"reference\": \"webhook_reference\",\n    \"endpoint\": \"https://webhook.webhook/\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/webhooks-delete",
+          "host": ["{{baseUrl}}"],
+          "path": ["webhooks-delete"]
+        }
+      },
+      "response": []
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{<YOUR_TOKEN>}}",
+        "type": "string"
+      }
+    ]
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [""]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [""]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "<YOUR_EMAIL>",
+      "value": "<YOUR_EMAIL>"
+    },
+    {
+      "key": "<YOUR_PASSWORD>",
+      "value": "<YOUR_PASSWORD>",
+      "type": "string"
+    },
+    {
+      "key": "<YOUR_API_KEY>",
+      "value": "<YOUR_API_KEY>",
+      "type": "string"
+    },
+    {
+      "key": "<YOUR_TOKEN>",
+      "value": "<YOUR_TOKEN>",
+      "type": "string"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://api.ezus.app",
+      "type": "string"
+    }
+  ]
+}
