@@ -270,6 +270,7 @@ axios.get(baseUrl + "/project?reference=project_reference", headers);
   "alternatives": [
     {
       "alternative_title": "Main Alternative",
+      "lang": "fr-FR",
       "is_main": true,
       "trip_date_in": "2024-03-01",
       "trip_date_out": "2024-03-09",
@@ -279,6 +280,11 @@ axios.get(baseUrl + "/project?reference=project_reference", headers);
       "budget_actual_excl_taxes ": 77950,
       "budget_margin_gross": 2500,
       "budget_margin_net": 1000,
+      "budget_purchases": 74500,
+      "financial_invoiced": 48000,
+      "financial_collected": 48000,
+      "financial_purchases": 72820,
+      "financial_spendings": 12820,
       "trip_people": "15",
       "trip_date_in": "2024-03-01",
       "trip_date_out": "2024-03-09",
@@ -3424,6 +3430,7 @@ A JSON object indicating whether an error occurred during the process, along wit
 "alternatives": [
   {
     "alternative_title": "Main Alternative",
+    "lang": "fr-FR",
     "is_main": true,
     "trip_date_in": "2024-03-01",
     "trip_date_out": "2024-03-09",
@@ -3433,6 +3440,11 @@ A JSON object indicating whether an error occurred during the process, along wit
     "budget_actual_excl_taxes ": 77950,
     "budget_margin_gross": 2500,
     "budget_margin_net": 1000,
+    "budget_purchases": 74500,
+    "financial_invoiced": 48000,
+    "financial_collected": 48000,
+    "financial_purchases": 72820,
+    "financial_spendings": 12820,
     "trip_people": "15",
     "client": {
       "reference": "client_reference",
@@ -3476,6 +3488,7 @@ A JSON object indicating whether an error occurred during the process, along wit
 | Property                      | Type    | Description                                                                                                                                                |
 | ----------------------------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | alternative_title             | String  | Title of the alternative                                                                                                                                   |
+| lang                          | String  | Alternative locale code (e.g. fr-FR, en-GB)                                                                                                                |
 | is_main                       | Boolean | If the alternative is the main alternative                                                                                                                 |
 | trip_date_in                  | Date    | Date of the beginning of this alternative, in a "YYYY-MM-DD" format string. If it's empty, the project has no dates                                        |
 | trip_date_out                 | Date    | Date of the end of this alternative, in a "YYYY-MM-DD" format string. If it's empty, the project has no dates                                              |
@@ -3485,6 +3498,11 @@ A JSON object indicating whether an error occurred during the process, along wit
 | budget_actual_excl_taxes      | Number  | Actual budget for the alternative, excluding taxes                                                                                                         |
 | budget_margin_gross           | Number  | Gross margin for the alternative                                                                                                                           |
 | budget_margin_net             | Number  | Net margin for the alternative                                                                                                                             |
+| budget_purchases              | Number  | Planned supplier purchases amount for the alternative (in project currency). This is a forecasted value, not actual spending                               |
+| financial_invoiced            | Number  | Total amount invoiced to clients for the alternative (in project currency). Draft invoices are not included in this calculation                            |
+| financial_collected           | Number  | Total amount collected from clients for the alternative (in project currency). Represents actual payments received                                         |
+| financial_purchases           | Number  | Actual supplier purchase costs for the alternative (in project currency). Corresponds to recorded supplier invoices                                        |
+| financial_spendings           | Number  | Actual spendings recorded for the alternative (in project currency). Includes all types of supplier payments (purchases, fees, etc.)                       |
 | trip_people                   | String  | Number of people                                                                                                                                           |
 | client                        | JSON    | JSON including: `reference`, `type` (enterprise or individual), `company_name`, `first_name`, `last_name` and `email`                                      |
 | trip_destination_reference    | String  | Destination reference of the alternative. Note: For multi-destination alternatives, only the primary destination is returned.                              |
