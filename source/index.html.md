@@ -3603,7 +3603,7 @@ The fields `purchase_price`, `purchase_price_excl_taxes`, `sales_price`, and `sa
 | sales_price               | Number  | The unit sales price of the item (including taxes)                                                                      |
 | sales_price_excl_taxes    | Number  | The unit sales price of the item (excluding taxes)                                                                      |
 | is_optional               | Boolean | Indicates whether the item is optional. **If true, the item does not contribute to the final purchase or sales price.** |
-| notes                     | String  | Notes about the item                                                                                                    |
+| notes                     | String  | Notes of the item                                                                                                       |
 
 ### Langs
 
@@ -4100,8 +4100,8 @@ This event is triggered whenever an invoice is finalized (its stage goes from `d
 | send_date          | String | Sent date of this invoice, in a "YYYY-MM-DD" format                                                                                                                                                               |
 | due_date           | String | Due date of this invoice, in a "YYYY-MM-DD" format                                                                                                                                                                |
 | currency           | String | The ISO 4217 currency code representing the currency you utilize (<a href="https://docs.google.com/spreadsheets/d/1b7BNOwKyN1hMOouve6xhFZ2R2zrH4Sj1L-646j755fU/edit?usp=sharing" target="_blank">Link to doc</a>) |
-| amount_ttc         | Number | Amount of the invoice excluding taxes                                                                                                                                                                             |
-| amount_ht          | Number | Amount of the invoice including taxes                                                                                                                                                                             |
+| amount_ttc         | Number | Amount of the invoice including taxes                                                                                                                                                                             |
+| amount_ht          | Number | Amount of the invoice excluding taxes                                                                                                                                                                             |
 | vat                | Number | VAT amount of the invoice                                                                                                                                                                                         |
 | project_reference  | String | The reference of the project linked to this invoice                                                                                                                                                               |
 | url                | String | URL of the invoice `.pdf` file                                                                                                                                                                                    |
