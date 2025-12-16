@@ -204,8 +204,8 @@ axios.get(baseUrl + "/projects", headers);
 | updated_at            | Date    | You can filter projects assigned to a specific or an intersection of last update date. Expected format: “YYYY-MM-DD” or “YYYY-MM-DD,YYYY-MM-DD”. See [Date Format](#date-format) for more details. |
 | trip_date_in          | Date    | You can filter projects assigned to a specific or an intersection of trip start date. Expected format: “YYYY-MM-DD” or “YYYY-MM-DD,YYYY-MM-DD”. See [Date Format](#date-format) for more details.  |
 | trip_date_out         | Date    | You can filter projects assigned to a specific or an intersection of trip end date. Expected format: “YYYY-MM-DD” or “YYYY-MM-DD,YYYY-MM-DD”. See [Date Format](#date-format) for more details.    |
-| sales_manager         | String  | You can filter projects assigned to a specific sales manager. Expected format: email (john.doe@e-corp.com)                                                                                         |
-| project_manager       | String  | You can filter projects assigned to a specific project manager. Expected format: email (john.doe@e-corp.com)                                                                                       |
+| sales_manager         | String  | Provide either the sales manager's email address or "None". Expected format: "john.doe@e-corp.com" or "None".                                                                                      |
+| project_manager       | String  | Provide either the project manager's email address or "None". Expected format: "john.doe@e-corp.com" or "None".                                                                                    |
 | from_programs_catalog | Boolean | Optional. Defaults to false. When set to true, retrieves all projects from the programs catalog.                                                                                                   |
 
 ### Response
