@@ -196,16 +196,17 @@ axios.get(baseUrl + "/projects", headers);
 
 ### Query Parameters
 
-| Parameter            | Type   | Description                                                                                                                                                                                        |
-| -------------------- | ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| next_token           | String | Specify this parameter if you want to retrieve the following elements of a given list query                                                                                                        |
-| info_stage_reference | String | You can filter projects that are in a specific stage. The stage of the project must be indicated by its technical name                                                                             |
-| created_at           | Date   | You can filter projects assigned to a specific or an intersection of creation date. Expected format: “YYYY-MM-DD” or “YYYY-MM-DD,YYYY-MM-DD”. See [Date Format](#date-format) for more details.    |
-| updated_at           | Date   | You can filter projects assigned to a specific or an intersection of last update date. Expected format: “YYYY-MM-DD” or “YYYY-MM-DD,YYYY-MM-DD”. See [Date Format](#date-format) for more details. |
-| trip_date_in         | Date   | You can filter projects assigned to a specific or an intersection of trip start date. Expected format: “YYYY-MM-DD” or “YYYY-MM-DD,YYYY-MM-DD”. See [Date Format](#date-format) for more details.  |
-| trip_date_out        | Date   | You can filter projects assigned to a specific or an intersection of trip end date. Expected format: “YYYY-MM-DD” or “YYYY-MM-DD,YYYY-MM-DD”. See [Date Format](#date-format) for more details.    |
-| sales_manager        | String | Provide either the sales manager's email address or "None". Expected format: "john.doe@e-corp.com" or "None".                                                                                      |
-| project_manager      | String | Provide either the project manager's email address or "None". Expected format: "john.doe@e-corp.com" or "None".                                                                                    |
+| Parameter             | Type    | Description                                                                                                                                                                                        |
+|-----------------------|---------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| next_token            | String  | Specify this parameter if you want to retrieve the following elements of a given list query                                                                                                        |
+| info_stage_reference  | String  | You can filter projects that are in a specific stage. The stage of the project must be indicated by its technical name                                                                             |
+| created_at            | Date    | You can filter projects assigned to a specific or an intersection of creation date. Expected format: “YYYY-MM-DD” or “YYYY-MM-DD,YYYY-MM-DD”. See [Date Format](#date-format) for more details.    |
+| updated_at            | Date    | You can filter projects assigned to a specific or an intersection of last update date. Expected format: “YYYY-MM-DD” or “YYYY-MM-DD,YYYY-MM-DD”. See [Date Format](#date-format) for more details. |
+| trip_date_in          | Date    | You can filter projects assigned to a specific or an intersection of trip start date. Expected format: “YYYY-MM-DD” or “YYYY-MM-DD,YYYY-MM-DD”. See [Date Format](#date-format) for more details.  |
+| trip_date_out         | Date    | You can filter projects assigned to a specific or an intersection of trip end date. Expected format: “YYYY-MM-DD” or “YYYY-MM-DD,YYYY-MM-DD”. See [Date Format](#date-format) for more details.    |
+| sales_manager         | String  | Provide either the sales manager's email address or "None". Expected format: "john.doe@e-corp.com" or "None".                                                                                      |
+| project_manager       | String  | Provide either the project manager's email address or "None". Expected format: "john.doe@e-corp.com" or "None".                                                                                    |
+| from_programs_catalog | Boolean | Optional. Defaults to false. When set to true, retrieves all projects from the programs catalog.                                                                                                   |
 
 ### Response
 
@@ -270,6 +271,7 @@ axios.get(baseUrl + "/project?reference=project_reference", headers);
   "alternatives": [
     {
       "alternative_title": "Main Alternative",
+      "lang": "fr-FR",
       "is_main": true,
       "trip_date_in": "2024-03-01",
       "trip_date_out": "2024-03-09",
@@ -279,6 +281,11 @@ axios.get(baseUrl + "/project?reference=project_reference", headers);
       "budget_actual_excl_taxes ": 77950,
       "budget_margin_gross": 2500,
       "budget_margin_net": 1000,
+      "budget_purchases": 74500,
+      "financial_invoiced": 48000,
+      "financial_collected": 48000,
+      "financial_purchases": 72820,
+      "financial_spendings": 12820,
       "trip_people": "15",
       "trip_date_in": "2024-03-01",
       "trip_date_out": "2024-03-09",
@@ -500,7 +507,8 @@ axios.get(baseUrl + "/project-steps?reference=project_reference", headers);
           "purchase_price_excl_taxes": 125,
           "sales_price": 200,
           "sales_price_excl_taxes": 166.67,
-          "is_optional": false
+          "is_optional": false,
+          "notes": "Notes about the item"
         }
       ],
       "medias": ["https://image.jpg", "https://image2.jpg"],
@@ -805,6 +813,118 @@ A JSON object indicating whether an error occurred during the process, along wit
 | Property | Type | Description                                               |
 | -------- | ---- | --------------------------------------------------------- |
 | result   | Link | The URL link of the document after uploading the document |
+
+## POST project-steps-upsert
+
+This endpoint updates an existing step when the provided reference matches a step in your account. If no match is found, a new step is created using the provided reference, or a randomly generated one if none is supplied.
+Note that the following fields are used only during creation and are ignored on update: `project_reference`, `alternative_order`, `type`, `date_start`, `date_end`.
+
+```shell
+curl --location 'https://api.ezus.app/project-steps-upsert' \
+--header 'x-api-key: <YOUR_API_KEY>' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer <YOUR_TOKEN>' \
+--data '{
+    "reference": "project_step_reference",
+    "project_reference": "project_reference",
+    "alternative_order": "0",
+    "name": "activity Title",
+    "type": "activity",
+    "category": "restaurant",
+    "people": "4",
+    "date_start": "2025-10-03 10:00:00",
+    "date_end": "2025-10-03 12:00:00",
+    "address": {
+        "label": "58 Rue de Paradis",
+        "city": "Paris",
+        "country": "France",
+        "zip": "75010",
+        "geo": {
+            "x": 48.875761,
+            "y": 2.348727
+        }
+    },
+}'
+```
+
+```javascript
+const axios = require("axios");
+const baseUrl = "https://api.ezus.app";
+
+const body = {
+  reference: "project_step_reference",
+  project_reference: "project_reference",
+  alternative_order: "0",
+  name: "activity Title",
+  type: "activity",
+  category: "restaurant",
+  people: "4",
+  date_start: "2025-10-03 10:00:00",
+  date_end: "2025-10-03 12:00:00",
+  address: {
+    label: "58 Rue de Paradis",
+    city: "Paris",
+    country: "France",
+    zip: "75010",
+    geo: {
+      x: 48.875761,
+      y: 2.348727,
+    },
+  },
+};
+const headers = {
+  "x-api-key": "<YOUR_API_KEY>",
+  Authorization: "Bearer <YOUR_TOKEN>",
+};
+
+axios.post(baseUrl + "/project-steps-upsert", body, headers);
+```
+
+> This request returns a structured JSON object:
+
+```json
+{
+  "error": "false",
+  "message": "ok",
+  "action": "Project step successfully created",
+  "reference": "project_step_reference"
+}
+```
+
+### HTTP Endpoint
+
+`POST https://api.ezus.app/project-steps-upsert`
+
+### Header Parameters
+
+| Parameter     | Type   | Description                                                                 |
+| ------------- | ------ | --------------------------------------------------------------------------- |
+| x-api-key     | String | <span class="label label-red float-right">Required</span> Your Ezus API key |
+| Authorization | String | <span class="label label-red float-right">Required</span> Your Bearer token |
+
+### Body Parameters (application/json)
+
+| Parameter         | Type   | Description                                                                                                                                                                                                                                        |
+| ----------------- | ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| reference         | String | If provided, the unique reference associated to the step you want to update. If you specify a reference during creation, this value will be used as the step reference. It must be a maximum of 64 characters.                                     |
+| project_reference | String | The project reference in which you want to create an step. This field is ignored on update.                                                                                                                                                        |
+| alternative_order | String | Specifies the alternative project order from which to create or update the step. If not provided, defaults to `0` for main alternative. This field is required to create a step. This field is ignored on update.                                  |
+| name              | String | Title of the step. This field is required to create a step. This field is optional on update.                                                                                                                                                      |
+| type              | String | Three options exist: `accom`, `activity`, `transport`. This field is required to create a step. This field is ignored on update.                                                                                                                   |
+| category          | String | Category of the step. You must provide the technical name of the category. If not specified during creation, the default value will be the main category of the account.                                                                           |
+| people            | String | Number of people in the activity. You can use a `number` or `P`. If not specified during creation, `P` will be used as the default value. `P` represents the number of people in the project.                                                      |
+| date_start        | String | Start date and time of the step. Must be within the dates of the alternative where the step is created. This field is required to create a step. This field is ignored on update. The date format must be as follows, e.g.: `2024-10-01 12:00:00`. |
+| date_end          | String | End date and time of the step. Must be within the dates of the alternative where the step is created. This field is required to create a step. This field is ignored on update. The date format must be as follows, e.g.: `2024-10-01 12:00:00`.   |
+| address           | Object | JSON object address ([Address](#address))                                                                                                                                                                                                          |
+
+### Response
+
+A JSON object indicating whether an error occurred during the process, along with the associated message.
+
+| Property  | Type   | Description                                               |
+| --------- | ------ | --------------------------------------------------------- |
+| action    | String | If the project has been updated and created               |
+| reference | String | The reference of the activity that was created or updated |
 
 # Clients
 
@@ -2804,6 +2924,9 @@ axios.put(baseUrl + "/invoices-update", body, headers);
 
 A JSON object indicating whether an error occurred during the process, along with the associated message.
 
+Please note that invoice finalization (the step that occurs when moving an invoice from the `draft` stage to `paid` or `completed`) can occasionally be busy if another finalization is already in progress.
+In such cases, the response message will indicate that the process is busy, and the client simply needs to retry the request after a short delay.
+
 | Property  | Type   | Description                                                                              |
 | --------- | ------ | ---------------------------------------------------------------------------------------- |
 | action    | String | Indicates type of invoice action was created                                             |
@@ -3309,6 +3432,7 @@ A JSON object indicating whether an error occurred during the process, along wit
 "alternatives": [
   {
     "alternative_title": "Main Alternative",
+    "lang": "fr-FR",
     "is_main": true,
     "trip_date_in": "2024-03-01",
     "trip_date_out": "2024-03-09",
@@ -3318,6 +3442,11 @@ A JSON object indicating whether an error occurred during the process, along wit
     "budget_actual_excl_taxes ": 77950,
     "budget_margin_gross": 2500,
     "budget_margin_net": 1000,
+    "budget_purchases": 74500,
+    "financial_invoiced": 48000,
+    "financial_collected": 48000,
+    "financial_purchases": 72820,
+    "financial_spendings": 12820,
     "trip_people": "15",
     "client": {
       "reference": "client_reference",
@@ -3361,6 +3490,7 @@ A JSON object indicating whether an error occurred during the process, along wit
 | Property                      | Type    | Description                                                                                                                                                |
 | ----------------------------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | alternative_title             | String  | Title of the alternative                                                                                                                                   |
+| lang                          | String  | Alternative locale code (e.g. fr-FR, en-GB)                                                                                                                |
 | is_main                       | Boolean | If the alternative is the main alternative                                                                                                                 |
 | trip_date_in                  | Date    | Date of the beginning of this alternative, in a "YYYY-MM-DD" format string. If it's empty, the project has no dates                                        |
 | trip_date_out                 | Date    | Date of the end of this alternative, in a "YYYY-MM-DD" format string. If it's empty, the project has no dates                                              |
@@ -3370,6 +3500,11 @@ A JSON object indicating whether an error occurred during the process, along wit
 | budget_actual_excl_taxes      | Number  | Actual budget for the alternative, excluding taxes                                                                                                         |
 | budget_margin_gross           | Number  | Gross margin for the alternative                                                                                                                           |
 | budget_margin_net             | Number  | Net margin for the alternative                                                                                                                             |
+| budget_purchases              | Number  | Planned supplier purchases amount for the alternative (in project currency). This is a forecasted value, not actual spending                               |
+| financial_invoiced            | Number  | Total amount invoiced to clients for the alternative (in project currency). Draft invoices are not included in this calculation                            |
+| financial_collected           | Number  | Total amount collected from clients for the alternative (in project currency). Represents actual payments received                                         |
+| financial_purchases           | Number  | Actual supplier purchase costs for the alternative (in project currency). Corresponds to recorded supplier invoices                                        |
+| financial_spendings           | Number  | Actual spendings recorded for the alternative (in project currency). Includes all types of supplier payments (purchases, fees, etc.)                       |
 | trip_people                   | String  | Number of people                                                                                                                                           |
 | client                        | JSON    | JSON including: `reference`, `type` (enterprise or individual), `company_name`, `first_name`, `last_name` and `email`                                      |
 | trip_destination_reference    | String  | Destination reference of the alternative. Note: For multi-destination alternatives, only the primary destination is returned.                              |
@@ -3576,7 +3711,8 @@ These objects provides insights into the invoice amounts, differentiating betwee
     "purchase_price_excl_taxes": 125,
     "sales_price": 200,
     "sales_price_excl_taxes": 166.67,
-    "is_optional": false
+    "is_optional": false,
+    "notes": "Notes about the item"
   }
 ]
 ```
@@ -3598,6 +3734,7 @@ The fields `purchase_price`, `purchase_price_excl_taxes`, `sales_price`, and `sa
 | sales_price               | Number  | The unit sales price of the item (including taxes)                                                                      |
 | sales_price_excl_taxes    | Number  | The unit sales price of the item (excluding taxes)                                                                      |
 | is_optional               | Boolean | Indicates whether the item is optional. **If true, the item does not contribute to the final purchase or sales price.** |
+| notes                     | String  | Notes about the item                                                                                                    |
 
 ### Langs
 
@@ -3700,7 +3837,8 @@ The steps are sorted by their creation date, with the most recently created appe
         "purchase_price_excl_taxes": 125,
         "sales_price": 200,
         "sales_price_excl_taxes": 166.67,
-        "is_optional": false
+        "is_optional": false,
+        "notes": "Notes about the item"
       }
     ],
     "medias": ["https://image.jpg", "https://image2.jpg"],
