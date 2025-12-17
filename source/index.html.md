@@ -197,7 +197,7 @@ axios.get(baseUrl + "/projects", headers);
 ### Query Parameters
 
 | Parameter             | Type    | Description                                                                                                                                                                                        |
-|-----------------------|---------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| --------------------- | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | next_token            | String  | Specify this parameter if you want to retrieve the following elements of a given list query                                                                                                        |
 | info_stage_reference  | String  | You can filter projects that are in a specific stage. The stage of the project must be indicated by its technical name                                                                             |
 | created_at            | Date    | You can filter projects assigned to a specific or an intersection of creation date. Expected format: “YYYY-MM-DD” or “YYYY-MM-DD,YYYY-MM-DD”. See [Date Format](#date-format) for more details.    |
@@ -2101,6 +2101,94 @@ axios.post(baseUrl + "/products-upsert", body, headers);
 | destination_reference    | String | Reference of the destination to link to the product. To reset the destination, you can put `'0'`.                                                                                                                                                                       |
 | subdestination_reference | String | Reference of the sub-destination to link to the product. To reset the sub-destination, you can put `'0'`. If the `destination_reference` is not provided, the `subdestination_reference` will be ignored.                                                               |
 | custom_fields            | JSON   | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                                                                                                                           |
+
+### Response
+
+A JSON object indicating whether an error occurred during the process, along with the associated message.
+
+| Property  | Type   | Description                                                                              |
+| --------- | ------ | ---------------------------------------------------------------------------------------- |
+| action    | String | Indicates type of product action was created                                             |
+| reference | String | The `reference` for the product, which you should store for future updates or retrievals |
+
+## POST product-seasons-upsert
+
+It updates a 'seasonal pricing' record if the provided reference does match one of the 'seasonal pricing' references in your account, otherwise it creates a new 'seasonal pricing' record with the provided reference (or with a random one if no reference is provided).
+All updates and insertions must be related to an existing product identified by the 'product_reference' value.
+
+```shell
+curl --location 'https://api.ezus.app/product-seasons-upsert' \
+--header 'x-api-key: <YOUR_API_KEY>' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer <YOUR_TOKEN>' \
+--data '{
+    "product_reference" : "product_reference",
+    "reference": "season_reference",
+    "name": "January 2026",
+    "date_start": "2026-01-01",
+    "date_end": "2026-01-31",
+    "is_recurrent": true,
+    "purchase_price": 165.25,
+    "sales_price": 200
+}'
+```
+
+```javascript
+const axios = require("axios");
+const baseUrl = "https://api.ezus.app";
+
+const body = {
+  product_reference: "product_reference",
+  reference: "season_reference",
+  name: "January 2026",
+  date_start: "2026-01-01",
+  date_end: "2026-01-31",
+  is_recurrent: true,
+  purchase_price: 165.25,
+  sales_price: 200,
+};
+const headers = {
+  "x-api-key": "<YOUR_API_KEY>",
+  Authorization: "Bearer <YOUR_TOKEN>",
+};
+
+axios.post(baseUrl + "/product-seasons-upsert", body, headers);
+```
+
+> This request returns a structured JSON object:
+
+```json
+{
+  "error": "false",
+  "message": "ok",
+  "action": "Season successfully created",
+  "reference": "season_reference"
+}
+```
+
+### HTTP Endpoint
+
+`POST https://api.ezus.app/product-seasons-upsert`
+
+### Header Parameters
+
+| Parameter     | Type   | Description                                                                 |
+| ------------- | ------ | --------------------------------------------------------------------------- |
+| x-api-key     | String | <span class="label label-red float-right">Required</span> Your Ezus API key |
+| Authorization | String | <span class="label label-red float-right">Required</span> Your Bearer token |
+
+### Body Parameters (application/json)
+
+| Parameter         | Type    | Description                                                                                                                                                                                                          |
+| ----------------- | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| product_reference | String  | Mandatory. Reference of the product of which you want to update / create the season to.                                                                                                                              |
+| reference         | String  | If provided, the unique reference associated to the season you want to update or create (in case the one you provided has never been used). If no reference is provided, a season will be created with a random one. |
+| name              | String  | Name of the 'seasonal pricing' (100 characters max).                                                                                                                                                                 |
+| date_start        | String  | Start date of the season. "YYYY-MM-DD" format string.                                                                                                                                                                |
+| date_end          | String  | End date of the season "YYYY-MM-DD" format string.                                                                                                                                                                   |
+| is_recurrent      | Boolean | Indicates whether the seasonal pricing repeats yearly.                                                                                                                                                               |
+| purchase_price    | Number  | Purchase price as a number.                                                                                                                                                                                          |
+| sales_price       | Number  | Sales price as a number.                                                                                                                                                                                             |
 
 ### Response
 
