@@ -1442,6 +1442,12 @@ axios.get(baseUrl + "/supplier?reference=supplier_reference", headers);
     "last_name": "Tate",
     "agency": "Paris Agency"
   },
+  "category": {
+    "reference": "category_reference",
+    "name": "Accommodation / Lodging",
+    "subcategory_reference": "subcategory_reference",
+    "subcategory_name": "Hotel Room"
+  },
   "destination": {
     "reference": "destination_reference",
     "name": "France",
@@ -1558,6 +1564,7 @@ A JSON object containing the supplier information with properties like:
 | capacity      | String | Maximum number of people for which the supplier can be used                                                                                                  |
 | visual_url    | String | URL of the Google Slides visual linked to the supplier                                                                                                       |
 | user          | JSON   | JSON object user ([User](#user))                                                                                                                             |
+| category      | JSON   | JSON object category ([Category](#category))                                                                                                                 |
 | destination   | JSON   | JSON object destination ([Destination](#destination))                                                                                                        |
 | address       | JSON   | JSON object address ([Address](#address))                                                                                                                    |
 | medias        | JSON   | JSON object medias ([Medias](#medias))                                                                                                                       |
@@ -1835,6 +1842,12 @@ axios.get(baseUrl + "/product?reference=product_reference", headers);
     "reference": "package_reference",
     "title": "packages_title"
   },
+  "category": {
+    "reference": "category_reference",
+    "name": "Accommodation / Lodging",
+    "subcategory_reference": "subcategory_reference",
+    "subcategory_name": "Hotel Room"
+  },
   "destination": {
     "reference": "destination_reference",
     "name": "France",
@@ -1978,6 +1991,7 @@ A JSON object containing the product information with properties like:
 | commission      | JSON   | A JSON object containing `commission_mode` ("sales" or "purchase"), `commission_regime` ("percent" or "amount"), `value`                                                                                                                 |
 | supplier        | JSON   | A JSON object containing `reference`, `company_name`                                                                                                                                                                                     |
 | package         | JSON   | A JSON object containing `reference`, `title`                                                                                                                                                                                            |
+| category        | JSON   | JSON object category ([Category](#category))                                                                                                                                                                                             |
 | destination     | JSON   | JSON object destination ([Destination](#destination))                                                                                                                                                                                    |
 | buget_form      | String | `Important`, `Normal`, `Low` represent how the product will be highlight on the budget By Default                                                                                                                                        |
 | budget_text     | String | This is an empty string `""` if the product is not marked as an option in the budget, otherwise it is the custom label of the option to which the product is associated                                                                  |
@@ -3624,6 +3638,24 @@ The technical name of a custom field can be found in the custom field edit modal
 | Checkbox          | String | The checkbox must be a string: "true" (checked) OR "false" (unchecked)                                                                                                                         |
 | Number            | String | Number type should be a Number without other character                                                                                                                                         |
 | File              | String | File must be a valid URL, and supported file extensions include: .pdf, .jpg, .jpeg, .png, .bmp, .gif, .docx, .doc, .msg, .odt, .rtf, .txt, .ppt, .pptx, .pptm, .csv, .xlsx                     |
+
+### Category
+
+```json
+"category": {
+    "reference": "category_reference",
+    "name": "Accommodation / Lodging",
+    "subcategory_reference": "subcategory_reference",
+    "subcategory_name": "Hotel Room"
+}
+```
+
+| Property              | Type   | Description                       |
+| --------------------- | ------ | --------------------------------- |
+| reference             | String | The reference of the category     |
+| name                  | String | Name of the category              |
+| subcategory_reference | String | The reference of the sub-category |
+| subcategory_name      | String | Name of the sub-category          |
 
 ### Destination
 
