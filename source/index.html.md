@@ -197,7 +197,7 @@ axios.get(baseUrl + "/projects", headers);
 ### Query Parameters
 
 | Parameter             | Type    | Description                                                                                                                                                                                        |
-|-----------------------|---------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| --------------------- | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | next_token            | String  | Specify this parameter if you want to retrieve the following elements of a given list query                                                                                                        |
 | info_stage_reference  | String  | You can filter projects that are in a specific stage. The stage of the project must be indicated by its technical name                                                                             |
 | created_at            | Date    | You can filter projects assigned to a specific or an intersection of creation date. Expected format: “YYYY-MM-DD” or “YYYY-MM-DD,YYYY-MM-DD”. See [Date Format](#date-format) for more details.    |
@@ -731,7 +731,7 @@ axios.post(baseUrl + "/projects-upsert", body, headers);
 | client_reference              | String | Reference or email of an existing client in your Ezus account to link to the project (only settable when creating a new project)                                                                                                                                    |
 | trip_destination_reference    | String | Reference of the destination to link to the project. To reset the destination, you can put `'0'`.                                                                                                                                                                   |
 | trip_subdestination_reference | String | Reference of the sub-destination to link to the project. To reset the sub-destination, you can put `'0'`. If the `trip_destination_reference` is not provided, the `trip_subdestination_reference` will be ignored.                                                 |
-| custom_fields                 | JSON   | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                                                                                                                       |
+| custom_fields                 | Array  | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                                                                                                                       |
 
 ### Response
 
@@ -1292,7 +1292,7 @@ axios.post(baseUrl + "/clients-upsert", body, headers);
 | user           | Email  | Email of the Ezus user to be set as the owner of the client                                                                                                                                                                            |
 | contact        | JSON   | A single JSON element ([Contacts](#contacts)) representing the main                                                                                                                                                                    |
 | address        | JSON   | JSON object address ([Address](#address)) To reset the address, you can put `'0'`. **Geolocation data cannot be modified during an upsert**.                                                                                           |
-| custom_fields  | JSON   | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                                                                                          |
+| custom_fields  | Array  | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                                                                                          |
 
 ### Response
 
@@ -1682,7 +1682,7 @@ axios.post(baseUrl + "/suppliers-upsert", body, headers);
 | address                  | JSON   | JSON object address ([Address](#address)) To reset the address, you can put `'0'`. **Geolocation data cannot be modified during an upsert**.                                                                                                     |
 | destination_reference    | String | Reference of the destination to link to the supplier. To reset the destination, you can put `'0'`.                                                                                                                                               |
 | subdestination_reference | String | Reference of the sub-destination to link to the supplier. To reset the sub-destination, you can put `'0'`. If the `destination_reference` is not provided, the `subdestination_reference` will be ignored.                                       |
-| custom_fields            | JSON   | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                                                                                                    |
+| custom_fields            | Array  | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                                                                                                    |
 
 ### Response
 
@@ -2100,7 +2100,7 @@ axios.post(baseUrl + "/products-upsert", body, headers);
 | package_reference        | String | If you give an adequate package reference, the product will be added in this package. If you want to update the package's product to None, you must enter 0.                                                                                                            |
 | destination_reference    | String | Reference of the destination to link to the product. To reset the destination, you can put `'0'`.                                                                                                                                                                       |
 | subdestination_reference | String | Reference of the sub-destination to link to the product. To reset the sub-destination, you can put `'0'`. If the `destination_reference` is not provided, the `subdestination_reference` will be ignored.                                                               |
-| custom_fields            | JSON   | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                                                                                                                           |
+| custom_fields            | Array  | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                                                                                                                           |
 
 ### Response
 
@@ -2306,7 +2306,7 @@ axios.post(baseUrl + "/packages-upsert", body, headers);
 | capacity                 | Number | Maximum number of people for which the package can be used . Leave blank `''` if not relevant                                                                                                                          |
 | destination_reference    | String | Reference of the destination to link to the package. To reset the destination, you can put `'0'`.                                                                                                                      |
 | subdestination_reference | String | Reference of the sub-destination to link to the package. To reset the sub-destination, you can put `'0'`. If the `destination_reference` is not provided, the `subdestination_reference` will be ignored.              |
-| custom_fields            | JSON   | Array of JSON custom fields [Custom fields](#custom-fields)                                                                                                                                                            |
+| custom_fields            | Array  | Array of JSON custom fields [Custom fields](#custom-fields)                                                                                                                                                            |
 
 ### Response
 
@@ -2918,7 +2918,7 @@ axios.put(baseUrl + "/invoices-update", body, headers);
 | reference     | String | The reference of the invoice you want to update                                                                                                                                                                              |
 | stage         | String | Represents the stage of the invoice. Allowed updates: you can move from `draft` to `paid` or `completed`. Once set to paid or completed, switching between these stages is allowed. Reverting back to draft is not permitted |
 | due_date      | String | due_date can be updated only if the invoice is a draft, due_date can be only on format `YYYY-MM-DD`                                                                                                                          |
-| custom_fields | JSON   | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                                                                                |
+| custom_fields | Array  | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                                                                                |
 
 ### Response
 
