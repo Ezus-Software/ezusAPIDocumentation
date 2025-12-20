@@ -440,6 +440,9 @@
                     <a href="#put-invoices-update" class="toc-h2 toc-link" data-title="PUT invoices-update">PUT invoices-update</a>
                   </li>
                   <li>
+                    <a href="#get-invoices-supplier" class="toc-h2 toc-link" data-title="GET invoices-supplier">GET invoices-supplier</a>
+                  </li>
+                  <li>
                     <a href="#get-invoice-supplier" class="toc-h2 toc-link" data-title="GET invoice-supplier">GET invoice-supplier</a>
                   </li>
               </ul>
@@ -4844,6 +4847,221 @@ In such cases, the response message will indicate that the process is busy, and 
 <td>The <code>reference</code> for the invoice, which you should store for future updates or retrievals</td>
 </tr>
 </tbody></table>
+<h2 id='get-invoices-supplier'>GET invoices-supplier</h2>
+<p>This API endpoint retrieves a list of purchase invoices in Ezus.</p>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="s1">'https://api.ezus.app/invoices-supplier'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'x-api-key: &lt;YOUR_API_KEY&gt;'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Bearer &lt;YOUR_TOKEN&gt;'</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">axios</span><span class="dl">"</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">baseUrl</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">https://api.ezus.app</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="dl">"</span><span class="s2">x-api-key</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">&lt;YOUR_API_KEY&gt;</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">Authorization</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Bearer &lt;YOUR_TOKEN&gt;</span><span class="dl">"</span><span class="p">,</span>
+<span class="p">};</span>
+
+<span class="nx">axios</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="nx">baseUrl</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">/invoices-supplier</span><span class="dl">"</span><span class="p">,</span> <span class="nx">headers</span><span class="p">);</span>
+</code></pre></div>
+<blockquote>
+<p>This request returns a structured JSON object:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">"false"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"next_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;NEXT_TOKEN&gt;"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">1240</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"data_size"</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"page"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"invoices-supplier"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"invoice_supplier_reference"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2023_101010.pdf"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"created_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2023-10-10"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"due_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2023-10-10"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EUR"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"amount_ttc"</span><span class="p">:</span><span class="w"> </span><span class="mf">160.0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"amount_ht"</span><span class="p">:</span><span class="w"> </span><span class="mf">120.0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"vat"</span><span class="p">:</span><span class="w"> </span><span class="mf">40.0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ezus.io/2023_101010.pdf"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"supplier_reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"supplier_reference"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"project_reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"project_reference"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"alternative_order"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"paid"</span><span class="p">:</span><span class="w"> </span><span class="mf">150.0</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='http-endpoint-28'>HTTP Endpoint</h3>
+<p><code>GET https://api.ezus.app/invoices-supplier</code></p>
+<h3 id='header-parameters-28'>Header Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>x-api-key</td>
+<td>String</td>
+<td><span class="label label-red float-right">Required</span> Your Ezus API key</td>
+</tr>
+<tr>
+<td>Authorization</td>
+<td>String</td>
+<td><span class="label label-red float-right">Required</span> Your Bearer token</td>
+</tr>
+</tbody></table>
+<h3 id='query-parameters-15'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>next_token</td>
+<td>String</td>
+<td>Specify this parameter if you want to retrieve the following elements of a given list query. If this parameter is filled, other parameters are ignored.</td>
+</tr>
+<tr>
+<td>supplier_reference</td>
+<td>String</td>
+<td>Filter invoices by the given supplier reference</td>
+</tr>
+<tr>
+<td>project_reference</td>
+<td>String</td>
+<td>Filter invoices by the given project reference</td>
+</tr>
+<tr>
+<td>alternative_order</td>
+<td>Number</td>
+<td>If <code>project_reference</code> is not provided, this parameter is ignored and the query applies to all alternatives of all projects.<br />If <code>project_reference</code> is provided, <code>alternative_order</code> must be a non-negative number: 0 targets the main alternative and the value falls back to 0 if not specified.</td>
+</tr>
+</tbody></table>
+
+<table><thead>
+<tr>
+</tr>
+</thead><tbody>
+</tbody></table>
+<h3 id='response-28'>Response</h3>
+<p>A JSON object containing the invoices-supplier information with properties like:</p>
+
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>next_token</td>
+<td>String</td>
+<td>A token will be returned if all invoices have not been returned. Use it in another call to access the following invoices</td>
+</tr>
+<tr>
+<td>size</td>
+<td>Number</td>
+<td>The total number of invoices available with these filters</td>
+</tr>
+<tr>
+<td>data_size</td>
+<td>Number</td>
+<td>Number of invoices returned on the current page</td>
+</tr>
+<tr>
+<td>page</td>
+<td>Number</td>
+<td>The page number</td>
+</tr>
+<tr>
+<td>invoices-supplier</td>
+<td>Array</td>
+<td>An array of JSON objects, each representing an invoice-supplier. These objects are formatted according to a simplified version of the GET <code>invoice-supplier</code> response structure. (<a href="#get-invoice-supplier">GET invoice-supplier</a>)</td>
+</tr>
+</tbody></table>
+
+<p>Each <code>invoice-supplier</code> of the <code>invoices-supplier</code> list is a JSON object containing the invoice-supplier information with properties like:</p>
+
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>reference</td>
+<td>String</td>
+<td>The reference of the supplier invoice</td>
+</tr>
+<tr>
+<td>filename</td>
+<td>String</td>
+<td>Filename of the supplier invoice</td>
+</tr>
+<tr>
+<td>created_date</td>
+<td>String</td>
+<td>Date of the creation of the supplier invoice, in a &quot;YYYY-MM-DD&quot; format</td>
+</tr>
+<tr>
+<td>due_date</td>
+<td>String</td>
+<td>Due date of the supplier invoice, in a &quot;YYYY-MM-DD&quot; format</td>
+</tr>
+<tr>
+<td>currency</td>
+<td>String</td>
+<td>The ISO 4217 currency code representing the currency you utilize (<a href="https://docs.google.com/spreadsheets/d/1b7BNOwKyN1hMOouve6xhFZ2R2zrH4Sj1L-646j755fU/edit?usp=sharing" target="_blank">Link to doc</a>)</td>
+</tr>
+<tr>
+<td>amount_ttc</td>
+<td>Number</td>
+<td>Amount of the supplier invoice including taxes</td>
+</tr>
+<tr>
+<td>amount_ht</td>
+<td>Number</td>
+<td>Amount of the supplier invoice excluding taxes</td>
+</tr>
+<tr>
+<td>vat</td>
+<td>Number</td>
+<td>VAT amount of the supplier invoice</td>
+</tr>
+<tr>
+<td>url</td>
+<td>String</td>
+<td>URL of the supplier invoice file</td>
+</tr>
+<tr>
+<td>supplier_reference</td>
+<td>String</td>
+<td>Reference of the related supplier, or an empty string if no supplier is assigned</td>
+</tr>
+<tr>
+<td>project_reference</td>
+<td>String</td>
+<td>Reference of the related project</td>
+</tr>
+<tr>
+<td>alternative_order</td>
+<td>Number</td>
+<td>Reference of the related alternative order; 0 is for main alternative</td>
+</tr>
+<tr>
+<td>paid</td>
+<td>Number</td>
+<td>Sum of the payments already made on the invoice</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
 <h2 id='get-invoice-supplier'>GET invoice-supplier</h2>
 <p>This API endpoint retrieves detailed information about a specific purchase invoice in Ezus.</p>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="s1">'https://api.ezus.app/invoice-supplier?reference=invoice_supplier_reference'</span> <span class="se">\</span>
@@ -4923,9 +5141,9 @@ In such cases, the response message will indicate that the process is busy, and 
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='http-endpoint-28'>HTTP Endpoint</h3>
+</span></code></pre></div><h3 id='http-endpoint-29'>HTTP Endpoint</h3>
 <p><code>GET https://api.ezus.app/invoice-supplier</code></p>
-<h3 id='header-parameters-28'>Header Parameters</h3>
+<h3 id='header-parameters-29'>Header Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -4944,7 +5162,7 @@ In such cases, the response message will indicate that the process is busy, and 
 <td><span class="label label-red float-right">Required</span> Your Bearer token</td>
 </tr>
 </tbody></table>
-<h3 id='query-parameters-15'>Query Parameters</h3>
+<h3 id='query-parameters-16'>Query Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -4958,7 +5176,7 @@ In such cases, the response message will indicate that the process is busy, and 
 <td><span class="label label-red float-right">Required</span> The reference of the invoice to retrieve</td>
 </tr>
 </tbody></table>
-<h3 id='response-28'>Response</h3>
+<h3 id='response-29'>Response</h3>
 <p>A JSON object containing the supplier invoice information with properties like:</p>
 
 <table><thead>
@@ -4996,12 +5214,12 @@ In such cases, the response message will indicate that the process is busy, and 
 <tr>
 <td>amount_ttc</td>
 <td>Number</td>
-<td>Amount of the supplier invoice excluding taxes</td>
+<td>Amount of the supplier invoice including taxes</td>
 </tr>
 <tr>
 <td>amount_ht</td>
 <td>Number</td>
-<td>Amount of the supplier invoice including taxes</td>
+<td>Amount of the supplier invoice excluding taxes</td>
 </tr>
 <tr>
 <td>vat</td>
@@ -5081,9 +5299,9 @@ In such cases, the response message will indicate that the process is busy, and 
   </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ok"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Deposit successfully created"</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='http-endpoint-29'>HTTP Endpoint</h3>
+</span></code></pre></div><h3 id='http-endpoint-30'>HTTP Endpoint</h3>
 <p><code>POST https://api.ezus.app/deposits-create</code></p>
-<h3 id='header-parameters-29'>Header Parameters</h3>
+<h3 id='header-parameters-30'>Header Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -5146,7 +5364,7 @@ In such cases, the response message will indicate that the process is busy, and 
 <td>Technical name of the payment method, you can find it in Settings - Custom fields</td>
 </tr>
 </tbody></table>
-<h3 id='response-29'>Response</h3>
+<h3 id='response-30'>Response</h3>
 <p>A JSON object indicating whether an error occurred during the process, along with the associated message.</p>
 
 <table><thead>
@@ -5192,9 +5410,9 @@ In such cases, the response message will indicate that the process is busy, and 
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='http-endpoint-30'>HTTP Endpoint</h3>
+</span></code></pre></div><h3 id='http-endpoint-31'>HTTP Endpoint</h3>
 <p><code>GET https://api.ezus.app/webhooks</code></p>
-<h3 id='header-parameters-30'>Header Parameters</h3>
+<h3 id='header-parameters-31'>Header Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -5213,7 +5431,7 @@ In such cases, the response message will indicate that the process is busy, and 
 <td><span class="label label-red float-right">Required</span> Your Bearer token</td>
 </tr>
 </tbody></table>
-<h3 id='response-30'>Response</h3>
+<h3 id='response-31'>Response</h3>
 <p>An array of JSON that contains your webhooks information.</p>
 
 <table><thead>
@@ -5259,9 +5477,9 @@ In such cases, the response message will indicate that the process is busy, and 
   </span><span class="nl">"is_duplication"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
   </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='http-endpoint-31'>HTTP Endpoint</h3>
+</span></code></pre></div><h3 id='http-endpoint-32'>HTTP Endpoint</h3>
 <p><code>GET https://api.ezus.app/webhooks-last</code></p>
-<h3 id='header-parameters-31'>Header Parameters</h3>
+<h3 id='header-parameters-32'>Header Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -5280,7 +5498,7 @@ In such cases, the response message will indicate that the process is busy, and 
 <td><span class="label label-red float-right">Required</span> Your Bearer token</td>
 </tr>
 </tbody></table>
-<h3 id='query-parameters-16'>Query Parameters</h3>
+<h3 id='query-parameters-17'>Query Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -5294,7 +5512,7 @@ In such cases, the response message will indicate that the process is busy, and 
 <td><span class="label label-red float-right">Required</span> The event type to retrieve</td>
 </tr>
 </tbody></table>
-<h3 id='response-31'>Response</h3>
+<h3 id='response-32'>Response</h3>
 <p>A JSON object indicating whether an error occurred during the process, along with the associated message. If successful, it returns the latest event occurrence of a specified event type (<a href="#events">Events</a>).</p>
 <h2 id='post-webhooks-upsert'>POST webhooks-upsert</h2>
 <p>It updates a webhook record if the provided reference or endpoint does match one of the webhooks in your account, otherwise it creates a new webhook record with the provided reference (or with a random one if no reference is provided).</p>
@@ -5333,9 +5551,9 @@ In such cases, the response message will indicate that the process is busy, and 
   </span><span class="nl">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Webhook successfully created"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"webhook_reference"</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='http-endpoint-32'>HTTP Endpoint</h3>
+</span></code></pre></div><h3 id='http-endpoint-33'>HTTP Endpoint</h3>
 <p><code>POST https://api.ezus.app/webhooks-upsert</code></p>
-<h3 id='header-parameters-32'>Header Parameters</h3>
+<h3 id='header-parameters-33'>Header Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -5383,7 +5601,7 @@ In such cases, the response message will indicate that the process is busy, and 
 <td>The list of events to enable for this endpoint. At least 1 required, separated by commas if more than one. (<a href="#events">Events</a>)</td>
 </tr>
 </tbody></table>
-<h3 id='response-32'>Response</h3>
+<h3 id='response-33'>Response</h3>
 <p>A JSON object indicating whether an error occurred during the process, along with the associated message.</p>
 
 <table><thead>
@@ -5437,9 +5655,9 @@ In such cases, the response message will indicate that the process is busy, and 
   </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ok"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Webhook successfully deleted"</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='http-endpoint-33'>HTTP Endpoint</h3>
+</span></code></pre></div><h3 id='http-endpoint-34'>HTTP Endpoint</h3>
 <p><code>DELETE https://api.ezus.app/webhooks-delete</code></p>
-<h3 id='header-parameters-33'>Header parameters</h3>
+<h3 id='header-parameters-34'>Header parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -5477,7 +5695,7 @@ In such cases, the response message will indicate that the process is busy, and 
 <td>If provided, the endpoint associated to the webhook you want to delete</td>
 </tr>
 </tbody></table>
-<h3 id='response-33'>Response</h3>
+<h3 id='response-34'>Response</h3>
 <p>A JSON object indicating whether an error occurred during the process, along with the associated message.</p>
 <h1 id='nested-resources'>Nested Resources</h1><h3 id='address'>Address</h3><div class="highlight"><pre class="highlight json tab-json"><code><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
   </span><span class="nl">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"58 Rue de Paradis"</span><span class="p">,</span><span class="w">
