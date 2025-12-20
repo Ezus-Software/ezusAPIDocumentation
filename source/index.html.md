@@ -2932,6 +2932,110 @@ In such cases, the response message will indicate that the process is busy, and 
 | action    | String | Indicates type of invoice action was created                                             |
 | reference | String | The `reference` for the invoice, which you should store for future updates or retrievals |
 
+## GET invoices-supplier
+
+This API endpoint retrieves a list of purchase invoices in Ezus.
+
+```shell
+curl --location 'https://api.ezus.app/invoices-supplier' \
+--header 'x-api-key: <YOUR_API_KEY>' \
+--header 'Authorization: Bearer <YOUR_TOKEN>'
+```
+
+```javascript
+const axios = require("axios");
+const baseUrl = "https://api.ezus.app";
+
+const headers = {
+  "x-api-key": "<YOUR_API_KEY>",
+  Authorization: "Bearer <YOUR_TOKEN>",
+};
+
+axios.get(baseUrl + "/invoices-supplier", headers);
+```
+
+> This request returns a structured JSON object:
+
+```json
+{
+  "error": "false",
+  "next_token": "<NEXT_TOKEN>",
+  "size": 1240,
+  "data_size": 50,
+  "page": 1,
+  "invoices-supplier": [
+    {
+      "reference": "invoice_supplier_reference",
+      "filename": "2023_101010.pdf",
+      "created_date": "2023-10-10",
+      "due_date": "2023-10-10",
+      "currency": "EUR",
+      "amount_ttc": 160.0,
+      "amount_ht": 120.0,
+      "vat": 40.0,
+      "url": "https://ezus.io/2023_101010.pdf",
+      "supplier_reference": "supplier_reference",
+      "project_reference": "project_reference",
+      "alternative_order": "0",
+      "paid": 150.0
+    }
+  ]
+}
+```
+
+### HTTP Endpoint
+
+`GET https://api.ezus.app/invoices-supplier`
+
+### Header Parameters
+
+| Parameter     | Type   | Description                                                                 |
+| ------------- | ------ | --------------------------------------------------------------------------- |
+| x-api-key     | String | <span class="label label-red float-right">Required</span> Your Ezus API key |
+| Authorization | String | <span class="label label-red float-right">Required</span> Your Bearer token |
+
+### Query Parameters
+
+| Parameter          | Type   | Description                                                                                                                                                                                                                                                                                                                              |
+| ------------------ | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| next_token         | String | Specify this parameter if you want to retrieve the following elements of a given list query. If this parameter is filled, other parameters are ignored.                                                                                                                                                                                  |
+| supplier_reference | String | Filter invoices by the given supplier reference                                                                                                                                                                                                                                                                                          |
+| project_reference  | String | Filter invoices by the given project reference                                                                                                                                                                                                                                                                                           |
+| alternative_order  | Number | If <code>project_reference</code> is not provided, this parameter is ignored and the query applies to all alternatives of all projects.<br />If <code>project_reference</code> is provided, <code>alternative_order</code> must be a non-negative number: 0 targets the main alternative and the value falls back to 0 if not specified. |
+
+|
+
+### Response
+
+A JSON object containing the invoices-supplier information with properties like:
+
+| Property          | Type   | Description                                                                                                                                                                                                                      |
+| ----------------- | ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| next_token        | String | A token will be returned if all invoices have not been returned. Use it in another call to access the following invoices                                                                                                         |
+| size              | Number | The total number of invoices available with these filters                                                                                                                                                                        |
+| data_size         | Number | Number of invoices returned on the current page                                                                                                                                                                                  |
+| page              | Number | The page number                                                                                                                                                                                                                  |
+| invoices-supplier | Array  | An array of JSON objects, each representing an invoice-supplier. These objects are formatted according to a simplified version of the GET `invoice-supplier` response structure. ([GET invoice-supplier](#get-invoice-supplier)) |
+
+Each `invoice-supplier` of the `invoices-supplier` list is a JSON object containing the invoice-supplier information with properties like:
+
+| Property           | Type   | Description                                                                                                                                                                                                       |
+| ------------------ | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| reference          | String | The reference of the supplier invoice                                                                                                                                                                             |
+| filename           | String | Filename of the supplier invoice                                                                                                                                                                                  |
+| created_date       | String | Date of the creation of the supplier invoice, in a "YYYY-MM-DD" format                                                                                                                                            |
+| due_date           | String | Due date of the supplier invoice, in a "YYYY-MM-DD" format                                                                                                                                                        |
+| currency           | String | The ISO 4217 currency code representing the currency you utilize (<a href="https://docs.google.com/spreadsheets/d/1b7BNOwKyN1hMOouve6xhFZ2R2zrH4Sj1L-646j755fU/edit?usp=sharing" target="_blank">Link to doc</a>) |
+| amount_ttc         | Number | Amount of the supplier invoice including taxes                                                                                                                                                                    |
+| amount_ht          | Number | Amount of the supplier invoice excluding taxes                                                                                                                                                                    |
+| vat                | Number | VAT amount of the supplier invoice                                                                                                                                                                                |
+| url                | String | URL of the supplier invoice file                                                                                                                                                                                  |
+| supplier_reference | String | Reference of the related supplier, or an empty string if no supplier is assigned                                                                                                                                  |
+| project_reference  | String | Reference of the related project                                                                                                                                                                                  |
+| alternative_order  | Number | Reference of the related alternative order; 0 is for main alternative                                                                                                                                             |
+| paid               | Number | Sum of the payments already made on the invoice                                                                                                                                                                   |
+|                    |
+
 ## GET invoice-supplier
 
 This API endpoint retrieves detailed information about a specific purchase invoice in Ezus.
@@ -3048,8 +3152,8 @@ A JSON object containing the supplier invoice information with properties like:
 | created_date | String | Date of the creation of the supplier invoice, in a "YYYY-MM-DD" format                                                                                                                                            |
 | due_date     | String | Due date of the supplier invoice, in a "YYYY-MM-DD" format                                                                                                                                                        |
 | currency     | String | The ISO 4217 currency code representing the currency you utilize (<a href="https://docs.google.com/spreadsheets/d/1b7BNOwKyN1hMOouve6xhFZ2R2zrH4Sj1L-646j755fU/edit?usp=sharing" target="_blank">Link to doc</a>) |
-| amount_ttc   | Number | Amount of the supplier invoice excluding taxes                                                                                                                                                                    |
-| amount_ht    | Number | Amount of the supplier invoice including taxes                                                                                                                                                                    |
+| amount_ttc   | Number | Amount of the supplier invoice including taxes                                                                                                                                                                    |
+| amount_ht    | Number | Amount of the supplier invoice excluding taxes                                                                                                                                                                    |
 | vat          | Number | VAT amount of the supplier invoice                                                                                                                                                                                |
 | url          | String | URL of the supplier invoice file                                                                                                                                                                                  |
 | supplier     | JSON   | JSON including: `reference`, `company_name` and `website`                                                                                                                                                         |
