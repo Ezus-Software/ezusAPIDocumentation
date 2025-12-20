@@ -2294,6 +2294,7 @@ Note that the following fields are used only during creation and are ignored on 
     "company_number": "362 521 879 00034",
     "user": "sam@proton.me",
     "contact": {
+        "mode": "upsert_main",
         "email": "contact@moke-international.com",
         "first_name": "Jane",
         "last_name": "Doe",
@@ -2326,6 +2327,7 @@ Note that the following fields are used only during creation and are ignored on 
   <span class="na">company_number</span><span class="p">:</span> <span class="dl">"</span><span class="s2">362 521 879 00034</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">user</span><span class="p">:</span> <span class="dl">"</span><span class="s2">sam@proton.me</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">contact</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">mode</span><span class="p">:</span> <span class="dl">"</span><span class="s2">upsert_main</span><span class="dl">"</span><span class="p">,</span>
     <span class="na">email</span><span class="p">:</span> <span class="dl">"</span><span class="s2">contact@moke-international.com</span><span class="dl">"</span><span class="p">,</span>
     <span class="na">first_name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Jane</span><span class="dl">"</span><span class="p">,</span>
     <span class="na">last_name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Doe</span><span class="dl">"</span><span class="p">,</span>
@@ -2431,7 +2433,7 @@ Note that the following fields are used only during creation and are ignored on 
 <tr>
 <td>contact</td>
 <td>JSON</td>
-<td>A single JSON element (<a href="#contacts">Contacts</a>) representing the main</td>
+<td>Main contact object (<a href="#contacts">Contacts</a>). Optional extra parameter <code>mode</code> in this endpoint. Mode values can either be: <code>insert_main</code> (default, creates and sets a main contact even if one exists) or <code>upsert_main</code> (updates the main contact if it exists, otherwise creates it)</td>
 </tr>
 <tr>
 <td>address</td>
