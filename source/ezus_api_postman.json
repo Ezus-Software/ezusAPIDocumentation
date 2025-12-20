@@ -103,6 +103,11 @@
               "key": "project_manager",
               "value": "john.doe@e-corp.com",
               "disabled": true
+            },
+            {
+              "key": "from_programs_catalog",
+              "value": false,
+              "disabled": true
             }
           ]
         }
@@ -285,6 +290,39 @@
       },
       "response": []
     },
+    {
+			"name": "project-steps-upsert",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-API-KEY",
+						"value": "{{<YOUR_API_KEY>}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"reference\": \"project-step-reference\",\n    \"project_reference\": \"project-reference\",\n    \"alternative_order\": \"0\",\n    \"type\": \"activity\",\n    \"name\": \"activity Title\",\n    \"category\": \"restaurant\",\n    \"people\": \"4\",\n    \"date_start\": \"2025-10-03 10:00:00\",\n    \"date_end\": \"2025-10-03 12:00:00\",\n    \"address\": {\n        \"label\": \"58 Rue de Paradis\",\n        \"city\": \"Paris\",\n        \"country\": \"France\",\n        \"zip\": \"75010\",\n        \"geo\": {\n            \"x\": 48.875761,\n            \"y\": 2.348727\n        }\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/project-steps-upsert",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"project-steps-upsert"
+					]
+				},
+				"description": "This POST request upserts (creates or updates) a project step in the EzusAPI system"
+			},
+			"response": []
+		},
     {
       "name": "clients",
       "request": {
@@ -805,6 +843,47 @@
           "raw": "{{baseUrl}}/invoices-update",
           "host": ["{{baseUrl}}"],
           "path": ["invoices-update"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "invoices-supplier",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "X-API-KEY",
+            "value": "{{<YOUR_API_KEY>}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/invoices-supplier",
+          "host": ["{{baseUrl}}"],
+          "path": ["invoices-supplier"],
+          "query": [
+            {
+              "key": "next_token",
+              "value": "",
+              "disabled": true
+            },
+            {
+              "key": "supplier_reference",
+              "value": "supplier_reference",
+              "disabled": true
+            },
+            {
+              "key": "project_reference",
+              "value": "project_reference",
+              "disabled": true
+            },
+            {
+              "key": "alternative_order",
+              "value": "0",
+              "disabled": true
+            }
+          ]
         }
       },
       "response": []
