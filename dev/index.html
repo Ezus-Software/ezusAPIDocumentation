@@ -488,6 +488,9 @@
                     <a href="#custom-fields" class="toc-h2 toc-link" data-title="Custom Fields">Custom Fields</a>
                   </li>
                   <li>
+                    <a href="#category" class="toc-h2 toc-link" data-title="Category">Category</a>
+                  </li>
+                  <li>
                     <a href="#destination" class="toc-h2 toc-link" data-title="Destination">Destination</a>
                   </li>
                   <li>
@@ -2630,6 +2633,12 @@ Note that the following fields are used only during creation and are ignored on 
     </span><span class="nl">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Tate"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"agency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Paris Agency"</span><span class="w">
   </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"category"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"category_reference"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Accommodation / Lodging"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"subcategory_reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"subcategory_reference"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"subcategory_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hotel Room"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
   </span><span class="nl">"destination"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"destination_reference"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"France"</span><span class="p">,</span><span class="w">
@@ -2801,6 +2810,11 @@ Note that the following fields are used only during creation and are ignored on 
 <td>user</td>
 <td>JSON</td>
 <td>JSON object user (<a href="#user">User</a>)</td>
+</tr>
+<tr>
+<td>category</td>
+<td>JSON</td>
+<td>JSON object category (<a href="#category">Category</a>)</td>
 </tr>
 <tr>
 <td>destination</td>
@@ -3196,6 +3210,12 @@ Note that the following fields are used only during creation and are ignored on 
     </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"package_reference"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"packages_title"</span><span class="w">
   </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"category"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"category_reference"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Accommodation / Lodging"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"subcategory_reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"subcategory_reference"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"subcategory_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hotel Room"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
   </span><span class="nl">"destination"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"destination_reference"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"France"</span><span class="p">,</span><span class="w">
@@ -3410,6 +3430,11 @@ Note that the following fields are used only during creation and are ignored on 
 <td>package</td>
 <td>JSON</td>
 <td>A JSON object containing <code>reference</code>, <code>title</code></td>
+</tr>
+<tr>
+<td>category</td>
+<td>JSON</td>
+<td>JSON object category (<a href="#category">Category</a>)</td>
 </tr>
 <tr>
 <td>destination</td>
@@ -6108,6 +6133,41 @@ The name of custom fields refers to their technical name, not their display name
 <td>File</td>
 <td>String</td>
 <td>File must be a valid URL, and supported file extensions include: .pdf, .jpg, .jpeg, .png, .bmp, .gif, .docx, .doc, .msg, .odt, .rtf, .txt, .ppt, .pptx, .pptm, .csv, .xlsx</td>
+</tr>
+</tbody></table>
+<h3 id='category'>Category</h3><div class="highlight"><pre class="highlight json tab-json"><code><span class="nl">"category"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"category_reference"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Accommodation / Lodging"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"subcategory_reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"subcategory_reference"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"subcategory_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hotel Room"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>reference</td>
+<td>String</td>
+<td>The reference of the category</td>
+</tr>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>Name of the category</td>
+</tr>
+<tr>
+<td>subcategory_reference</td>
+<td>String</td>
+<td>The reference of the sub-category</td>
+</tr>
+<tr>
+<td>subcategory_name</td>
+<td>String</td>
+<td>Name of the sub-category</td>
 </tr>
 </tbody></table>
 <h3 id='destination'>Destination</h3><div class="highlight"><pre class="highlight json tab-json"><code><span class="nl">"destination"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
