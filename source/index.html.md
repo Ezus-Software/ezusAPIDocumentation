@@ -1196,6 +1196,7 @@ curl --location 'https://api.ezus.app/clients-upsert' \
     "company_number": "362 521 879 00034",
     "user": "sam@proton.me",
     "contact": {
+        "mode": "upsert_main",
         "email": "contact@moke-international.com",
         "first_name": "Jane",
         "last_name": "Doe",
@@ -1231,6 +1232,7 @@ const body = {
   company_number: "362 521 879 00034",
   user: "sam@proton.me",
   contact: {
+    mode: "upsert_main",
     email: "contact@moke-international.com",
     first_name: "Jane",
     last_name: "Doe",
@@ -1280,19 +1282,19 @@ axios.post(baseUrl + "/clients-upsert", body, headers);
 
 ### Body Parameters (application/json)
 
-| Parameter      | Type   | Description                                                                                                                                                                                                                            |
-| -------------- | ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| reference      | String | If provided, the unique reference associated with the client you want to update or create (or a random one will be generated).                                                                                                         |
-| info_number    | String | File number that appears in the client record. Not to be confused with reference                                                                                                                                                       |
-| type           | String | Optional parameter. Specifies the client type (`enterprise` or `individual`). If `enterprise`, `company_name` is required. If `individual`, provide contact.first_name or contact.last_name.                                           |
-| company_name   | String | <span class="label label-red float-right">Required</span> Name of the client's company (if applicable). If empty, the client will be considered an individual, and the name of the client will be the same as the name of the contact. |
-| website        | String | Website of the client                                                                                                                                                                                                                  |
-| vat_number     | String | VAT number of the client (only for "enterprise" clients)                                                                                                                                                                               |
-| company_number | String | Company registration number of the client (only for "enterprise" clients)                                                                                                                                                              |
-| user           | Email  | Email of the Ezus user to be set as the owner of the client                                                                                                                                                                            |
-| contact        | JSON   | A single JSON element ([Contacts](#contacts)) representing the main                                                                                                                                                                    |
-| address        | JSON   | JSON object address ([Address](#address)) To reset the address, you can put `'0'`. **Geolocation data cannot be modified during an upsert**.                                                                                           |
-| custom_fields  | Array  | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                                                                                          |
+| Parameter      | Type   | Description                                                                                                                                                                                                                                                                                     |
+| -------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| reference      | String | If provided, the unique reference associated with the client you want to update or create (or a random one will be generated).                                                                                                                                                                  |
+| info_number    | String | File number that appears in the client record. Not to be confused with reference                                                                                                                                                                                                                |
+| type           | String | Optional parameter. Specifies the client type (`enterprise` or `individual`). If `enterprise`, `company_name` is required. If `individual`, provide contact.first_name or contact.last_name.                                                                                                    |
+| company_name   | String | <span class="label label-red float-right">Required</span> Name of the client's company (if applicable). If empty, the client will be considered an individual, and the name of the client will be the same as the name of the contact.                                                          |
+| website        | String | Website of the client                                                                                                                                                                                                                                                                           |
+| vat_number     | String | VAT number of the client (only for "enterprise" clients)                                                                                                                                                                                                                                        |
+| company_number | String | Company registration number of the client (only for "enterprise" clients)                                                                                                                                                                                                                       |
+| user           | Email  | Email of the Ezus user to be set as the owner of the client                                                                                                                                                                                                                                     |
+| contact        | JSON   | Main contact object ([Contacts](#contacts)). Optional extra parameter <code>mode</code> in this endpoint. Mode values can either be: `insert_main` (default, creates and sets a main contact even if one exists) or `upsert_main` (updates the main contact if it exists, otherwise creates it) |
+| address        | JSON   | JSON object address ([Address](#address)) To reset the address, you can put `'0'`. **Geolocation data cannot be modified during an upsert**.                                                                                                                                                    |
+| custom_fields  | Array  | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                                                                                                                                                   |
 
 ### Response
 
@@ -1442,6 +1444,12 @@ axios.get(baseUrl + "/supplier?reference=supplier_reference", headers);
     "last_name": "Tate",
     "agency": "Paris Agency"
   },
+  "category": {
+    "reference": "category_reference",
+    "name": "Accommodation / Lodging",
+    "subcategory_reference": "subcategory_reference",
+    "subcategory_name": "Hotel Room"
+  },
   "destination": {
     "reference": "destination_reference",
     "name": "France",
@@ -1558,6 +1566,7 @@ A JSON object containing the supplier information with properties like:
 | capacity      | String | Maximum number of people for which the supplier can be used                                                                                                  |
 | visual_url    | String | URL of the Google Slides visual linked to the supplier                                                                                                       |
 | user          | JSON   | JSON object user ([User](#user))                                                                                                                             |
+| category      | JSON   | JSON object category ([Category](#category))                                                                                                                 |
 | destination   | JSON   | JSON object destination ([Destination](#destination))                                                                                                        |
 | address       | JSON   | JSON object address ([Address](#address))                                                                                                                    |
 | medias        | JSON   | JSON object medias ([Medias](#medias))                                                                                                                       |
@@ -1835,6 +1844,12 @@ axios.get(baseUrl + "/product?reference=product_reference", headers);
     "reference": "package_reference",
     "title": "packages_title"
   },
+  "category": {
+    "reference": "category_reference",
+    "name": "Accommodation / Lodging",
+    "subcategory_reference": "subcategory_reference",
+    "subcategory_name": "Hotel Room"
+  },
   "destination": {
     "reference": "destination_reference",
     "name": "France",
@@ -1978,6 +1993,7 @@ A JSON object containing the product information with properties like:
 | commission      | JSON   | A JSON object containing `commission_mode` ("sales" or "purchase"), `commission_regime` ("percent" or "amount"), `value`                                                                                                                 |
 | supplier        | JSON   | A JSON object containing `reference`, `company_name`                                                                                                                                                                                     |
 | package         | JSON   | A JSON object containing `reference`, `title`                                                                                                                                                                                            |
+| category        | JSON   | JSON object category ([Category](#category))                                                                                                                                                                                             |
 | destination     | JSON   | JSON object destination ([Destination](#destination))                                                                                                                                                                                    |
 | buget_form      | String | `Important`, `Normal`, `Low` represent how the product will be highlight on the budget By Default                                                                                                                                        |
 | budget_text     | String | This is an empty string `""` if the product is not marked as an option in the budget, otherwise it is the custom label of the option to which the product is associated                                                                  |
@@ -2932,6 +2948,110 @@ In such cases, the response message will indicate that the process is busy, and 
 | action    | String | Indicates type of invoice action was created                                             |
 | reference | String | The `reference` for the invoice, which you should store for future updates or retrievals |
 
+## GET invoices-supplier
+
+This API endpoint retrieves a list of purchase invoices in Ezus.
+
+```shell
+curl --location 'https://api.ezus.app/invoices-supplier' \
+--header 'x-api-key: <YOUR_API_KEY>' \
+--header 'Authorization: Bearer <YOUR_TOKEN>'
+```
+
+```javascript
+const axios = require("axios");
+const baseUrl = "https://api.ezus.app";
+
+const headers = {
+  "x-api-key": "<YOUR_API_KEY>",
+  Authorization: "Bearer <YOUR_TOKEN>",
+};
+
+axios.get(baseUrl + "/invoices-supplier", headers);
+```
+
+> This request returns a structured JSON object:
+
+```json
+{
+  "error": "false",
+  "next_token": "<NEXT_TOKEN>",
+  "size": 1240,
+  "data_size": 50,
+  "page": 1,
+  "invoices-supplier": [
+    {
+      "reference": "invoice_supplier_reference",
+      "filename": "2023_101010.pdf",
+      "created_date": "2023-10-10",
+      "due_date": "2023-10-10",
+      "currency": "EUR",
+      "amount_ttc": 160.0,
+      "amount_ht": 120.0,
+      "vat": 40.0,
+      "url": "https://ezus.io/2023_101010.pdf",
+      "supplier_reference": "supplier_reference",
+      "project_reference": "project_reference",
+      "alternative_order": "0",
+      "paid": 150.0
+    }
+  ]
+}
+```
+
+### HTTP Endpoint
+
+`GET https://api.ezus.app/invoices-supplier`
+
+### Header Parameters
+
+| Parameter     | Type   | Description                                                                 |
+| ------------- | ------ | --------------------------------------------------------------------------- |
+| x-api-key     | String | <span class="label label-red float-right">Required</span> Your Ezus API key |
+| Authorization | String | <span class="label label-red float-right">Required</span> Your Bearer token |
+
+### Query Parameters
+
+| Parameter          | Type   | Description                                                                                                                                                                                                                                                                                                                              |
+| ------------------ | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| next_token         | String | Specify this parameter if you want to retrieve the following elements of a given list query. If this parameter is filled, other parameters are ignored.                                                                                                                                                                                  |
+| supplier_reference | String | Filter invoices by the given supplier reference                                                                                                                                                                                                                                                                                          |
+| project_reference  | String | Filter invoices by the given project reference                                                                                                                                                                                                                                                                                           |
+| alternative_order  | Number | If <code>project_reference</code> is not provided, this parameter is ignored and the query applies to all alternatives of all projects.<br />If <code>project_reference</code> is provided, <code>alternative_order</code> must be a non-negative number: 0 targets the main alternative and the value falls back to 0 if not specified. |
+
+|
+
+### Response
+
+A JSON object containing the invoices-supplier information with properties like:
+
+| Property          | Type   | Description                                                                                                                                                                                                                      |
+| ----------------- | ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| next_token        | String | A token will be returned if all invoices have not been returned. Use it in another call to access the following invoices                                                                                                         |
+| size              | Number | The total number of invoices available with these filters                                                                                                                                                                        |
+| data_size         | Number | Number of invoices returned on the current page                                                                                                                                                                                  |
+| page              | Number | The page number                                                                                                                                                                                                                  |
+| invoices-supplier | Array  | An array of JSON objects, each representing an invoice-supplier. These objects are formatted according to a simplified version of the GET `invoice-supplier` response structure. ([GET invoice-supplier](#get-invoice-supplier)) |
+
+Each `invoice-supplier` of the `invoices-supplier` list is a JSON object containing the invoice-supplier information with properties like:
+
+| Property           | Type   | Description                                                                                                                                                                                                       |
+| ------------------ | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| reference          | String | The reference of the supplier invoice                                                                                                                                                                             |
+| filename           | String | Filename of the supplier invoice                                                                                                                                                                                  |
+| created_date       | String | Date of the creation of the supplier invoice, in a "YYYY-MM-DD" format                                                                                                                                            |
+| due_date           | String | Due date of the supplier invoice, in a "YYYY-MM-DD" format                                                                                                                                                        |
+| currency           | String | The ISO 4217 currency code representing the currency you utilize (<a href="https://docs.google.com/spreadsheets/d/1b7BNOwKyN1hMOouve6xhFZ2R2zrH4Sj1L-646j755fU/edit?usp=sharing" target="_blank">Link to doc</a>) |
+| amount_ttc         | Number | Amount of the supplier invoice including taxes                                                                                                                                                                    |
+| amount_ht          | Number | Amount of the supplier invoice excluding taxes                                                                                                                                                                    |
+| vat                | Number | VAT amount of the supplier invoice                                                                                                                                                                                |
+| url                | String | URL of the supplier invoice file                                                                                                                                                                                  |
+| supplier_reference | String | Reference of the related supplier, or an empty string if no supplier is assigned                                                                                                                                  |
+| project_reference  | String | Reference of the related project                                                                                                                                                                                  |
+| alternative_order  | Number | Reference of the related alternative order; 0 is for main alternative                                                                                                                                             |
+| paid               | Number | Sum of the payments already made on the invoice                                                                                                                                                                   |
+|                    |
+
 ## GET invoice-supplier
 
 This API endpoint retrieves detailed information about a specific purchase invoice in Ezus.
@@ -3048,8 +3168,8 @@ A JSON object containing the supplier invoice information with properties like:
 | created_date | String | Date of the creation of the supplier invoice, in a "YYYY-MM-DD" format                                                                                                                                            |
 | due_date     | String | Due date of the supplier invoice, in a "YYYY-MM-DD" format                                                                                                                                                        |
 | currency     | String | The ISO 4217 currency code representing the currency you utilize (<a href="https://docs.google.com/spreadsheets/d/1b7BNOwKyN1hMOouve6xhFZ2R2zrH4Sj1L-646j755fU/edit?usp=sharing" target="_blank">Link to doc</a>) |
-| amount_ttc   | Number | Amount of the supplier invoice excluding taxes                                                                                                                                                                    |
-| amount_ht    | Number | Amount of the supplier invoice including taxes                                                                                                                                                                    |
+| amount_ttc   | Number | Amount of the supplier invoice including taxes                                                                                                                                                                    |
+| amount_ht    | Number | Amount of the supplier invoice excluding taxes                                                                                                                                                                    |
 | vat          | Number | VAT amount of the supplier invoice                                                                                                                                                                                |
 | url          | String | URL of the supplier invoice file                                                                                                                                                                                  |
 | supplier     | JSON   | JSON including: `reference`, `company_name` and `website`                                                                                                                                                         |
@@ -3624,6 +3744,24 @@ The technical name of a custom field can be found in the custom field edit modal
 | Checkbox          | String | The checkbox must be a string: "true" (checked) OR "false" (unchecked)                                                                                                                         |
 | Number            | String | Number type should be a Number without other character                                                                                                                                         |
 | File              | String | File must be a valid URL, and supported file extensions include: .pdf, .jpg, .jpeg, .png, .bmp, .gif, .docx, .doc, .msg, .odt, .rtf, .txt, .ppt, .pptx, .pptm, .csv, .xlsx                     |
+
+### Category
+
+```json
+"category": {
+    "reference": "category_reference",
+    "name": "Accommodation / Lodging",
+    "subcategory_reference": "subcategory_reference",
+    "subcategory_name": "Hotel Room"
+}
+```
+
+| Property              | Type   | Description                       |
+| --------------------- | ------ | --------------------------------- |
+| reference             | String | The reference of the category     |
+| name                  | String | Name of the category              |
+| subcategory_reference | String | The reference of the sub-category |
+| subcategory_name      | String | Name of the sub-category          |
 
 ### Destination
 
