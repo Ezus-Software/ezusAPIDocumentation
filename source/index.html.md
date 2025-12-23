@@ -196,16 +196,17 @@ axios.get(baseUrl + "/projects", headers);
 
 ### Query Parameters
 
-| Parameter            | Type   | Description                                                                                                                                                                                        |
-| -------------------- | ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| next_token           | String | Specify this parameter if you want to retrieve the following elements of a given list query                                                                                                        |
-| info_stage_reference | String | You can filter projects that are in a specific stage. The stage of the project must be indicated by its technical name                                                                             |
-| created_at           | Date   | You can filter projects assigned to a specific or an intersection of creation date. Expected format: “YYYY-MM-DD” or “YYYY-MM-DD,YYYY-MM-DD”. See [Date Format](#date-format) for more details.    |
-| updated_at           | Date   | You can filter projects assigned to a specific or an intersection of last update date. Expected format: “YYYY-MM-DD” or “YYYY-MM-DD,YYYY-MM-DD”. See [Date Format](#date-format) for more details. |
-| trip_date_in         | Date   | You can filter projects assigned to a specific or an intersection of trip start date. Expected format: “YYYY-MM-DD” or “YYYY-MM-DD,YYYY-MM-DD”. See [Date Format](#date-format) for more details.  |
-| trip_date_out        | Date   | You can filter projects assigned to a specific or an intersection of trip end date. Expected format: “YYYY-MM-DD” or “YYYY-MM-DD,YYYY-MM-DD”. See [Date Format](#date-format) for more details.    |
-| sales_manager        | String | You can filter projects assigned to a specific sales manager. Expected format: email (john.doe@e-corp.com)                                                                                         |
-| project_manager      | String | You can filter projects assigned to a specific project manager. Expected format: email (john.doe@e-corp.com)                                                                                       |
+| Parameter             | Type    | Description                                                                                                                                                                                        |
+| --------------------- | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| next_token            | String  | Specify this parameter if you want to retrieve the following elements of a given list query                                                                                                        |
+| info_stage_reference  | String  | You can filter projects that are in a specific stage. The stage of the project must be indicated by its technical name                                                                             |
+| created_at            | Date    | You can filter projects assigned to a specific or an intersection of creation date. Expected format: “YYYY-MM-DD” or “YYYY-MM-DD,YYYY-MM-DD”. See [Date Format](#date-format) for more details.    |
+| updated_at            | Date    | You can filter projects assigned to a specific or an intersection of last update date. Expected format: “YYYY-MM-DD” or “YYYY-MM-DD,YYYY-MM-DD”. See [Date Format](#date-format) for more details. |
+| trip_date_in          | Date    | You can filter projects assigned to a specific or an intersection of trip start date. Expected format: “YYYY-MM-DD” or “YYYY-MM-DD,YYYY-MM-DD”. See [Date Format](#date-format) for more details.  |
+| trip_date_out         | Date    | You can filter projects assigned to a specific or an intersection of trip end date. Expected format: “YYYY-MM-DD” or “YYYY-MM-DD,YYYY-MM-DD”. See [Date Format](#date-format) for more details.    |
+| sales_manager         | String  | Provide either the sales manager's email address or "None". Expected format: "john.doe@e-corp.com" or "None".                                                                                      |
+| project_manager       | String  | Provide either the project manager's email address or "None". Expected format: "john.doe@e-corp.com" or "None".                                                                                    |
+| from_programs_catalog | Boolean | Optional. Defaults to false. When set to true, retrieves all projects from the programs catalog.                                                                                                   |
 
 ### Response
 
@@ -270,6 +271,7 @@ axios.get(baseUrl + "/project?reference=project_reference", headers);
   "alternatives": [
     {
       "alternative_title": "Main Alternative",
+      "lang": "fr-FR",
       "is_main": true,
       "trip_date_in": "2024-03-01",
       "trip_date_out": "2024-03-09",
@@ -279,6 +281,11 @@ axios.get(baseUrl + "/project?reference=project_reference", headers);
       "budget_actual_excl_taxes ": 77950,
       "budget_margin_gross": 2500,
       "budget_margin_net": 1000,
+      "budget_purchases": 74500,
+      "financial_invoiced": 48000,
+      "financial_collected": 48000,
+      "financial_purchases": 72820,
+      "financial_spendings": 12820,
       "trip_people": "15",
       "trip_date_in": "2024-03-01",
       "trip_date_out": "2024-03-09",
@@ -500,7 +507,8 @@ axios.get(baseUrl + "/project-steps?reference=project_reference", headers);
           "purchase_price_excl_taxes": 125,
           "sales_price": 200,
           "sales_price_excl_taxes": 166.67,
-          "is_optional": false
+          "is_optional": false,
+          "notes": "Notes about the item"
         }
       ],
       "medias": ["https://image.jpg", "https://image2.jpg"],
@@ -528,10 +536,11 @@ axios.get(baseUrl + "/project-steps?reference=project_reference", headers);
 
 ### Query Parameters
 
-| Parameter         | Type   | Description                                                                                                                    |
-| ----------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------ |
-| reference         | String | <span class="label label-red float-right">Required</span> The reference of the project to retrieve documents from              |
-| alternative_order | Number | Specifies the alternative order in the project to retrieve documents from. If not provided, defaults to 0 for main alternative |
+| Parameter          | Type    | Description                                                                                                                                      |
+| ------------------ | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| reference          | String  | <span class="label label-red float-right">Required</span> The reference of the project to retrieve documents from                                |
+| alternative_order  | Number  | Specifies the alternative order in the project to retrieve documents from. If not provided, defaults to 0 for main alternative                   |
+| from_steps_catalog | Boolean | Optional. Defaults to false. When set to true, retrieves all the sample steps and overrides the reference and alternative_order query parameters |
 
 ### Response
 
@@ -704,35 +713,34 @@ axios.post(baseUrl + "/projects-upsert", body, headers);
 ### Header Parameters
 
 | Parameter     | Type   | Description                                                                 |
-|---------------|--------|-----------------------------------------------------------------------------|
+| ------------- | ------ | --------------------------------------------------------------------------- |
 | x-api-key     | String | <span class="label label-red float-right">Required</span> Your Ezus API key |
 | Authorization | String | <span class="label label-red float-right">Required</span> Your Bearer token |
 
 ### Body Parameters (application/json)
 
-| Parameter                     | Type   | Description                                                                                                                                                                                                                                                                                                                                                                                       |
-|-------------------------------|--------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| reference                     | String | If provided, the unique reference associated with the project you want to update or create (or a random one will be generated).                                                                                                                                                                                                                                                                   |
-| project_reference             | String | If provided, the `project_reference` is used to duplicate an existing project. The `reference` field must be left blank for the duplication to work. If the `info_number`, `info_title`, `info_stage_reference`, `travel_budget`, `travel_people`, `sales_manager_email` and `customer_reference` fields are filled in, they are used. The fields `trip_date_in` and `trip_date_out` are skipped. |
-| info_number                   | String | File number that appears in the project record. Not to be confused with reference                                                                                                                                                                                                                                                                                                                 |
-| info_title                    | String | Title of the project. This parameter is required if you create a new project                                                                                                                                                                                                                                                                                                                      |
-| info_stage_reference          | String | Stage of the project: Please use the technical name of the stage you intend to apply. If no specific stage is found, a default stage will be automatically assigned upon adding the project.                                                                                                                                                                                                      |
-| trip_date_in                  | Date   | Date of the project's start in "YYYY-MM-DD" format (only settable when creating a new project). If not provided or if not formatted correctly, or if duration > 40 days or if trip_date_in > trip_date_out, project will be set as 1 day and trip_date_in as today. This field is ignored on duplication                                                                                          |
-| trip_date_out                 | Date   | Date of the project's end in "YYYY-MM-DD" format (only settable when creating a new project). If not provided or if not formatted correctly, or if duration > 40 days or if trip_date_in > trip_date_out, project will be set as 1 day and trip_date_out as today. This field is ignored on duplication                                                                                           |
-| trip_budget                   | Number | Forecasted budget for the project                                                                                                                                                                                                                                                                                                                                                                 |
-| trip_people                   | Number | Number of people in the project (only settable when creating a new project)                                                                                                                                                                                                                                                                                                                       |
-| sales_manager_email           | Email  | Email of the Ezus user to be set as the sales manager of the project                                                                                                                                                                                                                                                                                                                              |
-| client_reference              | String | Reference or email of an existing client in your Ezus account to link to the project (only settable when creating a new project)                                                                                                                                                                                                                                                                  |
-| trip_destination_reference    | String | Reference of the destination to link to the project. To reset the destination, you can put `'0'`.                                                                                                                                                                                                                                                                                                 |
-| trip_subdestination_reference | String | Reference of the sub-destination to link to the project. To reset the sub-destination, you can put `'0'`. If the `trip_destination_reference` is not provided, the `trip_subdestination_reference` will be ignored.                                                                                                                                                                               |
-| custom_fields                 | JSON   | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                                                                                                                                                                                                                                                     |
+| Parameter                     | Type   | Description                                                                                                                                                                                                                                                         |
+| ----------------------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| reference                     | String | If provided, the unique reference associated with the project you want to update or create (or a random one will be generated).                                                                                                                                     |
+| info_number                   | String | File number that appears in the project record. Not to be confused with reference                                                                                                                                                                                   |
+| info_title                    | String | Title of the project. This parameter is required if you create a new project                                                                                                                                                                                        |
+| info_stage_reference          | String | Stage of the project: Please use the technical name of the stage you intend to apply. If no specific stage is found, a default stage will be automatically assigned upon adding the project.                                                                        |
+| trip_date_in                  | Date   | Date of the project's start in "YYYY-MM-DD" format (only settable when creating a new project). If not provided or if not formatted correctly, or if duration > 40 days or if trip_date_in > trip_date_out, project will be set as 1 day and trip_date_in as today. |
+| trip_date_out                 | Date   | Date of the project's end in "YYYY-MM-DD" format (only settable when creating a new project). If not provided or if not formatted correctly, or if duration > 40 days or if trip_date_in > trip_date_out, project will be set as 1 day and trip_date_out as today.  |
+| trip_budget                   | Number | Forecasted budget for the project                                                                                                                                                                                                                                   |
+| trip_people                   | Number | Number of people in the project (only settable when creating a new project)                                                                                                                                                                                         |
+| sales_manager_email           | Email  | Email of the Ezus user to be set as the sales manager of the project                                                                                                                                                                                                |
+| client_reference              | String | Reference or email of an existing client in your Ezus account to link to the project (only settable when creating a new project)                                                                                                                                    |
+| trip_destination_reference    | String | Reference of the destination to link to the project. To reset the destination, you can put `'0'`.                                                                                                                                                                   |
+| trip_subdestination_reference | String | Reference of the sub-destination to link to the project. To reset the sub-destination, you can put `'0'`. If the `trip_destination_reference` is not provided, the `trip_subdestination_reference` will be ignored.                                                 |
+| custom_fields                 | Array  | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                                                                                                                       |
 
 ### Response
 
 A JSON object indicating whether an error occurred during the process, along with the associated message.
 
 | Property         | Type   | Description                                                                              |
-|------------------|--------|------------------------------------------------------------------------------------------|
+| ---------------- | ------ | ---------------------------------------------------------------------------------------- |
 | action           | String | Indicates type of project action was created                                             |
 | reference        | String | The `reference` for the project, which you should store for future updates or retrievals |
 | info_number      | String | File number that appears in the project record. Not to be confused with reference        |
@@ -807,6 +815,118 @@ A JSON object indicating whether an error occurred during the process, along wit
 | Property | Type | Description                                               |
 | -------- | ---- | --------------------------------------------------------- |
 | result   | Link | The URL link of the document after uploading the document |
+
+## POST project-steps-upsert
+
+This endpoint updates an existing step when the provided reference matches a step in your account. If no match is found, a new step is created using the provided reference, or a randomly generated one if none is supplied.
+Note that the following fields are used only during creation and are ignored on update: `project_reference`, `alternative_order`, `type`, `date_start`, `date_end`.
+
+```shell
+curl --location 'https://api.ezus.app/project-steps-upsert' \
+--header 'x-api-key: <YOUR_API_KEY>' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer <YOUR_TOKEN>' \
+--data '{
+    "reference": "project_step_reference",
+    "project_reference": "project_reference",
+    "alternative_order": "0",
+    "name": "activity Title",
+    "type": "activity",
+    "category": "restaurant",
+    "people": "4",
+    "date_start": "2025-10-03 10:00:00",
+    "date_end": "2025-10-03 12:00:00",
+    "address": {
+        "label": "58 Rue de Paradis",
+        "city": "Paris",
+        "country": "France",
+        "zip": "75010",
+        "geo": {
+            "x": 48.875761,
+            "y": 2.348727
+        }
+    },
+}'
+```
+
+```javascript
+const axios = require("axios");
+const baseUrl = "https://api.ezus.app";
+
+const body = {
+  reference: "project_step_reference",
+  project_reference: "project_reference",
+  alternative_order: "0",
+  name: "activity Title",
+  type: "activity",
+  category: "restaurant",
+  people: "4",
+  date_start: "2025-10-03 10:00:00",
+  date_end: "2025-10-03 12:00:00",
+  address: {
+    label: "58 Rue de Paradis",
+    city: "Paris",
+    country: "France",
+    zip: "75010",
+    geo: {
+      x: 48.875761,
+      y: 2.348727,
+    },
+  },
+};
+const headers = {
+  "x-api-key": "<YOUR_API_KEY>",
+  Authorization: "Bearer <YOUR_TOKEN>",
+};
+
+axios.post(baseUrl + "/project-steps-upsert", body, headers);
+```
+
+> This request returns a structured JSON object:
+
+```json
+{
+  "error": "false",
+  "message": "ok",
+  "action": "Project step successfully created",
+  "reference": "project_step_reference"
+}
+```
+
+### HTTP Endpoint
+
+`POST https://api.ezus.app/project-steps-upsert`
+
+### Header Parameters
+
+| Parameter     | Type   | Description                                                                 |
+| ------------- | ------ | --------------------------------------------------------------------------- |
+| x-api-key     | String | <span class="label label-red float-right">Required</span> Your Ezus API key |
+| Authorization | String | <span class="label label-red float-right">Required</span> Your Bearer token |
+
+### Body Parameters (application/json)
+
+| Parameter         | Type   | Description                                                                                                                                                                                                                                        |
+| ----------------- | ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| reference         | String | If provided, the unique reference associated to the step you want to update. If you specify a reference during creation, this value will be used as the step reference. It must be a maximum of 64 characters.                                     |
+| project_reference | String | The project reference in which you want to create an step. This field is ignored on update.                                                                                                                                                        |
+| alternative_order | String | Specifies the alternative project order from which to create or update the step. If not provided, defaults to `0` for main alternative. This field is required to create a step. This field is ignored on update.                                  |
+| name              | String | Title of the step. This field is required to create a step. This field is optional on update.                                                                                                                                                      |
+| type              | String | Three options exist: `accom`, `activity`, `transport`. This field is required to create a step. This field is ignored on update.                                                                                                                   |
+| category          | String | Category of the step. You must provide the technical name of the category. If not specified during creation, the default value will be the main category of the account.                                                                           |
+| people            | String | Number of people in the activity. You can use a `number` or `P`. If not specified during creation, `P` will be used as the default value. `P` represents the number of people in the project.                                                      |
+| date_start        | String | Start date and time of the step. Must be within the dates of the alternative where the step is created. This field is required to create a step. This field is ignored on update. The date format must be as follows, e.g.: `2024-10-01 12:00:00`. |
+| date_end          | String | End date and time of the step. Must be within the dates of the alternative where the step is created. This field is required to create a step. This field is ignored on update. The date format must be as follows, e.g.: `2024-10-01 12:00:00`.   |
+| address           | Object | JSON object address ([Address](#address))                                                                                                                                                                                                          |
+
+### Response
+
+A JSON object indicating whether an error occurred during the process, along with the associated message.
+
+| Property  | Type   | Description                                               |
+| --------- | ------ | --------------------------------------------------------- |
+| action    | String | If the project has been updated and created               |
+| reference | String | The reference of the activity that was created or updated |
 
 # Clients
 
@@ -1056,12 +1176,12 @@ This API endpoint updates a client record if the provided reference or email mat
 ### Duplicate Prevention Rules
 
 - **Enterprise clients**: A client cannot be created or updated if another enterprise client already exists with the same **company name**.
-- **Individual clients**: A client cannot be created or updated if another individual client already exists with the same **first and last name**.
+- **Individual clients**: A client cannot be created or updated if another individual client already exists with the same **first name, last name, and email**.
 
 ### Error messages
 
 - Enterprise client duplication → `A client with this name already exists`
-- Individual client duplication → `A client with this name already exists`
+- Individual client duplication → `A client with this first name, last name and email already exists`
 
 ```shell
 curl --location 'https://api.ezus.app/clients-upsert' \
@@ -1078,6 +1198,7 @@ curl --location 'https://api.ezus.app/clients-upsert' \
     "company_number": "362 521 879 00034",
     "user": "sam@proton.me",
     "contact": {
+        "mode": "upsert_main",
         "email": "contact@moke-international.com",
         "first_name": "Jane",
         "last_name": "Doe",
@@ -1113,6 +1234,7 @@ const body = {
   company_number: "362 521 879 00034",
   user: "sam@proton.me",
   contact: {
+    mode: "upsert_main",
     email: "contact@moke-international.com",
     first_name: "Jane",
     last_name: "Doe",
@@ -1162,19 +1284,19 @@ axios.post(baseUrl + "/clients-upsert", body, headers);
 
 ### Body Parameters (application/json)
 
-| Parameter      | Type   | Description                                                                                                                                                                                                                            |
-| -------------- | ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| reference      | String | If provided, the unique reference associated with the client you want to update or create (or a random one will be generated).                                                                                                         |
-| info_number    | String | File number that appears in the client record. Not to be confused with reference                                                                                                                                                       |
-| type           | String | Optional parameter. Specifies the client type (`enterprise` or `individual`). If `enterprise`, `company_name` is required. If `individual`, provide contact.first_name or contact.last_name.                                           |
-| company_name   | String | <span class="label label-red float-right">Required</span> Name of the client's company (if applicable). If empty, the client will be considered an individual, and the name of the client will be the same as the name of the contact. |
-| website        | String | Website of the client                                                                                                                                                                                                                  |
-| vat_number     | String | VAT number of the client (only for "enterprise" clients)                                                                                                                                                                               |
-| company_number | String | Company registration number of the client (only for "enterprise" clients)                                                                                                                                                              |
-| user           | Email  | Email of the Ezus user to be set as the owner of the client                                                                                                                                                                            |
-| contact        | JSON   | A single JSON element ([Contacts](#contacts)) representing the main                                                                                                                                                                    |
-| address        | JSON   | JSON object address ([Address](#address)) To reset the address, you can put `'0'`. **Geolocation data cannot be modified during an upsert**.                                                                                           |
-| custom_fields  | JSON   | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                                                                                          |
+| Parameter      | Type   | Description                                                                                                                                                                                                                                                                                     |
+| -------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| reference      | String | If provided, the unique reference associated with the client you want to update or create (or a random one will be generated).                                                                                                                                                                  |
+| info_number    | String | File number that appears in the client record. Not to be confused with reference                                                                                                                                                                                                                |
+| type           | String | Optional parameter. Specifies the client type (`enterprise` or `individual`). If `enterprise`, `company_name` is required. If `individual`, provide contact.first_name or contact.last_name.                                                                                                    |
+| company_name   | String | <span class="label label-red float-right">Required</span> Name of the client's company (if applicable). If empty, the client will be considered an individual, and the name of the client will be the same as the name of the contact.                                                          |
+| website        | String | Website of the client                                                                                                                                                                                                                                                                           |
+| vat_number     | String | VAT number of the client (only for "enterprise" clients)                                                                                                                                                                                                                                        |
+| company_number | String | Company registration number of the client (only for "enterprise" clients)                                                                                                                                                                                                                       |
+| user           | Email  | Email of the Ezus user to be set as the owner of the client                                                                                                                                                                                                                                     |
+| contact        | JSON   | Main contact object ([Contacts](#contacts)). Optional extra parameter <code>mode</code> in this endpoint. Mode values can either be: `insert_main` (default, creates and sets a main contact even if one exists) or `upsert_main` (updates the main contact if it exists, otherwise creates it) |
+| address        | JSON   | JSON object address ([Address](#address)) To reset the address, you can put `'0'`. **Geolocation data cannot be modified during an upsert**.                                                                                                                                                    |
+| custom_fields  | Array  | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                                                                                                                                                   |
 
 ### Response
 
@@ -1324,6 +1446,12 @@ axios.get(baseUrl + "/supplier?reference=supplier_reference", headers);
     "last_name": "Tate",
     "agency": "Paris Agency"
   },
+  "category": {
+    "reference": "category_reference",
+    "name": "Accommodation / Lodging",
+    "subcategory_reference": "subcategory_reference",
+    "subcategory_name": "Hotel Room"
+  },
   "destination": {
     "reference": "destination_reference",
     "name": "France",
@@ -1440,6 +1568,7 @@ A JSON object containing the supplier information with properties like:
 | capacity      | String | Maximum number of people for which the supplier can be used                                                                                                  |
 | visual_url    | String | URL of the Google Slides visual linked to the supplier                                                                                                       |
 | user          | JSON   | JSON object user ([User](#user))                                                                                                                             |
+| category      | JSON   | JSON object category ([Category](#category))                                                                                                                 |
 | destination   | JSON   | JSON object destination ([Destination](#destination))                                                                                                        |
 | address       | JSON   | JSON object address ([Address](#address))                                                                                                                    |
 | medias        | JSON   | JSON object medias ([Medias](#medias))                                                                                                                       |
@@ -1564,7 +1693,7 @@ axios.post(baseUrl + "/suppliers-upsert", body, headers);
 | address                  | JSON   | JSON object address ([Address](#address)) To reset the address, you can put `'0'`. **Geolocation data cannot be modified during an upsert**.                                                                                                     |
 | destination_reference    | String | Reference of the destination to link to the supplier. To reset the destination, you can put `'0'`.                                                                                                                                               |
 | subdestination_reference | String | Reference of the sub-destination to link to the supplier. To reset the sub-destination, you can put `'0'`. If the `destination_reference` is not provided, the `subdestination_reference` will be ignored.                                       |
-| custom_fields            | JSON   | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                                                                                                    |
+| custom_fields            | Array  | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                                                                                                    |
 
 ### Response
 
@@ -1717,6 +1846,12 @@ axios.get(baseUrl + "/product?reference=product_reference", headers);
     "reference": "package_reference",
     "title": "packages_title"
   },
+  "category": {
+    "reference": "category_reference",
+    "name": "Accommodation / Lodging",
+    "subcategory_reference": "subcategory_reference",
+    "subcategory_name": "Hotel Room"
+  },
   "destination": {
     "reference": "destination_reference",
     "name": "France",
@@ -1735,23 +1870,84 @@ axios.get(baseUrl + "/product?reference=product_reference", headers);
     ],
     "size": 1
   },
+  "tariffs": [
+    {
+      "reference": "tariff_reference",
+      "type": "default",
+      "name": "",
+      "purchase_price": "100",
+      "margin_rate": "33.33",
+      "sales_price": "150",
+      "limit_start": "",
+      "limit_end": "",
+      "is_yearly": false,
+      "children": [
+        {
+          "reference": "",
+          "type": "custom",
+          "name": "",
+          "purchase_price": "100",
+          "margin_rate": "33.33",
+          "sales_price": "150",
+          "limit_start": "0",
+          "limit_end": "11",
+          "is_yearly": false
+        },
+        {
+          "reference": "",
+          "type": "custom",
+          "name": "",
+          "purchase_price": "100",
+          "margin_rate": "23.08",
+          "sales_price": "130",
+          "limit_start": "12",
+          "limit_end": "Infinity",
+          "is_yearly": false
+        }
+      ]
+    },
+    {
+      "reference": "tariff_reference",
+      "type": "season",
+      "name": "",
+      "purchase_price": "100.0",
+      "margin_rate": "50.0",
+      "sales_price": "200.0",
+      "limit_start": "2026-05-01",
+      "limit_end": "2026-08-31",
+      "is_yearly": true,
+      "children": [
+        {
+          "reference": "",
+          "type": "custom",
+          "name": "",
+          "purchase_price": "100",
+          "margin_rate": "9.09",
+          "sales_price": "110",
+          "limit_start": "0",
+          "limit_end": "10",
+          "is_yearly": false
+        },
+        {
+          "reference": "",
+          "type": "custom",
+          "name": "",
+          "purchase_price": "100",
+          "margin_rate": "16.66",
+          "sales_price": "120",
+          "limit_start": "11",
+          "limit_end": "Infinity",
+          "is_yearly": false
+        }
+      ]
+    }
+  ],
   "langs": [
     {
       "lang": "french",
       "name": "Chambre à 2 lits avec petit déjeuner",
       "short_description": "",
       "long_description": ""
-    }
-  ],
-  "tariffs": [
-    {
-      "reference": "tariff_reference",
-      "type": "default",
-      "name": "",
-      "purchase_price": 100.0,
-      "margin_rate": 50.0,
-      "sales_price": 200.0,
-      "childs": []
     }
   ],
   "custom_fields": [
@@ -1799,15 +1995,15 @@ A JSON object containing the product information with properties like:
 | commission      | JSON   | A JSON object containing `commission_mode` ("sales" or "purchase"), `commission_regime` ("percent" or "amount"), `value`                                                                                                                 |
 | supplier        | JSON   | A JSON object containing `reference`, `company_name`                                                                                                                                                                                     |
 | package         | JSON   | A JSON object containing `reference`, `title`                                                                                                                                                                                            |
+| category        | JSON   | JSON object category ([Category](#category))                                                                                                                                                                                             |
 | destination     | JSON   | JSON object destination ([Destination](#destination))                                                                                                                                                                                    |
 | buget_form      | String | `Important`, `Normal`, `Low` represent how the product will be highlight on the budget By Default                                                                                                                                        |
 | budget_text     | String | This is an empty string `""` if the product is not marked as an option in the budget, otherwise it is the custom label of the option to which the product is associated                                                                  |
 | budget_variable | String | `Display`, `Do not Display`, this option tells if the product will be displayed or not in the budget                                                                                                                                     |
 | medias          | JSON   | JSON object medias ([Medias](#medias))                                                                                                                                                                                                   |
-| langs           | Array  | Array of JSON langs ([Langs](#langs))                                                                                                                                                                                                    |
 | tariffs         | Array  | Array of JSON tariffs ([Tariffs](#tariffs))                                                                                                                                                                                              |
+| langs           | Array  | Array of JSON langs ([Langs](#langs))                                                                                                                                                                                                    |
 | custom_fields   | Array  | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                                                                                            |
-|                 |
 
 ## POST products-upsert
 
@@ -1922,7 +2118,7 @@ axios.post(baseUrl + "/products-upsert", body, headers);
 | package_reference        | String | If you give an adequate package reference, the product will be added in this package. If you want to update the package's product to None, you must enter 0.                                                                                                            |
 | destination_reference    | String | Reference of the destination to link to the product. To reset the destination, you can put `'0'`.                                                                                                                                                                       |
 | subdestination_reference | String | Reference of the sub-destination to link to the product. To reset the sub-destination, you can put `'0'`. If the `destination_reference` is not provided, the `subdestination_reference` will be ignored.                                                               |
-| custom_fields            | JSON   | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                                                                                                                           |
+| custom_fields            | Array  | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                                                                                                                           |
 
 ### Response
 
@@ -2128,7 +2324,7 @@ axios.post(baseUrl + "/packages-upsert", body, headers);
 | capacity                 | Number | Maximum number of people for which the package can be used . Leave blank `''` if not relevant                                                                                                                          |
 | destination_reference    | String | Reference of the destination to link to the package. To reset the destination, you can put `'0'`.                                                                                                                      |
 | subdestination_reference | String | Reference of the sub-destination to link to the package. To reset the sub-destination, you can put `'0'`. If the `destination_reference` is not provided, the `subdestination_reference` will be ignored.              |
-| custom_fields            | JSON   | Array of JSON custom fields [Custom fields](#custom-fields)                                                                                                                                                            |
+| custom_fields            | Array  | Array of JSON custom fields [Custom fields](#custom-fields)                                                                                                                                                            |
 
 ### Response
 
@@ -2740,16 +2936,123 @@ axios.put(baseUrl + "/invoices-update", body, headers);
 | reference     | String | The reference of the invoice you want to update                                                                                                                                                                              |
 | stage         | String | Represents the stage of the invoice. Allowed updates: you can move from `draft` to `paid` or `completed`. Once set to paid or completed, switching between these stages is allowed. Reverting back to draft is not permitted |
 | due_date      | String | due_date can be updated only if the invoice is a draft, due_date can be only on format `YYYY-MM-DD`                                                                                                                          |
-| custom_fields | JSON   | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                                                                                |
+| custom_fields | Array  | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                                                                                |
 
 ### Response
 
 A JSON object indicating whether an error occurred during the process, along with the associated message.
 
+Please note that invoice finalization (the step that occurs when moving an invoice from the `draft` stage to `paid` or `completed`) can occasionally be busy if another finalization is already in progress.
+In such cases, the response message will indicate that the process is busy, and the client simply needs to retry the request after a short delay.
+
 | Property  | Type   | Description                                                                              |
 | --------- | ------ | ---------------------------------------------------------------------------------------- |
 | action    | String | Indicates type of invoice action was created                                             |
 | reference | String | The `reference` for the invoice, which you should store for future updates or retrievals |
+
+## GET invoices-supplier
+
+This API endpoint retrieves a list of purchase invoices in Ezus.
+
+```shell
+curl --location 'https://api.ezus.app/invoices-supplier' \
+--header 'x-api-key: <YOUR_API_KEY>' \
+--header 'Authorization: Bearer <YOUR_TOKEN>'
+```
+
+```javascript
+const axios = require("axios");
+const baseUrl = "https://api.ezus.app";
+
+const headers = {
+  "x-api-key": "<YOUR_API_KEY>",
+  Authorization: "Bearer <YOUR_TOKEN>",
+};
+
+axios.get(baseUrl + "/invoices-supplier", headers);
+```
+
+> This request returns a structured JSON object:
+
+```json
+{
+  "error": "false",
+  "next_token": "<NEXT_TOKEN>",
+  "size": 1240,
+  "data_size": 50,
+  "page": 1,
+  "invoices-supplier": [
+    {
+      "reference": "invoice_supplier_reference",
+      "filename": "2023_101010.pdf",
+      "created_date": "2023-10-10",
+      "due_date": "2023-10-10",
+      "currency": "EUR",
+      "amount_ttc": 160.0,
+      "amount_ht": 120.0,
+      "vat": 40.0,
+      "url": "https://ezus.io/2023_101010.pdf",
+      "supplier_reference": "supplier_reference",
+      "project_reference": "project_reference",
+      "alternative_order": "0",
+      "paid": 150.0
+    }
+  ]
+}
+```
+
+### HTTP Endpoint
+
+`GET https://api.ezus.app/invoices-supplier`
+
+### Header Parameters
+
+| Parameter     | Type   | Description                                                                 |
+| ------------- | ------ | --------------------------------------------------------------------------- |
+| x-api-key     | String | <span class="label label-red float-right">Required</span> Your Ezus API key |
+| Authorization | String | <span class="label label-red float-right">Required</span> Your Bearer token |
+
+### Query Parameters
+
+| Parameter          | Type   | Description                                                                                                                                                                                                                                                                                                                              |
+| ------------------ | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| next_token         | String | Specify this parameter if you want to retrieve the following elements of a given list query. If this parameter is filled, other parameters are ignored.                                                                                                                                                                                  |
+| supplier_reference | String | Filter invoices by the given supplier reference                                                                                                                                                                                                                                                                                          |
+| project_reference  | String | Filter invoices by the given project reference                                                                                                                                                                                                                                                                                           |
+| alternative_order  | Number | If <code>project_reference</code> is not provided, this parameter is ignored and the query applies to all alternatives of all projects.<br />If <code>project_reference</code> is provided, <code>alternative_order</code> must be a non-negative number: 0 targets the main alternative and the value falls back to 0 if not specified. |
+
+|
+
+### Response
+
+A JSON object containing the invoices-supplier information with properties like:
+
+| Property          | Type   | Description                                                                                                                                                                                                                      |
+| ----------------- | ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| next_token        | String | A token will be returned if all invoices have not been returned. Use it in another call to access the following invoices                                                                                                         |
+| size              | Number | The total number of invoices available with these filters                                                                                                                                                                        |
+| data_size         | Number | Number of invoices returned on the current page                                                                                                                                                                                  |
+| page              | Number | The page number                                                                                                                                                                                                                  |
+| invoices-supplier | Array  | An array of JSON objects, each representing an invoice-supplier. These objects are formatted according to a simplified version of the GET `invoice-supplier` response structure. ([GET invoice-supplier](#get-invoice-supplier)) |
+
+Each `invoice-supplier` of the `invoices-supplier` list is a JSON object containing the invoice-supplier information with properties like:
+
+| Property           | Type   | Description                                                                                                                                                                                                       |
+| ------------------ | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| reference          | String | The reference of the supplier invoice                                                                                                                                                                             |
+| filename           | String | Filename of the supplier invoice                                                                                                                                                                                  |
+| created_date       | String | Date of the creation of the supplier invoice, in a "YYYY-MM-DD" format                                                                                                                                            |
+| due_date           | String | Due date of the supplier invoice, in a "YYYY-MM-DD" format                                                                                                                                                        |
+| currency           | String | The ISO 4217 currency code representing the currency you utilize (<a href="https://docs.google.com/spreadsheets/d/1b7BNOwKyN1hMOouve6xhFZ2R2zrH4Sj1L-646j755fU/edit?usp=sharing" target="_blank">Link to doc</a>) |
+| amount_ttc         | Number | Amount of the supplier invoice including taxes                                                                                                                                                                    |
+| amount_ht          | Number | Amount of the supplier invoice excluding taxes                                                                                                                                                                    |
+| vat                | Number | VAT amount of the supplier invoice                                                                                                                                                                                |
+| url                | String | URL of the supplier invoice file                                                                                                                                                                                  |
+| supplier_reference | String | Reference of the related supplier, or an empty string if no supplier is assigned                                                                                                                                  |
+| project_reference  | String | Reference of the related project                                                                                                                                                                                  |
+| alternative_order  | Number | Reference of the related alternative order; 0 is for main alternative                                                                                                                                             |
+| paid               | Number | Sum of the payments already made on the invoice                                                                                                                                                                   |
+|                    |
 
 ## GET invoice-supplier
 
@@ -2867,8 +3170,8 @@ A JSON object containing the supplier invoice information with properties like:
 | created_date | String | Date of the creation of the supplier invoice, in a "YYYY-MM-DD" format                                                                                                                                            |
 | due_date     | String | Due date of the supplier invoice, in a "YYYY-MM-DD" format                                                                                                                                                        |
 | currency     | String | The ISO 4217 currency code representing the currency you utilize (<a href="https://docs.google.com/spreadsheets/d/1b7BNOwKyN1hMOouve6xhFZ2R2zrH4Sj1L-646j755fU/edit?usp=sharing" target="_blank">Link to doc</a>) |
-| amount_ttc   | Number | Amount of the supplier invoice excluding taxes                                                                                                                                                                    |
-| amount_ht    | Number | Amount of the supplier invoice including taxes                                                                                                                                                                    |
+| amount_ttc   | Number | Amount of the supplier invoice including taxes                                                                                                                                                                    |
+| amount_ht    | Number | Amount of the supplier invoice excluding taxes                                                                                                                                                                    |
 | vat          | Number | VAT amount of the supplier invoice                                                                                                                                                                                |
 | url          | String | URL of the supplier invoice file                                                                                                                                                                                  |
 | supplier     | JSON   | JSON including: `reference`, `company_name` and `website`                                                                                                                                                         |
@@ -3251,6 +3554,7 @@ A JSON object indicating whether an error occurred during the process, along wit
 "alternatives": [
   {
     "alternative_title": "Main Alternative",
+    "lang": "fr-FR",
     "is_main": true,
     "trip_date_in": "2024-03-01",
     "trip_date_out": "2024-03-09",
@@ -3260,6 +3564,11 @@ A JSON object indicating whether an error occurred during the process, along wit
     "budget_actual_excl_taxes ": 77950,
     "budget_margin_gross": 2500,
     "budget_margin_net": 1000,
+    "budget_purchases": 74500,
+    "financial_invoiced": 48000,
+    "financial_collected": 48000,
+    "financial_purchases": 72820,
+    "financial_spendings": 12820,
     "trip_people": "15",
     "client": {
       "reference": "client_reference",
@@ -3303,6 +3612,7 @@ A JSON object indicating whether an error occurred during the process, along wit
 | Property                      | Type    | Description                                                                                                                                                |
 | ----------------------------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | alternative_title             | String  | Title of the alternative                                                                                                                                   |
+| lang                          | String  | Alternative locale code (e.g. fr-FR, en-GB)                                                                                                                |
 | is_main                       | Boolean | If the alternative is the main alternative                                                                                                                 |
 | trip_date_in                  | Date    | Date of the beginning of this alternative, in a "YYYY-MM-DD" format string. If it's empty, the project has no dates                                        |
 | trip_date_out                 | Date    | Date of the end of this alternative, in a "YYYY-MM-DD" format string. If it's empty, the project has no dates                                              |
@@ -3312,6 +3622,11 @@ A JSON object indicating whether an error occurred during the process, along wit
 | budget_actual_excl_taxes      | Number  | Actual budget for the alternative, excluding taxes                                                                                                         |
 | budget_margin_gross           | Number  | Gross margin for the alternative                                                                                                                           |
 | budget_margin_net             | Number  | Net margin for the alternative                                                                                                                             |
+| budget_purchases              | Number  | Planned supplier purchases amount for the alternative (in project currency). This is a forecasted value, not actual spending                               |
+| financial_invoiced            | Number  | Total amount invoiced to clients for the alternative (in project currency). Draft invoices are not included in this calculation                            |
+| financial_collected           | Number  | Total amount collected from clients for the alternative (in project currency). Represents actual payments received                                         |
+| financial_purchases           | Number  | Actual supplier purchase costs for the alternative (in project currency). Corresponds to recorded supplier invoices                                        |
+| financial_spendings           | Number  | Actual spendings recorded for the alternative (in project currency). Includes all types of supplier payments (purchases, fees, etc.)                       |
 | trip_people                   | String  | Number of people                                                                                                                                           |
 | client                        | JSON    | JSON including: `reference`, `type` (enterprise or individual), `company_name`, `first_name`, `last_name` and `email`                                      |
 | trip_destination_reference    | String  | Destination reference of the alternative. Note: For multi-destination alternatives, only the primary destination is returned.                              |
@@ -3432,6 +3747,24 @@ The technical name of a custom field can be found in the custom field edit modal
 | Number            | String | Number type should be a Number without other character                                                                                                                                         |
 | File              | String | File must be a valid URL, and supported file extensions include: .pdf, .jpg, .jpeg, .png, .bmp, .gif, .docx, .doc, .msg, .odt, .rtf, .txt, .ppt, .pptx, .pptm, .csv, .xlsx                     |
 
+### Category
+
+```json
+"category": {
+    "reference": "category_reference",
+    "name": "Accommodation / Lodging",
+    "subcategory_reference": "subcategory_reference",
+    "subcategory_name": "Hotel Room"
+}
+```
+
+| Property              | Type   | Description                       |
+| --------------------- | ------ | --------------------------------- |
+| reference             | String | The reference of the category     |
+| name                  | String | Name of the category              |
+| subcategory_reference | String | The reference of the sub-category |
+| subcategory_name      | String | Name of the sub-category          |
+
 ### Destination
 
 ```json
@@ -3518,7 +3851,8 @@ These objects provides insights into the invoice amounts, differentiating betwee
     "purchase_price_excl_taxes": 125,
     "sales_price": 200,
     "sales_price_excl_taxes": 166.67,
-    "is_optional": false
+    "is_optional": false,
+    "notes": "Notes about the item"
   }
 ]
 ```
@@ -3540,6 +3874,7 @@ The fields `purchase_price`, `purchase_price_excl_taxes`, `sales_price`, and `sa
 | sales_price               | Number  | The unit sales price of the item (including taxes)                                                                      |
 | sales_price_excl_taxes    | Number  | The unit sales price of the item (excluding taxes)                                                                      |
 | is_optional               | Boolean | Indicates whether the item is optional. **If true, the item does not contribute to the final purchase or sales price.** |
+| notes                     | String  | Notes about the item                                                                                                    |
 
 ### Langs
 
@@ -3642,7 +3977,8 @@ The steps are sorted by their creation date, with the most recently created appe
         "purchase_price_excl_taxes": 125,
         "sales_price": 200,
         "sales_price_excl_taxes": 166.67,
-        "is_optional": false
+        "is_optional": false,
+        "notes": "Notes about the item"
       }
     ],
     "medias": ["https://image.jpg", "https://image2.jpg"],
@@ -3731,23 +4067,87 @@ Only the last 10 suppliers are returned in this object.
     "reference": "tariff_reference",
     "type": "default",
     "name": "",
-    "purchase_price": 100.0,
-    "margin_rate": 50.0,
-    "sales_price": 200.0,
-    "childs": []
+    "purchase_price": "100",
+    "margin_rate": "33.33",
+    "sales_price": "150",
+    "limit_start": "",
+    "limit_end": "",
+    "is_yearly": false,
+    "children": [
+      {
+        "reference": "tariff_reference",
+        "type": "custom",
+        "name": "",
+        "purchase_price": "100",
+        "margin_rate": "33.33",
+        "sales_price": "150",
+        "limit_start": "0",
+        "limit_end": "11",
+        "is_yearly": false
+      },
+      {
+        "reference": "tariff_reference",
+        "type": "custom",
+        "name": "",
+        "purchase_price": "100",
+        "margin_rate": "23.08",
+        "sales_price": "130",
+        "limit_start": "12",
+        "limit_end": "Infinity",
+        "is_yearly": false
+      }
+    ]
+  },
+  {
+    "reference": "tariff_reference",
+    "type": "season",
+    "name": "tariff season",
+    "purchase_price": "100",
+    "margin_rate": "16.66",
+    "sales_price": "120",
+    "limit_start": "2026-05-01",
+    "limit_end": "2026-08-31",
+    "is_yearly": true,
+    "children": [
+      {
+        "reference": "tariff_reference",
+        "type": "custom",
+        "name": "",
+        "purchase_price": "100",
+        "margin_rate": "9.09",
+        "sales_price": "110",
+        "limit_start": "0",
+        "limit_end": "10",
+        "is_yearly": false
+      },
+      {
+        "reference": "tariff_reference",
+        "type": "custom",
+        "name": "",
+        "purchase_price": "100",
+        "margin_rate": "16.66",
+        "sales_price": "120",
+        "limit_start": "11",
+        "limit_end": "Infinity",
+        "is_yearly": false
+      }
+    ]
   }
 ]
 ```
 
-| Property       | Type   | Description                                                                           |
-| -------------- | ------ | ------------------------------------------------------------------------------------- |
-| reference      | String | An unique reference of this tariff                                                    |
-| type           | String | A tariff can be `default`, `custom` OR `season`.                                      |
-| name           | String | Name of the tariff (only season tariffs can have a name)                              |
-| purchase_price | Number | Purchase price including taxes                                                        |
-| margin_rate    | Number | The margin rate is based on the sales price                                           |
-| sales_price    | Number | Sales price including taxes                                                           |
-| childs         | Array  | Childs are sub-tariffs contained by this tariff (only season tariffs can have childs) |
+| Property       | Type    | Description                                                                                                                                                                                                                   |
+| -------------- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------ |
+| reference      | String  | A unique reference of this tariff                                                                                                                                                                                             |
+| type           | String  | A tariff can be `default`, `custom` OR `season`.                                                                                                                                                                              |
+| name           | String  | Name of the tariff (only seasonal tariffs have a name)                                                                                                                                                                        |
+| purchase_price | String  | Purchase price including taxes                                                                                                                                                                                                |
+| margin_rate    | String  | The margin rate is based on the sales price                                                                                                                                                                                   |
+| sales_price    | String  | Sales price including taxes                                                                                                                                                                                                   |
+| limit_start    | String  | Indicates the starting point of a tariff rule either the start date of a seasonal tariff or the lower bound of a level for a custom tariff.                                                                                   |
+| limit_end      | String  | Indicates the end point of a tariff rule either the end date of a seasonal tariff or the upper bound of a level for a custom tariff. When set to Infinity, it designates the final level of a flat-rate or open-ended tariff. |
+| is_yearly      | Boolean | Indicates whether the seasonal pricing repeats yearly. This field is only applicable when `type` is `season`, For `default` or `custom` tariffs, this field is always `false`.                                                | Is it recurring from one year to the next? |
+| children       | Array   | Children are sub-tariffs contained by this tariff. They may be seasonal tariff or default tariff when they are flat rate tariff.                                                                                              |
 
 ### User
 
