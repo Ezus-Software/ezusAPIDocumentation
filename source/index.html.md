@@ -638,7 +638,7 @@ A JSON object containing the project travellers information with properties like
 
 ## POST projects-upsert
 
-This API endpoint can create, duplicate, or update a project. If the provided `reference` matches an existing project, that project is updated. If no match is found, a new project is created using the provided reference, or a randomly generated one if none is supplied and `project_reference` is not provided. When `project_reference` is specified, a new project is created by duplicating the existing project identified by `project_reference` with the provided `reference` or a random one.
+This API endpoint can create, duplicate, or update a project. If the provided `reference` matches an existing project, that project is updated. If no match is found, a new project is created using the provided `reference`, or a randomly generated one if none is supplied and `project_reference` is not provided. When `project_reference` is specified, a new project is created by duplicating the existing project identified by `project_reference` with the provided `reference` or a random one.
 
 ```shell
 curl --location 'https://api.ezus.app/projects-upsert' \
