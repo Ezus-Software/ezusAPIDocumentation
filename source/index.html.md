@@ -2187,8 +2187,8 @@ axios.post(baseUrl + "/product-seasons-upsert", body, headers);
 | date_start        | String  | Start date of the season. "YYYY-MM-DD" format string.                                                                                                                                                                |
 | date_end          | String  | End date of the season "YYYY-MM-DD" format string.                                                                                                                                                                   |
 | is_recurrent      | Boolean | Indicates whether the seasonal pricing repeats yearly.                                                                                                                                                               |
-| purchase_price    | Number  | Purchase price as a number.                                                                                                                                                                                          |
-| sales_price       | Number  | Sales price as a number.                                                                                                                                                                                             |
+| purchase_price    | Number  | Purchase price (VAT included, in the product’s currency). Prices cannot be entered excluding VAT or in another currency.                                                                                             |
+| sales_price       | Number  | Sales price (VAT included, in the product’s currency). Prices cannot be entered excluding VAT or in another currency.                                                                                                |
 
 ### Response
 
