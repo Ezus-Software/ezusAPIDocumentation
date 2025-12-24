@@ -2125,11 +2125,11 @@ curl --location 'https://api.ezus.app/product-seasons-upsert' \
     "product_reference" : "product_reference",
     "reference": "season_reference",
     "name": "January 2026",
-    "date_start": "2026-01-01",
-    "date_end": "2026-01-31",
-    "is_recurrent": true,
     "purchase_price": 165.25,
-    "sales_price": 200
+    "sales_price": 200,
+    "limit_start": "2026-01-01",
+    "limit_end": "2026-01-31",
+    "is_yearly": true
 }'
 ```
 
@@ -2141,11 +2141,11 @@ const body = {
   product_reference: "product_reference",
   reference: "season_reference",
   name: "January 2026",
-  date_start: "2026-01-01",
-  date_end: "2026-01-31",
-  is_recurrent: true,
   purchase_price: 165.25,
   sales_price: 200,
+  limit_start: "2026-01-01",
+  limit_end: "2026-01-31",
+  is_yearly: true,
 };
 const headers = {
   "x-api-key": "<YOUR_API_KEY>",
@@ -2184,11 +2184,11 @@ axios.post(baseUrl + "/product-seasons-upsert", body, headers);
 | product_reference | String  | <span class="label label-red float-right">Required</span>Reference of the product for which you want to create or update a season.                                                                                   |
 | reference         | String  | If provided, the unique reference associated to the season you want to update or create (in case the one you provided has never been used). If no reference is provided, a season will be created with a random one. |
 | name              | String  | Name of the seasonal tariff (100 characters max).                                                                                                                                                                    |
-| date_start        | String  | Start date of the season. "YYYY-MM-DD" format string.                                                                                                                                                                |
-| date_end          | String  | End date of the season "YYYY-MM-DD" format string.                                                                                                                                                                   |
-| is_recurrent      | Boolean | Indicates if the seasonal tariff recurs every year                                                                                                                                                                   |
 | purchase_price    | Number  | Purchase price (VAT included, in the product’s currency). Prices cannot be entered excluding VAT or in another currency.                                                                                             |
 | sales_price       | Number  | Sales price (VAT included, in the product’s currency). Prices cannot be entered excluding VAT or in another currency.                                                                                                |
+| limit_start       | String  | Start date of the season. "YYYY-MM-DD" format string.                                                                                                                                                                |
+| limit_end         | String  | End date of the season "YYYY-MM-DD" format string.                                                                                                                                                                   |
+| is_yearly         | Boolean | Indicates if the seasonal tariff recurs every year                                                                                                                                                                   |
 
 ### Response
 
