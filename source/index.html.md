@@ -2186,8 +2186,8 @@ axios.post(baseUrl + "/product-seasons-upsert", body, headers);
 | name              | String  | Name of the seasonal tariff (100 characters max).                                                                                                                                                                    |
 | purchase_price    | Number  | Purchase price (VAT included, in the product’s currency). Prices cannot be entered excluding VAT or in another currency.                                                                                             |
 | sales_price       | Number  | Sales price (VAT included, in the product’s currency). Prices cannot be entered excluding VAT or in another currency.                                                                                                |
-| limit_start       | String  | Start date of the season. "YYYY-MM-DD" format string.                                                                                                                                                                |
-| limit_end         | String  | End date of the season "YYYY-MM-DD" format string.                                                                                                                                                                   |
+| limit_start       | String  | Start date of the season. "YYYY-MM-DD" format string                                                                                                                                                                 |
+| limit_end         | String  | End date of the season "YYYY-MM-DD" format string                                                                                                                                                                    |
 | is_yearly         | Boolean | Indicates if the seasonal tariff recurs every year                                                                                                                                                                   |
 
 ### Response
