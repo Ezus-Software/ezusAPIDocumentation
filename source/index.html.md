@@ -4094,7 +4094,7 @@ Only the last 10 suppliers are returned in this object.
 | sales_price    | String  | Sales price including taxes                                                                                                                                                                                                   |
 | limit_start    | String  | Indicates the starting point of a tariff rule either the start date of a seasonal tariff or the lower bound of a level for a custom tariff.                                                                                   |
 | limit_end      | String  | Indicates the end point of a tariff rule either the end date of a seasonal tariff or the upper bound of a level for a custom tariff. When set to Infinity, it designates the final level of a flat-rate or open-ended tariff. |
-| is_yearly      | Boolean | Indicates whether the seasonal pricing repeats yearly. This field is only applicable when `type` is `season`, For `default` or `custom` tariffs, this field is always `false`.                                                | Is it recurring from one year to the next? |
+| is_yearly      | Boolean | Indicates if the seasonal tariff recurs every year . This field is only applicable when `type` is `season`, For `default` or `custom` tariffs, this field is always `false`.                                                  | Is it recurring from one year to the next? |
 | children       | Array   | Children are sub-tariffs contained by this tariff. They may be seasonal tariff or default tariff when they are flat rate tariff.                                                                                              |
 
 ### User
