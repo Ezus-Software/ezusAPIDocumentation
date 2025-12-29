@@ -589,7 +589,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\n    \"product_reference\" : \"product_reference\",\n    \"reference\": \"season_reference\",\n    \"name\": \"January 2026\",\n    \"purchase_price\": 165.25,\n    \"sales_price\": 200,\n    \"limit_start\": \"2026-01-01\",\n    \"limit_end\": \"2026-01-31\",\n    \"is_yearly\": true\n}",
+          "raw": "{\n    \"product_reference\": \"product_reference\",\n    \"reference\": \"season_reference\",\n    \"name\": \"January 2026\",\n    \"purchase_price\": 165.25,\n    \"sales_price\": 200,\n    \"limit_start\": \"2026-01-01\",\n    \"limit_end\": \"2026-01-31\",\n    \"is_yearly\": true\n}",
           "options": {
             "raw": {
               "language": "json"
