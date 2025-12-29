@@ -291,38 +291,34 @@
       "response": []
     },
     {
-			"name": "project-steps-upsert",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "X-API-KEY",
-						"value": "{{<YOUR_API_KEY>}}",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"reference\": \"project-step-reference\",\n    \"project_reference\": \"project-reference\",\n    \"alternative_order\": \"0\",\n    \"type\": \"activity\",\n    \"name\": \"activity Title\",\n    \"category\": \"restaurant\",\n    \"people\": \"4\",\n    \"date_start\": \"2025-10-03 10:00:00\",\n    \"date_end\": \"2025-10-03 12:00:00\",\n    \"address\": {\n        \"label\": \"58 Rue de Paradis\",\n        \"city\": \"Paris\",\n        \"country\": \"France\",\n        \"zip\": \"75010\",\n        \"geo\": {\n            \"x\": 48.875761,\n            \"y\": 2.348727\n        }\n    }\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{baseUrl}}/project-steps-upsert",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
-						"project-steps-upsert"
-					]
-				},
-				"description": "This POST request upserts (creates or updates) a project step in the EzusAPI system"
-			},
-			"response": []
-		},
+      "name": "project-steps-upsert",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "X-API-KEY",
+            "value": "{{<YOUR_API_KEY>}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"reference\": \"project-step-reference\",\n    \"project_reference\": \"project-reference\",\n    \"alternative_order\": \"0\",\n    \"type\": \"activity\",\n    \"name\": \"activity Title\",\n    \"category\": \"restaurant\",\n    \"people\": \"4\",\n    \"date_start\": \"2025-10-03 10:00:00\",\n    \"date_end\": \"2025-10-03 12:00:00\",\n    \"address\": {\n        \"label\": \"58 Rue de Paradis\",\n        \"city\": \"Paris\",\n        \"country\": \"France\",\n        \"zip\": \"75010\",\n        \"geo\": {\n            \"x\": 48.875761,\n            \"y\": 2.348727\n        }\n    }\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/project-steps-upsert",
+          "host": ["{{baseUrl}}"],
+          "path": ["project-steps-upsert"]
+        },
+        "description": "This POST request upserts (creates or updates) a project step in the EzusAPI system"
+      },
+      "response": []
+    },
     {
       "name": "clients",
       "request": {
@@ -576,6 +572,34 @@
           "raw": "{{baseUrl}}/products-upsert",
           "host": ["{{baseUrl}}"],
           "path": ["products-upsert"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "product-seasons-upsert",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "X-API-KEY",
+            "value": "{{<YOUR_API_KEY>}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"product_reference\": \"product_reference\",\n    \"reference\": \"season_reference\",\n    \"name\": \"January 2026\",\n    \"purchase_price\": 165.25,\n    \"sales_price\": 200,\n    \"limit_start\": \"2026-01-01\",\n    \"limit_end\": \"2026-01-31\",\n    \"is_yearly\": true\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/product-seasons-upsert",
+          "host": ["{{baseUrl}}"],
+          "path": ["product-seasons-upsert"]
         }
       },
       "response": []
