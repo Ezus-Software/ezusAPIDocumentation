@@ -2122,7 +2122,7 @@ curl --location 'https://api.ezus.app/product-seasons-upsert' \
 --header 'Content-Type: application/json' \
 --header 'Authorization: Bearer <YOUR_TOKEN>' \
 --data '{
-    "product_reference" : "product_reference",
+    "product_reference": "product_reference",
     "reference": "season_reference",
     "name": "January 2026",
     "purchase_price": 165.25,
