@@ -4038,10 +4038,10 @@ The steps are sorted by their creation date, with the most recently created appe
 ]
 ```
 
-| Property  | Type   | Description                                                     |
-| --------- | ------ | --------------------------------------------------------------- |
-| reference | String | The reference of the tag, corresponds to the tag technical name |
-| name      | String | Display name of the tag                                         |
+| Property  | Type   | Description                                             |
+| --------- | ------ | ------------------------------------------------------- |
+| reference | String | The tag reference matches the technical name of the tag |
+| name      | String | Display name of the tag                                 |
 
 ### Travellers
 
