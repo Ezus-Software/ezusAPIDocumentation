@@ -1530,6 +1530,12 @@ axios.get(baseUrl + "/supplier?reference=supplier_reference", headers);
       "name": "Stars",
       "value": "5"
     }
+  ],
+  "tags": [
+    {
+      "reference": "mice",
+      "name": "MICE"
+    }
   ]
 }
 ```
@@ -1574,6 +1580,7 @@ A JSON object containing the supplier information with properties like:
 | contacts      | Array  | Array of JSON contacts ([Contacts](#contacts))                                                                                                               |
 | langs         | Array  | Array of JSON langs ([Langs](#langs))                                                                                                                        |
 | custom_fields | Array  | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                |
+| tags          | Array  | Array of JSON tags ([Tags](#tags))                                                                                                                           |
 
 ## POST suppliers-upsert
 
@@ -1953,6 +1960,12 @@ axios.get(baseUrl + "/product?reference=product_reference", headers);
       "name": "View",
       "value": "Parking"
     }
+  ],
+  "tags": [
+    {
+      "reference": "mice",
+      "name": "MICE"
+    }
   ]
 }
 ```
@@ -2002,6 +2015,7 @@ A JSON object containing the product information with properties like:
 | tariffs         | Array  | Array of JSON tariffs ([Tariffs](#tariffs))                                                                                                                                                                                              |
 | langs           | Array  | Array of JSON langs ([Langs](#langs))                                                                                                                                                                                                    |
 | custom_fields   | Array  | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                                                                                            |
+| tags            | Array  | Array of JSON tags ([Tags](#tags))                                                                                                                                                                                                       |
 
 ## POST products-upsert
 
@@ -4005,6 +4019,30 @@ The steps are sorted by their creation date, with the most recently created appe
 | medias        | Array  | Array of strings representing the images URLs associated with the step                                                                                                        |
 | custom_fields | Array  | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                                 |
 
+### Tags
+
+```json
+"tags": [
+  {
+    "reference": "mice",
+    "name": "MICE"
+  },
+  {
+    "reference": "premium",
+    "name": "Premium"
+  },
+  {
+    "reference": "ops-approved",
+    "name": "Ops approved"
+  }
+]
+```
+
+| Property  | Type   | Description                                                     |
+| --------- | ------ | --------------------------------------------------------------- |
+| reference | String | The reference of the tag, corresponds to the tag technical name |
+| name      | String | Display name of the tag                                         |
+
 ### Travellers
 
 ```json
@@ -4029,11 +4067,11 @@ The steps are sorted by their creation date, with the most recently created appe
 ```
 
 | Property      | Type   | Description                                                                     |
-| ------------- | ------ | ------------------------------------------------------------------------------- | --- |
+| ------------- | ------ | ------------------------------------------------------------------------------- |
 | email         | String | The email of the traveller                                                      |
 | first_name    | String | The first name of the traveller                                                 |
 | last_name     | String | The last name of the traveller                                                  |
-| phone         | String | The phone number of the traveller                                               |     |
+| phone         | String | The phone number of the traveller                                               |
 | custom_fields | String | The custom fields and the assigned values. Varies with number of custom fields. |
 
 ### Suppliers
