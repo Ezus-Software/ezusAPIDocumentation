@@ -1534,6 +1534,7 @@ axios.get(baseUrl + "/supplier?reference=supplier_reference", headers);
   "tags": [
     {
       "reference": "mice",
+      "type": "supplier",
       "name": "MICE"
     }
   ]
@@ -1964,6 +1965,7 @@ axios.get(baseUrl + "/product?reference=product_reference", headers);
   "tags": [
     {
       "reference": "mice",
+      "type": "product",
       "name": "MICE"
     }
   ]
@@ -4025,23 +4027,27 @@ The steps are sorted by their creation date, with the most recently created appe
 "tags": [
   {
     "reference": "mice",
+    "type": "product",
     "name": "MICE"
   },
   {
     "reference": "premium",
+    "type": "product",
     "name": "Premium"
   },
   {
     "reference": "ops-approved",
+    "type": "product",
     "name": "Ops approved"
   }
 ]
 ```
 
-| Property  | Type   | Description                                             |
-| --------- | ------ | ------------------------------------------------------- |
-| reference | String | The tag reference matches the technical name of the tag |
-| name      | String | Display name of the tag                                 |
+| Property  | Type   | Description                                                           |
+| --------- | ------ | --------------------------------------------------------------------- |
+| reference | String | The tag reference matches the technical name of the tag               |
+| type      | String | Tag type. Possible values: `product`, `supplier`, `client`, `package` |
+| name      | String | Display name of the tag                                               |
 
 ### Travellers
 
