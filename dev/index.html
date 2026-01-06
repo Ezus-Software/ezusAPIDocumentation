@@ -515,6 +515,9 @@
                     <a href="#steps" class="toc-h2 toc-link" data-title="Steps">Steps</a>
                   </li>
                   <li>
+                    <a href="#tags" class="toc-h2 toc-link" data-title="Tags">Tags</a>
+                  </li>
+                  <li>
                     <a href="#travellers" class="toc-h2 toc-link" data-title="Travellers">Travellers</a>
                   </li>
                   <li>
@@ -2719,6 +2722,13 @@ Note that the following fields are used only during creation and are ignored on 
       </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Stars"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5"</span><span class="w">
     </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mice"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"supplier"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MICE"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h3 id='http-endpoint-14'>HTTP Endpoint</h3>
@@ -2850,6 +2860,11 @@ Note that the following fields are used only during creation and are ignored on 
 <td>custom_fields</td>
 <td>Array</td>
 <td>Array of JSON custom fields (<a href="#custom-fields">Custom fields</a>)</td>
+</tr>
+<tr>
+<td>tags</td>
+<td>Array</td>
+<td>Array of JSON tags (<a href="#tags">Tags</a>)</td>
 </tr>
 </tbody></table>
 <h2 id='post-suppliers-upsert'>POST suppliers-upsert</h2>
@@ -3319,6 +3334,13 @@ Note that the following fields are used only during creation and are ignored on 
       </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"View"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Parking"</span><span class="w">
     </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mice"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"product"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MICE"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h3 id='http-endpoint-17'>HTTP Endpoint</h3>
@@ -3475,6 +3497,11 @@ Note that the following fields are used only during creation and are ignored on 
 <td>custom_fields</td>
 <td>Array</td>
 <td>Array of JSON custom fields (<a href="#custom-fields">Custom fields</a>)</td>
+</tr>
+<tr>
+<td>tags</td>
+<td>Array</td>
+<td>Array of JSON tags (<a href="#tags">Tags</a>)</td>
 </tr>
 </tbody></table>
 <h2 id='post-products-upsert'>POST products-upsert</h2>
@@ -6590,6 +6617,47 @@ The fields <code>purchase_price</code>, <code>purchase_price_excl_taxes</code>, 
 <td>custom_fields</td>
 <td>Array</td>
 <td>Array of JSON custom fields (<a href="#custom-fields">Custom fields</a>)</td>
+</tr>
+</tbody></table>
+<h3 id='tags'>Tags</h3><div class="highlight"><pre class="highlight json tab-json"><code><span class="nl">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mice"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"product"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MICE"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"premium"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"product"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Premium"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ops-approved"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"product"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Ops approved"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div>
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>reference</td>
+<td>String</td>
+<td>The tag reference matches the technical name of the tag</td>
+</tr>
+<tr>
+<td>type</td>
+<td>String</td>
+<td>Tag type. Possible values: <code>product</code>, <code>supplier</code>, <code>client</code>, <code>package</code></td>
+</tr>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>Display name of the tag</td>
 </tr>
 </tbody></table>
 <h3 id='travellers'>Travellers</h3><div class="highlight"><pre class="highlight json tab-json"><code><span class="nl">"travellers"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
