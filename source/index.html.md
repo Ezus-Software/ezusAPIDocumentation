@@ -2146,6 +2146,94 @@ A JSON object indicating whether an error occurred during the process, along wit
 | action    | String | Indicates type of product action was created                                             |
 | reference | String | The `reference` for the product, which you should store for future updates or retrievals |
 
+## POST product-seasons-upsert
+
+Each update or insertion must reference an existing product via `product_reference`.
+If the provided reference matches an existing seasonal tariff in your account, the record is updated; otherwise, a new seasonal tariff is created using the provided reference (or a randomly generated one if none is given).
+
+```shell
+curl --location 'https://api.ezus.app/product-seasons-upsert' \
+--header 'x-api-key: <YOUR_API_KEY>' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer <YOUR_TOKEN>' \
+--data '{
+    "product_reference": "product_reference",
+    "reference": "season_reference",
+    "name": "January 2026",
+    "purchase_price": 165.25,
+    "sales_price": 200,
+    "limit_start": "2026-01-01",
+    "limit_end": "2026-01-31",
+    "is_yearly": true
+}'
+```
+
+```javascript
+const axios = require("axios");
+const baseUrl = "https://api.ezus.app";
+
+const body = {
+  product_reference: "product_reference",
+  reference: "season_reference",
+  name: "January 2026",
+  purchase_price: 165.25,
+  sales_price: 200,
+  limit_start: "2026-01-01",
+  limit_end: "2026-01-31",
+  is_yearly: true,
+};
+const headers = {
+  "x-api-key": "<YOUR_API_KEY>",
+  Authorization: "Bearer <YOUR_TOKEN>",
+};
+
+axios.post(baseUrl + "/product-seasons-upsert", body, headers);
+```
+
+> This request returns a structured JSON object:
+
+```json
+{
+  "error": "false",
+  "message": "ok",
+  "action": "Season successfully created",
+  "reference": "season_reference"
+}
+```
+
+### HTTP Endpoint
+
+`POST https://api.ezus.app/product-seasons-upsert`
+
+### Header Parameters
+
+| Parameter     | Type   | Description                                                                 |
+| ------------- | ------ | --------------------------------------------------------------------------- |
+| x-api-key     | String | <span class="label label-red float-right">Required</span> Your Ezus API key |
+| Authorization | String | <span class="label label-red float-right">Required</span> Your Bearer token |
+
+### Body Parameters (application/json)
+
+| Parameter         | Type    | Description                                                                                                                                                                                                          |
+| ----------------- | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| product_reference | String  | <span class="label label-red float-right">Required</span>Reference of the product for which you want to create or update a season.                                                                                   |
+| reference         | String  | If provided, the unique reference associated to the season you want to update or create (in case the one you provided has never been used). If no reference is provided, a season will be created with a random one. |
+| name              | String  | Name of the seasonal tariff (100 characters max).                                                                                                                                                                    |
+| purchase_price    | Number  | Purchase price (VAT included, in the product’s currency). Prices cannot be entered excluding VAT or in another currency.                                                                                             |
+| sales_price       | Number  | Sales price (VAT included, in the product’s currency). Prices cannot be entered excluding VAT or in another currency.                                                                                                |
+| limit_start       | String  | Start date of the season. "YYYY-MM-DD" format string                                                                                                                                                                 |
+| limit_end         | String  | End date of the season "YYYY-MM-DD" format string                                                                                                                                                                    |
+| is_yearly         | Boolean | Indicates if the seasonal tariff recurs every year                                                                                                                                                                   |
+
+### Response
+
+A JSON object indicating whether an error occurred during the process, along with the associated message.
+
+| Property  | Type   | Description                                                                              |
+| --------- | ------ | ---------------------------------------------------------------------------------------- |
+| action    | String | Indicates type of product action was created                                             |
+| reference | String | The `reference` for the product, which you should store for future updates or retrievals |
+
 # Packages
 
 ## GET package
@@ -4191,7 +4279,7 @@ Only the last 10 suppliers are returned in this object.
 | sales_price    | String  | Sales price including taxes                                                                                                                                                                                                   |
 | limit_start    | String  | Indicates the starting point of a tariff rule either the start date of a seasonal tariff or the lower bound of a level for a custom tariff.                                                                                   |
 | limit_end      | String  | Indicates the end point of a tariff rule either the end date of a seasonal tariff or the upper bound of a level for a custom tariff. When set to Infinity, it designates the final level of a flat-rate or open-ended tariff. |
-| is_yearly      | Boolean | Indicates whether the seasonal pricing repeats yearly. This field is only applicable when `type` is `season`, For `default` or `custom` tariffs, this field is always `false`.                                                | Is it recurring from one year to the next? |
+| is_yearly      | Boolean | Indicates if the seasonal tariff recurs every year . This field is only applicable when `type` is `season`, For `default` or `custom` tariffs, this field is always `false`.                                                  | Is it recurring from one year to the next? |
 | children       | Array   | Children are sub-tariffs contained by this tariff. They may be seasonal tariff or default tariff when they are flat rate tariff.                                                                                              |
 
 ### User
