@@ -397,6 +397,9 @@
                   <li>
                     <a href="#post-products-upsert" class="toc-h2 toc-link" data-title="POST products-upsert">POST products-upsert</a>
                   </li>
+                  <li>
+                    <a href="#post-product-seasons-upsert" class="toc-h2 toc-link" data-title="POST product-seasons-upsert">POST product-seasons-upsert</a>
+                  </li>
               </ul>
           </li>
           <li>
@@ -3720,6 +3723,143 @@ Note that the following fields are used only during creation and are ignored on 
 <td>The <code>reference</code> for the product, which you should store for future updates or retrievals</td>
 </tr>
 </tbody></table>
+<h2 id='post-product-seasons-upsert'>POST product-seasons-upsert</h2>
+<p>Each update or insertion must reference an existing product via <code>product_reference</code>.
+If the provided reference matches an existing seasonal tariff in your account, the record is updated; otherwise, a new seasonal tariff is created using the provided reference (or a randomly generated one if none is given).</p>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="s1">'https://api.ezus.app/product-seasons-upsert'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'x-api-key: &lt;YOUR_API_KEY&gt;'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Bearer &lt;YOUR_TOKEN&gt;'</span> <span class="se">\</span>
+<span class="nt">--data</span> <span class="s1">'{
+    "product_reference": "product_reference",
+    "reference": "season_reference",
+    "name": "January 2026",
+    "purchase_price": 165.25,
+    "sales_price": 200,
+    "limit_start": "2026-01-01",
+    "limit_end": "2026-01-31",
+    "is_yearly": true
+}'</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">axios</span><span class="dl">"</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">baseUrl</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">https://api.ezus.app</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">body</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">product_reference</span><span class="p">:</span> <span class="dl">"</span><span class="s2">product_reference</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">reference</span><span class="p">:</span> <span class="dl">"</span><span class="s2">season_reference</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">January 2026</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">purchase_price</span><span class="p">:</span> <span class="mf">165.25</span><span class="p">,</span>
+  <span class="na">sales_price</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span>
+  <span class="na">limit_start</span><span class="p">:</span> <span class="dl">"</span><span class="s2">2026-01-01</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">limit_end</span><span class="p">:</span> <span class="dl">"</span><span class="s2">2026-01-31</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">is_yearly</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+<span class="p">};</span>
+<span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="dl">"</span><span class="s2">x-api-key</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">&lt;YOUR_API_KEY&gt;</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">Authorization</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Bearer &lt;YOUR_TOKEN&gt;</span><span class="dl">"</span><span class="p">,</span>
+<span class="p">};</span>
+
+<span class="nx">axios</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="nx">baseUrl</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">/product-seasons-upsert</span><span class="dl">"</span><span class="p">,</span> <span class="nx">body</span><span class="p">,</span> <span class="nx">headers</span><span class="p">);</span>
+</code></pre></div>
+<blockquote>
+<p>This request returns a structured JSON object:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">"false"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ok"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Season successfully created"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"season_reference"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='http-endpoint-19'>HTTP Endpoint</h3>
+<p><code>POST https://api.ezus.app/product-seasons-upsert</code></p>
+<h3 id='header-parameters-19'>Header Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>x-api-key</td>
+<td>String</td>
+<td><span class="label label-red float-right">Required</span> Your Ezus API key</td>
+</tr>
+<tr>
+<td>Authorization</td>
+<td>String</td>
+<td><span class="label label-red float-right">Required</span> Your Bearer token</td>
+</tr>
+</tbody></table>
+<h3 id='body-parameters-application-json-8'>Body Parameters (application/json)</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>product_reference</td>
+<td>String</td>
+<td><span class="label label-red float-right">Required</span>Reference of the product for which you want to create or update a season.</td>
+</tr>
+<tr>
+<td>reference</td>
+<td>String</td>
+<td>If provided, the unique reference associated to the season you want to update or create (in case the one you provided has never been used). If no reference is provided, a season will be created with a random one.</td>
+</tr>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>Name of the seasonal tariff (100 characters max).</td>
+</tr>
+<tr>
+<td>purchase_price</td>
+<td>Number</td>
+<td>Purchase price (VAT included, in the product’s currency). Prices cannot be entered excluding VAT or in another currency.</td>
+</tr>
+<tr>
+<td>sales_price</td>
+<td>Number</td>
+<td>Sales price (VAT included, in the product’s currency). Prices cannot be entered excluding VAT or in another currency.</td>
+</tr>
+<tr>
+<td>limit_start</td>
+<td>String</td>
+<td>Start date of the season. &quot;YYYY-MM-DD&quot; format string</td>
+</tr>
+<tr>
+<td>limit_end</td>
+<td>String</td>
+<td>End date of the season &quot;YYYY-MM-DD&quot; format string</td>
+</tr>
+<tr>
+<td>is_yearly</td>
+<td>Boolean</td>
+<td>Indicates if the seasonal tariff recurs every year</td>
+</tr>
+</tbody></table>
+<h3 id='response-19'>Response</h3>
+<p>A JSON object indicating whether an error occurred during the process, along with the associated message.</p>
+
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>action</td>
+<td>String</td>
+<td>Indicates type of product action was created</td>
+</tr>
+<tr>
+<td>reference</td>
+<td>String</td>
+<td>The <code>reference</code> for the product, which you should store for future updates or retrievals</td>
+</tr>
+</tbody></table>
 <h1 id='packages'>Packages</h1><h2 id='get-package'>GET package</h2>
 <p>This API endpoint retrieves detailed information about a specific package in Ezus.</p>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="s1">'https://api.ezus.app/package?reference=package_reference'</span> <span class="se">\</span>
@@ -3793,9 +3933,9 @@ Note that the following fields are used only during creation and are ignored on 
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='http-endpoint-19'>HTTP Endpoint</h3>
+</span></code></pre></div><h3 id='http-endpoint-20'>HTTP Endpoint</h3>
 <p><code>GET https://api.ezus.app/package</code></p>
-<h3 id='header-parameters-19'>Header Parameters</h3>
+<h3 id='header-parameters-20'>Header Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -3828,7 +3968,7 @@ Note that the following fields are used only during creation and are ignored on 
 <td><span class="label label-red float-right">Required</span> The reference of the package to retrieve</td>
 </tr>
 </tbody></table>
-<h3 id='response-19'>Response</h3>
+<h3 id='response-20'>Response</h3>
 <p>A JSON object containing the package information with properties like:</p>
 
 <table><thead>
@@ -3940,9 +4080,9 @@ Note that the following fields are used only during creation and are ignored on 
   </span><span class="nl">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Package successfully created"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"package_reference"</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='http-endpoint-20'>HTTP Endpoint</h3>
+</span></code></pre></div><h3 id='http-endpoint-21'>HTTP Endpoint</h3>
 <p><code>POST https://api.ezus.app/packages-upsert</code></p>
-<h3 id='header-parameters-20'>Header Parameters</h3>
+<h3 id='header-parameters-21'>Header Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -3961,7 +4101,7 @@ Note that the following fields are used only during creation and are ignored on 
 <td><span class="label label-red float-right">Required</span> Your Bearer token</td>
 </tr>
 </tbody></table>
-<h3 id='body-parameters-application-json-8'>Body Parameters (application/json)</h3>
+<h3 id='body-parameters-application-json-9'>Body Parameters (application/json)</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -4005,7 +4145,7 @@ Note that the following fields are used only during creation and are ignored on 
 <td>Array of JSON custom fields <a href="#custom-fields">Custom fields</a></td>
 </tr>
 </tbody></table>
-<h3 id='response-20'>Response</h3>
+<h3 id='response-21'>Response</h3>
 <p>A JSON object indicating whether an error occurred during the process, along with the associated message.</p>
 
 <table><thead>
@@ -4060,9 +4200,9 @@ Note that the following fields are used only during creation and are ignored on 
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='http-endpoint-21'>HTTP Endpoint</h3>
+</span></code></pre></div><h3 id='http-endpoint-22'>HTTP Endpoint</h3>
 <p><code>GET https://api.ezus.app/destinations</code></p>
-<h3 id='header-parameters-21'>Header Parameters</h3>
+<h3 id='header-parameters-22'>Header Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -4081,7 +4221,7 @@ Note that the following fields are used only during creation and are ignored on 
 <td><span class="label label-red float-right">Required</span> Your Bearer token</td>
 </tr>
 </tbody></table>
-<h3 id='response-21'>Response</h3>
+<h3 id='response-22'>Response</h3>
 <p>A JSON object containing the destination information with properties like:</p>
 
 <table><thead>
@@ -4135,9 +4275,9 @@ Note that the following fields are used only during creation and are ignored on 
   </span><span class="nl">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Destination successfully created"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"destination_reference"</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='http-endpoint-22'>HTTP Endpoint</h3>
+</span></code></pre></div><h3 id='http-endpoint-23'>HTTP Endpoint</h3>
 <p><code>POST https://api.ezus.app/destinations-upsert</code></p>
-<h3 id='header-parameters-22'>Header Parameters</h3>
+<h3 id='header-parameters-23'>Header Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -4156,7 +4296,7 @@ Note that the following fields are used only during creation and are ignored on 
 <td><span class="label label-red float-right">Required</span> Your Bearer token</td>
 </tr>
 </tbody></table>
-<h3 id='body-parameters-application-json-9'>Body Parameters (application/json)</h3>
+<h3 id='body-parameters-application-json-10'>Body Parameters (application/json)</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -4175,7 +4315,7 @@ Note that the following fields are used only during creation and are ignored on 
 <td>This parameter is required. Name of the destination to create or update. If a destination already exists with this name, it will return an error.</td>
 </tr>
 </tbody></table>
-<h3 id='response-22'>Response</h3>
+<h3 id='response-23'>Response</h3>
 <p>A JSON object indicating whether an error occurred during the process, along with the associated message.</p>
 
 <table><thead>
@@ -4242,9 +4382,9 @@ Note that the following fields are used only during creation and are ignored on 
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='http-endpoint-23'>HTTP Endpoint</h3>
+</span></code></pre></div><h3 id='http-endpoint-24'>HTTP Endpoint</h3>
 <p><code>GET https://api.ezus.app/subdestination</code></p>
-<h3 id='header-parameters-23'>Header Parameters</h3>
+<h3 id='header-parameters-24'>Header Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -4263,7 +4403,7 @@ Note that the following fields are used only during creation and are ignored on 
 <td><span class="label label-red float-right">Required</span> Your Bearer token</td>
 </tr>
 </tbody></table>
-<h3 id='body-parameters-application-json-10'>Body Parameters (application/json)</h3>
+<h3 id='body-parameters-application-json-11'>Body Parameters (application/json)</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -4277,7 +4417,7 @@ Note that the following fields are used only during creation and are ignored on 
 <td>The reference of the sub-destination</td>
 </tr>
 </tbody></table>
-<h3 id='response-23'>Response</h3>
+<h3 id='response-24'>Response</h3>
 <p>A JSON object containing the sub-destination information with properties like:</p>
 
 <table><thead>
@@ -4358,9 +4498,9 @@ Note that the following fields are used only during creation and are ignored on 
   </span><span class="nl">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Subdestination successfully created"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"subdestination_reference"</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='http-endpoint-24'>HTTP Endpoint</h3>
+</span></code></pre></div><h3 id='http-endpoint-25'>HTTP Endpoint</h3>
 <p><code>POST https://api.ezus.app/subdestinations-upsert</code></p>
-<h3 id='header-parameters-24'>Header Parameters</h3>
+<h3 id='header-parameters-25'>Header Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -4379,7 +4519,7 @@ Note that the following fields are used only during creation and are ignored on 
 <td><span class="label label-red float-right">Required</span> Your Bearer token</td>
 </tr>
 </tbody></table>
-<h3 id='body-parameters-application-json-11'>Body Parameters (application/json)</h3>
+<h3 id='body-parameters-application-json-12'>Body Parameters (application/json)</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -4403,7 +4543,7 @@ Note that the following fields are used only during creation and are ignored on 
 <td>This parameter is required. Name of the sub-destination to create or update. If a sub-destination already exists with this name, it will return an error.</td>
 </tr>
 </tbody></table>
-<h3 id='response-24'>Response</h3>
+<h3 id='response-25'>Response</h3>
 <p>A JSON object indicating whether an error occurred during the process, along with the associated message.</p>
 
 <table><thead>
@@ -4503,9 +4643,9 @@ Note that the following fields are used only during creation and are ignored on 
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='http-endpoint-25'>HTTP Endpoint</h3>
+</span></code></pre></div><h3 id='http-endpoint-26'>HTTP Endpoint</h3>
 <p><code>GET https://api.ezus.app/invoices</code></p>
-<h3 id='header-parameters-25'>Header Parameters</h3>
+<h3 id='header-parameters-26'>Header Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -4548,7 +4688,7 @@ Note that the following fields are used only during creation and are ignored on 
 <td>You can filter invoices according to one of their custom fields by adding the <code>technical_name</code> of the custom field as a query parameter and the desired value as a value.</td>
 </tr>
 </tbody></table>
-<h3 id='response-25'>Response</h3>
+<h3 id='response-26'>Response</h3>
 <p>A JSON object containing the invoice information with properties like:</p>
 
 <table><thead>
@@ -4654,9 +4794,9 @@ Note that the following fields are used only during creation and are ignored on 
     </span><span class="nl">"amount_ht"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='http-endpoint-26'>HTTP Endpoint</h3>
+</span></code></pre></div><h3 id='http-endpoint-27'>HTTP Endpoint</h3>
 <p><code>GET https://api.ezus.app/invoice</code></p>
-<h3 id='header-parameters-26'>Header Parameters</h3>
+<h3 id='header-parameters-27'>Header Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -4689,7 +4829,7 @@ Note that the following fields are used only during creation and are ignored on 
 <td><span class="label label-red float-right">Required</span> The reference of the invoice to retrieve</td>
 </tr>
 </tbody></table>
-<h3 id='response-26'>Response</h3>
+<h3 id='response-27'>Response</h3>
 <p>A JSON object containing the invoice information with properties like:</p>
 
 <table><thead>
@@ -4834,9 +4974,9 @@ Note that the following fields are used only during creation and are ignored on 
   </span><span class="nl">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Invoice successfully updated"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"invoice_reference"</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='http-endpoint-27'>HTTP Endpoint</h3>
+</span></code></pre></div><h3 id='http-endpoint-28'>HTTP Endpoint</h3>
 <p><code>PUT https://api.ezus.app/invoices-update</code></p>
-<h3 id='header-parameters-27'>Header Parameters</h3>
+<h3 id='header-parameters-28'>Header Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -4855,7 +4995,7 @@ Note that the following fields are used only during creation and are ignored on 
 <td><span class="label label-red float-right">Required</span> Your Bearer token</td>
 </tr>
 </tbody></table>
-<h3 id='body-parameters-application-json-12'>Body Parameters (application/json)</h3>
+<h3 id='body-parameters-application-json-13'>Body Parameters (application/json)</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -4884,7 +5024,7 @@ Note that the following fields are used only during creation and are ignored on 
 <td>Array of JSON custom fields (<a href="#custom-fields">Custom fields</a>)</td>
 </tr>
 </tbody></table>
-<h3 id='response-27'>Response</h3>
+<h3 id='response-28'>Response</h3>
 <p>A JSON object indicating whether an error occurred during the process, along with the associated message.</p>
 
 <p>Please note that invoice finalization (the step that occurs when moving an invoice from the <code>draft</code> stage to <code>paid</code> or <code>completed</code>) can occasionally be busy if another finalization is already in progress.
@@ -4950,9 +5090,9 @@ In such cases, the response message will indicate that the process is busy, and 
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='http-endpoint-28'>HTTP Endpoint</h3>
+</span></code></pre></div><h3 id='http-endpoint-29'>HTTP Endpoint</h3>
 <p><code>GET https://api.ezus.app/invoices-supplier</code></p>
-<h3 id='header-parameters-28'>Header Parameters</h3>
+<h3 id='header-parameters-29'>Header Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -5006,7 +5146,7 @@ In such cases, the response message will indicate that the process is busy, and 
 </tr>
 </thead><tbody>
 </tbody></table>
-<h3 id='response-28'>Response</h3>
+<h3 id='response-29'>Response</h3>
 <p>A JSON object containing the invoices-supplier information with properties like:</p>
 
 <table><thead>
@@ -5202,9 +5342,9 @@ In such cases, the response message will indicate that the process is busy, and 
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='http-endpoint-29'>HTTP Endpoint</h3>
+</span></code></pre></div><h3 id='http-endpoint-30'>HTTP Endpoint</h3>
 <p><code>GET https://api.ezus.app/invoice-supplier</code></p>
-<h3 id='header-parameters-29'>Header Parameters</h3>
+<h3 id='header-parameters-30'>Header Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -5237,7 +5377,7 @@ In such cases, the response message will indicate that the process is busy, and 
 <td><span class="label label-red float-right">Required</span> The reference of the invoice to retrieve</td>
 </tr>
 </tbody></table>
-<h3 id='response-29'>Response</h3>
+<h3 id='response-30'>Response</h3>
 <p>A JSON object containing the supplier invoice information with properties like:</p>
 
 <table><thead>
@@ -5360,9 +5500,9 @@ In such cases, the response message will indicate that the process is busy, and 
   </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ok"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Deposit successfully created"</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='http-endpoint-30'>HTTP Endpoint</h3>
+</span></code></pre></div><h3 id='http-endpoint-31'>HTTP Endpoint</h3>
 <p><code>POST https://api.ezus.app/deposits-create</code></p>
-<h3 id='header-parameters-30'>Header Parameters</h3>
+<h3 id='header-parameters-31'>Header Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -5381,7 +5521,7 @@ In such cases, the response message will indicate that the process is busy, and 
 <td><span class="label label-red float-right">Required</span> Your Bearer token</td>
 </tr>
 </tbody></table>
-<h3 id='body-parameters-application-json-13'>Body Parameters (application/json)</h3>
+<h3 id='body-parameters-application-json-14'>Body Parameters (application/json)</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -5425,7 +5565,7 @@ In such cases, the response message will indicate that the process is busy, and 
 <td>Technical name of the payment method, you can find it in Settings - Custom fields</td>
 </tr>
 </tbody></table>
-<h3 id='response-30'>Response</h3>
+<h3 id='response-31'>Response</h3>
 <p>A JSON object indicating whether an error occurred during the process, along with the associated message.</p>
 
 <table><thead>
@@ -5471,9 +5611,9 @@ In such cases, the response message will indicate that the process is busy, and 
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='http-endpoint-31'>HTTP Endpoint</h3>
+</span></code></pre></div><h3 id='http-endpoint-32'>HTTP Endpoint</h3>
 <p><code>GET https://api.ezus.app/webhooks</code></p>
-<h3 id='header-parameters-31'>Header Parameters</h3>
+<h3 id='header-parameters-32'>Header Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -5492,7 +5632,7 @@ In such cases, the response message will indicate that the process is busy, and 
 <td><span class="label label-red float-right">Required</span> Your Bearer token</td>
 </tr>
 </tbody></table>
-<h3 id='response-31'>Response</h3>
+<h3 id='response-32'>Response</h3>
 <p>An array of JSON that contains your webhooks information.</p>
 
 <table><thead>
@@ -5538,9 +5678,9 @@ In such cases, the response message will indicate that the process is busy, and 
   </span><span class="nl">"is_duplication"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
   </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='http-endpoint-32'>HTTP Endpoint</h3>
+</span></code></pre></div><h3 id='http-endpoint-33'>HTTP Endpoint</h3>
 <p><code>GET https://api.ezus.app/webhooks-last</code></p>
-<h3 id='header-parameters-32'>Header Parameters</h3>
+<h3 id='header-parameters-33'>Header Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -5573,7 +5713,7 @@ In such cases, the response message will indicate that the process is busy, and 
 <td><span class="label label-red float-right">Required</span> The event type to retrieve</td>
 </tr>
 </tbody></table>
-<h3 id='response-32'>Response</h3>
+<h3 id='response-33'>Response</h3>
 <p>A JSON object indicating whether an error occurred during the process, along with the associated message. If successful, it returns the latest event occurrence of a specified event type (<a href="#events">Events</a>).</p>
 <h2 id='post-webhooks-upsert'>POST webhooks-upsert</h2>
 <p>It updates a webhook record if the provided reference or endpoint does match one of the webhooks in your account, otherwise it creates a new webhook record with the provided reference (or with a random one if no reference is provided).</p>
@@ -5612,9 +5752,9 @@ In such cases, the response message will indicate that the process is busy, and 
   </span><span class="nl">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Webhook successfully created"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"webhook_reference"</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='http-endpoint-33'>HTTP Endpoint</h3>
+</span></code></pre></div><h3 id='http-endpoint-34'>HTTP Endpoint</h3>
 <p><code>POST https://api.ezus.app/webhooks-upsert</code></p>
-<h3 id='header-parameters-33'>Header Parameters</h3>
+<h3 id='header-parameters-34'>Header Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -5633,7 +5773,7 @@ In such cases, the response message will indicate that the process is busy, and 
 <td><span class="label label-red float-right">Required</span> Your Bearer token</td>
 </tr>
 </tbody></table>
-<h3 id='body-parameters-application-json-14'>Body Parameters (application/json)</h3>
+<h3 id='body-parameters-application-json-15'>Body Parameters (application/json)</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -5662,7 +5802,7 @@ In such cases, the response message will indicate that the process is busy, and 
 <td>The list of events to enable for this endpoint. At least 1 required, separated by commas if more than one. (<a href="#events">Events</a>)</td>
 </tr>
 </tbody></table>
-<h3 id='response-33'>Response</h3>
+<h3 id='response-34'>Response</h3>
 <p>A JSON object indicating whether an error occurred during the process, along with the associated message.</p>
 
 <table><thead>
@@ -5716,9 +5856,9 @@ In such cases, the response message will indicate that the process is busy, and 
   </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ok"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Webhook successfully deleted"</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='http-endpoint-34'>HTTP Endpoint</h3>
+</span></code></pre></div><h3 id='http-endpoint-35'>HTTP Endpoint</h3>
 <p><code>DELETE https://api.ezus.app/webhooks-delete</code></p>
-<h3 id='header-parameters-34'>Header parameters</h3>
+<h3 id='header-parameters-35'>Header parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -5737,7 +5877,7 @@ In such cases, the response message will indicate that the process is busy, and 
 <td><span class="label label-red float-right">Required</span> Your Bearer token</td>
 </tr>
 </tbody></table>
-<h3 id='body-parameters-application-json-15'>Body parameters (application/json)</h3>
+<h3 id='body-parameters-application-json-16'>Body parameters (application/json)</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -5756,7 +5896,7 @@ In such cases, the response message will indicate that the process is busy, and 
 <td>If provided, the endpoint associated to the webhook you want to delete</td>
 </tr>
 </tbody></table>
-<h3 id='response-34'>Response</h3>
+<h3 id='response-35'>Response</h3>
 <p>A JSON object indicating whether an error occurred during the process, along with the associated message.</p>
 <h1 id='nested-resources'>Nested Resources</h1><h3 id='address'>Address</h3><div class="highlight"><pre class="highlight json tab-json"><code><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
   </span><span class="nl">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"58 Rue de Paradis"</span><span class="p">,</span><span class="w">
@@ -6872,7 +7012,7 @@ The fields <code>purchase_price</code>, <code>purchase_price_excl_taxes</code>, 
 <tr>
 <td>is_yearly</td>
 <td>Boolean</td>
-<td>Indicates whether the seasonal pricing repeats yearly. This field is only applicable when <code>type</code> is <code>season</code>, For <code>default</code> or <code>custom</code> tariffs, this field is always <code>false</code>.</td>
+<td>Indicates if the seasonal tariff recurs every year . This field is only applicable when <code>type</code> is <code>season</code>, For <code>default</code> or <code>custom</code> tariffs, this field is always <code>false</code>.</td>
 </tr>
 <tr>
 <td>children</td>
