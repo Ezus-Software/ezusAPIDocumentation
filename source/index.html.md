@@ -1196,7 +1196,6 @@ curl --location 'https://api.ezus.app/clients-upsert' \
     "company_number": "362 521 879 00034",
     "user": "sam@proton.me",
     "contact": {
-        "mode": "upsert_main",
         "email": "contact@moke-international.com",
         "first_name": "Jane",
         "last_name": "Doe",
@@ -1232,7 +1231,6 @@ const body = {
   company_number: "362 521 879 00034",
   user: "sam@proton.me",
   contact: {
-    mode: "upsert_main",
     email: "contact@moke-international.com",
     first_name: "Jane",
     last_name: "Doe",
@@ -1282,19 +1280,19 @@ axios.post(baseUrl + "/clients-upsert", body, headers);
 
 ### Body Parameters (application/json)
 
-| Parameter      | Type   | Description                                                                                                                                                                                                                                                                                     |
-| -------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| reference      | String | If provided, the unique reference associated with the client you want to update or create (or a random one will be generated).                                                                                                                                                                  |
-| info_number    | String | File number that appears in the client record. Not to be confused with reference                                                                                                                                                                                                                |
-| type           | String | Optional parameter. Specifies the client type (`enterprise` or `individual`). If `enterprise`, `company_name` is required. If `individual`, provide contact.first_name or contact.last_name.                                                                                                    |
-| company_name   | String | <span class="label label-red float-right">Required</span> Name of the client's company (if applicable). If empty, the client will be considered an individual, and the name of the client will be the same as the name of the contact.                                                          |
-| website        | String | Website of the client                                                                                                                                                                                                                                                                           |
-| vat_number     | String | VAT number of the client (only for "enterprise" clients)                                                                                                                                                                                                                                        |
-| company_number | String | Company registration number of the client (only for "enterprise" clients)                                                                                                                                                                                                                       |
-| user           | Email  | Email of the Ezus user to be set as the owner of the client                                                                                                                                                                                                                                     |
-| contact        | JSON   | Main contact object ([Contacts](#contacts)). Optional extra parameter <code>mode</code> in this endpoint. Mode values can either be: `insert_main` (default, creates and sets a main contact even if one exists) or `upsert_main` (updates the main contact if it exists, otherwise creates it) |
-| address        | JSON   | JSON object address ([Address](#address)) To reset the address, you can put `'0'`. **Geolocation data cannot be modified during an upsert**.                                                                                                                                                    |
-| custom_fields  | Array  | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                                                                                                                                                   |
+| Parameter      | Type   | Description                                                                                                                                                                                                                            |
+| -------------- | ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| reference      | String | If provided, the unique reference associated with the client you want to update or create (or a random one will be generated).                                                                                                         |
+| info_number    | String | File number that appears in the client record. Not to be confused with reference                                                                                                                                                       |
+| type           | String | Optional parameter. Specifies the client type (`enterprise` or `individual`). If `enterprise`, `company_name` is required. If `individual`, provide contact.first_name or contact.last_name.                                           |
+| company_name   | String | <span class="label label-red float-right">Required</span> Name of the client's company (if applicable). If empty, the client will be considered an individual, and the name of the client will be the same as the name of the contact. |
+| website        | String | Website of the client                                                                                                                                                                                                                  |
+| vat_number     | String | VAT number of the client (only for "enterprise" clients)                                                                                                                                                                               |
+| company_number | String | Company registration number of the client (only for "enterprise" clients)                                                                                                                                                              |
+| user           | Email  | Email of the Ezus user to be set as the owner of the client                                                                                                                                                                            |
+| contact        | JSON   | A single JSON element ([Contacts](#contacts)) representing the main                                                                                                                                                                    |
+| address        | JSON   | JSON object address ([Address](#address)) To reset the address, you can put `'0'`. **Geolocation data cannot be modified during an upsert**.                                                                                           |
+| custom_fields  | Array  | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                                                                                          |
 
 ### Response
 
