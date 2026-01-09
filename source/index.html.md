@@ -1619,7 +1619,8 @@ curl --location 'https://api.ezus.app/suppliers-upsert' \
   "subdestination_reference": "subdestination_reference",
   "custom_fields": [
       {"name": "field_name", "value": "field_value"}
-  ]
+  ],
+  "tags": ["tag_1", "tag_2", "tag_3"]
 }
 ```
 
@@ -1653,6 +1654,7 @@ const body = {
   destination_reference: "destination_reference",
   subdestination_reference: "subdestination_reference",
   custom_fields: [{ name: "field_name", value: "field_value" }],
+  tags: ["tag_1", "tag_2", "tag_3"],
 };
 const headers = {
   "x-api-key": "<YOUR_API_KEY>",
@@ -1700,6 +1702,7 @@ axios.post(baseUrl + "/suppliers-upsert", body, headers);
 | destination_reference    | String | Reference of the destination to link to the supplier. To reset the destination, you can put `'0'`.                                                                                                                                               |
 | subdestination_reference | String | Reference of the sub-destination to link to the supplier. To reset the sub-destination, you can put `'0'`. If the `destination_reference` is not provided, the `subdestination_reference` will be ignored.                                       |
 | custom_fields            | Array  | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                                                                                                    |
+| tags                     | Array  | Array of strings representing tag technical names. If an empty array (`[]`) is provided, all existing product tags are removed. Otherwise, the provided tags fully replace the current ones.                                                     |
 
 ### Response
 
@@ -2051,7 +2054,8 @@ curl --location 'https://api.ezus.app/products-upsert' \
     "subdestination_reference": "subdestination_reference",
     "custom_fields": [
         {"name": "field_name", "value": "field_value"}
-    ]
+    ],
+    "tags": ["tag_1", "tag_2", "tag_3"]
 }'
 ```
 
@@ -2081,6 +2085,7 @@ const body = {
   destination_reference: "destination_reference",
   subdestination_reference: "subdestination_reference",
   custom_fields: [{ name: "field_name", value: "field_value" }],
+  tags: ["tag_1", "tag_2", "tag_3"],
 };
 const headers = {
   "x-api-key": "<YOUR_API_KEY>",
@@ -2133,6 +2138,7 @@ axios.post(baseUrl + "/products-upsert", body, headers);
 | destination_reference    | String | Reference of the destination to link to the product. To reset the destination, you can put `'0'`.                                                                                                                                                                       |
 | subdestination_reference | String | Reference of the sub-destination to link to the product. To reset the sub-destination, you can put `'0'`. If the `destination_reference` is not provided, the `subdestination_reference` will be ignored.                                                               |
 | custom_fields            | Array  | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                                                                                                                           |
+| tags                     | Array  | Array of strings representing tag technical names. If an empty array (`[]`) is provided, all existing product tags are removed. Otherwise, the provided tags fully replace the current ones.                                                                            |
 
 ### Response
 
