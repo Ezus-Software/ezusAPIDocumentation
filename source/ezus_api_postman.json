@@ -966,6 +966,37 @@
       "response": []
     },
     {
+      "name": "tags",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "X-API-KEY",
+            "value": "{{<YOUR_API_KEY>}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/tags",
+          "host": ["{{baseUrl}}"],
+          "path": ["tags"],
+          "query": [
+            {
+              "key": "next_token",
+              "value": "",
+              "disabled": true
+            },
+            {
+              "key": "type",
+              "value": "product",
+              "disabled": true
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
       "name": "webhooks",
       "request": {
         "method": "GET",
