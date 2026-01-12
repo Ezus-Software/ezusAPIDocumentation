@@ -2911,7 +2911,8 @@ Note that the following fields are used only during creation and are ignored on 
   "subdestination_reference": "subdestination_reference",
   "custom_fields": [
       {"name": "field_name", "value": "field_value"}
-  ]
+  ],
+  "tags": ["tag_1", "tag_2", "tag_3"]
 }
 </span></code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">axios</span><span class="dl">"</span><span class="p">);</span>
 <span class="kd">const</span> <span class="nx">baseUrl</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">https://api.ezus.app</span><span class="dl">"</span><span class="p">;</span>
@@ -2942,6 +2943,7 @@ Note that the following fields are used only during creation and are ignored on 
   <span class="na">destination_reference</span><span class="p">:</span> <span class="dl">"</span><span class="s2">destination_reference</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">subdestination_reference</span><span class="p">:</span> <span class="dl">"</span><span class="s2">subdestination_reference</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">custom_fields</span><span class="p">:</span> <span class="p">[{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">field_name</span><span class="dl">"</span><span class="p">,</span> <span class="na">value</span><span class="p">:</span> <span class="dl">"</span><span class="s2">field_value</span><span class="dl">"</span> <span class="p">}],</span>
+  <span class="na">tags</span><span class="p">:</span> <span class="p">[</span><span class="dl">"</span><span class="s2">tag_1</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">tag_2</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">tag_3</span><span class="dl">"</span><span class="p">],</span>
 <span class="p">};</span>
 <span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="dl">"</span><span class="s2">x-api-key</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">&lt;YOUR_API_KEY&gt;</span><span class="dl">"</span><span class="p">,</span>
@@ -3047,6 +3049,11 @@ Note that the following fields are used only during creation and are ignored on 
 <td>custom_fields</td>
 <td>Array</td>
 <td>Array of JSON custom fields (<a href="#custom-fields">Custom fields</a>)</td>
+</tr>
+<tr>
+<td>tags</td>
+<td>Array</td>
+<td>Array of strings representing tag technical names. If an empty array (<code>[]</code>) is provided, all existing product tags are removed. Otherwise, the provided tags fully replace the current ones.</td>
 </tr>
 </tbody></table>
 <h3 id='response-15'>Response</h3>
@@ -3544,7 +3551,8 @@ Note that the following fields are used only during creation and are ignored on 
     "subdestination_reference": "subdestination_reference",
     "custom_fields": [
         {"name": "field_name", "value": "field_value"}
-    ]
+    ],
+    "tags": ["tag_1", "tag_2", "tag_3"]
 }'</span>
 </code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">axios</span><span class="dl">"</span><span class="p">);</span>
 <span class="kd">const</span> <span class="nx">baseUrl</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">https://api.ezus.app</span><span class="dl">"</span><span class="p">;</span>
@@ -3571,6 +3579,7 @@ Note that the following fields are used only during creation and are ignored on 
   <span class="na">destination_reference</span><span class="p">:</span> <span class="dl">"</span><span class="s2">destination_reference</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">subdestination_reference</span><span class="p">:</span> <span class="dl">"</span><span class="s2">subdestination_reference</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">custom_fields</span><span class="p">:</span> <span class="p">[{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">field_name</span><span class="dl">"</span><span class="p">,</span> <span class="na">value</span><span class="p">:</span> <span class="dl">"</span><span class="s2">field_value</span><span class="dl">"</span> <span class="p">}],</span>
+  <span class="na">tags</span><span class="p">:</span> <span class="p">[</span><span class="dl">"</span><span class="s2">tag_1</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">tag_2</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">tag_3</span><span class="dl">"</span><span class="p">],</span>
 <span class="p">};</span>
 <span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="dl">"</span><span class="s2">x-api-key</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">&lt;YOUR_API_KEY&gt;</span><span class="dl">"</span><span class="p">,</span>
@@ -3701,6 +3710,11 @@ Note that the following fields are used only during creation and are ignored on 
 <td>custom_fields</td>
 <td>Array</td>
 <td>Array of JSON custom fields (<a href="#custom-fields">Custom fields</a>)</td>
+</tr>
+<tr>
+<td>tags</td>
+<td>Array</td>
+<td>Array of strings representing tag technical names. If an empty array (<code>[]</code>) is provided, all existing product tags are removed. Otherwise, the provided tags fully replace the current ones.</td>
 </tr>
 </tbody></table>
 <h3 id='response-18'>Response</h3>
