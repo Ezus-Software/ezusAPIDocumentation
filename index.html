@@ -459,6 +459,14 @@
               </ul>
           </li>
           <li>
+            <a href="#tags" class="toc-h1 toc-link" data-title="Tags">Tags</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#get-tags" class="toc-h2 toc-link" data-title="GET tags">GET tags</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
             <a href="#webhooks" class="toc-h1 toc-link" data-title="Webhooks">Webhooks</a>
               <ul class="toc-list-h2">
                   <li>
@@ -518,7 +526,7 @@
                     <a href="#steps" class="toc-h2 toc-link" data-title="Steps">Steps</a>
                   </li>
                   <li>
-                    <a href="#tags" class="toc-h2 toc-link" data-title="Tags">Tags</a>
+                    <a href="#tags-2" class="toc-h2 toc-link" data-title="Tags">Tags</a>
                   </li>
                   <li>
                     <a href="#travellers" class="toc-h2 toc-link" data-title="Travellers">Travellers</a>
@@ -2867,7 +2875,7 @@ Note that the following fields are used only during creation and are ignored on 
 <tr>
 <td>tags</td>
 <td>Array</td>
-<td>Array of JSON tags (<a href="#tags">Tags</a>)</td>
+<td>Array of JSON tags (<a href="#tags-2">Tags</a>)</td>
 </tr>
 </tbody></table>
 <h2 id='post-suppliers-upsert'>POST suppliers-upsert</h2>
@@ -2903,7 +2911,8 @@ Note that the following fields are used only during creation and are ignored on 
   "subdestination_reference": "subdestination_reference",
   "custom_fields": [
       {"name": "field_name", "value": "field_value"}
-  ]
+  ],
+  "tags": ["tag_1", "tag_2", "tag_3"]
 }
 </span></code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">axios</span><span class="dl">"</span><span class="p">);</span>
 <span class="kd">const</span> <span class="nx">baseUrl</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">https://api.ezus.app</span><span class="dl">"</span><span class="p">;</span>
@@ -2934,6 +2943,7 @@ Note that the following fields are used only during creation and are ignored on 
   <span class="na">destination_reference</span><span class="p">:</span> <span class="dl">"</span><span class="s2">destination_reference</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">subdestination_reference</span><span class="p">:</span> <span class="dl">"</span><span class="s2">subdestination_reference</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">custom_fields</span><span class="p">:</span> <span class="p">[{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">field_name</span><span class="dl">"</span><span class="p">,</span> <span class="na">value</span><span class="p">:</span> <span class="dl">"</span><span class="s2">field_value</span><span class="dl">"</span> <span class="p">}],</span>
+  <span class="na">tags</span><span class="p">:</span> <span class="p">[</span><span class="dl">"</span><span class="s2">tag_1</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">tag_2</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">tag_3</span><span class="dl">"</span><span class="p">],</span>
 <span class="p">};</span>
 <span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="dl">"</span><span class="s2">x-api-key</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">&lt;YOUR_API_KEY&gt;</span><span class="dl">"</span><span class="p">,</span>
@@ -3039,6 +3049,11 @@ Note that the following fields are used only during creation and are ignored on 
 <td>custom_fields</td>
 <td>Array</td>
 <td>Array of JSON custom fields (<a href="#custom-fields">Custom fields</a>)</td>
+</tr>
+<tr>
+<td>tags</td>
+<td>Array</td>
+<td>Array of strings representing tag technical names. If an empty array (<code>[]</code>) is provided, all existing product tags are removed. Otherwise, the provided tags fully replace the current ones.</td>
 </tr>
 </tbody></table>
 <h3 id='response-15'>Response</h3>
@@ -3504,7 +3519,7 @@ Note that the following fields are used only during creation and are ignored on 
 <tr>
 <td>tags</td>
 <td>Array</td>
-<td>Array of JSON tags (<a href="#tags">Tags</a>)</td>
+<td>Array of JSON tags (<a href="#tags-2">Tags</a>)</td>
 </tr>
 </tbody></table>
 <h2 id='post-products-upsert'>POST products-upsert</h2>
@@ -3536,7 +3551,8 @@ Note that the following fields are used only during creation and are ignored on 
     "subdestination_reference": "subdestination_reference",
     "custom_fields": [
         {"name": "field_name", "value": "field_value"}
-    ]
+    ],
+    "tags": ["tag_1", "tag_2", "tag_3"]
 }'</span>
 </code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">axios</span><span class="dl">"</span><span class="p">);</span>
 <span class="kd">const</span> <span class="nx">baseUrl</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">https://api.ezus.app</span><span class="dl">"</span><span class="p">;</span>
@@ -3563,6 +3579,7 @@ Note that the following fields are used only during creation and are ignored on 
   <span class="na">destination_reference</span><span class="p">:</span> <span class="dl">"</span><span class="s2">destination_reference</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">subdestination_reference</span><span class="p">:</span> <span class="dl">"</span><span class="s2">subdestination_reference</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">custom_fields</span><span class="p">:</span> <span class="p">[{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">field_name</span><span class="dl">"</span><span class="p">,</span> <span class="na">value</span><span class="p">:</span> <span class="dl">"</span><span class="s2">field_value</span><span class="dl">"</span> <span class="p">}],</span>
+  <span class="na">tags</span><span class="p">:</span> <span class="p">[</span><span class="dl">"</span><span class="s2">tag_1</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">tag_2</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">tag_3</span><span class="dl">"</span><span class="p">],</span>
 <span class="p">};</span>
 <span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="dl">"</span><span class="s2">x-api-key</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">&lt;YOUR_API_KEY&gt;</span><span class="dl">"</span><span class="p">,</span>
@@ -3693,6 +3710,11 @@ Note that the following fields are used only during creation and are ignored on 
 <td>custom_fields</td>
 <td>Array</td>
 <td>Array of JSON custom fields (<a href="#custom-fields">Custom fields</a>)</td>
+</tr>
+<tr>
+<td>tags</td>
+<td>Array</td>
+<td>Array of strings representing tag technical names. If an empty array (<code>[]</code>) is provided, all existing product tags are removed. Otherwise, the provided tags fully replace the current ones.</td>
 </tr>
 </tbody></table>
 <h3 id='response-18'>Response</h3>
@@ -5574,6 +5596,129 @@ In such cases, the response message will indicate that the process is busy, and 
 <td>Indicates type of deposit action was created</td>
 </tr>
 </tbody></table>
+<h1 id='tags'>Tags</h1><h2 id='get-tags'>GET tags</h2>
+<p>Retrieves a list of your tags (<code>product</code>, <code>supplier</code>, <code>client</code>, or <code>package</code>) sorted by type. The list of tags returned is paginated (50 per 50): to call the 50 next items in the list, call the route with the next_token query parameter.</p>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="s1">'https://api.ezus.app/tags'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'X-API-KEY: &lt;YOUR_API_KEY&gt;'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: Bearer &lt;YOUR_TOKEN&gt;'</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">axios</span><span class="dl">"</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">baseUrl</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">https://api.ezus.app</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="dl">"</span><span class="s2">X-API-KEY</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">&lt;YOUR_API_KEY&gt;</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">Authorization</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Bearer &lt;YOUR_TOKEN&gt;</span><span class="dl">"</span><span class="p">,</span>
+<span class="p">};</span>
+
+<span class="nx">axios</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="nx">baseUrl</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">/tags</span><span class="dl">"</span><span class="p">,</span> <span class="nx">headers</span><span class="p">);</span>
+</code></pre></div>
+<blockquote>
+<p>This request returns a structured JSON object:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">"false"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"next_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;NEXT_TOKEN&gt;"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">338</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"data_size"</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"page"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"partner"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"client"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Partner"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"premium"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"package"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Premium"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mice"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"product"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MICE"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mice"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"supplier"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MICE"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='http-endpoint-32'>HTTP Endpoint</h3>
+<p><code>GET https://api.ezus.app/tags</code></p>
+<h3 id='header-parameters-32'>Header Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>X-API-KEY</td>
+<td>String</td>
+<td><span class="label label-red float-right">Required</span> Your Ezus API key</td>
+</tr>
+<tr>
+<td>Authorization</td>
+<td>String</td>
+<td><span class="label label-red float-right">Required</span> Your Bearer token</td>
+</tr>
+</tbody></table>
+<h3 id='query-parameters-17'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>next_token</td>
+<td>String</td>
+<td>Specify this parameter if you want to retrieve the following elements of a given list query</td>
+</tr>
+<tr>
+<td>type</td>
+<td>String</td>
+<td>Specifies the tag type to retrieve. Possible values: <code>product</code>, <code>supplier</code>, <code>client</code>, or <code>package</code></td>
+</tr>
+</tbody></table>
+<h3 id='response-32'>Response</h3>
+<p>An array of JSON that contains your tags information.</p>
+
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>next_token</td>
+<td>String</td>
+<td>A token will be returned if all tags have not been returned. Use it in another call to access the following tags</td>
+</tr>
+<tr>
+<td>size</td>
+<td>Number</td>
+<td>The total number of tags available with these filters</td>
+</tr>
+<tr>
+<td>data_size</td>
+<td>Number</td>
+<td>Number of tags returned on the current page</td>
+</tr>
+<tr>
+<td>page</td>
+<td>Number</td>
+<td>The page number</td>
+</tr>
+<tr>
+<td>tags</td>
+<td>Array</td>
+<td>Array of JSON tags (<a href="#tags-2">Tags</a>)</td>
+</tr>
+</tbody></table>
 <h1 id='webhooks'>Webhooks</h1><h2 id='get-webhooks'>GET webhooks</h2>
 <p>Retrieves a list of webhook endpoints, sorted by creation date from newest to oldest.</p>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="s1">'https://api.ezus.app/webhooks'</span> <span class="se">\</span>
@@ -5604,9 +5749,9 @@ In such cases, the response message will indicate that the process is busy, and 
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='http-endpoint-32'>HTTP Endpoint</h3>
+</span></code></pre></div><h3 id='http-endpoint-33'>HTTP Endpoint</h3>
 <p><code>GET https://api.ezus.app/webhooks</code></p>
-<h3 id='header-parameters-32'>Header Parameters</h3>
+<h3 id='header-parameters-33'>Header Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -5625,7 +5770,7 @@ In such cases, the response message will indicate that the process is busy, and 
 <td><span class="label label-red float-right">Required</span> Your Bearer token</td>
 </tr>
 </tbody></table>
-<h3 id='response-32'>Response</h3>
+<h3 id='response-33'>Response</h3>
 <p>An array of JSON that contains your webhooks information.</p>
 
 <table><thead>
@@ -5671,9 +5816,9 @@ In such cases, the response message will indicate that the process is busy, and 
   </span><span class="nl">"is_duplication"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
   </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='http-endpoint-33'>HTTP Endpoint</h3>
+</span></code></pre></div><h3 id='http-endpoint-34'>HTTP Endpoint</h3>
 <p><code>GET https://api.ezus.app/webhooks-last</code></p>
-<h3 id='header-parameters-33'>Header Parameters</h3>
+<h3 id='header-parameters-34'>Header Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -5692,7 +5837,7 @@ In such cases, the response message will indicate that the process is busy, and 
 <td><span class="label label-red float-right">Required</span> Your Bearer token</td>
 </tr>
 </tbody></table>
-<h3 id='query-parameters-17'>Query Parameters</h3>
+<h3 id='query-parameters-18'>Query Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -5706,7 +5851,7 @@ In such cases, the response message will indicate that the process is busy, and 
 <td><span class="label label-red float-right">Required</span> The event type to retrieve</td>
 </tr>
 </tbody></table>
-<h3 id='response-33'>Response</h3>
+<h3 id='response-34'>Response</h3>
 <p>A JSON object indicating whether an error occurred during the process, along with the associated message. If successful, it returns the latest event occurrence of a specified event type (<a href="#events">Events</a>).</p>
 <h2 id='post-webhooks-upsert'>POST webhooks-upsert</h2>
 <p>It updates a webhook record if the provided reference or endpoint does match one of the webhooks in your account, otherwise it creates a new webhook record with the provided reference (or with a random one if no reference is provided).</p>
@@ -5745,9 +5890,9 @@ In such cases, the response message will indicate that the process is busy, and 
   </span><span class="nl">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Webhook successfully created"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"webhook_reference"</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='http-endpoint-34'>HTTP Endpoint</h3>
+</span></code></pre></div><h3 id='http-endpoint-35'>HTTP Endpoint</h3>
 <p><code>POST https://api.ezus.app/webhooks-upsert</code></p>
-<h3 id='header-parameters-34'>Header Parameters</h3>
+<h3 id='header-parameters-35'>Header Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -5795,7 +5940,7 @@ In such cases, the response message will indicate that the process is busy, and 
 <td>The list of events to enable for this endpoint. At least 1 required, separated by commas if more than one. (<a href="#events">Events</a>)</td>
 </tr>
 </tbody></table>
-<h3 id='response-34'>Response</h3>
+<h3 id='response-35'>Response</h3>
 <p>A JSON object indicating whether an error occurred during the process, along with the associated message.</p>
 
 <table><thead>
@@ -5849,9 +5994,9 @@ In such cases, the response message will indicate that the process is busy, and 
   </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ok"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Webhook successfully deleted"</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='http-endpoint-35'>HTTP Endpoint</h3>
+</span></code></pre></div><h3 id='http-endpoint-36'>HTTP Endpoint</h3>
 <p><code>DELETE https://api.ezus.app/webhooks-delete</code></p>
-<h3 id='header-parameters-35'>Header parameters</h3>
+<h3 id='header-parameters-36'>Header parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -5889,7 +6034,7 @@ In such cases, the response message will indicate that the process is busy, and 
 <td>If provided, the endpoint associated to the webhook you want to delete</td>
 </tr>
 </tbody></table>
-<h3 id='response-35'>Response</h3>
+<h3 id='response-36'>Response</h3>
 <p>A JSON object indicating whether an error occurred during the process, along with the associated message.</p>
 <h1 id='nested-resources'>Nested Resources</h1><h3 id='address'>Address</h3><div class="highlight"><pre class="highlight json tab-json"><code><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
   </span><span class="nl">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"58 Rue de Paradis"</span><span class="p">,</span><span class="w">
@@ -6759,21 +6904,26 @@ The fields <code>purchase_price</code>, <code>purchase_price_excl_taxes</code>, 
 <td>Array of JSON custom fields (<a href="#custom-fields">Custom fields</a>)</td>
 </tr>
 </tbody></table>
-<h3 id='tags'>Tags</h3><div class="highlight"><pre class="highlight json tab-json"><code><span class="nl">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+<h3 id='tags-2'>Tags</h3><div class="highlight"><pre class="highlight json tab-json"><code><span class="nl">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"partner"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"client"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Partner"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"premium"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"package"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Premium"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
   </span><span class="p">{</span><span class="w">
     </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mice"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"product"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MICE"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"premium"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"product"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Premium"</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ops-approved"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"product"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Ops approved"</span><span class="w">
+    </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mice"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"supplier"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MICE"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
