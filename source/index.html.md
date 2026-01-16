@@ -1617,6 +1617,8 @@ curl --location 'https://api.ezus.app/suppliers-upsert' \
   },
   "destination_reference": "destination_reference",
   "subdestination_reference": "subdestination_reference",
+  "category_reference": "category_reference",
+  "subcategory_reference": "subdestination_reference",
   "custom_fields": [
       {"name": "field_name", "value": "field_value"}
   ],
@@ -1653,6 +1655,8 @@ const body = {
   },
   destination_reference: "destination_reference",
   subdestination_reference: "subdestination_reference",
+  category_reference: "category_reference",
+  subcategory_reference: "subcategory_reference",
   custom_fields: [{ name: "field_name", value: "field_value" }],
   tags: ["tag_1", "tag_2", "tag_3"],
 };
@@ -1701,6 +1705,8 @@ axios.post(baseUrl + "/suppliers-upsert", body, headers);
 | address                  | JSON   | JSON object address ([Address](#address)) To reset the address, you can put `'0'`. **Geolocation data cannot be modified during an upsert**.                                                                                                     |
 | destination_reference    | String | Reference of the destination to link to the supplier. To reset the destination, you can put `'0'`.                                                                                                                                               |
 | subdestination_reference | String | Reference of the sub-destination to link to the supplier. To reset the sub-destination, you can put `'0'`. If the `destination_reference` is not provided, the `subdestination_reference` will be ignored.                                       |
+| category_reference       | String | Reference of the category to link to the supplier. To reset the category, you can put `'0'`.                                                                                                                                                     |
+| subcategory_reference    | String | Reference of the sub-category to link to the supplier. To reset the sub-category, you can put `'0'`. If the `category_reference` is not provided, the `subcategory_reference` will be ignored.                                                   |
 | custom_fields            | Array  | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                                                                                                    |
 | tags                     | Array  | Array of strings representing tag technical names. If an empty array (`[]`) is provided, all existing product tags are removed. Otherwise, the provided tags fully replace the current ones.                                                     |
 
@@ -2052,6 +2058,8 @@ curl --location 'https://api.ezus.app/products-upsert' \
     "package_reference": "package_reference",
     "destination_reference": "destination_reference",
     "subdestination_reference": "subdestination_reference",
+    "category_reference": "category_reference",
+    "subcategory_reference": "subcategory_reference",
     "custom_fields": [
         {"name": "field_name", "value": "field_value"}
     ],
@@ -2084,6 +2092,8 @@ const body = {
   package_reference: "package_reference",
   destination_reference: "destination_reference",
   subdestination_reference: "subdestination_reference",
+  category_reference: "category_reference",
+  subcategory_reference: "subcategory_reference",
   custom_fields: [{ name: "field_name", value: "field_value" }],
   tags: ["tag_1", "tag_2", "tag_3"],
 };
@@ -2137,6 +2147,8 @@ axios.post(baseUrl + "/products-upsert", body, headers);
 | package_reference        | String | If you give an adequate package reference, the product will be added in this package. If you want to update the package's product to None, you must enter 0.                                                                                                            |
 | destination_reference    | String | Reference of the destination to link to the product. To reset the destination, you can put `'0'`.                                                                                                                                                                       |
 | subdestination_reference | String | Reference of the sub-destination to link to the product. To reset the sub-destination, you can put `'0'`. If the `destination_reference` is not provided, the `subdestination_reference` will be ignored.                                                               |
+| category_reference       | String | Reference of the category to link to the product. To reset the category, you can put `'0'`.                                                                                                                                                                             |
+| subcategory_reference    | String | Reference of the sub-category to link to the product. To reset the sub-category, you can put `'0'`. If the `category_reference` is not provided, the `subcategory_reference` will be ignored.                                                                           |
 | custom_fields            | Array  | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                                                                                                                           |
 | tags                     | Array  | Array of strings representing tag technical names. If an empty array (`[]`) is provided, all existing product tags are removed. Otherwise, the provided tags fully replace the current ones.                                                                            |
 
@@ -2372,6 +2384,8 @@ curl --location 'https://api.ezus.app/packages-upsert' \
     "capacity": "2",
     "destination_reference": "destination_reference",
     "subdestination_reference": "subdestination_reference",
+    "category_reference": "category_reference",
+    "subcategory_reference": "subcategory_reference",
     "custom_fields": [
         {"name": "field_name", "value": "field_value"}
     ]
@@ -2390,6 +2404,8 @@ const body = {
   capacity: "2",
   destination_reference: "destination_reference",
   subdestination_reference: "subdestination_reference",
+  category_reference: "category_reference",
+  subcategory_reference: "subcategory_reference",
   custom_fields: [{ name: "field_name", value: "field_value" }],
 };
 const headers = {
@@ -2432,6 +2448,8 @@ axios.post(baseUrl + "/packages-upsert", body, headers);
 | capacity                 | Number | Maximum number of people for which the package can be used . Leave blank `''` if not relevant                                                                                                                          |
 | destination_reference    | String | Reference of the destination to link to the package. To reset the destination, you can put `'0'`.                                                                                                                      |
 | subdestination_reference | String | Reference of the sub-destination to link to the package. To reset the sub-destination, you can put `'0'`. If the `destination_reference` is not provided, the `subdestination_reference` will be ignored.              |
+| category_reference       | String | Reference of the category to link to the package. To reset the category, you can put `'0'`.                                                                                                                            |
+| subcategory_reference    | String | Reference of the sub-category to link to the package. To reset the sub-category, you can put `'0'`. If the `category_reference` is not provided, the `subcategory_reference` will be ignored.                          |
 | custom_fields            | Array  | Array of JSON custom fields [Custom fields](#custom-fields)                                                                                                                                                            |
 
 ### Response
