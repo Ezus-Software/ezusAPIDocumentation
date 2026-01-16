@@ -482,7 +482,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\n    \"reference\": \"supplier_reference\",\n    \"info_number\": \"202306001-S\",\n    \"type\": \"accom, activity\",\n    \"company_name\": \"The best hotel\",\n    \"website\": \"www.the_best_hotel.com\",\n    \"capacity\": 200,\n    \"user\": \"sam@proton.me\",\n    \"contact\": {\n        \"email\": \"bob@proton.me\",\n        \"first_name\": \"Bob\",\n        \"last_name\": \"Morane\",\n        \"title\": \"Project Manager\",\n        \"gender\": \"Mr\",\n        \"phone\": \"0606060606\",\n        \"phone2\": \"0707070707\",\n    },\n    \"address\": {\n        \"label\": \"58 Rue de Paradis\",\n        \"city\": \"Paris\",\n        \"country\": \"France\",\n        \"zip\": \"75009\"\n    },\n    \"destination_reference\": \"destination_reference\",\n    \"subdestination_reference\": \"subdestination_reference\",\n    \"category_reference\": \"category_reference\",\n    \"subcategory_reference\": \"subcategory_reference\",\n    \"custom_fields\": [\n        {\"name\": \"field_name\", \"value\": \"field_value\"}\n    ]\n}",
+          "raw": "{\n    \"reference\": \"supplier_reference\",\n    \"info_number\": \"202306001-S\",\n    \"type\": \"accom, activity\",\n    \"company_name\": \"The best hotel\",\n    \"website\": \"www.the_best_hotel.com\",\n    \"capacity\": 200,\n    \"user\": \"sam@proton.me\",\n    \"contact\": {\n        \"email\": \"bob@proton.me\",\n        \"first_name\": \"Bob\",\n        \"last_name\": \"Morane\",\n        \"title\": \"Project Manager\",\n        \"gender\": \"Mr\",\n        \"phone\": \"0606060606\",\n        \"phone2\": \"0707070707\",\n    },\n    \"address\": {\n        \"label\": \"58 Rue de Paradis\",\n        \"city\": \"Paris\",\n        \"country\": \"France\",\n        \"zip\": \"75009\"\n    },\n    \"destination_reference\": \"destination_reference\",\n    \"subdestination_reference\": \"subdestination_reference\",\n    \"category_reference\": \"category_reference\",\n    \"subcategory_reference\": \"subcategory_reference\",\n    \"custom_fields\": [\n        {\"name\": \"field_name\", \"value\": \"field_value\"}\n     ],\n    \"tags\": [\"tag_1\", \"tag_2\", \"tag_3\"]\n}}",
           "options": {
             "raw": {
               "language": "json"
@@ -561,7 +561,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\n    \"reference\": \"product_reference\",\n    \"info_number\": \"202306001-PR\",\n    \"title\": \"2-bed room with breakfast\",\n    \"info_notes\": \"Product's notes\",\n    \"capacity\": 2,\n    \"quantity\": \"1\",\n    \"currency\": \"USD\",\n    \"purchase_price\": 42,\n    \"sales_price\": 84,\n    \"vat_rate\": 20,\n    \"vat_regime\": \"none\",\n    \"commission\": {\n       \"commission_mode\": \"purchase\",\n    \"commission_regime\": \"percent\",\n     \"value\": 10\n    },\n    \"supplier_reference\": \"supplier_reference\",\n    \"package_reference\": \"package_reference\",\n    \"destination_reference\": \"destination_reference\",\n    \"subdestination_reference\": \"subdestination_reference\",\n    \"category_reference\": \"category_reference\",\n    \"subcategory_reference\": \"subcategory_reference\",\n    \"custom_fields\": [\n        {\"name\": \"field_name\", \"value\": \"field_value\"}\n    ]\n }",
+          "raw": "{\n    \"reference\": \"product_reference\",\n    \"info_number\": \"202306001-PR\",\n    \"title\": \"2-bed room with breakfast\",\n    \"info_notes\": \"Product's notes\",\n    \"capacity\": 2,\n    \"quantity\": \"1\",\n    \"currency\": \"USD\",\n    \"purchase_price\": 42,\n    \"sales_price\": 84,\n    \"vat_rate\": 20,\n    \"vat_regime\": \"none\",\n    \"commission\": {\n       \"commission_mode\": \"purchase\",\n    \"commission_regime\": \"percent\",\n     \"value\": 10\n    },\n    \"supplier_reference\": \"supplier_reference\",\n    \"package_reference\": \"package_reference\",\n    \"destination_reference\": \"destination_reference\",\n    \"subdestination_reference\": \"subdestination_reference\",\n    \"category_reference\": \"category_reference\",\n    \"subcategory_reference\": \"subcategory_reference\",\n    \"custom_fields\": [\n        {\"name\": \"field_name\", \"value\": \"field_value\"}\n    ],\n    \"tags\": [\"tag_1\", \"tag_2\", \"tag_3\"]\n}",
           "options": {
             "raw": {
               "language": "json"
@@ -572,6 +572,34 @@
           "raw": "{{baseUrl}}/products-upsert",
           "host": ["{{baseUrl}}"],
           "path": ["products-upsert"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "product-seasons-upsert",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "X-API-KEY",
+            "value": "{{<YOUR_API_KEY>}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"product_reference\": \"product_reference\",\n    \"reference\": \"season_reference\",\n    \"name\": \"January 2026\",\n    \"purchase_price\": 165.25,\n    \"sales_price\": 200,\n    \"limit_start\": \"2026-01-01\",\n    \"limit_end\": \"2026-01-31\",\n    \"is_yearly\": true\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/product-seasons-upsert",
+          "host": ["{{baseUrl}}"],
+          "path": ["product-seasons-upsert"]
         }
       },
       "response": []
@@ -933,6 +961,37 @@
           "raw": "{{baseUrl}}/deposits-create",
           "host": ["{{baseUrl}}"],
           "path": ["deposits-create"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "tags",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "X-API-KEY",
+            "value": "{{<YOUR_API_KEY>}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/tags",
+          "host": ["{{baseUrl}}"],
+          "path": ["tags"],
+          "query": [
+            {
+              "key": "next_token",
+              "value": "",
+              "disabled": true
+            },
+            {
+              "key": "type",
+              "value": "product",
+              "disabled": true
+            }
+          ]
         }
       },
       "response": []
