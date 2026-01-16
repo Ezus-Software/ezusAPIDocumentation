@@ -638,7 +638,7 @@ A JSON object containing the project travellers information with properties like
 
 ## POST projects-upsert
 
-This API endpoint updates a project record if the provided reference matches an existing project in your account. If no match is found, a new project record is created with the provided reference, or a randomly generated one if no reference is supplied.
+This API endpoint can create, duplicate, or update a project. If the provided `reference` matches an existing project, that project is updated. If no match is found, a new project is created using the provided `reference`, or a randomly generated one if none is supplied and `project_reference` is not provided. When `project_reference` is specified, a new project is created by duplicating the existing project identified by `project_reference` with the provided `reference` or a random one.
 
 ```shell
 curl --location 'https://api.ezus.app/projects-upsert' \
@@ -647,6 +647,7 @@ curl --location 'https://api.ezus.app/projects-upsert' \
 --header 'Authorization: Bearer <YOUR_TOKEN>' \
 --data-raw '{
     "reference": "project_reference",
+    "project_reference": "project_type_reference",
     "info_number": "202306001-P",
     "info_title": "Paris fashion week 2024",
     "info_stage_reference": "received",
@@ -670,6 +671,7 @@ const baseUrl = "https://api.ezus.app";
 
 const body = {
   reference: "project_reference",
+  project_reference: "project_type_reference",
   info_number: "202306001-P",
   info_title: "Paris fashion week 2024",
   info_stage_reference: "received",
@@ -717,21 +719,22 @@ axios.post(baseUrl + "/projects-upsert", body, headers);
 
 ### Body Parameters (application/json)
 
-| Parameter                     | Type   | Description                                                                                                                                                                                                                                                         |
-| ----------------------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| reference                     | String | If provided, the unique reference associated with the project you want to update or create (or a random one will be generated).                                                                                                                                     |
-| info_number                   | String | File number that appears in the project record. Not to be confused with reference                                                                                                                                                                                   |
-| info_title                    | String | Title of the project. This parameter is required if you create a new project                                                                                                                                                                                        |
-| info_stage_reference          | String | Stage of the project: Please use the technical name of the stage you intend to apply. If no specific stage is found, a default stage will be automatically assigned upon adding the project.                                                                        |
-| trip_date_in                  | Date   | Date of the project's start in "YYYY-MM-DD" format (only settable when creating a new project). If not provided or if not formatted correctly, or if duration > 40 days or if trip_date_in > trip_date_out, project will be set as 1 day and trip_date_in as today. |
-| trip_date_out                 | Date   | Date of the project's end in "YYYY-MM-DD" format (only settable when creating a new project). If not provided or if not formatted correctly, or if duration > 40 days or if trip_date_in > trip_date_out, project will be set as 1 day and trip_date_out as today.  |
-| trip_budget                   | Number | Forecasted budget for the project                                                                                                                                                                                                                                   |
-| trip_people                   | Number | Number of people in the project (only settable when creating a new project)                                                                                                                                                                                         |
-| sales_manager_email           | Email  | Email of the Ezus user to be set as the sales manager of the project                                                                                                                                                                                                |
-| client_reference              | String | Reference or email of an existing client in your Ezus account to link to the project (only settable when creating a new project)                                                                                                                                    |
-| trip_destination_reference    | String | Reference of the destination to link to the project. To reset the destination, you can put `'0'`.                                                                                                                                                                   |
-| trip_subdestination_reference | String | Reference of the sub-destination to link to the project. To reset the sub-destination, you can put `'0'`. If the `trip_destination_reference` is not provided, the `trip_subdestination_reference` will be ignored.                                                 |
-| custom_fields                 | Array  | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                                                                                                                       |
+| Parameter                     | Type   | Description                                                                                                                                                                                                                                                                                                                                                                                                            |
+| ----------------------------- | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| reference                     | String | If provided, the unique reference associated with the project you want to update or create (or a random one will be generated).                                                                                                                                                                                                                                                                                        |
+| project_reference             | String | If provided, the `project_reference` is used to duplicate an existing project. For the duplication to succeed, the `reference` field must not match any existing project. If the `info_number`, `info_title`, `info_stage_reference`, `travel_budget`, `travel_people`, `sales_manager_email` and `customer_reference` fields are filled in, they are used. The fields `trip_date_in` and `trip_date_out` are skipped. |
+| info_number                   | String | File number that appears in the project record. Not to be confused with reference                                                                                                                                                                                                                                                                                                                                      |
+| info_title                    | String | Title of the project. This parameter is required if you create a new project                                                                                                                                                                                                                                                                                                                                           |
+| info_stage_reference          | String | Stage of the project: Please use the technical name of the stage you intend to apply. If no specific stage is found, a default stage will be automatically assigned upon adding the project.                                                                                                                                                                                                                           |
+| trip_date_in                  | Date   | Date of the project's start in "YYYY-MM-DD" format (only settable when creating a new project). If not provided or if not formatted correctly, or if duration > 40 days or if trip_date_in > trip_date_out, project will be set as 1 day and trip_date_in as today.                                                                                                                                                    |
+| trip_date_out                 | Date   | Date of the project's end in "YYYY-MM-DD" format (only settable when creating a new project). If not provided or if not formatted correctly, or if duration > 40 days or if trip_date_in > trip_date_out, project will be set as 1 day and trip_date_out as today.                                                                                                                                                     |
+| trip_budget                   | Number | Forecasted budget for the project                                                                                                                                                                                                                                                                                                                                                                                      |
+| trip_people                   | Number | Number of people in the project (only settable when creating a new project)                                                                                                                                                                                                                                                                                                                                            |
+| sales_manager_email           | Email  | Email of the Ezus user to be set as the sales manager of the project                                                                                                                                                                                                                                                                                                                                                   |
+| client_reference              | String | Reference or email of an existing client in your Ezus account to link to the project (only settable when creating a new project)                                                                                                                                                                                                                                                                                       |
+| trip_destination_reference    | String | Reference of the destination to link to the project. To reset the destination, you can put `'0'`.                                                                                                                                                                                                                                                                                                                      |
+| trip_subdestination_reference | String | Reference of the sub-destination to link to the project. To reset the sub-destination, you can put `'0'`. If the `trip_destination_reference` is not provided, the `trip_subdestination_reference` will be ignored.                                                                                                                                                                                                    |
+| custom_fields                 | Array  | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                                                                                                                                                                                                                                                                          |
 
 ### Response
 
@@ -1617,6 +1620,8 @@ curl --location 'https://api.ezus.app/suppliers-upsert' \
   },
   "destination_reference": "destination_reference",
   "subdestination_reference": "subdestination_reference",
+  "category_reference": "category_reference",
+  "subcategory_reference": "subdestination_reference",
   "custom_fields": [
       {"name": "field_name", "value": "field_value"}
   ],
@@ -1653,6 +1658,8 @@ const body = {
   },
   destination_reference: "destination_reference",
   subdestination_reference: "subdestination_reference",
+  category_reference: "category_reference",
+  subcategory_reference: "subcategory_reference",
   custom_fields: [{ name: "field_name", value: "field_value" }],
   tags: ["tag_1", "tag_2", "tag_3"],
 };
@@ -1701,6 +1708,8 @@ axios.post(baseUrl + "/suppliers-upsert", body, headers);
 | address                  | JSON   | JSON object address ([Address](#address)) To reset the address, you can put `'0'`. **Geolocation data cannot be modified during an upsert**.                                                                                                     |
 | destination_reference    | String | Reference of the destination to link to the supplier. To reset the destination, you can put `'0'`.                                                                                                                                               |
 | subdestination_reference | String | Reference of the sub-destination to link to the supplier. To reset the sub-destination, you can put `'0'`. If the `destination_reference` is not provided, the `subdestination_reference` will be ignored.                                       |
+| category_reference       | String | Reference of the category to link to the supplier. To reset the category, you can put `'0'`.                                                                                                                                                     |
+| subcategory_reference    | String | Reference of the sub-category to link to the supplier. To reset the sub-category, you can put `'0'`. If the `category_reference` is not provided, the `subcategory_reference` will be ignored.                                                   |
 | custom_fields            | Array  | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                                                                                                    |
 | tags                     | Array  | Array of strings representing tag technical names. If an empty array (`[]`) is provided, all existing product tags are removed. Otherwise, the provided tags fully replace the current ones.                                                     |
 
@@ -2052,6 +2061,8 @@ curl --location 'https://api.ezus.app/products-upsert' \
     "package_reference": "package_reference",
     "destination_reference": "destination_reference",
     "subdestination_reference": "subdestination_reference",
+    "category_reference": "category_reference",
+    "subcategory_reference": "subcategory_reference",
     "custom_fields": [
         {"name": "field_name", "value": "field_value"}
     ],
@@ -2084,6 +2095,8 @@ const body = {
   package_reference: "package_reference",
   destination_reference: "destination_reference",
   subdestination_reference: "subdestination_reference",
+  category_reference: "category_reference",
+  subcategory_reference: "subcategory_reference",
   custom_fields: [{ name: "field_name", value: "field_value" }],
   tags: ["tag_1", "tag_2", "tag_3"],
 };
@@ -2137,6 +2150,8 @@ axios.post(baseUrl + "/products-upsert", body, headers);
 | package_reference        | String | If you give an adequate package reference, the product will be added in this package. If you want to update the package's product to None, you must enter 0.                                                                                                            |
 | destination_reference    | String | Reference of the destination to link to the product. To reset the destination, you can put `'0'`.                                                                                                                                                                       |
 | subdestination_reference | String | Reference of the sub-destination to link to the product. To reset the sub-destination, you can put `'0'`. If the `destination_reference` is not provided, the `subdestination_reference` will be ignored.                                                               |
+| category_reference       | String | Reference of the category to link to the product. To reset the category, you can put `'0'`.                                                                                                                                                                             |
+| subcategory_reference    | String | Reference of the sub-category to link to the product. To reset the sub-category, you can put `'0'`. If the `category_reference` is not provided, the `subcategory_reference` will be ignored.                                                                           |
 | custom_fields            | Array  | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                                                                                                                           |
 | tags                     | Array  | Array of strings representing tag technical names. If an empty array (`[]`) is provided, all existing product tags are removed. Otherwise, the provided tags fully replace the current ones.                                                                            |
 
@@ -2372,6 +2387,8 @@ curl --location 'https://api.ezus.app/packages-upsert' \
     "capacity": "2",
     "destination_reference": "destination_reference",
     "subdestination_reference": "subdestination_reference",
+    "category_reference": "category_reference",
+    "subcategory_reference": "subcategory_reference",
     "custom_fields": [
         {"name": "field_name", "value": "field_value"}
     ]
@@ -2390,6 +2407,8 @@ const body = {
   capacity: "2",
   destination_reference: "destination_reference",
   subdestination_reference: "subdestination_reference",
+  category_reference: "category_reference",
+  subcategory_reference: "subcategory_reference",
   custom_fields: [{ name: "field_name", value: "field_value" }],
 };
 const headers = {
@@ -2432,6 +2451,8 @@ axios.post(baseUrl + "/packages-upsert", body, headers);
 | capacity                 | Number | Maximum number of people for which the package can be used . Leave blank `''` if not relevant                                                                                                                          |
 | destination_reference    | String | Reference of the destination to link to the package. To reset the destination, you can put `'0'`.                                                                                                                      |
 | subdestination_reference | String | Reference of the sub-destination to link to the package. To reset the sub-destination, you can put `'0'`. If the `destination_reference` is not provided, the `subdestination_reference` will be ignored.              |
+| category_reference       | String | Reference of the category to link to the package. To reset the category, you can put `'0'`.                                                                                                                            |
+| subcategory_reference    | String | Reference of the sub-category to link to the package. To reset the sub-category, you can put `'0'`. If the `category_reference` is not provided, the `subcategory_reference` will be ignored.                          |
 | custom_fields            | Array  | Array of JSON custom fields [Custom fields](#custom-fields)                                                                                                                                                            |
 
 ### Response
