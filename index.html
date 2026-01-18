@@ -1472,13 +1472,14 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 </tr>
 </tbody></table>
 <h2 id='post-projects-upsert'>POST projects-upsert</h2>
-<p>This API endpoint updates a project record if the provided reference matches an existing project in your account. If no match is found, a new project record is created with the provided reference, or a randomly generated one if no reference is supplied.</p>
+<p>This API endpoint can create, duplicate, or update a project. If the provided <code>reference</code> matches an existing project, that project is updated. If no match is found, a new project is created using the provided <code>reference</code>, or a randomly generated one if none is supplied and <code>project_reference</code> is not provided. When <code>project_reference</code> is specified, a new project is created by duplicating the existing project identified by <code>project_reference</code> with the provided <code>reference</code> or a random one.</p>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="s1">'https://api.ezus.app/projects-upsert'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'x-api-key: &lt;YOUR_API_KEY&gt;'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Authorization: Bearer &lt;YOUR_TOKEN&gt;'</span> <span class="se">\</span>
 <span class="nt">--data-raw</span> <span class="s1">'{
     "reference": "project_reference",
+    "project_reference": "project_type_reference",
     "info_number": "202306001-P",
     "info_title": "Paris fashion week 2024",
     "info_stage_reference": "received",
@@ -1499,6 +1500,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 
 <span class="kd">const</span> <span class="nx">body</span> <span class="o">=</span> <span class="p">{</span>
   <span class="na">reference</span><span class="p">:</span> <span class="dl">"</span><span class="s2">project_reference</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">project_reference</span><span class="p">:</span> <span class="dl">"</span><span class="s2">project_type_reference</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">info_number</span><span class="p">:</span> <span class="dl">"</span><span class="s2">202306001-P</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">info_title</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Paris fashion week 2024</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">info_stage_reference</span><span class="p">:</span> <span class="dl">"</span><span class="s2">received</span><span class="dl">"</span><span class="p">,</span>
@@ -1563,6 +1565,11 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <td>reference</td>
 <td>String</td>
 <td>If provided, the unique reference associated with the project you want to update or create (or a random one will be generated).</td>
+</tr>
+<tr>
+<td>project_reference</td>
+<td>String</td>
+<td>If provided, the <code>project_reference</code> is used to duplicate an existing project. For the duplication to succeed, the <code>reference</code> field must not match any existing project. If the <code>info_number</code>, <code>info_title</code>, <code>info_stage_reference</code>, <code>travel_budget</code>, <code>travel_people</code>, <code>sales_manager_email</code> and <code>customer_reference</code> fields are filled in, they are used. The fields <code>trip_date_in</code> and <code>trip_date_out</code> are skipped.</td>
 </tr>
 <tr>
 <td>info_number</td>
@@ -2909,6 +2916,8 @@ Note that the following fields are used only during creation and are ignored on 
   },
   "destination_reference": "destination_reference",
   "subdestination_reference": "subdestination_reference",
+  "category_reference": "category_reference",
+  "subcategory_reference": "subdestination_reference",
   "custom_fields": [
       {"name": "field_name", "value": "field_value"}
   ],
@@ -2942,6 +2951,8 @@ Note that the following fields are used only during creation and are ignored on 
   <span class="p">},</span>
   <span class="na">destination_reference</span><span class="p">:</span> <span class="dl">"</span><span class="s2">destination_reference</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">subdestination_reference</span><span class="p">:</span> <span class="dl">"</span><span class="s2">subdestination_reference</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">category_reference</span><span class="p">:</span> <span class="dl">"</span><span class="s2">category_reference</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">subcategory_reference</span><span class="p">:</span> <span class="dl">"</span><span class="s2">subcategory_reference</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">custom_fields</span><span class="p">:</span> <span class="p">[{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">field_name</span><span class="dl">"</span><span class="p">,</span> <span class="na">value</span><span class="p">:</span> <span class="dl">"</span><span class="s2">field_value</span><span class="dl">"</span> <span class="p">}],</span>
   <span class="na">tags</span><span class="p">:</span> <span class="p">[</span><span class="dl">"</span><span class="s2">tag_1</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">tag_2</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">tag_3</span><span class="dl">"</span><span class="p">],</span>
 <span class="p">};</span>
@@ -3044,6 +3055,16 @@ Note that the following fields are used only during creation and are ignored on 
 <td>subdestination_reference</td>
 <td>String</td>
 <td>Reference of the sub-destination to link to the supplier. To reset the sub-destination, you can put <code>&#39;0&#39;</code>. If the <code>destination_reference</code> is not provided, the <code>subdestination_reference</code> will be ignored.</td>
+</tr>
+<tr>
+<td>category_reference</td>
+<td>String</td>
+<td>Reference of the category to link to the supplier. To reset the category, you can put <code>&#39;0&#39;</code>.</td>
+</tr>
+<tr>
+<td>subcategory_reference</td>
+<td>String</td>
+<td>Reference of the sub-category to link to the supplier. To reset the sub-category, you can put <code>&#39;0&#39;</code>. If the <code>category_reference</code> is not provided, the <code>subcategory_reference</code> will be ignored.</td>
 </tr>
 <tr>
 <td>custom_fields</td>
@@ -3549,6 +3570,8 @@ Note that the following fields are used only during creation and are ignored on 
     "package_reference": "package_reference",
     "destination_reference": "destination_reference",
     "subdestination_reference": "subdestination_reference",
+    "category_reference": "category_reference",
+    "subcategory_reference": "subcategory_reference",
     "custom_fields": [
         {"name": "field_name", "value": "field_value"}
     ],
@@ -3578,6 +3601,8 @@ Note that the following fields are used only during creation and are ignored on 
   <span class="na">package_reference</span><span class="p">:</span> <span class="dl">"</span><span class="s2">package_reference</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">destination_reference</span><span class="p">:</span> <span class="dl">"</span><span class="s2">destination_reference</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">subdestination_reference</span><span class="p">:</span> <span class="dl">"</span><span class="s2">subdestination_reference</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">category_reference</span><span class="p">:</span> <span class="dl">"</span><span class="s2">category_reference</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">subcategory_reference</span><span class="p">:</span> <span class="dl">"</span><span class="s2">subcategory_reference</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">custom_fields</span><span class="p">:</span> <span class="p">[{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">field_name</span><span class="dl">"</span><span class="p">,</span> <span class="na">value</span><span class="p">:</span> <span class="dl">"</span><span class="s2">field_value</span><span class="dl">"</span> <span class="p">}],</span>
   <span class="na">tags</span><span class="p">:</span> <span class="p">[</span><span class="dl">"</span><span class="s2">tag_1</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">tag_2</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">tag_3</span><span class="dl">"</span><span class="p">],</span>
 <span class="p">};</span>
@@ -3705,6 +3730,16 @@ Note that the following fields are used only during creation and are ignored on 
 <td>subdestination_reference</td>
 <td>String</td>
 <td>Reference of the sub-destination to link to the product. To reset the sub-destination, you can put <code>&#39;0&#39;</code>. If the <code>destination_reference</code> is not provided, the <code>subdestination_reference</code> will be ignored.</td>
+</tr>
+<tr>
+<td>category_reference</td>
+<td>String</td>
+<td>Reference of the category to link to the product. To reset the category, you can put <code>&#39;0&#39;</code>.</td>
+</tr>
+<tr>
+<td>subcategory_reference</td>
+<td>String</td>
+<td>Reference of the sub-category to link to the product. To reset the sub-category, you can put <code>&#39;0&#39;</code>. If the <code>category_reference</code> is not provided, the <code>subcategory_reference</code> will be ignored.</td>
 </tr>
 <tr>
 <td>custom_fields</td>
@@ -4062,6 +4097,8 @@ If the provided reference matches an existing seasonal tariff in your account, t
     "capacity": "2",
     "destination_reference": "destination_reference",
     "subdestination_reference": "subdestination_reference",
+    "category_reference": "category_reference",
+    "subcategory_reference": "subcategory_reference",
     "custom_fields": [
         {"name": "field_name", "value": "field_value"}
     ]
@@ -4077,6 +4114,8 @@ If the provided reference matches an existing seasonal tariff in your account, t
   <span class="na">capacity</span><span class="p">:</span> <span class="dl">"</span><span class="s2">2</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">destination_reference</span><span class="p">:</span> <span class="dl">"</span><span class="s2">destination_reference</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">subdestination_reference</span><span class="p">:</span> <span class="dl">"</span><span class="s2">subdestination_reference</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">category_reference</span><span class="p">:</span> <span class="dl">"</span><span class="s2">category_reference</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">subcategory_reference</span><span class="p">:</span> <span class="dl">"</span><span class="s2">subcategory_reference</span><span class="dl">"</span><span class="p">,</span>
   <span class="na">custom_fields</span><span class="p">:</span> <span class="p">[{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">field_name</span><span class="dl">"</span><span class="p">,</span> <span class="na">value</span><span class="p">:</span> <span class="dl">"</span><span class="s2">field_value</span><span class="dl">"</span> <span class="p">}],</span>
 <span class="p">};</span>
 <span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
@@ -4153,6 +4192,16 @@ If the provided reference matches an existing seasonal tariff in your account, t
 <td>subdestination_reference</td>
 <td>String</td>
 <td>Reference of the sub-destination to link to the package. To reset the sub-destination, you can put <code>&#39;0&#39;</code>. If the <code>destination_reference</code> is not provided, the <code>subdestination_reference</code> will be ignored.</td>
+</tr>
+<tr>
+<td>category_reference</td>
+<td>String</td>
+<td>Reference of the category to link to the package. To reset the category, you can put <code>&#39;0&#39;</code>.</td>
+</tr>
+<tr>
+<td>subcategory_reference</td>
+<td>String</td>
+<td>Reference of the sub-category to link to the package. To reset the sub-category, you can put <code>&#39;0&#39;</code>. If the <code>category_reference</code> is not provided, the <code>subcategory_reference</code> will be ignored.</td>
 </tr>
 <tr>
 <td>custom_fields</td>
