@@ -1569,7 +1569,7 @@ Quick tip: You can <a href="./ezus_api_postman.json?attachmentlinks=true"  targe
 <tr>
 <td>project_reference</td>
 <td>String</td>
-<td>If provided, the <code>project_reference</code> is used to duplicate an existing project. For the duplication to succeed, the <code>reference</code> field must not match any existing project. If the <code>info_number</code>, <code>info_title</code>, <code>info_stage_reference</code>, <code>travel_budget</code>, <code>travel_people</code>, <code>sales_manager_email</code> and <code>customer_reference</code> fields are filled in, they are used. The fields <code>trip_date_in</code> and <code>trip_date_out</code> are skipped.</td>
+<td>If provided, the <code>project_reference</code> is used to duplicate an existing project. For the duplication to succeed, the <code>reference</code> field must not match any existing project. If the <code>info_number</code>, <code>info_title</code>, <code>info_stage_reference</code>, <code>trip_budget</code>, <code>trip_people</code>, <code>sales_manager_email</code> and <code>client_reference</code> fields are filled in, they are used. The fields <code>trip_date_in</code> and <code>trip_date_out</code> are skipped.</td>
 </tr>
 <tr>
 <td>info_number</td>
@@ -4415,7 +4415,7 @@ If the provided reference matches an existing seasonal tariff in your account, t
 
 <span class="nx">axios</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span>
   <span class="nx">baseUrl</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">/subdestination?reference=subdestination_reference</span><span class="dl">"</span><span class="p">,</span>
-  <span class="nx">headers</span>
+  <span class="nx">headers</span><span class="p">,</span>
 <span class="p">);</span>
 </code></pre></div>
 <blockquote>
@@ -5342,7 +5342,7 @@ In such cases, the response message will indicate that the process is busy, and 
 
 <span class="nx">axios</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span>
   <span class="nx">baseUrl</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">/invoice-supplier?reference=invoice_supplier_reference</span><span class="dl">"</span><span class="p">,</span>
-  <span class="nx">headers</span>
+  <span class="nx">headers</span><span class="p">,</span>
 <span class="p">);</span>
 </code></pre></div>
 <blockquote>
