@@ -764,7 +764,8 @@
         "header": [
           {
             "key": "X-API-KEY",
-            "value": "{{<YOUR_API_KEY>}}"
+            "value": "{{<YOUR_API_KEY>}}",
+            "type": "text"
           }
         ],
         "url": {
