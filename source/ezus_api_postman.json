@@ -658,6 +658,25 @@
       "response": []
     },
     {
+      "name": "categories",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "X-API-KEY",
+            "value": "{{<YOUR_API_KEY>}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/categories",
+          "host": ["{{baseUrl}}"],
+          "path": ["categories"]
+        }
+      },
+      "response": []
+    },
+    {
       "name": "destinations",
       "request": {
         "method": "GET",
