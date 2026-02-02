@@ -2493,7 +2493,7 @@ axios.get(baseUrl + "/categories", headers);
 ```json
 {
   "error": "false",
-  "size": 32,
+  "size": 1,
   "categories": [
     {
       "reference": "category_reference",
@@ -2522,7 +2522,7 @@ axios.get(baseUrl + "/categories", headers);
 
 ### Response
 
-A JSON object containing the destination information with properties like:
+A JSON object containing category information, with properties such as:
 
 | Property   | Type   | Description                                            |
 | ---------- | ------ | ------------------------------------------------------ |
