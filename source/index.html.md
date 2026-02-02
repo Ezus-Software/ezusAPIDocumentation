@@ -2522,7 +2522,7 @@ axios.get(baseUrl + "/categories", headers);
 
 ### Response
 
-A JSON object containing category information, with properties such as:
+A JSON object containing the category information, with properties like:
 
 | Property   | Type   | Description                                            |
 | ---------- | ------ | ------------------------------------------------------ |
