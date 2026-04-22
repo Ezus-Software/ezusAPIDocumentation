@@ -270,6 +270,7 @@ axios.get(baseUrl + "/project?reference=project_reference", headers);
   },
   "alternatives": [
     {
+      "reference": "550e8400-e29b-41d4-a716-446655440000",
       "alternative_title": "Main Alternative",
       "lang": "fr-FR",
       "is_main": true,
@@ -3770,6 +3771,7 @@ A JSON object indicating whether an error occurred during the process, along wit
 ```json
 "alternatives": [
   {
+    "reference": "550e8400-e29b-41d4-a716-446655440000",
     "alternative_title": "Main Alternative",
     "lang": "fr-FR",
     "is_main": true,
@@ -3828,6 +3830,7 @@ A JSON object indicating whether an error occurred during the process, along wit
 
 | Property                      | Type    | Description                                                                                                                                                |
 | ----------------------------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| reference                     | String  | Unique reference of this alternative: (distinct from the root project `reference` at the top level of the GET `project` response).                         |
 | alternative_title             | String  | Title of the alternative                                                                                                                                   |
 | lang                          | String  | Alternative locale code (e.g. fr-FR, en-GB)                                                                                                                |
 | is_main                       | Boolean | If the alternative is the main alternative                                                                                                                 |
