@@ -1,82 +1,130 @@
-<p align="center">
-  <img src="https://raw.githubusercontent.com/slatedocs/img/main/logo-slate.png" alt="Slate: API Documentation Generator" width="226">
-  <br>
-  <a href="https://github.com/slatedocs/slate/actions?query=workflow%3ABuild+branch%3Amain"><img src="https://github.com/slatedocs/slate/workflows/Build/badge.svg?branch=main" alt="Build Status"></a>
-  <a href="https://hub.docker.com/r/slatedocs/slate"><img src="https://img.shields.io/docker/v/slatedocs/slate?sort=semver" alt="Docker Version" /></a>
-</p>
+# Ezus API Documentation
 
-<p align="center">Slate helps you create beautiful, intelligent, responsive API documentation.</p>
+Documentation de l'API Ezus, générée avec [Slate](https://github.com/slatedocs/slate) (Middleman + Ruby) et déployée sur Netlify à chaque push.
 
-<p align="center"><img src="https://raw.githubusercontent.com/slatedocs/img/main/screenshot-slate.png" width=700 alt="Screenshot of Example Documentation created with Slate"></p>
+---
 
-<p align="center"><em>The example above was created with Slate. Check it out at <a href="https://slatedocs.github.io/slate">slatedocs.github.io/slate</a>.</em></p>
+## Prérequis
 
-Features
-------------
+| Outil | Version | Install                                                                         |
+| ----- | ------- | ------------------------------------------------------------------------------- |
+| Ruby  | 3.4.x   | [RubyInstaller Windows](https://rubyinstaller.org/) — **coche DevKit** à la fin |
+| Git   | —       | [git-scm.com](https://git-scm.com/)                                             |
 
-* **Clean, intuitive design** — With Slate, the description of your API is on the left side of your documentation, and all the code examples are on the right side. Inspired by [Stripe's](https://stripe.com/docs/api) and [PayPal's](https://developer.paypal.com/webapps/developer/docs/api/) API docs. Slate is responsive, so it looks great on tablets, phones, and even in print.
+Vérifie l'install :
 
-* **Everything on a single page** — Gone are the days when your users had to search through a million pages to find what they wanted. Slate puts the entire documentation on a single page. We haven't sacrificed linkability, though. As you scroll, your browser's hash will update to the nearest header, so linking to a particular point in the documentation is still natural and easy.
+```bash
+ruby -v      # -> 3.4.x
+bundle -v
+```
 
-* **Slate is just Markdown** — When you write docs with Slate, you're just writing Markdown, which makes it simple to edit and understand. Everything is written in Markdown — even the code samples are just Markdown code blocks.
+Si `bundle install` plante plus tard sur des gems natifs (`nokogiri`, `sassc`, `ffi`), lance `ridk install` et choisis l'option **3**.
 
-* **Write code samples in multiple languages** — If your API has bindings in multiple programming languages, you can easily put in tabs to switch between them. In your document, you'll distinguish different languages by specifying the language name at the top of each code block, just like with GitHub Flavored Markdown.
+---
 
-* **Out-of-the-box syntax highlighting** for [over 100 languages](https://github.com/rouge-ruby/rouge/wiki/List-of-supported-languages-and-lexers), no configuration required.
+## 1. Installation depuis ton fork
 
-* **Automatic, smoothly scrolling table of contents** on the far left of the page. As you scroll, it displays your current position in the document. It's fast, too. We're using Slate at TripIt to build documentation for our new API, where our table of contents has over 180 entries. We've made sure that the performance remains excellent, even for larger documents.
+```bash
+git clone https://github.com/<ton-user>/ezusAPIDocumentation.git
+cd ezusAPIDocumentation
+bundle install
+```
 
-* **Let your users update your documentation for you** — By default, your Slate-generated documentation is hosted in a public GitHub repository. Not only does this mean you get free hosting for your docs with GitHub Pages, but it also makes it simple for other developers to make pull requests to your docs if they find typos or other problems. Of course, if you don't want to use GitHub, you're also welcome to host your docs elsewhere.
+`bundle install` lit le `Gemfile` et télécharge toutes les dépendances Ruby dans ton projet. À ne faire qu'une fois (ou après un changement de `Gemfile`).
 
-* **RTL Support** Full right-to-left layout for RTL languages such as Arabic, Persian (Farsi), Hebrew etc.
+---
 
-Getting started with Slate is super easy! Simply press the green "use this template" button above and follow the instructions below. Or, if you'd like to check out what Slate is capable of, take a look at the [sample docs](https://slatedocs.github.io/slate/).
+## 2. Lancer en local
 
-Getting Started with Slate
-------------------------------
+**Mode dev avec hot-reload** (recommandé pour éditer la doc) :
 
-To get started with Slate, please check out the [Getting Started](https://github.com/slatedocs/slate/wiki#getting-started)
-section in our [wiki](https://github.com/slatedocs/slate/wiki).
+```bash
+bundle exec middleman server
+```
 
-We support running Slate in three different ways:
-* [Natively](https://github.com/slatedocs/slate/wiki/Using-Slate-Natively)
-* [Using Vagrant](https://github.com/slatedocs/slate/wiki/Using-Slate-in-Vagrant)
-* [Using Docker](https://github.com/slatedocs/slate/wiki/Using-Slate-in-Docker)
+Ouvre http://localhost:4567. Chaque modif d'un fichier source recharge la page automatiquement. `Ctrl + C` pour stopper.
 
-Companies Using Slate
----------------------------------
+**Mode build statique** (pour tester exactement ce que Netlify va déployer) :
 
-* [NASA](https://api.nasa.gov)
-* [Sony](http://developers.cimediacloud.com)
-* [Best Buy](https://bestbuyapis.github.io/api-documentation/)
-* [Travis-CI](https://docs.travis-ci.com/api/)
-* [Greenhouse](https://developers.greenhouse.io/harvest.html)
-* [WooCommerce](http://woocommerce.github.io/woocommerce-rest-api-docs/)
-* [Dwolla](https://docs.dwolla.com/)
-* [Clearbit](https://clearbit.com/docs)
-* [Coinbase](https://developers.coinbase.com/api)
-* [Parrot Drones](http://developer.parrot.com/docs/bebop/)
-* [CoinAPI](https://docs.coinapi.io/)
+```bash
+bundle exec middleman build
+```
 
-You can view more in [the list on the wiki](https://github.com/slatedocs/slate/wiki/Slate-in-the-Wild).
+Le site compilé atterrit dans `build/`. Pour le servir :
 
-Questions? Need Help? Found a bug?
---------------------
+```bash
+cd build
+python -m http.server 8000
+```
 
-If you've got questions about setup, deploying, special feature implementation in your fork, or just want to chat with the developer, please feel free to [start a thread in our Discussions tab](https://github.com/slatedocs/slate/discussions)!
+Puis http://localhost:8000.
 
-Found a bug with upstream Slate? Go ahead and [submit an issue](https://github.com/slatedocs/slate/issues). And, of course, feel free to submit pull requests with bug fixes or changes to the `dev` branch.
+---
 
-Contributors
---------------------
+## 3. Où éditer quoi
 
-Slate was built by [Robert Lord](https://lord.io) while at [TripIt](https://www.tripit.com/). The project is now maintained by [Matthew Peveler](https://github.com/MasterOdin) and [Mike Ralphson](https://github.com/MikeRalphson).
+| Fichier / Dossier           | Rôle                                       |
+| --------------------------- | ------------------------------------------ |
+| `source/index.html.md`      | **Contenu principal** de la doc (Markdown) |
+| `source/includes/*.md`      | Sections incluses (ex. `_errors.md`)       |
+| `source/stylesheets/*.scss` | Styles SCSS                                |
+| `source/javascripts/`       | Scripts front (search, toc, copy, lang)    |
+| `source/layouts/layout.erb` | Template HTML global                       |
+| `source/images/`            | Logo, images                               |
+| `config.rb`                 | Config Middleman                           |
+| `Gemfile`                   | Dépendances Ruby                           |
+| `.ruby-version`             | Version Ruby utilisée en prod              |
 
-Thanks to the following people who have submitted major pull requests:
+---
 
-- [@chrissrogers](https://github.com/chrissrogers)
-- [@bootstraponline](https://github.com/bootstraponline)
-- [@realityking](https://github.com/realityking)
-- [@cvkef](https://github.com/cvkef)
+## 4. Ajouter ou modifier un gem
 
-Also, thanks to [Sauce Labs](http://saucelabs.com) for sponsoring the development of the responsive styles.
+Après un changement dans le `Gemfile` :
+
+```bash
+bundle install
+bundle lock --add-platform x86_64-linux
+bundle lock --add-platform ruby
+```
+
+Les deux `--add-platform` sont **essentielles** : elles ajoutent les plateformes Linux dans le `Gemfile.lock` pour que Netlify (qui build sur Linux) puisse installer les gems. Sans ça, le build Netlify plante.
+
+Ensuite commit les deux fichiers ensemble :
+
+```bash
+git add Gemfile Gemfile.lock
+git commit -m "deps: <what you changed>"
+git push
+```
+
+---
+
+## 5. Déploiement
+
+Un push sur la branche de prod déclenche automatiquement un build Netlify. La config côté Netlify :
+
+- **Build command** : `bundle exec middleman build`
+- **Publish directory** : `build`
+- **Ruby version** : contrôlée par `.ruby-version` à la racine du repo
+
+---
+
+## Troubleshooting rapide
+
+| Erreur                                                  | Fix                                                                                                                                   |
+| ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| `CssSyntaxError: Unknown word` sur `//`                 | Les fichiers SCSS doivent s'appeler `screen.css.scss` / `print.css.scss` (double extension), pas seulement `.css`                     |
+| `Unexpected token: keyword (const)` au build JS         | Dans `config.rb`, remplace `activate :minify_javascript` par `activate :minify_javascript, compressor: ::Uglifier.new(harmony: true)` |
+| Build Netlify : Ruby version mismatch                   | Vérifie que `.ruby-version` contient la même version que celle que tu utilises en local                                               |
+| Build Netlify : `Could not find gem ... in locked gems` | Tu as oublié les `bundle lock --add-platform`, refais-les et recommit `Gemfile.lock`                                                  |
+| `bundle install` plante sur Windows                     | Lance `ridk install` puis option 3 pour installer le toolchain natif                                                                  |
+
+---
+
+## Stack
+
+- [Middleman](https://middlemanapp.com/) 4.x — static site generator
+- [Slate](https://github.com/slatedocs/slate) — template doc API
+- [Redcarpet](https://github.com/vmg/redcarpet) — parser Markdown
+- [Rouge](https://github.com/rouge-ruby/rouge) — coloration syntaxique
+- Hébergement : Netlify
