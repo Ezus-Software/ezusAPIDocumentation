@@ -27,8 +27,6 @@ ready do
   require './lib/multilang.rb'
 end
 
-activate :sprockets
-
 activate :autoprefixer do |config|
   config.browsers = ['last 2 version', 'Firefox ESR']
   config.cascade  = false
@@ -50,7 +48,7 @@ configure :build do
   # If you're having trouble with Middleman hanging, commenting
   # out the following two lines has been known to help
   activate :minify_css
-  activate :minify_javascript
+  activate :minify_javascript, compressor: ::Terser.new
   # activate :gzip
 end
 
