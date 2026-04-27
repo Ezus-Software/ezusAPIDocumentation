@@ -1637,8 +1637,8 @@ curl --location 'https://api.ezus.app/suppliers-upsert' \
     {
       "lang": "american",
       "name": "My product",
-      "short_description": "Short American Description.",
-      "long_description": "Long American Description."
+      "short_description": "Short American Description",
+      "long_description": "Long American Description"
     }
   ]
 }
@@ -1687,8 +1687,8 @@ const body = {
     {
       lang: "american",
       name: "My product",
-      short_description: "Short American Description.",
-      long_description: "Long American Description.",
+      short_description: "Short American Description",
+      long_description: "Long American Description",
     },
   ],
 };
@@ -2107,8 +2107,8 @@ curl --location 'https://api.ezus.app/products-upsert' \
     {
       "lang": "american",
       "name": "My product",
-      "short_description": "Short American Description.",
-      "long_description": "Long American Description."
+      "short_description": "Short American Description",
+      "long_description": "Long American Description"
     }
   ]
 }'
@@ -2153,8 +2153,8 @@ const body = {
     {
       lang: "american",
       name: "My product",
-      short_description: "Short American Description.",
-      long_description: "Long American Description.",
+      short_description: "Short American Description",
+      long_description: "Long American Description",
     },
   ],
 };
@@ -2461,8 +2461,8 @@ curl --location 'https://api.ezus.app/packages-upsert' \
     {
       "lang": "american",
       "name": "My product",
-      "short_description": "Short American Description.",
-      "long_description": "Long American Description."
+      "short_description": "Short American Description",
+      "long_description": "Long American Description"
     }
   ]
 }'
@@ -2492,8 +2492,8 @@ const body = {
     {
       lang: "american",
       name: "My product",
-      short_description: "Short American Description.",
-      long_description: "Long American Description.",
+      short_description: "Short American Description",
+      long_description: "Long American Description",
     },
   ],
 };
@@ -2794,8 +2794,8 @@ curl --location 'https://api.ezus.app/subdestinations-upsert' \
     {
       "lang": "american",
       "name": "My product",
-      "short_description": "Short American Description.",
-      "long_description": "Long American Description."
+      "short_description": "Short American Description",
+      "long_description": "Long American Description"
     }
   ]
 }'
@@ -2819,8 +2819,8 @@ const body = {
     {
       lang: "american",
       name: "My product",
-      short_description: "Short American Description.",
-      long_description: "Long American Description.",
+      short_description: "Short American Description",
+      long_description: "Long American Description",
     },
   ],
 };
