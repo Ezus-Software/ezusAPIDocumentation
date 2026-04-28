@@ -942,12 +942,12 @@ curl --location 'https://api.ezus.app/project-steps-items-upsert' \
 --header 'Authorization: Bearer <YOUR_TOKEN>' \
 --data '[
     {
-        "project_step_reference": "step_reference",
+        "project_step_reference": "project_step_reference",
         "name": "item_creation_minimal"
     },
     {
-        "project_step_reference": "step_reference",
-        "reference": "item_reference1",
+        "project_step_reference": "project_step_reference",
+        "reference": "item_reference",
         "name": "item_update_maximal",
         "quantity": 2,
         "currency": "USD",
@@ -965,12 +965,12 @@ const baseUrl = "https://api.ezus.app";
 
 const body = [
   {
-    project_step_reference: "step_reference",
+    project_step_reference: "project_step_reference",
     name: "item_creation_minimal",
   },
   {
-    project_step_reference: "step_reference",
-    reference: "item_reference1",
+    project_step_reference: "project_step_reference",
+    reference: "item_reference",
     name: "item_update_maximal",
     quantity: 2,
     currency: "USD",
@@ -995,7 +995,7 @@ axios.post(baseUrl + "/project-steps-items-upsert", body, headers);
   "error": "false",
   "message": "ok",
   "action": "1 item successfully created ; 1 item successfully updated",
-  "references": ["14ed5b0e-89dc-11f0-8d9d-0a964b339312", "item_reference1"]
+  "references": ["project_step_item_reference", "item_reference"]
 }
 ```
 
