@@ -320,6 +320,35 @@
       "response": []
     },
     {
+      "name": "project-steps-items-upsert",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "X-API-KEY",
+            "value": "{{<YOUR_API_KEY>}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "[\n    {\n        \"project_step_reference\": \"step_reference\",\n        \"name\": \"item_creation_minimal\"\n    },\n    {\n        \"project_step_reference\": \"step_reference\",\n        \"reference\": \"item_reference1\",\n        \"name\": \"item_update_maximal\",\n        \"quantity\": 2,\n        \"currency\": \"USD\",\n        \"purchase_price\": 150,\n        \"sales_price\": 200,\n        \"vat_rate\": 20,\n        \"vat_regime\": \"classic\"\n    }\n]",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/project-steps-items-upsert",
+          "host": ["{{baseUrl}}"],
+          "path": ["project-steps-items-upsert"]
+        },
+        "description": "This POST request upserts (creates or updates) multiple items within project step(s) in batch mode"
+      },
+      "response": []
+    },
+    {
       "name": "clients",
       "request": {
         "method": "GET",

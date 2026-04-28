@@ -930,6 +930,161 @@ A JSON object indicating whether an error occurred during the process, along wit
 | action    | String | If the project has been updated and created               |
 | reference | String | The reference of the activity that was created or updated |
 
+## POST project-steps-items-upsert
+
+This endpoint allows you to create or update multiple items within project step(s) in batch mode (maximum 100 items per request).
+The endpoint works in upsert mode: if the provided `reference` matches an existing item in your account and belongs to the specified step, the item is updated. Otherwise, a new item is created.
+
+**Batch behavior:**
+- Accepts an array of items (maximum 100 items, throws an error if exceeded)
+- **Fail-fast**: if any item in the array is invalid (wrong type, invalid reference, etc.), no processing occurs (no items are persisted or modified) and the first error encountered is returned
+- Within the same batch, you can have both item creations and updates
+
+**Important notes for V1:**
+- The `product_reference` field and all associated inheritance logic (seasonal/flat rates) are intentionally excluded from this version and will be handled in a future V2 ticket
+- Items cannot be linked to catalog products in this version
+
+```shell
+curl --location 'https://api.ezus.app/project-steps-items-upsert' \
+--header 'x-api-key: <YOUR_API_KEY>' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer <YOUR_TOKEN>' \
+--data '[
+    {
+        "project_step_reference": "step_reference",
+        "name": "item_creation_minimal"
+    },
+    {
+        "project_step_reference": "step_reference",
+        "reference": "item_reference1",
+        "name": "item_update_maximal",
+        "quantity": 2,
+        "currency": "USD",
+        "purchase_price": 150,
+        "sales_price": 200,
+        "vat_rate": 20,
+        "vat_regime": "classic"
+    }
+]'
+```
+
+```javascript
+const axios = require("axios");
+const baseUrl = "https://api.ezus.app";
+
+const body = [
+  {
+    project_step_reference: "step_reference",
+    name: "item_creation_minimal",
+  },
+  {
+    project_step_reference: "step_reference",
+    reference: "item_reference1",
+    name: "item_update_maximal",
+    quantity: 2,
+    currency: "USD",
+    purchase_price: 150,
+    sales_price: 200,
+    vat_rate: 20,
+    vat_regime: "classic",
+  },
+];
+const headers = {
+  "x-api-key": "<YOUR_API_KEY>",
+  Authorization: "Bearer <YOUR_TOKEN>",
+};
+
+axios.post(baseUrl + "/project-steps-items-upsert", body, headers);
+```
+
+> This request returns a structured JSON object:
+
+```json
+{
+  "error": "false",
+  "message": "ok",
+  "action": "1 item successfully created ; 1 item successfully updated",
+  "references": ["14ed5b0e-89dc-11f0-8d9d-0a964b339312", "item_reference1"]
+}
+```
+
+> Error response example:
+
+```json
+{
+  "error": "true",
+  "message": "Invalid input detected: item[0].'vat_regime'. It must be classic, margin or none. The operation could not be processed due to this error"
+}
+```
+
+### HTTP Endpoint
+
+`POST https://api.ezus.app/project-steps-items-upsert`
+
+### Header Parameters
+
+| Parameter     | Type   | Description                                                                 |
+| ------------- | ------ | --------------------------------------------------------------------------- |
+| x-api-key     | String | <span class="label label-red float-right">Required</span> Your Ezus API key |
+| Authorization | String | <span class="label label-red float-right">Required</span> Your Bearer token |
+
+### Body Parameters (application/json)
+
+The request body must be an array of item objects (maximum 100 items).
+
+| Parameter              | Type   | Description                                                                                                                                                                                                                                         |
+| ---------------------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| project_step_reference | String | <span class="label label-red float-right">Required</span> The project step reference in which you want to create or update an item. Must match a valid, non-deleted step belonging to your account.                                                 |
+| reference              | String | If provided, the unique reference associated to the item you want to update. If you specify a reference during creation, this value will be used as the item reference (max 64 characters). If not provided, a UUID v4 is automatically generated. |
+| name                   | String | Title of the item. This field is required to create an item. This field is optional on update.                                                                                                                                                     |
+| quantity               | Number | Quantity of the item. Default value on creation: `1`                                                                                                                                                                                                 |
+| currency               | String | Currency ISO code (e.g., `USD`, `EUR`). Default value on creation: the project's sales currency. Must be present in the project's currencies (`projects_currencies`).                                                                                |
+| purchase_price         | Number | The unit purchase price of the item (including taxes). Default value on creation: `0`. See [Edge Cases](#edge-cases-project-steps-items) for price behavior.                                                                                       |
+| sales_price            | Number | The unit sales price of the item (including taxes). Default value on creation: `0`. See [Edge Cases](#edge-cases-project-steps-items) for price behavior.                                                                                           |
+| vat_rate               | Number | VAT rate in percentage (e.g., `20` for 20%). Default value on creation: the project's `default_vat_rate`.                                                                                                                                          |
+| vat_regime             | String | VAT regime: `classic`, `margin`, or `none`. Default value on creation: the project's VAT regime.                                                                                                                                                   |
+
+<aside class="notice">
+The request body accepts a maximum of 100 items per batch. If more than 100 items are provided, an error is thrown.
+</aside>
+
+### Response
+
+A JSON object indicating whether an error occurred during the process, along with the associated message.
+
+| Property    | Type   | Description                                                                                              |
+| ----------- | ------ | -------------------------------------------------------------------------------------------------------- |
+| action      | String | Summary of actions performed (e.g., "1 item successfully created ; 1 item successfully updated")        |
+| references  | Array  | List of references of the items that were created or updated (UUIDs for auto-generated, provided references otherwise) |
+
+### Edge Cases {#edge-cases-project-steps-items}
+
+**Rule 1 - Currency validation:**
+If the currency provided in the payload is not mapped in the project's currencies (`projects_currencies`), an error is thrown.
+
+**Rule 2 - Price relationship on INSERT:**
+- If `sales_price` is provided but `purchase_price` is not (or vice versa) on INSERT:
+  - `sales_price` takes the value provided in the payload and `purchase_price` = `sales_price`
+  - Or vice versa: `purchase_price` takes the value provided and `sales_price` = `purchase_price`
+
+**Rule 3 - Global calculation mode:**
+If the project is in "Global" calculation mode (not "Per product"), then `purchase_price` = `sales_price` systematically:
+- If no price is provided on INSERT: `sales_price` = `purchase_price` = `0`
+- If `sales_price` provided and `purchase_price` not provided (INSERT or UPDATE): `purchase_price` = `sales_price`
+- If `purchase_price` provided and `sales_price` not provided (INSERT or UPDATE): `sales_price` = `purchase_price`
+- If both `purchase_price` and `sales_price` are provided (INSERT or UPDATE): `sales_price` takes priority, `purchase_price` = `sales_price`
+
+### Upsert Logic
+
+| Condition                                                                                              | Behavior                         |
+| ------------------------------------------------------------------------------------------------------ | -------------------------------- |
+| `reference` not provided                                                                               | INSERT with auto-generated UUID   |
+| `reference` provided and matches an existing item in your account **belonging to the specified step**  | UPDATE the existing item          |
+| `reference` provided and matches an existing item in your account **NOT belonging to the specified step** | Error: item does not belong to this step |
+| `reference` provided and does not match any existing item in your account                               | INSERT with the provided reference |
+
+**Note:** On UPDATE, fields not provided keep their current values (no default values are applied on update).
+
 # Clients
 
 ## GET clients
