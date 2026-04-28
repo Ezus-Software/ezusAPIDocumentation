@@ -1059,17 +1059,6 @@ For project in "Global" calculation mode:
 - If `purchase_price` provided and `sales_price` not provided (INSERT or UPDATE): `sales_price` = `purchase_price`
 - If both `purchase_price` and `sales_price` are provided (INSERT or UPDATE): `sales_price` takes priority, `purchase_price` = `sales_price`
 
-### Upsert Logic
-
-| Condition                                                                                                 | Behavior                                 |
-| --------------------------------------------------------------------------------------------------------- | ---------------------------------------- |
-| `reference` not provided                                                                                  | INSERT with auto-generated UUID          |
-| `reference` provided and matches an existing item in your account **belonging to the specified step**     | UPDATE the existing item                 |
-| `reference` provided and matches an existing item in your account **NOT belonging to the specified step** | Error: item does not belong to this step |
-| `reference` provided and does not match any existing item in your account                                 | INSERT with the provided reference       |
-
-**Note:** On UPDATE, fields not provided keep their current values (no default values are applied on update).
-
 # Clients
 
 ## GET clients
