@@ -2787,13 +2787,13 @@ curl --location 'https://api.ezus.app/subdestinations-upsert' \
     "langs": [
     {
       "lang": "french",
-      "name": "Ma destination",
+      "name": "Ma sous-destination",
       "short_description": "Une description courte en français",
       "long_description": "Une description longue en français"
     },
     {
       "lang": "american",
-      "name": "My destination",
+      "name": "My sub-destination",
       "short_description": "Short American Description",
       "long_description": "Long American Description"
     }
@@ -2812,13 +2812,13 @@ const body = {
   langs: [
     {
       lang: "french",
-      name: "Ma destination",
+      name: "Ma sous-destination",
       short_description: "Une description courte en français",
       long_description: "Une description longue en français",
     },
     {
       lang: "american",
-      name: "My destination",
+      name: "My sub-destination",
       short_description: "Short American Description",
       long_description: "Long American Description",
     },
