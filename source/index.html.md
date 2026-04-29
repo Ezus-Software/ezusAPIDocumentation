@@ -1741,7 +1741,7 @@ axios.post(baseUrl + "/suppliers-upsert", body, headers);
 | subcategory_reference    | String | Reference of the sub-category to link to the supplier. To reset the sub-category, you can put `'0'`. If the `category_reference` is not provided, the `subcategory_reference` will be ignored.                                                   |
 | custom_fields            | Array  | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                                                                                                    |
 | tags                     | Array  | Array of strings representing tag technical names. If an empty array (`[]`) is provided, all existing product tags are removed. Otherwise, the provided tags fully replace the current ones.                                                     |
-| langs                    | Array  | Array of JSON langs representing the descriptions associated with this supplier ([Langs](#langs))                                                                                                                                                |
+| langs                    | Array  | Array of JSON langs representing the descriptions associated with this supplier. The specified language must be enabled for the given account ([Langs](#langs))                                                                                  |
 
 ### Response
 
@@ -2212,7 +2212,7 @@ axios.post(baseUrl + "/products-upsert", body, headers);
 | subcategory_reference    | String | Reference of the sub-category to link to the product. To reset the sub-category, you can put `'0'`. If the `category_reference` is not provided, the `subcategory_reference` will be ignored.                                                                           |
 | custom_fields            | Array  | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                                                                                                                           |
 | tags                     | Array  | Array of strings representing tag technical names. If an empty array (`[]`) is provided, all existing product tags are removed. Otherwise, the provided tags fully replace the current ones.                                                                            |
-| langs                    | Array  | Array of JSON langs representing the descriptions associated with this product ([Langs](#langs))                                                                                                                                                                        |
+| langs                    | Array  | Array of JSON langs representing the descriptions associated with this product. The specified language must be enabled for the given account ([Langs](#langs))                                                                                                          |
 
 ### Response
 
@@ -2540,7 +2540,7 @@ axios.post(baseUrl + "/packages-upsert", body, headers);
 | category_reference       | String | Reference of the category to link to the package. To reset the category, you can put `'0'`.                                                                                                                            |
 | subcategory_reference    | String | Reference of the sub-category to link to the package. To reset the sub-category, you can put `'0'`. If the `category_reference` is not provided, the `subcategory_reference` will be ignored.                          |
 | custom_fields            | Array  | Array of JSON custom fields [Custom fields](#custom-fields)                                                                                                                                                            |
-| langs                    | Array  | Array of JSON langs representing the descriptions associated with this package ([Langs](#langs))                                                                                                                       |
+| langs                    | Array  | Array of JSON langs representing the descriptions associated with this package. The specified language must be enabled for the given account ([Langs](#langs))                                                         |
 
 ### Response
 
@@ -2861,7 +2861,7 @@ axios.post(baseUrl + "/subdestinations-upsert", body, headers);
 | reference             | String | If provided, the unique reference associated to the sub-destination you want to update or create (in case the one you provided has never been used). If no reference is provided, a sub-destination will be created with a random one. |
 | destination_reference | String | This parameter is required and must match an existing destination.                                                                                                                                                                     |
 | name                  | String | This parameter is required. Name of the sub-destination to create or update. If a sub-destination already exists with this name, it will return an error.                                                                              |
-| langs                 | Array  | Array of JSON langs representing the descriptions associated with this sub-destination ([Langs](#langs))                                                                                                                               |
+| langs                 | Array  | Array of JSON langs representing the descriptions associated with this sub-destination. The specified language must be enabled for the given account ([Langs](#langs))                                                                 |
 
 ### Response
 
@@ -4224,12 +4224,12 @@ The fields `purchase_price`, `purchase_price_excl_taxes`, `sales_price`, and `sa
 ]
 ```
 
-| Property          | Type   | Description                                      |
-| ----------------- | ------ | ------------------------------------------------ |
-| lang              | String | Language name in lower case                      |
-| name              | String | Title of the object in this language             |
-| short_description | String | Short description of the object in this language |
-| long_description  | String | Long description of the object in this language  |
+| Property          | Type   | Description                                                                                                                                       |
+| ----------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| lang              | String | Language name in lower case. Possible lang property values are: french, english, american, spanish, italian, portuguese, german, dutch, norwegian |
+| name              | String | Title of the object in this language                                                                                                              |
+| short_description | String | Short description of the object in this language                                                                                                  |
+| long_description  | String | Long description of the object in this language                                                                                                   |
 
 ### Medias
 
