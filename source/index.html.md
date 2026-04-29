@@ -1630,13 +1630,13 @@ curl --location 'https://api.ezus.app/suppliers-upsert' \
   "langs": [
     {
       "lang": "french",
-      "name": "Mon produit",
+      "name": "Mon fournisseur",
       "short_description": "Une description courte en français",
       "long_description": "Une description longue en français"
     },
     {
       "lang": "american",
-      "name": "My product",
+      "name": "My supplier",
       "short_description": "Short American Description",
       "long_description": "Long American Description"
     }
@@ -1680,13 +1680,13 @@ const body = {
   langs: [
     {
       lang: "french",
-      name: "Mon produit",
+      name: "Mon fournisseur",
       short_description: "Une description courte en français",
       long_description: "Une description longue en français",
     },
     {
       lang: "american",
-      name: "My product",
+      name: "My supplier",
       short_description: "Short American Description",
       long_description: "Long American Description",
     },
@@ -2454,13 +2454,13 @@ curl --location 'https://api.ezus.app/packages-upsert' \
     "langs": [
     {
       "lang": "french",
-      "name": "Mon produit",
+      "name": "Mon package",
       "short_description": "Une description courte en français",
       "long_description": "Une description longue en français"
     },
     {
       "lang": "american",
-      "name": "My product",
+      "name": "My package",
       "short_description": "Short American Description",
       "long_description": "Long American Description"
     }
@@ -2485,13 +2485,13 @@ const body = {
   langs: [
     {
       lang: "french",
-      name: "Mon produit",
+      name: "Mon package",
       short_description: "Une description courte en français",
       long_description: "Une description longue en français",
     },
     {
       lang: "american",
-      name: "My product",
+      name: "My package",
       short_description: "Short American Description",
       long_description: "Long American Description",
     },
@@ -2787,13 +2787,13 @@ curl --location 'https://api.ezus.app/subdestinations-upsert' \
     "langs": [
     {
       "lang": "french",
-      "name": "Mon produit",
+      "name": "Ma destination",
       "short_description": "Une description courte en français",
       "long_description": "Une description longue en français"
     },
     {
       "lang": "american",
-      "name": "My product",
+      "name": "My destination",
       "short_description": "Short American Description",
       "long_description": "Long American Description"
     }
@@ -2812,13 +2812,13 @@ const body = {
   langs: [
     {
       lang: "french",
-      name: "Mon produit",
+      name: "Ma destination",
       short_description: "Une description courte en français",
       long_description: "Une description longue en français",
     },
     {
       lang: "american",
-      name: "My product",
+      name: "My destination",
       short_description: "Short American Description",
       long_description: "Long American Description",
     },
