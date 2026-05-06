@@ -332,7 +332,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "[\n    {\n        \"project_step_reference\": \"step_reference\",\n        \"name\": \"item_creation_minimal\"\n    },\n    {\n        \"project_step_reference\": \"step_reference\",\n        \"reference\": \"item_reference1\",\n        \"name\": \"item_update_maximal\",\n        \"quantity\": 2,\n        \"currency\": \"USD\",\n        \"purchase_price\": 150,\n        \"sales_price\": 200,\n        \"vat_rate\": 20,\n        \"vat_regime\": \"classic\"\n    }\n]",
+          "raw": "[\n    {\n        \"project_step_reference\": \"project_step_reference\",\n        \"name\": \"item_creation_minimal\"\n    },\n    {\n        \"project_step_reference\": \"project_step_reference\",\n        \"reference\": \"item_reference\",\n        \"name\": \"item_update_maximal\",\n        \"quantity\": 2,\n        \"currency\": \"USD\",\n        \"purchase_price\": 150,\n        \"sales_price\": 200,\n        \"vat_rate\": 20,\n        \"vat_regime\": \"classic\"\n    }\n]",
           "options": {
             "raw": {
               "language": "json"
