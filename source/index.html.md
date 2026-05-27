@@ -3361,6 +3361,7 @@ axios.get(baseUrl + "/invoices-supplier", headers);
       "filename": "2023_101010.pdf",
       "created_date": "2023-10-10",
       "due_date": "2023-10-10",
+      "send_date": "2023-10-10",
       "currency": "EUR",
       "amount_ttc": 160.0,
       "amount_ht": 120.0,
@@ -3417,6 +3418,7 @@ Each `invoice-supplier` of the `invoices-supplier` list is a JSON object contain
 | filename           | String | Filename of the supplier invoice                                                                                                                                                                                  |
 | created_date       | String | Date of the creation of the supplier invoice, in a "YYYY-MM-DD" format                                                                                                                                            |
 | due_date           | String | Due date of the supplier invoice, in a "YYYY-MM-DD" format                                                                                                                                                        |
+| send_date          | String | Sent date of the supplier invoice, in a "YYYY-MM-DD" format                                                                                                                                                       |
 | currency           | String | The ISO 4217 currency code representing the currency you utilize (<a href="https://docs.google.com/spreadsheets/d/1b7BNOwKyN1hMOouve6xhFZ2R2zrH4Sj1L-646j755fU/edit?usp=sharing" target="_blank">Link to doc</a>) |
 | amount_ttc         | Number | Amount of the supplier invoice including taxes                                                                                                                                                                    |
 | amount_ht          | Number | Amount of the supplier invoice excluding taxes                                                                                                                                                                    |
@@ -3462,6 +3464,7 @@ axios.get(
   "filename": "File Name",
   "created_date": "2023-10-10",
   "due_date": "2023-10-20",
+  "send_date": "2023-10-15",
   "currency": "EUR",
   "amount_ttc": 1200.0,
   "amount_ht": 1000.0,
@@ -3543,6 +3546,7 @@ A JSON object containing the supplier invoice information with properties like:
 | filename     | String | Filename of the supplier invoice                                                                                                                                                                                  |
 | created_date | String | Date of the creation of the supplier invoice, in a "YYYY-MM-DD" format                                                                                                                                            |
 | due_date     | String | Due date of the supplier invoice, in a "YYYY-MM-DD" format                                                                                                                                                        |
+| send_date    | String | Sent date of the supplier invoice, in a "YYYY-MM-DD" format                                                                                                                                                       |
 | currency     | String | The ISO 4217 currency code representing the currency you utilize (<a href="https://docs.google.com/spreadsheets/d/1b7BNOwKyN1hMOouve6xhFZ2R2zrH4Sj1L-646j755fU/edit?usp=sharing" target="_blank">Link to doc</a>) |
 | amount_ttc   | Number | Amount of the supplier invoice including taxes                                                                                                                                                                    |
 | amount_ht    | Number | Amount of the supplier invoice excluding taxes                                                                                                                                                                    |
@@ -4886,6 +4890,7 @@ This event is triggered whenever a file is added to a supplier invoice.
     "filename": "2023_101010.pdf",
     "created_date": "2023-10-10",
     "due_date": "2023-10-20",
+    "send_date": "2023-10-15",
     "currency": "EUR",
     "amount_ttc": 1200.0,
     "amount_ht": 1000.0,
@@ -4907,6 +4912,7 @@ This event is triggered whenever a file is added to a supplier invoice.
 | filename           | String | Filename of the supplier invoice                                                                                                                                                                                  |
 | created_date       | String | Date of the creation of this supplier invoice, in a "YYYY-MM-DD" format                                                                                                                                           |
 | due_date           | String | Due date of this supplier invoice, in a "YYYY-MM-DD" format                                                                                                                                                       |
+| send_date          | String | Sent date of this supplier invoice, in a "YYYY-MM-DD" format                                                                                                                                                       |
 | currency           | String | The ISO 4217 currency code representing the currency you utilize (<a href="https://docs.google.com/spreadsheets/d/1b7BNOwKyN1hMOouve6xhFZ2R2zrH4Sj1L-646j755fU/edit?usp=sharing" target="_blank">Link to doc</a>) |
 | amount_ttc         | Number | Amount of the supplier invoice including taxes                                                                                                                                                                    |
 | amount_ht          | Number | Amount of the supplier invoice excluding taxes                                                                                                                                                                    |
