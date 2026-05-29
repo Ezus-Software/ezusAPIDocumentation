@@ -3262,7 +3262,21 @@ axios.get(baseUrl + "/invoice?reference=invoice_reference", headers);
     "commission": null,
     "vat_deducted": null,
     "amount_ht": null
-  }
+  },
+  "lines": [
+    {
+      "title": "Private Suite at Hôtel Ritz Paris",
+      "quantity": 1,
+      "price": 1200,
+      "price_excl_taxes": 1000,
+      "description": "Luxury private suite accommodation at Hôtel Ritz Paris including premium amenities and concierge services.",
+      "taxes": {
+        "name": "classic",
+        "category": "S",
+        "comment": ""
+      }
+    }
+  ]
 }
 ```
 
@@ -3308,6 +3322,7 @@ A JSON object containing the invoice information with properties like:
 | client             | JSON   | JSON including: `reference`, `type` (enterprise or individual), `company_name`, `first_name`, `last_name` and `email`                                                                                             |
 | forecast           | JSON   | JSON object forecast ([Invoices Amounts](#invoices-amounts))                                                                                                                                                      |
 | actual             | JSON   | JSON object actual ([Invoices Amounts](#invoices-amounts))                                                                                                                                                        |
+| lines              | Array  | Array of JSON invoices lines ([Invoices Lines](#invoices-lines))                                                                                                                                                  |
 
 ## PUT invoices-update
 
@@ -4390,6 +4405,38 @@ These objects provides insights into the invoice amounts, differentiating betwee
 | commission   | Number  | Forecasted / Actual commission                                                           |
 | vat_deducted | Number  | Forecasted / Actual deductible VAT                                                       |
 | amount_ht    | Number  | Forecasted / Actual amount excluding taxes                                               |
+
+### Invoices Lines
+
+```json
+"lines": [
+  {
+    "title": "Private Suite at Hôtel Ritz Paris",
+    "quantity": 1,
+    "price": 1200,
+    "price_excl_taxes": 1000,
+    "description": "Luxury private suite accommodation at Hôtel Ritz Paris including premium amenities and concierge services.",
+    "taxes": {
+      "name": "classic",
+      "category": "S",
+      "comment": ""
+    }
+  }
+]
+```
+
+These objects represent the individual invoice lines associated with the invoice or credit note.
+
+| Property         | Type   | Description                                                                           |
+| ---------------- | ------ | ------------------------------------------------------------------------------------- |
+| title            | String | Title or short label of the invoiced service or product                               |
+| quantity         | Number | Quantity billed for this invoice line                                                 |
+| price            | Number | Total amount including taxes                                                          |
+| price_excl_taxes | Number | Total amount excluding taxes                                                          |
+| description      | String | Detailed description of the invoiced service or product                               |
+| taxes.name       | String | Tax profile applied to the invoice line. Possible values: `none`, `margin`, `classic` |
+| taxes.category   | String | Tax category code associated with the invoice line                                    |
+| taxes.comment    | String | Additional tax-related information or comment                                         |
 
 ### Items
 
