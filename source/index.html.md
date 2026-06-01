@@ -4432,17 +4432,17 @@ These objects provides insights into the invoice amounts, differentiating betwee
 
 These objects represent the individual invoice lines associated with the invoice or credit note.
 
-| Property            | Type   | Description                                                                           |
-| ------------------- | ------ | ------------------------------------------------------------------------------------- |
-| title               | String | Title or short label of the invoiced service or product                               |
-| quantity            | Number | Quantity billed for this invoice line                                                 |
-| price               | Number | Total amount including taxes                                                          |
-| price_excl_taxes    | Number | Total amount excluding taxes                                                          |
-| description         | String | Detailed description of the invoiced service or product                               |
-| tax_rate            | Number | Tax rate                                                                              |
-| tax_regime.name     | String | Tax profile applied to the invoice line. Possible values: `none`, `margin`, `classic` |
-| tax_regime.category | String | Tax category code associated with the invoice line                                    |
-| tax_regime.comment  | String | Additional tax-related information or comment                                         |
+| Property            | Type   | Description                                                                                                                                                                     |
+| ------------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| title               | String | Title or short label of the invoiced service or product. When present, the fee line is returned with the title "Main fee" and the discount line with the title "Main discount". |
+| quantity            | Number | Quantity billed for this invoice line                                                                                                                                           |
+| price               | Number | Total amount including taxes                                                                                                                                                    |
+| price_excl_taxes    | Number | Total amount excluding taxes                                                                                                                                                    |
+| description         | String | Detailed description of the invoiced service or product                                                                                                                         |
+| tax_rate            | Number | Tax rate applied to the line item, expressed as a percentage.                                                                                                                   |
+| tax_regime.name     | String | Tax profile applied to the invoice line. Possible values: `none`, `margin`, `classic`                                                                                           |
+| tax_regime.category | String | Tax category code associated with the invoice line                                                                                                                              |
+| tax_regime.comment  | String | Additional tax-related information or comment                                                                                                                                   |
 
 ### Items
 
