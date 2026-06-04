@@ -2680,6 +2680,71 @@ A JSON object indicating whether an error occurred during the process, along wit
 | action    | String | Indicates type of package action was created                                             |
 | reference | String | The `reference` for the package, which you should store for future updates or retrievals |
 
+# Categories
+
+## GET categories
+
+Returns a list of all categories and sub-categories. The list is not paginated and is theoretically limited to 1000 objects (categories and sub-categories), although higher limits may work depending on the payload size. The order of the categories and sub-categories matches their order in Ezus.
+
+```shell
+curl --location 'https://api.ezus.app/categories' \
+--header 'x-api-key: <YOUR_API_KEY>' \
+--header 'Authorization: Bearer <YOUR_TOKEN>'
+```
+
+```javascript
+const axios = require("axios");
+const baseUrl = "https://api.ezus.app";
+
+const headers = {
+  "x-api-key": "<YOUR_API_KEY>",
+  Authorization: "Bearer <YOUR_TOKEN>",
+};
+
+axios.get(baseUrl + "/categories", headers);
+```
+
+> This request returns a structured JSON object:
+
+```json
+{
+  "error": "false",
+  "size": 1,
+  "categories": [
+    {
+      "reference": "category_reference",
+      "name": "Experiences",
+      "subcategories": [
+        {
+          "reference": "subcategory_reference",
+          "name": "Relaxation"
+        }
+      ]
+    }
+  ]
+}
+```
+
+### HTTP Endpoint
+
+`GET https://api.ezus.app/categories`
+
+### Header Parameters
+
+| Parameter     | Type   | Description                                                                 |
+| ------------- | ------ | --------------------------------------------------------------------------- |
+| x-api-key     | String | <span class="label label-red float-right">Required</span> Your Ezus API key |
+| Authorization | String | <span class="label label-red float-right">Required</span> Your Bearer token |
+
+### Response
+
+A JSON object containing the category information, with properties like:
+
+| Property   | Type   | Description                                            |
+| ---------- | ------ | ------------------------------------------------------ |
+| size       | Number | The total number of categories                         |
+| categories | Array  | Array of JSON categories ([Categories](#categories-2)) |
+
 # Destinations
 
 ## GET destinations
@@ -3047,6 +3112,7 @@ axios.get(baseUrl + "/invoices?stage=completed", headers);
       "send_date": "2023-10-10",
       "due_date": "2023-10-10",
       "currency": "EUR",
+      "is_einvoice_ready": true,
       "amount_ttc": 1200.0,
       "amount_ht": 1000.0,
       "vat": 200.0,
@@ -3159,6 +3225,7 @@ axios.get(baseUrl + "/invoice?reference=invoice_reference", headers);
   "send_date": "2023-10-10",
   "due_date": "2023-10-10",
   "currency": "EUR",
+  "is_einvoice_ready": true,
   "amount_ttc": 1200.0,
   "amount_ht": 1000.0,
   "vat": 200.0,
@@ -3197,7 +3264,22 @@ axios.get(baseUrl + "/invoice?reference=invoice_reference", headers);
     "commission": null,
     "vat_deducted": null,
     "amount_ht": null
-  }
+  },
+  "lines": [
+    {
+      "title": "Private Suite at Hôtel Ritz Paris",
+      "quantity": 1,
+      "price": 1200,
+      "price_excl_taxes": 1000,
+      "description": "Luxury private suite accommodation at Hôtel Ritz Paris including premium amenities and concierge services.",
+      "tax_rate": 20,
+      "tax_regime": {
+        "name": "classic",
+        "category": "S",
+        "comment": ""
+      }
+    }
+  ]
 }
 ```
 
@@ -3222,27 +3304,29 @@ axios.get(baseUrl + "/invoice?reference=invoice_reference", headers);
 
 A JSON object containing the invoice information with properties like:
 
-| Property           | Type   | Description                                                                                                                                                                                                       |
-| ------------------ | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| reference          | String | The reference of the invoice                                                                                                                                                                                      |
-| info_number        | String | Title of the invoice                                                                                                                                                                                              |
-| type               | String | Type of the invoice `invoice` or `credit_note`                                                                                                                                                                    |
-| origin_reference   | String | This is only displayed if the type of the invoice is a `credit_note`. The reference of the origin invoice.                                                                                                        |
-| origin_info_number | String | This is only displayed if the type of the invoice is a `credit_note`. Title of the origin invoice.                                                                                                                |
-| stage              | String | Stage of the invoice `draft` `completed` or `paid`                                                                                                                                                                |
-| created_date       | String | Date of the creation of this invoice, in a "YYYY-MM-DD" format                                                                                                                                                    |
-| send_date          | String | Sent date of this invoice, in a "YYYY-MM-DD" format                                                                                                                                                               |
-| due_date           | String | Due date of this invoice, in a "YYYY-MM-DD" format                                                                                                                                                                |
-| currency           | String | The ISO 4217 currency code representing the currency you utilize (<a href="https://docs.google.com/spreadsheets/d/1b7BNOwKyN1hMOouve6xhFZ2R2zrH4Sj1L-646j755fU/edit?usp=sharing" target="_blank">Link to doc</a>) |
-| amount_ttc         | Number | Amount of the invoice including taxes                                                                                                                                                                             |
-| amount_ht          | Number | Amount of the invoice excluding taxes                                                                                                                                                                             |
-| vat                | Number | VAT amount of the invoice                                                                                                                                                                                         |
-| url                | String | URL of the invoice `.pdf` file                                                                                                                                                                                    |
-| project            | JSON   | JSON including: `reference`, `info_number`, `info_title`, `info_stage_reference`, `info_stage`, `currency` and `is_closed`                                                                                        |
-| alternative        | JSON   | JSON including: `sort_order` and `title`                                                                                                                                                                          |
-| client             | JSON   | JSON including: `reference`, `type` (enterprise or individual), `company_name`, `first_name`, `last_name` and `email`                                                                                             |
-| forecast           | JSON   | JSON object forecast ([Invoices Amounts](#invoices-amounts))                                                                                                                                                      |
-| actual             | JSON   | JSON object actual ([Invoices Amounts](#invoices-amounts))                                                                                                                                                        |
+| Property           | Type    | Description                                                                                                                                                                                                       |
+| ------------------ | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| reference          | String  | The reference of the invoice                                                                                                                                                                                      |
+| info_number        | String  | Title of the invoice                                                                                                                                                                                              |
+| type               | String  | Type of the invoice `invoice` or `credit_note`                                                                                                                                                                    |
+| origin_reference   | String  | This is only displayed if the type of the invoice is a `credit_note`. The reference of the origin invoice.                                                                                                        |
+| origin_info_number | String  | This is only displayed if the type of the invoice is a `credit_note`. Title of the origin invoice.                                                                                                                |
+| stage              | String  | Stage of the invoice `draft` `completed` or `paid`                                                                                                                                                                |
+| created_date       | String  | Date of the creation of this invoice, in a "YYYY-MM-DD" format                                                                                                                                                    |
+| send_date          | String  | Sent date of this invoice, in a "YYYY-MM-DD" format                                                                                                                                                               |
+| due_date           | String  | Due date of this invoice, in a "YYYY-MM-DD" format                                                                                                                                                                |
+| currency           | String  | The ISO 4217 currency code representing the currency you utilize (<a href="https://docs.google.com/spreadsheets/d/1b7BNOwKyN1hMOouve6xhFZ2R2zrH4Sj1L-646j755fU/edit?usp=sharing" target="_blank">Link to doc</a>) |
+| is_einvoice_ready  | Boolean | Is the invoice ready for e-invoicing                                                                                                                                                                              |
+| amount_ttc         | Number  | Amount of the invoice including taxes                                                                                                                                                                             |
+| amount_ht          | Number  | Amount of the invoice excluding taxes                                                                                                                                                                             |
+| vat                | Number  | VAT amount of the invoice                                                                                                                                                                                         |
+| url                | String  | URL of the invoice `.pdf` file                                                                                                                                                                                    |
+| project            | JSON    | JSON including: `reference`, `info_number`, `info_title`, `info_stage_reference`, `info_stage`, `currency` and `is_closed`                                                                                        |
+| alternative        | JSON    | JSON including: `sort_order` and `title`                                                                                                                                                                          |
+| client             | JSON    | JSON including: `reference`, `type` (enterprise or individual), `company_name`, `first_name`, `last_name` and `email`                                                                                             |
+| forecast           | JSON    | JSON object forecast ([Invoices Amounts](#invoices-amounts))                                                                                                                                                      |
+| actual             | JSON    | JSON object actual ([Invoices Amounts](#invoices-amounts))                                                                                                                                                        |
+| lines              | Array   | Array of JSON invoices lines ([Invoices Lines](#invoices-lines))                                                                                                                                                  |
 
 ## PUT invoices-update
 
@@ -4233,6 +4317,31 @@ The technical name of a custom field can be found in the custom field edit modal
 | subcategory_reference | String | The reference of the sub-category |
 | subcategory_name      | String | Name of the sub-category          |
 
+### Categories
+
+```json
+"categories": [
+  {
+    "reference": "category_reference",
+    "name": "Experiences",
+    "subcategories": [
+      {
+        "reference": "subcategory_reference",
+        "name": "Relaxation"
+      }
+    ]
+  }
+]
+```
+
+Each object represents a category with its associated sub-categories
+
+| Property      | Type   | Description                                                                                  |
+| ------------- | ------ | -------------------------------------------------------------------------------------------- |
+| reference     | String | The reference of the category                                                                |
+| name          | String | Name of the category                                                                         |
+| subcategories | Array  | An array of JSON objects, each representing a sub-category along with its name and reference |
+
 ### Destination
 
 ```json
@@ -4304,6 +4413,40 @@ These objects provides insights into the invoice amounts, differentiating betwee
 | commission   | Number  | Forecasted / Actual commission                                                           |
 | vat_deducted | Number  | Forecasted / Actual deductible VAT                                                       |
 | amount_ht    | Number  | Forecasted / Actual amount excluding taxes                                               |
+
+### Invoices Lines
+
+```json
+"lines": [
+  {
+    "title": "Private Suite at Hôtel Ritz Paris",
+    "quantity": 1,
+    "price": 1200,
+    "price_excl_taxes": 1000,
+    "description": "Luxury private suite accommodation at Hôtel Ritz Paris including premium amenities and concierge services.",
+    "tax_rate": 20,
+    "tax_regime": {
+      "name": "classic",
+      "category": "S",
+      "comment": ""
+    }
+  }
+]
+```
+
+These objects represent the individual invoice lines associated with the invoice or credit note.
+
+| Property            | Type   | Description                                                                                                                                                                     |
+| ------------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| title               | String | Title or short label of the invoiced service or product. When present, the fee line is returned with the title "Main fee" and the discount line with the title "Main discount". |
+| quantity            | Number | Quantity billed for this invoice line                                                                                                                                           |
+| price               | Number | Total amount including taxes                                                                                                                                                    |
+| price_excl_taxes    | Number | Total amount excluding taxes                                                                                                                                                    |
+| description         | String | Detailed description of the invoiced service or product                                                                                                                         |
+| tax_rate            | Number | Tax rate applied to the line item, expressed as a percentage.                                                                                                                   |
+| tax_regime.name     | String | Tax profile applied to the invoice line. Possible values: `none`, `margin`, `classic`                                                                                           |
+| tax_regime.category | String | Tax category code associated with the invoice line                                                                                                                              |
+| tax_regime.comment  | String | Additional tax-related information or comment                                                                                                                                   |
 
 ### Items
 
