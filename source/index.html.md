@@ -3340,7 +3340,7 @@ A JSON object containing the invoice information with properties like:
 | vat                | Number  | VAT amount of the invoice                                                                                                                                                                                         |
 | url                | String  | URL of the invoice `.pdf` file                                                                                                                                                                                    |
 | project            | JSON    | JSON including: `reference`, `info_number`, `info_title`, `info_stage_reference`, `info_stage`, `currency` and `is_closed`                                                                                        |
-| alternative        | JSON    | JSON including: `sort_order`, `title`, `trip_date_in` and `trip_date_out`                                                                                                                                         |
+| alternative        | JSON    | JSON including: `sort_order`, `title`, `trip_date_in`, `trip_date_out` and `trip_duration`                                                                                                                        |
 | client             | JSON    | JSON including: `reference`, `type` (enterprise or individual), `company_name`, `first_name`, `last_name` and `email`                                                                                             |
 | forecast           | JSON    | JSON object forecast ([Invoices Amounts](#invoices-amounts))                                                                                                                                                      |
 | actual             | JSON    | JSON object actual ([Invoices Amounts](#invoices-amounts))                                                                                                                                                        |
@@ -5115,23 +5115,21 @@ If it’s defined as a dynamic filter, you can use different comparison operator
 | Ends with   | `_ends`   | Field value ends with...                                                                      | `email_ends=international.com`            |
 | Contains    | `_like`   | Field value contains...                                                                       | `email_like=moke`                         |
 
-## Dynamic Date-Filters
+## Dynamic Date Filters
 
 Some date filters can be marked as Dynamic date filter.
-They follow the same suffix mechanism as text [Dynamic filters](#dynamic-filters), but with date comparison operators. Values must be provided in ISO 8601 `YYYY-MM-DD` format.
+They follow the same suffix mechanism as text [Dynamic filters](#dynamic-filters), but with date comparison operators. Values must be provided in `YYYY-MM-DD` format.
 
-| Operator     | Suffix | Description          | Example                       |
-| ------------ | ------ | -------------------- | ----------------------------- |
-| Equals       |        | Exact date           | `created_date=2026-01-15`     |
-| Equals       | `_eq`  | Exact date           | `created_date_eq=2026-01-15`  |
-| After        | `_gt`  | Strictly after       | `created_date_gt=2026-01-01`  |
-| On or after  | `_gte` | On or after (incl.)  | `created_date_gte=2026-01-01` |
-| Before       | `_lt`  | Strictly before      | `created_date_lt=2026-02-01`  |
-| On or before | `_lte` | On or before (incl.) | `created_date_lte=2026-01-31` |
+| Operator     | Suffix | Description                                                                                   | Example                       |
+| ------------ | ------ | --------------------------------------------------------------------------------------------- | ----------------------------- |
+| Equals       |        | Filters that aren’t marked as dynamic default to equals, meaning it will match values exactly | `created_date=2026-01-15`     |
+| Equals       | `_eq`  | Exact date                                                                                    | `created_date_eq=2026-01-15`  |
+| After        | `_gt`  | Strictly after                                                                                | `created_date_gt=2026-01-01`  |
+| On or after  | `_gte` | On or after (incl.)                                                                           | `created_date_gte=2026-01-01` |
+| Before       | `_lt`  | Strictly before                                                                               | `created_date_lt=2026-02-01`  |
+| On or before | `_lte` | On or before (incl.)                                                                          | `created_date_lte=2026-01-31` |
 
 A date range is obtained by combining two suffixes, e.g. `created_date_gte=2026-01-01&created_date_lte=2026-03-31`.
-
-A value that is not a valid `YYYY-MM-DD` date returns an explicit error (4xx) instead of being silently ignored.
 
 # Date Format
 
