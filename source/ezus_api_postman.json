@@ -969,6 +969,11 @@
               "disabled": true
             },
             {
+              "key": "has_attachement",
+              "value": "true",
+              "disabled": true
+            },
+            {
               "key": "supplier_reference",
               "value": "supplier_reference",
               "disabled": true
