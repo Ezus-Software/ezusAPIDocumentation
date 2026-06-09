@@ -948,6 +948,7 @@ curl --location 'https://api.ezus.app/project-steps-items-upsert' \
     {
         "project_step_reference": "project_step_reference",
         "reference": "item_reference",
+        "product_reference": "product_reference",
         "name": "item_update_maximal",
         "quantity": 2,
         "currency": "USD",
