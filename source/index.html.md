@@ -1142,10 +1142,10 @@ axios.get(baseUrl + "/clients", headers);
 | Parameter   | Type                               | Description                                                                                                                               |
 | ----------- | ---------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
 | next_token  | String                             | Specify this parameter if you want to retrieve the following elements of a given list query.                                              |
-| reference   | [Dynamic-filter](#dynamic-filters) | You can filter clients with a specific reference                                                                                          |
-| info_number | [Dynamic-filter](#dynamic-filters) | You can filter clients with a specific info_number, file number that appears in the client record. Not to be confused with reference      |
+| reference   | [Dynamic filter](#dynamic-filters) | You can filter clients with a specific reference                                                                                          |
+| info_number | [Dynamic filter](#dynamic-filters) | You can filter clients with a specific info_number, file number that appears in the client record. Not to be confused with reference      |
 | type        | String                             | You can filter clients by their type. Either `enterprise` or `individual`                                                                 |
-| email       | [Dynamic-filter](#dynamic-filters) | You can filter clients by email. This filter works for both `enterprise` clients (uses the main contact’s email) and `individual` clients |
+| email       | [Dynamic filter](#dynamic-filters) | You can filter clients by email. This filter works for both `enterprise` clients (uses the main contact’s email) and `individual` clients |
 
 ### Response
 
@@ -3127,7 +3127,10 @@ axios.get(baseUrl + "/invoices?stage=completed", headers);
       },
       "alternative": {
         "sort_order": "0",
-        "title": "Main Alternative"
+        "title": "Main Alternative",
+        "trip_date_in": "2024-03-01",
+        "trip_date_out": "2024-03-09",
+        "trip_duration": 9
       },
       "client": {
         "reference": "client_reference",
@@ -3170,11 +3173,23 @@ axios.get(baseUrl + "/invoices?stage=completed", headers);
 
 ### Query Parameters
 
-| Parameter      | Type   | Description                                                                                                                                                               |
-| -------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| next_token     | String | Specify this parameter if you want to retrieve the following elements of a given list query. If this parameter is filled, other parameters are ignored.                   |
-| stage          | String | You can filter invoices that are at a specific stage. The stage can be `paid`, `completed` or `draft`.                                                                    |
-| technical_name | String | You can filter invoices according to one of their custom fields by adding the `technical_name` of the custom field as a query parameter and the desired value as a value. |
+| Parameter                    | Type                                                                                          | Description                                                                                                                                                               |
+| ---------------------------- | --------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| next_token                   | String                                                                                        | Specify this parameter if you want to retrieve the following elements of a given list query. If this parameter is filled, other parameters are ignored.                   |
+| stage                        | String                                                                                        | You can filter invoices that are at a specific stage. The stage can be `paid`, `completed` or `draft`.                                                                    |
+| is_einvoice_ready            | Boolean                                                                                       | Filter invoices ready for e-invoicing. Accepts `true` or `false`.                                                                                                         |
+| client_reference             | [Linked-record filter](#linked-record-filters)                                                | Exact match. Filter invoices by the reference of the linked client.                                                                                                       |
+| project_info_stage_reference | [Linked-record filter](#linked-record-filters)                                                | Exact match. Filter invoices whose linked project is at a given stage...                                                                                                  |
+| technical_name               | String                                                                                        | You can filter invoices according to one of their custom fields by adding the `technical_name` of the custom field as a query parameter and the desired value as a value. |
+| info_number                  | [Dynamic filter](#dynamic-filters)                                                            | Filter on the invoice's `info_number`.                                                                                                                                    |
+| project_info_number          | [Linked-record filter](#linked-record-filters) + [Dynamic filter](#dynamic-filters)           | Filter on the linked project's `info_number`.                                                                                                                             |
+| created_date                 | [Dynamic date filter](#dynamic-date-filters)                                                  | Filter on the invoice creation date.                                                                                                                                      |
+| send_date                    | [Dynamic date filter](#dynamic-date-filters)                                                  | Filter on the invoice send date.                                                                                                                                          |
+| due_date                     | [Dynamic date filter](#dynamic-date-filters)                                                  | Filter on the invoice due date.                                                                                                                                           |
+| alternative_trip_date_in     | [Linked-record filter](#linked-record-filters) + [Dynamic date filter](#dynamic-date-filters) | Filter on the linked alternative's trip start date.                                                                                                                       |
+| alternative_trip_date_out    | [Linked-record filter](#linked-record-filters) + [Dynamic date filter](#dynamic-date-filters) | Filter on the linked alternative's trip end date.                                                                                                                         |
+
+All filters are cumulative (`AND`): an invoice must match every supplied filter to be returned.
 
 ### Response
 
@@ -3241,7 +3256,10 @@ axios.get(baseUrl + "/invoice?reference=invoice_reference", headers);
   },
   "alternative": {
     "sort_order": "0",
-    "title": "Main Alternative"
+    "title": "Main Alternative",
+    "trip_date_in": "2024-03-01",
+    "trip_date_out": "2024-03-09",
+    "trip_duration": 9
   },
   "client": {
     "reference": "client_reference",
@@ -3322,7 +3340,7 @@ A JSON object containing the invoice information with properties like:
 | vat                | Number  | VAT amount of the invoice                                                                                                                                                                                         |
 | url                | String  | URL of the invoice `.pdf` file                                                                                                                                                                                    |
 | project            | JSON    | JSON including: `reference`, `info_number`, `info_title`, `info_stage_reference`, `info_stage`, `currency` and `is_closed`                                                                                        |
-| alternative        | JSON    | JSON including: `sort_order` and `title`                                                                                                                                                                          |
+| alternative        | JSON    | JSON including: `sort_order`, `title`, `trip_date_in`, `trip_date_out` and `trip_duration`                                                                                                                        |
 | client             | JSON    | JSON including: `reference`, `type` (enterprise or individual), `company_name`, `first_name`, `last_name` and `email`                                                                                             |
 | forecast           | JSON    | JSON object forecast ([Invoices Amounts](#invoices-amounts))                                                                                                                                                      |
 | actual             | JSON    | JSON object actual ([Invoices Amounts](#invoices-amounts))                                                                                                                                                        |
@@ -5055,7 +5073,7 @@ This event is triggered whenever a file is added to a supplier invoice.
 | filename           | String | Filename of the supplier invoice                                                                                                                                                                                  |
 | created_date       | String | Date of the creation of this supplier invoice, in a "YYYY-MM-DD" format                                                                                                                                           |
 | due_date           | String | Due date of this supplier invoice, in a "YYYY-MM-DD" format                                                                                                                                                       |
-| send_date          | String | Sent date of this supplier invoice, in a "YYYY-MM-DD" format                                                                                                                                                       |
+| send_date          | String | Sent date of this supplier invoice, in a "YYYY-MM-DD" format                                                                                                                                                      |
 | currency           | String | The ISO 4217 currency code representing the currency you utilize (<a href="https://docs.google.com/spreadsheets/d/1b7BNOwKyN1hMOouve6xhFZ2R2zrH4Sj1L-646j755fU/edit?usp=sharing" target="_blank">Link to doc</a>) |
 | amount_ttc         | Number | Amount of the supplier invoice including taxes                                                                                                                                                                    |
 | amount_ht          | Number | Amount of the supplier invoice excluding taxes                                                                                                                                                                    |
@@ -5065,9 +5083,25 @@ This event is triggered whenever a file is added to a supplier invoice.
 | project_reference  | String | The reference of the project linked to this supplier invoice                                                                                                                                                      |
 | alternative        | JSON   | JSON including: `sort_order` and `title`                                                                                                                                                                          |
 
-# Dynamic Filters
+# Filtering
 
-Some filters can be marked as Dynamic-filter.
+List endpoints accept query-parameter filters. Each endpoint lists its available filters and labels each one with its type: a plain exact match, a dynamic (text) filter, or a dynamic date filter. Some are additionally flagged as linked-record filters, meaning they only match objects whose linked entity has not been deleted.
+
+## Linked-Record Filters
+
+Across list endpoints, some filters target a **linked record** (e.g. the client, project or alternative attached to an invoice) rather than the returned object itself.
+
+By default, a list includes objects whose linked record has been deleted: the object still exists (e.g. an invoice remains even if the client or project linked to it has been deleted).
+
+But **a linked-record filter only matches objects whose linked record still exists**. As a result, applying such a filter excludes objects attached to a deleted linked record (e.g. filtering invoices on a project start date in June 2026 will not return invoices linked to _deleted_ projects that started in June 2026).
+
+Filtering on a linked-record field therefore narrows results to objects whose linked record is not deleted.
+
+Each endpoint indicates which of its filters are linked-record filters.
+
+## Dynamic Filters
+
+Some filters can be marked as Dynamic filter.
 When a filter is dynamic, it only accepts **String** values, and you can append operator suffixes directly to the query parameter name.
 
 Let’s take the `email` field as an example.  
@@ -5080,6 +5114,22 @@ If it’s defined as a dynamic filter, you can use different comparison operator
 | Starts with | `_starts` | Field value starts with...                                                                    | `email_starts=contact`                    |
 | Ends with   | `_ends`   | Field value ends with...                                                                      | `email_ends=international.com`            |
 | Contains    | `_like`   | Field value contains...                                                                       | `email_like=moke`                         |
+
+## Dynamic Date Filters
+
+Some date filters can be marked as Dynamic date filter.
+They follow the same suffix mechanism as text [Dynamic filters](#dynamic-filters), but with date comparison operators. Values must be provided in `YYYY-MM-DD` format.
+
+| Operator     | Suffix | Description                                                                                   | Example                       |
+| ------------ | ------ | --------------------------------------------------------------------------------------------- | ----------------------------- |
+| Equals       |        | Filters that aren’t marked as dynamic default to equals, meaning it will match values exactly | `created_date=2026-01-15`     |
+| Equals       | `_eq`  | Exact date                                                                                    | `created_date_eq=2026-01-15`  |
+| After        | `_gt`  | Strictly after                                                                                | `created_date_gt=2026-01-01`  |
+| On or after  | `_gte` | On or after (incl.)                                                                           | `created_date_gte=2026-01-01` |
+| Before       | `_lt`  | Strictly before                                                                               | `created_date_lt=2026-02-01`  |
+| On or before | `_lte` | On or before (incl.)                                                                          | `created_date_lte=2026-01-31` |
+
+A date range is obtained by combining two suffixes, e.g. `created_date_gte=2026-01-01&created_date_lte=2026-03-31`.
 
 # Date Format
 
