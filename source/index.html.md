@@ -1066,6 +1066,8 @@ Creates travellers for a project.
 This endpoint replaces all existing travellers for the selected project alternative.  
  If the project already has travellers, they will be **deleted and replaced** by the travellers provided in this request.
 
+**Note:** When creating travellers with custom fields, only custom fields of type `text` are currently supported.
+
 ```shell
 curl --location 'https://api.ezus.app/project-travellers-create' \
 --header 'x-api-key: <YOUR_API_KEY>' \
