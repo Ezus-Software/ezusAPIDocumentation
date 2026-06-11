@@ -3460,7 +3460,9 @@ axios.get(baseUrl + "/invoices-supplier", headers);
   "invoices-supplier": [
     {
       "reference": "invoice_supplier_reference",
+      "has_attachement": true,
       "filename": "2023_101010.pdf",
+      "url": "https://ezus.io/2023_101010.pdf",
       "created_date": "2023-10-10",
       "due_date": "2023-10-10",
       "send_date": "2023-10-10",
@@ -3468,7 +3470,6 @@ axios.get(baseUrl + "/invoices-supplier", headers);
       "amount_ttc": 160.0,
       "amount_ht": 120.0,
       "vat": 40.0,
-      "url": "https://ezus.io/2023_101010.pdf",
       "supplier_reference": "supplier_reference",
       "project_reference": "project_reference",
       "alternative_order": "0",
@@ -3491,14 +3492,13 @@ axios.get(baseUrl + "/invoices-supplier", headers);
 
 ### Query Parameters
 
-| Parameter          | Type   | Description                                                                                                                                                                                                                                                                                                                              |
-| ------------------ | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| next_token         | String | Specify this parameter if you want to retrieve the following elements of a given list query. If this parameter is filled, other parameters are ignored.                                                                                                                                                                                  |
-| supplier_reference | String | Filter invoices by the given supplier reference                                                                                                                                                                                                                                                                                          |
-| project_reference  | String | Filter invoices by the given project reference                                                                                                                                                                                                                                                                                           |
-| alternative_order  | Number | If <code>project_reference</code> is not provided, this parameter is ignored and the query applies to all alternatives of all projects.<br />If <code>project_reference</code> is provided, <code>alternative_order</code> must be a non-negative number: 0 targets the main alternative and the value falls back to 0 if not specified. |
-
-|
+| Parameter          | Type    | Description                                                                                                                                                                                                                                                                                                                              |
+| ------------------ | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| next_token         | String  | Specify this parameter if you want to retrieve the following elements of a given list query. If this parameter is filled, other parameters are ignored.                                                                                                                                                                                  |
+| has_attachement    | Boolean | "true" matches lines where a file is attached (filename and url are both set), "false" matches lines where a file is not attached                                                                                                                                                                                                        |
+| supplier_reference | String  | Filter invoices by the given supplier reference                                                                                                                                                                                                                                                                                          |
+| project_reference  | String  | Filter invoices by the given project reference                                                                                                                                                                                                                                                                                           |
+| alternative_order  | Number  | If <code>project_reference</code> is not provided, this parameter is ignored and the query applies to all alternatives of all projects.<br />If <code>project_reference</code> is provided, <code>alternative_order</code> must be a non-negative number: 0 targets the main alternative and the value falls back to 0 if not specified. |
 
 ### Response
 
@@ -3514,23 +3514,23 @@ A JSON object containing the invoices-supplier information with properties like:
 
 Each `invoice-supplier` of the `invoices-supplier` list is a JSON object containing the invoice-supplier information with properties like:
 
-| Property           | Type   | Description                                                                                                                                                                                                       |
-| ------------------ | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| reference          | String | The reference of the supplier invoice                                                                                                                                                                             |
-| filename           | String | Filename of the supplier invoice                                                                                                                                                                                  |
-| created_date       | String | Date of the creation of the supplier invoice, in a "YYYY-MM-DD" format                                                                                                                                            |
-| due_date           | String | Due date of the supplier invoice, in a "YYYY-MM-DD" format                                                                                                                                                        |
-| send_date          | String | Sent date of the supplier invoice, in a "YYYY-MM-DD" format                                                                                                                                                       |
-| currency           | String | The ISO 4217 currency code representing the currency you utilize (<a href="https://docs.google.com/spreadsheets/d/1b7BNOwKyN1hMOouve6xhFZ2R2zrH4Sj1L-646j755fU/edit?usp=sharing" target="_blank">Link to doc</a>) |
-| amount_ttc         | Number | Amount of the supplier invoice including taxes                                                                                                                                                                    |
-| amount_ht          | Number | Amount of the supplier invoice excluding taxes                                                                                                                                                                    |
-| vat                | Number | VAT amount of the supplier invoice                                                                                                                                                                                |
-| url                | String | URL of the supplier invoice file                                                                                                                                                                                  |
-| supplier_reference | String | Reference of the related supplier, or an empty string if no supplier is assigned                                                                                                                                  |
-| project_reference  | String | Reference of the related project                                                                                                                                                                                  |
-| alternative_order  | Number | Reference of the related alternative order; 0 is for main alternative                                                                                                                                             |
-| paid               | Number | Sum of the payments already made on the invoice                                                                                                                                                                   |
-|                    |
+| Property           | Type    | Description                                                                                                                                                                                                       |
+| ------------------ | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| reference          | String  | The reference of the supplier invoice                                                                                                                                                                             |
+| has_attachement    | Boolean | true if a file is attached (filename and url are both set), false otherwise                                                                                                                                       |
+| filename           | String  | Filename of the supplier invoice                                                                                                                                                                                  |
+| url                | String  | URL of the supplier invoice file                                                                                                                                                                                  |
+| created_date       | String  | Date of the creation of the supplier invoice, in a "YYYY-MM-DD" format                                                                                                                                            |
+| due_date           | String  | Due date of the supplier invoice, in a "YYYY-MM-DD" format                                                                                                                                                        |
+| send_date          | String  | Sent date of the supplier invoice, in a "YYYY-MM-DD" format                                                                                                                                                       |
+| currency           | String  | The ISO 4217 currency code representing the currency you utilize (<a href="https://docs.google.com/spreadsheets/d/1b7BNOwKyN1hMOouve6xhFZ2R2zrH4Sj1L-646j755fU/edit?usp=sharing" target="_blank">Link to doc</a>) |
+| amount_ttc         | Number  | Amount of the supplier invoice including taxes                                                                                                                                                                    |
+| amount_ht          | Number  | Amount of the supplier invoice excluding taxes                                                                                                                                                                    |
+| vat                | Number  | VAT amount of the supplier invoice                                                                                                                                                                                |
+| supplier_reference | String  | Reference of the related supplier, or an empty string if no supplier is assigned                                                                                                                                  |
+| project_reference  | String  | Reference of the related project                                                                                                                                                                                  |
+| alternative_order  | Number  | Reference of the related alternative order; 0 is for main alternative                                                                                                                                             |
+| paid               | Number  | Sum of the payments already made on the invoice                                                                                                                                                                   |
 
 ## GET invoice-supplier
 
@@ -3563,7 +3563,9 @@ axios.get(
 {
   "error": "false",
   "reference": "invoice_supplier_reference",
+  "has_attachement": true,
   "filename": "File Name",
+  "url": "https://ezus.io/2023_101010.pdf",
   "created_date": "2023-10-10",
   "due_date": "2023-10-20",
   "send_date": "2023-10-15",
@@ -3571,7 +3573,6 @@ axios.get(
   "amount_ttc": 1200.0,
   "amount_ht": 1000.0,
   "vat": 200.0,
-  "url": "https://ezus.io/2023_101010.pdf",
   "supplier": {
     "reference": "supplier_reference",
     "company_name": "The best hotel",
@@ -3642,23 +3643,24 @@ axios.get(
 
 A JSON object containing the supplier invoice information with properties like:
 
-| Property     | Type   | Description                                                                                                                                                                                                       |
-| ------------ | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| reference    | String | The reference of the supplier invoice                                                                                                                                                                             |
-| filename     | String | Filename of the supplier invoice                                                                                                                                                                                  |
-| created_date | String | Date of the creation of the supplier invoice, in a "YYYY-MM-DD" format                                                                                                                                            |
-| due_date     | String | Due date of the supplier invoice, in a "YYYY-MM-DD" format                                                                                                                                                        |
-| send_date    | String | Sent date of the supplier invoice, in a "YYYY-MM-DD" format                                                                                                                                                       |
-| currency     | String | The ISO 4217 currency code representing the currency you utilize (<a href="https://docs.google.com/spreadsheets/d/1b7BNOwKyN1hMOouve6xhFZ2R2zrH4Sj1L-646j755fU/edit?usp=sharing" target="_blank">Link to doc</a>) |
-| amount_ttc   | Number | Amount of the supplier invoice including taxes                                                                                                                                                                    |
-| amount_ht    | Number | Amount of the supplier invoice excluding taxes                                                                                                                                                                    |
-| vat          | Number | VAT amount of the supplier invoice                                                                                                                                                                                |
-| url          | String | URL of the supplier invoice file                                                                                                                                                                                  |
-| supplier     | JSON   | JSON including: `reference`, `company_name` and `website`                                                                                                                                                         |
-| project      | JSON   | JSON including: `reference`, `info_title`, `info_stage`, `info_stage_reference`, `info_number`, `currency` and `is_closed`                                                                                        |
-| alternative  | JSON   | JSON including: `sort_order` and `title`                                                                                                                                                                          |
-| client       | JSON   | JSON including: `reference`, `type` (enterprise or individual), `company_name`, `first_name`, `last_name` and `email`                                                                                             |
-| payments     | Array  | Array of JSON including: `reference`, `date`, `amount` and `payment_method`                                                                                                                                       |
+| Property        | Type    | Description                                                                                                                                                                                                       |
+| --------------- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| reference       | String  | The reference of the supplier invoice                                                                                                                                                                             |
+| has_attachement | Boolean | true if a file is attached (filename and url are both set), false otherwise                                                                                                                                       |
+| filename        | String  | Filename of the supplier invoice                                                                                                                                                                                  |
+| url             | String  | URL of the supplier invoice file                                                                                                                                                                                  |
+| created_date    | String  | Date of the creation of the supplier invoice, in a "YYYY-MM-DD" format                                                                                                                                            |
+| due_date        | String  | Due date of the supplier invoice, in a "YYYY-MM-DD" format                                                                                                                                                        |
+| send_date       | String  | Sent date of the supplier invoice, in a "YYYY-MM-DD" format                                                                                                                                                       |
+| currency        | String  | The ISO 4217 currency code representing the currency you utilize (<a href="https://docs.google.com/spreadsheets/d/1b7BNOwKyN1hMOouve6xhFZ2R2zrH4Sj1L-646j755fU/edit?usp=sharing" target="_blank">Link to doc</a>) |
+| amount_ttc      | Number  | Amount of the supplier invoice including taxes                                                                                                                                                                    |
+| amount_ht       | Number  | Amount of the supplier invoice excluding taxes                                                                                                                                                                    |
+| vat             | Number  | VAT amount of the supplier invoice                                                                                                                                                                                |
+| supplier        | JSON    | JSON including: `reference`, `company_name` and `website`                                                                                                                                                         |
+| project         | JSON    | JSON including: `reference`, `info_title`, `info_stage`, `info_stage_reference`, `info_number`, `currency` and `is_closed`                                                                                        |
+| alternative     | JSON    | JSON including: `sort_order` and `title`                                                                                                                                                                          |
+| client          | JSON    | JSON including: `reference`, `type` (enterprise or individual), `company_name`, `first_name`, `last_name` and `email`                                                                                             |
+| payments        | Array   | Array of JSON including: `reference`, `date`, `amount` and `payment_method`                                                                                                                                       |
 
 # Deposits
 
@@ -5048,7 +5050,9 @@ This event is triggered whenever a file is added to a supplier invoice.
 {
   "data": {
     "reference": "invoice_supplier_reference",
+    "has_attachement": true,
     "filename": "2023_101010.pdf",
+    "url": "https://ezus.io/2023_101010.pdf",
     "created_date": "2023-10-10",
     "due_date": "2023-10-20",
     "send_date": "2023-10-15",
@@ -5056,7 +5060,6 @@ This event is triggered whenever a file is added to a supplier invoice.
     "amount_ttc": 1200.0,
     "amount_ht": 1000.0,
     "vat": 200.0,
-    "url": "https://ezus.io/2023_101010.pdf",
     "supplier_reference": "supplier_reference",
     "project_reference": "project_reference",
     "alternative": {
@@ -5067,21 +5070,22 @@ This event is triggered whenever a file is added to a supplier invoice.
 }
 ```
 
-| Property           | Type   | Description                                                                                                                                                                                                       |
-| ------------------ | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| reference          | String | The reference of the supplier invoice                                                                                                                                                                             |
-| filename           | String | Filename of the supplier invoice                                                                                                                                                                                  |
-| created_date       | String | Date of the creation of this supplier invoice, in a "YYYY-MM-DD" format                                                                                                                                           |
-| due_date           | String | Due date of this supplier invoice, in a "YYYY-MM-DD" format                                                                                                                                                       |
-| send_date          | String | Sent date of this supplier invoice, in a "YYYY-MM-DD" format                                                                                                                                                      |
-| currency           | String | The ISO 4217 currency code representing the currency you utilize (<a href="https://docs.google.com/spreadsheets/d/1b7BNOwKyN1hMOouve6xhFZ2R2zrH4Sj1L-646j755fU/edit?usp=sharing" target="_blank">Link to doc</a>) |
-| amount_ttc         | Number | Amount of the supplier invoice including taxes                                                                                                                                                                    |
-| amount_ht          | Number | Amount of the supplier invoice excluding taxes                                                                                                                                                                    |
-| vat                | Number | VAT amount of the supplier invoice                                                                                                                                                                                |
-| url                | String | URL of the supplier invoice file                                                                                                                                                                                  |
-| supplier_reference | String | The reference of the supplier linked to this supplier invoice                                                                                                                                                     |
-| project_reference  | String | The reference of the project linked to this supplier invoice                                                                                                                                                      |
-| alternative        | JSON   | JSON including: `sort_order` and `title`                                                                                                                                                                          |
+| Property           | Type    | Description                                                                                                                                                                                                       |
+| ------------------ | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| reference          | String  | The reference of the supplier invoice                                                                                                                                                                             |
+| has_attachement    | Boolean | true if a file is attached (filename and url are both set), false otherwise                                                                                                                                       |
+| filename           | String  | Filename of the supplier invoice                                                                                                                                                                                  |
+| url                | String  | URL of the supplier invoice file                                                                                                                                                                                  |
+| created_date       | String  | Date of the creation of this supplier invoice, in a "YYYY-MM-DD" format                                                                                                                                           |
+| due_date           | String  | Due date of this supplier invoice, in a "YYYY-MM-DD" format                                                                                                                                                       |
+| send_date          | String  | Sent date of this supplier invoice, in a "YYYY-MM-DD" format                                                                                                                                                      |
+| currency           | String  | The ISO 4217 currency code representing the currency you utilize (<a href="https://docs.google.com/spreadsheets/d/1b7BNOwKyN1hMOouve6xhFZ2R2zrH4Sj1L-646j755fU/edit?usp=sharing" target="_blank">Link to doc</a>) |
+| amount_ttc         | Number  | Amount of the supplier invoice including taxes                                                                                                                                                                    |
+| amount_ht          | Number  | Amount of the supplier invoice excluding taxes                                                                                                                                                                    |
+| vat                | Number  | VAT amount of the supplier invoice                                                                                                                                                                                |
+| supplier_reference | String  | The reference of the supplier linked to this supplier invoice                                                                                                                                                     |
+| project_reference  | String  | The reference of the project linked to this supplier invoice                                                                                                                                                      |
+| alternative        | JSON    | JSON including: `sort_order` and `title`                                                                                                                                                                          |
 
 # Filtering
 

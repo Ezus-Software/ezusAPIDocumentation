@@ -895,31 +895,6 @@
       "response": []
     },
     {
-      "name": "invoice-supplier",
-      "request": {
-        "method": "GET",
-        "header": [
-          {
-            "key": "X-API-KEY",
-            "value": "{{<YOUR_API_KEY>}}",
-            "type": "text"
-          }
-        ],
-        "url": {
-          "raw": "{{baseUrl}}/invoice-supplier?reference=invoice_supplier_reference",
-          "host": ["{{baseUrl}}"],
-          "path": ["invoice-supplier"],
-          "query": [
-            {
-              "key": "reference",
-              "value": "invoice_supplier_reference"
-            }
-          ]
-        }
-      },
-      "response": []
-    },
-    {
       "name": "invoices-update",
       "request": {
         "method": "PUT",
@@ -966,6 +941,11 @@
             {
               "key": "next_token",
               "value": "",
+              "disabled": true
+            },
+            {
+              "key": "has_attachement",
+              "value": "true",
               "disabled": true
             },
             {
