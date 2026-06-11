@@ -349,6 +349,35 @@
       "response": []
     },
     {
+      "name": "project-travellers-create",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "X-API-KEY",
+            "value": "{{<YOUR_API_KEY>}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"reference\": \"project_reference\",\n    \"alternative_order\": 0,\n    \"travellers\": [\n        {\n            \"email\": \"emily.johnson@example.com\",\n            \"first_name\": \"Emily\",\n            \"last_name\": \"Johnson\",\n            \"phone\": \"+1-555-123-4567\",\n            \"custom_field1\": \"value1.1\",\n            \"custom_field2\": \"value2.1\"\n        }\n    ]\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/project-travellers-create",
+          "host": ["{{baseUrl}}"],
+          "path": ["project-travellers-create"]
+        },
+        "description": "Creates travellers for a specific project. This endpoint replaces any existing travellers with the travellers provided in the request."
+      },
+      "response": []
+    },
+    {
       "name": "clients",
       "request": {
         "method": "GET",
