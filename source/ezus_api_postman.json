@@ -303,7 +303,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\n    \"reference\": \"project-step-reference\",\n    \"project_reference\": \"project-reference\",\n    \"alternative_order\": \"0\",\n    \"type\": \"activity\",\n    \"name\": \"activity Title\",\n    \"category\": \"restaurant\",\n    \"people\": \"4\",\n    \"date_start\": \"2025-10-03 10:00:00\",\n    \"date_end\": \"2025-10-03 12:00:00\",\n    \"address\": {\n        \"label\": \"58 Rue de Paradis\",\n        \"city\": \"Paris\",\n        \"country\": \"France\",\n        \"zip\": \"75010\",\n        \"geo\": {\n            \"x\": 48.875761,\n            \"y\": 2.348727\n        }\n    }\n}",
+          "raw": "{\n    \"reference\": \"project_step_reference\",\n    \"project_reference\": \"project_reference\",\n    \"alternative_order\": \"0\",\n    \"type\": \"activity\",\n    \"name\": \"activity Title\",\n    \"category\": \"restaurant\",\n    \"people\": \"4\",\n    \"date_start\": \"2025-10-03 10:00:00\",\n    \"date_end\": \"2025-10-03 12:00:00\",\n    \"address\": {\n        \"label\": \"58 Rue de Paradis\",\n        \"city\": \"Paris\",\n        \"country\": \"France\",\n        \"zip\": \"75010\",\n        \"geo\": {\n            \"x\": 48.875761,\n            \"y\": 2.348727\n        }\n    }\n}",
           "options": {
             "raw": {
               "language": "json"
@@ -810,30 +810,58 @@
       "request": {
         "method": "GET",
         "header": [
-          {
-            "key": "X-API-KEY",
-            "value": "{{<YOUR_API_KEY>}}",
-            "type": "text"
-          }
+          { "key": "X-API-KEY", "value": "{{<YOUR_API_KEY>}}", "type": "text" }
         ],
         "url": {
           "raw": "{{baseUrl}}/invoices",
           "host": ["{{baseUrl}}"],
           "path": ["invoices"],
           "query": [
+            { "key": "next_token", "value": "", "disabled": true },
+            { "key": "stage", "value": "completed", "disabled": true },
+            { "key": "is_einvoice_ready", "value": "true", "disabled": true },
             {
-              "key": "next_token",
-              "value": "",
+              "key": "client_reference",
+              "value": "client_reference",
               "disabled": true
             },
             {
-              "key": "stage",
-              "value": "completed",
+              "key": "project_info_stage_reference",
+              "value": "confirmed",
               "disabled": true
             },
             {
               "key": "technical_name",
               "value": "technical_name",
+              "disabled": true
+            },
+            { "key": "info_number", "value": "2023_101010", "disabled": true },
+            { "key": "info_number_like", "value": "101010", "disabled": true },
+            {
+              "key": "project_info_number",
+              "value": "202306001-P",
+              "disabled": true
+            },
+            {
+              "key": "created_date_gte",
+              "value": "2026-01-01",
+              "disabled": true
+            },
+            {
+              "key": "created_date_lte",
+              "value": "2026-01-31",
+              "disabled": true
+            },
+            { "key": "send_date", "value": "2026-01-15", "disabled": true },
+            { "key": "due_date_gt", "value": "2026-01-01", "disabled": true },
+            {
+              "key": "alternative_trip_date_in_gte",
+              "value": "2026-03-01",
+              "disabled": true
+            },
+            {
+              "key": "alternative_trip_date_out_lte",
+              "value": "2026-03-31",
               "disabled": true
             }
           ]
@@ -860,31 +888,6 @@
             {
               "key": "reference",
               "value": "invoice_reference"
-            }
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "invoice-supplier",
-      "request": {
-        "method": "GET",
-        "header": [
-          {
-            "key": "X-API-KEY",
-            "value": "{{<YOUR_API_KEY>}}",
-            "type": "text"
-          }
-        ],
-        "url": {
-          "raw": "{{baseUrl}}/invoice-supplier?reference=invoice_supplier_reference",
-          "host": ["{{baseUrl}}"],
-          "path": ["invoice-supplier"],
-          "query": [
-            {
-              "key": "reference",
-              "value": "invoice_supplier_reference"
             }
           ]
         }
@@ -938,6 +941,11 @@
             {
               "key": "next_token",
               "value": "",
+              "disabled": true
+            },
+            {
+              "key": "has_attachement",
+              "value": "true",
               "disabled": true
             },
             {
