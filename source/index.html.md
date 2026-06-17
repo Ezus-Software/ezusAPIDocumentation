@@ -3735,7 +3735,7 @@ axios.post(baseUrl + "/deposits-create", body, headers);
 | type              | String  | Type can be `deposit`, `payment`, `final_payment`, `extra_paid`. By default the deposits will be a `deposit`                                       |
 | notes             | String  | Note attributed to the payment, this note is limited to 100 characters, all additional characters will not be saved.                               |
 | date              | String  | The date must be a string in "YYYY-MM-DD" format. If it is not filled in or is invalid, the payment will be assigned to the current date.          |
-| amount            | Integer | The deposit amount in cents.                                                                                                                       |
+| amount            | Integer | <span class="label label-red float-right">Required</span> The deposit amount in cents.                                                                                                                       |
 | payment_method    | String  | Technical name of the payment method, you can find it in Settings - Custom fields                                                                  |
 
 ### Response
