@@ -1148,9 +1148,9 @@ axios.post(baseUrl + "/project-travellers-create", body, headers);
 
 A JSON object indicating whether an error occurred during the process, along with the associated message.
 
-| Property | Type   | Description                        |
-| -------- | ------ | ---------------------------------- |
-| action   | String | If the travellers has been created |
+| Property | Type   | Description                         |
+| -------- | ------ | ----------------------------------- |
+| action   | String | If the travellers have been created |
 
 # Clients
 
