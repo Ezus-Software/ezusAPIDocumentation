@@ -1068,6 +1068,8 @@ This endpoint replaces all existing travellers for the selected project alternat
 
 **Note:** When creating travellers with custom fields, only custom fields of type `text` are currently supported.
 
+**Note:** Travellers can only be created if the project's defined number of travelers is greater than or equal to the number of travellers provided in the request. If the input exceeds the project's traveler count, the request will be rejected.
+
 ```shell
 curl --location 'https://api.ezus.app/project-travellers-create' \
 --header 'x-api-key: <YOUR_API_KEY>' \
