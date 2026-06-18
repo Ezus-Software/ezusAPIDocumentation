@@ -1084,6 +1084,101 @@ For project in "Global" calculation mode:
 - If `purchase_price` provided and `sales_price` not provided (INSERT or UPDATE): `sales_price` = `purchase_price`
 - If both `purchase_price` and `sales_price` are provided (INSERT or UPDATE): `sales_price` takes priority, `purchase_price` = `sales_price`
 
+## POST project-travellers-create
+
+Creates travellers for a project.
+
+This endpoint replaces all existing travellers for the selected project alternative.  
+ If the project already has travellers, they will be **deleted and replaced** by the travellers provided in this request.
+
+**Note:** When creating travellers with custom fields, only custom fields of type `text` are currently supported.
+
+**Note:** Travellers can only be created if the project's defined number of travelers is greater than or equal to the number of travellers provided in the request. If the input exceeds the project's traveler count, the request will be rejected.
+
+```shell
+curl --location 'https://api.ezus.app/project-travellers-create' \
+--header 'x-api-key: <YOUR_API_KEY>' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer <YOUR_TOKEN>' \
+--data '{
+    "reference": "project_reference",
+    "alternative_order": 0,
+    "travellers": [
+      {
+        "email": "emily.johnson@example.com",
+        "first_name": "Emily",
+        "last_name": "Johnson",
+        "phone": "+1-555-123-4567",
+        "custom_field1": "value1.1",
+        "custom_field2": "value2.1"
+      }
+    ]
+}'
+```
+
+```javascript
+const axios = require("axios");
+const baseUrl = "https://api.ezus.app";
+
+const body = {
+  reference: "project_reference",
+  alternative_order: 0,
+  travellers: [
+    {
+      email: "emily.johnson@example.com",
+      first_name: "Emily",
+      last_name: "Johnson",
+      phone: "+1-555-123-4567",
+      custom_field1: "value1.1",
+      custom_field2: "value2.1",
+    },
+  ],
+};
+const headers = {
+  "x-api-key": "<YOUR_API_KEY>",
+  Authorization: "Bearer <YOUR_TOKEN>",
+};
+
+axios.post(baseUrl + "/project-travellers-create", body, headers);
+```
+
+> This request returns a structured JSON object:
+
+```json
+{
+  "error": "false",
+  "message": "ok",
+  "action": "Travellers successfully created"
+}
+```
+
+### HTTP Endpoint
+
+`POST https://api.ezus.app/project-travellers-create`
+
+### Header Parameters
+
+| Parameter     | Type   | Description                                                                 |
+| ------------- | ------ | --------------------------------------------------------------------------- |
+| x-api-key     | String | <span class="label label-red float-right">Required</span> Your Ezus API key |
+| Authorization | String | <span class="label label-red float-right">Required</span> Your Bearer token |
+
+### Body Parameters (application/json)
+
+| Parameter         | Type   | Description                                                                                                                   |
+| ----------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------- |
+| reference         | String | <span class="label label-red float-right">Required</span> The project reference in which you want to create travellers        |
+| alternative_order | Number | Specifies the alternative order in the project to create travellers from. If not provided, defaults to 0 for main alternative |
+| travellers        | Array  | Array of JSON travellers ([Travellers](#travellers))                                                                          |
+
+### Response
+
+A JSON object indicating whether an error occurred during the process, along with the associated message.
+
+| Property | Type   | Description                         |
+| -------- | ------ | ----------------------------------- |
+| action   | String | If the travellers have been created |
+
 # Clients
 
 ## GET clients
