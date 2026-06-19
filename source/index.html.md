@@ -520,7 +520,31 @@ axios.get(baseUrl + "/project-steps?reference=project_reference", headers);
         }
       ]
     }
-  ]
+  ],
+  "supplements": {
+    "fees": [
+      {
+        "reference": "fee_reference",
+        "label": "Main fee",
+        "mode": "flat",
+        "value": 2000,
+        "amount": 2000,
+        "amount_excl_taxes": 1666.67,
+        "notes": "Some notes"
+      }
+    ],
+    "discounts": [
+      {
+        "reference": "discount_reference",
+        "label": "Main discount",
+        "mode": "percentage",
+        "value": 10,
+        "amount": 1000,
+        "amount_excl_taxes": 833.33,
+        "notes": "Some notes"
+      }
+    ]
+  }
 }
 ```
 
@@ -556,6 +580,7 @@ A JSON object containing the project documents information with properties like:
 | data_size         | Number | Number of projects returned on the current page                                                                           |
 | page              | Number | The page number                                                                                                           |
 | steps             | Array  | Array of JSON steps ([Steps](#steps))                                                                                     |
+| supplements       | JSON   | JSON object containing the fees and discounts supplements of the project ([Supplements](#supplements))                    |
 
 ## GET project-travellers
 
@@ -1058,6 +1083,101 @@ For project in "Global" calculation mode:
 - If `sales_price` provided and `purchase_price` not provided (INSERT or UPDATE): `purchase_price` = `sales_price`
 - If `purchase_price` provided and `sales_price` not provided (INSERT or UPDATE): `sales_price` = `purchase_price`
 - If both `purchase_price` and `sales_price` are provided (INSERT or UPDATE): `sales_price` takes priority, `purchase_price` = `sales_price`
+
+## POST project-travellers-create
+
+Creates travellers for a project.
+
+This endpoint replaces all existing travellers for the selected project alternative.  
+ If the project already has travellers, they will be **deleted and replaced** by the travellers provided in this request.
+
+**Note:** When creating travellers with custom fields, only custom fields of type `text` are currently supported.
+
+**Note:** Travellers can only be created if the project's defined number of travelers is greater than or equal to the number of travellers provided in the request. If the input exceeds the project's traveler count, the request will be rejected.
+
+```shell
+curl --location 'https://api.ezus.app/project-travellers-create' \
+--header 'x-api-key: <YOUR_API_KEY>' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer <YOUR_TOKEN>' \
+--data '{
+    "reference": "project_reference",
+    "alternative_order": 0,
+    "travellers": [
+      {
+        "email": "emily.johnson@example.com",
+        "first_name": "Emily",
+        "last_name": "Johnson",
+        "phone": "+1-555-123-4567",
+        "custom_field1": "value1.1",
+        "custom_field2": "value2.1"
+      }
+    ]
+}'
+```
+
+```javascript
+const axios = require("axios");
+const baseUrl = "https://api.ezus.app";
+
+const body = {
+  reference: "project_reference",
+  alternative_order: 0,
+  travellers: [
+    {
+      email: "emily.johnson@example.com",
+      first_name: "Emily",
+      last_name: "Johnson",
+      phone: "+1-555-123-4567",
+      custom_field1: "value1.1",
+      custom_field2: "value2.1",
+    },
+  ],
+};
+const headers = {
+  "x-api-key": "<YOUR_API_KEY>",
+  Authorization: "Bearer <YOUR_TOKEN>",
+};
+
+axios.post(baseUrl + "/project-travellers-create", body, headers);
+```
+
+> This request returns a structured JSON object:
+
+```json
+{
+  "error": "false",
+  "message": "ok",
+  "action": "Travellers successfully created"
+}
+```
+
+### HTTP Endpoint
+
+`POST https://api.ezus.app/project-travellers-create`
+
+### Header Parameters
+
+| Parameter     | Type   | Description                                                                 |
+| ------------- | ------ | --------------------------------------------------------------------------- |
+| x-api-key     | String | <span class="label label-red float-right">Required</span> Your Ezus API key |
+| Authorization | String | <span class="label label-red float-right">Required</span> Your Bearer token |
+
+### Body Parameters (application/json)
+
+| Parameter         | Type   | Description                                                                                                                   |
+| ----------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------- |
+| reference         | String | <span class="label label-red float-right">Required</span> The project reference in which you want to create travellers        |
+| alternative_order | Number | Specifies the alternative order in the project to create travellers from. If not provided, defaults to 0 for main alternative |
+| travellers        | Array  | Array of JSON travellers ([Travellers](#travellers))                                                                          |
+
+### Response
+
+A JSON object indicating whether an error occurred during the process, along with the associated message.
+
+| Property | Type   | Description                         |
+| -------- | ------ | ----------------------------------- |
+| action   | String | If the travellers have been created |
 
 # Clients
 
@@ -3735,7 +3855,7 @@ axios.post(baseUrl + "/deposits-create", body, headers);
 | type              | String  | Type can be `deposit`, `payment`, `final_payment`, `extra_paid`. By default the deposits will be a `deposit`                                       |
 | notes             | String  | Note attributed to the payment, this note is limited to 100 characters, all additional characters will not be saved.                               |
 | date              | String  | The date must be a string in "YYYY-MM-DD" format. If it is not filled in or is invalid, the payment will be assigned to the current date.          |
-| amount            | Integer | The deposit amount in cents.                                                                                                                       |
+| amount            | Integer | <span class="label label-red float-right">Required</span> The deposit amount in cents.                                                                                                                       |
 | payment_method    | String  | Technical name of the payment method, you can find it in Settings - Custom fields                                                                  |
 
 ### Response
@@ -4637,6 +4757,66 @@ The steps are sorted by their creation date, with the most recently created appe
 | items         | Array  | Array of JSON items ([Items](#items))                                                                                                                                         |
 | medias        | Array  | Array of strings representing the images URLs associated with the step                                                                                                        |
 | custom_fields | Array  | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                                 |
+
+### Supplements
+
+The supplements of the project. Today only the main fee and main discount are returned by the API.
+
+```json
+"supplements": {
+  "fees": [
+    {
+      "reference": "fee_reference",
+      "label": "Main fee",
+      "mode": "flat",
+      "value": 2000,
+      "amount": 2000,
+      "amount_excl_taxes": 1666.67,
+      "notes": "Some notes"
+    }
+  ],
+  "discounts": [
+    {
+      "reference": "discount_reference",
+      "label": "Main discount",
+      "mode": "percentage",
+      "value": 10,
+      "amount": 1000,
+      "amount_excl_taxes": 833.33,
+      "notes": "Some notes"
+    }
+  ]
+}
+```
+
+If the project has its calculation of sales price set to `global`, then the return will be like this:
+
+```json
+"supplements": {
+  "fees": [
+    {
+      "reference": "fee_reference",
+      "label": "Global margin",
+      "mode": "flat",
+      "value": 2000,
+      "amount": 2000,
+      "amount_excl_taxes": 1666.67,
+      "notes": "Some notes"
+    }
+  ],
+  "discounts": []
+}
+```
+
+| Property          | Type   | Description                                                                                                                                                                                    |
+| ----------------- | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| reference         | String | The reference of the fee/discount. For the main one it is with this format: `alternative_reference-main_fee/main_discount`                                                                     |
+| label             | String | The label of the fee/discount. For the main one it is with this format: `Main fee/Main discount`. If the calculation of the sales price is set to `global`, the label will be `Global margin`. |
+| mode              | String | The mode of the fee/discount. It can be `flat` or `percentage`                                                                                                                                 |
+| value             | Number | The value of the fee/discount. If the mode is `flat`, it represents a fixed amount. If the mode is `percentage`, it represents a percentage applied to the project sales price.                |
+| amount            | Number | The amount of the fee/discount. If the mode is `flat`, it is equal to the value. If the mode is `percentage`, it is calculated as `value`% of the project sales price.                         |
+| amount_excl_taxes | Number | The amount of the fee/discount excluding taxes.                                                                                                                                                |
+| notes             | String | Additional notes or comments about the fee/discount.                                                                                                                                           |
 
 ### Tags
 
