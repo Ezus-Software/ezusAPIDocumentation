@@ -295,14 +295,6 @@ axios.get(baseUrl + "/project?reference=project_reference", headers);
       "trip_destination": "France",
       "trip_subdestination_reference ": "subdestination_reference",
       "trip_subdestination": "Paris",
-      "client": {
-        "reference": "client_reference",
-        "type": "enterprise",
-        "company_name": "MOKE INTERNATIONAL LIMITED",
-        "first_name": "Jane",
-        "last_name": "Doe",
-        "email": "contact@moke-international.com"
-      },
       "destinations": {
         "size": 3,
         "data": [
@@ -325,6 +317,19 @@ axios.get(baseUrl + "/project?reference=project_reference", headers);
             "subdestination_name": "Milan"
           }
         ]
+      },
+      "client": {
+        "reference": "client_reference",
+        "type": "enterprise",
+        "company_name": "MOKE INTERNATIONAL LIMITED",
+        "first_name": "Jane",
+        "last_name": "Doe",
+        "email": "contact@moke-international.com"
+      },
+      "client_space": {
+        "is_live": true,
+        "description": "Description of the client space",
+        "image_url": "https://image.jpg"
       }
     }
   ],
@@ -3855,7 +3860,7 @@ axios.post(baseUrl + "/deposits-create", body, headers);
 | type              | String  | Type can be `deposit`, `payment`, `final_payment`, `extra_paid`. By default the deposits will be a `deposit`                                       |
 | notes             | String  | Note attributed to the payment, this note is limited to 100 characters, all additional characters will not be saved.                               |
 | date              | String  | The date must be a string in "YYYY-MM-DD" format. If it is not filled in or is invalid, the payment will be assigned to the current date.          |
-| amount            | Integer | <span class="label label-red float-right">Required</span> The deposit amount in cents.                                                                                                                       |
+| amount            | Integer | <span class="label label-red float-right">Required</span> The deposit amount in cents.                                                             |
 | payment_method    | String  | Technical name of the payment method, you can find it in Settings - Custom fields                                                                  |
 
 ### Response
@@ -4261,14 +4266,6 @@ A JSON object indicating whether an error occurred during the process, along wit
     "financial_purchases": 72820,
     "financial_spendings": 12820,
     "trip_people": "15",
-    "client": {
-      "reference": "client_reference",
-      "type": "enterprise",
-      "company_name": "MOKE INTERNATIONAL LIMITED",
-      "first_name": "Jane",
-      "last_name": "Doe",
-      "email": "contact@moke-international.com"
-    },
     "trip_destination_reference": "destination_reference",
     "trip_destination": "France",
     "trip_subdestination_reference ": "subdestination_reference",
@@ -4295,6 +4292,19 @@ A JSON object indicating whether an error occurred during the process, along wit
           "subdestination_name": "Milan"
         }
       ]
+    },
+    "client": {
+      "reference": "client_reference",
+      "type": "enterprise",
+      "company_name": "MOKE INTERNATIONAL LIMITED",
+      "first_name": "Jane",
+      "last_name": "Doe",
+      "email": "contact@moke-international.com"
+    },
+    "client_space": {
+      "is_live": true,
+      "description": "Description of the client space",
+      "image_url": "https://image.jpg"
     }
   }
 ]
@@ -4320,12 +4330,13 @@ A JSON object indicating whether an error occurred during the process, along wit
 | financial_purchases           | Number  | Actual supplier purchase costs for the alternative (in project currency). Corresponds to recorded supplier invoices                                        |
 | financial_spendings           | Number  | Actual spendings recorded for the alternative (in project currency). Includes all types of supplier payments (purchases, fees, etc.)                       |
 | trip_people                   | String  | Number of people                                                                                                                                           |
-| client                        | JSON    | JSON including: `reference`, `type` (enterprise or individual), `company_name`, `first_name`, `last_name` and `email`                                      |
 | trip_destination_reference    | String  | Destination reference of the alternative. Note: For multi-destination alternatives, only the primary destination is returned.                              |
 | trip_destination              | String  | Destination of the alternative. Note: For multi-destination alternatives, only the primary destination is returned.                                        |
 | trip_subdestination_reference | String  | Subdestination reference of the alternative. Note: For multi-destination alternatives, only the primary subdestination is returned.                        |
 | trip_subdestination           | String  | Subdestination of the alternative. Note: For multi-destination alternatives, only the primary subdestination is returned.                                  |
 | destinations                  | JSON    | JSON including: `size`, Array of all destination (`reference` and `name`) and subdestination (`subdestination_reference` and `subdestination_name`) values |
+| client                        | JSON    | JSON including: `reference`, `type` (enterprise or individual), `company_name`, `first_name`, `last_name` and `email`                                      |
+| client_space                  | JSON    | JSON including: `is_live` (Boolean), `description`, `image_url`                                                                                            |
 
 ### Contacts
 
