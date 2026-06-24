@@ -4800,34 +4800,15 @@ The supplements of the project. Today only the main fee and main discount are re
 }
 ```
 
-If the project has its calculation of sales price set to `global`, then the return will be like this:
-
-```json
-"supplements": {
-  "fees": [
-    {
-      "reference": "fee_reference",
-      "label": "Global margin",
-      "mode": "flat",
-      "value": 2000,
-      "amount": 2000,
-      "amount_excl_taxes": 1666.67,
-      "notes": "Some notes"
-    }
-  ],
-  "discounts": []
-}
-```
-
-| Property          | Type   | Description                                                                                                                                                                                    |
-| ----------------- | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| reference         | String | The reference of the fee/discount. For the main one it is with this format: `alternative_reference-main_fee/main_discount`                                                                     |
-| label             | String | The label of the fee/discount. For the main one it is with this format: `Main fee/Main discount`. If the calculation of the sales price is set to `global`, the label will be `Global margin`. |
-| mode              | String | The mode of the fee/discount. It can be `flat` or `percentage`                                                                                                                                 |
-| value             | Number | The value of the fee/discount. If the mode is `flat`, it represents a fixed amount. If the mode is `percentage`, it represents a percentage applied to the project sales price.                |
-| amount            | Number | The amount of the fee/discount. If the mode is `flat`, it is equal to the value. If the mode is `percentage`, it is calculated as `value`% of the project sales price.                         |
-| amount_excl_taxes | Number | The amount of the fee/discount excluding taxes.                                                                                                                                                |
-| notes             | String | Additional notes or comments about the fee/discount.                                                                                                                                           |
+| Property          | Type   | Description                                                                                                                                                                                           |
+| ----------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| reference         | String | The reference of the fee/discount. For the main one it is with this format: `alternative_reference-main_fee/main_discount`                                                                            |
+| label             | String | The label of the fee/discount. For the main one it is with this format: `Main fee/Main discount`. If the project is in `global` calculation mode: the label will be `Global margin` for the main fee. |
+| mode              | String | The mode of the fee/discount. It can be `flat` or `percentage`. If the project is in `global` calculation mode: the mode will be `flat` for the main fee.                                             |
+| value             | Number | The value of the fee/discount. If the mode is `flat`, it represents a fixed amount. If the mode is `percentage`, it represents a percentage applied to the project sales price.                       |
+| amount            | Number | The amount of the fee/discount. If the mode is `flat`, it is equal to the value. If the mode is `percentage`, it is calculated as `value`% of the project sales price.                                |
+| amount_excl_taxes | Number | The amount of the fee/discount excluding taxes.                                                                                                                                                       |
+| notes             | String | Additional notes or comments about the fee/discount.                                                                                                                                                  |
 
 ### Tags
 
