@@ -331,6 +331,21 @@ axios.get(baseUrl + "/project?reference=project_reference", headers);
         "description": "Description of the client space",
         "image_url": "https://image.jpg"
       }
+      "brand": {
+        "title": "INTERNATIONAL LIMITED",
+        "company_name": "MOKE INTERNATIONAL LIMITED",
+        "address": {
+          "label": "58 Rue de Paradis",
+          "city": "Paris",
+          "country": "France",
+          "zip": "75010"
+        },
+        "email": "travel-design@e-corp.com",
+        "phone": "0101010101",
+        "website": "www.moke_ltd.com",
+        "vat_number": "GB 240-635-038",
+        "company_number": "09728676"
+      }
     }
   ],
   "custom_fields": [
@@ -4306,6 +4321,21 @@ A JSON object indicating whether an error occurred during the process, along wit
       "description": "Description of the client space",
       "image_url": "https://image.jpg"
     }
+    "brand": {
+      "title": "INTERNATIONAL LIMITED",
+      "company_name": "MOKE INTERNATIONAL LIMITED",
+      "address": {
+        "label": "58 Rue de Paradis",
+        "city": "Paris",
+        "country": "France",
+        "zip": "75010"
+      },
+      "email": "travel-design@e-corp.com",
+      "phone": "0101010101",
+      "website": "www.moke_ltd.com",
+      "vat_number": "GB 240-635-038",
+      "company_number": "09728676"
+    }
   }
 ]
 ```
@@ -4337,6 +4367,40 @@ A JSON object indicating whether an error occurred during the process, along wit
 | destinations                  | JSON    | JSON including: `size`, Array of all destination (`reference` and `name`) and subdestination (`subdestination_reference` and `subdestination_name`) values |
 | client                        | JSON    | JSON including: `reference`, `type` (enterprise or individual), `company_name`, `first_name`, `last_name` and `email`                                      |
 | client_space                  | JSON    | JSON including: `is_live` (Boolean), `description`, `image_url`                                                                                            |
+| brand | JSON | JSON object representing the brand ([Brand](#brand)) associated with the alternative |
+
+### Brand
+
+If no brand is associated with an alternative, the default values are taken from the user’s company settings.
+
+```json
+"brand": {
+  "title": "INTERNATIONAL LIMITED",
+  "company_name": "MOKE INTERNATIONAL LIMITED",
+  "address": {
+    "label": "58 Rue de Paradis",
+    "city": "Paris",
+    "country": "France",
+    "zip": "75010"
+  },
+  "email": "travel-design@e-corp.com",
+  "phone": "0101010101",
+  "website": "www.moke_ltd.com",
+  "vat_number": "GB 240-635-038",
+  "company_number": "09728676"
+}
+```
+
+| Property | Type | Description |
+| ---------- | ------- | ------------------------------------------------------------------------------------------------- |
+| title | String | Title of the brand |
+| company_name | String | Name of the brand company |
+| address | JSON  | JSON object representing the address ([Address](#address)) of the brand |
+| email | String | Email of the brand |
+| phone | String | Phone of the brand |
+| website | String | Website link of the brand |
+| vat_number | String | VAT number of the brand |
+| company_number | String | Company registration number of the brand |
 
 ### Contacts
 
