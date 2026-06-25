@@ -629,7 +629,7 @@ axios.get(baseUrl + "/project-travellers?reference=project_reference", headers);
     {
       "email": "michael.smith@example.com",
       "first_name": "Michael",
-      "name": "Smith",
+      "last_name": "Smith",
       "phone": "+1-555-987-6543",
       "custom_field1": "value1.2",
       "custom_field2": "value2.2"
@@ -4877,7 +4877,7 @@ If the project has its calculation of sales price set to `global`, then the retu
   {
     "email": "michael.smith@example.com",
     "first_name": "Michael",
-    "name": "Smith",
+    "last_name": "Smith",
     "phone": "+1-555-987-6543",
     "custom_field1": "value1.2",
     "custom_field2": "value2.2"
