@@ -330,7 +330,7 @@ axios.get(baseUrl + "/project?reference=project_reference", headers);
         "is_live": true,
         "description": "Description of the client space",
         "image_url": "https://image.jpg"
-      }
+      },
       "brand": {
         "title": "INTERNATIONAL LIMITED",
         "company_name": "MOKE INTERNATIONAL LIMITED",
@@ -4320,7 +4320,7 @@ A JSON object indicating whether an error occurred during the process, along wit
       "is_live": true,
       "description": "Description of the client space",
       "image_url": "https://image.jpg"
-    }
+    },
     "brand": {
       "title": "INTERNATIONAL LIMITED",
       "company_name": "MOKE INTERNATIONAL LIMITED",
