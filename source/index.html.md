@@ -330,6 +330,21 @@ axios.get(baseUrl + "/project?reference=project_reference", headers);
         "is_live": true,
         "description": "Description of the client space",
         "image_url": "https://image.jpg"
+      },
+      "brand": {
+        "title": "INTERNATIONAL LIMITED",
+        "company_name": "MOKE INTERNATIONAL LIMITED",
+        "address": {
+          "label": "58 Rue de Paradis",
+          "city": "Paris",
+          "country": "France",
+          "zip": "75010"
+        },
+        "email": "travel-design@e-corp.com",
+        "phone": "0101010101",
+        "website": "www.moke_ltd.com",
+        "vat_number": "GB 240-635-038",
+        "company_number": "09728676"
       }
     }
   ],
@@ -629,7 +644,7 @@ axios.get(baseUrl + "/project-travellers?reference=project_reference", headers);
     {
       "email": "michael.smith@example.com",
       "first_name": "Michael",
-      "name": "Smith",
+      "last_name": "Smith",
       "phone": "+1-555-987-6543",
       "custom_field1": "value1.2",
       "custom_field2": "value2.2"
@@ -978,6 +993,7 @@ curl --location 'https://api.ezus.app/project-steps-items-upsert' \
     {
         "project_step_reference": "project_step_reference",
         "reference": "item_reference",
+        "product_reference": "product_reference",
         "name": "item_update_maximal",
         "quantity": 2,
         "currency": "USD",
@@ -1001,6 +1017,7 @@ const body = [
   {
     project_step_reference: "project_step_reference",
     reference: "item_reference",
+    product_reference: "product_reference",
     name: "item_update_maximal",
     quantity: 2,
     currency: "USD",
@@ -1053,17 +1070,18 @@ axios.post(baseUrl + "/project-steps-items-upsert", body, headers);
 
 The request body must be an array of item objects (maximum 100 items).
 
-| Parameter              | Type   | Description                                                                                                                                                                                                                                        |
-| ---------------------- | ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| project_step_reference | String | <span class="label label-red float-right">Required</span> The project step reference in which you want to create or update an item. Must match a valid, non-deleted step belonging to your account.                                                |
-| reference              | String | If provided, the unique reference associated to the item you want to update. If you specify a reference during creation, this value will be used as the item reference (max 64 characters). If not provided, a UUID v4 is automatically generated. |
-| name                   | String | Title of the item. Cannot be empty. This field is required to create an item. This field is optional on update.                                                                                                                                    |
-| quantity               | Number | Quantity of the item. Default value on creation: `1`                                                                                                                                                                                               |
-| currency               | String | Currency ISO code (e.g., `USD`, `EUR`). Default value on creation: the project's sales currency. Must be present in the project's currencies else it will throw an error.                                                                          |
-| purchase_price         | Number | The unit purchase price of the item (including taxes). Default value on creation: `0`. See [Price behavior](#price-behavior) for more details.                                                                                                     |
-| sales_price            | Number | The unit sales price of the item (including taxes). Default value on creation: `0`. See [Price behavior](#price-behavior) for more details.                                                                                                        |
-| vat_rate               | Number | VAT rate in percentage (e.g., `20` for 20%). Default value on creation: the project's `vat_rate`.                                                                                                                                                  |
-| vat_regime             | String | VAT regime: `classic`, `margin`, or `none`. Default value on creation: the project's VAT regime.                                                                                                                                                   |
+| Parameter              | Type   | Description                                                                                                                                                                                                                                                                                                          |
+| ---------------------- | ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| project_step_reference | String | <span class="label label-red float-right">Required</span> The project step reference in which you want to create or update an item. Must match a valid, non-deleted step belonging to your account.                                                                                                                  |
+| reference              | String | If provided, the unique reference associated to the item you want to update. If you specify a reference during creation, this value will be used as the item reference (max 64 characters). If not provided, a UUID v4 is automatically generated.                                                                   |
+| product_reference      | String | Reference of the product to link to the item. This field is optional. If provided, it must match a valid product reference in your account. When linking a product to your item, it will inherit its name, quantity, currency, purchase_price, sales_price, vat_rate and vat_regime by default on the creation only. |
+| name                   | String | Title of the item. Cannot be empty. This field is required to create an item if the product_reference is not provided. This field is optional on update.                                                                                                                                                             |
+| quantity               | Number | Quantity of the item. Default value on creation: `1`. If this item is linked to a product, it will trigger a tariff recalculation based on the product's pricing rules.                                                                                                                                              |
+| currency               | String | Currency ISO code (e.g., `USD`, `EUR`). Default value on creation: the project's sales currency. Must be present in the project's currencies else it will throw an error.                                                                                                                                            |
+| purchase_price         | Number | The unit purchase price of the item (including taxes). Default value on creation: `0`. See [Price behavior](#price-behavior) for more details.                                                                                                                                                                       |
+| sales_price            | Number | The unit sales price of the item (including taxes). Default value on creation: `0`. See [Price behavior](#price-behavior) for more details.                                                                                                                                                                          |
+| vat_rate               | Number | VAT rate in percentage (e.g., `20` for 20%). Default value on creation: the project's `vat_rate`.                                                                                                                                                                                                                    |
+| vat_regime             | String | VAT regime: `classic`, `margin`, or `none`. Default value on creation: the project's VAT regime.                                                                                                                                                                                                                     |
 
 ### Response
 
@@ -3620,7 +3638,7 @@ axios.get(baseUrl + "/invoices-supplier", headers);
 | Parameter          | Type    | Description                                                                                                                                                                                                                                                                                                                              |
 | ------------------ | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | next_token         | String  | Specify this parameter if you want to retrieve the following elements of a given list query. If this parameter is filled, other parameters are ignored.                                                                                                                                                                                  |
-| has_attachement    | Boolean | "true" matches lines where a file is attached (filename and url are both set), "false" matches lines where a file is not attached                                                                                                                                                                                                        |
+| has_attachement    | Boolean | true if a file is attached (filename and url are both set), false otherwise                                                                                                                                                                                                                                                              |
 | supplier_reference | String  | Filter invoices by the given supplier reference                                                                                                                                                                                                                                                                                          |
 | project_reference  | String  | Filter invoices by the given project reference                                                                                                                                                                                                                                                                                           |
 | alternative_order  | Number  | If <code>project_reference</code> is not provided, this parameter is ignored and the query applies to all alternatives of all projects.<br />If <code>project_reference</code> is provided, <code>alternative_order</code> must be a non-negative number: 0 targets the main alternative and the value falls back to 0 if not specified. |
@@ -4305,6 +4323,21 @@ A JSON object indicating whether an error occurred during the process, along wit
       "is_live": true,
       "description": "Description of the client space",
       "image_url": "https://image.jpg"
+    },
+    "brand": {
+      "title": "INTERNATIONAL LIMITED",
+      "company_name": "MOKE INTERNATIONAL LIMITED",
+      "address": {
+        "label": "58 Rue de Paradis",
+        "city": "Paris",
+        "country": "France",
+        "zip": "75010"
+      },
+      "email": "travel-design@e-corp.com",
+      "phone": "0101010101",
+      "website": "www.moke_ltd.com",
+      "vat_number": "GB 240-635-038",
+      "company_number": "09728676"
     }
   }
 ]
@@ -4337,6 +4370,40 @@ A JSON object indicating whether an error occurred during the process, along wit
 | destinations                  | JSON    | JSON including: `size`, Array of all destination (`reference` and `name`) and subdestination (`subdestination_reference` and `subdestination_name`) values |
 | client                        | JSON    | JSON including: `reference`, `type` (enterprise or individual), `company_name`, `first_name`, `last_name` and `email`                                      |
 | client_space                  | JSON    | JSON including: `is_live` (Boolean), `description`, `image_url`                                                                                            |
+| brand | JSON | JSON object representing the brand ([Brand](#brand)) associated with the alternative |
+
+### Brand
+
+If no brand is associated with an alternative, the default values are taken from the user’s company settings.
+
+```json
+"brand": {
+  "title": "INTERNATIONAL LIMITED",
+  "company_name": "MOKE INTERNATIONAL LIMITED",
+  "address": {
+    "label": "58 Rue de Paradis",
+    "city": "Paris",
+    "country": "France",
+    "zip": "75010"
+  },
+  "email": "travel-design@e-corp.com",
+  "phone": "0101010101",
+  "website": "www.moke_ltd.com",
+  "vat_number": "GB 240-635-038",
+  "company_number": "09728676"
+}
+```
+
+| Property | Type | Description |
+| ---------- | ------- | ------------------------------------------------------------------------------------------------- |
+| title | String | Title of the brand |
+| company_name | String | Name of the brand company |
+| address | JSON  | JSON object representing the address ([Address](#address)) of the brand |
+| email | String | Email of the brand |
+| phone | String | Phone of the brand |
+| website | String | Website link of the brand |
+| vat_number | String | VAT number of the brand |
+| company_number | String | Company registration number of the brand |
 
 ### Contacts
 
@@ -4800,34 +4867,15 @@ The supplements of the project. Today only the main fee and main discount are re
 }
 ```
 
-If the project has its calculation of sales price set to `global`, then the return will be like this:
-
-```json
-"supplements": {
-  "fees": [
-    {
-      "reference": "fee_reference",
-      "label": "Global margin",
-      "mode": "flat",
-      "value": 2000,
-      "amount": 2000,
-      "amount_excl_taxes": 1666.67,
-      "notes": "Some notes"
-    }
-  ],
-  "discounts": []
-}
-```
-
-| Property          | Type   | Description                                                                                                                                                                                    |
-| ----------------- | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| reference         | String | The reference of the fee/discount. For the main one it is with this format: `alternative_reference-main_fee/main_discount`                                                                     |
-| label             | String | The label of the fee/discount. For the main one it is with this format: `Main fee/Main discount`. If the calculation of the sales price is set to `global`, the label will be `Global margin`. |
-| mode              | String | The mode of the fee/discount. It can be `flat` or `percentage`                                                                                                                                 |
-| value             | Number | The value of the fee/discount. If the mode is `flat`, it represents a fixed amount. If the mode is `percentage`, it represents a percentage applied to the project sales price.                |
-| amount            | Number | The amount of the fee/discount. If the mode is `flat`, it is equal to the value. If the mode is `percentage`, it is calculated as `value`% of the project sales price.                         |
-| amount_excl_taxes | Number | The amount of the fee/discount excluding taxes.                                                                                                                                                |
-| notes             | String | Additional notes or comments about the fee/discount.                                                                                                                                           |
+| Property          | Type   | Description                                                                                                                                                                                           |
+| ----------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| reference         | String | The reference of the fee/discount. For the main one it is with this format: `alternative_reference-main_fee/main_discount`                                                                            |
+| label             | String | The label of the fee/discount. For the main one it is with this format: `Main fee/Main discount`. If the project is in `global` calculation mode: the label will be `Global margin` for the main fee. |
+| mode              | String | The mode of the fee/discount. It can be `flat` or `percentage`. If the project is in `global` calculation mode: the mode will be `flat` for the main fee.                                             |
+| value             | Number | The value of the fee/discount. If the mode is `flat`, it represents a fixed amount. If the mode is `percentage`, it represents a percentage applied to the project sales price.                       |
+| amount            | Number | The amount of the fee/discount. If the mode is `flat`, it is equal to the value. If the mode is `percentage`, it is calculated as `value`% of the project sales price.                                |
+| amount_excl_taxes | Number | The amount of the fee/discount excluding taxes.                                                                                                                                                       |
+| notes             | String | Additional notes or comments about the fee/discount.                                                                                                                                                  |
 
 ### Tags
 
@@ -4877,7 +4925,7 @@ If the project has its calculation of sales price set to `global`, then the retu
   {
     "email": "michael.smith@example.com",
     "first_name": "Michael",
-    "name": "Smith",
+    "last_name": "Smith",
     "phone": "+1-555-987-6543",
     "custom_field1": "value1.2",
     "custom_field2": "value2.2"
