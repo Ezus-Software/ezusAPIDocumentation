@@ -893,6 +893,10 @@ curl --location 'https://api.ezus.app/project-steps-upsert' \
             "y": 2.348727
         }
     },
+    "description": {
+      "short": "Short description of the activity",
+      "long": "Long description of the activity"
+    }
 }'
 ```
 
@@ -919,6 +923,10 @@ const body = {
       x: 48.875761,
       y: 2.348727,
     },
+  },
+  description: {
+    short: "Short description of the activity",
+    long: "Long description of the activity",
   },
 };
 const headers = {
@@ -965,6 +973,7 @@ axios.post(baseUrl + "/project-steps-upsert", body, headers);
 | date_start        | String | Start date and time of the step. Must be within the dates of the alternative where the step is created. This field is required to create a step. This field is ignored on update. The date format must be as follows, e.g.: `2024-10-01 12:00:00`. |
 | date_end          | String | End date and time of the step. Must be within the dates of the alternative where the step is created. This field is required to create a step. This field is ignored on update. The date format must be as follows, e.g.: `2024-10-01 12:00:00`.   |
 | address           | Object | JSON object address ([Address](#address))                                                                                                                                                                                                          |
+| description       | JSON   | JSON object representing the short and long description of the step. Only works for non sample steps.                                                                                                                                              |
 
 ### Response
 
