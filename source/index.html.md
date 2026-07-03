@@ -3805,6 +3805,107 @@ A JSON object containing the supplier invoice information with properties like:
 | client          | JSON    | JSON including: `reference`, `type` (enterprise or individual), `company_name`, `first_name`, `last_name` and `email`                                                                                             |
 | payments        | Array   | Array of JSON including: `reference`, `date`, `amount` and `payment_method`                                                                                                                                       |
 
+## POST invoices-suppliers-upsert
+
+This endpoint allows you to create or update a supplier invoice (purchase invoice) on a project.
+The endpoint works in upsert mode: if the provided `reference` matches an existing, non-deleted supplier invoice of your account that belongs to the specified supplier and project, the invoice is updated. Otherwise, a new supplier invoice is created.
+
+```shell
+curl --location 'https://api.ezus.app/invoices-suppliers-upsert' \
+--header 'x-api-key: <YOUR_API_KEY>' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer <YOUR_TOKEN>' \
+--data '{
+    "supplier_reference": "supplier_reference",
+    "project_reference": "project_reference",
+    "alternative_order": "0",
+    "reference": "invoice_supplier_reference",
+    "due_date": "2023-10-20",
+    "amount_ttc": 1200.00,
+    "amount_ht": 1000.00,
+    "filename": "2023_101010.pdf",
+    "url": "https://ezus.io/2023_101010.pdf",
+    "note": "Invoice for the Paris fashion week 2024 project"
+}'
+```
+
+```javascript
+const axios = require("axios");
+const baseUrl = "https://api.ezus.app";
+
+const body = {
+  supplier_reference: "supplier_reference",
+  project_reference: "project_reference",
+  alternative_order: "0",
+  reference: "invoice_supplier_reference",
+  due_date: "2023-10-20",
+  amount_ttc: 1200.0,
+  amount_ht: 1000.0,
+  filename: "2023_101010.pdf",
+  url: "https://ezus.io/2023_101010.pdf",
+  note: "Invoice for the Paris fashion week 2024 project",
+};
+const headers = {
+  "x-api-key": "<YOUR_API_KEY>",
+  Authorization: "Bearer <YOUR_TOKEN>",
+};
+
+axios.post(baseUrl + "/invoices-suppliers-upsert", body, headers);
+```
+
+> This request returns a structured JSON object:
+
+```json
+{
+  "error": "false",
+  "message": "ok",
+  "action": "Supplier invoice successfully created",
+  "reference": "invoice_supplier_reference"
+}
+```
+
+### HTTP Endpoint
+
+`POST https://api.ezus.app/invoices-suppliers-upsert`
+
+### Header Parameters
+
+| Parameter     | Type   | Description                                                                 |
+| ------------- | ------ | --------------------------------------------------------------------------- |
+| x-api-key     | String | <span class="label label-red float-right">Required</span> Your Ezus API key |
+| Authorization | String | <span class="label label-red float-right">Required</span> Your Bearer token |
+
+### Body Parameters (application/json)
+
+| Parameter          | Type   | Description                                                                                                                                                                                                            |
+| ------------------ | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| supplier_reference | String | <span class="label label-red float-right">Required</span> Reference of the supplier the invoice belongs to. Must match a valid, non-deleted supplier of the specified project. Required both on insert and on update.  |
+| project_reference  | String | <span class="label label-red float-right">Required</span> Reference of the project the invoice belongs to. Must match a valid, non-deleted project of your account. Required both on insert and on update.             |
+| alternative_order  | String | Alternative number. If not provided, the invoice is attached to the project's main alternative (`0`).                                                                                                                  |
+| reference          | String | Unique reference of the supplier invoice to create or update. If not provided, a UUID v4 is automatically generated and returned. Must be less than 100 characters, otherwise an error is returned.                    |
+| due_date           | String | Due date of the supplier invoice, in a "YYYY-MM-DD" format.                                                                                                                                                            |
+| amount_ttc         | Number | Amount of the supplier invoice including taxes.                                                                                                                                                                        |
+| amount_ht          | Number | Amount of the supplier invoice excluding taxes.                                                                                                                                                                        |
+| filename           | String | Name associated to the invoice file (PDF). Optional. If left empty while `url` is provided, the filename is deduced from the downloaded file.                                                                          |
+| url                | String | Link to the invoice file. Only `.pdf` files are accepted. Required if `filename` is provided, otherwise an error is returned. If provided while `filename` is empty, the filename is deduced from the downloaded file. |
+| note               | String | Note attached to the supplier invoice.                                                                                                                                                                                 |
+
+### Response
+
+A JSON object indicating whether an error occurred during the process, along with the associated message.
+
+| Property  | Type   | Description                                                                                                                            |
+| --------- | ------ | -------------------------------------------------------------------------------------------------------------------------------------- |
+| action    | String | Summary of the action performed (e.g., "Supplier invoice successfully created" or "Supplier invoice successfully updated")             |
+| reference | String | Reference of the supplier invoice that was created or updated (the auto-generated UUID on insert, or the provided reference otherwise) |
+
+### Currency
+
+<aside class="notice">In V1, multi-currency is not managed for supplier invoices.</aside>
+
+- The currency of the supplier invoice is the currency of the project it is inserted into (V1).
+- If the supplier (`project_supplier`) has a currency different from the project's currency, an error is returned (this case is not handled in V1).
+
 # Deposits
 
 ## POST deposits-create
@@ -4370,7 +4471,7 @@ A JSON object indicating whether an error occurred during the process, along wit
 | destinations                  | JSON    | JSON including: `size`, Array of all destination (`reference` and `name`) and subdestination (`subdestination_reference` and `subdestination_name`) values |
 | client                        | JSON    | JSON including: `reference`, `type` (enterprise or individual), `company_name`, `first_name`, `last_name` and `email`                                      |
 | client_space                  | JSON    | JSON including: `is_live` (Boolean), `description`, `image_url`                                                                                            |
-| brand | JSON | JSON object representing the brand ([Brand](#brand)) associated with the alternative |
+| brand                         | JSON    | JSON object representing the brand ([Brand](#brand)) associated with the alternative                                                                       |
 
 ### Brand
 
@@ -4394,16 +4495,16 @@ If no brand is associated with an alternative, the default values are taken from
 }
 ```
 
-| Property | Type | Description |
-| ---------- | ------- | ------------------------------------------------------------------------------------------------- |
-| title | String | Title of the brand |
-| company_name | String | Name of the brand company |
-| address | JSON  | JSON object representing the address ([Address](#address)) of the brand |
-| email | String | Email of the brand |
-| phone | String | Phone of the brand |
-| website | String | Website link of the brand |
-| vat_number | String | VAT number of the brand |
-| company_number | String | Company registration number of the brand |
+| Property       | Type   | Description                                                             |
+| -------------- | ------ | ----------------------------------------------------------------------- |
+| title          | String | Title of the brand                                                      |
+| company_name   | String | Name of the brand company                                               |
+| address        | JSON   | JSON object representing the address ([Address](#address)) of the brand |
+| email          | String | Email of the brand                                                      |
+| phone          | String | Phone of the brand                                                      |
+| website        | String | Website link of the brand                                               |
+| vat_number     | String | VAT number of the brand                                                 |
+| company_number | String | Company registration number of the brand                                |
 
 ### Contacts
 
