@@ -865,8 +865,10 @@ A JSON object indicating whether an error occurred during the process, along wit
 
 ## POST project-steps-upsert
 
-This endpoint updates an existing step when the provided reference matches a step in your account. If no match is found, a new step is created using the provided reference, or a randomly generated one if none is supplied.
-Note that the following fields are used only during creation and are ignored on update: `project_reference`, `alternative_order`, `type`, `date_start`, `date_end`.
+This endpoint updates an existing step when the provided reference matches a step in your account. If no match is found, a new step is created using the provided reference, or a randomly generated one if none is supplied. Note that the following fields are used only during creation and are ignored on update: `project_reference`, `alternative_order`, `type`, `date_start`, `date_end`.
+
+Use the field `from_steps_catalog` to update an existant sample steps when the provided reference matches an sample steps in your account. If no match is found, a new sample step is is created using the provided reference, or a randomly generated one if none is supplied.
+Note that the dates provided are not stored as they are, but are normalised to January 1950. The delta between `date_end` and `date_start` must not exceed the number of days in the sample steps catalog. Dates can only be modified if both `date_start` and `date_end` are specified. Note that the following fields are ignored during creation and update: `project_reference`, `alternative_order`.
 
 ```shell
 curl --location 'https://api.ezus.app/project-steps-upsert' \
@@ -929,6 +931,63 @@ const headers = {
 axios.post(baseUrl + "/project-steps-upsert", body, headers);
 ```
 
+```shell
+curl --location 'https://api.ezus.app/project-steps-upsert' \
+--header 'x-api-key: <YOUR_API_KEY>' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer <YOUR_TOKEN>' \
+--data '{
+    "reference": "project_sample_step_reference",
+    "name": "activity Title",
+    "type": "activity",
+    "category": "restaurant",
+    "people": "4",
+    "date_start": "2025-10-03 10:00:00",
+    "date_end": "2025-10-03 12:00:00",
+    "address": {
+        "label": "58 Rue de Paradis",
+        "city": "Paris",
+        "country": "France",
+        "zip": "75010",
+        "geo": {
+            "x": 48.875761,
+            "y": 2.348727
+        }
+    },
+}'
+```
+
+```javascript
+const axios = require("axios");
+const baseUrl = "https://api.ezus.app";
+
+const body = {
+  reference: "project_sample_step_reference",
+  name: "activity Title",
+  type: "activity",
+  category: "restaurant",
+  people: "4",
+  date_start: "2025-10-03 10:00:00",
+  date_end: "2025-10-03 12:00:00",
+  address: {
+    label: "58 Rue de Paradis",
+    city: "Paris",
+    country: "France",
+    zip: "75010",
+    geo: {
+      x: 48.875761,
+      y: 2.348727,
+    },
+  },
+};
+const headers = {
+  "x-api-key": "<YOUR_API_KEY>",
+  Authorization: "Bearer <YOUR_TOKEN>",
+};
+
+axios.post(baseUrl + "/project-steps-upsert", body, headers);
+```
+
 > This request returns a structured JSON object:
 
 ```json
@@ -956,15 +1015,16 @@ axios.post(baseUrl + "/project-steps-upsert", body, headers);
 | Parameter         | Type   | Description                                                                                                                                                                                                                                        |
 | ----------------- | ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | reference         | String | If provided, the unique reference associated to the step you want to update. If you specify a reference during creation, this value will be used as the step reference. It must be a maximum of 64 characters.                                     |
-| project_reference | String | The project reference in which you want to create an step. This field is ignored on update.                                                                                                                                                        |
-| alternative_order | String | Specifies the alternative project order from which to create or update the step. If not provided, defaults to `0` for main alternative. This field is required to create a step. This field is ignored on update.                                  |
+| project_reference | String | The project reference in which you want to create an step. This field is ignored on update or using field `from_steps_catalog`. |
+| alternative_order | String | Specifies the alternative project order from which to create or update the step. If not provided, defaults to `0` for main alternative. This field is required to create a step. This field is ignored on update or using field `from_steps_catalog`. |
 | name              | String | Title of the step. This field is required to create a step. This field is optional on update.                                                                                                                                                      |
-| type              | String | Three options exist: `accom`, `activity`, `transport`. This field is required to create a step. This field is ignored on update.                                                                                                                   |
+| type              | String | Three options exist: `accom`, `activity`, `transport`. This field is required to create a step. This field is ignored only on step update.                                                                                                                   |
 | category          | String | Category of the step. You must provide the technical name of the category. If not specified during creation, the default value will be the main category of the account.                                                                           |
 | people            | String | Number of people in the activity. You can use a `number` or `P`. If not specified during creation, `P` will be used as the default value. `P` represents the number of people in the project.                                                      |
-| date_start        | String | Start date and time of the step. Must be within the dates of the alternative where the step is created. This field is required to create a step. This field is ignored on update. The date format must be as follows, e.g.: `2024-10-01 12:00:00`. |
-| date_end          | String | End date and time of the step. Must be within the dates of the alternative where the step is created. This field is required to create a step. This field is ignored on update. The date format must be as follows, e.g.: `2024-10-01 12:00:00`.   |
-| address           | Object | JSON object address ([Address](#address))                                                                                                                                                                                                          |
+| date_start        | String | Start date and time of the step. Must be within the dates of the alternative where the step is created. This field is required to create a step. This field is ignored only on step update. The date format must be as follows, e.g.: `2024-10-01 12:00:00`. |
+| date_end          | String | End date and time of the step. Must be within the dates of the alternative where the step is created. This field is required to create a step. This field is ignored only on step update. The date format must be as follows, e.g.: `2024-10-01 12:00:00`.   |
+| address           | Object | JSON object address ([Address](#address)) |
+| from_steps_catalog | Boolean | True to create or update sample steps from catalog, False to create or update activity step in a project. |
 
 ### Response
 
