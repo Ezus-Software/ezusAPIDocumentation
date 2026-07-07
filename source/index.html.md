@@ -1254,6 +1254,7 @@ axios.get(baseUrl + "/clients", headers);
       "website": "www.moke_ltd.com",
       "vat_number": "GB 240-635-038",
       "company_number": "09728676",
+      "predefined_net_margin_rate": 15,
       "user": {
         "email": "tommy@e-corp.com",
         "first_name": "Tommy",
@@ -1263,7 +1264,6 @@ axios.get(baseUrl + "/clients", headers);
       "email": "contact@moke-international.com",
       "first_name": "Jane",
       "last_name": "Doe",
-      "predefined_net_margin_rate": 15,
       "address": {
         "label": "58 Rue de Paradis",
         "city": "Paris",
@@ -1347,6 +1347,7 @@ axios.get(baseUrl + "/client?reference=client_reference", headers);
   "website": "www.moke_ltd.com",
   "vat_number": "GB 240-635-038",
   "company_number": "09728676",
+  "predefined_net_margin_rate": 15,
   "user": {
     "email": "tommy@e-corp.com",
     "first_name": "Tommy",
@@ -1356,7 +1357,6 @@ axios.get(baseUrl + "/client?reference=client_reference", headers);
   "email": "contact@moke-international.com",
   "first_name": "Jane",
   "last_name": "Doe",
-  "predefined_net_margin_rate": 15,
   "address": {
     "label": "58 Rue de Paradis",
     "city": "Paris",
@@ -1435,25 +1435,25 @@ axios.get(baseUrl + "/client?reference=client_reference", headers);
 
 A JSON object containing the client information with properties like:
 
-| Property                      | Type   | Description                                                                                |
-| ----------------------------- | ------ | ------------------------------------------------------------------------------------------ |
-| reference                     | String | The reference of the client                                                                |
-| info_number                   | String | File number that appears in the client record. Not to be confused with reference           |
-| type                          | String | The type of the client (either "enterprise" or "individual")                               |
-| company_name                  | String | Name of the client's company (if applicable)                                               |
-| info_notes                    | String | Notes on the client                                                                        |
-| website                       | String | Website of the client                                                                      |
-| vat_number                    | String | VAT number of the client (only for "enterprise" clients)                                   |
-| company_number                | String | Company registration number of the client (only for "enterprise" clients)                  |
-| user                          | JSON   | JSON object representing the user ([User](#user)) associated with the client               |
-| email                         | String | Email of the main contact at the client's organization                                     |
-| first_name                    | String | First name of the main contact at the client's organization                                |
-| last_name                     | String | Last name of the main contact at the client's organization                                 |
-| predefined_net_margin_rate    | Number | Predefined net margin rate in percentage (e.g., `15` for 15%). Leave blank `''` if not set |
-| address                       | JSON   | JSON object representing the address ([Address](#address)) of the client                   |
-| projects                      | JSON   | Projects linked to the client (returns the first 10 projects)                              |
-| contacts                      | Array  | An array of JSON contacts ([Contacts](#contacts)) associated with the client               |
-| custom_fields                 | Array  | An array of JSON custom fields ([Custom fields](#custom-fields)) for the client            |
+| Property                   | Type   | Description                                                                                |
+| -------------------------- | ------ | ------------------------------------------------------------------------------------------ |
+| reference                  | String | The reference of the client                                                                |
+| info_number                | String | File number that appears in the client record. Not to be confused with reference           |
+| type                       | String | The type of the client (either "enterprise" or "individual")                               |
+| company_name               | String | Name of the client's company (if applicable)                                               |
+| info_notes                 | String | Notes on the client                                                                        |
+| website                    | String | Website of the client                                                                      |
+| vat_number                 | String | VAT number of the client (only for "enterprise" clients)                                   |
+| company_number             | String | Company registration number of the client (only for "enterprise" clients)                  |
+| predefined_net_margin_rate | Number | Predefined net margin rate in percentage (e.g., `15` for 15%). Leave blank `''` if not set |
+| user                       | JSON   | JSON object representing the user ([User](#user)) associated with the client               |
+| email                      | String | Email of the main contact at the client's organization                                     |
+| first_name                 | String | First name of the main contact at the client's organization                                |
+| last_name                  | String | Last name of the main contact at the client's organization                                 |
+| address                    | JSON   | JSON object representing the address ([Address](#address)) of the client                   |
+| projects                   | JSON   | Projects linked to the client (returns the first 10 projects)                              |
+| contacts                   | Array  | An array of JSON contacts ([Contacts](#contacts)) associated with the client               |
+| custom_fields              | Array  | An array of JSON custom fields ([Custom fields](#custom-fields)) for the client            |
 
 ## POST clients-upsert
 
@@ -4382,7 +4382,7 @@ A JSON object indicating whether an error occurred during the process, along wit
 | destinations                  | JSON    | JSON including: `size`, Array of all destination (`reference` and `name`) and subdestination (`subdestination_reference` and `subdestination_name`) values |
 | client                        | JSON    | JSON including: `reference`, `type` (enterprise or individual), `company_name`, `first_name`, `last_name` and `email`                                      |
 | client_space                  | JSON    | JSON including: `is_live` (Boolean), `description`, `image_url`                                                                                            |
-| brand | JSON | JSON object representing the brand ([Brand](#brand)) associated with the alternative |
+| brand                         | JSON    | JSON object representing the brand ([Brand](#brand)) associated with the alternative                                                                       |
 
 ### Brand
 
@@ -4406,16 +4406,16 @@ If no brand is associated with an alternative, the default values are taken from
 }
 ```
 
-| Property | Type | Description |
-| ---------- | ------- | ------------------------------------------------------------------------------------------------- |
-| title | String | Title of the brand |
-| company_name | String | Name of the brand company |
-| address | JSON  | JSON object representing the address ([Address](#address)) of the brand |
-| email | String | Email of the brand |
-| phone | String | Phone of the brand |
-| website | String | Website link of the brand |
-| vat_number | String | VAT number of the brand |
-| company_number | String | Company registration number of the brand |
+| Property       | Type   | Description                                                             |
+| -------------- | ------ | ----------------------------------------------------------------------- |
+| title          | String | Title of the brand                                                      |
+| company_name   | String | Name of the brand company                                               |
+| address        | JSON   | JSON object representing the address ([Address](#address)) of the brand |
+| email          | String | Email of the brand                                                      |
+| phone          | String | Phone of the brand                                                      |
+| website        | String | Website link of the brand                                               |
+| vat_number     | String | VAT number of the brand                                                 |
+| company_number | String | Company registration number of the brand                                |
 
 ### Contacts
 
