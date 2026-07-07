@@ -876,6 +876,7 @@ curl --location 'https://api.ezus.app/project-steps-upsert' \
 --header 'Content-Type: application/json' \
 --header 'Authorization: Bearer <YOUR_TOKEN>' \
 --data '{
+    "from_steps_catalog": false,
     "reference": "project_step_reference",
     "project_reference": "project_reference",
     "alternative_order": "0",
@@ -895,6 +896,10 @@ curl --location 'https://api.ezus.app/project-steps-upsert' \
             "y": 2.348727
         }
     },
+    "description": {
+      "short": "Short description of the activity",
+      "long": "Long description of the activity"
+    }
 }'
 ```
 
@@ -903,6 +908,7 @@ const axios = require("axios");
 const baseUrl = "https://api.ezus.app";
 
 const body = {
+  from_steps_catalog: false,
   reference: "project_step_reference",
   project_reference: "project_reference",
   alternative_order: "0",
@@ -922,6 +928,10 @@ const body = {
       y: 2.348727,
     },
   },
+  description: {
+    short: "Short description of the activity",
+    long: "Long description of the activity",
+  },
 };
 const headers = {
   "x-api-key": "<YOUR_API_KEY>",
@@ -937,6 +947,7 @@ curl --location 'https://api.ezus.app/project-steps-upsert' \
 --header 'Content-Type: application/json' \
 --header 'Authorization: Bearer <YOUR_TOKEN>' \
 --data '{
+    "from_steps_catalog": true,
     "reference": "project_sample_step_reference",
     "name": "activity Title",
     "type": "activity",
@@ -962,6 +973,7 @@ const axios = require("axios");
 const baseUrl = "https://api.ezus.app";
 
 const body = {
+  from_steps_catalog: true,
   reference: "project_sample_step_reference",
   name: "activity Title",
   type: "activity",
@@ -1014,6 +1026,7 @@ axios.post(baseUrl + "/project-steps-upsert", body, headers);
 
 | Parameter         | Type   | Description                                                                                                                                                                                                                                        |
 | ----------------- | ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| from_steps_catalog | Boolean | True to create or update sample steps from catalog, False to create or update activity step in a project. |
 | reference         | String | If provided, the unique reference associated to the step you want to update. If you specify a reference during creation, this value will be used as the step reference. It must be a maximum of 64 characters.                                     |
 | project_reference | String | The project reference in which you want to create an step. This field is ignored on update or using field `from_steps_catalog`. |
 | alternative_order | String | Specifies the alternative project order from which to create or update the step. If not provided, defaults to `0` for main alternative. This field is required to create a step. This field is ignored on update or using field `from_steps_catalog`. |
@@ -1024,7 +1037,7 @@ axios.post(baseUrl + "/project-steps-upsert", body, headers);
 | date_start        | String | Start date and time of the step. Must be within the dates of the alternative where the step is created. This field is required to create a step. This field is ignored only on step update. The date format must be as follows, e.g.: `2024-10-01 12:00:00`. |
 | date_end          | String | End date and time of the step. Must be within the dates of the alternative where the step is created. This field is required to create a step. This field is ignored only on step update. The date format must be as follows, e.g.: `2024-10-01 12:00:00`.   |
 | address           | Object | JSON object address ([Address](#address)) |
-| from_steps_catalog | Boolean | True to create or update sample steps from catalog, False to create or update activity step in a project. |
+| description | JSON | JSON object representing the short and long description of the step. This field is ignored for sample steps. |
 
 ### Response
 
@@ -1305,6 +1318,7 @@ axios.get(baseUrl + "/clients", headers);
       "website": "www.moke_ltd.com",
       "vat_number": "GB 240-635-038",
       "company_number": "09728676",
+      "predefined_net_margin_rate": 15,
       "user": {
         "email": "tommy@e-corp.com",
         "first_name": "Tommy",
@@ -1397,6 +1411,7 @@ axios.get(baseUrl + "/client?reference=client_reference", headers);
   "website": "www.moke_ltd.com",
   "vat_number": "GB 240-635-038",
   "company_number": "09728676",
+  "predefined_net_margin_rate": 15,
   "user": {
     "email": "tommy@e-corp.com",
     "first_name": "Tommy",
@@ -1484,24 +1499,25 @@ axios.get(baseUrl + "/client?reference=client_reference", headers);
 
 A JSON object containing the client information with properties like:
 
-| Property       | Type   | Description                                                                      |
-| -------------- | ------ | -------------------------------------------------------------------------------- |
-| reference      | String | The reference of the client                                                      |
-| info_number    | String | File number that appears in the client record. Not to be confused with reference |
-| type           | String | The type of the client (either "enterprise" or "individual")                     |
-| company_name   | String | Name of the client's company (if applicable)                                     |
-| info_notes     | String | Notes on the client                                                              |
-| website        | String | Website of the client                                                            |
-| vat_number     | String | VAT number of the client (only for "enterprise" clients)                         |
-| company_number | String | Company registration number of the client (only for "enterprise" clients)        |
-| user           | JSON   | JSON object representing the user ([User](#user)) associated with the client     |
-| email          | String | Email of the main contact at the client's organization                           |
-| first_name     | String | First name of the main contact at the client's organization                      |
-| last_name      | String | Last name of the main contact at the client's organization                       |
-| address        | JSON   | JSON object representing the address ([Address](#address)) of the client         |
-| projects       | JSON   | Projects linked to the client (returns the first 10 projects)                    |
-| contacts       | Array  | An array of JSON contacts ([Contacts](#contacts)) associated with the client     |
-| custom_fields  | Array  | An array of JSON custom fields ([Custom fields](#custom-fields)) for the client  |
+| Property                   | Type   | Description                                                                                |
+| -------------------------- | ------ | ------------------------------------------------------------------------------------------ |
+| reference                  | String | The reference of the client                                                                |
+| info_number                | String | File number that appears in the client record. Not to be confused with reference           |
+| type                       | String | The type of the client (either "enterprise" or "individual")                               |
+| company_name               | String | Name of the client's company (if applicable)                                               |
+| info_notes                 | String | Notes on the client                                                                        |
+| website                    | String | Website of the client                                                                      |
+| vat_number                 | String | VAT number of the client (only for "enterprise" clients)                                   |
+| company_number             | String | Company registration number of the client (only for "enterprise" clients)                  |
+| predefined_net_margin_rate | Number | Predefined net margin rate in percentage (e.g., `15` for 15%). Leave blank `''` if not set |
+| user                       | JSON   | JSON object representing the user ([User](#user)) associated with the client               |
+| email                      | String | Email of the main contact at the client's organization                                     |
+| first_name                 | String | First name of the main contact at the client's organization                                |
+| last_name                  | String | Last name of the main contact at the client's organization                                 |
+| address                    | JSON   | JSON object representing the address ([Address](#address)) of the client                   |
+| projects                   | JSON   | Projects linked to the client (returns the first 10 projects)                              |
+| contacts                   | Array  | An array of JSON contacts ([Contacts](#contacts)) associated with the client               |
+| custom_fields              | Array  | An array of JSON custom fields ([Custom fields](#custom-fields)) for the client            |
 
 ## POST clients-upsert
 
@@ -4430,7 +4446,7 @@ A JSON object indicating whether an error occurred during the process, along wit
 | destinations                  | JSON    | JSON including: `size`, Array of all destination (`reference` and `name`) and subdestination (`subdestination_reference` and `subdestination_name`) values |
 | client                        | JSON    | JSON including: `reference`, `type` (enterprise or individual), `company_name`, `first_name`, `last_name` and `email`                                      |
 | client_space                  | JSON    | JSON including: `is_live` (Boolean), `description`, `image_url`                                                                                            |
-| brand | JSON | JSON object representing the brand ([Brand](#brand)) associated with the alternative |
+| brand                         | JSON    | JSON object representing the brand ([Brand](#brand)) associated with the alternative                                                                       |
 
 ### Brand
 
@@ -4454,16 +4470,16 @@ If no brand is associated with an alternative, the default values are taken from
 }
 ```
 
-| Property | Type | Description |
-| ---------- | ------- | ------------------------------------------------------------------------------------------------- |
-| title | String | Title of the brand |
-| company_name | String | Name of the brand company |
-| address | JSON  | JSON object representing the address ([Address](#address)) of the brand |
-| email | String | Email of the brand |
-| phone | String | Phone of the brand |
-| website | String | Website link of the brand |
-| vat_number | String | VAT number of the brand |
-| company_number | String | Company registration number of the brand |
+| Property       | Type   | Description                                                             |
+| -------------- | ------ | ----------------------------------------------------------------------- |
+| title          | String | Title of the brand                                                      |
+| company_name   | String | Name of the brand company                                               |
+| address        | JSON   | JSON object representing the address ([Address](#address)) of the brand |
+| email          | String | Email of the brand                                                      |
+| phone          | String | Phone of the brand                                                      |
+| website        | String | Website link of the brand                                               |
+| vat_number     | String | VAT number of the brand                                                 |
+| company_number | String | Company registration number of the brand                                |
 
 ### Contacts
 
