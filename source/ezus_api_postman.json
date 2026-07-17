@@ -1023,7 +1023,7 @@
       "response": []
     },
     {
-      "name": "invoices-suppliers-upsert",
+      "name": "invoices-supplier-upsert",
       "request": {
         "method": "POST",
         "header": [
@@ -1043,9 +1043,9 @@
           }
         },
         "url": {
-          "raw": "{{baseUrl}}/invoices-suppliers-upsert",
+          "raw": "{{baseUrl}}/invoices-supplier-upsert",
           "host": ["{{baseUrl}}"],
-          "path": ["invoices-suppliers-upsert"]
+          "path": ["invoices-supplier-upsert"]
         }
       },
       "response": []

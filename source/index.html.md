@@ -3805,13 +3805,13 @@ A JSON object containing the supplier invoice information with properties like:
 | client          | JSON    | JSON including: `reference`, `type` (enterprise or individual), `company_name`, `first_name`, `last_name` and `email`                                                                                             |
 | payments        | Array   | Array of JSON including: `reference`, `date`, `amount` and `payment_method`                                                                                                                                       |
 
-## POST invoices-suppliers-upsert
+## POST invoices-supplier-upsert
 
 This endpoint allows you to create or update a supplier invoice (purchase invoice) on a project.
 The endpoint works in upsert mode: if the provided `reference` matches an existing, non-deleted supplier invoice of your account that belongs to the specified supplier and project, the invoice is updated. Otherwise, a new supplier invoice is created.
 
 ```shell
-curl --location 'https://api.ezus.app/invoices-suppliers-upsert' \
+curl --location 'https://api.ezus.app/invoices-supplier-upsert' \
 --header 'x-api-key: <YOUR_API_KEY>' \
 --header 'Content-Type: application/json' \
 --header 'Authorization: Bearer <YOUR_TOKEN>' \
@@ -3850,7 +3850,7 @@ const headers = {
   Authorization: "Bearer <YOUR_TOKEN>",
 };
 
-axios.post(baseUrl + "/invoices-suppliers-upsert", body, headers);
+axios.post(baseUrl + "/invoices-supplier-upsert", body, headers);
 ```
 
 > This request returns a structured JSON object:
@@ -3866,7 +3866,7 @@ axios.post(baseUrl + "/invoices-suppliers-upsert", body, headers);
 
 ### HTTP Endpoint
 
-`POST https://api.ezus.app/invoices-suppliers-upsert`
+`POST https://api.ezus.app/invoices-supplier-upsert`
 
 ### Header Parameters
 
