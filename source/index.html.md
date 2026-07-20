@@ -215,32 +215,32 @@ axios.get(baseUrl + "/projects", headers);
 
 A JSON object containing the project information with properties like:
 
-| Property   | Type   | Description                                                                                                                                                                                 |
-| ---------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| next_token | String | A token will be returned if all projects have not been returned. Use it in another call to access the following projects                                                                    |
-| size       | Number | The total number of projects available with these filters                                                                                                                                   |
-| data_size  | Number | Number of projects returned on the current page                                                                                                                                             |
-| page       | Number | The page number                                                                                                                                                                             |
-| projects   | Array  | An array of JSON objects, each representing a project. The properties of each project object are detailed in the table below                                                               |
+| Property   | Type   | Description                                                                                                                  |
+| ---------- | ------ | ---------------------------------------------------------------------------------------------------------------------------- |
+| next_token | String | A token will be returned if all projects have not been returned. Use it in another call to access the following projects     |
+| size       | Number | The total number of projects available with these filters                                                                    |
+| data_size  | Number | Number of projects returned on the current page                                                                              |
+| page       | Number | The page number                                                                                                              |
+| projects   | Array  | An array of JSON objects, each representing a project. The properties of each project object are detailed in the table below |
 
 Each project object of the `projects` array contains the following properties:
 
-| Property             | Type   | Description                                                                                                                                                        |
-| -------------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| reference            | String | The reference of the project                                                                                                                                       |
-| info_number          | String | File number that appears in the project record. Not to be confused with reference                                                                                  |
-| info_title           | String | The title of the project                                                                                                                                           |
-| info_stage_reference | String | Technical name of the stage of the project (confirmed, received, paid...)                                                                                          |
-| info_stage           | String | The stage of the project (Confirmed, Received, Paid...)                                                                                                            |
-| info_notes           | String | Notes on the project                                                                                                                                               |
-| created_at           | Date   | Date of creation (YYYY-MM-DD)                                                                                                                                      |
-| updated_at           | Date   | Date of the last update (YYYY-MM-DD)                                                                                                                               |
-| trip_date_in         | Date   | Start date of the trip (YYYY-MM-DD), taken from the main alternative of the project. Empty string if the project has no dates                                      |
-| trip_date_out        | Date   | End date of the trip (YYYY-MM-DD), taken from the main alternative of the project. Empty string if the project has no dates                                        |
-| trip_duration        | Number | Number of days the trip lasts, taken from the main alternative of the project. 0 if the project has no dates                                                       |
-| currency             | String | Default currency of the project                                                                                                                                    |
-| sales_manager        | JSON   | JSON object representing the sales manager ([User](#user))                                                                                                         |
-| project_manager      | JSON   | JSON object representing the project manager ([User](#user))                                                                                                       |
+| Property             | Type   | Description                                                                                                                   |
+| -------------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------- |
+| reference            | String | The reference of the project                                                                                                  |
+| info_number          | String | File number that appears in the project record. Not to be confused with reference                                             |
+| info_title           | String | The title of the project                                                                                                      |
+| info_stage_reference | String | Technical name of the stage of the project (confirmed, received, paid...)                                                     |
+| info_stage           | String | The stage of the project (Confirmed, Received, Paid...)                                                                       |
+| info_notes           | String | Notes on the project                                                                                                          |
+| created_at           | Date   | Date of creation (YYYY-MM-DD)                                                                                                 |
+| updated_at           | Date   | Date of the last update (YYYY-MM-DD)                                                                                          |
+| trip_date_in         | Date   | Start date of the trip (YYYY-MM-DD), taken from the main alternative of the project. Empty string if the project has no dates |
+| trip_date_out        | Date   | End date of the trip (YYYY-MM-DD), taken from the main alternative of the project. Empty string if the project has no dates   |
+| trip_duration        | Number | Number of days the trip lasts, taken from the main alternative of the project                                                 |
+| currency             | String | Default currency of the project                                                                                               |
+| sales_manager        | JSON   | JSON object representing the sales manager ([User](#user))                                                                    |
+| project_manager      | JSON   | JSON object representing the project manager ([User](#user))                                                                  |
 
 ## GET project
 
@@ -1046,20 +1046,20 @@ axios.post(baseUrl + "/project-steps-upsert", body, headers);
 
 ### Body Parameters (application/json)
 
-| Parameter         | Type   | Description                                                                                                                                                                                                                                        |
-| ----------------- | ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| from_steps_catalog | Boolean | Optional. Default to false. When set to true, create or update sample step from catalog. |
-| reference         | String | If provided, the unique reference associated to the step you want to update. If you specify a reference during creation, this value will be used as the step reference. It must be a maximum of 64 characters.                                     |
-| project_reference | String | The project reference in which you want to create an step. This field is ignored during update or when using the `from_steps_catalog` field. |
-| alternative_order | String | Specifies the alternative project order from which to create or update the step. If not provided, defaults to `0` for main alternative. This field is required to create a step. This field is ignored during update or when using the `from_steps_catalog` field. |
-| name              | String | Title of the step. This field is required to create a step. This field is optional on update.                                                                                                                                                      |
-| type              | String | Three options exist: `accom`, `activity`, `transport`. This field is required to create a step. This field is ignored on update.                                                                                                                   |
-| category          | String | Category of the step. You must provide the technical name of the category. If not specified during creation, the default value will be the main category of the account.                                                                           |
-| people            | String | Number of people in the activity. You can use a `number` or `P`. If not specified during creation, `P` will be used as the default value. `P` represents the number of people in the project.                                                      |
-| date_start        | String | Start date and time of the step. Must be within the dates of the alternative where the step is created. This field is required to create a step. This field is ignored on step update. This field can be completed when updating a sample step, but both dates are required. The date format must be as follows, e.g.: `2024-10-01 12:00:00`. |
-| date_end          | String | End date and time of the step. Must be within the dates of the alternative where the step is created. This field is required to create a step. This field is ignored on step update. This field can be completed when updating the sample step, but both dates are required. The date format must be as follows, e.g.: `2024-10-01 12:00:00`.   |
-| address           | Object | JSON object address ([Address](#address)) |
-| description | JSON | JSON object representing the short and long description of the step. This field is ignored for sample steps. |
+| Parameter          | Type    | Description                                                                                                                                                                                                                                                                                                                                   |
+| ------------------ | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| from_steps_catalog | Boolean | Optional. Default to false. When set to true, create or update sample step from catalog.                                                                                                                                                                                                                                                      |
+| reference          | String  | If provided, the unique reference associated to the step you want to update. If you specify a reference during creation, this value will be used as the step reference. It must be a maximum of 64 characters.                                                                                                                                |
+| project_reference  | String  | The project reference in which you want to create an step. This field is ignored during update or when using the `from_steps_catalog` field.                                                                                                                                                                                                  |
+| alternative_order  | String  | Specifies the alternative project order from which to create or update the step. If not provided, defaults to `0` for main alternative. This field is required to create a step. This field is ignored during update or when using the `from_steps_catalog` field.                                                                            |
+| name               | String  | Title of the step. This field is required to create a step. This field is optional on update.                                                                                                                                                                                                                                                 |
+| type               | String  | Three options exist: `accom`, `activity`, `transport`. This field is required to create a step. This field is ignored on update.                                                                                                                                                                                                              |
+| category           | String  | Category of the step. You must provide the technical name of the category. If not specified during creation, the default value will be the main category of the account.                                                                                                                                                                      |
+| people             | String  | Number of people in the activity. You can use a `number` or `P`. If not specified during creation, `P` will be used as the default value. `P` represents the number of people in the project.                                                                                                                                                 |
+| date_start         | String  | Start date and time of the step. Must be within the dates of the alternative where the step is created. This field is required to create a step. This field is ignored on step update. This field can be completed when updating a sample step, but both dates are required. The date format must be as follows, e.g.: `2024-10-01 12:00:00`. |
+| date_end           | String  | End date and time of the step. Must be within the dates of the alternative where the step is created. This field is required to create a step. This field is ignored on step update. This field can be completed when updating the sample step, but both dates are required. The date format must be as follows, e.g.: `2024-10-01 12:00:00`. |
+| address            | Object  | JSON object address ([Address](#address))                                                                                                                                                                                                                                                                                                     |
+| description        | JSON    | JSON object representing the short and long description of the step. This field is ignored for sample steps.                                                                                                                                                                                                                                  |
 
 ### Response
 
