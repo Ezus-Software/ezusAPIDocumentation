@@ -165,6 +165,9 @@ axios.get(baseUrl + "/projects", headers);
       "info_notes": "Jane has verbally confirmed our quotation",
       "created_at": "2024-06-18",
       "updated_at": "2024-06-19",
+      "trip_date_in": "2024-03-01",
+      "trip_date_out": "2024-03-09",
+      "trip_duration": 8,
       "currency": "€",
       "sales_manager": {
         "email": "travel-design@e-corp.com",
@@ -218,7 +221,26 @@ A JSON object containing the project information with properties like:
 | size       | Number | The total number of projects available with these filters                                                                                                                                   |
 | data_size  | Number | Number of projects returned on the current page                                                                                                                                             |
 | page       | Number | The page number                                                                                                                                                                             |
-| projects   | Array  | An array of JSON objects, each representing a project. These objects are formatted according to a simplified version of the GET `project` response structure. ([GET project](#get-project)) |
+| projects   | Array  | An array of JSON objects, each representing a project. The properties of each project object are detailed in the table below                                                               |
+
+Each project object of the `projects` array contains the following properties:
+
+| Property             | Type   | Description                                                                                                                                                        |
+| -------------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| reference            | String | The reference of the project                                                                                                                                       |
+| info_number          | String | File number that appears in the project record. Not to be confused with reference                                                                                  |
+| info_title           | String | The title of the project                                                                                                                                           |
+| info_stage_reference | String | Technical name of the stage of the project (confirmed, received, paid...)                                                                                          |
+| info_stage           | String | The stage of the project (Confirmed, Received, Paid...)                                                                                                            |
+| info_notes           | String | Notes on the project                                                                                                                                               |
+| created_at           | Date   | Date of creation (YYYY-MM-DD)                                                                                                                                      |
+| updated_at           | Date   | Date of the last update (YYYY-MM-DD)                                                                                                                               |
+| trip_date_in         | Date   | Start date of the trip (YYYY-MM-DD), taken from the main alternative of the project. Empty string if the project has no dates                                      |
+| trip_date_out        | Date   | End date of the trip (YYYY-MM-DD), taken from the main alternative of the project. Empty string if the project has no dates                                        |
+| trip_duration        | Number | Number of days the trip lasts, taken from the main alternative of the project. 0 if the project has no dates                                                       |
+| currency             | String | Default currency of the project                                                                                                                                    |
+| sales_manager        | JSON   | JSON object representing the sales manager ([User](#user))                                                                                                         |
+| project_manager      | JSON   | JSON object representing the project manager ([User](#user))                                                                                                       |
 
 ## GET project
 
