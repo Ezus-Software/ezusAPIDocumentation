@@ -1023,6 +1023,34 @@
       "response": []
     },
     {
+      "name": "invoices-supplier-upsert",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "X-API-KEY",
+            "value": "{{<YOUR_API_KEY>}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"supplier_reference\": \"supplier_reference\",\n    \"project_reference\": \"project_reference\",\n    \"alternative_order\": \"0\",\n    \"reference\": \"invoice_supplier_reference\",\n    \"due_date\": \"2023-10-20\",\n    \"amount_ttc\": 1200.00,\n    \"amount_ht\": 1000.00,\n    \"filename\": \"2023_101010.pdf\",\n    \"url\": \"https://ezus.io/2023_101010.pdf\",\n    \"note\": \"Invoice for the Paris fashion week 2024 project\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/invoices-supplier-upsert",
+          "host": ["{{baseUrl}}"],
+          "path": ["invoices-supplier-upsert"]
+        }
+      },
+      "response": []
+    },
+    {
       "name": "deposits-create",
       "request": {
         "method": "POST",
