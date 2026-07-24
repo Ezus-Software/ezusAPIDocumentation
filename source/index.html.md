@@ -163,12 +163,12 @@ axios.get(baseUrl + "/projects", headers);
       "info_stage_reference": "confirmed",
       "info_stage": "Confirmed",
       "info_notes": "Jane has verbally confirmed our quotation",
-      "created_at": "2024-06-18",
-      "updated_at": "2024-06-19",
       "trip_date_in": "2024-03-01",
       "trip_date_out": "2024-03-09",
       "trip_duration": 8,
       "currency": "€",
+      "created_at": "2024-06-18",
+      "updated_at": "2024-06-19",
       "sales_manager": {
         "email": "travel-design@e-corp.com",
         "first_name": "Alice",
@@ -203,10 +203,10 @@ axios.get(baseUrl + "/projects", headers);
 | --------------------- | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | next_token            | String  | Specify this parameter if you want to retrieve the following elements of a given list query                                                                                                        |
 | info_stage_reference  | String  | You can filter projects that are in a specific stage. The stage of the project must be indicated by its technical name                                                                             |
-| created_at            | Date    | You can filter projects assigned to a specific or an intersection of creation date. Expected format: “YYYY-MM-DD” or “YYYY-MM-DD,YYYY-MM-DD”. See [Date Format](#date-format) for more details.    |
-| updated_at            | Date    | You can filter projects assigned to a specific or an intersection of last update date. Expected format: “YYYY-MM-DD” or “YYYY-MM-DD,YYYY-MM-DD”. See [Date Format](#date-format) for more details. |
 | trip_date_in          | Date    | You can filter projects assigned to a specific or an intersection of trip start date. Expected format: “YYYY-MM-DD” or “YYYY-MM-DD,YYYY-MM-DD”. See [Date Format](#date-format) for more details.  |
 | trip_date_out         | Date    | You can filter projects assigned to a specific or an intersection of trip end date. Expected format: “YYYY-MM-DD” or “YYYY-MM-DD,YYYY-MM-DD”. See [Date Format](#date-format) for more details.    |
+| created_at            | Date    | You can filter projects assigned to a specific or an intersection of creation date. Expected format: “YYYY-MM-DD” or “YYYY-MM-DD,YYYY-MM-DD”. See [Date Format](#date-format) for more details.    |
+| updated_at            | Date    | You can filter projects assigned to a specific or an intersection of last update date. Expected format: “YYYY-MM-DD” or “YYYY-MM-DD,YYYY-MM-DD”. See [Date Format](#date-format) for more details. |
 | sales_manager         | String  | Provide either the sales manager's email address or "None". Expected format: "john.doe@e-corp.com" or "None".                                                                                      |
 | project_manager       | String  | Provide either the project manager's email address or "None". Expected format: "john.doe@e-corp.com" or "None".                                                                                    |
 | from_programs_catalog | Boolean | Optional. Defaults to false. When set to true, retrieves all projects from the programs catalog.                                                                                                   |
@@ -256,9 +256,9 @@ axios.get(baseUrl + "/project?reference=project_reference", headers);
   "info_stage_reference": "confirmed",
   "info_stage": "Confirmed",
   "info_notes": "Jane has verbally confirmed our quotation",
+  "currency": "€",
   "created_at": "2024-06-18",
   "updated_at": "2024-06-19",
-  "currency": "€",
   "sales_manager": {
     "email": "travel-design@e-corp.com",
     "first_name": "Alice",
@@ -386,9 +386,9 @@ A JSON object containing the project information with properties like:
 | info_stage_reference | String | Technical name of the stage of the project (confirmed, received, paid...)         |
 | info_stage           | String | The stage of the project (Confirmed, Received, Paid...)                           |
 | info_notes           | String | Notes on the project                                                              |
+| currency             | String | Default currency of the project                                                   |
 | created_at           | Date   | Date of creation                                                                  |
 | updated_at           | Date   | Date of the last update                                                           |
-| currency             | String | Default currency of the project                                                   |
 | sales_manager        | JSON   | JSON object representing the sales manager ([User](#user))                        |
 | project_manager      | JSON   | JSON object representing the project manager ([User](#user))                      |
 | alternatives         | Array  | Array of JSON alternatives ([Alternatives](#alternatives))                        |
