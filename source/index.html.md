@@ -215,32 +215,13 @@ axios.get(baseUrl + "/projects", headers);
 
 A JSON object containing the project information with properties like:
 
-| Property   | Type   | Description                                                                                                                  |
-| ---------- | ------ | ---------------------------------------------------------------------------------------------------------------------------- |
-| next_token | String | A token will be returned if all projects have not been returned. Use it in another call to access the following projects     |
-| size       | Number | The total number of projects available with these filters                                                                    |
-| data_size  | Number | Number of projects returned on the current page                                                                              |
-| page       | Number | The page number                                                                                                              |
-| projects   | Array  | An array of JSON objects, each representing a project. The properties of each project object are detailed in the table below |
-
-Each project object of the `projects` array contains the following properties:
-
-| Property             | Type   | Description                                                                                                                   |
-| -------------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------- |
-| reference            | String | The reference of the project                                                                                                  |
-| info_number          | String | File number that appears in the project record. Not to be confused with reference                                             |
-| info_title           | String | The title of the project                                                                                                      |
-| info_stage_reference | String | Technical name of the stage of the project (confirmed, received, paid...)                                                     |
-| info_stage           | String | The stage of the project (Confirmed, Received, Paid...)                                                                       |
-| info_notes           | String | Notes on the project                                                                                                          |
-| created_at           | Date   | Date of creation (YYYY-MM-DD)                                                                                                 |
-| updated_at           | Date   | Date of the last update (YYYY-MM-DD)                                                                                          |
-| trip_date_in         | Date   | Start date of the trip (YYYY-MM-DD), taken from the main alternative of the project. Empty string if the project has no dates |
-| trip_date_out        | Date   | End date of the trip (YYYY-MM-DD), taken from the main alternative of the project. Empty string if the project has no dates   |
-| trip_duration        | Number | Number of days the trip lasts, taken from the main alternative of the project                                                 |
-| currency             | String | Default currency of the project                                                                                               |
-| sales_manager        | JSON   | JSON object representing the sales manager ([User](#user))                                                                    |
-| project_manager      | JSON   | JSON object representing the project manager ([User](#user))                                                                  |
+| Property   | Type   | Description                                                                                                                                                                                                                                                                                                                          |
+| ---------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| next_token | String | A token will be returned if all projects have not been returned. Use it in another call to access the following projects                                                                                                                                                                                                             |
+| size       | Number | The total number of projects available with these filters                                                                                                                                                                                                                                                                            |
+| data_size  | Number | Number of projects returned on the current page                                                                                                                                                                                                                                                                                      |
+| page       | Number | The page number                                                                                                                                                                                                                                                                                                                      |
+| projects   | Array  | An array of JSON objects, each representing a project. Each object follows the [GET project](#get-project) response structure, with two differences: the `alternatives` and `custom_fields` arrays are omitted ; the main alternative's `trip_date_in`, `trip_date_out`, `trip_duration` are returned directly at the project level. |
 
 ## GET project
 
