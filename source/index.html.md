@@ -163,9 +163,12 @@ axios.get(baseUrl + "/projects", headers);
       "info_stage_reference": "confirmed",
       "info_stage": "Confirmed",
       "info_notes": "Jane has verbally confirmed our quotation",
+      "trip_date_in": "2024-03-01",
+      "trip_date_out": "2024-03-09",
+      "trip_duration": 8,
+      "currency": "€",
       "created_at": "2024-06-18",
       "updated_at": "2024-06-19",
-      "currency": "€",
       "sales_manager": {
         "email": "travel-design@e-corp.com",
         "first_name": "Alice",
@@ -200,10 +203,10 @@ axios.get(baseUrl + "/projects", headers);
 | --------------------- | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | next_token            | String  | Specify this parameter if you want to retrieve the following elements of a given list query                                                                                                        |
 | info_stage_reference  | String  | You can filter projects that are in a specific stage. The stage of the project must be indicated by its technical name                                                                             |
-| created_at            | Date    | You can filter projects assigned to a specific or an intersection of creation date. Expected format: “YYYY-MM-DD” or “YYYY-MM-DD,YYYY-MM-DD”. See [Date Format](#date-format) for more details.    |
-| updated_at            | Date    | You can filter projects assigned to a specific or an intersection of last update date. Expected format: “YYYY-MM-DD” or “YYYY-MM-DD,YYYY-MM-DD”. See [Date Format](#date-format) for more details. |
 | trip_date_in          | Date    | You can filter projects assigned to a specific or an intersection of trip start date. Expected format: “YYYY-MM-DD” or “YYYY-MM-DD,YYYY-MM-DD”. See [Date Format](#date-format) for more details.  |
 | trip_date_out         | Date    | You can filter projects assigned to a specific or an intersection of trip end date. Expected format: “YYYY-MM-DD” or “YYYY-MM-DD,YYYY-MM-DD”. See [Date Format](#date-format) for more details.    |
+| created_at            | Date    | You can filter projects assigned to a specific or an intersection of creation date. Expected format: “YYYY-MM-DD” or “YYYY-MM-DD,YYYY-MM-DD”. See [Date Format](#date-format) for more details.    |
+| updated_at            | Date    | You can filter projects assigned to a specific or an intersection of last update date. Expected format: “YYYY-MM-DD” or “YYYY-MM-DD,YYYY-MM-DD”. See [Date Format](#date-format) for more details. |
 | sales_manager         | String  | Provide either the sales manager's email address or "None". Expected format: "john.doe@e-corp.com" or "None".                                                                                      |
 | project_manager       | String  | Provide either the project manager's email address or "None". Expected format: "john.doe@e-corp.com" or "None".                                                                                    |
 | from_programs_catalog | Boolean | Optional. Defaults to false. When set to true, retrieves all projects from the programs catalog.                                                                                                   |
@@ -212,13 +215,13 @@ axios.get(baseUrl + "/projects", headers);
 
 A JSON object containing the project information with properties like:
 
-| Property   | Type   | Description                                                                                                                                                                                 |
-| ---------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| next_token | String | A token will be returned if all projects have not been returned. Use it in another call to access the following projects                                                                    |
-| size       | Number | The total number of projects available with these filters                                                                                                                                   |
-| data_size  | Number | Number of projects returned on the current page                                                                                                                                             |
-| page       | Number | The page number                                                                                                                                                                             |
-| projects   | Array  | An array of JSON objects, each representing a project. These objects are formatted according to a simplified version of the GET `project` response structure. ([GET project](#get-project)) |
+| Property   | Type   | Description                                                                                                                                                                                                                                                                                                                          |
+| ---------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| next_token | String | A token will be returned if all projects have not been returned. Use it in another call to access the following projects                                                                                                                                                                                                             |
+| size       | Number | The total number of projects available with these filters                                                                                                                                                                                                                                                                            |
+| data_size  | Number | Number of projects returned on the current page                                                                                                                                                                                                                                                                                      |
+| page       | Number | The page number                                                                                                                                                                                                                                                                                                                      |
+| projects   | Array  | An array of JSON objects, each representing a project. Each object follows the [GET project](#get-project) response structure, with two differences: the `alternatives` and `custom_fields` arrays are omitted ; the main alternative's `trip_date_in`, `trip_date_out`, `trip_duration` are returned directly at the project level. |
 
 ## GET project
 
@@ -253,9 +256,9 @@ axios.get(baseUrl + "/project?reference=project_reference", headers);
   "info_stage_reference": "confirmed",
   "info_stage": "Confirmed",
   "info_notes": "Jane has verbally confirmed our quotation",
+  "currency": "€",
   "created_at": "2024-06-18",
   "updated_at": "2024-06-19",
-  "currency": "€",
   "sales_manager": {
     "email": "travel-design@e-corp.com",
     "first_name": "Alice",
@@ -288,9 +291,6 @@ axios.get(baseUrl + "/project?reference=project_reference", headers);
       "financial_purchases": 72820,
       "financial_spendings": 12820,
       "trip_people": "15",
-      "trip_date_in": "2024-03-01",
-      "trip_date_out": "2024-03-09",
-      "trip_duration": 9,
       "trip_destination_reference": "destination_reference",
       "trip_destination": "France",
       "trip_subdestination_reference ": "subdestination_reference",
@@ -386,9 +386,9 @@ A JSON object containing the project information with properties like:
 | info_stage_reference | String | Technical name of the stage of the project (confirmed, received, paid...)         |
 | info_stage           | String | The stage of the project (Confirmed, Received, Paid...)                           |
 | info_notes           | String | Notes on the project                                                              |
+| currency             | String | Default currency of the project                                                   |
 | created_at           | Date   | Date of creation                                                                  |
 | updated_at           | Date   | Date of the last update                                                           |
-| currency             | String | Default currency of the project                                                   |
 | sales_manager        | JSON   | JSON object representing the sales manager ([User](#user))                        |
 | project_manager      | JSON   | JSON object representing the project manager ([User](#user))                      |
 | alternatives         | Array  | Array of JSON alternatives ([Alternatives](#alternatives))                        |
@@ -1024,20 +1024,20 @@ axios.post(baseUrl + "/project-steps-upsert", body, headers);
 
 ### Body Parameters (application/json)
 
-| Parameter         | Type   | Description                                                                                                                                                                                                                                        |
-| ----------------- | ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| from_steps_catalog | Boolean | Optional. Default to false. When set to true, create or update sample step from catalog. |
-| reference         | String | If provided, the unique reference associated to the step you want to update. If you specify a reference during creation, this value will be used as the step reference. It must be a maximum of 64 characters.                                     |
-| project_reference | String | The project reference in which you want to create an step. This field is ignored during update or when using the `from_steps_catalog` field. |
-| alternative_order | String | Specifies the alternative project order from which to create or update the step. If not provided, defaults to `0` for main alternative. This field is required to create a step. This field is ignored during update or when using the `from_steps_catalog` field. |
-| name              | String | Title of the step. This field is required to create a step. This field is optional on update.                                                                                                                                                      |
-| type              | String | Three options exist: `accom`, `activity`, `transport`. This field is required to create a step. This field is ignored on update.                                                                                                                   |
-| category          | String | Category of the step. You must provide the technical name of the category. If not specified during creation, the default value will be the main category of the account.                                                                           |
-| people            | String | Number of people in the activity. You can use a `number` or `P`. If not specified during creation, `P` will be used as the default value. `P` represents the number of people in the project.                                                      |
-| date_start        | String | Start date and time of the step. Must be within the dates of the alternative where the step is created. This field is required to create a step. This field is ignored on step update. This field can be completed when updating a sample step, but both dates are required. The date format must be as follows, e.g.: `2024-10-01 12:00:00`. |
-| date_end          | String | End date and time of the step. Must be within the dates of the alternative where the step is created. This field is required to create a step. This field is ignored on step update. This field can be completed when updating the sample step, but both dates are required. The date format must be as follows, e.g.: `2024-10-01 12:00:00`.   |
-| address           | Object | JSON object address ([Address](#address)) |
-| description | JSON | JSON object representing the short and long description of the step. This field is ignored for sample steps. |
+| Parameter          | Type    | Description                                                                                                                                                                                                                                                                                                                                   |
+| ------------------ | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| from_steps_catalog | Boolean | Optional. Default to false. When set to true, create or update sample step from catalog.                                                                                                                                                                                                                                                      |
+| reference          | String  | If provided, the unique reference associated to the step you want to update. If you specify a reference during creation, this value will be used as the step reference. It must be a maximum of 64 characters.                                                                                                                                |
+| project_reference  | String  | The project reference in which you want to create an step. This field is ignored during update or when using the `from_steps_catalog` field.                                                                                                                                                                                                  |
+| alternative_order  | String  | Specifies the alternative project order from which to create or update the step. If not provided, defaults to `0` for main alternative. This field is required to create a step. This field is ignored during update or when using the `from_steps_catalog` field.                                                                            |
+| name               | String  | Title of the step. This field is required to create a step. This field is optional on update.                                                                                                                                                                                                                                                 |
+| type               | String  | Three options exist: `accom`, `activity`, `transport`. This field is required to create a step. This field is ignored on update.                                                                                                                                                                                                              |
+| category           | String  | Category of the step. You must provide the technical name of the category. If not specified during creation, the default value will be the main category of the account.                                                                                                                                                                      |
+| people             | String  | Number of people in the activity. You can use a `number` or `P`. If not specified during creation, `P` will be used as the default value. `P` represents the number of people in the project.                                                                                                                                                 |
+| date_start         | String  | Start date and time of the step. Must be within the dates of the alternative where the step is created. This field is required to create a step. This field is ignored on step update. This field can be completed when updating a sample step, but both dates are required. The date format must be as follows, e.g.: `2024-10-01 12:00:00`. |
+| date_end           | String  | End date and time of the step. Must be within the dates of the alternative where the step is created. This field is required to create a step. This field is ignored on step update. This field can be completed when updating the sample step, but both dates are required. The date format must be as follows, e.g.: `2024-10-01 12:00:00`. |
+| address            | Object  | JSON object address ([Address](#address))                                                                                                                                                                                                                                                                                                     |
+| description        | JSON    | JSON object representing the short and long description of the step. This field is ignored for sample steps.                                                                                                                                                                                                                                  |
 
 ### Response
 
@@ -3880,6 +3880,107 @@ A JSON object containing the supplier invoice information with properties like:
 | alternative     | JSON    | JSON including: `sort_order` and `title`                                                                                                                                                                          |
 | client          | JSON    | JSON including: `reference`, `type` (enterprise or individual), `company_name`, `first_name`, `last_name` and `email`                                                                                             |
 | payments        | Array   | Array of JSON including: `reference`, `date`, `amount` and `payment_method`                                                                                                                                       |
+
+## POST invoices-supplier-upsert
+
+This endpoint allows you to create or update a supplier invoice (purchase invoice) on a project.
+The endpoint works in upsert mode: if the provided `reference` matches an existing, non-deleted supplier invoice of your account that belongs to the specified supplier and project, the invoice is updated. Otherwise, a new supplier invoice is created.
+
+```shell
+curl --location 'https://api.ezus.app/invoices-supplier-upsert' \
+--header 'x-api-key: <YOUR_API_KEY>' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer <YOUR_TOKEN>' \
+--data '{
+    "supplier_reference": "supplier_reference",
+    "project_reference": "project_reference",
+    "alternative_order": "0",
+    "reference": "invoice_supplier_reference",
+    "due_date": "2023-10-20",
+    "amount_ttc": 1200.00,
+    "amount_ht": 1000.00,
+    "filename": "2023_101010.pdf",
+    "url": "https://ezus.io/2023_101010.pdf",
+    "note": "Invoice for the Paris fashion week 2024 project"
+}'
+```
+
+```javascript
+const axios = require("axios");
+const baseUrl = "https://api.ezus.app";
+
+const body = {
+  supplier_reference: "supplier_reference",
+  project_reference: "project_reference",
+  alternative_order: "0",
+  reference: "invoice_supplier_reference",
+  due_date: "2023-10-20",
+  amount_ttc: 1200.0,
+  amount_ht: 1000.0,
+  filename: "2023_101010.pdf",
+  url: "https://ezus.io/2023_101010.pdf",
+  note: "Invoice for the Paris fashion week 2024 project",
+};
+const headers = {
+  "x-api-key": "<YOUR_API_KEY>",
+  Authorization: "Bearer <YOUR_TOKEN>",
+};
+
+axios.post(baseUrl + "/invoices-supplier-upsert", body, headers);
+```
+
+> This request returns a structured JSON object:
+
+```json
+{
+  "error": "false",
+  "message": "ok",
+  "action": "Supplier invoice successfully created",
+  "reference": "invoice_supplier_reference"
+}
+```
+
+### HTTP Endpoint
+
+`POST https://api.ezus.app/invoices-supplier-upsert`
+
+### Header Parameters
+
+| Parameter     | Type   | Description                                                                 |
+| ------------- | ------ | --------------------------------------------------------------------------- |
+| x-api-key     | String | <span class="label label-red float-right">Required</span> Your Ezus API key |
+| Authorization | String | <span class="label label-red float-right">Required</span> Your Bearer token |
+
+### Body Parameters (application/json)
+
+| Parameter          | Type   | Description                                                                                                                                                                                                            |
+| ------------------ | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| supplier_reference | String | <span class="label label-red float-right">Required</span> Reference of the supplier the invoice belongs to. Must match a valid, non-deleted supplier of the specified project.                                         |
+| project_reference  | String | <span class="label label-red float-right">Required</span> Reference of the project the invoice belongs to. Must match a valid, non-deleted project of your account.                                                    |
+| alternative_order  | String | Alternative number. If not provided, the invoice is attached to the project's main alternative (`0`).                                                                                                                  |
+| reference          | String | Unique reference of the supplier invoice to create or update. If not provided, a UUID v4 is automatically generated and returned. Must be less than 100 characters, otherwise an error is returned.                    |
+| due_date           | String | Due date of the supplier invoice, in a "YYYY-MM-DD" format.                                                                                                                                                            |
+| amount_ttc         | Number | Amount of the supplier invoice including taxes.                                                                                                                                                                        |
+| amount_ht          | Number | Amount of the supplier invoice excluding taxes.                                                                                                                                                                        |
+| filename           | String | Name associated to the invoice file (PDF). Optional. If left empty while `url` is provided, the filename is deduced from the downloaded file.                                                                          |
+| url                | String | Link to the invoice file. Only `.pdf` files are accepted. Required if `filename` is provided, otherwise an error is returned. If provided while `filename` is empty, the filename is deduced from the downloaded file. |
+| note               | String | Note attached to the supplier invoice.                                                                                                                                                                                 |
+
+### Response
+
+A JSON object indicating whether an error occurred during the process, along with the associated message.
+
+| Property  | Type   | Description                                                                                                                            |
+| --------- | ------ | -------------------------------------------------------------------------------------------------------------------------------------- |
+| action    | String | Summary of the action performed (e.g., "Supplier invoice successfully created" or "Supplier invoice successfully updated")             |
+| reference | String | Reference of the supplier invoice that was created or updated (the auto-generated UUID on insert, or the provided reference otherwise) |
+
+### Currency
+
+<aside class="notice">In V1, multi-currency is not managed for supplier invoices.</aside>
+
+- The currency of the supplier invoice is the currency of the project it is inserted into (V1).
+- If the supplier (`project_supplier`) has a currency different from the project's currency, an error is returned (this case is not handled in V1).
 
 # Deposits
 
