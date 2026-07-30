@@ -900,7 +900,10 @@ curl --location 'https://api.ezus.app/project-steps-upsert' \
     "description": {
       "short": "Short description of the activity",
       "long": "Long description of the activity"
-    }
+    },
+    "custom_fields": [
+      {"name": "field_name", "value": "field_value"}
+    ]
 }'
 ```
 
@@ -933,6 +936,9 @@ const body = {
     short: "Short description of the activity",
     long: "Long description of the activity",
   },
+  custom_fields: [
+    {name: "field_name", value: "field_value"}
+  ]
 };
 const headers = {
   "x-api-key": "<YOUR_API_KEY>",
@@ -965,7 +971,10 @@ curl --location 'https://api.ezus.app/project-steps-upsert' \
             "x": 48.875761,
             "y": 2.348727
         }
-    }
+    },
+    "custom_fields": [
+      {"name": "field_name", "value": "field_value"}
+    ]
 }'
 ```
 
@@ -992,6 +1001,9 @@ const body = {
       y: 2.348727,
     },
   },
+  custom_fields: [
+    {name: "field_name", value: "field_value"}
+  ]
 };
 const headers = {
   "x-api-key": "<YOUR_API_KEY>",
@@ -1038,7 +1050,9 @@ axios.post(baseUrl + "/project-steps-upsert", body, headers);
 | date_start         | String  | Start date and time of the step. Must be within the dates of the alternative where the step is created. This field is required to create a step. This field is ignored on step update. This field can be completed when updating a sample step, but both dates are required. The date format must be as follows, e.g.: `2024-10-01 12:00:00`. |
 | date_end           | String  | End date and time of the step. Must be within the dates of the alternative where the step is created. This field is required to create a step. This field is ignored on step update. This field can be completed when updating the sample step, but both dates are required. The date format must be as follows, e.g.: `2024-10-01 12:00:00`. |
 | address            | Object  | JSON object address ([Address](#address))                                                                                                                                                                                                                                                                                                     |
-| description        | JSON    | JSON object representing the short and long description of the step. This field is ignored for sample steps.                                                                                                                                                                                                                                  |
+| description        | JSON    | JSON object representing the short and long description of the step. This field is ignored for sample steps. |
+| custom_fields | Array | An array of JSON custom fields ([Custom fields](#custom-fields)) for the step. |
+
 
 ### Response
 
