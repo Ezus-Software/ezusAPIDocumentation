@@ -4002,6 +4002,85 @@ A JSON object indicating whether an error occurred during the process, along wit
 - The currency of the supplier invoice is the currency of the project it is inserted into (V1).
 - If the supplier (`project_supplier`) has a currency different from the project's currency, an error is returned (this case is not handled in V1).
 
+## POST invoices-supplier-payments-create
+
+This endpoint allows you to create a payment attached to an existing supplier invoice (purchase invoice).
+The endpoint works in creation mode only: payments cannot be updated or deleted through the public API. If the provided `reference` is already used by a payment of your account, an error is returned.
+
+```shell
+curl --location 'https://api.ezus.app/invoices-supplier-payments-create' \
+--header 'x-api-key: <YOUR_API_KEY>' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer <YOUR_TOKEN>' \
+--data '{
+    "invoice_supplier_reference": "invoice_supplier_reference",
+    "reference": "payment_reference",
+    "date": "2026-05-28",
+    "amount": 600.00,
+    "payment_method": "default4"
+}'
+```
+
+```javascript
+const axios = require("axios");
+const baseUrl = "https://api.ezus.app";
+
+const body = {
+  invoice_supplier_reference: "invoice_supplier_reference",
+  reference: "payment_reference",
+  date: "2026-05-28",
+  amount: 600.0,
+  payment_method: "default4",
+};
+const headers = {
+  "x-api-key": "<YOUR_API_KEY>",
+  Authorization: "Bearer <YOUR_TOKEN>",
+};
+
+axios.post(baseUrl + "/invoices-supplier-payments-create", body, headers);
+```
+
+> This request returns a structured JSON object:
+
+```json
+{
+  "error": "false",
+  "message": "ok",
+  "action": "Supplier invoice payment successfully created",
+  "reference": "payment_reference"
+}
+```
+
+### HTTP Endpoint
+
+`POST https://api.ezus.app/invoices-supplier-payments-create`
+
+### Header Parameters
+
+| Parameter     | Type   | Description                                                                 |
+| ------------- | ------ | --------------------------------------------------------------------------- |
+| x-api-key     | String | <span class="label label-red float-right">Required</span> Your Ezus API key |
+| Authorization | String | <span class="label label-red float-right">Required</span> Your Bearer token |
+
+### Body Parameters (application/json)
+
+| Parameter                  | Type   | Description                                                                                                                                                                                                                                                                                                     |
+| -------------------------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| invoice_supplier_reference | String | <span class="label label-red float-right">Required</span> Reference of the supplier invoice the payment is attached to. Must match a valid, non-deleted supplier invoice of your account, otherwise an error is returned.                                                                                       |
+| reference                  | String | Unique reference of the payment to create. If not provided, a UUID v4 is automatically generated and returned. Must be less than 36 characters and not already used by a payment of your account, otherwise an error is returned.                                                                               |
+| date                       | String | <span class="label label-red float-right">Required</span> Date of the payment, in a "YYYY-MM-DD" format. Must be a date between years 2000 and 2050 (exclusive), otherwise an error is returned.                                                                                                                |
+| amount                     | Number | <span class="label label-red float-right">Required</span> Amount of the payment. The value is rounded to 2 decimals before being stored. If the provided value is not a number, an error is returned.                                                                                                           |
+| payment_method             | String | Technical name of the payment method (e.g. "default4"). If the provided value does not match any payment method of your account, an error is returned and nothing is created. If not provided, the account's default payment method is used; if the account don't have one, the payment is created without one. |
+
+### Response
+
+A JSON object indicating whether an error occurred during the process, along with the associated message.
+
+| Property  | Type   | Description                                                                                                        |
+| --------- | ------ | ------------------------------------------------------------------------------------------------------------------ |
+| action    | String | Summary of the action performed (e.g., "Supplier invoice payment successfully created")                            |
+| reference | String | Reference of the payment that was created (the auto-generated UUID on insert, or the provided reference otherwise) |
+
 # Deposits
 
 ## POST deposits-create

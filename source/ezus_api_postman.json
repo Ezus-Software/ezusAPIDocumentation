@@ -1051,6 +1051,34 @@
       "response": []
     },
     {
+      "name": "invoices-supplier-payments-create",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "X-API-KEY",
+            "value": "{{<YOUR_API_KEY>}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"invoice_supplier_reference\": \"invoice_supplier_reference\",\n    \"reference\": \"payment_reference\",\n    \"date\": \"2026-05-28\",\n    \"amount\": 600.00,\n    \"payment_method\": \"default4\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/invoices-supplier-payments-create",
+          "host": ["{{baseUrl}}"],
+          "path": ["invoices-supplier-payments-create"]
+        }
+      },
+      "response": []
+    },
+    {
       "name": "deposits-create",
       "request": {
         "method": "POST",
