@@ -328,6 +328,7 @@ axios.get(baseUrl + "/project?reference=project_reference", headers);
       },
       "client_space": {
         "is_live": true,
+        "url": "https://custom-domain.com/your-space-slug",
         "description": "Description of the client space",
         "image_url": "https://image.jpg"
       },
@@ -4498,6 +4499,7 @@ A JSON object indicating whether an error occurred during the process, along wit
     },
     "client_space": {
       "is_live": true,
+      "url": "https://custom-domain.com/your-space-slug",
       "description": "Description of the client space",
       "image_url": "https://image.jpg"
     },
@@ -4520,34 +4522,34 @@ A JSON object indicating whether an error occurred during the process, along wit
 ]
 ```
 
-| Property                      | Type    | Description                                                                                                                                                |
-| ----------------------------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| reference                     | String  | Unique reference of this alternative: (distinct from the root project `reference` at the top level of the GET `project` response).                         |
-| alternative_title             | String  | Title of the alternative                                                                                                                                   |
-| lang                          | String  | Alternative locale code (e.g. fr-FR, en-GB)                                                                                                                |
-| is_main                       | Boolean | If the alternative is the main alternative                                                                                                                 |
-| trip_date_in                  | Date    | Date of the beginning of this alternative, in a "YYYY-MM-DD" format string. If it's empty, the project has no dates                                        |
-| trip_date_out                 | Date    | Date of the end of this alternative, in a "YYYY-MM-DD" format string. If it's empty, the project has no dates                                              |
-| trip_duration                 | Number  | Number of days this alternative lasts                                                                                                                      |
-| trip_budget                   | Number  | Forecasted budget for the alternative (the one that is entered manually not the actual one)                                                                |
-| budget_actual                 | Number  | Actual budget for the alternative, inclusive of taxes                                                                                                      |
-| budget_actual_excl_taxes      | Number  | Actual budget for the alternative, excluding taxes                                                                                                         |
-| budget_margin_gross           | Number  | Gross margin for the alternative                                                                                                                           |
-| budget_margin_net             | Number  | Net margin for the alternative                                                                                                                             |
-| budget_purchases              | Number  | Planned supplier purchases amount for the alternative (in project currency). This is a forecasted value, not actual spending                               |
-| financial_invoiced            | Number  | Total amount invoiced to clients for the alternative (in project currency). Draft invoices are not included in this calculation                            |
-| financial_collected           | Number  | Total amount collected from clients for the alternative (in project currency). Represents actual payments received                                         |
-| financial_purchases           | Number  | Actual supplier purchase costs for the alternative (in project currency). Corresponds to recorded supplier invoices                                        |
-| financial_spendings           | Number  | Actual spendings recorded for the alternative (in project currency). Includes all types of supplier payments (purchases, fees, etc.)                       |
-| trip_people                   | String  | Number of people                                                                                                                                           |
-| trip_destination_reference    | String  | Destination reference of the alternative. Note: For multi-destination alternatives, only the primary destination is returned.                              |
-| trip_destination              | String  | Destination of the alternative. Note: For multi-destination alternatives, only the primary destination is returned.                                        |
-| trip_subdestination_reference | String  | Subdestination reference of the alternative. Note: For multi-destination alternatives, only the primary subdestination is returned.                        |
-| trip_subdestination           | String  | Subdestination of the alternative. Note: For multi-destination alternatives, only the primary subdestination is returned.                                  |
-| destinations                  | JSON    | JSON including: `size`, Array of all destination (`reference` and `name`) and subdestination (`subdestination_reference` and `subdestination_name`) values |
-| client                        | JSON    | JSON including: `reference`, `type` (enterprise or individual), `company_name`, `first_name`, `last_name` and `email`                                      |
-| client_space                  | JSON    | JSON including: `is_live` (Boolean), `description`, `image_url`                                                                                            |
-| brand                         | JSON    | JSON object representing the brand ([Brand](#brand)) associated with the alternative                                                                       |
+| Property                      | Type    | Description                                                                                                                                                                                                |
+| ----------------------------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| reference                     | String  | Unique reference of this alternative: (distinct from the root project `reference` at the top level of the GET `project` response).                                                                         |
+| alternative_title             | String  | Title of the alternative                                                                                                                                                                                   |
+| lang                          | String  | Alternative locale code (e.g. fr-FR, en-GB)                                                                                                                                                                |
+| is_main                       | Boolean | If the alternative is the main alternative                                                                                                                                                                 |
+| trip_date_in                  | Date    | Date of the beginning of this alternative, in a "YYYY-MM-DD" format string. If it's empty, the project has no dates                                                                                        |
+| trip_date_out                 | Date    | Date of the end of this alternative, in a "YYYY-MM-DD" format string. If it's empty, the project has no dates                                                                                              |
+| trip_duration                 | Number  | Number of days this alternative lasts                                                                                                                                                                      |
+| trip_budget                   | Number  | Forecasted budget for the alternative (the one that is entered manually not the actual one)                                                                                                                |
+| budget_actual                 | Number  | Actual budget for the alternative, inclusive of taxes                                                                                                                                                      |
+| budget_actual_excl_taxes      | Number  | Actual budget for the alternative, excluding taxes                                                                                                                                                         |
+| budget_margin_gross           | Number  | Gross margin for the alternative                                                                                                                                                                           |
+| budget_margin_net             | Number  | Net margin for the alternative                                                                                                                                                                             |
+| budget_purchases              | Number  | Planned supplier purchases amount for the alternative (in project currency). This is a forecasted value, not actual spending                                                                               |
+| financial_invoiced            | Number  | Total amount invoiced to clients for the alternative (in project currency). Draft invoices are not included in this calculation                                                                            |
+| financial_collected           | Number  | Total amount collected from clients for the alternative (in project currency). Represents actual payments received                                                                                         |
+| financial_purchases           | Number  | Actual supplier purchase costs for the alternative (in project currency). Corresponds to recorded supplier invoices                                                                                        |
+| financial_spendings           | Number  | Actual spendings recorded for the alternative (in project currency). Includes all types of supplier payments (purchases, fees, etc.)                                                                       |
+| trip_people                   | String  | Number of people                                                                                                                                                                                           |
+| trip_destination_reference    | String  | Destination reference of the alternative. Note: For multi-destination alternatives, only the primary destination is returned.                                                                              |
+| trip_destination              | String  | Destination of the alternative. Note: For multi-destination alternatives, only the primary destination is returned.                                                                                        |
+| trip_subdestination_reference | String  | Subdestination reference of the alternative. Note: For multi-destination alternatives, only the primary subdestination is returned.                                                                        |
+| trip_subdestination           | String  | Subdestination of the alternative. Note: For multi-destination alternatives, only the primary subdestination is returned.                                                                                  |
+| destinations                  | JSON    | JSON including: `size`, Array of all destination (`reference` and `name`) and subdestination (`subdestination_reference` and `subdestination_name`) values                                                 |
+| client                        | JSON    | JSON including: `reference`, `type` (enterprise or individual), `company_name`, `first_name`, `last_name` and `email`                                                                                      |
+| client_space                  | JSON    | JSON including: `is_live` (Boolean), `url` (empty string when not live; uses slug when available, otherwise `?id=`; custom domain when configured, fallback to `docs.ezus.io`), `description`, `image_url` |
+| brand                         | JSON    | JSON object representing the brand ([Brand](#brand)) associated with the alternative                                                                                                                       |
 
 ### Brand
 
