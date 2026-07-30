@@ -4044,21 +4044,21 @@ axios.post(baseUrl + "/invoices-supplier-payments-create", body, headers);
 
 ### Body Parameters (application/json)
 
-| Parameter                  | Type   | Description                                                                                                                                                                                                                             |
-| -------------------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| invoice_supplier_reference | String | <span class="label label-red float-right">Required</span> Reference of the supplier invoice the payment is attached to. Must match a valid, non-deleted supplier invoice of your account, otherwise an error is returned.              |
-| reference                  | String | Unique reference of the payment to create. If not provided, a UUID v4 is automatically generated and returned. Must be less than 36 characters and not already used by a payment of your account, otherwise an error is returned.       |
-| date                       | String | <span class="label label-red float-right">Required</span> Date of the payment, in a "YYYY-MM-DD" format. Must be a date between years 2000 and 2050 (exclusive), otherwise an error is returned.                                        |
-| amount                     | Number | <span class="label label-red float-right">Required</span> Amount of the payment. The value is rounded to 2 decimals before being stored. If the provided value is not a number, an error is returned.                                   |
-| payment_method             | String | Technical name of the payment method (e.g. "default4"). If the provided value does not match any payment method of your account, an error is returned and nothing is created. If not provided, the account's default payment method (the first one, ordered by sort order) is used. |
+| Parameter                  | Type   | Description                                                                                                                                                                                                                                                                                                     |
+| -------------------------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| invoice_supplier_reference | String | <span class="label label-red float-right">Required</span> Reference of the supplier invoice the payment is attached to. Must match a valid, non-deleted supplier invoice of your account, otherwise an error is returned.                                                                                       |
+| reference                  | String | Unique reference of the payment to create. If not provided, a UUID v4 is automatically generated and returned. Must be less than 36 characters and not already used by a payment of your account, otherwise an error is returned.                                                                               |
+| date                       | String | <span class="label label-red float-right">Required</span> Date of the payment, in a "YYYY-MM-DD" format. Must be a date between years 2000 and 2050 (exclusive), otherwise an error is returned.                                                                                                                |
+| amount                     | Number | <span class="label label-red float-right">Required</span> Amount of the payment. The value is rounded to 2 decimals before being stored. If the provided value is not a number, an error is returned.                                                                                                           |
+| payment_method             | String | Technical name of the payment method (e.g. "default4"). If the provided value does not match any payment method of your account, an error is returned and nothing is created. If not provided, the account's default payment method is used; if the account don't have one, the payment is created without one. |
 
 ### Response
 
 A JSON object indicating whether an error occurred during the process, along with the associated message.
 
-| Property  | Type   | Description                                                                                                 |
-| --------- | ------ | ------------------------------------------------------------------------------------------------------------- |
-| action    | String | Summary of the action performed (e.g., "Supplier invoice payment successfully created")                     |
+| Property  | Type   | Description                                                                                                        |
+| --------- | ------ | ------------------------------------------------------------------------------------------------------------------ |
+| action    | String | Summary of the action performed (e.g., "Supplier invoice payment successfully created")                            |
 | reference | String | Reference of the payment that was created (the auto-generated UUID on insert, or the provided reference otherwise) |
 
 # Deposits
