@@ -1547,6 +1547,7 @@ This API endpoint updates a client record if the provided reference or email mat
 
 - Enterprise client duplication → `A client with this name already exists`
 - Individual client duplication → `A client with this first name, last name and email already exists`
+- Email ambiguity: if several clients in your account have a primary contact with the same email, the email cannot be used as a matching key. The request is rejected with an `AMBIGUOUS_EMAIL_REFERENCE` error and no record is updated or created. Use the client's unique reference instead.
 
 ```shell
 curl --location 'https://api.ezus.app/clients-upsert' \
@@ -1953,6 +1954,10 @@ A JSON object containing the supplier information with properties like:
 ## POST suppliers-upsert
 
 It updates a supplier record if the provided reference (or the email) does match one of the supplier references in your account, otherwise it creates a new supplier record with the provided reference (or with a random one if no reference is provided). Note that for this endpoint, the email of the supplier can also be used as a primary key for the upsert.
+
+### Error messages
+
+- Email ambiguity: if several suppliers in your account have a primary contact with the same email, the email cannot be used as a matching key. The request is rejected with an `AMBIGUOUS_EMAIL_REFERENCE` error and no record is updated or created. Use the supplier's unique reference instead.
 
 ```shell
 curl --location 'https://api.ezus.app/suppliers-upsert' \
