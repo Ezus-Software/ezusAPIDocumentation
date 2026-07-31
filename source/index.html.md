@@ -328,6 +328,7 @@ axios.get(baseUrl + "/project?reference=project_reference", headers);
       },
       "client_space": {
         "is_live": true,
+        "url": "https://custom-domain.com/your-space-slug",
         "description": "Description of the client space",
         "image_url": "https://image.jpg"
       },
@@ -899,7 +900,10 @@ curl --location 'https://api.ezus.app/project-steps-upsert' \
     "description": {
       "short": "Short description of the activity",
       "long": "Long description of the activity"
-    }
+    },
+    "custom_fields": [
+      {"name": "field_name", "value": "field_value"}
+    ]
 }'
 ```
 
@@ -932,6 +936,9 @@ const body = {
     short: "Short description of the activity",
     long: "Long description of the activity",
   },
+  custom_fields: [
+    {name: "field_name", value: "field_value"}
+  ]
 };
 const headers = {
   "x-api-key": "<YOUR_API_KEY>",
@@ -964,7 +971,10 @@ curl --location 'https://api.ezus.app/project-steps-upsert' \
             "x": 48.875761,
             "y": 2.348727
         }
-    }
+    },
+    "custom_fields": [
+      {"name": "field_name", "value": "field_value"}
+    ]
 }'
 ```
 
@@ -991,6 +1001,9 @@ const body = {
       y: 2.348727,
     },
   },
+  custom_fields: [
+    {name: "field_name", value: "field_value"}
+  ]
 };
 const headers = {
   "x-api-key": "<YOUR_API_KEY>",
@@ -1037,7 +1050,9 @@ axios.post(baseUrl + "/project-steps-upsert", body, headers);
 | date_start         | String  | Start date and time of the step. Must be within the dates of the alternative where the step is created. This field is required to create a step. This field is ignored on step update. This field can be completed when updating a sample step, but both dates are required. The date format must be as follows, e.g.: `2024-10-01 12:00:00`. |
 | date_end           | String  | End date and time of the step. Must be within the dates of the alternative where the step is created. This field is required to create a step. This field is ignored on step update. This field can be completed when updating the sample step, but both dates are required. The date format must be as follows, e.g.: `2024-10-01 12:00:00`. |
 | address            | Object  | JSON object address ([Address](#address))                                                                                                                                                                                                                                                                                                     |
-| description        | JSON    | JSON object representing the short and long description of the step. This field is ignored for sample steps.                                                                                                                                                                                                                                  |
+| description        | JSON    | JSON object representing the short and long description of the step. This field is ignored for sample steps. |
+| custom_fields | Array | An array of JSON custom fields ([Custom fields](#custom-fields)) for the step. |
+
 
 ### Response
 
@@ -1532,6 +1547,7 @@ This API endpoint updates a client record if the provided reference or email mat
 
 - Enterprise client duplication → `A client with this name already exists`
 - Individual client duplication → `A client with this first name, last name and email already exists`
+- Email ambiguity: if several clients in your account have a primary contact with the same email, the email cannot be used as a matching key. The request is rejected with an `AMBIGUOUS_EMAIL_REFERENCE` error and no record is updated or created. Use the client's unique reference instead.
 
 ```shell
 curl --location 'https://api.ezus.app/clients-upsert' \
@@ -1938,6 +1954,10 @@ A JSON object containing the supplier information with properties like:
 ## POST suppliers-upsert
 
 It updates a supplier record if the provided reference (or the email) does match one of the supplier references in your account, otherwise it creates a new supplier record with the provided reference (or with a random one if no reference is provided). Note that for this endpoint, the email of the supplier can also be used as a primary key for the upsert.
+
+### Error messages
+
+- Email ambiguity: if several suppliers in your account have a primary contact with the same email, the email cannot be used as a matching key. The request is rejected with an `AMBIGUOUS_EMAIL_REFERENCE` error and no record is updated or created. Use the supplier's unique reference instead.
 
 ```shell
 curl --location 'https://api.ezus.app/suppliers-upsert' \
@@ -3982,6 +4002,85 @@ A JSON object indicating whether an error occurred during the process, along wit
 - The currency of the supplier invoice is the currency of the project it is inserted into (V1).
 - If the supplier (`project_supplier`) has a currency different from the project's currency, an error is returned (this case is not handled in V1).
 
+## POST invoices-supplier-payments-create
+
+This endpoint allows you to create a payment attached to an existing supplier invoice (purchase invoice).
+The endpoint works in creation mode only: payments cannot be updated or deleted through the public API. If the provided `reference` is already used by a payment of your account, an error is returned.
+
+```shell
+curl --location 'https://api.ezus.app/invoices-supplier-payments-create' \
+--header 'x-api-key: <YOUR_API_KEY>' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer <YOUR_TOKEN>' \
+--data '{
+    "invoice_supplier_reference": "invoice_supplier_reference",
+    "reference": "payment_reference",
+    "date": "2026-05-28",
+    "amount": 600.00,
+    "payment_method": "default4"
+}'
+```
+
+```javascript
+const axios = require("axios");
+const baseUrl = "https://api.ezus.app";
+
+const body = {
+  invoice_supplier_reference: "invoice_supplier_reference",
+  reference: "payment_reference",
+  date: "2026-05-28",
+  amount: 600.0,
+  payment_method: "default4",
+};
+const headers = {
+  "x-api-key": "<YOUR_API_KEY>",
+  Authorization: "Bearer <YOUR_TOKEN>",
+};
+
+axios.post(baseUrl + "/invoices-supplier-payments-create", body, headers);
+```
+
+> This request returns a structured JSON object:
+
+```json
+{
+  "error": "false",
+  "message": "ok",
+  "action": "Supplier invoice payment successfully created",
+  "reference": "payment_reference"
+}
+```
+
+### HTTP Endpoint
+
+`POST https://api.ezus.app/invoices-supplier-payments-create`
+
+### Header Parameters
+
+| Parameter     | Type   | Description                                                                 |
+| ------------- | ------ | --------------------------------------------------------------------------- |
+| x-api-key     | String | <span class="label label-red float-right">Required</span> Your Ezus API key |
+| Authorization | String | <span class="label label-red float-right">Required</span> Your Bearer token |
+
+### Body Parameters (application/json)
+
+| Parameter                  | Type   | Description                                                                                                                                                                                                                                                                                                     |
+| -------------------------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| invoice_supplier_reference | String | <span class="label label-red float-right">Required</span> Reference of the supplier invoice the payment is attached to. Must match a valid, non-deleted supplier invoice of your account, otherwise an error is returned.                                                                                       |
+| reference                  | String | Unique reference of the payment to create. If not provided, a UUID v4 is automatically generated and returned. Must be less than 36 characters and not already used by a payment of your account, otherwise an error is returned.                                                                               |
+| date                       | String | <span class="label label-red float-right">Required</span> Date of the payment, in a "YYYY-MM-DD" format. Must be a date between years 2000 and 2050 (exclusive), otherwise an error is returned.                                                                                                                |
+| amount                     | Number | <span class="label label-red float-right">Required</span> Amount of the payment. The value is rounded to 2 decimals before being stored. If the provided value is not a number, an error is returned.                                                                                                           |
+| payment_method             | String | Technical name of the payment method (e.g. "default4"). If the provided value does not match any payment method of your account, an error is returned and nothing is created. If not provided, the account's default payment method is used; if the account don't have one, the payment is created without one. |
+
+### Response
+
+A JSON object indicating whether an error occurred during the process, along with the associated message.
+
+| Property  | Type   | Description                                                                                                        |
+| --------- | ------ | ------------------------------------------------------------------------------------------------------------------ |
+| action    | String | Summary of the action performed (e.g., "Supplier invoice payment successfully created")                            |
+| reference | String | Reference of the payment that was created (the auto-generated UUID on insert, or the provided reference otherwise) |
+
 # Deposits
 
 ## POST deposits-create
@@ -4498,6 +4597,7 @@ A JSON object indicating whether an error occurred during the process, along wit
     },
     "client_space": {
       "is_live": true,
+      "url": "https://custom-domain.com/your-space-slug",
       "description": "Description of the client space",
       "image_url": "https://image.jpg"
     },
@@ -4520,34 +4620,34 @@ A JSON object indicating whether an error occurred during the process, along wit
 ]
 ```
 
-| Property                      | Type    | Description                                                                                                                                                |
-| ----------------------------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| reference                     | String  | Unique reference of this alternative: (distinct from the root project `reference` at the top level of the GET `project` response).                         |
-| alternative_title             | String  | Title of the alternative                                                                                                                                   |
-| lang                          | String  | Alternative locale code (e.g. fr-FR, en-GB)                                                                                                                |
-| is_main                       | Boolean | If the alternative is the main alternative                                                                                                                 |
-| trip_date_in                  | Date    | Date of the beginning of this alternative, in a "YYYY-MM-DD" format string. If it's empty, the project has no dates                                        |
-| trip_date_out                 | Date    | Date of the end of this alternative, in a "YYYY-MM-DD" format string. If it's empty, the project has no dates                                              |
-| trip_duration                 | Number  | Number of days this alternative lasts                                                                                                                      |
-| trip_budget                   | Number  | Forecasted budget for the alternative (the one that is entered manually not the actual one)                                                                |
-| budget_actual                 | Number  | Actual budget for the alternative, inclusive of taxes                                                                                                      |
-| budget_actual_excl_taxes      | Number  | Actual budget for the alternative, excluding taxes                                                                                                         |
-| budget_margin_gross           | Number  | Gross margin for the alternative                                                                                                                           |
-| budget_margin_net             | Number  | Net margin for the alternative                                                                                                                             |
-| budget_purchases              | Number  | Planned supplier purchases amount for the alternative (in project currency). This is a forecasted value, not actual spending                               |
-| financial_invoiced            | Number  | Total amount invoiced to clients for the alternative (in project currency). Draft invoices are not included in this calculation                            |
-| financial_collected           | Number  | Total amount collected from clients for the alternative (in project currency). Represents actual payments received                                         |
-| financial_purchases           | Number  | Actual supplier purchase costs for the alternative (in project currency). Corresponds to recorded supplier invoices                                        |
-| financial_spendings           | Number  | Actual spendings recorded for the alternative (in project currency). Includes all types of supplier payments (purchases, fees, etc.)                       |
-| trip_people                   | String  | Number of people                                                                                                                                           |
-| trip_destination_reference    | String  | Destination reference of the alternative. Note: For multi-destination alternatives, only the primary destination is returned.                              |
-| trip_destination              | String  | Destination of the alternative. Note: For multi-destination alternatives, only the primary destination is returned.                                        |
-| trip_subdestination_reference | String  | Subdestination reference of the alternative. Note: For multi-destination alternatives, only the primary subdestination is returned.                        |
-| trip_subdestination           | String  | Subdestination of the alternative. Note: For multi-destination alternatives, only the primary subdestination is returned.                                  |
-| destinations                  | JSON    | JSON including: `size`, Array of all destination (`reference` and `name`) and subdestination (`subdestination_reference` and `subdestination_name`) values |
-| client                        | JSON    | JSON including: `reference`, `type` (enterprise or individual), `company_name`, `first_name`, `last_name` and `email`                                      |
-| client_space                  | JSON    | JSON including: `is_live` (Boolean), `description`, `image_url`                                                                                            |
-| brand                         | JSON    | JSON object representing the brand ([Brand](#brand)) associated with the alternative                                                                       |
+| Property                      | Type    | Description                                                                                                                                                                                                |
+| ----------------------------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| reference                     | String  | Unique reference of this alternative: (distinct from the root project `reference` at the top level of the GET `project` response).                                                                         |
+| alternative_title             | String  | Title of the alternative                                                                                                                                                                                   |
+| lang                          | String  | Alternative locale code (e.g. fr-FR, en-GB)                                                                                                                                                                |
+| is_main                       | Boolean | If the alternative is the main alternative                                                                                                                                                                 |
+| trip_date_in                  | Date    | Date of the beginning of this alternative, in a "YYYY-MM-DD" format string. If it's empty, the project has no dates                                                                                        |
+| trip_date_out                 | Date    | Date of the end of this alternative, in a "YYYY-MM-DD" format string. If it's empty, the project has no dates                                                                                              |
+| trip_duration                 | Number  | Number of days this alternative lasts                                                                                                                                                                      |
+| trip_budget                   | Number  | Forecasted budget for the alternative (the one that is entered manually not the actual one)                                                                                                                |
+| budget_actual                 | Number  | Actual budget for the alternative, inclusive of taxes                                                                                                                                                      |
+| budget_actual_excl_taxes      | Number  | Actual budget for the alternative, excluding taxes                                                                                                                                                         |
+| budget_margin_gross           | Number  | Gross margin for the alternative                                                                                                                                                                           |
+| budget_margin_net             | Number  | Net margin for the alternative                                                                                                                                                                             |
+| budget_purchases              | Number  | Planned supplier purchases amount for the alternative (in project currency). This is a forecasted value, not actual spending                                                                               |
+| financial_invoiced            | Number  | Total amount invoiced to clients for the alternative (in project currency). Draft invoices are not included in this calculation                                                                            |
+| financial_collected           | Number  | Total amount collected from clients for the alternative (in project currency). Represents actual payments received                                                                                         |
+| financial_purchases           | Number  | Actual supplier purchase costs for the alternative (in project currency). Corresponds to recorded supplier invoices                                                                                        |
+| financial_spendings           | Number  | Actual spendings recorded for the alternative (in project currency). Includes all types of supplier payments (purchases, fees, etc.)                                                                       |
+| trip_people                   | String  | Number of people                                                                                                                                                                                           |
+| trip_destination_reference    | String  | Destination reference of the alternative. Note: For multi-destination alternatives, only the primary destination is returned.                                                                              |
+| trip_destination              | String  | Destination of the alternative. Note: For multi-destination alternatives, only the primary destination is returned.                                                                                        |
+| trip_subdestination_reference | String  | Subdestination reference of the alternative. Note: For multi-destination alternatives, only the primary subdestination is returned.                                                                        |
+| trip_subdestination           | String  | Subdestination of the alternative. Note: For multi-destination alternatives, only the primary subdestination is returned.                                                                                  |
+| destinations                  | JSON    | JSON including: `size`, Array of all destination (`reference` and `name`) and subdestination (`subdestination_reference` and `subdestination_name`) values                                                 |
+| client                        | JSON    | JSON including: `reference`, `type` (enterprise or individual), `company_name`, `first_name`, `last_name` and `email`                                                                                      |
+| client_space                  | JSON    | JSON including: `is_live` (Boolean), `url` (empty string when not live; uses slug when available, otherwise `?id=`; custom domain when configured, fallback to `docs.ezus.io`), `description`, `image_url` |
+| brand                         | JSON    | JSON object representing the brand ([Brand](#brand)) associated with the alternative                                                                                                                       |
 
 ### Brand
 
