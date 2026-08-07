@@ -530,7 +530,8 @@ axios.get(baseUrl + "/project-steps?reference=project_reference", headers);
           "sales_price": 200,
           "sales_price_excl_taxes": 166.67,
           "is_optional": false,
-          "notes": "Notes about the item"
+          "notes": "Notes about the item",
+          "booked": false
         }
       ],
       "medias": ["https://image.jpg", "https://image2.jpg"],
@@ -4958,7 +4959,8 @@ These objects represent the individual invoice lines associated with the invoice
     "sales_price": 200,
     "sales_price_excl_taxes": 166.67,
     "is_optional": false,
-    "notes": "Notes about the item"
+    "notes": "Notes about the item",
+    "booked": false
   }
 ]
 ```
@@ -4981,6 +4983,7 @@ The fields `purchase_price`, `purchase_price_excl_taxes`, `sales_price`, and `sa
 | sales_price_excl_taxes    | Number  | The unit sales price of the item (excluding taxes)                                                                      |
 | is_optional               | Boolean | Indicates whether the item is optional. **If true, the item does not contribute to the final purchase or sales price.** |
 | notes                     | String  | Notes about the item                                                                                                    |
+| booked                    | Boolean | Indicates whether the item has been booked / reserved.                                                                  |
 
 ### Langs
 
@@ -5084,7 +5087,8 @@ The steps are sorted by their creation date, with the most recently created appe
         "sales_price": 200,
         "sales_price_excl_taxes": 166.67,
         "is_optional": false,
-        "notes": "Notes about the item"
+        "notes": "Notes about the item",
+        "booked": false
       }
     ],
     "medias": ["https://image.jpg", "https://image2.jpg"],
