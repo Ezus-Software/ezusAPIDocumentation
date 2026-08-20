@@ -4294,8 +4294,7 @@ axios.post(baseUrl + "/media-create", body, headers);
   "error": "false",
   "message": "ok",
   "action": "Media successfully created",
-  "reference": "media_reference",
-  "id": "e7fca41e-3f83-4f1d-a9ab-1a7c78b9f2c4"
+  "reference": "media_reference"
 }
 ```
 
@@ -4328,7 +4327,6 @@ A JSON object indicating whether an error occurred during the process, along wit
 | --------- | ------ | ---------------------------------------------------------- |
 | action    | String | If the media has been created                              |
 | reference | String | The reference of the created media (provided or generated) |
-| id        | String | The unique identifier of the created media                 |
 
 # Webhooks
 
