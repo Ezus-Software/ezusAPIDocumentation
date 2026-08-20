@@ -1138,6 +1138,34 @@
       "response": []
     },
     {
+      "name": "media-create",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "X-API-KEY",
+            "value": "{{<YOUR_API_KEY>}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"reference\": \"media_reference\",\n    \"media_name\": \"Hotel pool\",\n    \"path_full\": \"https://example.com/images/hotel-pool.jpg\",\n    \"object_type\": \"supplier\",\n    \"object_reference\": \"supplier_reference\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/media-create",
+          "host": ["{{baseUrl}}"],
+          "path": ["media-create"]
+        }
+      },
+      "response": []
+    },
+    {
       "name": "webhooks",
       "request": {
         "method": "GET",
