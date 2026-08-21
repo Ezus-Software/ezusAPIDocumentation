@@ -279,7 +279,12 @@ axios.get(baseUrl + "/project?reference=project_reference", headers);
       "is_main": true,
       "trip_date_in": "2024-03-01",
       "trip_date_out": "2024-03-09",
-      "trip_duration": 9,
+      "trip_duration": 9,      
+      "trip_people": "15",
+      "trip_destination_reference": "destination_reference",
+      "trip_destination": "France",
+      "trip_subdestination_reference ": "subdestination_reference",
+      "trip_subdestination": "Paris",
       "trip_budget": 90000,
       "budget_actual": 88750,
       "budget_actual_excl_taxes ": 77950,
@@ -290,11 +295,6 @@ axios.get(baseUrl + "/project?reference=project_reference", headers);
       "financial_collected": 48000,
       "financial_purchases": 72820,
       "financial_spendings": 12820,
-      "trip_people": "15",
-      "trip_destination_reference": "destination_reference",
-      "trip_destination": "France",
-      "trip_subdestination_reference ": "subdestination_reference",
-      "trip_subdestination": "Paris",
       "destinations": {
         "size": 3,
         "data": [
@@ -4625,6 +4625,11 @@ A JSON object indicating whether an error occurred during the process, along wit
     "trip_date_in": "2024-03-01",
     "trip_date_out": "2024-03-09",
     "trip_duration": 9,
+    "trip_people": "15",
+    "trip_destination_reference": "destination_reference",
+    "trip_destination": "France",
+    "trip_subdestination_reference ": "subdestination_reference",
+    "trip_subdestination": "Paris",
     "trip_budget": 90000,
     "budget_actual": 88750,
     "budget_actual_excl_taxes ": 77950,
@@ -4635,11 +4640,6 @@ A JSON object indicating whether an error occurred during the process, along wit
     "financial_collected": 48000,
     "financial_purchases": 72820,
     "financial_spendings": 12820,
-    "trip_people": "15",
-    "trip_destination_reference": "destination_reference",
-    "trip_destination": "France",
-    "trip_subdestination_reference ": "subdestination_reference",
-    "trip_subdestination": "Paris",
     "destinations": {
       "size": 3,
       "data": [
@@ -4705,6 +4705,11 @@ A JSON object indicating whether an error occurred during the process, along wit
 | trip_date_in                  | Date    | Date of the beginning of this alternative, in a "YYYY-MM-DD" format string. If it's empty, the project has no dates                                                                                        |
 | trip_date_out                 | Date    | Date of the end of this alternative, in a "YYYY-MM-DD" format string. If it's empty, the project has no dates                                                                                              |
 | trip_duration                 | Number  | Number of days this alternative lasts                                                                                                                                                                      |
+| trip_people                   | String  | Number of people                                                                                                                                                                                           |
+| trip_destination_reference    | String  | Destination reference of the alternative. Note: For multi-destination alternatives, only the primary destination is returned.                                                                              |
+| trip_destination              | String  | Destination of the alternative. Note: For multi-destination alternatives, only the primary destination is returned.                                                                                        |
+| trip_subdestination_reference | String  | Subdestination reference of the alternative. Note: For multi-destination alternatives, only the primary subdestination is returned.                                                                        |
+| trip_subdestination           | String  | Subdestination of the alternative. Note: For multi-destination alternatives, only the primary subdestination is returned.                                                                                  |
 | trip_budget                   | Number  | Forecasted budget for the alternative (the one that is entered manually not the actual one)                                                                                                                |
 | budget_actual                 | Number  | Actual budget for the alternative, inclusive of taxes                                                                                                                                                      |
 | budget_actual_excl_taxes      | Number  | Actual budget for the alternative, excluding taxes                                                                                                                                                         |
@@ -4715,11 +4720,6 @@ A JSON object indicating whether an error occurred during the process, along wit
 | financial_collected           | Number  | Total amount collected from clients for the alternative (in project currency). Represents actual payments received                                                                                         |
 | financial_purchases           | Number  | Actual supplier purchase costs for the alternative (in project currency). Corresponds to recorded supplier invoices                                                                                        |
 | financial_spendings           | Number  | Actual spendings recorded for the alternative (in project currency). Includes all types of supplier payments (purchases, fees, etc.)                                                                       |
-| trip_people                   | String  | Number of people                                                                                                                                                                                           |
-| trip_destination_reference    | String  | Destination reference of the alternative. Note: For multi-destination alternatives, only the primary destination is returned.                                                                              |
-| trip_destination              | String  | Destination of the alternative. Note: For multi-destination alternatives, only the primary destination is returned.                                                                                        |
-| trip_subdestination_reference | String  | Subdestination reference of the alternative. Note: For multi-destination alternatives, only the primary subdestination is returned.                                                                        |
-| trip_subdestination           | String  | Subdestination of the alternative. Note: For multi-destination alternatives, only the primary subdestination is returned.                                                                                  |
 | destinations                  | JSON    | JSON including: `size`, Array of all destination (`reference` and `name`) and subdestination (`subdestination_reference` and `subdestination_name`) values                                                 |
 | client                        | JSON    | JSON including: `reference`, `type` (enterprise or individual), `company_name`, `first_name`, `last_name` and `email`                                                                                      |
 | client_space                  | JSON    | JSON including: `is_live` (Boolean), `url` (empty string when not live; uses slug when available, otherwise `?id=`; custom domain when configured, fallback to `docs.ezus.io`), `description`, `image_url` |
