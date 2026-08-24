@@ -34,10 +34,12 @@ axios.get(baseUrl + "/travellers", headers);
   "travellers": [
     {
       "esus_reference": "<TRAVELLER_REFERENCE>",
-      "first_name": "4",
-      "last_name": "",
-      "email": "",
-      "phone": "",
+      "created_at": "2026-08-24 01:23:45",
+      "updated_at": "2026-08-24 12:34:56",
+      "first_name": "John",
+      "last_name": "Smith",
+      "email": "john.smith@travellers.example",
+      "phone": "+1-555-123-4567",
       "projects": [
         {
           "project_reference": "<PROJECT_REFERENCE>",
