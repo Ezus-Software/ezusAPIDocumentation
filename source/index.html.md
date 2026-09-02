@@ -3019,6 +3019,12 @@ axios.get(baseUrl + "/destinations", headers);
           "reference": "subdestination_reference",
           "name": "Paris"
         }
+      ],
+      "langs": [
+        {
+          "lang": "french",
+          "name": "Un pays intéressant"
+        }
       ]
     }
   ]
@@ -3056,7 +3062,17 @@ curl --location 'https://api.ezus.app/destinations-upsert' \
 --header 'Authorization: Bearer <YOUR_TOKEN>'
 --data '{
     "reference": "destination_reference",
-    "name": "France"
+    "name": "France",
+    "langs": [
+    {
+      "lang": "french",
+      "name": "Ma destination"
+    },
+    {
+      "lang": "american",
+      "name": "My destination"
+    }
+  ]
 }'
 ```
 
@@ -3067,6 +3083,16 @@ const baseUrl = "https://api.ezus.app";
 const body = {
   reference: "destination_reference",
   name: "France",
+  langs: [
+    {
+      lang: "french",
+      name: "Ma destination",
+    },
+    {
+      lang: "american",
+      name: "My destination",
+    },
+  ],
 };
 const headers = {
   "x-api-key": "<YOUR_API_KEY>",
@@ -3104,6 +3130,7 @@ axios.post(baseUrl + "/destinations-upsert", body, headers);
 | --------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | reference | String | If provided, the unique reference associated to the destination you want to update or create (in case the one you provided has never been used). If no reference is provided, a destination will be created with a random one. |
 | name      | String | This parameter is required. Name of the destination to create or update. If a destination already exists with this name, it will return an error.                                                                              |
+| langs     | Array  | Array of JSON langs representing the descriptions associated with this destination. The specified language must be enabled for the given account ([Langs](#langs)) - only name supported in this case.                         |
 
 ### Response
 
@@ -4943,6 +4970,12 @@ Each object represents a category with its associated sub-categories
         "reference": "subdestination_reference",
         "name": "Paris"
       }
+    ],
+    "langs": [
+      {
+        "lang": "french",
+        "name": "Un pays intéressant",
+      }
     ]
   },
 ]
@@ -4955,6 +4988,7 @@ Each object represents a destination with its associated sub-destinations
 | reference       | String | The reference of the destination                                                                |
 | name            | String | Name of the destination                                                                         |
 | subdestinations | Array  | An array of JSON objects, each representing a sub-destination along with its name and reference |
+| langs           | Array  | Array of JSON langs ([Langs](#langs)) - only name supported in this case                        |
 
 ### Invoices Amounts
 
