@@ -766,7 +766,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\n    \"reference\": \"destination_reference\",\n    \"name\": \"France\"\n}",
+          "raw": "{\n    \"reference\": \"destination_reference\",\n    \"name\": \"France\",\n    \"langs\": [\n        {\n            \"lang\": \"american\",\n            \"name\": \"My destination\"\n        }\n    ]\n}",
           "options": {
             "raw": {
               "language": "json"
