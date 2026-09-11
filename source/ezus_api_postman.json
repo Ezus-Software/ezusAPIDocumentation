@@ -115,6 +115,32 @@
       "response": []
     },
     {
+      "name": "travellers",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "X-API-KEY",
+            "value": "{{<YOUR_API_KEY>}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/travellers",
+          "host": ["{{baseUrl}}"],
+          "path": ["travellers"],
+          "query": [
+            {
+              "key": "next_token",
+              "value": "",
+              "disabled": true
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
       "name": "project",
       "request": {
         "method": "GET",
