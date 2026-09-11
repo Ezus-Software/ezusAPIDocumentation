@@ -1,6 +1,6 @@
 # Nested Resources
 
-### Address
+## Address
 
 ```json
 "address": {
@@ -23,7 +23,7 @@
 | zip      | String | Post code                                                                                                                                                                                      |
 | geo      | JSON   | Represents the geographical coordinates of the address or `null` if not geolocated. If provided, it consists of `x` (latitude) and `y` (longitude), both returning a `Number` with 6 decimals. |
 
-### Alternatives
+## Alternatives
 
 ```json
 "alternatives": [
@@ -107,7 +107,7 @@
 ```
 
 | Property                      | Type    | Description                                                                                                                                                                                                |
-| ----------------------------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|-------------------------------|---------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | reference                     | String  | Unique reference of this alternative: (distinct from the root project `reference` at the top level of the GET `project` response).                                                                         |
 | alternative_title             | String  | Title of the alternative                                                                                                                                                                                   |
 | lang                          | String  | Alternative locale code (e.g. fr-FR, en-GB)                                                                                                                                                                |
@@ -133,9 +133,9 @@
 | destinations                  | JSON    | JSON including: `size`, Array of all destination (`reference` and `name`) and subdestination (`subdestination_reference` and `subdestination_name`) values                                                 |
 | client                        | JSON    | JSON including: `reference`, `type` (enterprise or individual), `company_name`, `first_name`, `last_name` and `email`                                                                                      |
 | client_space                  | JSON    | JSON including: `is_live` (Boolean), `url` (empty string when not live; uses slug when available, otherwise `?id=`; custom domain when configured, fallback to `docs.ezus.io`), `description`, `image_url` |
-| brand                         | JSON    | JSON object representing the brand ([Brand](#brand)) associated with the alternative                                                                                                                       |
+| brand                         | JSON    | JSON object representing the brand ([Brand](#nested-resources-brand)) associated with the alternative                                                                                                      |
 
-### Brand
+## Brand
 
 If no brand is associated with an alternative, the default values are taken from the user’s company settings.
 
@@ -157,18 +157,18 @@ If no brand is associated with an alternative, the default values are taken from
 }
 ```
 
-| Property       | Type   | Description                                                             |
-| -------------- | ------ | ----------------------------------------------------------------------- |
-| title          | String | Title of the brand                                                      |
-| company_name   | String | Name of the brand company                                               |
-| address        | JSON   | JSON object representing the address ([Address](#address)) of the brand |
-| email          | String | Email of the brand                                                      |
-| phone          | String | Phone of the brand                                                      |
-| website        | String | Website link of the brand                                               |
-| vat_number     | String | VAT number of the brand                                                 |
-| company_number | String | Company registration number of the brand                                |
+| Property       | Type   | Description                                                                              |
+|----------------|--------|------------------------------------------------------------------------------------------|
+| title          | String | Title of the brand                                                                       |
+| company_name   | String | Name of the brand company                                                                |
+| address        | JSON   | JSON object representing the address ([Address](#nested-resources-address)) of the brand |
+| email          | String | Email of the brand                                                                       |
+| phone          | String | Phone of the brand                                                                       |
+| website        | String | Website link of the brand                                                                |
+| vat_number     | String | VAT number of the brand                                                                  |
+| company_number | String | Company registration number of the brand                                                 |
 
-### Contacts
+## Contacts
 
 Only the last 10 contacts are returned in this object. Note that for upsert endpoints, only one contact is required (equivalent to a single JSON element in the contacts.data Array below).
 
@@ -217,7 +217,7 @@ Only the last 10 contacts are returned in this object. Note that for upsert endp
 | birth_date | String  | Contact's date of birth in a "YYYY-MM-DD" format string (supplier contacts have no date of birth) |
 | is_main    | Boolean | True if this contact is the primary contact for the parent resource                               |
 
-### Custom Fields
+## Custom Fields
 
 ```json
 "custom_fields": [
@@ -280,7 +280,7 @@ The technical name of a custom field can be found in the custom field edit modal
 | Number            | String | Number type should be a Number without other character                                                                                                                                         |
 | File              | String | File must be a valid URL, and supported file extensions include: .pdf, .jpg, .jpeg, .png, .bmp, .gif, .docx, .doc, .msg, .odt, .rtf, .txt, .ppt, .pptx, .pptm, .csv, .xlsx                     |
 
-### Category
+## Category
 
 ```json
 "category": {
@@ -298,7 +298,7 @@ The technical name of a custom field can be found in the custom field edit modal
 | subcategory_reference | String | The reference of the sub-category |
 | subcategory_name      | String | Name of the sub-category          |
 
-### Categories
+## Categories
 
 ```json
 "categories": [
@@ -323,7 +323,7 @@ Each object represents a category with its associated sub-categories
 | name          | String | Name of the category                                                                         |
 | subcategories | Array  | An array of JSON objects, each representing a sub-category along with its name and reference |
 
-### Destination
+## Destination
 
 ```json
 "destination": {
@@ -341,7 +341,7 @@ Each object represents a category with its associated sub-categories
 | subdestination_reference | String | The reference of the sub-destination |
 | subdestination_name      | String | Name of the sub-destination          |
 
-### Destinations
+## Destinations
 
 ```json
 "destinations": [
@@ -366,7 +366,7 @@ Each object represents a destination with its associated sub-destinations
 | name            | String | Name of the destination                                                                         |
 | subdestinations | Array  | An array of JSON objects, each representing a sub-destination along with its name and reference |
 
-### Invoices Amounts
+## Invoices Amounts
 
 ```json
 "forecast": {
@@ -395,7 +395,7 @@ These objects provides insights into the invoice amounts, differentiating betwee
 | vat_deducted | Number  | Forecasted / Actual deductible VAT                                                       |
 | amount_ht    | Number  | Forecasted / Actual amount excluding taxes                                               |
 
-### Invoices Lines
+## Invoices Lines
 
 ```json
 "lines": [
@@ -429,7 +429,7 @@ These objects represent the individual invoice lines associated with the invoice
 | tax_regime.category | String | Tax category code associated with the invoice line                                                                                                                              |
 | tax_regime.comment  | String | Additional tax-related information or comment                                                                                                                                   |
 
-### Items
+## Items
 
 ```json
 "items": [
@@ -470,7 +470,7 @@ The fields `purchase_price`, `purchase_price_excl_taxes`, `sales_price`, and `sa
 | notes                     | String  | Notes about the item                                                                                                    |
 | booked                    | Boolean | Indicates whether the item has been booked / reserved.                                                                  |
 
-### Langs
+## Langs
 
 ```json
 "langs": [
@@ -490,7 +490,7 @@ The fields `purchase_price`, `purchase_price_excl_taxes`, `sales_price`, and `sa
 | short_description | String | Short description of the object in this language                                                                                                  |
 | long_description  | String | Long description of the object in this language                                                                                                   |
 
-### Medias
+## Medias
 
 Only the last 10 medias are returned in this object.
 
@@ -511,7 +511,7 @@ Only the last 10 medias are returned in this object.
 | media_name | String | Title of the media                                                |
 | path_full  | String | Media URL. This is a pre-signed URL that expires after 30 minutes |
 
-### Products <a name="products-two"></a>
+## Products <a name="products-two"></a>
 
 Only the last 10 products are returned in this object.
 
@@ -532,7 +532,7 @@ Only the last 10 products are returned in this object.
 | reference | String | The reference of the product |
 | title     | String | The title of the product     |
 
-### Steps
+## Steps
 
 The steps are sorted by their creation date, with the most recently created appearing first.
 
@@ -587,22 +587,22 @@ The steps are sorted by their creation date, with the most recently created appe
 ]
 ```
 
-| Property      | Type   | Description                                                                                                                                                                   |
-| ------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| reference     | String | The reference of the activity                                                                                                                                                 |
-| type          | String | Type of the step `activity` `accommodation` `transport` or `extra`                                                                                                            |
-| name          | String | Name of the step                                                                                                                                                              |
-| category      | String | Category of the step                                                                                                                                                          |
-| date_start    | String | Date of the beginning of this step, in a "YYYY-MM-DD HH:MM:SS" format string. If it's empty, the step has no dates.                                                           |
-| date_end      | String | Date of the end of this step, in a "YYYY-MM-DD HH:MM:SS" format string. If it's empty, the step has no dates or no end.                                                       |
-| people        | Number | Number of people                                                                                                                                                              |
-| address       | JSON   | JSON object representing the address ([Address](#address)) of the step, including longitude and latitude. Note: Longitude and latitude are only returned by this step object. |
-| description   | JSON   | JSON object representing the short and long description of the step                                                                                                           |
-| items         | Array  | Array of JSON items ([Items](#items))                                                                                                                                         |
-| medias        | Array  | Array of strings representing the images URLs associated with the step                                                                                                        |
-| custom_fields | Array  | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                                 |
+| Property      | Type   | Description                                                                                                                                                                                    |
+|---------------|--------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| reference     | String | The reference of the activity                                                                                                                                                                  |
+| type          | String | Type of the step `activity` `accommodation` `transport` or `extra`                                                                                                                             |
+| name          | String | Name of the step                                                                                                                                                                               |
+| category      | String | Category of the step                                                                                                                                                                           |
+| date_start    | String | Date of the beginning of this step, in a "YYYY-MM-DD HH:MM:SS" format string. If it's empty, the step has no dates.                                                                            |
+| date_end      | String | Date of the end of this step, in a "YYYY-MM-DD HH:MM:SS" format string. If it's empty, the step has no dates or no end.                                                                        |
+| people        | Number | Number of people                                                                                                                                                                               |
+| address       | JSON   | JSON object representing the address ([Address](#nested-resources-address)) of the step, including longitude and latitude. Note: Longitude and latitude are only returned by this step object. |
+| description   | JSON   | JSON object representing the short and long description of the step                                                                                                                            |
+| items         | Array  | Array of JSON items ([Items](#nested-resources-items))                                                                                                                                         |
+| medias        | Array  | Array of strings representing the images URLs associated with the step                                                                                                                         |
+| custom_fields | Array  | Array of JSON custom fields ([Custom fields](#nested-resources-custom-fields))                                                                                                                 |
 
-### Supplements
+## Supplements
 
 The supplements of the project. Today only the main fee and main discount are returned by the API.
 
@@ -643,7 +643,7 @@ The supplements of the project. Today only the main fee and main discount are re
 | amount_excl_taxes | Number | The amount of the fee/discount excluding taxes.                                                                                                                                                       |
 | notes             | String | Additional notes or comments about the fee/discount.                                                                                                                                                  |
 
-### Tags
+## Tags
 
 ```json
 "tags": [
@@ -676,7 +676,7 @@ The supplements of the project. Today only the main fee and main discount are re
 | type      | String | Tag type. Possible values: `product`, `supplier`, `client`, `package` |
 | name      | String | Display name of the tag                                               |
 
-### Travellers
+## Travellers
 
 ```json
 "travellers": [
@@ -707,7 +707,7 @@ The supplements of the project. Today only the main fee and main discount are re
 | phone         | String | The phone number of the traveller                                               |
 | custom_fields | String | The custom fields and the assigned values. Varies with number of custom fields. |
 
-### Suppliers
+## Suppliers
 
 Only the last 10 suppliers are returned in this object.
 
@@ -728,7 +728,7 @@ Only the last 10 suppliers are returned in this object.
 | reference    | String | The reference of the supplier    |
 | company_name | String | The company name of the supplier |
 
-### Tariffs
+## Tariffs
 
 ```json
 "tariffs": [
@@ -818,7 +818,7 @@ Only the last 10 suppliers are returned in this object.
 | is_yearly      | Boolean | Indicates if the seasonal tariff recurs every year . This field is only applicable when `type` is `season`, For `default` or `custom` tariffs, this field is always `false`.                                                  | Is it recurring from one year to the next? |
 | children       | Array   | Children are sub-tariffs contained by this tariff. They may be seasonal tariff or default tariff when they are flat rate tariff.                                                                                              |
 
-### User
+## User
 
 One of the following options: `None`, `Everyone`, `User Group` or the following JSON object corresponding to an active Ezus user of this account.
 
@@ -838,7 +838,7 @@ One of the following options: `None`, `Everyone`, `User Group` or the following 
 | last_name  | String | Last name of the user    |
 | agency     | String | User's affiliated agency |
 
-### Webhooks
+## Webhooks
 
 ```json
 "webhooks": [

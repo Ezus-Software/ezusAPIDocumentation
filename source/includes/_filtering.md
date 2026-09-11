@@ -33,7 +33,7 @@ If it’s defined as a dynamic filter, you can use different comparison operator
 ## Dynamic Date Filters
 
 Some date filters can be marked as Dynamic date filter.
-They follow the same suffix mechanism as text [Dynamic filters](#dynamic-filters), but with date comparison operators. Values must be provided in `YYYY-MM-DD` format.
+They follow the same suffix mechanism as text [Dynamic filters](#filtering-dynamic-filters), but with date comparison operators. Values must be provided in `YYYY-MM-DD` format.
 
 | Operator     | Suffix | Description                                                                                   | Example                       |
 | ------------ | ------ | --------------------------------------------------------------------------------------------- | ----------------------------- |

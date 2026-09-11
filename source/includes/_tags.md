@@ -79,9 +79,9 @@ axios.get(baseUrl + "/tags", headers);
 An array of JSON that contains your tags information.
 
 | Property   | Type   | Description                                                                                                      |
-| ---------- | ------ | ---------------------------------------------------------------------------------------------------------------- |
+|------------|--------|------------------------------------------------------------------------------------------------------------------|
 | next_token | String | A token will be returned if all tags have not been returned. Use it in another call to access the following tags |
 | size       | Number | The total number of tags available with these filters                                                            |
 | data_size  | Number | Number of tags returned on the current page                                                                      |
 | page       | Number | The page number                                                                                                  |
-| tags       | Array  | Array of JSON tags ([Tags](#tags-2))                                                                             |
+| tags       | Array  | Array of JSON tags ([Tags](#nested-resources-tags))                                                              |

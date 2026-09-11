@@ -91,13 +91,13 @@ axios.get(baseUrl + "/projects", headers);
 
 A JSON object containing the project information with properties like:
 
-| Property   | Type   | Description                                                                                                                                                                                                                                                                                                                          |
-| ---------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| next_token | String | A token will be returned if all projects have not been returned. Use it in another call to access the following projects                                                                                                                                                                                                             |
-| size       | Number | The total number of projects available with these filters                                                                                                                                                                                                                                                                            |
-| data_size  | Number | Number of projects returned on the current page                                                                                                                                                                                                                                                                                      |
-| page       | Number | The page number                                                                                                                                                                                                                                                                                                                      |
-| projects   | Array  | An array of JSON objects, each representing a project. Each object follows the [GET project](#get-project) response structure, with two differences: the `alternatives` and `custom_fields` arrays are omitted ; the main alternative's `trip_date_in`, `trip_date_out`, `trip_duration` are returned directly at the project level. |
+| Property   | Type   | Description                                                                                                                                                                                                                                                                                                                                   |
+|------------|--------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| next_token | String | A token will be returned if all projects have not been returned. Use it in another call to access the following projects                                                                                                                                                                                                                      |
+| size       | Number | The total number of projects available with these filters                                                                                                                                                                                                                                                                                     |
+| data_size  | Number | Number of projects returned on the current page                                                                                                                                                                                                                                                                                               |
+| page       | Number | The page number                                                                                                                                                                                                                                                                                                                               |
+| projects   | Array  | An array of JSON objects, each representing a project. Each object follows the [GET project](#projects-get-project) response structure, with two differences: the `alternatives` and `custom_fields` arrays are omitted ; the main alternative's `trip_date_in`, `trip_date_out`, `trip_duration` are returned directly at the project level. |
 
 ## GET project
 
@@ -256,7 +256,7 @@ axios.get(baseUrl + "/project?reference=project_reference", headers);
 A JSON object containing the project information with properties like:
 
 | Property             | Type   | Description                                                                       |
-| -------------------- | ------ | --------------------------------------------------------------------------------- |
+|----------------------|--------|-----------------------------------------------------------------------------------|
 | reference            | String | The reference of the project                                                      |
 | info_number          | String | File number that appears in the project record. Not to be confused with reference |
 | info_title           | String | The title of the project                                                          |
@@ -266,10 +266,10 @@ A JSON object containing the project information with properties like:
 | currency             | String | Default currency of the project                                                   |
 | created_at           | Date   | Date of creation                                                                  |
 | updated_at           | Date   | Date of the last update                                                           |
-| sales_manager        | JSON   | JSON object representing the sales manager ([User](#user))                        |
-| project_manager      | JSON   | JSON object representing the project manager ([User](#user))                      |
-| alternatives         | Array  | Array of JSON alternatives ([Alternatives](#alternatives))                        |
-| custom_fields        | Array  | Array of JSON custom fields ([Custom fields](#custom-fields))                     |
+| sales_manager        | JSON   | JSON object representing the sales manager ([User](#nested-resources-user))       |
+| project_manager      | JSON   | JSON object representing the project manager ([User](#nested-resources-user))     |
+| alternatives         | Array  | Array of JSON alternatives ([Alternatives](#nested-resources-alternatives))       |
+| custom_fields        | Array  | Array of JSON custom fields ([Custom fields](#nested-resources-custom-fields))    |
 
 ## GET project-documents
 
@@ -470,15 +470,15 @@ axios.get(baseUrl + "/project-steps?reference=project_reference", headers);
 A JSON object containing the project documents information with properties like:
 
 | Property          | Type   | Description                                                                                                               |
-| ----------------- | ------ | ------------------------------------------------------------------------------------------------------------------------- |
+|-------------------|--------|---------------------------------------------------------------------------------------------------------------------------|
 | next_token        | String | A token will be returned if all project steps have not been returned. Use it in another call to access the following ones |
 | reference         | String | The reference of the project                                                                                              |
 | alternative_order | Number | The alternative order; 0 is for main alternative                                                                          |
 | size              | Number | The total number of projects available with these filters                                                                 |
 | data_size         | Number | Number of projects returned on the current page                                                                           |
 | page              | Number | The page number                                                                                                           |
-| steps             | Array  | Array of JSON steps ([Steps](#steps))                                                                                     |
-| supplements       | JSON   | JSON object containing the fees and discounts supplements of the project ([Supplements](#supplements))                    |
+| steps             | Array  | Array of JSON steps ([Steps](#nested-resources-steps))                                                                    |
+| supplements       | JSON   | JSON object containing the fees and discounts supplements of the project ([Supplements](#nested-resources-supplements))   |
 
 ## GET project-travellers
 
@@ -553,12 +553,12 @@ axios.get(baseUrl + "/project-travellers?reference=project_reference", headers);
 
 A JSON object containing the project travellers information with properties like:
 
-| Property          | Type   | Description                                          |
-| ----------------- | ------ | ---------------------------------------------------- |
-| reference         | String | The reference of the project                         |
-| alternative_order | Number | The alternative order; 0 is for main alternative     |
-| size              | Number | Total travellers in the project                      |
-| travellers        | Array  | Array of JSON travellers ([Travellers](#travellers)) |
+| Property          | Type   | Description                                                           |
+|-------------------|--------|-----------------------------------------------------------------------|
+| reference         | String | The reference of the project                                          |
+| alternative_order | Number | The alternative order; 0 is for main alternative                      |
+| size              | Number | Total travellers in the project                                       |
+| travellers        | Array  | Array of JSON travellers ([Travellers](#nested-resources-travellers)) |
 
 ## POST projects-upsert
 
@@ -644,7 +644,7 @@ axios.post(baseUrl + "/projects-upsert", body, headers);
 ### Body Parameters (application/json)
 
 | Parameter                     | Type   | Description                                                                                                                                                                                                                                                                                                                                                                                                      |
-| ----------------------------- | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|-------------------------------|--------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | reference                     | String | If provided, the unique reference associated with the project you want to update or create (or a random one will be generated).                                                                                                                                                                                                                                                                                  |
 | project_reference             | String | If provided, the `project_reference` is used to duplicate an existing project. For the duplication to succeed, the `reference` field must not match any existing project. If the `info_number`, `info_title`, `info_stage_reference`, `trip_budget`, `trip_people`, `sales_manager_email` and `client_reference` fields are filled in, they are used. The fields `trip_date_in` and `trip_date_out` are skipped. |
 | info_number                   | String | File number that appears in the project record. Not to be confused with reference                                                                                                                                                                                                                                                                                                                                |
@@ -658,7 +658,7 @@ axios.post(baseUrl + "/projects-upsert", body, headers);
 | client_reference              | String | Reference or email of an existing client in your Ezus account to link to the project (only settable when creating a new project)                                                                                                                                                                                                                                                                                 |
 | trip_destination_reference    | String | Reference of the destination to link to the project. To reset the destination, you can put `'0'`.                                                                                                                                                                                                                                                                                                                |
 | trip_subdestination_reference | String | Reference of the sub-destination to link to the project. To reset the sub-destination, you can put `'0'`. If the `trip_destination_reference` is not provided, the `trip_subdestination_reference` will be ignored.                                                                                                                                                                                              |
-| custom_fields                 | Array  | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                                                                                                                                                                                                                                                                    |
+| custom_fields                 | Array  | Array of JSON custom fields ([Custom fields](#nested-resources-custom-fields))                                                                                                                                                                                                                                                                                                                                   |
 
 ### Response
 
@@ -911,7 +911,7 @@ axios.post(baseUrl + "/project-steps-upsert", body, headers);
 ### Body Parameters (application/json)
 
 | Parameter          | Type    | Description                                                                                                                                                                                                                                                                                                                                   |
-| ------------------ | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|--------------------|---------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | from_steps_catalog | Boolean | Optional. Default to false. When set to true, create or update sample step from catalog.                                                                                                                                                                                                                                                      |
 | reference          | String  | If provided, the unique reference associated to the step you want to update. If you specify a reference during creation, this value will be used as the step reference. It must be a maximum of 64 characters.                                                                                                                                |
 | project_reference  | String  | The project reference in which you want to create an step. This field is ignored during update or when using the `from_steps_catalog` field.                                                                                                                                                                                                  |
@@ -922,9 +922,9 @@ axios.post(baseUrl + "/project-steps-upsert", body, headers);
 | people             | String  | Number of people in the activity. You can use a `number` or `P`. If not specified during creation, `P` will be used as the default value. `P` represents the number of people in the project.                                                                                                                                                 |
 | date_start         | String  | Start date and time of the step. Must be within the dates of the alternative where the step is created. This field is required to create a step. This field is ignored on step update. This field can be completed when updating a sample step, but both dates are required. The date format must be as follows, e.g.: `2024-10-01 12:00:00`. |
 | date_end           | String  | End date and time of the step. Must be within the dates of the alternative where the step is created. This field is required to create a step. This field is ignored on step update. This field can be completed when updating the sample step, but both dates are required. The date format must be as follows, e.g.: `2024-10-01 12:00:00`. |
-| address            | Object  | JSON object address ([Address](#address))                                                                                                                                                                                                                                                                                                     |
+| address            | Object  | JSON object address ([Address](#nested-resources-address))                                                                                                                                                                                                                                                                                    |
 | description        | JSON    | JSON object representing the short and long description of the step. This field is ignored for sample steps.                                                                                                                                                                                                                                  |
-| custom_fields      | Array   | An array of JSON custom fields ([Custom fields](#custom-fields)) for the step.                                                                                                                                                                                                                                                                |
+| custom_fields      | Array   | An array of JSON custom fields ([Custom fields](#nested-resources-custom-fields)) for the step.                                                                                                                                                                                                                                               |
 
 ### Response
 
@@ -1031,15 +1031,15 @@ axios.post(baseUrl + "/project-steps-items-upsert", body, headers);
 The request body must be an array of item objects (maximum 100 items).
 
 | Parameter              | Type   | Description                                                                                                                                                                                                                                                                                                          |
-| ---------------------- | ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|------------------------|--------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | project_step_reference | String | <span class="label label-red float-right">Required</span> The project step reference in which you want to create or update an item. Must match a valid, non-deleted step belonging to your account.                                                                                                                  |
 | reference              | String | If provided, the unique reference associated to the item you want to update. If you specify a reference during creation, this value will be used as the item reference (max 64 characters). If not provided, a UUID v4 is automatically generated.                                                                   |
 | product_reference      | String | Reference of the product to link to the item. This field is optional. If provided, it must match a valid product reference in your account. When linking a product to your item, it will inherit its name, quantity, currency, purchase_price, sales_price, vat_rate and vat_regime by default on the creation only. |
 | name                   | String | Title of the item. Cannot be empty. This field is required to create an item if the product_reference is not provided. This field is optional on update.                                                                                                                                                             |
 | quantity               | Number | Quantity of the item. Default value on creation: `1`. If this item is linked to a product, it will trigger a tariff recalculation based on the product's pricing rules.                                                                                                                                              |
 | currency               | String | Currency ISO code (e.g., `USD`, `EUR`). Default value on creation: the project's sales currency. Must be present in the project's currencies else it will throw an error.                                                                                                                                            |
-| purchase_price         | Number | The unit purchase price of the item (including taxes). Default value on creation: `0`. See [Price behavior](#price-behavior) for more details.                                                                                                                                                                       |
-| sales_price            | Number | The unit sales price of the item (including taxes). Default value on creation: `0`. See [Price behavior](#price-behavior) for more details.                                                                                                                                                                          |
+| purchase_price         | Number | The unit purchase price of the item (including taxes). Default value on creation: `0`. See [Price behavior](#projects-post-project-steps-items-upsert-price-behavior) for more details.                                                                                                                              |
+| sales_price            | Number | The unit sales price of the item (including taxes). Default value on creation: `0`. See [Price behavior](#projects-post-project-steps-items-upsert-price-behavior) for more details.                                                                                                                                 |
 | vat_rate               | Number | VAT rate in percentage (e.g., `20` for 20%). Default value on creation: the project's `vat_rate`.                                                                                                                                                                                                                    |
 | vat_regime             | String | VAT regime: `classic`, `margin`, or `none`. Default value on creation: the project's VAT regime.                                                                                                                                                                                                                     |
 
@@ -1149,10 +1149,10 @@ axios.post(baseUrl + "/project-travellers-create", body, headers);
 ### Body Parameters (application/json)
 
 | Parameter         | Type   | Description                                                                                                                   |
-| ----------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------- |
+|-------------------|--------|-------------------------------------------------------------------------------------------------------------------------------|
 | reference         | String | <span class="label label-red float-right">Required</span> The project reference in which you want to create travellers        |
 | alternative_order | Number | Specifies the alternative order in the project to create travellers from. If not provided, defaults to 0 for main alternative |
-| travellers        | Array  | Array of JSON travellers ([Travellers](#travellers))                                                                          |
+| travellers        | Array  | Array of JSON travellers ([Travellers](#nested-resources-travellers))                                                         |
 
 ### Response
 

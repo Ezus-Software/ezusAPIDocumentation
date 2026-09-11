@@ -79,25 +79,25 @@ axios.get(baseUrl + "/clients", headers);
 
 ### Query Parameters
 
-| Parameter   | Type                               | Description                                                                                                                               |
-| ----------- | ---------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| next_token  | String                             | Specify this parameter if you want to retrieve the following elements of a given list query.                                              |
-| reference   | [Dynamic filter](#dynamic-filters) | You can filter clients with a specific reference                                                                                          |
-| info_number | [Dynamic filter](#dynamic-filters) | You can filter clients with a specific info_number, file number that appears in the client record. Not to be confused with reference      |
-| type        | String                             | You can filter clients by their type. Either `enterprise` or `individual`                                                                 |
-| email       | [Dynamic filter](#dynamic-filters) | You can filter clients by email. This filter works for both `enterprise` clients (uses the main contact’s email) and `individual` clients |
+| Parameter   | Type                                         | Description                                                                                                                               |
+|-------------|----------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------|
+| next_token  | String                                       | Specify this parameter if you want to retrieve the following elements of a given list query.                                              |
+| reference   | [Dynamic filter](#filtering-dynamic-filters) | You can filter clients with a specific reference                                                                                          |
+| info_number | [Dynamic filter](#filtering-dynamic-filters) | You can filter clients with a specific info_number, file number that appears in the client record. Not to be confused with reference      |
+| type        | String                                       | You can filter clients by their type. Either `enterprise` or `individual`                                                                 |
+| email       | [Dynamic filter](#filtering-dynamic-filters) | You can filter clients by email. This filter works for both `enterprise` clients (uses the main contact’s email) and `individual` clients |
 
 ### Response
 
 A JSON object containing the client information with properties like:
 
-| Property   | Type   | Description                                                                                                                                                                             |
-| ---------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| next_token | String | A token will be returned if all clients have not been returned. Use it in another call to access the following clients                                                                  |
-| size       | Number | The total number of clients available with these filters                                                                                                                                |
-| data_size  | Number | Number of clients returned on the current page                                                                                                                                          |
-| page       | Number | The page number                                                                                                                                                                         |
-| clients    | Array  | An array of JSON objects, each representing a client. These objects are formatted according to a simplified version of the GET `client` response structure. ([GET client](#get-client)) |
+| Property   | Type   | Description                                                                                                                                                                                     |
+|------------|--------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| next_token | String | A token will be returned if all clients have not been returned. Use it in another call to access the following clients                                                                          |
+| size       | Number | The total number of clients available with these filters                                                                                                                                        |
+| data_size  | Number | Number of clients returned on the current page                                                                                                                                                  |
+| page       | Number | The page number                                                                                                                                                                                 |
+| clients    | Array  | An array of JSON objects, each representing a client. These objects are formatted according to a simplified version of the GET `client` response structure. ([GET client](#clients-get-client)) |
 
 ## GET client
 
@@ -222,25 +222,25 @@ axios.get(baseUrl + "/client?reference=client_reference", headers);
 
 A JSON object containing the client information with properties like:
 
-| Property                   | Type   | Description                                                                                |
-| -------------------------- | ------ | ------------------------------------------------------------------------------------------ |
-| reference                  | String | The reference of the client                                                                |
-| info_number                | String | File number that appears in the client record. Not to be confused with reference           |
-| type                       | String | The type of the client (either "enterprise" or "individual")                               |
-| company_name               | String | Name of the client's company (if applicable)                                               |
-| info_notes                 | String | Notes on the client                                                                        |
-| website                    | String | Website of the client                                                                      |
-| vat_number                 | String | VAT number of the client (only for "enterprise" clients)                                   |
-| company_number             | String | Company registration number of the client (only for "enterprise" clients)                  |
-| predefined_net_margin_rate | Number | Predefined net margin rate in percentage (e.g., `15` for 15%). Leave blank `''` if not set |
-| user                       | JSON   | JSON object representing the user ([User](#user)) associated with the client               |
-| email                      | String | Email of the main contact at the client's organization                                     |
-| first_name                 | String | First name of the main contact at the client's organization                                |
-| last_name                  | String | Last name of the main contact at the client's organization                                 |
-| address                    | JSON   | JSON object representing the address ([Address](#address)) of the client                   |
-| projects                   | JSON   | Projects linked to the client (returns the first 10 projects)                              |
-| contacts                   | Array  | An array of JSON contacts ([Contacts](#contacts)) associated with the client               |
-| custom_fields              | Array  | An array of JSON custom fields ([Custom fields](#custom-fields)) for the client            |
+| Property                   | Type   | Description                                                                                      |
+|----------------------------|--------|--------------------------------------------------------------------------------------------------|
+| reference                  | String | The reference of the client                                                                      |
+| info_number                | String | File number that appears in the client record. Not to be confused with reference                 |
+| type                       | String | The type of the client (either "enterprise" or "individual")                                     |
+| company_name               | String | Name of the client's company (if applicable)                                                     |
+| info_notes                 | String | Notes on the client                                                                              |
+| website                    | String | Website of the client                                                                            |
+| vat_number                 | String | VAT number of the client (only for "enterprise" clients)                                         |
+| company_number             | String | Company registration number of the client (only for "enterprise" clients)                        |
+| predefined_net_margin_rate | Number | Predefined net margin rate in percentage (e.g., `15` for 15%). Leave blank `''` if not set       |
+| user                       | JSON   | JSON object representing the user ([User](#nested-resources-user)) associated with the client    |
+| email                      | String | Email of the main contact at the client's organization                                           |
+| first_name                 | String | First name of the main contact at the client's organization                                      |
+| last_name                  | String | Last name of the main contact at the client's organization                                       |
+| address                    | JSON   | JSON object representing the address ([Address](#nested-resources-address)) of the client        |
+| projects                   | JSON   | Projects linked to the client (returns the first 10 projects)                                    |
+| contacts                   | Array  | An array of JSON contacts ([Contacts](#nested-resources-contacts)) associated with the client    |
+| custom_fields              | Array  | An array of JSON custom fields ([Custom fields](#nested-resources-custom-fields)) for the client |
 
 ## POST clients-upsert
 
@@ -358,19 +358,19 @@ axios.post(baseUrl + "/clients-upsert", body, headers);
 
 ### Body Parameters (application/json)
 
-| Parameter      | Type   | Description                                                                                                                                                                                                                                                                                     |
-| -------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| reference      | String | If provided, the unique reference associated with the client you want to update or create (or a random one will be generated).                                                                                                                                                                  |
-| info_number    | String | File number that appears in the client record. Not to be confused with reference                                                                                                                                                                                                                |
-| type           | String | Optional parameter. Specifies the client type (`enterprise` or `individual`). If `enterprise`, `company_name` is required. If `individual`, provide contact.first_name or contact.last_name.                                                                                                    |
-| company_name   | String | <span class="label label-red float-right">Required</span> Name of the client's company (if applicable). If empty, the client will be considered an individual, and the name of the client will be the same as the name of the contact.                                                          |
-| website        | String | Website of the client                                                                                                                                                                                                                                                                           |
-| vat_number     | String | VAT number of the client (only for "enterprise" clients)                                                                                                                                                                                                                                        |
-| company_number | String | Company registration number of the client (only for "enterprise" clients)                                                                                                                                                                                                                       |
-| user           | Email  | Email of the Ezus user to be set as the owner of the client                                                                                                                                                                                                                                     |
-| contact        | JSON   | Main contact object ([Contacts](#contacts)). Optional extra parameter <code>mode</code> in this endpoint. Mode values can either be: `insert_main` (default, creates and sets a main contact even if one exists) or `upsert_main` (updates the main contact if it exists, otherwise creates it) |
-| address        | JSON   | JSON object address ([Address](#address)) To reset the address, you can put `'0'`. **Geolocation data cannot be modified during an upsert**.                                                                                                                                                    |
-| custom_fields  | Array  | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                                                                                                                                                   |
+| Parameter      | Type   | Description                                                                                                                                                                                                                                                                                                      |
+|----------------|--------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| reference      | String | If provided, the unique reference associated with the client you want to update or create (or a random one will be generated).                                                                                                                                                                                   |
+| info_number    | String | File number that appears in the client record. Not to be confused with reference                                                                                                                                                                                                                                 |
+| type           | String | Optional parameter. Specifies the client type (`enterprise` or `individual`). If `enterprise`, `company_name` is required. If `individual`, provide contact.first_name or contact.last_name.                                                                                                                     |
+| company_name   | String | <span class="label label-red float-right">Required</span> Name of the client's company (if applicable). If empty, the client will be considered an individual, and the name of the client will be the same as the name of the contact.                                                                           |
+| website        | String | Website of the client                                                                                                                                                                                                                                                                                            |
+| vat_number     | String | VAT number of the client (only for "enterprise" clients)                                                                                                                                                                                                                                                         |
+| company_number | String | Company registration number of the client (only for "enterprise" clients)                                                                                                                                                                                                                                        |
+| user           | Email  | Email of the Ezus user to be set as the owner of the client                                                                                                                                                                                                                                                      |
+| contact        | JSON   | Main contact object ([Contacts](#nested-resources-contacts)). Optional extra parameter <code>mode</code> in this endpoint. Mode values can either be: `insert_main` (default, creates and sets a main contact even if one exists) or `upsert_main` (updates the main contact if it exists, otherwise creates it) |
+| address        | JSON   | JSON object address ([Address](#nested-resources-address)) To reset the address, you can put `'0'`. **Geolocation data cannot be modified during an upsert**.                                                                                                                                                    |
+| custom_fields  | Array  | Array of JSON custom fields ([Custom fields](#nested-resources-custom-fields))                                                                                                                                                                                                                                   |
 
 ### Response
 
