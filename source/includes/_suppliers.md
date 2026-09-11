@@ -88,13 +88,13 @@ axios.get(baseUrl + "/suppliers", headers);
 
 A JSON object containing the supplier information with properties like:
 
-| Property   | Type   | Description                                                                                                                                                                                     |
-| ---------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| next_token | String | A token will be returned if all suppliers have not been returned. Use it in another call to access the following suppliers                                                                      |
-| size       | Number | The total number of suppliers available with these filters                                                                                                                                      |
-| data_size  | Number | Number of suppliers returned on the current page                                                                                                                                                |
-| page       | Number | The page number                                                                                                                                                                                 |
-| suppliers  | Array  | An array of JSON objects, each representing a supplier. These objects are formatted according to a simplified version of the GET `supplier` response structure. ([GET supplier](#get-supplier)) |
+| Property   | Type   | Description                                                                                                                                                                                               |
+|------------|--------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| next_token | String | A token will be returned if all suppliers have not been returned. Use it in another call to access the following suppliers                                                                                |
+| size       | Number | The total number of suppliers available with these filters                                                                                                                                                |
+| data_size  | Number | Number of suppliers returned on the current page                                                                                                                                                          |
+| page       | Number | The page number                                                                                                                                                                                           |
+| suppliers  | Array  | An array of JSON objects, each representing a supplier. These objects are formatted according to a simplified version of the GET `supplier` response structure. ([GET supplier](#suppliers-get-supplier)) |
 
 ## GET supplier
 
@@ -256,7 +256,7 @@ axios.get(baseUrl + "/supplier?reference=supplier_reference", headers);
 A JSON object containing the supplier information with properties like:
 
 | Property      | Type   | Description                                                                                                                                                  |
-| ------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+|---------------|--------|--------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | reference     | String | The reference of the supplier                                                                                                                                |
 | info_number   | String | File number that appears in the supplier record. Not to be confused with reference                                                                           |
 | type          | String | 3 options: `accom`, `activity`, `transport`. A supplier can have no type, 1 type or several types. In this case, the different types are separated by commas |
@@ -265,16 +265,16 @@ A JSON object containing the supplier information with properties like:
 | website       | String | Website of the supplier                                                                                                                                      |
 | capacity      | String | Maximum number of people for which the supplier can be used                                                                                                  |
 | visual_url    | String | URL of the Google Slides visual linked to the supplier                                                                                                       |
-| user          | JSON   | JSON object user ([User](#user))                                                                                                                             |
-| category      | JSON   | JSON object category ([Category](#category))                                                                                                                 |
-| destination   | JSON   | JSON object destination ([Destination](#destination))                                                                                                        |
-| address       | JSON   | JSON object address ([Address](#address))                                                                                                                    |
-| medias        | JSON   | JSON object medias ([Medias](#medias))                                                                                                                       |
-| products      | JSON   | JSON object products ([Products](#products-2))                                                                                                               |
-| contacts      | Array  | Array of JSON contacts ([Contacts](#contacts))                                                                                                               |
-| langs         | Array  | Array of JSON langs ([Langs](#langs))                                                                                                                        |
-| custom_fields | Array  | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                |
-| tags          | Array  | Array of JSON tags ([Tags](#tags-2))                                                                                                                         |
+| user          | JSON   | JSON object user ([User](#nested-resources-user))                                                                                                            |
+| category      | JSON   | JSON object category ([Category](#nested-resources-category))                                                                                                |
+| destination   | JSON   | JSON object destination ([Destination](#nested-resources-destination))                                                                                       |
+| address       | JSON   | JSON object address ([Address](#nested-resources-address))                                                                                                   |
+| medias        | JSON   | JSON object medias ([Medias](#nested-resources-medias))                                                                                                      |
+| products      | JSON   | JSON object products ([Products](#nested-resources-products))                                                                                                |
+| contacts      | Array  | Array of JSON contacts ([Contacts](#nested-resources-contacts))                                                                                              |
+| langs         | Array  | Array of JSON langs ([Langs](#nested-resources-langs))                                                                                                       |
+| custom_fields | Array  | Array of JSON custom fields ([Custom fields](#nested-resources-custom-fields))                                                                               |
+| tags          | Array  | Array of JSON tags ([Tags](#nested-resources-tags))                                                                                                          |
 
 ## POST suppliers-upsert
 
@@ -418,23 +418,23 @@ axios.post(baseUrl + "/suppliers-upsert", body, headers);
 ### Body Parameters (application/json)
 
 | Parameter                | Type   | Description                                                                                                                                                                                                                                      |
-| ------------------------ | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --- |
+|--------------------------|--------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | reference                | String | If provided, the unique reference associated to the supplier you want to update or create (in case the one you provided has never been used). If no reference is provided, a supplier will be created with a random one.                         |
 | info_number              | String | File number that appears in the supplier record. Not to be confused with reference                                                                                                                                                               |
 | type                     | String | Either `undefined` or a combination of these 3 options: `accom`, `activity`, `transport`. You can select multiple options by separating them with comas ("accom, activity" for instance). Enter "undefined" if you want to reset this parameter. |
-| company_name             | String | <span class="label label-red float-right">Required</span> Name of the supplier. This parameter is required if you create a new supplier                                                                                                          |     |
+| company_name             | String | <span class="label label-red float-right">Required</span> Name of the supplier. This parameter is required if you create a new supplier                                                                                                          | 
 | website                  | String | Website of the supplier                                                                                                                                                                                                                          |
 | capacity                 | Number | Maximum number of people for which the supplier can be used. Leave blank `''` if not relevant                                                                                                                                                    |
 | user                     | Email  | Email of the Ezus user that will be set as the owner of the supplier. By default, if no owner is provided or the provided email do not match any user on this account, the owner will be assigned to everyone                                    |
-| contact                  | JSON   | Contact is a single JSON and email is needed. Note that only one contact can be upsert this way (the main contact of the supplier) ([Contact](#contacts)) To reset the main contact, you can put `'0'`                                           |
-| address                  | JSON   | JSON object address ([Address](#address)) To reset the address, you can put `'0'`. **Geolocation data cannot be modified during an upsert**.                                                                                                     |
+| contact                  | JSON   | Contact is a single JSON and email is needed. Note that only one contact can be upsert this way (the main contact of the supplier) ([Contact](#nested-resources-contacts)) To reset the main contact, you can put `'0'`                          |
+| address                  | JSON   | JSON object address ([Address](#nested-resources-address)) To reset the address, you can put `'0'`. **Geolocation data cannot be modified during an upsert**.                                                                                    |
 | destination_reference    | String | Reference of the destination to link to the supplier. To reset the destination, you can put `'0'`.                                                                                                                                               |
 | subdestination_reference | String | Reference of the sub-destination to link to the supplier. To reset the sub-destination, you can put `'0'`. If the `destination_reference` is not provided, the `subdestination_reference` will be ignored.                                       |
 | category_reference       | String | Reference of the category to link to the supplier. To reset the category, you can put `'0'`.                                                                                                                                                     |
 | subcategory_reference    | String | Reference of the sub-category to link to the supplier. To reset the sub-category, you can put `'0'`. If the `category_reference` is not provided, the `subcategory_reference` will be ignored.                                                   |
-| custom_fields            | Array  | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                                                                                                    |
+| custom_fields            | Array  | Array of JSON custom fields ([Custom fields](#nested-resources-custom-fields))                                                                                                                                                                   |
 | tags                     | Array  | Array of strings representing tag technical names. If an empty array (`[]`) is provided, all existing product tags are removed. Otherwise, the provided tags fully replace the current ones.                                                     |
-| langs                    | Array  | Array of JSON langs representing the descriptions associated with this supplier. The specified language must be enabled for the given account ([Langs](#langs))                                                                                  |
+| langs                    | Array  | Array of JSON langs representing the descriptions associated with this supplier. The specified language must be enabled for the given account ([Langs](#nested-resources-langs))                                                                 |
 
 ### Response
 

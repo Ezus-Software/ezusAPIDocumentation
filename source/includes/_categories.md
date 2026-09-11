@@ -58,7 +58,7 @@ axios.get(baseUrl + "/categories", headers);
 
 A JSON object containing the category information, with properties like:
 
-| Property   | Type   | Description                                            |
-| ---------- | ------ | ------------------------------------------------------ |
-| size       | Number | The total number of categories                         |
-| categories | Array  | Array of JSON categories ([Categories](#categories-2)) |
+| Property   | Type   | Description                                                           |
+|------------|--------|-----------------------------------------------------------------------|
+| size       | Number | The total number of categories                                        |
+| categories | Array  | Array of JSON categories ([Categories](#nested-resources-categories)) |

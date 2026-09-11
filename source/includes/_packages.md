@@ -104,18 +104,18 @@ axios.get(baseUrl + "/package?reference=package_reference", headers);
 A JSON object containing the package information with properties like:
 
 | Property      | Type   | Description                                                                       |
-| ------------- | ------ | --------------------------------------------------------------------------------- |
+|---------------|--------|-----------------------------------------------------------------------------------|
 | reference     | String | The reference of the package                                                      |
 | info_number   | String | File number that appears in the package record. Not to be confused with reference |
 | title         | String | Name of the package                                                               |
 | info_notes    | String | Notes on the package                                                              |
 | capacity      | String | Maximum number of people for which the package can be used                        |
 | visual_url    | String | URL of the Google Slides visual linked to the package                             |
-| suppliers     | JSON   | JSON object suppliers ([Suppliers](#suppliers-2))                                 |
-| medias        | JSON   | JSON object medias ([Medias](#medias))                                            |
-| products      | JSON   | JSON object products ([Products](#products-2))                                    |
-| langs         | Array  | Array of JSON langs ([Langs](#langs))                                             |
-| custom_fields | Array  | Array of JSON custom fields [Custom fields](#custom-fields)                       |
+| suppliers     | JSON   | JSON object suppliers ([Suppliers](#nested-resources-suppliers))                  |
+| medias        | JSON   | JSON object medias ([Medias](#nested-resources-medias))                           |
+| products      | JSON   | JSON object products ([Products](#nested-resources-products))                     |
+| langs         | Array  | Array of JSON langs ([Langs](#nested-resources-langs))                            |
+| custom_fields | Array  | Array of JSON custom fields [Custom fields](#nested-resources-custom-fields)      |
 
 ## POST packages-upsert
 
@@ -217,7 +217,7 @@ axios.post(baseUrl + "/packages-upsert", body, headers);
 ### Body Parameters (application/json)
 
 | Parameter                | Type   | Description                                                                                                                                                                                                            |
-| ------------------------ | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|--------------------------|--------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | reference                | String | If provided, the unique reference associated to the package you want to update or create (in case the one you provided has never been used). If no reference is provided, a package will be created with a random one. |
 | info_number              | String | File number that appears in the package record. Not to be confused with reference                                                                                                                                      |
 | title                    | String | This parameter is required if you create a new package                                                                                                                                                                 |
@@ -226,8 +226,8 @@ axios.post(baseUrl + "/packages-upsert", body, headers);
 | subdestination_reference | String | Reference of the sub-destination to link to the package. To reset the sub-destination, you can put `'0'`. If the `destination_reference` is not provided, the `subdestination_reference` will be ignored.              |
 | category_reference       | String | Reference of the category to link to the package. To reset the category, you can put `'0'`.                                                                                                                            |
 | subcategory_reference    | String | Reference of the sub-category to link to the package. To reset the sub-category, you can put `'0'`. If the `category_reference` is not provided, the `subcategory_reference` will be ignored.                          |
-| custom_fields            | Array  | Array of JSON custom fields [Custom fields](#custom-fields)                                                                                                                                                            |
-| langs                    | Array  | Array of JSON langs representing the descriptions associated with this package. The specified language must be enabled for the given account ([Langs](#langs))                                                         |
+| custom_fields            | Array  | Array of JSON custom fields [Custom fields](#nested-resources-custom-fields)                                                                                                                                           |
+| langs                    | Array  | Array of JSON langs representing the descriptions associated with this package. The specified language must be enabled for the given account ([Langs](#nested-resources-langs))                                        |
 
 ### Response
 

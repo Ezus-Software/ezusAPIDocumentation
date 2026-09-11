@@ -105,21 +105,21 @@ axios.get(baseUrl + "/invoices?stage=completed", headers);
 
 ### Query Parameters
 
-| Parameter                    | Type                                                                                          | Description                                                                                                                                                               |
-| ---------------------------- | --------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| next_token                   | String                                                                                        | Specify this parameter if you want to retrieve the following elements of a given list query. If this parameter is filled, other parameters are ignored.                   |
-| stage                        | String                                                                                        | You can filter invoices that are at a specific stage. The stage can be `paid`, `completed` or `draft`.                                                                    |
-| is_einvoice_ready            | Boolean                                                                                       | Filter invoices ready for e-invoicing. Accepts `true` or `false`.                                                                                                         |
-| client_reference             | [Linked-record filter](#linked-record-filters)                                                | Exact match. Filter invoices by the reference of the linked client.                                                                                                       |
-| project_info_stage_reference | [Linked-record filter](#linked-record-filters)                                                | Exact match. Filter invoices whose linked project is at a given stage...                                                                                                  |
-| technical_name               | String                                                                                        | You can filter invoices according to one of their custom fields by adding the `technical_name` of the custom field as a query parameter and the desired value as a value. |
-| info_number                  | [Dynamic filter](#dynamic-filters)                                                            | Filter on the invoice's `info_number`.                                                                                                                                    |
-| project_info_number          | [Linked-record filter](#linked-record-filters) + [Dynamic filter](#dynamic-filters)           | Filter on the linked project's `info_number`.                                                                                                                             |
-| created_date                 | [Dynamic date filter](#dynamic-date-filters)                                                  | Filter on the invoice creation date.                                                                                                                                      |
-| send_date                    | [Dynamic date filter](#dynamic-date-filters)                                                  | Filter on the invoice send date.                                                                                                                                          |
-| due_date                     | [Dynamic date filter](#dynamic-date-filters)                                                  | Filter on the invoice due date.                                                                                                                                           |
-| alternative_trip_date_in     | [Linked-record filter](#linked-record-filters) + [Dynamic date filter](#dynamic-date-filters) | Filter on the linked alternative's trip start date.                                                                                                                       |
-| alternative_trip_date_out    | [Linked-record filter](#linked-record-filters) + [Dynamic date filter](#dynamic-date-filters) | Filter on the linked alternative's trip end date.                                                                                                                         |
+| Parameter                    | Type                                                                                                              | Description                                                                                                                                                               |
+|------------------------------|-------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| next_token                   | String                                                                                                            | Specify this parameter if you want to retrieve the following elements of a given list query. If this parameter is filled, other parameters are ignored.                   |
+| stage                        | String                                                                                                            | You can filter invoices that are at a specific stage. The stage can be `paid`, `completed` or `draft`.                                                                    |
+| is_einvoice_ready            | Boolean                                                                                                           | Filter invoices ready for e-invoicing. Accepts `true` or `false`.                                                                                                         |
+| client_reference             | [Linked-record filter](#filtering-linked-record-filters)                                                          | Exact match. Filter invoices by the reference of the linked client.                                                                                                       |
+| project_info_stage_reference | [Linked-record filter](#filtering-linked-record-filters)                                                          | Exact match. Filter invoices whose linked project is at a given stage...                                                                                                  |
+| technical_name               | String                                                                                                            | You can filter invoices according to one of their custom fields by adding the `technical_name` of the custom field as a query parameter and the desired value as a value. |
+| info_number                  | [Dynamic filter](#filtering-dynamic-filters)                                                                      | Filter on the invoice's `info_number`.                                                                                                                                    |
+| project_info_number          | [Linked-record filter](#filtering-linked-record-filters) + [Dynamic filter](#filtering-dynamic-filters)           | Filter on the linked project's `info_number`.                                                                                                                             |
+| created_date                 | [Dynamic date filter](#filtering-dynamic-date-filters)                                                            | Filter on the invoice creation date.                                                                                                                                      |
+| send_date                    | [Dynamic date filter](#filtering-dynamic-date-filters)                                                            | Filter on the invoice send date.                                                                                                                                          |
+| due_date                     | [Dynamic date filter](#filtering-dynamic-date-filters)                                                            | Filter on the invoice due date.                                                                                                                                           |
+| alternative_trip_date_in     | [Linked-record filter](#filtering-linked-record-filters) + [Dynamic date filter](#filtering-dynamic-date-filters) | Filter on the linked alternative's trip start date.                                                                                                                       |
+| alternative_trip_date_out    | [Linked-record filter](#filtering-linked-record-filters) + [Dynamic date filter](#filtering-dynamic-date-filters) | Filter on the linked alternative's trip end date.                                                                                                                         |
 
 All filters are cumulative (`AND`): an invoice must match every supplied filter to be returned.
 
@@ -127,13 +127,13 @@ All filters are cumulative (`AND`): an invoice must match every supplied filter 
 
 A JSON object containing the invoice information with properties like:
 
-| Property   | Type   | Description                                                                                                                                                                                 |
-| ---------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| next_token | String | A token will be returned if all invoices have not been returned. Use it in another call to access the following invoices                                                                    |
-| size       | Number | The total number of invoices available with these filters                                                                                                                                   |
-| data_size  | Number | Number of invoices returned on the current page                                                                                                                                             |
-| page       | Number | The page number                                                                                                                                                                             |
-| invoices   | Array  | An array of JSON objects, each representing a invoice. These objects are formatted according to a simplified version of the GET `invoice` response structure. ([GET invoice](#get-invoice)) |
+| Property   | Type   | Description                                                                                                                                                                                           |
+|------------|--------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| next_token | String | A token will be returned if all invoices have not been returned. Use it in another call to access the following invoices                                                                              |
+| size       | Number | The total number of invoices available with these filters                                                                                                                                             |
+| data_size  | Number | Number of invoices returned on the current page                                                                                                                                                       |
+| page       | Number | The page number                                                                                                                                                                                       |
+| invoices   | Array  | An array of JSON objects, each representing a invoice. These objects are formatted according to a simplified version of the GET `invoice` response structure. ([GET invoice](#invoices-get-invoices)) |
 
 ## GET invoice
 
@@ -255,7 +255,7 @@ axios.get(baseUrl + "/invoice?reference=invoice_reference", headers);
 A JSON object containing the invoice information with properties like:
 
 | Property           | Type    | Description                                                                                                                                                                                                       |
-| ------------------ | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|--------------------|---------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | reference          | String  | The reference of the invoice                                                                                                                                                                                      |
 | info_number        | String  | Title of the invoice                                                                                                                                                                                              |
 | type               | String  | Type of the invoice `invoice` or `credit_note`                                                                                                                                                                    |
@@ -274,9 +274,9 @@ A JSON object containing the invoice information with properties like:
 | project            | JSON    | JSON including: `reference`, `info_number`, `info_title`, `info_stage_reference`, `info_stage`, `currency` and `is_closed`                                                                                        |
 | alternative        | JSON    | JSON including: `sort_order`, `title`, `trip_date_in`, `trip_date_out` and `trip_duration`                                                                                                                        |
 | client             | JSON    | JSON including: `reference`, `type` (enterprise or individual), `company_name`, `first_name`, `last_name` and `email`                                                                                             |
-| forecast           | JSON    | JSON object forecast ([Invoices Amounts](#invoices-amounts))                                                                                                                                                      |
-| actual             | JSON    | JSON object actual ([Invoices Amounts](#invoices-amounts))                                                                                                                                                        |
-| lines              | Array   | Array of JSON invoices lines ([Invoices Lines](#invoices-lines))                                                                                                                                                  |
+| forecast           | JSON    | JSON object forecast ([Invoices Amounts](#nested-resources-invoices-amounts))                                                                                                                                     |
+| actual             | JSON    | JSON object actual ([Invoices Amounts](#nested-resources-invoices-amounts))                                                                                                                                       |
+| lines              | Array   | Array of JSON invoices lines ([Invoices Lines](#nested-resources-invoices-lines))                                                                                                                                 |
 
 ## PUT invoices-update
 
@@ -340,11 +340,11 @@ axios.put(baseUrl + "/invoices-update", body, headers);
 ### Body Parameters (application/json)
 
 | Parameter     | Type   | Description                                                                                                                                                                                                                  |
-| ------------- | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|---------------|--------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | reference     | String | The reference of the invoice you want to update                                                                                                                                                                              |
 | stage         | String | Represents the stage of the invoice. Allowed updates: you can move from `draft` to `paid` or `completed`. Once set to paid or completed, switching between these stages is allowed. Reverting back to draft is not permitted |
 | due_date      | String | due_date can be updated only if the invoice is a draft, due_date can be only on format `YYYY-MM-DD`                                                                                                                          |
-| custom_fields | Array  | Array of JSON custom fields ([Custom fields](#custom-fields))                                                                                                                                                                |
+| custom_fields | Array  | Array of JSON custom fields ([Custom fields](#nested-resources-custom-fields))                                                                                                                                               |
 
 ### Response
 
@@ -436,13 +436,13 @@ axios.get(baseUrl + "/invoices-supplier", headers);
 
 A JSON object containing the invoices-supplier information with properties like:
 
-| Property          | Type   | Description                                                                                                                                                                                                                      |
-| ----------------- | ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| next_token        | String | A token will be returned if all invoices have not been returned. Use it in another call to access the following invoices                                                                                                         |
-| size              | Number | The total number of invoices available with these filters                                                                                                                                                                        |
-| data_size         | Number | Number of invoices returned on the current page                                                                                                                                                                                  |
-| page              | Number | The page number                                                                                                                                                                                                                  |
-| invoices-supplier | Array  | An array of JSON objects, each representing an invoice-supplier. These objects are formatted according to a simplified version of the GET `invoice-supplier` response structure. ([GET invoice-supplier](#get-invoice-supplier)) |
+| Property          | Type   | Description                                                                                                                                                                                                                               |
+|-------------------|--------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| next_token        | String | A token will be returned if all invoices have not been returned. Use it in another call to access the following invoices                                                                                                                  |
+| size              | Number | The total number of invoices available with these filters                                                                                                                                                                                 |
+| data_size         | Number | Number of invoices returned on the current page                                                                                                                                                                                           |
+| page              | Number | The page number                                                                                                                                                                                                                           |
+| invoices-supplier | Array  | An array of JSON objects, each representing an invoice-supplier. These objects are formatted according to a simplified version of the GET `invoice-supplier` response structure. ([GET invoice-supplier](#invoices-get-invoice-supplier)) |
 
 Each `invoice-supplier` of the `invoices-supplier` list is a JSON object containing the invoice-supplier information with properties like:
 

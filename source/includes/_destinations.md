@@ -58,10 +58,10 @@ axios.get(baseUrl + "/destinations", headers);
 
 A JSON object containing the destination information with properties like:
 
-| Property     | Type   | Description                                                  |
-| ------------ | ------ | ------------------------------------------------------------ |
-| size         | Number | The total number of destinations                             |
-| destinations | Array  | Array of JSON destinations ([Destinations](#destinations-2)) |
+| Property     | Type   | Description                                                                 |
+|--------------|--------|-----------------------------------------------------------------------------|
+| size         | Number | The total number of destinations                                            |
+| destinations | Array  | Array of JSON destinations ([Destinations](#nested-resources-destinations)) |
 
 ## POST destinations-upsert
 
@@ -209,14 +209,14 @@ axios.get(
 A JSON object containing the sub-destination information with properties like:
 
 | Property              | Type   | Description                                                   |
-| --------------------- | ------ | ------------------------------------------------------------- |
+|-----------------------|--------|---------------------------------------------------------------|
 | reference             | String | The reference of the sub-destination                          |
 | name                  | String | Name of the sub-destination                                   |
 | destination_reference | String | The reference of the destination                              |
 | destination_name      | String | Name of the destination                                       |
 | visual_url            | String | URL of the Google Slides visual linked to the sub-destination |
-| medias                | JSON   | JSON object medias ([Medias](#medias))                        |
-| langs                 | Array  | Array of JSON langs ([Langs](#langs))                         |
+| medias                | JSON   | JSON object medias ([Medias](#nested-resources-medias))       |
+| langs                 | Array  | Array of JSON langs ([Langs](#nested-resources-langs))        |
 
 ## POST subdestinations-upsert
 
@@ -304,11 +304,11 @@ axios.post(baseUrl + "/subdestinations-upsert", body, headers);
 ### Body Parameters (application/json)
 
 | Parameter             | Type   | Description                                                                                                                                                                                                                            |
-| --------------------- | ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|-----------------------|--------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | reference             | String | If provided, the unique reference associated to the sub-destination you want to update or create (in case the one you provided has never been used). If no reference is provided, a sub-destination will be created with a random one. |
 | destination_reference | String | This parameter is required and must match an existing destination.                                                                                                                                                                     |
 | name                  | String | This parameter is required. Name of the sub-destination to create or update. If a sub-destination already exists with this name, it will return an error.                                                                              |
-| langs                 | Array  | Array of JSON langs representing the descriptions associated with this sub-destination. The specified language must be enabled for the given account ([Langs](#langs))                                                                 |
+| langs                 | Array  | Array of JSON langs representing the descriptions associated with this sub-destination. The specified language must be enabled for the given account ([Langs](#nested-resources-langs))                                                |
 
 ### Response
 

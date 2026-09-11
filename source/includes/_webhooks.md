@@ -54,9 +54,9 @@ axios.get(baseUrl + "/webhooks", headers);
 
 An array of JSON that contains your webhooks information.
 
-| Property | Type  | Description                                      |
-| -------- | ----- | ------------------------------------------------ |
-| webhooks | Array | Array of JSON webhooks ([Webhooks](#webhooks-2)) |
+| Property | Type  | Description                                                     |
+|----------|-------|-----------------------------------------------------------------|
+| webhooks | Array | Array of JSON webhooks ([Webhooks](#nested-resources-webhooks)) |
 
 ## GET webhooks-last
 
