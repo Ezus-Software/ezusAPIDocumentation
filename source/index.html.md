@@ -4253,7 +4253,7 @@ An array of JSON that contains your tags information.
 
 ## POST media-create
 
-It creates a media (image) from a given image URL and adds it to your media library. The media can optionally be attached to a `supplier`, a `product`, a `package` or a `subdestination`: it is then always added in the last position of the object's media list.
+It creates a media (image) from a given image URL and adds it to your media library. The media can optionally be attached to a `supplier`, a `product`, a `package`, a `step` or a `subdestination`: it is then always added in the last position of the object's media list.
 
 ```shell
 curl --location 'https://api.ezus.app/media-create' \
@@ -4312,13 +4312,13 @@ axios.post(baseUrl + "/media-create", body, headers);
 
 ### Body Parameters (application/json)
 
-| Parameter        | Type   | Description                                                                                                                                                                                                                                   |
-| ---------------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| reference        | String | Unique identifier of the media, it must be less than 36 characters long and unique among your non-deleted media. If not provided, a reference is generated and returned in the response. This endpoint only works in creation mode.           |
-| media_name       | String | <span class="label label-red float-right">Required</span> The name of the media, limited to 300 characters.                                                                                                                                   |
-| path_full        | String | <span class="label label-red float-right">Required</span> The URL of the image to download, limited to 500 characters. Supported formats are `jpg`, `jpeg`, `png`, `gif` and `jfif`, with a maximum size of 20 MB.                            |
-| object_type      | String | The type of object to link the media to. It must be one of: `supplier`, `product`, `package`, `subdestination`. It is mandatory when `object_reference` is provided. If no object is provided, the media is only added to your media library. |
-| object_reference | String | The reference of the object to link the media to. It is mandatory when `object_type` is provided. The media is added in last position of the object's media.                                                                                  |
+| Parameter        | Type   | Description                                                                                                                                                                                                                                           |
+| ---------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| reference        | String | Unique identifier of the media, it must be less than 36 characters long and unique among your non-deleted media. If not provided, a reference is generated and returned in the response. This endpoint only works in creation mode.                   |
+| media_name       | String | <span class="label label-red float-right">Required</span> The name of the media, limited to 300 characters.                                                                                                                                           |
+| path_full        | String | <span class="label label-red float-right">Required</span> The URL of the image to download, limited to 500 characters. Supported formats are `jpg`, `jpeg`, `png`, `gif` and `jfif`, with a maximum size of 20 MB.                                    |
+| object_type      | String | The type of object to link the media to. It must be one of: `supplier`, `product`, `package`, `subdestination`, `step`. It is mandatory when `object_reference` is provided. If no object is provided, the media is only added to your media library. |
+| object_reference | String | The reference of the object to link the media to. It is mandatory when `object_type` is provided. The media is added in last position of the object's media.                                                                                          |
 
 ### Response
 
