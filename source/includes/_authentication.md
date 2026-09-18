@@ -52,7 +52,8 @@ axios.post(baseUrl + "/login", body, headers);
 {
   "error": "false",
   "message": "ok",
-  "token": "<YOUR_TOKEN>"
+  "token": "<YOUR_TOKEN>",
+  "authorization_code": "<YOUR_AUTHORIZATION_CODE>"
 }
 ```
 
@@ -77,4 +78,6 @@ axios.post(baseUrl + "/login", body, headers);
 
 ### Response
 
-A JSON object indicating whether an error occurred during the process, along with the associated message. If successful, it also returns a `token` that you must retain for future API requests.
+A JSON object indicating whether an error occurred during the process, along with the associated message. If successful, it also returns a `token` that you must retain for future API requests, as well as an `authorization_code`.
+
+The `authorization_code` is a single-use code valid for 5 minutes, intended for authorization flows that exchange it against a token. If you only use the bearer `token`, you can safely ignore this field.
