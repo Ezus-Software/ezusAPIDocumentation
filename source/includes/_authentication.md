@@ -80,4 +80,69 @@ axios.post(baseUrl + "/login", body, headers);
 
 A JSON object indicating whether an error occurred during the process, along with the associated message. If successful, it also returns a `token` that you must retain for future API requests, as well as an `authorization_code`.
 
-The `authorization_code` is a single-use code valid for 5 minutes, intended for authorization flows that exchange it against a token. If you only use the bearer `token`, you can safely ignore this field.
+The `authorization_code` is a single-use code valid for 5 minutes, intended to be exchanged on the `/token` endpoint. If you only use the bearer `token`, you can safely ignore this field.
+
+## POST token
+
+> To exchange your authorization code for tokens, make a request to the `/token` endpoint:
+
+```shell
+curl --location 'https://api.ezus.app/token' \
+--header 'x-api-key: <YOUR_API_KEY>' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "grant_type": "authorization_code",
+    "code": "<YOUR_AUTHORIZATION_CODE>"
+}'
+```
+
+```javascript
+const axios = require("axios");
+const baseUrl = "https://api.ezus.app";
+
+const body = {
+  grant_type: "authorization_code",
+  code: "<YOUR_AUTHORIZATION_CODE>",
+};
+const headers = { "x-api-key": "<YOUR_API_KEY>" };
+
+axios.post(baseUrl + "/token", body, headers);
+```
+
+> This request returns a structured JSON object:
+
+```json
+{
+  "error": "false",
+  "access_token": "<YOUR_ACCESS_TOKEN>",
+  "refresh_token": "<YOUR_REFRESH_TOKEN>",
+  "token_type": "Bearer",
+  "expires_in": 43200
+}
+```
+
+> Use the `access_token` as your Bearer token in the Authorization header of subsequent requests. When it expires, call `/token` again with `grant_type` set to `refresh_token` and your `refresh_token` to obtain new tokens.
+
+### HTTP Endpoint
+
+`POST https://api.ezus.app/token`
+
+### Header Parameters
+
+| Parameter | Type   | Description                                                                                                                            |
+| --------- | ------ | -------------------------------------------------------------------------------------------------------------------------------------- |
+| x-api-key | String | <span class="label label-red float-right">Required</span> Your Ezus API key. Must be the key the code or refresh token was issued for. |
+
+### Body Parameters (application/json)
+
+| Parameter     | Type   | Description                                                                                                                                   |
+| ------------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| grant_type    | String | <span class="label label-red float-right">Required</span> `authorization_code` or `refresh_token`                                             |
+| code          | String | <span class="label label-red float-right">Required if grant_type=authorization_code</span> The `authorization_code` returned by `/login`      |
+| refresh_token | String | <span class="label label-red float-right">Required if grant_type=refresh_token</span> The `refresh_token` returned by your last `/token` call |
+
+### Response
+
+A JSON object containing an `access_token` (same format and 12-hour lifetime as the `token` returned by `/login`), a new `refresh_token`, the `token_type` and the access token lifetime in seconds.
+
+Refresh tokens are single-use and valid for 90 days: every call to `/token` invalidates the code or refresh token you presented and returns a new `refresh_token` (you should store the one from the latest response). Presenting an already-used code or refresh token revokes all tokens issued from the same authorization flow, and you will need to authenticate again through `/login`.
