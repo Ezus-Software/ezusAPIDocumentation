@@ -13,7 +13,7 @@
             "exec": [
               "var jsonData = JSON.parse(responseBody);\r",
               "\r",
-              "pm.collectionVariables.set(\"<YOUR_TOKEN>\", jsonData.token);"
+              "pm.collectionVariables.set(\"<YOUR_TOKEN>\", jsonData.token);\r"
             ],
             "type": "text/javascript"
           }
@@ -45,6 +45,52 @@
           "host": ["{{baseUrl}}"],
           "path": ["login"]
         }
+      },
+      "response": []
+    },
+    {
+      "name": "token",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "var jsonData = JSON.parse(responseBody);\r",
+              "\r",
+              "pm.collectionVariables.set(\"<YOUR_TOKEN>\", jsonData.access_token);\r",
+              "pm.collectionVariables.set(\"<YOUR_REFRESH_TOKEN>\", jsonData.refresh_token);"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "X-API-KEY",
+            "value": "{{<YOUR_API_KEY>}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"grant_type\": \"refresh_token\",\n    \"refresh_token\": \"{{<YOUR_REFRESH_TOKEN>}}\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/token",
+          "host": ["{{baseUrl}}"],
+          "path": ["token"]
+        },
+        "description": "Rotates the refresh_token: the presented token is invalidated and a new access_token + refresh_token pair is returned."
       },
       "response": []
     },
@@ -1336,6 +1382,11 @@
     {
       "key": "<YOUR_TOKEN>",
       "value": "<YOUR_TOKEN>",
+      "type": "string"
+    },
+    {
+      "key": "<YOUR_REFRESH_TOKEN>",
+      "value": "<YOUR_REFRESH_TOKEN>",
       "type": "string"
     },
     {
