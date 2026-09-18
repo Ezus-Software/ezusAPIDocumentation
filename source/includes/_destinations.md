@@ -37,6 +37,12 @@ axios.get(baseUrl + "/destinations", headers);
           "reference": "subdestination_reference",
           "name": "Paris"
         }
+      ],
+      "langs": [
+        {
+          "lang": "french",
+          "name": "Un pays intéressant"
+        }
       ]
     }
   ]
@@ -59,7 +65,7 @@ axios.get(baseUrl + "/destinations", headers);
 A JSON object containing the destination information with properties like:
 
 | Property     | Type   | Description                                                                 |
-|--------------|--------|-----------------------------------------------------------------------------|
+| ------------ | ------ | --------------------------------------------------------------------------- |
 | size         | Number | The total number of destinations                                            |
 | destinations | Array  | Array of JSON destinations ([Destinations](#nested-resources-destinations)) |
 
@@ -74,7 +80,17 @@ curl --location 'https://api.ezus.app/destinations-upsert' \
 --header 'Authorization: Bearer <YOUR_TOKEN>'
 --data '{
     "reference": "destination_reference",
-    "name": "France"
+    "name": "France",
+    "langs": [
+    {
+      "lang": "french",
+      "name": "Ma destination"
+    },
+    {
+      "lang": "american",
+      "name": "My destination"
+    }
+  ]
 }'
 ```
 
@@ -85,6 +101,16 @@ const baseUrl = "https://api.ezus.app";
 const body = {
   reference: "destination_reference",
   name: "France",
+  langs: [
+    {
+      lang: "french",
+      name: "Ma destination",
+    },
+    {
+      lang: "american",
+      name: "My destination",
+    },
+  ],
 };
 const headers = {
   "x-api-key": "<YOUR_API_KEY>",
@@ -119,9 +145,10 @@ axios.post(baseUrl + "/destinations-upsert", body, headers);
 ### Body Parameters (application/json)
 
 | Parameter | Type   | Description                                                                                                                                                                                                                    |
-| --------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| --------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --- |
 | reference | String | If provided, the unique reference associated to the destination you want to update or create (in case the one you provided has never been used). If no reference is provided, a destination will be created with a random one. |
 | name      | String | This parameter is required. Name of the destination to create or update. If a destination already exists with this name, it will return an error.                                                                              |
+| langs     | Array  | Array of JSON langs representing the descriptions associated with this destination. The specified language must be enabled for the given account ([Langs](#langs)) - only name supported in this case.                         |     |
 
 ### Response
 
@@ -209,7 +236,7 @@ axios.get(
 A JSON object containing the sub-destination information with properties like:
 
 | Property              | Type   | Description                                                   |
-|-----------------------|--------|---------------------------------------------------------------|
+| --------------------- | ------ | ------------------------------------------------------------- |
 | reference             | String | The reference of the sub-destination                          |
 | name                  | String | Name of the sub-destination                                   |
 | destination_reference | String | The reference of the destination                              |
@@ -304,7 +331,7 @@ axios.post(baseUrl + "/subdestinations-upsert", body, headers);
 ### Body Parameters (application/json)
 
 | Parameter             | Type   | Description                                                                                                                                                                                                                            |
-|-----------------------|--------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| --------------------- | ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | reference             | String | If provided, the unique reference associated to the sub-destination you want to update or create (in case the one you provided has never been used). If no reference is provided, a sub-destination will be created with a random one. |
 | destination_reference | String | This parameter is required and must match an existing destination.                                                                                                                                                                     |
 | name                  | String | This parameter is required. Name of the sub-destination to create or update. If a sub-destination already exists with this name, it will return an error.                                                                              |
