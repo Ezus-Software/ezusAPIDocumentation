@@ -148,7 +148,7 @@ axios.post(baseUrl + "/destinations-upsert", body, headers);
 | --------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --- |
 | reference | String | If provided, the unique reference associated to the destination you want to update or create (in case the one you provided has never been used). If no reference is provided, a destination will be created with a random one. |
 | name      | String | This parameter is required. Name of the destination to create or update. If a destination already exists with this name, it will return an error.                                                                              |
-| langs     | Array  | Array of JSON langs representing the descriptions associated with this destination. The specified language must be enabled for the given account ([Langs](#langs)) - only name supported in this case.                         |     |
+| langs     | Array  | Array of JSON langs representing the descriptions associated with this destination. The specified language must be enabled for the given account ([Langs](#nested-resources-langs)) - only name supported in this case.                         |     |
 
 ### Response
 
