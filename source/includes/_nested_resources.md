@@ -1,5 +1,37 @@
 # Nested Resources
 
+## Account
+
+```json
+"account": {
+  "name": "E-Corp Travels",
+  "currency": "EUR"
+}
+```
+
+| Property | Type   | Description                     |
+| -------- | ------ | ------------------------------- |
+| name     | String | Company name of the account     |
+| currency | String | Default currency of the account |
+
+## Authenticated User
+
+```json
+"user": {
+  "email": "tommy@e-corp.com",
+  "first_name": "Tommy",
+  "last_name": "Atkins",
+  "role": "admin"
+}
+```
+
+| Property   | Type   | Description                                                                                                      |
+| ---------- | ------ | ---------------------------------------------------------------------------------------------------------------- |
+| email      | String | Email of the user                                                                                                |
+| first_name | String | First name of the user                                                                                           |
+| last_name  | String | Last name of the user                                                                                            |
+| role       | String | Role of the user. Ezus ships with `super_admin`, `admin`, `user` and `collaborator`; a role your account created itself keeps its own name |
+
 ## Address
 
 ```json
@@ -371,7 +403,7 @@ Each object represents a destination with its associated sub-destinations
 | reference       | String | The reference of the destination                                                                |
 | name            | String | Name of the destination                                                                         |
 | subdestinations | Array  | An array of JSON objects, each representing a sub-destination along with its name and reference |
-| langs           | Array  | Array of JSON langs ([Langs](#langs)) - only name supported in this case                        |
+| langs           | Array  | Array of JSON langs ([Langs](#nested-resources-langs)) - only name supported in this case                        |
 
 ## Invoices Amounts
 
@@ -538,6 +570,57 @@ Only the last 10 products are returned in this object.
 | --------- | ------ | ---------------------------- |
 | reference | String | The reference of the product |
 | title     | String | The title of the product     |
+
+## Quota
+
+```json
+"quota": {
+  "period": "DAY",
+  "limit": 10000,
+  "used": 2317,
+  "remaining": 7683,
+  "burst_limit": 100,
+  "resets_at": "2026-09-20T00:00:00Z"
+}
+```
+
+| Property    | Type   | Description                                                          |
+| ----------- | ------ | -------------------------------------------------------------------- |
+| period      | String | Rate limit period. Possible values: `DAY`, `WEEK`, `MONTH`           |
+| limit       | Number | Calls allowed over the period ([Rate Limits](#rate-limits))          |
+| used        | Number | Calls already made over the current period                           |
+| remaining   | Number | Calls still available over the current period                        |
+| burst_limit | Number | Calls allowed per second ([Rate Limits](#rate-limits))               |
+| resets_at   | String | End of the current period, UTC                                       |
+
+<aside class="notice">
+These figures lag a few minutes behind your real usage, are cached for one minute, and
+`quota` is `null` when they cannot be read. Use them to monitor your integration, not to
+decide whether a given call will go through.
+</aside>
+
+## Scopes
+
+One entry per permission of the role of the user, keyed by the permission name, so the keys depend on that role. Each value is a three-digit code, one digit per action, in the order read, edit, delete.
+
+```json
+"scopes": {
+  "projects": "333",
+  "clients": "310",
+  "invoices_finalize": "000"
+}
+```
+
+| Digit | Access                                               |
+| ----- | ---------------------------------------------------- |
+| `0`   | None                                                 |
+| `1`   | Records the user owns                                |
+| `2`   | Records the user owns, plus the ones nobody owns     |
+| `3`   | Full                                                 |
+
+`"clients": "310"` reads as: sees every client, edits only their own, deletes none. A permission that is simply on or off, such as `invoices_finalize`, is `333` or `000`.
+
+A call outside the scopes of the user returns what that user may see, which can be an empty list, not an error.
 
 ## Steps
 
@@ -824,6 +907,20 @@ Only the last 10 suppliers are returned in this object.
 | limit_end      | String  | Indicates the end point of a tariff rule either the end date of a seasonal tariff or the upper bound of a level for a custom tariff. When set to Infinity, it designates the final level of a flat-rate or open-ended tariff. |
 | is_yearly      | Boolean | Indicates if the seasonal tariff recurs every year . This field is only applicable when `type` is `season`, For `default` or `custom` tariffs, this field is always `false`.                                                  | Is it recurring from one year to the next? |
 | children       | Array   | Children are sub-tariffs contained by this tariff. They may be seasonal tariff or default tariff when they are flat rate tariff.                                                                                              |
+
+## Token
+
+```json
+"token": {
+  "issued_at": "2026-09-19T10:00:00Z",
+  "expires_at": "2026-09-19T22:00:00Z"
+}
+```
+
+| Property   | Type   | Description                     |
+| ---------- | ------ | ------------------------------- |
+| issued_at  | String | When the token was issued, UTC  |
+| expires_at | String | When the token expires, UTC     |
 
 ## User
 

@@ -146,3 +146,83 @@ axios.post(baseUrl + "/token", body, headers);
 A JSON object containing an `access_token` (same format and 12-hour lifetime as the `token` returned by `/login`), a new `refresh_token`, the `token_type` and the access token lifetime in seconds.
 
 Refresh tokens are single-use and valid for 90 days: every call to `/token` invalidates the code or refresh token you presented and returns a new `refresh_token` (you should store the one from the latest response). Presenting an already-used code or refresh token revokes all tokens issued from the same authorization flow, and you will need to authenticate again through `/login`.
+
+## GET me
+
+Returns the authentication context of your call: the user your bearer token belongs to, its account, the lifetime of the token, and what the role of that user grants. Add the `include=quota` query parameter to also get the consumption of your API key over the current rate limit period.
+
+```shell
+curl --location 'https://api.ezus.app/me' \
+--header 'x-api-key: <YOUR_API_KEY>' \
+--header 'Authorization: Bearer <YOUR_TOKEN>'
+```
+
+```javascript
+const axios = require("axios");
+const baseUrl = "https://api.ezus.app";
+
+const headers = {
+  "x-api-key": "<YOUR_API_KEY>",
+  Authorization: "Bearer <YOUR_TOKEN>",
+};
+
+axios.get(baseUrl + "/me", headers);
+```
+
+> This request returns a structured JSON object:
+
+```json
+{
+  "error": "false",
+  "user": {
+    "email": "tommy@e-corp.com",
+    "first_name": "Tommy",
+    "last_name": "Atkins",
+    "role": "admin"
+  },
+  "account": {
+    "name": "E-Corp Travels",
+    "currency": "EUR"
+  },
+  "token": {
+    "issued_at": "2026-09-19T10:00:00Z",
+    "expires_at": "2026-09-19T22:00:00Z"
+  },
+  "scopes": {
+    "projects": "333",
+    "clients": "310",
+    "invoices_finalize": "000"
+  },
+  "server_time": "2026-09-19T10:12:03Z"
+}
+```
+
+### HTTP Endpoint
+
+`GET https://api.ezus.app/me`
+
+### Header Parameters
+
+| Parameter     | Type   | Description                                                                 |
+| ------------- | ------ | --------------------------------------------------------------------------- |
+| x-api-key     | String | <span class="label label-red float-right">Required</span> Your Ezus API key |
+| Authorization | String | <span class="label label-red float-right">Required</span> Your Bearer token |
+
+### Query Parameters
+
+| Parameter | Type   | Description                                                                                                         |
+| --------- | ------ | --------------------------------------------------------------------------------------------------------------------- |
+| include   | String | Set to `quota` to add the `quota` object to the response. Case and spacing are ignored, any other value is rejected |
+
+### Response
+
+A JSON object that contains your authentication context.
+
+| Property    | Type   | Description                                                                                             |
+| ----------- | ------ | --------------------------------------------------------------------------------------------------------- |
+| user        | JSON   | The user your token was issued for ([Authenticated User](#nested-resources-authenticated-user))         |
+| account     | JSON   | The account this user works for ([Account](#nested-resources-account))                                  |
+| token       | JSON   | Lifetime of your bearer token ([Token](#nested-resources-token))                                        |
+| scopes      | JSON   | What the role of this user grants ([Scopes](#nested-resources-scopes))                                  |
+| quota       | JSON   | Consumption of your API key ([Quota](#nested-resources-quota)). Returned only with `include=quota`      |
+| server_time | String | Current server time, UTC                                                                                |

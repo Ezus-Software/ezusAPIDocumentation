@@ -95,6 +95,33 @@
       "response": []
     },
     {
+      "name": "me",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "X-API-KEY",
+            "value": "{{<YOUR_API_KEY>}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/me",
+          "host": ["{{baseUrl}}"],
+          "path": ["me"],
+          "query": [
+            {
+              "key": "include",
+              "value": "quota",
+              "disabled": true
+            }
+          ]
+        },
+        "description": "Describes the authentication context of the call. Enable include=quota to also receive the consumption of the API key over the current rate limit period."
+      },
+      "response": []
+    },
+    {
       "name": "projects",
       "request": {
         "method": "GET",
