@@ -149,7 +149,7 @@ Refresh tokens are single-use and valid for 90 days: every call to `/token` inva
 
 ## GET me
 
-Returns the authentication context of your call: the user your bearer token belongs to, its account, the lifetime of the token, and what the role of that user grants. Add the `include=quota` query parameter to also get the consumption of your API key over the current rate limit period.
+Returns the authentication context of your call: the user your bearer token belongs to, its account, the lifetime of the token, and what the role of that user grants.
 
 ```shell
 curl --location 'https://api.ezus.app/me' \
@@ -226,12 +226,6 @@ axios.get(baseUrl + "/me", headers);
 | x-api-key     | String | <span class="label label-red float-right">Required</span> Your Ezus API key |
 | Authorization | String | <span class="label label-red float-right">Required</span> Your Bearer token |
 
-### Query Parameters
-
-| Parameter | Type   | Description                                                                                                         |
-| --------- | ------ | --------------------------------------------------------------------------------------------------------------------- |
-| include   | String | Set to `quota` to add the `quota` object to the response. Case and spacing are ignored, any other value is rejected |
-
 ### Response
 
 A JSON object that contains your authentication context.
@@ -242,5 +236,4 @@ A JSON object that contains your authentication context.
 | account     | JSON   | The account this user works for ([Account](#nested-resources-account))                                  |
 | token       | JSON   | Lifetime of your bearer token ([Token](#nested-resources-token))                                        |
 | scopes      | JSON   | What the role of this user grants ([Scopes](#nested-resources-scopes))                                  |
-| quota       | JSON   | Consumption of your API key ([Quota](#nested-resources-quota)). Returned only with `include=quota`      |
 | server_time | String | Current server time, UTC                                                                                |

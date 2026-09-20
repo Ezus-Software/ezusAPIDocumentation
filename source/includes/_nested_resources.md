@@ -571,34 +571,6 @@ Only the last 10 products are returned in this object.
 | reference | String | The reference of the product |
 | title     | String | The title of the product     |
 
-## Quota
-
-```json
-"quota": {
-  "period": "DAY",
-  "limit": 10000,
-  "used": 2317,
-  "remaining": 7683,
-  "burst_limit": 100,
-  "resets_at": "2026-09-20T00:00:00Z"
-}
-```
-
-| Property    | Type   | Description                                                          |
-| ----------- | ------ | -------------------------------------------------------------------- |
-| period      | String | Rate limit period. Always `DAY`                                      |
-| limit       | Number | Calls allowed over the period ([Rate Limits](#rate-limits))          |
-| used        | Number | Calls already made over the current period                           |
-| remaining   | Number | Calls still available over the current period                        |
-| burst_limit | Number | Calls allowed per second ([Rate Limits](#rate-limits))               |
-| resets_at   | String | End of the current period, UTC                                       |
-
-<aside class="notice">
-These figures lag a few minutes behind your real usage, are cached for one minute, and
-`quota` is `null` when they cannot be read. Use them to monitor your integration, not to
-decide whether a given call will go through.
-</aside>
-
 ## Scopes
 
 One entry per permission of the role of the user, keyed by the permission name, so the keys depend on that role. Each value is a three-digit code, one digit per action, in the order read, edit, delete.
