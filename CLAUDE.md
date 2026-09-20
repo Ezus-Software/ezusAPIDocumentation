@@ -21,9 +21,7 @@ then write the table from it.
 | `source/ezus_api_postman.json`  | The Postman collection shipped with the doc                      |
 
 A new topic needs its file **and** its name added to `includes:` in `index.html.md`.
-A route that belongs to an existing topic goes in that file, never in one of its own:
-`GET /me` describes the authentication context, so it lives in `_authentication.md` under
-`POST token`.
+A route that belongs to an existing topic goes in that file, never in one of its own.
 
 ## The shape of a route section
 
@@ -72,11 +70,23 @@ they stop being read otherwise.
 
 ## Postman
 
-Every documented route has an entry in `source/ezus_api_postman.json`, in the same order
-as the doc. Optional query parameters are present and `"disabled": true`. Only `source/`
-is edited; `build/` is generated and gitignored.
+Every documented route has an entry in `source/ezus_api_postman.json`, with the same
+method and URL. Optional query parameters are present and `"disabled": true`. Only
+`source/` is edited; `build/` is generated and gitignored.
 
 ## Language and line endings
 
-Everything is written in English. Files are CRLF, like their neighbours — never convert an
-existing file.
+Everything is written in English.
+
+Markdown is platform agnostic: nothing here depends on the line endings of a file, and
+Middleman renders CRLF and LF the same way. Keep whatever a file already has — never
+convert one wholesale, it turns a one-line change into a diff nobody can review.
+
+## Stay inside what was asked
+
+Change the files the task names, and nothing else. The toolchain — `Gemfile`,
+`Gemfile.lock`, `config.rb`, the build command, the CI workflow — is not yours to
+rework on the way to a documentation change unless the task asks for it. Nor is
+reordering a file, renaming a section or reformatting a table the task did not
+mention. A diff that carries more than the ask costs the reviewer more than it
+saves you: if something next door looks wrong, say so and leave it.

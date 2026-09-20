@@ -586,7 +586,7 @@ Only the last 10 products are returned in this object.
 
 | Property    | Type   | Description                                                          |
 | ----------- | ------ | -------------------------------------------------------------------- |
-| period      | String | Rate limit period. Possible values: `DAY`, `WEEK`, `MONTH`           |
+| period      | String | Rate limit period. Always `DAY`                                      |
 | limit       | Number | Calls allowed over the period ([Rate Limits](#rate-limits))          |
 | used        | Number | Calls already made over the current period                           |
 | remaining   | Number | Calls still available over the current period                        |
@@ -607,7 +607,25 @@ One entry per permission of the role of the user, keyed by the permission name, 
 "scopes": {
   "projects": "333",
   "clients": "310",
-  "invoices_finalize": "000"
+  "travellers": "333",
+  "suppliers": "333",
+  "invoices": "300",
+  "tasks": "333",
+  "catalog": "333",
+  "models": "300",
+  "library": "333",
+  "invoices_suppliers": "300",
+  "territories": "333",
+  "categories": "333",
+  "invoices_finalize": "000",
+  "invoices_stats": "000",
+  "stripe_payments": "000",
+  "projects_close": "333",
+  "steps_catalog": "333",
+  "settings": "000",
+  "billing_team": "000",
+  "export": "333",
+  "client_space": "333"
 }
 ```
 
@@ -619,6 +637,32 @@ One entry per permission of the role of the user, keyed by the permission name, 
 | `3`   | Full                                                 |
 
 `"clients": "310"` reads as: sees every client, edits only their own, deletes none. A permission that is simply on or off, such as `invoices_finalize`, is `333` or `000`.
+
+The permissions the API serves:
+
+| Permission           | Covers                                                             |
+| -------------------- | -------------------------------------------------------------------- |
+| projects             | Projects                                                           |
+| clients              | Clients                                                            |
+| travellers           | Travellers                                                         |
+| suppliers            | Suppliers                                                          |
+| invoices             | Client invoices and deposits                                       |
+| tasks                | Tasks                                                              |
+| catalog              | Catalog: products and packages                                     |
+| models               | Document and email models                                          |
+| library              | Media library                                                      |
+| invoices_suppliers   | Supplier invoices and their payments                               |
+| territories          | Destinations and subdestinations                                   |
+| categories           | Categories                                                         |
+| invoices_finalize    | Finalizing a client invoice                                        |
+| invoices_stats       | Invoicing statistics                                               |
+| stripe_payments      | Stripe payments                                                    |
+| projects_close       | Closing a project                                                  |
+| steps_catalog        | The catalog of steps of a project                                  |
+| settings             | Account settings                                                   |
+| billing_team         | Subscription, billing and team management                          |
+| export               | Exports                                                            |
+| client_space         | The client space                                                   |
 
 A call outside the scopes of the user returns what that user may see, which can be an empty list, not an error.
 

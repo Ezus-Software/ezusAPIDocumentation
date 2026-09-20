@@ -19,35 +19,33 @@ bundle exec middleman build
 
 `build/` is generated and gitignored. Never commit it, and never edit it — only `source/`.
 
-## 2. Check every in-page link
+## 2. Run the documentation checks
 
-Anchors are generated from the headings at build time, so only the built page can tell you
-a link is dead. Run this after the build; it must print `none`:
-
-```bash
-python -c "
-import re
-html = open('build/index.html', encoding='utf-8').read()
-ids = set(re.findall(r\"<h\d id='([^']*)'\", html))
-broken = sorted(l for l in set(re.findall(r'href=\"#([^\"]+)\"', html)) if l not in ids)
-print('broken in-page links:', broken or 'none')
-"
-```
-
-An anchor is the heading, lowercased, spaces hyphenated, prefixed by the `# Title` of its
-file: `## Langs` under `# Nested Resources` is `#nested-resources-langs`.
-
-## 3. Check the Postman export
-
-It must stay valid JSON, and carry every route you documented:
+The checks that can be read off the files are tests, in `test/`. The `Build` workflow runs
+them on every pull request, so a broken link or a missing Postman entry turns the pull
+request red instead of waiting for a reviewer.
 
 ```bash
-python -c "
-import json
-d = json.load(open('source/ezus_api_postman.json', encoding='utf-8'))
-print([i['name'] for i in d['item']])
-"
+bundle exec ruby test/all.rb
 ```
+
+| Test                          | What it asserts                                                                      |
+| ----------------------------- | -------------------------------------------------------------------------------------- |
+| `test/in_page_links_test.rb`  | Every `href="#..."` of the built page resolves to a heading, and no two headings share an anchor |
+| `test/postman_export_test.rb` | The export is valid JSON and carries exactly the documented routes, with matching methods and URLs |
+| `test/includes_test.rb`       | Every topic listed under `includes:` has a file, and every topic file is listed       |
+
+The link test reads `build/index.html`, so run step 1 first: anchors are generated from the
+headings at build time. An anchor is the heading, lowercased, spaces hyphenated, prefixed
+by the `# Title` of its file — `## Langs` under `# Nested Resources` is
+`#nested-resources-langs`.
+
+A red test names what it tripped on. Fix the documentation, not the assertion.
+
+## 3. What the tests cannot check
+
+The rest of `CLAUDE.md` — wording, where a route lives, whether a sentence says anything —
+is read by a human. Step 4 and step 5 are that reading.
 
 ## 4. Compare the page with a real call
 

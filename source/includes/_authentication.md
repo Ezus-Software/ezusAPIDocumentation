@@ -191,7 +191,25 @@ axios.get(baseUrl + "/me", headers);
   "scopes": {
     "projects": "333",
     "clients": "310",
-    "invoices_finalize": "000"
+    "travellers": "333",
+    "suppliers": "333",
+    "invoices": "300",
+    "tasks": "333",
+    "catalog": "333",
+    "models": "300",
+    "library": "333",
+    "invoices_suppliers": "300",
+    "territories": "333",
+    "categories": "333",
+    "invoices_finalize": "000",
+    "invoices_stats": "000",
+    "stripe_payments": "000",
+    "projects_close": "333",
+    "steps_catalog": "333",
+    "settings": "000",
+    "billing_team": "000",
+    "export": "333",
+    "client_space": "333"
   },
   "server_time": "2026-09-19T10:12:03Z"
 }
