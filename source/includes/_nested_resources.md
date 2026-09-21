@@ -107,7 +107,7 @@
 ```
 
 | Property                      | Type    | Description                                                                                                                                                                                                |
-|-------------------------------|---------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ----------------------------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | reference                     | String  | Unique reference of this alternative: (distinct from the root project `reference` at the top level of the GET `project` response).                                                                         |
 | alternative_title             | String  | Title of the alternative                                                                                                                                                                                   |
 | lang                          | String  | Alternative locale code (e.g. fr-FR, en-GB)                                                                                                                                                                |
@@ -158,7 +158,7 @@ If no brand is associated with an alternative, the default values are taken from
 ```
 
 | Property       | Type   | Description                                                                              |
-|----------------|--------|------------------------------------------------------------------------------------------|
+| -------------- | ------ | ---------------------------------------------------------------------------------------- |
 | title          | String | Title of the brand                                                                       |
 | company_name   | String | Name of the brand company                                                                |
 | address        | JSON   | JSON object representing the address ([Address](#nested-resources-address)) of the brand |
@@ -353,8 +353,14 @@ Each object represents a category with its associated sub-categories
         "reference": "subdestination_reference",
         "name": "Paris"
       }
+    ],
+    "langs": [
+      {
+        "lang": "french",
+        "name": "Un pays intéressant"
+      }
     ]
-  },
+  }
 ]
 ```
 
@@ -365,6 +371,7 @@ Each object represents a destination with its associated sub-destinations
 | reference       | String | The reference of the destination                                                                |
 | name            | String | Name of the destination                                                                         |
 | subdestinations | Array  | An array of JSON objects, each representing a sub-destination along with its name and reference |
+| langs           | Array  | Array of JSON langs ([Langs](#langs)) - only name supported in this case                        |
 
 ## Invoices Amounts
 
@@ -588,7 +595,7 @@ The steps are sorted by their creation date, with the most recently created appe
 ```
 
 | Property      | Type   | Description                                                                                                                                                                                    |
-|---------------|--------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ------------- | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | reference     | String | The reference of the activity                                                                                                                                                                  |
 | type          | String | Type of the step `activity` `accommodation` `transport` or `extra`                                                                                                                             |
 | name          | String | Name of the step                                                                                                                                                                               |
