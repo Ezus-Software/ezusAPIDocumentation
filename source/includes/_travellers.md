@@ -33,7 +33,7 @@ axios.get(baseUrl + "/travellers", headers);
   "page": 1,
   "travellers": [
     {
-      "esus_reference": "<TRAVELLER_REFERENCE>",
+      "reference": "<TRAVELLER_REFERENCE>",
       "created_at": "2026-08-24 01:23:45",
       "updated_at": "2026-08-24 12:34:56",
       "first_name": "John",
@@ -65,19 +65,18 @@ axios.get(baseUrl + "/travellers", headers);
 
 ### Query Parameters
 
-| Parameter             | Type    | Description                                                                                                                                                                                        |
-| --------------------- | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| next_token            | String  | Specify this parameter if you want to retrieve the following elements of a given list query                                                                                                        |
+| Parameter  | Type   | Description                                                                                 |
+| ---------- | ------ | ------------------------------------------------------------------------------------------- |
+| next_token | String | Specify this parameter if you want to retrieve the following elements of a given list query |
 
 ### Response
 
 A JSON object containing the project information with properties like:
 
 | Property   | Type   | Description                                                                                                                  |
-|------------|--------|------------------------------------------------------------------------------------------------------------------------------|
+| ---------- | ------ | ---------------------------------------------------------------------------------------------------------------------------- |
 | next_token | String | A token will be returned if all travellers have not been returned. Use it in another call to access the following travellers |
 | size       | Number | The total number of travellers available with these filters                                                                  |
 | data_size  | Number | Number of travellers returned on the current page                                                                            |
 | page       | Number | The page number                                                                                                              |
-| travellers | Array  | An array of JSON objects, each representing a traveller.                                                                     | 
-
+| travellers | Array  | An array of JSON objects, each representing a traveller.                                                                     |
