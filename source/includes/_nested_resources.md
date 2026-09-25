@@ -403,7 +403,7 @@ Each object represents a destination with its associated sub-destinations
 | reference       | String | The reference of the destination                                                                |
 | name            | String | Name of the destination                                                                         |
 | subdestinations | Array  | An array of JSON objects, each representing a sub-destination along with its name and reference |
-| langs           | Array  | Array of JSON langs ([Langs](#nested-resources-langs)) - only name supported in this case                        |
+| langs           | Array  | Array of JSON langs ([Langs](#nested-resources-langs)) - only name supported in this case       |
 
 ## Invoices Amounts
 
