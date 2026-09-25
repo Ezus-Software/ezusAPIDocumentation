@@ -74,9 +74,20 @@ axios.get(baseUrl + "/products", headers);
 
 ### Query Parameters
 
-| Parameter  | Type   | Description                                                                                  |
-| ---------- | ------ | -------------------------------------------------------------------------------------------- |
-| next_token | String | Specify this parameter if you want to retrieve the following elements of a given list query. |
+| Parameter             | Type                                                                                                    | Description                                                                                  |
+| --------------------- | ------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| next_token            | String                                                                                                  | Specify this parameter if you want to retrieve the following elements of a given list query. |
+| reference             | [Dynamic filter](#filtering-dynamic-filters)                                                            | Filter on the product's `reference`.                                                         |
+| title                 | [Dynamic filter](#filtering-dynamic-filters)                                                            | Filter on the product's `title`.                                                             |
+| info_number           | [Dynamic filter](#filtering-dynamic-filters)                                                            | Filter on the product's `info_number`.                                                       |
+| supplier_reference    | [Linked-record filter](#filtering-linked-record-filters) + [Dynamic filter](#filtering-dynamic-filters) | Filter on the linked supplier's `reference`.                                                 |
+| supplier_company_name | [Linked-record filter](#filtering-linked-record-filters) + [Dynamic filter](#filtering-dynamic-filters) | Filter on the linked supplier's `company_name`.                                              |
+| destination_name      | [Dynamic filter](#filtering-dynamic-filters)                                                            | Filter on the product's `destination.name`.                                                  |
+| subdestination_name   | [Dynamic filter](#filtering-dynamic-filters)                                                            | Filter on the product's `destination.subdestination_name`.                                   |
+| created_at            | [Dynamic date filter](#filtering-dynamic-date-filters)                                                  | Filter on the product creation date.                                                         |
+| updated_at            | [Dynamic date filter](#filtering-dynamic-date-filters)                                                  | Filter on the product last update date.                                                      |
+
+All filters are cumulative (`AND`): a product must match every supplied filter to be returned.
 
 ### Response
 
