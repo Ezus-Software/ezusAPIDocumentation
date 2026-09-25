@@ -588,6 +588,41 @@
               "key": "next_token",
               "value": "",
               "disabled": true
+            },
+            {
+              "key": "reference",
+              "value": "supplier_reference",
+              "disabled": true
+            },
+            {
+              "key": "company_name_starts",
+              "value": "The best",
+              "disabled": true
+            },
+            {
+              "key": "info_number",
+              "value": "202306001-SU",
+              "disabled": true
+            },
+            {
+              "key": "destination_name",
+              "value": "France",
+              "disabled": true
+            },
+            {
+              "key": "subdestination_name_like",
+              "value": "Paris",
+              "disabled": true
+            },
+            {
+              "key": "created_at_gte",
+              "value": "2026-01-01",
+              "disabled": true
+            },
+            {
+              "key": "updated_at_lte",
+              "value": "2026-01-31",
+              "disabled": true
             }
           ]
         }

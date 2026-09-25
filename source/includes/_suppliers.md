@@ -80,9 +80,18 @@ axios.get(baseUrl + "/suppliers", headers);
 
 ### Query Parameters
 
-| Parameter  | Type   | Description                                                                                  |
-| ---------- | ------ | -------------------------------------------------------------------------------------------- |
-| next_token | String | Specify this parameter if you want to retrieve the following elements of a given list query. |
+| Parameter           | Type                                                   | Description                                                                                  |
+| ------------------- | ------------------------------------------------------ | -------------------------------------------------------------------------------------------- |
+| next_token          | String                                                 | Specify this parameter if you want to retrieve the following elements of a given list query. |
+| reference           | [Dynamic filter](#filtering-dynamic-filters)           | Filter on the supplier's `reference`.                                                        |
+| company_name        | [Dynamic filter](#filtering-dynamic-filters)           | Filter on the supplier's `company_name`.                                                     |
+| info_number         | [Dynamic filter](#filtering-dynamic-filters)           | Filter on the supplier's `info_number`.                                                      |
+| destination_name    | [Dynamic filter](#filtering-dynamic-filters)           | Filter on the supplier's `destination.name`.                                                 |
+| subdestination_name | [Dynamic filter](#filtering-dynamic-filters)           | Filter on the supplier's `destination.subdestination_name`.                                  |
+| created_at          | [Dynamic date filter](#filtering-dynamic-date-filters) | Filter on the supplier creation date.                                                        |
+| updated_at          | [Dynamic date filter](#filtering-dynamic-date-filters) | Filter on the supplier last update date.                                                     |
+
+All filters are cumulative (`AND`): a supplier must match every supplied filter to be returned.
 
 ### Response
 
