@@ -95,6 +95,26 @@
       "response": []
     },
     {
+      "name": "me",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "X-API-KEY",
+            "value": "{{<YOUR_API_KEY>}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/me",
+          "host": ["{{baseUrl}}"],
+          "path": ["me"]
+        },
+        "description": "Describes the authentication context of the call: the user the bearer token belongs to, its account, the lifetime of the token and what the role of that user grants."
+      },
+      "response": []
+    },
+    {
       "name": "projects",
       "request": {
         "method": "GET",

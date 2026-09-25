@@ -1,5 +1,37 @@
 # Nested Resources
 
+## Account
+
+```json
+"account": {
+  "name": "E-Corp Travels",
+  "currency": "EUR"
+}
+```
+
+| Property | Type   | Description                     |
+| -------- | ------ | ------------------------------- |
+| name     | String | Company name of the account     |
+| currency | String | Default currency of the account |
+
+## Authenticated User
+
+```json
+"user": {
+  "email": "tommy@e-corp.com",
+  "first_name": "Tommy",
+  "last_name": "Atkins",
+  "role": "admin"
+}
+```
+
+| Property   | Type   | Description                                                                                                      |
+| ---------- | ------ | ---------------------------------------------------------------------------------------------------------------- |
+| email      | String | Email of the user                                                                                                |
+| first_name | String | First name of the user                                                                                           |
+| last_name  | String | Last name of the user                                                                                            |
+| role       | String | Role of the user. Ezus ships with `super_admin`, `admin`, `user` and `collaborator`; a role your account created itself keeps its own name |
+
 ## Address
 
 ```json
@@ -539,6 +571,73 @@ Only the last 10 products are returned in this object.
 | reference | String | The reference of the product |
 | title     | String | The title of the product     |
 
+## Scopes
+
+One entry per permission of the role of the user, keyed by the permission name, so the keys depend on that role. Each value is a three-digit code, one digit per action, in the order read, edit, delete.
+
+```json
+"scopes": {
+  "projects": "333",
+  "clients": "310",
+  "travellers": "333",
+  "suppliers": "333",
+  "invoices": "300",
+  "tasks": "333",
+  "catalog": "333",
+  "models": "300",
+  "library": "333",
+  "invoices_suppliers": "300",
+  "territories": "333",
+  "categories": "333",
+  "invoices_finalize": "000",
+  "invoices_stats": "000",
+  "stripe_payments": "000",
+  "projects_close": "333",
+  "steps_catalog": "333",
+  "settings": "000",
+  "billing_team": "000",
+  "export": "333",
+  "client_space": "333"
+}
+```
+
+| Digit | Access                                               |
+| ----- | ---------------------------------------------------- |
+| `0`   | None                                                 |
+| `1`   | Records the user owns                                |
+| `2`   | Records the user owns, plus the ones nobody owns     |
+| `3`   | Full                                                 |
+
+`"clients": "310"` reads as: sees every client, edits only their own, deletes none. A permission that is simply on or off, such as `invoices_finalize`, is `333` or `000`.
+
+The permissions the API serves:
+
+| Permission           | Covers                                                             |
+| -------------------- | -------------------------------------------------------------------- |
+| projects             | Projects                                                           |
+| clients              | Clients                                                            |
+| travellers           | Travellers                                                         |
+| suppliers            | Suppliers                                                          |
+| invoices             | Client invoices and deposits                                       |
+| tasks                | Tasks                                                              |
+| catalog              | Catalog: products and packages                                     |
+| models               | Document and email models                                          |
+| library              | Media library                                                      |
+| invoices_suppliers   | Supplier invoices and their payments                               |
+| territories          | Destinations and subdestinations                                   |
+| categories           | Categories                                                         |
+| invoices_finalize    | Finalizing a client invoice                                        |
+| invoices_stats       | Invoicing statistics                                               |
+| stripe_payments      | Stripe payments                                                    |
+| projects_close       | Closing a project                                                  |
+| steps_catalog        | The catalog of steps of a project                                  |
+| settings             | Account settings                                                   |
+| billing_team         | Subscription, billing and team management                          |
+| export               | Exports                                                            |
+| client_space         | The client space                                                   |
+
+A call outside the scopes of the user returns what that user may see, which can be an empty list, not an error.
+
 ## Steps
 
 The steps are sorted by their creation date, with the most recently created appearing first.
@@ -824,6 +923,20 @@ Only the last 10 suppliers are returned in this object.
 | limit_end      | String  | Indicates the end point of a tariff rule either the end date of a seasonal tariff or the upper bound of a level for a custom tariff. When set to Infinity, it designates the final level of a flat-rate or open-ended tariff. |
 | is_yearly      | Boolean | Indicates if the seasonal tariff recurs every year . This field is only applicable when `type` is `season`, For `default` or `custom` tariffs, this field is always `false`.                                                  | Is it recurring from one year to the next? |
 | children       | Array   | Children are sub-tariffs contained by this tariff. They may be seasonal tariff or default tariff when they are flat rate tariff.                                                                                              |
+
+## Token
+
+```json
+"token": {
+  "issued_at": "2026-09-19T10:00:00Z",
+  "expires_at": "2026-09-19T22:00:00Z"
+}
+```
+
+| Property   | Type   | Description                     |
+| ---------- | ------ | ------------------------------- |
+| issued_at  | String | When the token was issued, UTC  |
+| expires_at | String | When the token expires, UTC     |
 
 ## User
 

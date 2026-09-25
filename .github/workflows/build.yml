@@ -19,3 +19,6 @@ jobs:
 
       - name: Middleman build
         run: bundle exec middleman build
+
+      - name: Documentation checks
+        run: bundle exec ruby test/all.rb
