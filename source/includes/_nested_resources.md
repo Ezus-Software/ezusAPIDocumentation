@@ -211,7 +211,7 @@ The users of the account, in the order they were created. A deactivated user is 
 | email      | String  | Email of the user                                                                                            |
 | role       | String  | Role of the user, as `role` in [Authenticated User](#nested-resources-authenticated-user)                    |
 | is_active  | Boolean | Whether the user is active, `false` once deactivated                                                        |
-| is_technical_user | Boolean | Whether the user is a technical user, not counted among the users of the account                            |
+| is_technical_user | Boolean | Whether the user is a technical user, not counted among the users of the account: flagged as such, or with an Ezus address (`@ezus.io`) |
 
 ## Authenticated User
 
