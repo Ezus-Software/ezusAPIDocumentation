@@ -639,6 +639,12 @@ The configuration of the account, returned by `GET /me?include=config`.
       }
     ]
   },
+  "notes_default": {
+    "project": "Budget and dates to confirm with the client",
+    "products": "",
+    "packages": "",
+    "suppliers": "Ask for the group rates"
+  },
   "custom_fields": {
     "project": [
       {
@@ -819,6 +825,7 @@ A <code>reference</code> is the value the other routes accept for that entity, a
 | Property         | Type | Description                                                                                  |
 | ---------------- | ---- | -------------------------------------------------------------------------------------------- |
 | project_statuses | JSON | Project statuses of the account, per group ([Project Statuses](#nested-resources-project-statuses)) |
+| notes_default    | JSON | Notes a new project, product, package or supplier starts with ([Default Notes](#nested-resources-default-notes)) |
 | custom_fields    | JSON | Custom fields of the account, per object type ([Custom Field Definitions](#nested-resources-custom-field-definitions)) |
 | seasons_groups   | Array | Preset seasons of the account, per group ([Seasons Groups](#nested-resources-seasons-groups)) |
 | step_categories  | JSON | Step categories of the account, per step type ([Step Categories](#nested-resources-step-categories)) |
@@ -829,6 +836,26 @@ A <code>reference</code> is the value the other routes accept for that entity, a
 | legal_entity        | JSON | Company, contact, address and billing details of the account ([Legal Entity](#nested-resources-legal-entity)) |
 | default             | JSON | Business defaults of the account, the settings a new record and its prices are computed with ([Account Defaults](#nested-resources-account-defaults)) |
 | users               | Array | Users of the account ([Account Users](#nested-resources-account-users))                     |
+
+## Default Notes
+
+The notes a new record starts with, one per object, as set in the settings of the account. Plain text, line breaks as `\n`.
+
+```json
+"notes_default": {
+  "project": "Budget and dates to confirm with the client",
+  "products": "",
+  "packages": "",
+  "suppliers": "Ask for the group rates"
+}
+```
+
+| Property  | Type   | Description                                                     |
+| --------- | ------ | --------------------------------------------------------------- |
+| project   | String | Default notes of a new project, `""` when none is set           |
+| products  | String | Default notes of a new catalog product, `""` when none is set   |
+| packages  | String | Default notes of a new package, `""` when none is set           |
+| suppliers | String | Default notes of a new supplier, `""` when none is set          |
 
 ## Destination
 
