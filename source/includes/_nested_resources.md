@@ -122,11 +122,11 @@ VAT:
 
 | Property                          | Type    | Description                                                                                                                                     |
 | --------------------------------- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
-| vat_regime                        | String  | VAT regime. Possible values: `margin` (VAT on the margin), `classic`, `not_applicable`. `null` when none is set                                |
+| vat_regime                        | String  | VAT regime, as `vat_regime` on the product and item routes. Possible values: `margin` (VAT on the margin), `classic` (common law VAT), `none` (non applicable VAT). `null` when the account has no regime set |
 | vat_rate                          | Number  | Default VAT rate, in percent                                                                                                                    |
 | vat_rate_margin                   | Number  | VAT rate applied to the margin and to the fees, in percent                                                                                     |
 | vat_classic_calculation_mode      | String  | Rate the `classic` regime applies. Possible values: `line` (the rate of each line), `vat_rate_margin`, `vat_rate`                              |
-| vat_not_applicable_is_recoverable | Boolean | Whether the purchase VAT is recovered under the `not_applicable` regime                                                                        |
+| vat_not_applicable_is_recoverable | Boolean | Whether the purchase VAT is recovered under the `none` regime                                                                                  |
 
 Commission and fees:
 
@@ -617,24 +617,21 @@ The configuration of the account, returned by `GET /me?include=config`.
       {
         "name": "Quote sent",
         "reference": "quote_sent",
-        "color": "#00b3ff",
-        "sort_order": 1
+        "color": "#00b3ff"
       }
     ],
     "archived": [
       {
         "name": "Paid",
         "reference": "paid",
-        "color": "#7ed321",
-        "sort_order": 1
+        "color": "#7ed321"
       }
     ],
     "template": [
       {
         "name": "Seminar",
         "reference": "seminar",
-        "color": "#e25050",
-        "sort_order": 1
+        "color": "#e25050"
       }
     ]
   },
@@ -793,7 +790,7 @@ The configuration of the account, returned by `GET /me?include=config`.
 ```
 
 <aside class="notice">
-A <code>reference</code> is the value the other routes accept for that entity, as it is. Statuses, custom fields and step categories are sorted by <code>sort_order</code>, ascending. A list is empty rather than <code>null</code> when the account has nothing configured. Closed sets are technical values in English, never translated labels.
+A <code>reference</code> is the value the other routes accept for that entity, as it is. Statuses, custom fields and step categories come in the order the account set in its settings. A list is empty rather than <code>null</code> when the account has nothing configured. Closed sets are technical values in English, never translated labels.
 </aside>
 
 | Property         | Type | Description                                                                                  |
@@ -1166,8 +1163,7 @@ The statuses a project of the account can take, in three groups. An account that
     {
       "name": "Quote sent",
       "reference": "quote_sent",
-      "color": "#00b3ff",
-      "sort_order": 1
+      "color": "#00b3ff"
     }
   ],
   "archived": [],
@@ -1188,7 +1184,6 @@ Each status:
 | name       | String  | Display name of the status, as `info_stage` returns it on a project                                    |
 | reference  | String  | Technical name of the status, the value `info_stage_reference` takes on `GET /projects` and `POST /projects-upsert` |
 | color      | String  | Color of the status, hexadecimal. `null` when none is set                                               |
-| sort_order | Integer | Position of the status in its group                                                                     |
 
 ## Reference Numbering
 
