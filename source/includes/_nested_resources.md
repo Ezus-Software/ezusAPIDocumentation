@@ -197,7 +197,8 @@ The users of the account, in the order they were created. A deactivated user is 
     "last_name": "Atkins",
     "email": "tommy@e-corp.com",
     "role": "admin",
-    "is_active": true
+    "is_active": true,
+    "is_technical_user": false
   }
 ]
 ```
@@ -210,6 +211,7 @@ The users of the account, in the order they were created. A deactivated user is 
 | email      | String  | Email of the user                                                                                            |
 | role       | String  | Role of the user, as `role` in [Authenticated User](#nested-resources-authenticated-user)                    |
 | is_active  | Boolean | Whether the user is active, `false` once deactivated                                                        |
+| is_technical_user | Boolean | Whether the user is a technical user, not counted among the users of the account                            |
 
 ## Authenticated User
 
@@ -448,7 +450,7 @@ Only the last 10 contacts are returned in this object. Note that for upsert endp
 
 ## Custom Field Definitions
 
-The custom fields an account defined, one list per object type. A field is written and read by its `reference`, as the `name` of a [Custom Fields](#nested-resources-custom-fields) entry.
+The custom fields an account defined, one list per object type. A field is written and read by its `reference`, as the `name` of a [Custom Fields](#nested-resources-custom-fields) entry. Each list is grouped by family, in the order the account sorts them: the fields without family first, then each family, each field in its order within its family.
 
 ```json
 "custom_fields": {
@@ -459,7 +461,8 @@ The custom fields an account defined, one list per object type. A field is writt
       "type": "select",
       "options": ["Incentive", "Seminar", "Leisure"],
       "default": "Seminar",
-      "description": "Theme announced to the client"
+      "description": "Theme announced to the client",
+      "family": "General"
     }
   ],
   "budget": [],
@@ -499,6 +502,7 @@ Each field:
 | options     | Array   | Values a `select` or `multi_select` field accepts, to write exactly as listed. `null` for the other types                                                                   |
 | default     | Mixed   | Value of a new record: a string for `text`, `textarea`, `select`, `url`; a number for `number`; `true` or `false` for `checkbox`; `"YYYY-MM-DD"` for `date`; `"HH:MM"` for `time`; an array of options for `multi_select`. `null` when none is set, and always for `file` |
 | description | String  | Description of the field. `null` when none is set                                                                                                                            |
+| family      | String  | Name of the family of the field, `General` when it has none                                                                                                                  |
 
 ## Custom Fields
 
@@ -643,7 +647,8 @@ The configuration of the account, returned by `GET /me?include=config`.
         "type": "select",
         "options": ["Incentive", "Seminar", "Leisure"],
         "default": "Seminar",
-        "description": "Theme announced to the client"
+        "description": "Theme announced to the client",
+        "family": "General"
       }
     ],
     "budget": [],
@@ -657,6 +662,21 @@ The configuration of the account, returned by `GET /me?include=config`.
     "options": [],
     "texts": []
   },
+  "seasons_groups": [
+    {
+      "name": "Summer",
+      "reference": "summer",
+      "seasons": [
+        {
+          "name": "High season",
+          "reference": "high_season",
+          "limit_start": "2026-07-01",
+          "limit_end": "2026-08-31",
+          "is_yearly": true
+        }
+      ]
+    }
+  ],
   "step_categories": {
     "accommodation": [
       {
@@ -696,13 +716,15 @@ The configuration of the account, returned by `GET /me?include=config`.
       { "code": "CHF", "name": "Swiss franc", "rate": 2.2223 }
     ]
   },
-  "invoice_numbering": {
-    "counter_name": "Invoices",
-    "format": "$$yyyy$$$$mm$$$$n$$",
-    "counter_size": 4,
-    "next_number": 208,
-    "reset": "never"
-  },
+  "invoice_numbering": [
+    {
+      "counter_name": "Invoices",
+      "format": "$$yyyy$$$$mm$$$$n$$",
+      "counter_size": 4,
+      "next_number": 208,
+      "reset": "never"
+    }
+  ],
   "reference_numbering": {
     "enabled": true,
     "projects": [
@@ -783,7 +805,8 @@ The configuration of the account, returned by `GET /me?include=config`.
       "last_name": "Atkins",
       "email": "tommy@e-corp.com",
       "role": "admin",
-      "is_active": true
+      "is_active": true,
+      "is_technical_user": false
     }
   ]
 }
@@ -797,10 +820,11 @@ A <code>reference</code> is the value the other routes accept for that entity, a
 | ---------------- | ---- | -------------------------------------------------------------------------------------------- |
 | project_statuses | JSON | Project statuses of the account, per group ([Project Statuses](#nested-resources-project-statuses)) |
 | custom_fields    | JSON | Custom fields of the account, per object type ([Custom Field Definitions](#nested-resources-custom-field-definitions)) |
+| seasons_groups   | Array | Preset seasons of the account, per group ([Seasons Groups](#nested-resources-seasons-groups)) |
 | step_categories  | JSON | Step categories of the account, per step type ([Step Categories](#nested-resources-step-categories)) |
 | languages        | JSON | Default and active languages of the account ([Account Languages](#nested-resources-account-languages)) |
 | currencies       | JSON | Currency settings and exchange rates of the account ([Account Currencies](#nested-resources-account-currencies)) |
-| invoice_numbering   | JSON | Counter numbering the invoices of the account ([Invoice Numbering](#nested-resources-invoice-numbering)). `null` when the account has none |
+| invoice_numbering   | Array | Counters numbering the invoices of the account ([Invoice Numbering](#nested-resources-invoice-numbering)) |
 | reference_numbering | JSON | Counters of the automatic references of projects, clients and suppliers ([Reference Numbering](#nested-resources-reference-numbering)) |
 | legal_entity        | JSON | Company, contact, address and billing details of the account ([Legal Entity](#nested-resources-legal-entity)) |
 | default             | JSON | Business defaults of the account, the settings a new record and its prices are computed with ([Account Defaults](#nested-resources-account-defaults)) |
@@ -858,16 +882,18 @@ Each object represents a destination with its associated sub-destinations
 
 ## Invoice Numbering
 
-The counter numbering the invoices of the account when they are finalized, shaped as a [Numbering Counter](#nested-resources-numbering-counter). `null` when the account has no main invoice counter.
+The counters numbering the invoices of the account when they are finalized, each shaped as a [Numbering Counter](#nested-resources-numbering-counter), the default one first. An empty list when the account has none.
 
 ```json
-"invoice_numbering": {
-  "counter_name": "Invoices",
-  "format": "$$yyyy$$$$mm$$$$n$$",
-  "counter_size": 4,
-  "next_number": 208,
-  "reset": "never"
-}
+"invoice_numbering": [
+  {
+    "counter_name": "Invoices",
+    "format": "$$yyyy$$$$mm$$$$n$$",
+    "counter_size": 4,
+    "next_number": 208,
+    "reset": "never"
+  }
+]
 ```
 
 ## Invoices Amounts
@@ -1109,7 +1135,7 @@ A counter of the account, shared by [Invoice Numbering](#nested-resources-invoic
 
 | Property     | Type    | Description                                                                                                                      |
 | ------------ | ------- | -------------------------------------------------------------------------------------------------------------------------------- |
-| counter_name | String  | Name of the counter. `null` when it has none                                                                                     |
+| counter_name | String  | Name of the counter. `Default` when it has none                                                                                  |
 | format       | String  | Pattern of the numbers, as stored, with the placeholders below                                                                   |
 | counter_size | Integer | Minimum number of digits of `$$n$$`, zero padded: `4` turns `12` into `0012`                                                    |
 | next_number  | Integer | Number the counter will issue next                                                                                               |
@@ -1280,6 +1306,44 @@ The permissions the API serves:
 
 A call outside the scopes of the user returns what that user may see, which can be an empty list, not an error.
 
+## Seasons Groups
+
+The preset seasons of the account, one entry per group in the order the account sorts them, each with its seasons in their order. A season carries the keys of a seasonal tariff, ready to send on `POST /product-seasons-upsert`.
+
+```json
+"seasons_groups": [
+  {
+    "name": "Summer",
+    "reference": "summer",
+    "seasons": [
+      {
+        "name": "High season",
+        "reference": "high_season",
+        "limit_start": "2026-07-01",
+        "limit_end": "2026-08-31",
+        "is_yearly": true
+      }
+    ]
+  }
+]
+```
+
+| Property  | Type   | Description                                     |
+| --------- | ------ | ----------------------------------------------- |
+| name      | String | Display name of the group                       |
+| reference | String | Technical name of the group, unique in the account |
+| seasons   | Array  | Seasons of the group. Empty when it has none    |
+
+Each season:
+
+| Property    | Type    | Description                                                                                       |
+| ----------- | ------- | ------------------------------------------------------------------------------------------------- |
+| name        | String  | Display name of the season, the `name` of a seasonal tariff                                       |
+| reference   | String  | Technical name of the season, unique in the account                                               |
+| limit_start | String  | Start date of the season, `"YYYY-MM-DD"`. `null` when none is set                                  |
+| limit_end   | String  | End date of the season, `"YYYY-MM-DD"`. `null` when none is set                                    |
+| is_yearly   | Boolean | Whether the season recurs every year: only the day and month of its dates count                  |
+
 ## Steps
 
 The steps are sorted by their creation date, with the most recently created appearing first.
@@ -1393,7 +1457,7 @@ Each category:
 | name          | String  | Display name of the category, as `category` returns it on `GET /project-steps`                                               |
 | reference     | String  | Technical name of the category, the `category` to send on `POST /project-steps-upsert` with a step of that type               |
 | is_favorite   | Boolean | Whether it is the default category of its step type, the one a step created without `category` gets                          |
-| custom_fields | Array   | Custom fields of the steps of this category, each shaped as a field of [Custom Field Definitions](#nested-resources-custom-field-definitions). Empty when it has none |
+| custom_fields | Array   | Custom fields of the steps of this category, each shaped as a field of [Custom Field Definitions](#nested-resources-custom-field-definitions), without `family`. Empty when it has none |
 
 ## Supplements
 
