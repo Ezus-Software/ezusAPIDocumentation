@@ -643,7 +643,8 @@ The configuration of the account, returned by `GET /me?include=config`.
     "project": "Budget and dates to confirm with the client",
     "products": "",
     "packages": "",
-    "suppliers": "Ask for the group rates"
+    "suppliers": "Ask for the group rates",
+    "clients": ""
   },
   "custom_fields": {
     "project": [
@@ -825,7 +826,7 @@ A <code>reference</code> is the value the other routes accept for that entity, a
 | Property         | Type | Description                                                                                  |
 | ---------------- | ---- | -------------------------------------------------------------------------------------------- |
 | project_statuses | JSON | Project statuses of the account, per group ([Project Statuses](#nested-resources-project-statuses)) |
-| notes_default    | JSON | Notes a new project, product, package or supplier starts with ([Default Notes](#nested-resources-default-notes)) |
+| notes_default    | JSON | Notes a new project, product, package, supplier or client starts with ([Default Notes](#nested-resources-default-notes)) |
 | custom_fields    | JSON | Custom fields of the account, per object type ([Custom Field Definitions](#nested-resources-custom-field-definitions)) |
 | seasons_groups   | Array | Preset seasons of the account, per group ([Seasons Groups](#nested-resources-seasons-groups)) |
 | step_categories  | JSON | Step categories of the account, per step type ([Step Categories](#nested-resources-step-categories)) |
@@ -846,7 +847,8 @@ The notes a new record starts with, one per object, as set in the settings of th
   "project": "Budget and dates to confirm with the client",
   "products": "",
   "packages": "",
-  "suppliers": "Ask for the group rates"
+  "suppliers": "Ask for the group rates",
+  "clients": ""
 }
 ```
 
@@ -856,6 +858,7 @@ The notes a new record starts with, one per object, as set in the settings of th
 | products  | String | Default notes of a new catalog product, `""` when none is set   |
 | packages  | String | Default notes of a new package, `""` when none is set           |
 | suppliers | String | Default notes of a new supplier, `""` when none is set          |
+| clients   | String | Default notes of a new client, `""` when none is set            |
 
 ## Destination
 
