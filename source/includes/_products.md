@@ -2,7 +2,7 @@
 
 ## GET products
 
-Returns a list of your products, sorted by creation date from newest to oldest, with the most recent products appearing first. The list of products returned is paginated (50 per 50): to call the 50 next items in the list, call the route with the `next_token` query parameter.
+Returns a list of your products, sorted by creation date from newest to oldest, with the most recent products appearing first. The list of products returned is paginated (50 per 50): to call the 50 next items in the list, call the route with the `next_token` query parameter. Call it with `include_tariffs=true` to also get the tariffs of each product, seasons included.
 
 ```shell
 curl --location 'https://api.ezus.app/products' \
@@ -74,21 +74,22 @@ axios.get(baseUrl + "/products", headers);
 
 ### Query Parameters
 
-| Parameter  | Type   | Description                                                                                  |
-| ---------- | ------ | -------------------------------------------------------------------------------------------- |
-| next_token | String | Specify this parameter if you want to retrieve the following elements of a given list query. |
+| Parameter       | Type    | Description                                                                                                                                  |
+| --------------- | ------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| next_token      | String  | Specify this parameter if you want to retrieve the following elements of a given list query.                                                |
+| include_tariffs | Boolean | Add the `tariffs` of each product to the response. Accepts `true` or `false`, defaults to `false`. The `next_token` keeps it for the next pages. |
 
 ### Response
 
 A JSON object containing the product information with properties like:
 
-| Property   | Type   | Description                                                                                                                                                                                          |
-|------------|--------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| next_token | String | A token will be returned if all products have not been returned. Use it in another call to access the following products                                                                             |
-| size       | Number | The total number of products available with these filters                                                                                                                                            |
-| data_size  | Number | Number of products returned on the current page                                                                                                                                                      |
-| page       | Number | The page number                                                                                                                                                                                      |
-| products   | Array  | An array of JSON objects, each representing a product. These objects are formatted according to a simplified version of the GET `product` response structure. ([GET product](#products-get-product)) |
+| Property   | Type   | Description                                                                                                                                                                                                                                                                              |
+|------------|--------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| next_token | String | A token will be returned if all products have not been returned. Use it in another call to access the following products                                                                                                                                                                 |
+| size       | Number | The total number of products available with these filters                                                                                                                                                                                                                                |
+| data_size  | Number | Number of products returned on the current page                                                                                                                                                                                                                                          |
+| page       | Number | The page number                                                                                                                                                                                                                                                                          |
+| products   | Array  | An array of JSON objects, each representing a product. These objects are formatted according to a simplified version of the GET `product` response structure. ([GET product](#products-get-product)). With `include_tariffs=true`, each product also carries its `tariffs` ([Tariffs](#nested-resources-tariffs)) |
 
 ## GET product
 
