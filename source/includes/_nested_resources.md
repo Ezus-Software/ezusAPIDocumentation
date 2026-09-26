@@ -495,6 +495,28 @@ The configuration of the account, returned by `GET /me?include=config`.
     "packages": [],
     "suppliers": [],
     "clients": []
+  },
+  "step_categories": {
+    "accommodation": [
+      {
+        "name": "Hotel",
+        "reference": "hotel",
+        "is_favorite": true,
+        "custom_fields": [
+          {
+            "name": "Check-in time",
+            "reference": "check-in-time",
+            "type": "time",
+            "options": null,
+            "default": "15:00",
+            "description": null
+          }
+        ]
+      }
+    ],
+    "transport": [],
+    "activity": [],
+    "extra": []
   }
 }
 ```
@@ -508,6 +530,7 @@ A <code>reference</code> is the value the other routes accept for that entity, a
 | project_statuses | JSON | Project statuses of the account, per group ([Project Statuses](#nested-resources-project-statuses)) |
 | custom_fields    | JSON | Custom fields of the account, per object type ([Custom Field Definitions](#nested-resources-custom-field-definitions)) |
 | tags             | JSON | Tags of the account, per kind of record ([Account Tags](#nested-resources-account-tags))     |
+| step_categories  | JSON | Step categories of the account, per step type ([Step Categories](#nested-resources-step-categories)) |
 
 ## Destination
 
@@ -895,6 +918,51 @@ The steps are sorted by their creation date, with the most recently created appe
 | items         | Array  | Array of JSON items ([Items](#nested-resources-items))                                                                                                                                         |
 | medias        | Array  | Array of strings representing the images URLs associated with the step                                                                                                                         |
 | custom_fields | Array  | Array of JSON custom fields ([Custom fields](#nested-resources-custom-fields))                                                                                                                 |
+
+## Step Categories
+
+The categories a step of the account can take, one list per step type, each with the custom fields its steps carry. Extra steps share the categories of the activity steps, so `extra` lists the same ones as `activity`.
+
+```json
+"step_categories": {
+  "accommodation": [
+    {
+      "name": "Hotel",
+      "reference": "hotel",
+      "is_favorite": true,
+      "custom_fields": [
+        {
+          "name": "Check-in time",
+          "reference": "check-in-time",
+          "type": "time",
+          "options": null,
+          "default": "15:00",
+          "description": null
+        }
+      ]
+    }
+  ],
+  "transport": [],
+  "activity": [],
+  "extra": []
+}
+```
+
+| Property      | Type  | Description                                                                             |
+| ------------- | ----- | --------------------------------------------------------------------------------------- |
+| accommodation | Array | Categories of the accommodation steps, `type` `accom` on `POST /project-steps-upsert`   |
+| transport     | Array | Categories of the transport steps, `type` `transport` on `POST /project-steps-upsert`  |
+| activity      | Array | Categories of the activity steps, `type` `activity` on `POST /project-steps-upsert`    |
+| extra         | Array | Categories of the extra steps, the same as `activity`                                   |
+
+Each category:
+
+| Property      | Type    | Description                                                                                                                   |
+| ------------- | ------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| name          | String  | Display name of the category, as `category` returns it on `GET /project-steps`                                               |
+| reference     | String  | Technical name of the category, the `category` to send on `POST /project-steps-upsert` with a step of that type               |
+| is_favorite   | Boolean | Whether it is the default category of its step type, the one a step created without `category` gets                          |
+| custom_fields | Array   | Custom fields of the steps of this category, each shaped as a field of [Custom Field Definitions](#nested-resources-custom-field-definitions). Empty when it has none |
 
 ## Supplements
 
