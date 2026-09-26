@@ -672,6 +672,51 @@
               "key": "include_tariffs",
               "value": "true",
               "disabled": true
+            },
+            {
+              "key": "reference",
+              "value": "product_reference",
+              "disabled": true
+            },
+            {
+              "key": "title_like",
+              "value": "room",
+              "disabled": true
+            },
+            {
+              "key": "info_number",
+              "value": "202306001-PR",
+              "disabled": true
+            },
+            {
+              "key": "supplier_reference",
+              "value": "supplier_reference",
+              "disabled": true
+            },
+            {
+              "key": "supplier_company_name_starts",
+              "value": "The best",
+              "disabled": true
+            },
+            {
+              "key": "destination_name",
+              "value": "France",
+              "disabled": true
+            },
+            {
+              "key": "subdestination_name_like",
+              "value": "Paris",
+              "disabled": true
+            },
+            {
+              "key": "created_at_gte",
+              "value": "2026-01-01",
+              "disabled": true
+            },
+            {
+              "key": "updated_at_lte",
+              "value": "2026-01-31",
+              "disabled": true
             }
           ]
         }
