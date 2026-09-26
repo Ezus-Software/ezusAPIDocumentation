@@ -158,6 +158,32 @@ Sales:
 | create_payment_after_invoice | Boolean | Whether a client payment is created with a new invoice                                            |
 | paid_invoice_mention         | String  | Mention stamped on a paid invoice. Possible values: `paid`, `settled`. `null` when none           |
 
+## Account Deleted Users
+
+The deleted users of the account, the last deleted first. A record created by a user who was deleted since still carries the email of that user: this list names it. An email appears once, and never when a live user of [Account Users](#nested-resources-account-users) holds it again.
+
+```json
+"users_deleted": [
+  {
+    "reference": "former@e-corp.com",
+    "first_name": "Paul",
+    "last_name": "Martin",
+    "email": "former@e-corp.com",
+    "role": "user",
+    "is_technical_user": false
+  }
+]
+```
+
+| Property          | Type    | Description                                                                                    |
+| ----------------- | ------- | ---------------------------------------------------------------------------------------------- |
+| reference         | String  | Identifier of the user, its email, as the records it owned carry it                            |
+| first_name        | String  | First name of the user, `""` when none is set                                                  |
+| last_name         | String  | Last name of the user, `""` when none is set                                                   |
+| email             | String  | Email of the user                                                                              |
+| role              | String  | Role the user had, as `role` in [Authenticated User](#nested-resources-authenticated-user)     |
+| is_technical_user | Boolean | Whether the user was a technical user, as `is_technical_user` in [Account Users](#nested-resources-account-users) |
+
 ## Account Languages
 
 The languages the account writes its descriptions in.
@@ -187,7 +213,7 @@ Each language:
 
 ## Account Users
 
-The users of the account, in the order they were created. A deactivated user is listed with `is_active` `false`; a deleted one is not listed.
+The users of the account, in the order they were created. A deactivated user is listed with `is_active` `false`; a deleted one is listed in [Account Deleted Users](#nested-resources-account-deleted-users) instead.
 
 ```json
 "users": [
@@ -815,6 +841,16 @@ The configuration of the account, returned by `GET /me?include=config`.
       "is_active": true,
       "is_technical_user": false
     }
+  ],
+  "users_deleted": [
+    {
+      "reference": "former@e-corp.com",
+      "first_name": "Paul",
+      "last_name": "Martin",
+      "email": "former@e-corp.com",
+      "role": "user",
+      "is_technical_user": false
+    }
   ]
 }
 ```
@@ -837,6 +873,7 @@ A <code>reference</code> is the value the other routes accept for that entity, a
 | legal_entity        | JSON | Company, contact, address and billing details of the account ([Legal Entity](#nested-resources-legal-entity)) |
 | default             | JSON | Business defaults of the account, the settings a new record and its prices are computed with ([Account Defaults](#nested-resources-account-defaults)) |
 | users               | Array | Users of the account ([Account Users](#nested-resources-account-users))                     |
+| users_deleted       | Array | Deleted users of the account, who may still own records ([Account Deleted Users](#nested-resources-account-deleted-users)) |
 
 ## Default Notes
 
