@@ -149,7 +149,7 @@ Refresh tokens are single-use and valid for 90 days: every call to `/token` inva
 
 ## GET me
 
-Returns the authentication context of your call: the user your bearer token belongs to, its account, the lifetime of the token, and what the role of that user grants.
+Returns the authentication context of your call: the user your bearer token belongs to, its account, the lifetime of the token, and what the role of that user grants. Add `include=config` to also receive the configuration of the account.
 
 ```shell
 curl --location 'https://api.ezus.app/me' \
@@ -226,6 +226,12 @@ axios.get(baseUrl + "/me", headers);
 | x-api-key     | String | <span class="label label-red float-right">Required</span> Your Ezus API key |
 | Authorization | String | <span class="label label-red float-right">Required</span> Your Bearer token |
 
+### Query Parameters
+
+| Parameter | Type   | Description                                                                                                                                      |
+| --------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| include   | String | Comma-separated list of objects to add to the response. Possible values: `config`. Without it, the response carries no `config` object |
+
 ### Response
 
 A JSON object that contains your authentication context.
@@ -237,3 +243,4 @@ A JSON object that contains your authentication context.
 | token       | JSON   | Lifetime of your bearer token ([Token](#nested-resources-token))                                        |
 | scopes      | JSON   | What the role of this user grants ([Scopes](#nested-resources-scopes))                                  |
 | server_time | String | Current server time, UTC                                                                                |
+| config      | JSON   | Configuration of the account, only with `include=config` ([Config](#nested-resources-config))           |

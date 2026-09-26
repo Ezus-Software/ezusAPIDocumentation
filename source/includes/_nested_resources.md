@@ -355,6 +355,49 @@ Each object represents a category with its associated sub-categories
 | name          | String | Name of the category                                                                         |
 | subcategories | Array  | An array of JSON objects, each representing a sub-category along with its name and reference |
 
+## Config
+
+The configuration of the account, returned by `GET /me?include=config`.
+
+```json
+"config": {
+  "project_statuses": {
+    "ongoing": [
+      {
+        "name": "Quote sent",
+        "reference": "quote_sent",
+        "color": "#00b3ff",
+        "sort_order": 1
+      }
+    ],
+    "archived": [
+      {
+        "name": "Paid",
+        "reference": "paid",
+        "color": "#7ed321",
+        "sort_order": 1
+      }
+    ],
+    "template": [
+      {
+        "name": "Seminar",
+        "reference": "seminar",
+        "color": "#e25050",
+        "sort_order": 1
+      }
+    ]
+  }
+}
+```
+
+<aside class="notice">
+A <code>reference</code> is the value the other routes accept for that entity, as it is. Lists are sorted by <code>sort_order</code>, ascending, and are empty rather than <code>null</code> when the account has nothing configured. Closed sets are technical values in English, never translated labels.
+</aside>
+
+| Property         | Type | Description                                                                                  |
+| ---------------- | ---- | -------------------------------------------------------------------------------------------- |
+| project_statuses | JSON | Project statuses of the account, per group ([Project Statuses](#nested-resources-project-statuses)) |
+
 ## Destination
 
 ```json
@@ -570,6 +613,40 @@ Only the last 10 products are returned in this object.
 | --------- | ------ | ---------------------------- |
 | reference | String | The reference of the product |
 | title     | String | The title of the product     |
+
+## Project Statuses
+
+The statuses a project of the account can take, in three groups. An account that never edited its statuses gets the Ezus default ones.
+
+```json
+"project_statuses": {
+  "ongoing": [
+    {
+      "name": "Quote sent",
+      "reference": "quote_sent",
+      "color": "#00b3ff",
+      "sort_order": 1
+    }
+  ],
+  "archived": [],
+  "template": []
+}
+```
+
+| Property | Type  | Description                                                                                  |
+| -------- | ----- | -------------------------------------------------------------------------------------------- |
+| ongoing  | Array | Statuses of the projects in progress                                                         |
+| archived | Array | Statuses of the archived projects                                                            |
+| template | Array | Statuses of the templates, the projects listed with `from_programs_catalog=true` on `GET /projects` |
+
+Each status:
+
+| Property   | Type    | Description                                                                                             |
+| ---------- | ------- | ------------------------------------------------------------------------------------------------------- |
+| name       | String  | Display name of the status, as `info_stage` returns it on a project                                    |
+| reference  | String  | Technical name of the status, the value `info_stage_reference` takes on `GET /projects` and `POST /projects-upsert` |
+| color      | String  | Color of the status, hexadecimal. `null` when none is set                                               |
+| sort_order | Integer | Position of the status in its group                                                                     |
 
 ## Scopes
 

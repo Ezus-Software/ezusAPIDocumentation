@@ -108,9 +108,16 @@
         "url": {
           "raw": "{{baseUrl}}/me",
           "host": ["{{baseUrl}}"],
-          "path": ["me"]
+          "path": ["me"],
+          "query": [
+            {
+              "key": "include",
+              "value": "config",
+              "disabled": true
+            }
+          ]
         },
-        "description": "Describes the authentication context of the call: the user the bearer token belongs to, its account, the lifetime of the token and what the role of that user grants."
+        "description": "Describes the authentication context of the call: the user the bearer token belongs to, its account, the lifetime of the token and what the role of that user grants. Enable include=config to also receive the configuration of the account."
       },
       "response": []
     },
