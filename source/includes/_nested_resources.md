@@ -113,7 +113,7 @@ Budget:
 | --------------------------------- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
 | price_display                     | String  | Prices shown in the budget. Possible values: `excluded_taxes`, `included_taxes`                                                                 |
 | margin_based_on                   | String  | Price the margin rate is shown against. Possible values: `sales_price`, `purchase_price`                                                        |
-| margin_rate                       | Number  | Default margin rate, in percent of the sales price whatever `margin_based_on`: a sales price is the purchase price divided by `1 - margin_rate / 100` |
+| margin_rate                       | Number  | Default margin rate, in percent of the price `margin_based_on` names, as the settings show it. `sales_price`: a sales price is the purchase price divided by `1 - margin_rate / 100`; `purchase_price`: it is the purchase price times `1 + margin_rate / 100` |
 | margin_calculation                | String  | How the margin of a project is computed. Possible values: `per_product`, `global`                                                              |
 | price_update_behavior             | String  | What changes when a price of a product is edited. Possible values: `adjust_margin_rate` (the margin rate follows), `keep_margin_rate` (the other price follows). `null` when none is set |
 | is_margin_rate_per_client_enabled | Boolean | Whether a client can carry a margin rate of its own                                                                                            |
