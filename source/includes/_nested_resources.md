@@ -14,6 +14,33 @@
 | name     | String | Company name of the account     |
 | currency | String | Default currency of the account |
 
+## Account Tags
+
+The tags an account defined, one list per kind of record. `POST /products-upsert` and `POST /suppliers-upsert` take the `reference` in `tags`, and `GET /tags` returns the same tags.
+
+```json
+"tags": {
+  "products": [{ "name": "Seaside", "reference": "seaside" }],
+  "packages": [],
+  "suppliers": [],
+  "clients": []
+}
+```
+
+| Property  | Type  | Description           |
+| --------- | ----- | --------------------- |
+| products  | Array | Tags of the products  |
+| packages  | Array | Tags of the packages  |
+| suppliers | Array | Tags of the suppliers |
+| clients   | Array | Tags of the clients   |
+
+Each tag:
+
+| Property  | Type   | Description                |
+| --------- | ------ | -------------------------- |
+| name      | String | Display name of the tag    |
+| reference | String | Technical name of the tag  |
+
 ## Authenticated User
 
 ```json
@@ -249,6 +276,60 @@ Only the last 10 contacts are returned in this object. Note that for upsert endp
 | birth_date | String  | Contact's date of birth in a "YYYY-MM-DD" format string (supplier contacts have no date of birth) |
 | is_main    | Boolean | True if this contact is the primary contact for the parent resource                               |
 
+## Custom Field Definitions
+
+The custom fields an account defined, one list per object type. A field is written and read by its `reference`, as the `name` of a [Custom Fields](#nested-resources-custom-fields) entry.
+
+```json
+"custom_fields": {
+  "project": [
+    {
+      "name": "Trip theme",
+      "reference": "trip-theme",
+      "type": "select",
+      "options": ["Incentive", "Seminar", "Leisure"],
+      "default": "Seminar",
+      "description": "Theme announced to the client"
+    }
+  ],
+  "budget": [],
+  "products": [],
+  "packages": [],
+  "suppliers": [],
+  "clients": [],
+  "travellers": [],
+  "invoices": [],
+  "payment_methods": [],
+  "options": [],
+  "texts": []
+}
+```
+
+| Property        | Type  | Description                                                                                                                  |
+| --------------- | ----- | ---------------------------------------------------------------------------------------------------------------------------- |
+| project         | Array | Fields of the project brief                                                                                                  |
+| budget          | Array | Fields of the project budget                                                                                                 |
+| products        | Array | Fields of the catalog products                                                                                               |
+| packages        | Array | Fields of the packages                                                                                                       |
+| suppliers       | Array | Fields of the suppliers, whatever their family                                                                               |
+| clients         | Array | Fields of the clients                                                                                                        |
+| travellers      | Array | Fields of the travellers. `POST /project-travellers-create` only writes the `text` and `number` ones                         |
+| invoices        | Array | Fields of the invoices                                                                                                       |
+| payment_methods | Array | Payment methods of the account, one entry each. The `reference` is the `payment_method` of `POST /deposits-create`. Empty while the account uses the Ezus default ones |
+| options         | Array | Option labels an item can carry, one entry each. Empty while the account uses the Ezus default ones                         |
+| texts           | Array | Wordings the account renamed: `name` is its wording, `default` the Ezus one                                                  |
+
+Each field:
+
+| Property    | Type    | Description                                                                                                                                                                  |
+| ----------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| name        | String  | Display name of the field                                                                                                                                                    |
+| reference   | String  | Technical name of the field, the `name` to send in `custom_fields` on the write routes                                                                                      |
+| type        | String  | Type of the field. Possible values: `text`, `textarea`, `number`, `date`, `time`, `checkbox`, `select`, `multi_select`, `url`, `file`                                        |
+| options     | Array   | Values a `select` or `multi_select` field accepts, to write exactly as listed. `null` for the other types                                                                   |
+| default     | Mixed   | Value of a new record: a string for `text`, `textarea`, `select`, `url`; a number for `number`; `true` or `false` for `checkbox`; `"YYYY-MM-DD"` for `date`; `"HH:MM"` for `time`; an array of options for `multi_select`. `null` when none is set, and always for `file` |
+| description | String  | Description of the field. `null` when none is set                                                                                                                            |
+
 ## Custom Fields
 
 ```json
@@ -386,6 +467,34 @@ The configuration of the account, returned by `GET /me?include=config`.
         "sort_order": 1
       }
     ]
+  },
+  "custom_fields": {
+    "project": [
+      {
+        "name": "Trip theme",
+        "reference": "trip-theme",
+        "type": "select",
+        "options": ["Incentive", "Seminar", "Leisure"],
+        "default": "Seminar",
+        "description": "Theme announced to the client"
+      }
+    ],
+    "budget": [],
+    "products": [],
+    "packages": [],
+    "suppliers": [],
+    "clients": [],
+    "travellers": [],
+    "invoices": [],
+    "payment_methods": [],
+    "options": [],
+    "texts": []
+  },
+  "tags": {
+    "products": [{ "name": "Seaside", "reference": "seaside" }],
+    "packages": [],
+    "suppliers": [],
+    "clients": []
   }
 }
 ```
@@ -397,6 +506,8 @@ A <code>reference</code> is the value the other routes accept for that entity, a
 | Property         | Type | Description                                                                                  |
 | ---------------- | ---- | -------------------------------------------------------------------------------------------- |
 | project_statuses | JSON | Project statuses of the account, per group ([Project Statuses](#nested-resources-project-statuses)) |
+| custom_fields    | JSON | Custom fields of the account, per object type ([Custom Field Definitions](#nested-resources-custom-field-definitions)) |
+| tags             | JSON | Tags of the account, per kind of record ([Account Tags](#nested-resources-account-tags))     |
 
 ## Destination
 

@@ -119,7 +119,46 @@
         },
         "description": "Describes the authentication context of the call: the user the bearer token belongs to, its account, the lifetime of the token and what the role of that user grants. Enable include=config to also receive the configuration of the account."
       },
-      "response": []
+      "response": [
+        {
+          "name": "me?include=config",
+          "originalRequest": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-API-KEY",
+                "value": "{{<YOUR_API_KEY>}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/me?include=config",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "me"
+              ],
+              "query": [
+                {
+                  "key": "include",
+                  "value": "config"
+                }
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"error\": \"false\",\n  \"user\": {\n    \"email\": \"tommy@e-corp.com\",\n    \"first_name\": \"Tommy\",\n    \"last_name\": \"Atkins\",\n    \"role\": \"admin\"\n  },\n  \"account\": {\n    \"name\": \"E-Corp Travels\",\n    \"currency\": \"EUR\"\n  },\n  \"token\": {\n    \"issued_at\": \"2026-09-19T10:00:00Z\",\n    \"expires_at\": \"2026-09-19T22:00:00Z\"\n  },\n  \"scopes\": {\n    \"projects\": \"333\",\n    \"clients\": \"310\",\n    \"travellers\": \"333\",\n    \"suppliers\": \"333\",\n    \"invoices\": \"300\",\n    \"tasks\": \"333\",\n    \"catalog\": \"333\",\n    \"models\": \"300\",\n    \"library\": \"333\",\n    \"invoices_suppliers\": \"300\",\n    \"territories\": \"333\",\n    \"categories\": \"333\",\n    \"invoices_finalize\": \"000\",\n    \"invoices_stats\": \"000\",\n    \"stripe_payments\": \"000\",\n    \"projects_close\": \"333\",\n    \"steps_catalog\": \"333\",\n    \"settings\": \"000\",\n    \"billing_team\": \"000\",\n    \"export\": \"333\",\n    \"client_space\": \"333\"\n  },\n  \"server_time\": \"2026-09-19T10:12:03Z\",\n  \"config\": {\n    \"project_statuses\": {\n      \"ongoing\": [\n        {\n          \"name\": \"Quote sent\",\n          \"reference\": \"quote_sent\",\n          \"color\": \"#00b3ff\",\n          \"sort_order\": 1\n        }\n      ],\n      \"archived\": [\n        {\n          \"name\": \"Paid\",\n          \"reference\": \"paid\",\n          \"color\": \"#7ed321\",\n          \"sort_order\": 1\n        }\n      ],\n      \"template\": [\n        {\n          \"name\": \"Seminar\",\n          \"reference\": \"seminar\",\n          \"color\": \"#e25050\",\n          \"sort_order\": 1\n        }\n      ]\n    },\n    \"custom_fields\": {\n      \"project\": [\n        {\n          \"name\": \"Trip theme\",\n          \"reference\": \"trip-theme\",\n          \"type\": \"select\",\n          \"options\": [\n            \"Incentive\",\n            \"Seminar\",\n            \"Leisure\"\n          ],\n          \"default\": \"Seminar\",\n          \"description\": \"Theme announced to the client\"\n        }\n      ],\n      \"budget\": [],\n      \"products\": [],\n      \"packages\": [],\n      \"suppliers\": [],\n      \"clients\": [],\n      \"travellers\": [],\n      \"invoices\": [],\n      \"payment_methods\": [],\n      \"options\": [],\n      \"texts\": []\n    },\n    \"tags\": {\n      \"products\": [\n        {\n          \"name\": \"Seaside\",\n          \"reference\": \"seaside\"\n        }\n      ],\n      \"packages\": [],\n      \"suppliers\": [],\n      \"clients\": []\n    }\n  }\n}"
+        }
+      ]
     },
     {
       "name": "projects",
