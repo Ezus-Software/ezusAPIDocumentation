@@ -1,5 +1,262 @@
 # Nested Resources
 
+## Account
+
+```json
+"account": {
+  "name": "E-Corp Travels",
+  "currency": "EUR"
+}
+```
+
+| Property | Type   | Description                     |
+| -------- | ------ | ------------------------------- |
+| name     | String | Company name of the account     |
+| currency | String | Default currency of the account |
+
+## Account Currencies
+
+The currencies of the account and their exchange rates.
+
+```json
+"currencies": {
+  "reference": "EUR",
+  "catalog": "EUR",
+  "projects": "USD",
+  "library": [
+    { "code": "EUR", "name": "Euro", "rate": 1 },
+    { "code": "USD", "name": "US dollar", "rate": 1.08 },
+    { "code": "CHF", "name": "Swiss franc", "rate": 2.2223 }
+  ]
+}
+```
+
+<aside class="notice">
+A <code>rate</code> is the amount of that currency worth 1 unit of the <code>reference</code> currency: with <code>EUR</code> as reference, <code>"rate": 2.2223</code> for <code>CHF</code> means 2.2223 CHF = 1 EUR, so 100 EUR convert to 222.23 CHF and 100 CHF to 45.00 EUR.
+</aside>
+
+| Property  | Type   | Description                                                                                                  |
+| --------- | ------ | ------------------------------------------------------------------------------------------------------------ |
+| reference | String | Code of the reference currency, the one every rate is quoted against. The same as `currency` in [Account](#nested-resources-account) |
+| catalog   | String | Code of the default currency of new catalog products                                                          |
+| projects  | String | Code of the default sales currency of new projects                                                            |
+| library   | Array  | Currencies of the account, the reference first, then in the order they were added                           |
+
+Each currency:
+
+| Property | Type   | Description                                                                                   |
+| -------- | ------ | --------------------------------------------------------------------------------------------- |
+| code     | String | Code of the currency, as the `currency` of the write routes takes it. ISO 4217, except for a few Ezus codes such as `CFA` or `BTC` |
+| name     | String | English name of the currency                                                                  |
+| rate     | Number | Amount of this currency worth 1 unit of the reference currency. `1` for the reference itself |
+
+## Account Defaults
+
+The settings of the account a new record is created with and its prices, margins and VAT are computed with. A setting the account never changed carries the value Ezus applies.
+
+```json
+"default": {
+  "lang": "french",
+  "client_type": "enterprise",
+  "activity_start": "09:00:00",
+  "activity_end": "18:00:00",
+  "activity_hours": "start_and_end",
+  "step_title_accommodation_transportation": "supplier_name",
+  "step_title_activity": "product_name",
+  "step_description": "short",
+  "price_display": "excluded_taxes",
+  "margin_based_on": "sales_price",
+  "margin_rate": 20,
+  "margin_calculation": "per_product",
+  "price_update_behavior": "adjust_margin_rate",
+  "is_margin_rate_per_client_enabled": true,
+  "vat_regime": "classic",
+  "vat_rate": 20,
+  "vat_rate_margin": 20,
+  "vat_classic_calculation_mode": "line",
+  "vat_not_applicable_is_recoverable": false,
+  "commission_based_on": "sales_price",
+  "project_global_supplements": {
+    "fees": 1452,
+    "fees_type": "flat",
+    "discount": 10,
+    "discount_type": "percentage"
+  },
+  "purchase_invoices_based_on": "total_invoiced_purchase_price",
+  "purchase_invoices_due_date": "day_plus_30",
+  "create_payment_after_invoice": true,
+  "paid_invoice_mention": null
+}
+```
+
+General:
+
+| Property    | Type   | Description                                                                                               |
+| ----------- | ------ | --------------------------------------------------------------------------------------------------------- |
+| lang        | String | Default language, as the `name` of [Account Languages](#nested-resources-account-languages)              |
+| client_type | String | Type of a new client. Possible values: `enterprise`, `individual`, as the `type` of a client             |
+
+Steps:
+
+| Property                                | Type   | Description                                                                                                   |
+| --------------------------------------- | ------ | ------------------------------------------------------------------------------------------------------------- |
+| activity_start                          | String | Start time of a new activity step, `"HH:MM:SS"`. `null` when `activity_hours` is `none`                       |
+| activity_end                            | String | End time of a new activity step, `"HH:MM:SS"`. `null` unless `activity_hours` is `start_and_end`              |
+| activity_hours                          | String | Hours a new activity step gets. Possible values: `none` (no time), `start_only` (`activity_start`, no end), `start_and_end` |
+| step_title_accommodation_transportation | String | Title of a new accommodation or transport step. Possible values: `supplier_name`, `product_name`             |
+| step_title_activity                     | String | Title of a new activity or extra step. Possible values: `supplier_name`, `product_name`                      |
+| step_description                        | String | Description a new step takes from its product. Possible values: `short`, `long`. `null` when none is set      |
+
+Budget:
+
+| Property                          | Type    | Description                                                                                                                                     |
+| --------------------------------- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| price_display                     | String  | Prices shown in the budget. Possible values: `excluded_taxes`, `included_taxes`                                                                 |
+| margin_based_on                   | String  | Price the margin rate is shown against. Possible values: `sales_price`, `purchase_price`                                                        |
+| margin_rate                       | Number  | Default margin rate, in percent of the price `margin_based_on` names, as the settings show it. `sales_price`: a sales price is the purchase price divided by `1 - margin_rate / 100`; `purchase_price`: it is the purchase price times `1 + margin_rate / 100` |
+| margin_calculation                | String  | How the margin of a project is computed. Possible values: `per_product`, `global`                                                              |
+| price_update_behavior             | String  | What changes when a price of a product is edited. Possible values: `adjust_margin_rate` (the margin rate follows), `keep_margin_rate` (the other price follows). `null` when none is set |
+| is_margin_rate_per_client_enabled | Boolean | Whether a client can carry a margin rate of its own                                                                                            |
+
+VAT:
+
+| Property                          | Type    | Description                                                                                                                                     |
+| --------------------------------- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| vat_regime                        | String  | VAT regime, as `vat_regime` on the product and item routes. Possible values: `margin` (VAT on the margin), `classic` (common law VAT), `none` (non applicable VAT). `null` when the account has no regime set |
+| vat_rate                          | Number  | Default VAT rate, in percent                                                                                                                    |
+| vat_rate_margin                   | Number  | VAT rate applied to the margin and to the fees, in percent                                                                                     |
+| vat_classic_calculation_mode      | String  | Rate the `classic` regime applies. Possible values: `line` (the rate of each line), `vat_rate_margin`, `vat_rate`                              |
+| vat_not_applicable_is_recoverable | Boolean | Whether the purchase VAT is recovered under the `none` regime                                                                                  |
+
+Commission and fees:
+
+| Property                   | Type   | Description                                                                                          |
+| -------------------------- | ------ | ---------------------------------------------------------------------------------------------------- |
+| commission_based_on        | String | Price a commission in percent applies to. Possible values: `sales_price`, `purchase_price`           |
+| project_global_supplements | JSON   | Fee and discount of a new project                                                                    |
+
+`project_global_supplements`:
+
+| Property      | Type   | Description                                                                                 |
+| ------------- | ------ | ------------------------------------------------------------------------------------------- |
+| fees          | Number | Amount of the fee: a percentage or an amount in the reference currency, per `fees_type`     |
+| fees_type     | String | Possible values: `percentage`, `flat`                                                       |
+| discount      | Number | Amount of the discount: a percentage or an amount in the reference currency, per `discount_type` |
+| discount_type | String | Possible values: `percentage`, `flat`                                                       |
+
+Purchases:
+
+| Property                   | Type   | Description                                                                                                                                  |
+| -------------------------- | ------ | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| purchase_invoices_based_on | String | Purchase total the finances of a new project are computed from: the budget or the supplier invoices. Possible values: `total_forecast_purchase_price`, `total_invoiced_purchase_price`. `null` when none is set |
+| purchase_invoices_due_date | String | Due date of a new supplier invoice. Possible values: `none`, `day` (its invoice date), `day_plus_1`, `day_plus_2`, `day_plus_3`, `day_plus_4`, `day_plus_5`, `day_plus_7`, `day_plus_14`, `day_plus_30`, `day_plus_60`, `day_plus_90` |
+
+Sales:
+
+| Property                     | Type    | Description                                                                                       |
+| ---------------------------- | ------- | ------------------------------------------------------------------------------------------------- |
+| create_payment_after_invoice | Boolean | Whether a client payment is created with a new invoice                                            |
+| paid_invoice_mention         | String  | Mention stamped on a paid invoice. Possible values: `paid`, `settled`. `null` when none           |
+
+## Account Deleted Users
+
+The deleted users of the account, the last deleted first. A record created by a user who was deleted since still carries the email of that user: this list names it. An email appears once, and never when a live user of [Account Users](#nested-resources-account-users) holds it again.
+
+```json
+"users_deleted": [
+  {
+    "reference": "former@e-corp.com",
+    "first_name": "Paul",
+    "last_name": "Martin",
+    "email": "former@e-corp.com",
+    "role": "user",
+    "is_technical_user": false
+  }
+]
+```
+
+| Property          | Type    | Description                                                                                    |
+| ----------------- | ------- | ---------------------------------------------------------------------------------------------- |
+| reference         | String  | Identifier of the user, its email, as the records it owned carry it                            |
+| first_name        | String  | First name of the user, `""` when none is set                                                  |
+| last_name         | String  | Last name of the user, `""` when none is set                                                   |
+| email             | String  | Email of the user                                                                              |
+| role              | String  | Role the user had, as `role` in [Authenticated User](#nested-resources-authenticated-user)     |
+| is_technical_user | Boolean | Whether the user was a technical user, as `is_technical_user` in [Account Users](#nested-resources-account-users) |
+
+## Account Languages
+
+The languages the account writes its descriptions in.
+
+```json
+"languages": {
+  "default": "french",
+  "library": [
+    { "code": "fr", "name": "french", "label": "French" },
+    { "code": "us", "name": "american", "label": "English (US)" }
+  ]
+}
+```
+
+| Property | Type   | Description                                                                                         |
+| -------- | ------ | --------------------------------------------------------------------------------------------------- |
+| default  | String | `name` of the default language of the account, the one a new project is written in                |
+| library  | Array  | Languages activated in the language library of the account                                         |
+
+Each language:
+
+| Property | Type   | Description                                                                                                                   |
+| -------- | ------ | ----------------------------------------------------------------------------------------------------------------------------- |
+| code     | String | Short code of the language. Possible values: `fr`, `en`, `us`, `es`, `it`, `pt`, `de`, `nl`, `no`, `cu` (the custom language) |
+| name     | String | Name of the language, the `lang` of a [Langs](#nested-resources-langs) entry on the write routes                              |
+| label    | String | English label of the language                                                                                                 |
+
+## Account Users
+
+The users of the account, in the order they were created. A deactivated user is listed with `is_active` `false`; a deleted one is listed in [Account Deleted Users](#nested-resources-account-deleted-users) instead.
+
+```json
+"users": [
+  {
+    "reference": "tommy@e-corp.com",
+    "first_name": "Tommy",
+    "last_name": "Atkins",
+    "email": "tommy@e-corp.com",
+    "role": "admin",
+    "is_active": true,
+    "is_technical_user": false
+  }
+]
+```
+
+| Property   | Type    | Description                                                                                                  |
+| ---------- | ------- | ------------------------------------------------------------------------------------------------------------ |
+| reference  | String  | Identifier of the user on the write routes: the `sales_manager_email` of `POST /projects-upsert`, the `user` of `POST /clients-upsert` |
+| first_name | String  | First name of the user, `""` when none is set                                                                |
+| last_name  | String  | Last name of the user, `""` when none is set                                                                 |
+| email      | String  | Email of the user                                                                                            |
+| role       | String  | Role of the user, as `role` in [Authenticated User](#nested-resources-authenticated-user)                    |
+| is_active  | Boolean | Whether the user is active, `false` once deactivated                                                        |
+| is_technical_user | Boolean | Whether the user is a technical user, not counted among the users of the account: flagged as such, or with an Ezus address (`@ezus.io`) |
+
+## Authenticated User
+
+```json
+"user": {
+  "email": "tommy@e-corp.com",
+  "first_name": "Tommy",
+  "last_name": "Atkins",
+  "role": "admin"
+}
+```
+
+| Property   | Type   | Description                                                                                                      |
+| ---------- | ------ | ---------------------------------------------------------------------------------------------------------------- |
+| email      | String | Email of the user                                                                                                |
+| first_name | String | First name of the user                                                                                           |
+| last_name  | String | Last name of the user                                                                                            |
+| role       | String | Role of the user. Ezus ships with `super_admin`, `admin`, `user` and `collaborator`; a role your account created itself keeps its own name |
+
 ## Address
 
 ```json
@@ -217,6 +474,62 @@ Only the last 10 contacts are returned in this object. Note that for upsert endp
 | birth_date | String  | Contact's date of birth in a "YYYY-MM-DD" format string (supplier contacts have no date of birth) |
 | is_main    | Boolean | True if this contact is the primary contact for the parent resource                               |
 
+## Custom Field Definitions
+
+The custom fields an account defined, one list per object type. A field is written and read by its `reference`, as the `name` of a [Custom Fields](#nested-resources-custom-fields) entry. Each list is grouped by family, in the order the account sorts them: the fields without family first, then each family, each field in its order within its family.
+
+```json
+"custom_fields": {
+  "project": [
+    {
+      "name": "Trip theme",
+      "reference": "trip-theme",
+      "type": "select",
+      "options": ["Incentive", "Seminar", "Leisure"],
+      "default": "Seminar",
+      "description": "Theme announced to the client",
+      "family": "General"
+    }
+  ],
+  "budget": [],
+  "products": [],
+  "packages": [],
+  "suppliers": [],
+  "clients": [],
+  "travellers": [],
+  "invoices": [],
+  "payment_methods": [],
+  "options": [],
+  "texts": []
+}
+```
+
+| Property        | Type  | Description                                                                                                                  |
+| --------------- | ----- | ---------------------------------------------------------------------------------------------------------------------------- |
+| project         | Array | Fields of the project brief                                                                                                  |
+| budget          | Array | Fields of the project budget                                                                                                 |
+| products        | Array | Fields of the catalog products                                                                                               |
+| packages        | Array | Fields of the packages                                                                                                       |
+| suppliers       | Array | Fields of the suppliers, whatever their family                                                                               |
+| clients         | Array | Fields of the clients                                                                                                        |
+| travellers      | Array | Fields of the travellers. `POST /project-travellers-create` only writes the `text` and `number` ones                         |
+| invoices        | Array | Fields of the invoices                                                                                                       |
+| payment_methods | Array | Payment methods of the account, one entry each. The `reference` is the `payment_method` of `POST /deposits-create`. Empty while the account uses the Ezus default ones |
+| options         | Array | Option labels an item can carry, one entry each. Empty while the account uses the Ezus default ones                         |
+| texts           | Array | Wordings the account renamed: `name` is its wording, `default` the Ezus one                                                  |
+
+Each field:
+
+| Property    | Type    | Description                                                                                                                                                                  |
+| ----------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| name        | String  | Display name of the field                                                                                                                                                    |
+| reference   | String  | Technical name of the field, the `name` to send in `custom_fields` on the write routes                                                                                      |
+| type        | String  | Type of the field. Possible values: `text`, `textarea`, `number`, `date`, `time`, `checkbox`, `select`, `multi_select`, `url`, `file`                                        |
+| options     | Array   | Values a `select` or `multi_select` field accepts, to write exactly as listed. `null` for the other types                                                                   |
+| default     | Mixed   | Value of a new record: a string for `text`, `textarea`, `select`, `url`; a number for `number`; `true` or `false` for `checkbox`; `"YYYY-MM-DD"` for `date`; `"HH:MM"` for `time`; an array of options for `multi_select`. `null` when none is set, and always for `file` |
+| description | String  | Description of the field. `null` when none is set                                                                                                                            |
+| family      | String  | Name of the family of the field, `General` when it has none                                                                                                                  |
+
 ## Custom Fields
 
 ```json
@@ -323,6 +636,267 @@ Each object represents a category with its associated sub-categories
 | name          | String | Name of the category                                                                         |
 | subcategories | Array  | An array of JSON objects, each representing a sub-category along with its name and reference |
 
+## Config
+
+The configuration of the account, returned by `GET /me?include=config`.
+
+```json
+"config": {
+  "project_statuses": {
+    "ongoing": [
+      {
+        "name": "Quote sent",
+        "reference": "quote_sent",
+        "color": "#00b3ff"
+      }
+    ],
+    "archived": [
+      {
+        "name": "Paid",
+        "reference": "paid",
+        "color": "#7ed321"
+      }
+    ],
+    "template": [
+      {
+        "name": "Seminar",
+        "reference": "seminar",
+        "color": "#e25050"
+      }
+    ]
+  },
+  "notes_default": {
+    "project": "Budget and dates to confirm with the client",
+    "products": "",
+    "packages": "",
+    "suppliers": "Ask for the group rates",
+    "clients": ""
+  },
+  "custom_fields": {
+    "project": [
+      {
+        "name": "Trip theme",
+        "reference": "trip-theme",
+        "type": "select",
+        "options": ["Incentive", "Seminar", "Leisure"],
+        "default": "Seminar",
+        "description": "Theme announced to the client",
+        "family": "General"
+      }
+    ],
+    "budget": [],
+    "products": [],
+    "packages": [],
+    "suppliers": [],
+    "clients": [],
+    "travellers": [],
+    "invoices": [],
+    "payment_methods": [],
+    "options": [],
+    "texts": []
+  },
+  "seasons_groups": [
+    {
+      "name": "Summer",
+      "reference": "summer",
+      "seasons": [
+        {
+          "name": "High season",
+          "reference": "high_season",
+          "limit_start": "2026-07-01",
+          "limit_end": "2026-08-31",
+          "is_yearly": true
+        }
+      ]
+    }
+  ],
+  "step_categories": {
+    "accommodation": [
+      {
+        "name": "Hotel",
+        "reference": "hotel",
+        "is_favorite": true,
+        "custom_fields": [
+          {
+            "name": "Check-in time",
+            "reference": "check-in-time",
+            "type": "time",
+            "options": null,
+            "default": "15:00",
+            "description": null
+          }
+        ]
+      }
+    ],
+    "transport": [],
+    "activity": [],
+    "extra": []
+  },
+  "languages": {
+    "default": "french",
+    "library": [
+      { "code": "fr", "name": "french", "label": "French" },
+      { "code": "us", "name": "american", "label": "English (US)" }
+    ]
+  },
+  "currencies": {
+    "reference": "EUR",
+    "catalog": "EUR",
+    "projects": "USD",
+    "library": [
+      { "code": "EUR", "name": "Euro", "rate": 1 },
+      { "code": "USD", "name": "US dollar", "rate": 1.08 },
+      { "code": "CHF", "name": "Swiss franc", "rate": 2.2223 }
+    ]
+  },
+  "invoice_numbering": [
+    {
+      "counter_name": "Invoices",
+      "format": "$$yyyy$$$$mm$$$$n$$",
+      "counter_size": 4,
+      "next_number": 208,
+      "reset": "never"
+    }
+  ],
+  "reference_numbering": {
+    "enabled": true,
+    "projects": [
+      {
+        "counter_name": "MICE",
+        "format": "$$yyyy$$$$mm$$$$n$$-MICE$$ppp$$",
+        "counter_size": 5,
+        "next_number": 12,
+        "reset": "yearly"
+      }
+    ],
+    "clients": [],
+    "suppliers": []
+  },
+  "legal_entity": {
+    "company_name": "E-Corp Travels",
+    "contact": {
+      "website": "https://e-corp.com",
+      "phone": "0601020304",
+      "email": "contact@e-corp.com"
+    },
+    "address": {
+      "label": "58 Rue de Paradis",
+      "city": "Paris",
+      "zip": "75010",
+      "country": {
+        "label": "France",
+        "code": "FR",
+        "stripe_sepa_enabled": true,
+        "electronic_invoicing_enabled": true
+      }
+    },
+    "billing": {
+      "vat_number": "FR00123456789",
+      "company_number": "12345678900011",
+      "invoice_bank": "E-Bank",
+      "invoice_location": "Paris",
+      "invoice_iban": "FR76 3000 6000 0112 3456 7890 189",
+      "invoice_bic": "AGRIFRPP"
+    }
+  },
+  "default": {
+    "lang": "french",
+    "client_type": "enterprise",
+    "activity_start": "09:00:00",
+    "activity_end": "18:00:00",
+    "activity_hours": "start_and_end",
+    "step_title_accommodation_transportation": "supplier_name",
+    "step_title_activity": "product_name",
+    "step_description": "short",
+    "price_display": "excluded_taxes",
+    "margin_based_on": "sales_price",
+    "margin_rate": 20,
+    "margin_calculation": "per_product",
+    "price_update_behavior": "adjust_margin_rate",
+    "is_margin_rate_per_client_enabled": true,
+    "vat_regime": "classic",
+    "vat_rate": 20,
+    "vat_rate_margin": 20,
+    "vat_classic_calculation_mode": "line",
+    "vat_not_applicable_is_recoverable": false,
+    "commission_based_on": "sales_price",
+    "project_global_supplements": {
+      "fees": 1452,
+      "fees_type": "flat",
+      "discount": 10,
+      "discount_type": "percentage"
+    },
+    "purchase_invoices_based_on": "total_invoiced_purchase_price",
+    "purchase_invoices_due_date": "day_plus_30",
+    "create_payment_after_invoice": true,
+    "paid_invoice_mention": null
+  },
+  "users": [
+    {
+      "reference": "tommy@e-corp.com",
+      "first_name": "Tommy",
+      "last_name": "Atkins",
+      "email": "tommy@e-corp.com",
+      "role": "admin",
+      "is_active": true,
+      "is_technical_user": false
+    }
+  ],
+  "users_deleted": [
+    {
+      "reference": "former@e-corp.com",
+      "first_name": "Paul",
+      "last_name": "Martin",
+      "email": "former@e-corp.com",
+      "role": "user",
+      "is_technical_user": false
+    }
+  ]
+}
+```
+
+<aside class="notice">
+A <code>reference</code> is the value the other routes accept for that entity, as it is. Statuses, custom fields and step categories come in the order the account set in its settings. A list is empty rather than <code>null</code> when the account has nothing configured. Closed sets are technical values in English, never translated labels.
+</aside>
+
+| Property         | Type | Description                                                                                  |
+| ---------------- | ---- | -------------------------------------------------------------------------------------------- |
+| project_statuses | JSON | Project statuses of the account, per group ([Project Statuses](#nested-resources-project-statuses)) |
+| notes_default    | JSON | Notes a new project, product, package, supplier or client starts with ([Default Notes](#nested-resources-default-notes)) |
+| custom_fields    | JSON | Custom fields of the account, per object type ([Custom Field Definitions](#nested-resources-custom-field-definitions)) |
+| seasons_groups   | Array | Preset seasons of the account, per group ([Seasons Groups](#nested-resources-seasons-groups)) |
+| step_categories  | JSON | Step categories of the account, per step type ([Step Categories](#nested-resources-step-categories)) |
+| languages        | JSON | Default and active languages of the account ([Account Languages](#nested-resources-account-languages)) |
+| currencies       | JSON | Currency settings and exchange rates of the account ([Account Currencies](#nested-resources-account-currencies)) |
+| invoice_numbering   | Array | Counters numbering the invoices of the account ([Invoice Numbering](#nested-resources-invoice-numbering)) |
+| reference_numbering | JSON | Counters of the automatic references of projects, clients and suppliers ([Reference Numbering](#nested-resources-reference-numbering)) |
+| legal_entity        | JSON | Company, contact, address and billing details of the account ([Legal Entity](#nested-resources-legal-entity)) |
+| default             | JSON | Business defaults of the account, the settings a new record and its prices are computed with ([Account Defaults](#nested-resources-account-defaults)) |
+| users               | Array | Users of the account ([Account Users](#nested-resources-account-users))                     |
+| users_deleted       | Array | Deleted users of the account, who may still own records ([Account Deleted Users](#nested-resources-account-deleted-users)) |
+
+## Default Notes
+
+The notes a new record starts with, one per object, as set in the settings of the account. Plain text, line breaks as `\n`.
+
+```json
+"notes_default": {
+  "project": "Budget and dates to confirm with the client",
+  "products": "",
+  "packages": "",
+  "suppliers": "Ask for the group rates",
+  "clients": ""
+}
+```
+
+| Property  | Type   | Description                                                     |
+| --------- | ------ | --------------------------------------------------------------- |
+| project   | String | Default notes of a new project, `""` when none is set           |
+| products  | String | Default notes of a new catalog product, `""` when none is set   |
+| packages  | String | Default notes of a new package, `""` when none is set           |
+| suppliers | String | Default notes of a new supplier, `""` when none is set          |
+| clients   | String | Default notes of a new client, `""` when none is set            |
+
 ## Destination
 
 ```json
@@ -372,6 +946,22 @@ Each object represents a destination with its associated sub-destinations
 | name            | String | Name of the destination                                                                         |
 | subdestinations | Array  | An array of JSON objects, each representing a sub-destination along with its name and reference |
 | langs           | Array  | Array of JSON langs ([Langs](#nested-resources-langs)) - only name supported in this case       |
+
+## Invoice Numbering
+
+The counters numbering the invoices of the account when they are finalized, each shaped as a [Numbering Counter](#nested-resources-numbering-counter), the default one first. An empty list when the account has none.
+
+```json
+"invoice_numbering": [
+  {
+    "counter_name": "Invoices",
+    "format": "$$yyyy$$$$mm$$$$n$$",
+    "counter_size": 4,
+    "next_number": 208,
+    "reset": "never"
+  }
+]
+```
 
 ## Invoices Amounts
 
@@ -497,6 +1087,84 @@ The fields `purchase_price`, `purchase_price_excl_taxes`, `sales_price`, and `sa
 | short_description | String | Short description of the object in this language                                                                                                  |
 | long_description  | String | Long description of the object in this language                                                                                                   |
 
+## Legal Entity
+
+The company the account invoices as. A value the account never filled is `null`.
+
+```json
+"legal_entity": {
+  "company_name": "E-Corp Travels",
+  "contact": {
+    "website": "https://e-corp.com",
+    "phone": "0601020304",
+    "email": "contact@e-corp.com"
+  },
+  "address": {
+    "label": "58 Rue de Paradis",
+    "city": "Paris",
+    "zip": "75010",
+    "country": {
+      "label": "France",
+      "code": "FR",
+      "stripe_sepa_enabled": true,
+      "electronic_invoicing_enabled": true
+    }
+  },
+  "billing": {
+    "vat_number": "FR00123456789",
+    "company_number": "12345678900011",
+    "invoice_bank": "E-Bank",
+    "invoice_location": "Paris",
+    "invoice_iban": "FR76 3000 6000 0112 3456 7890 189",
+    "invoice_bic": "AGRIFRPP"
+  }
+}
+```
+
+| Property     | Type   | Description                          |
+| ------------ | ------ | ------------------------------------ |
+| company_name | String | Company name                         |
+| contact      | JSON   | Website, phone and generic email     |
+| address      | JSON   | Address of the company               |
+| billing      | JSON   | Details printed on its invoices      |
+
+`contact`:
+
+| Property | Type   | Description             |
+| -------- | ------ | ----------------------- |
+| website  | String | Website of the company  |
+| phone    | String | Phone of the company    |
+| email    | String | Generic email of the company |
+
+`address`:
+
+| Property | Type   | Description                                              |
+| -------- | ------ | -------------------------------------------------------- |
+| label    | String | Street address                                           |
+| city     | String | City                                                     |
+| zip      | String | Postal code                                              |
+| country  | JSON   | Country of the company. `null` when none is set          |
+
+`address.country`:
+
+| Property                     | Type    | Description                                                         |
+| ---------------------------- | ------- | ------------------------------------------------------------------- |
+| label                        | String  | English name of the country                                         |
+| code                         | String  | ISO 3166-1 alpha-2 code of the country                              |
+| stripe_sepa_enabled          | Boolean | Whether Stripe offers SEPA direct debit in this country             |
+| electronic_invoicing_enabled | Boolean | Whether Ezus supports electronic invoicing in this country          |
+
+`billing`:
+
+| Property         | Type   | Description                                   |
+| ---------------- | ------ | --------------------------------------------- |
+| vat_number       | String | VAT number of the company                     |
+| company_number   | String | Registration number of the company            |
+| invoice_bank     | String | Bank printed on the invoices                  |
+| invoice_location | String | Place of issue printed on the invoices        |
+| invoice_iban     | String | IBAN printed on the invoices                  |
+| invoice_bic      | String | BIC printed on the invoices                   |
+
 ## Medias
 
 Only the last 10 medias are returned in this object.
@@ -518,6 +1186,45 @@ Only the last 10 medias are returned in this object.
 | media_name | String | Title of the media                                                |
 | path_full  | String | Media URL. This is a pre-signed URL that expires after 30 minutes |
 
+## Numbering Counter
+
+A counter of the account, shared by [Invoice Numbering](#nested-resources-invoice-numbering) and [Reference Numbering](#nested-resources-reference-numbering). Reading it never consumes a number.
+
+```json
+{
+  "counter_name": "MICE",
+  "format": "$$yyyy$$$$mm$$$$n$$-MICE$$ppp$$",
+  "counter_size": 5,
+  "next_number": 12,
+  "reset": "yearly"
+}
+```
+
+| Property     | Type    | Description                                                                                                                      |
+| ------------ | ------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| counter_name | String  | Name of the counter. `Default` when it has none                                                                                  |
+| format       | String  | Pattern of the numbers, as stored, with the placeholders below                                                                   |
+| counter_size | Integer | Minimum number of digits of `$$n$$`, zero padded: `4` turns `12` into `0012`                                                    |
+| next_number  | Integer | Number the counter will issue next                                                                                               |
+| reset        | String  | When the counter goes back to `1`. Possible values: `never`, `monthly` (on the 1st of each month), `yearly` (on January 1st)     |
+
+The placeholders of `format`, replaced when a number is issued:
+
+| Placeholder | Replaced by                                                   |
+| ----------- | ------------------------------------------------------------- |
+| `$$yyyy$$`  | Year, 4 digits                                                |
+| `$$yy$$`    | Year, 2 digits                                                |
+| `$$mm$$`    | Month, 2 digits                                               |
+| `$$m$$`     | Month, without leading zero                                   |
+| `$$dd$$`    | Day of the month, 2 digits                                    |
+| `$$d$$`     | Day of the month, without leading zero                        |
+| `$$n$$`     | The number, padded to `counter_size` digits                   |
+| `$$c$$`     | First 3 letters of the client company name, in capitals. Projects only |
+| `$$dest$$`  | First 3 letters of the destination, in capitals. Projects only |
+| `$$p$$`     | Number of travellers. Projects only                          |
+| `$$pp$$`    | Number of travellers, 2 digits. Projects only                |
+| `$$ppp$$`   | Number of travellers, 3 digits. Projects only                |
+
 ## Products <a name="products-two"></a>
 
 Only the last 10 products are returned in this object.
@@ -538,6 +1245,171 @@ Only the last 10 products are returned in this object.
 | --------- | ------ | ---------------------------- |
 | reference | String | The reference of the product |
 | title     | String | The title of the product     |
+
+## Project Statuses
+
+The statuses a project of the account can take, in three groups. An account that never edited its statuses gets the Ezus default ones.
+
+```json
+"project_statuses": {
+  "ongoing": [
+    {
+      "name": "Quote sent",
+      "reference": "quote_sent",
+      "color": "#00b3ff"
+    }
+  ],
+  "archived": [],
+  "template": []
+}
+```
+
+| Property | Type  | Description                                                                                  |
+| -------- | ----- | -------------------------------------------------------------------------------------------- |
+| ongoing  | Array | Statuses of the projects in progress                                                         |
+| archived | Array | Statuses of the archived projects                                                            |
+| template | Array | Statuses of the templates, the projects listed with `from_programs_catalog=true` on `GET /projects` |
+
+Each status:
+
+| Property   | Type    | Description                                                                                             |
+| ---------- | ------- | ------------------------------------------------------------------------------------------------------- |
+| name       | String  | Display name of the status, as `info_stage` returns it on a project                                    |
+| reference  | String  | Technical name of the status, the value `info_stage_reference` takes on `GET /projects` and `POST /projects-upsert` |
+| color      | String  | Color of the status, hexadecimal. `null` when none is set                                               |
+
+## Reference Numbering
+
+The counters giving a reference to a project, a client or a supplier created without one, each shaped as a [Numbering Counter](#nested-resources-numbering-counter).
+
+```json
+"reference_numbering": {
+  "enabled": true,
+  "projects": [
+    {
+      "counter_name": "MICE",
+      "format": "$$yyyy$$$$mm$$$$n$$-MICE$$ppp$$",
+      "counter_size": 5,
+      "next_number": 12,
+      "reset": "yearly"
+    }
+  ],
+  "clients": [],
+  "suppliers": []
+}
+```
+
+| Property  | Type    | Description                                                                                                        |
+| --------- | ------- | ------------------------------------------------------------------------------------------------------------------ |
+| enabled   | Boolean | Whether the account gives automatic references. When `false`, the three lists are empty                           |
+| projects  | Array   | Counters of the projects, the default one first                                                                    |
+| clients   | Array   | Counters of the clients, the default one first                                                                     |
+| suppliers | Array   | Counters of the suppliers, the default one first                                                                   |
+
+## Scopes
+
+One entry per permission of the role of the user, keyed by the permission name, so the keys depend on that role. Each value is a three-digit code, one digit per action, in the order read, edit, delete.
+
+```json
+"scopes": {
+  "projects": "333",
+  "clients": "310",
+  "travellers": "333",
+  "suppliers": "333",
+  "invoices": "300",
+  "tasks": "333",
+  "catalog": "333",
+  "models": "300",
+  "library": "333",
+  "invoices_suppliers": "300",
+  "territories": "333",
+  "categories": "333",
+  "invoices_finalize": "000",
+  "invoices_stats": "000",
+  "stripe_payments": "000",
+  "projects_close": "333",
+  "steps_catalog": "333",
+  "settings": "000",
+  "billing_team": "000",
+  "export": "333",
+  "client_space": "333"
+}
+```
+
+| Digit | Access                                               |
+| ----- | ---------------------------------------------------- |
+| `0`   | None                                                 |
+| `1`   | Records the user owns                                |
+| `2`   | Records the user owns, plus the ones nobody owns     |
+| `3`   | Full                                                 |
+
+`"clients": "310"` reads as: sees every client, edits only their own, deletes none. A permission that is simply on or off, such as `invoices_finalize`, is `333` or `000`.
+
+The permissions the API serves:
+
+| Permission           | Covers                                                             |
+| -------------------- | -------------------------------------------------------------------- |
+| projects             | Projects                                                           |
+| clients              | Clients                                                            |
+| travellers           | Travellers                                                         |
+| suppliers            | Suppliers                                                          |
+| invoices             | Client invoices and deposits                                       |
+| tasks                | Tasks                                                              |
+| catalog              | Catalog: products and packages                                     |
+| models               | Document and email models                                          |
+| library              | Media library                                                      |
+| invoices_suppliers   | Supplier invoices and their payments                               |
+| territories          | Destinations and subdestinations                                   |
+| categories           | Categories                                                         |
+| invoices_finalize    | Finalizing a client invoice                                        |
+| invoices_stats       | Invoicing statistics                                               |
+| stripe_payments      | Stripe payments                                                    |
+| projects_close       | Closing a project                                                  |
+| steps_catalog        | The catalog of steps of a project                                  |
+| settings             | Account settings                                                   |
+| billing_team         | Subscription, billing and team management                          |
+| export               | Exports                                                            |
+| client_space         | The client space                                                   |
+
+A call outside the scopes of the user returns what that user may see, which can be an empty list, not an error.
+
+## Seasons Groups
+
+The preset seasons of the account, one entry per group in the order the account sorts them, each with its seasons in their order. A season carries the keys of a seasonal tariff, ready to send on `POST /product-seasons-upsert`.
+
+```json
+"seasons_groups": [
+  {
+    "name": "Summer",
+    "reference": "summer",
+    "seasons": [
+      {
+        "name": "High season",
+        "reference": "high_season",
+        "limit_start": "2026-07-01",
+        "limit_end": "2026-08-31",
+        "is_yearly": true
+      }
+    ]
+  }
+]
+```
+
+| Property  | Type   | Description                                     |
+| --------- | ------ | ----------------------------------------------- |
+| name      | String | Display name of the group                       |
+| reference | String | Technical name of the group, unique in the account |
+| seasons   | Array  | Seasons of the group. Empty when it has none    |
+
+Each season:
+
+| Property    | Type    | Description                                                                                       |
+| ----------- | ------- | ------------------------------------------------------------------------------------------------- |
+| name        | String  | Display name of the season, the `name` of a seasonal tariff                                       |
+| reference   | String  | Technical name of the season, unique in the account                                               |
+| limit_start | String  | Start date of the season, `"YYYY-MM-DD"`. `null` when none is set                                  |
+| limit_end   | String  | End date of the season, `"YYYY-MM-DD"`. `null` when none is set                                    |
+| is_yearly   | Boolean | Whether the season recurs every year: only the day and month of its dates count                  |
 
 ## Steps
 
@@ -608,6 +1480,51 @@ The steps are sorted by their creation date, with the most recently created appe
 | items         | Array  | Array of JSON items ([Items](#nested-resources-items))                                                                                                                                         |
 | medias        | Array  | Array of strings representing the images URLs associated with the step                                                                                                                         |
 | custom_fields | Array  | Array of JSON custom fields ([Custom fields](#nested-resources-custom-fields))                                                                                                                 |
+
+## Step Categories
+
+The categories a step of the account can take, one list per step type, each with the custom fields its steps carry. Extra steps share the categories of the activity steps, so `extra` lists the same ones as `activity`.
+
+```json
+"step_categories": {
+  "accommodation": [
+    {
+      "name": "Hotel",
+      "reference": "hotel",
+      "is_favorite": true,
+      "custom_fields": [
+        {
+          "name": "Check-in time",
+          "reference": "check-in-time",
+          "type": "time",
+          "options": null,
+          "default": "15:00",
+          "description": null
+        }
+      ]
+    }
+  ],
+  "transport": [],
+  "activity": [],
+  "extra": []
+}
+```
+
+| Property      | Type  | Description                                                                             |
+| ------------- | ----- | --------------------------------------------------------------------------------------- |
+| accommodation | Array | Categories of the accommodation steps, `type` `accom` on `POST /project-steps-upsert`   |
+| transport     | Array | Categories of the transport steps, `type` `transport` on `POST /project-steps-upsert`  |
+| activity      | Array | Categories of the activity steps, `type` `activity` on `POST /project-steps-upsert`    |
+| extra         | Array | Categories of the extra steps, the same as `activity`                                   |
+
+Each category:
+
+| Property      | Type    | Description                                                                                                                   |
+| ------------- | ------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| name          | String  | Display name of the category, as `category` returns it on `GET /project-steps`                                               |
+| reference     | String  | Technical name of the category, the `category` to send on `POST /project-steps-upsert` with a step of that type               |
+| is_favorite   | Boolean | Whether it is the default category of its step type, the one a step created without `category` gets                          |
+| custom_fields | Array   | Custom fields of the steps of this category, each shaped as a field of [Custom Field Definitions](#nested-resources-custom-field-definitions), without `family`. Empty when it has none |
 
 ## Supplements
 
@@ -824,6 +1741,20 @@ Only the last 10 suppliers are returned in this object.
 | limit_end      | String  | Indicates the end point of a tariff rule either the end date of a seasonal tariff or the upper bound of a level for a custom tariff. When set to Infinity, it designates the final level of a flat-rate or open-ended tariff. |
 | is_yearly      | Boolean | Indicates if the seasonal tariff recurs every year . This field is only applicable when `type` is `season`, For `default` or `custom` tariffs, this field is always `false`.                                                  | Is it recurring from one year to the next? |
 | children       | Array   | Children are sub-tariffs contained by this tariff. They may be seasonal tariff or default tariff when they are flat rate tariff.                                                                                              |
+
+## Token
+
+```json
+"token": {
+  "issued_at": "2026-09-19T10:00:00Z",
+  "expires_at": "2026-09-19T22:00:00Z"
+}
+```
+
+| Property   | Type   | Description                     |
+| ---------- | ------ | ------------------------------- |
+| issued_at  | String | When the token was issued, UTC  |
+| expires_at | String | When the token expires, UTC     |
 
 ## User
 
