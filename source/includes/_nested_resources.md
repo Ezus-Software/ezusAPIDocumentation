@@ -14,6 +14,69 @@
 | name     | String | Company name of the account     |
 | currency | String | Default currency of the account |
 
+## Account Currencies
+
+The currencies of the account and their exchange rates.
+
+```json
+"currencies": {
+  "reference": "EUR",
+  "catalog": "EUR",
+  "projects": "USD",
+  "library": [
+    { "code": "EUR", "name": "Euro", "rate": 1 },
+    { "code": "USD", "name": "US dollar", "rate": 1.08 },
+    { "code": "CHF", "name": "Swiss franc", "rate": 2.2223 }
+  ]
+}
+```
+
+<aside class="notice">
+A <code>rate</code> is the amount of that currency worth 1 unit of the <code>reference</code> currency: with <code>EUR</code> as reference, <code>"rate": 2.2223</code> for <code>CHF</code> means 2.2223 CHF = 1 EUR, so 100 EUR convert to 222.23 CHF and 100 CHF to 45.00 EUR.
+</aside>
+
+| Property  | Type   | Description                                                                                                  |
+| --------- | ------ | ------------------------------------------------------------------------------------------------------------ |
+| reference | String | Code of the reference currency, the one every rate is quoted against. The same as `currency` in [Account](#nested-resources-account) |
+| catalog   | String | Code of the default currency of new catalog products                                                          |
+| projects  | String | Code of the default sales currency of new projects                                                            |
+| library   | Array  | Currencies of the account, the reference first, then in the order they were added                           |
+
+Each currency:
+
+| Property | Type   | Description                                                                                   |
+| -------- | ------ | --------------------------------------------------------------------------------------------- |
+| code     | String | Code of the currency, as the `currency` of the write routes takes it. ISO 4217, except for a few Ezus codes such as `CFA` or `BTC` |
+| name     | String | English name of the currency                                                                  |
+| rate     | Number | Amount of this currency worth 1 unit of the reference currency. `1` for the reference itself |
+
+## Account Languages
+
+The languages the account writes its descriptions in.
+
+```json
+"languages": {
+  "default": "french",
+  "library": [
+    { "code": "fr", "name": "french", "label": "French" },
+    { "code": "us", "name": "american", "label": "English (US)" }
+  ]
+}
+```
+
+| Property | Type   | Description                                                                                         |
+| -------- | ------ | --------------------------------------------------------------------------------------------------- |
+| default  | String | `name` of the default language of the account, the one a new project is written in                |
+| library  | Array  | Languages activated in the language library of the account                                         |
+
+Each language:
+
+| Property | Type   | Description                                                                                                                   |
+| -------- | ------ | ----------------------------------------------------------------------------------------------------------------------------- |
+| code     | String | Short code of the language. Possible values: `fr`, `en`, `us`, `es`, `it`, `pt`, `de`, `nl`, `no`, `cu` (the custom language) |
+| name     | String | Name of the language, the `lang` of a [Langs](#nested-resources-langs) entry on the write routes                              |
+| label    | String | English label of the language                                                                                                 |
+
 ## Account Tags
 
 The tags an account defined, one list per kind of record. `POST /products-upsert` and `POST /suppliers-upsert` take the `reference` in `tags`, and `GET /tags` returns the same tags.
@@ -517,6 +580,23 @@ The configuration of the account, returned by `GET /me?include=config`.
     "transport": [],
     "activity": [],
     "extra": []
+  },
+  "languages": {
+    "default": "french",
+    "library": [
+      { "code": "fr", "name": "french", "label": "French" },
+      { "code": "us", "name": "american", "label": "English (US)" }
+    ]
+  },
+  "currencies": {
+    "reference": "EUR",
+    "catalog": "EUR",
+    "projects": "USD",
+    "library": [
+      { "code": "EUR", "name": "Euro", "rate": 1 },
+      { "code": "USD", "name": "US dollar", "rate": 1.08 },
+      { "code": "CHF", "name": "Swiss franc", "rate": 2.2223 }
+    ]
   }
 }
 ```
@@ -531,6 +611,8 @@ A <code>reference</code> is the value the other routes accept for that entity, a
 | custom_fields    | JSON | Custom fields of the account, per object type ([Custom Field Definitions](#nested-resources-custom-field-definitions)) |
 | tags             | JSON | Tags of the account, per kind of record ([Account Tags](#nested-resources-account-tags))     |
 | step_categories  | JSON | Step categories of the account, per step type ([Step Categories](#nested-resources-step-categories)) |
+| languages        | JSON | Default and active languages of the account ([Account Languages](#nested-resources-account-languages)) |
+| currencies       | JSON | Currency settings and exchange rates of the account ([Account Currencies](#nested-resources-account-currencies)) |
 
 ## Destination
 
