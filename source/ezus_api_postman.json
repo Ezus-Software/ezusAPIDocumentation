@@ -669,6 +669,11 @@
               "disabled": true
             },
             {
+              "key": "include_tariffs",
+              "value": "true",
+              "disabled": true
+            },
+            {
               "key": "reference",
               "value": "product_reference",
               "disabled": true
