@@ -230,7 +230,7 @@ axios.get(baseUrl + "/me", headers);
 
 | Parameter | Type   | Description                                                                                                                                      |
 | --------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------ |
-| include   | String | Comma-separated list of objects to add to the response. Possible values: `config`. Without it, the response carries no `config` object |
+| include   | String | Comma-separated list of objects to add to the response. Possible values: `config`. Without it, the response carries no `config` object; any other value is refused with an error |
 
 ### Response
 

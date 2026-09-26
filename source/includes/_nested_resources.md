@@ -212,6 +212,32 @@ Each tag:
 | name      | String | Display name of the tag    |
 | reference | String | Technical name of the tag  |
 
+## Account Users
+
+The users of the account, in the order they were created. A deactivated user is listed with `is_active` `false`; a deleted one is not listed.
+
+```json
+"users": [
+  {
+    "reference": "tommy@e-corp.com",
+    "first_name": "Tommy",
+    "last_name": "Atkins",
+    "email": "tommy@e-corp.com",
+    "role": "admin",
+    "is_active": true
+  }
+]
+```
+
+| Property   | Type    | Description                                                                                                  |
+| ---------- | ------- | ------------------------------------------------------------------------------------------------------------ |
+| reference  | String  | Identifier of the user on the write routes: the `sales_manager_email` of `POST /projects-upsert`, the `user` of `POST /clients-upsert` |
+| first_name | String  | First name of the user, `""` when none is set                                                                |
+| last_name  | String  | Last name of the user, `""` when none is set                                                                 |
+| email      | String  | Email of the user                                                                                            |
+| role       | String  | Role of the user, as `role` in [Authenticated User](#nested-resources-authenticated-user)                    |
+| is_active  | Boolean | Whether the user is active, `false` once deactivated                                                        |
+
 ## Authenticated User
 
 ```json
@@ -727,6 +753,33 @@ The configuration of the account, returned by `GET /me?include=config`.
     "clients": [],
     "suppliers": []
   },
+  "legal_entity": {
+    "company_name": "E-Corp Travels",
+    "contact": {
+      "website": "https://e-corp.com",
+      "phone": "0601020304",
+      "email": "contact@e-corp.com"
+    },
+    "address": {
+      "label": "58 Rue de Paradis",
+      "city": "Paris",
+      "zip": "75010",
+      "country": {
+        "label": "France",
+        "code": "FR",
+        "stripe_sepa_enabled": true,
+        "electronic_invoicing_enabled": true
+      }
+    },
+    "billing": {
+      "vat_number": "FR00123456789",
+      "company_number": "12345678900011",
+      "invoice_bank": "E-Bank",
+      "invoice_location": "Paris",
+      "invoice_iban": "FR76 3000 6000 0112 3456 7890 189",
+      "invoice_bic": "AGRIFRPP"
+    }
+  },
   "default": {
     "lang": "french",
     "client_type": "enterprise",
@@ -758,12 +811,22 @@ The configuration of the account, returned by `GET /me?include=config`.
     "purchase_invoices_due_date": "day_plus_30",
     "create_payment_after_invoice": true,
     "paid_invoice_mention": null
-  }
+  },
+  "users": [
+    {
+      "reference": "tommy@e-corp.com",
+      "first_name": "Tommy",
+      "last_name": "Atkins",
+      "email": "tommy@e-corp.com",
+      "role": "admin",
+      "is_active": true
+    }
+  ]
 }
 ```
 
 <aside class="notice">
-A <code>reference</code> is the value the other routes accept for that entity, as it is. Lists are sorted by <code>sort_order</code>, ascending, and are empty rather than <code>null</code> when the account has nothing configured. Closed sets are technical values in English, never translated labels.
+A <code>reference</code> is the value the other routes accept for that entity, as it is. Statuses, custom fields and step categories are sorted by <code>sort_order</code>, ascending. A list is empty rather than <code>null</code> when the account has nothing configured. Closed sets are technical values in English, never translated labels.
 </aside>
 
 | Property         | Type | Description                                                                                  |
@@ -776,7 +839,9 @@ A <code>reference</code> is the value the other routes accept for that entity, a
 | currencies       | JSON | Currency settings and exchange rates of the account ([Account Currencies](#nested-resources-account-currencies)) |
 | invoice_numbering   | JSON | Counter numbering the invoices of the account ([Invoice Numbering](#nested-resources-invoice-numbering)). `null` when the account has none |
 | reference_numbering | JSON | Counters of the automatic references of projects, clients and suppliers ([Reference Numbering](#nested-resources-reference-numbering)) |
+| legal_entity        | JSON | Company, contact, address and billing details of the account ([Legal Entity](#nested-resources-legal-entity)) |
 | default             | JSON | Business defaults of the account, the settings a new record and its prices are computed with ([Account Defaults](#nested-resources-account-defaults)) |
+| users               | Array | Users of the account ([Account Users](#nested-resources-account-users))                     |
 
 ## Destination
 
@@ -965,6 +1030,84 @@ The fields `purchase_price`, `purchase_price_excl_taxes`, `sales_price`, and `sa
 | name              | String | Title of the object in this language                                                                                                              |
 | short_description | String | Short description of the object in this language                                                                                                  |
 | long_description  | String | Long description of the object in this language                                                                                                   |
+
+## Legal Entity
+
+The company the account invoices as. A value the account never filled is `null`.
+
+```json
+"legal_entity": {
+  "company_name": "E-Corp Travels",
+  "contact": {
+    "website": "https://e-corp.com",
+    "phone": "0601020304",
+    "email": "contact@e-corp.com"
+  },
+  "address": {
+    "label": "58 Rue de Paradis",
+    "city": "Paris",
+    "zip": "75010",
+    "country": {
+      "label": "France",
+      "code": "FR",
+      "stripe_sepa_enabled": true,
+      "electronic_invoicing_enabled": true
+    }
+  },
+  "billing": {
+    "vat_number": "FR00123456789",
+    "company_number": "12345678900011",
+    "invoice_bank": "E-Bank",
+    "invoice_location": "Paris",
+    "invoice_iban": "FR76 3000 6000 0112 3456 7890 189",
+    "invoice_bic": "AGRIFRPP"
+  }
+}
+```
+
+| Property     | Type   | Description                          |
+| ------------ | ------ | ------------------------------------ |
+| company_name | String | Company name                         |
+| contact      | JSON   | Website, phone and generic email     |
+| address      | JSON   | Address of the company               |
+| billing      | JSON   | Details printed on its invoices      |
+
+`contact`:
+
+| Property | Type   | Description             |
+| -------- | ------ | ----------------------- |
+| website  | String | Website of the company  |
+| phone    | String | Phone of the company    |
+| email    | String | Generic email of the company |
+
+`address`:
+
+| Property | Type   | Description                                              |
+| -------- | ------ | -------------------------------------------------------- |
+| label    | String | Street address                                           |
+| city     | String | City                                                     |
+| zip      | String | Postal code                                              |
+| country  | JSON   | Country of the company. `null` when none is set          |
+
+`address.country`:
+
+| Property                     | Type    | Description                                                         |
+| ---------------------------- | ------- | ------------------------------------------------------------------- |
+| label                        | String  | English name of the country                                         |
+| code                         | String  | ISO 3166-1 alpha-2 code of the country                              |
+| stripe_sepa_enabled          | Boolean | Whether Stripe offers SEPA direct debit in this country             |
+| electronic_invoicing_enabled | Boolean | Whether Ezus supports electronic invoicing in this country          |
+
+`billing`:
+
+| Property         | Type   | Description                                   |
+| ---------------- | ------ | --------------------------------------------- |
+| vat_number       | String | VAT number of the company                     |
+| company_number   | String | Registration number of the company            |
+| invoice_bank     | String | Bank printed on the invoices                  |
+| invoice_location | String | Place of issue printed on the invoices        |
+| invoice_iban     | String | IBAN printed on the invoices                  |
+| invoice_bic      | String | BIC printed on the invoices                   |
 
 ## Medias
 
