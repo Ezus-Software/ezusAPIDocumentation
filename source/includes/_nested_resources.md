@@ -100,8 +100,8 @@ Steps:
 
 | Property                                | Type   | Description                                                                                                   |
 | --------------------------------------- | ------ | ------------------------------------------------------------------------------------------------------------- |
-| activity_start                          | String | Start time of a new activity step, `"HH:MM:SS"`. `null` when none is set                                      |
-| activity_end                            | String | End time of a new activity step, `"HH:MM:SS"`. `null` when none is set                                        |
+| activity_start                          | String | Start time of a new activity step, `"HH:MM:SS"`. `null` when `activity_hours` is `none`                       |
+| activity_end                            | String | End time of a new activity step, `"HH:MM:SS"`. `null` unless `activity_hours` is `start_and_end`              |
 | activity_hours                          | String | Hours a new activity step gets. Possible values: `none` (no time), `start_only` (`activity_start`, no end), `start_and_end` |
 | step_title_accommodation_transportation | String | Title of a new accommodation or transport step. Possible values: `supplier_name`, `product_name`             |
 | step_title_activity                     | String | Title of a new activity or extra step. Possible values: `supplier_name`, `product_name`                      |
@@ -184,33 +184,6 @@ Each language:
 | code     | String | Short code of the language. Possible values: `fr`, `en`, `us`, `es`, `it`, `pt`, `de`, `nl`, `no`, `cu` (the custom language) |
 | name     | String | Name of the language, the `lang` of a [Langs](#nested-resources-langs) entry on the write routes                              |
 | label    | String | English label of the language                                                                                                 |
-
-## Account Tags
-
-The tags an account defined, one list per kind of record. `POST /products-upsert` and `POST /suppliers-upsert` take the `reference` in `tags`, and `GET /tags` returns the same tags.
-
-```json
-"tags": {
-  "products": [{ "name": "Seaside", "reference": "seaside" }],
-  "packages": [],
-  "suppliers": [],
-  "clients": []
-}
-```
-
-| Property  | Type  | Description           |
-| --------- | ----- | --------------------- |
-| products  | Array | Tags of the products  |
-| packages  | Array | Tags of the packages  |
-| suppliers | Array | Tags of the suppliers |
-| clients   | Array | Tags of the clients   |
-
-Each tag:
-
-| Property  | Type   | Description                |
-| --------- | ------ | -------------------------- |
-| name      | String | Display name of the tag    |
-| reference | String | Technical name of the tag  |
 
 ## Account Users
 
@@ -687,12 +660,6 @@ The configuration of the account, returned by `GET /me?include=config`.
     "options": [],
     "texts": []
   },
-  "tags": {
-    "products": [{ "name": "Seaside", "reference": "seaside" }],
-    "packages": [],
-    "suppliers": [],
-    "clients": []
-  },
   "step_categories": {
     "accommodation": [
       {
@@ -833,7 +800,6 @@ A <code>reference</code> is the value the other routes accept for that entity, a
 | ---------------- | ---- | -------------------------------------------------------------------------------------------- |
 | project_statuses | JSON | Project statuses of the account, per group ([Project Statuses](#nested-resources-project-statuses)) |
 | custom_fields    | JSON | Custom fields of the account, per object type ([Custom Field Definitions](#nested-resources-custom-field-definitions)) |
-| tags             | JSON | Tags of the account, per kind of record ([Account Tags](#nested-resources-account-tags))     |
 | step_categories  | JSON | Step categories of the account, per step type ([Step Categories](#nested-resources-step-categories)) |
 | languages        | JSON | Default and active languages of the account ([Account Languages](#nested-resources-account-languages)) |
 | currencies       | JSON | Currency settings and exchange rates of the account ([Account Currencies](#nested-resources-account-currencies)) |
