@@ -50,6 +50,114 @@ Each currency:
 | name     | String | English name of the currency                                                                  |
 | rate     | Number | Amount of this currency worth 1 unit of the reference currency. `1` for the reference itself |
 
+## Account Defaults
+
+The settings of the account a new record is created with and its prices, margins and VAT are computed with. A setting the account never changed carries the value Ezus applies.
+
+```json
+"default": {
+  "lang": "french",
+  "client_type": "enterprise",
+  "activity_start": "09:00:00",
+  "activity_end": "18:00:00",
+  "activity_hours": "start_and_end",
+  "step_title_accommodation_transportation": "supplier_name",
+  "step_title_activity": "product_name",
+  "step_description": "short",
+  "price_display": "excluded_taxes",
+  "margin_based_on": "sales_price",
+  "margin_rate": 20,
+  "margin_calculation": "per_product",
+  "price_update_behavior": "adjust_margin_rate",
+  "is_margin_rate_per_client_enabled": true,
+  "vat_regime": "classic",
+  "vat_rate": 20,
+  "vat_rate_margin": 20,
+  "vat_classic_calculation_mode": "line",
+  "vat_not_applicable_is_recoverable": false,
+  "commission_based_on": "sales_price",
+  "project_global_supplements": {
+    "fees": 1452,
+    "fees_type": "flat",
+    "discount": 10,
+    "discount_type": "percentage"
+  },
+  "purchase_invoices_based_on": "total_invoiced_purchase_price",
+  "purchase_invoices_due_date": "day_plus_30",
+  "create_payment_after_invoice": true,
+  "paid_invoice_mention": null
+}
+```
+
+General:
+
+| Property    | Type   | Description                                                                                               |
+| ----------- | ------ | --------------------------------------------------------------------------------------------------------- |
+| lang        | String | Default language, as the `name` of [Account Languages](#nested-resources-account-languages)              |
+| client_type | String | Type of a new client. Possible values: `enterprise`, `individual`, as the `type` of a client             |
+
+Steps:
+
+| Property                                | Type   | Description                                                                                                   |
+| --------------------------------------- | ------ | ------------------------------------------------------------------------------------------------------------- |
+| activity_start                          | String | Start time of a new activity step, `"HH:MM:SS"`. `null` when none is set                                      |
+| activity_end                            | String | End time of a new activity step, `"HH:MM:SS"`. `null` when none is set                                        |
+| activity_hours                          | String | Hours a new activity step gets. Possible values: `none` (no time), `start_only` (`activity_start`, no end), `start_and_end` |
+| step_title_accommodation_transportation | String | Title of a new accommodation or transport step. Possible values: `supplier_name`, `product_name`             |
+| step_title_activity                     | String | Title of a new activity or extra step. Possible values: `supplier_name`, `product_name`                      |
+| step_description                        | String | Description a new step takes from its product. Possible values: `short`, `long`. `null` when none is set      |
+
+Budget:
+
+| Property                          | Type    | Description                                                                                                                                     |
+| --------------------------------- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| price_display                     | String  | Prices shown in the budget. Possible values: `excluded_taxes`, `included_taxes`                                                                 |
+| margin_based_on                   | String  | Price the margin rate is shown against. Possible values: `sales_price`, `purchase_price`                                                        |
+| margin_rate                       | Number  | Default margin rate, in percent of the sales price whatever `margin_based_on`: a sales price is the purchase price divided by `1 - margin_rate / 100` |
+| margin_calculation                | String  | How the margin of a project is computed. Possible values: `per_product`, `global`                                                              |
+| price_update_behavior             | String  | What changes when a price of a product is edited. Possible values: `adjust_margin_rate` (the margin rate follows), `keep_margin_rate` (the other price follows). `null` when none is set |
+| is_margin_rate_per_client_enabled | Boolean | Whether a client can carry a margin rate of its own                                                                                            |
+
+VAT:
+
+| Property                          | Type    | Description                                                                                                                                     |
+| --------------------------------- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| vat_regime                        | String  | VAT regime. Possible values: `margin` (VAT on the margin), `classic`, `not_applicable`. `null` when none is set                                |
+| vat_rate                          | Number  | Default VAT rate, in percent                                                                                                                    |
+| vat_rate_margin                   | Number  | VAT rate applied to the margin and to the fees, in percent                                                                                     |
+| vat_classic_calculation_mode      | String  | Rate the `classic` regime applies. Possible values: `line` (the rate of each line), `vat_rate_margin`, `vat_rate`                              |
+| vat_not_applicable_is_recoverable | Boolean | Whether the purchase VAT is recovered under the `not_applicable` regime                                                                        |
+
+Commission and fees:
+
+| Property                   | Type   | Description                                                                                          |
+| -------------------------- | ------ | ---------------------------------------------------------------------------------------------------- |
+| commission_based_on        | String | Price a commission in percent applies to. Possible values: `sales_price`, `purchase_price`           |
+| project_global_supplements | JSON   | Fee and discount of a new project                                                                    |
+
+`project_global_supplements`:
+
+| Property      | Type   | Description                                                                                 |
+| ------------- | ------ | ------------------------------------------------------------------------------------------- |
+| fees          | Number | Amount of the fee: a percentage or an amount in the reference currency, per `fees_type`     |
+| fees_type     | String | Possible values: `percentage`, `flat`                                                       |
+| discount      | Number | Amount of the discount: a percentage or an amount in the reference currency, per `discount_type` |
+| discount_type | String | Possible values: `percentage`, `flat`                                                       |
+
+Purchases:
+
+| Property                   | Type   | Description                                                                                                                                  |
+| -------------------------- | ------ | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| purchase_invoices_based_on | String | Purchase total the finances of a new project are computed from: the budget or the supplier invoices. Possible values: `total_forecast_purchase_price`, `total_invoiced_purchase_price`. `null` when none is set |
+| purchase_invoices_due_date | String | Due date of a new supplier invoice. Possible values: `none`, `day` (its invoice date), `day_plus_1`, `day_plus_2`, `day_plus_3`, `day_plus_4`, `day_plus_5`, `day_plus_7`, `day_plus_14`, `day_plus_30`, `day_plus_60`, `day_plus_90` |
+
+Sales:
+
+| Property                     | Type    | Description                                                                                       |
+| ---------------------------- | ------- | ------------------------------------------------------------------------------------------------- |
+| create_payment_after_invoice | Boolean | Whether a client payment is created with a new invoice                                            |
+| paid_invoice_mention         | String  | Mention stamped on a paid invoice. Possible values: `paid`, `settled`. `null` when none           |
+
 ## Account Languages
 
 The languages the account writes its descriptions in.
@@ -618,6 +726,38 @@ The configuration of the account, returned by `GET /me?include=config`.
     ],
     "clients": [],
     "suppliers": []
+  },
+  "default": {
+    "lang": "french",
+    "client_type": "enterprise",
+    "activity_start": "09:00:00",
+    "activity_end": "18:00:00",
+    "activity_hours": "start_and_end",
+    "step_title_accommodation_transportation": "supplier_name",
+    "step_title_activity": "product_name",
+    "step_description": "short",
+    "price_display": "excluded_taxes",
+    "margin_based_on": "sales_price",
+    "margin_rate": 20,
+    "margin_calculation": "per_product",
+    "price_update_behavior": "adjust_margin_rate",
+    "is_margin_rate_per_client_enabled": true,
+    "vat_regime": "classic",
+    "vat_rate": 20,
+    "vat_rate_margin": 20,
+    "vat_classic_calculation_mode": "line",
+    "vat_not_applicable_is_recoverable": false,
+    "commission_based_on": "sales_price",
+    "project_global_supplements": {
+      "fees": 1452,
+      "fees_type": "flat",
+      "discount": 10,
+      "discount_type": "percentage"
+    },
+    "purchase_invoices_based_on": "total_invoiced_purchase_price",
+    "purchase_invoices_due_date": "day_plus_30",
+    "create_payment_after_invoice": true,
+    "paid_invoice_mention": null
   }
 }
 ```
@@ -636,6 +776,7 @@ A <code>reference</code> is the value the other routes accept for that entity, a
 | currencies       | JSON | Currency settings and exchange rates of the account ([Account Currencies](#nested-resources-account-currencies)) |
 | invoice_numbering   | JSON | Counter numbering the invoices of the account ([Invoice Numbering](#nested-resources-invoice-numbering)). `null` when the account has none |
 | reference_numbering | JSON | Counters of the automatic references of projects, clients and suppliers ([Reference Numbering](#nested-resources-reference-numbering)) |
+| default             | JSON | Business defaults of the account, the settings a new record and its prices are computed with ([Account Defaults](#nested-resources-account-defaults)) |
 
 ## Destination
 
