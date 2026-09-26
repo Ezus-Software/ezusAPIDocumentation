@@ -597,6 +597,27 @@ The configuration of the account, returned by `GET /me?include=config`.
       { "code": "USD", "name": "US dollar", "rate": 1.08 },
       { "code": "CHF", "name": "Swiss franc", "rate": 2.2223 }
     ]
+  },
+  "invoice_numbering": {
+    "counter_name": "Invoices",
+    "format": "$$yyyy$$$$mm$$$$n$$",
+    "counter_size": 4,
+    "next_number": 208,
+    "reset": "never"
+  },
+  "reference_numbering": {
+    "enabled": true,
+    "projects": [
+      {
+        "counter_name": "MICE",
+        "format": "$$yyyy$$$$mm$$$$n$$-MICE$$ppp$$",
+        "counter_size": 5,
+        "next_number": 12,
+        "reset": "yearly"
+      }
+    ],
+    "clients": [],
+    "suppliers": []
   }
 }
 ```
@@ -613,6 +634,8 @@ A <code>reference</code> is the value the other routes accept for that entity, a
 | step_categories  | JSON | Step categories of the account, per step type ([Step Categories](#nested-resources-step-categories)) |
 | languages        | JSON | Default and active languages of the account ([Account Languages](#nested-resources-account-languages)) |
 | currencies       | JSON | Currency settings and exchange rates of the account ([Account Currencies](#nested-resources-account-currencies)) |
+| invoice_numbering   | JSON | Counter numbering the invoices of the account ([Invoice Numbering](#nested-resources-invoice-numbering)). `null` when the account has none |
+| reference_numbering | JSON | Counters of the automatic references of projects, clients and suppliers ([Reference Numbering](#nested-resources-reference-numbering)) |
 
 ## Destination
 
@@ -663,6 +686,20 @@ Each object represents a destination with its associated sub-destinations
 | name            | String | Name of the destination                                                                         |
 | subdestinations | Array  | An array of JSON objects, each representing a sub-destination along with its name and reference |
 | langs           | Array  | Array of JSON langs ([Langs](#nested-resources-langs)) - only name supported in this case       |
+
+## Invoice Numbering
+
+The counter numbering the invoices of the account when they are finalized, shaped as a [Numbering Counter](#nested-resources-numbering-counter). `null` when the account has no main invoice counter.
+
+```json
+"invoice_numbering": {
+  "counter_name": "Invoices",
+  "format": "$$yyyy$$$$mm$$$$n$$",
+  "counter_size": 4,
+  "next_number": 208,
+  "reset": "never"
+}
+```
 
 ## Invoices Amounts
 
@@ -809,6 +846,45 @@ Only the last 10 medias are returned in this object.
 | media_name | String | Title of the media                                                |
 | path_full  | String | Media URL. This is a pre-signed URL that expires after 30 minutes |
 
+## Numbering Counter
+
+A counter of the account, shared by [Invoice Numbering](#nested-resources-invoice-numbering) and [Reference Numbering](#nested-resources-reference-numbering). Reading it never consumes a number.
+
+```json
+{
+  "counter_name": "MICE",
+  "format": "$$yyyy$$$$mm$$$$n$$-MICE$$ppp$$",
+  "counter_size": 5,
+  "next_number": 12,
+  "reset": "yearly"
+}
+```
+
+| Property     | Type    | Description                                                                                                                      |
+| ------------ | ------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| counter_name | String  | Name of the counter. `null` when it has none                                                                                     |
+| format       | String  | Pattern of the numbers, as stored, with the placeholders below                                                                   |
+| counter_size | Integer | Minimum number of digits of `$$n$$`, zero padded: `4` turns `12` into `0012`                                                    |
+| next_number  | Integer | Number the counter will issue next                                                                                               |
+| reset        | String  | When the counter goes back to `1`. Possible values: `never`, `monthly` (on the 1st of each month), `yearly` (on January 1st)     |
+
+The placeholders of `format`, replaced when a number is issued:
+
+| Placeholder | Replaced by                                                   |
+| ----------- | ------------------------------------------------------------- |
+| `$$yyyy$$`  | Year, 4 digits                                                |
+| `$$yy$$`    | Year, 2 digits                                                |
+| `$$mm$$`    | Month, 2 digits                                               |
+| `$$m$$`     | Month, without leading zero                                   |
+| `$$dd$$`    | Day of the month, 2 digits                                    |
+| `$$d$$`     | Day of the month, without leading zero                        |
+| `$$n$$`     | The number, padded to `counter_size` digits                   |
+| `$$c$$`     | First 3 letters of the client company name, in capitals. Projects only |
+| `$$dest$$`  | First 3 letters of the destination, in capitals. Projects only |
+| `$$p$$`     | Number of travellers. Projects only                          |
+| `$$pp$$`    | Number of travellers, 2 digits. Projects only                |
+| `$$ppp$$`   | Number of travellers, 3 digits. Projects only                |
+
 ## Products <a name="products-two"></a>
 
 Only the last 10 products are returned in this object.
@@ -863,6 +939,34 @@ Each status:
 | reference  | String  | Technical name of the status, the value `info_stage_reference` takes on `GET /projects` and `POST /projects-upsert` |
 | color      | String  | Color of the status, hexadecimal. `null` when none is set                                               |
 | sort_order | Integer | Position of the status in its group                                                                     |
+
+## Reference Numbering
+
+The counters giving a reference to a project, a client or a supplier created without one, each shaped as a [Numbering Counter](#nested-resources-numbering-counter).
+
+```json
+"reference_numbering": {
+  "enabled": true,
+  "projects": [
+    {
+      "counter_name": "MICE",
+      "format": "$$yyyy$$$$mm$$$$n$$-MICE$$ppp$$",
+      "counter_size": 5,
+      "next_number": 12,
+      "reset": "yearly"
+    }
+  ],
+  "clients": [],
+  "suppliers": []
+}
+```
+
+| Property  | Type    | Description                                                                                                        |
+| --------- | ------- | ------------------------------------------------------------------------------------------------------------------ |
+| enabled   | Boolean | Whether the account gives automatic references. When `false`, the three lists are empty                           |
+| projects  | Array   | Counters of the projects, the default one first                                                                    |
+| clients   | Array   | Counters of the clients, the default one first                                                                     |
+| suppliers | Array   | Counters of the suppliers, the default one first                                                                   |
 
 ## Scopes
 
