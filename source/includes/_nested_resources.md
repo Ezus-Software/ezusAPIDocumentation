@@ -1246,6 +1246,110 @@ Only the last 10 products are returned in this object.
 | reference | String | The reference of the product |
 | title     | String | The title of the product     |
 
+## Project Config
+
+The settings the prices of a project are computed with, returned by `GET /project?include=config`. Each alternative carries its own; a setting the alternative leaves to the account carries the account value, as `default` in [Account Defaults](#nested-resources-account-defaults).
+
+```json
+"config": {
+  "currencies": {
+    "reference": "EUR",
+    "projects": "USD",
+    "library": [
+      { "code": "EUR", "name": "Euro", "rate": 1 },
+      { "code": "GBP", "name": "Pounds sterling", "rate": 0.87 },
+      { "code": "USD", "name": "US dollar", "rate": 2.1 }
+    ]
+  },
+  "alternatives": [
+    {
+      "reference": "550e8400-e29b-41d4-a716-446655440000",
+      "alternative_title": "Main Alternative",
+      "is_main": true,
+      "default": {
+        "price_display": "excluded_taxes",
+        "margin_based_on": "sales_price",
+        "margin_calculation": "per_product",
+        "vat_regime": "margin",
+        "vat_rate": 20,
+        "vat_rate_margin": 20,
+        "vat_classic_calculation_mode": "line",
+        "vat_not_applicable_is_recoverable": false,
+        "commission_based_on": "purchase_price",
+        "project_global_supplements": {
+          "fees": 5,
+          "fees_type": "percentage",
+          "discount": 0,
+          "discount_type": "flat"
+        },
+        "purchase_invoices_based_on": "total_forecast_purchase_price"
+      }
+    },
+    {
+      "reference": "7d2c3a1e-4f5b-4c6d-8e9f-0a1b2c3d4e5f",
+      "alternative_title": "Alternative 2",
+      "is_main": false,
+      "default": {
+        "price_display": "included_taxes",
+        "margin_based_on": "sales_price",
+        "margin_calculation": "global",
+        "vat_regime": "classic",
+        "vat_rate": 10,
+        "vat_rate_margin": 20,
+        "vat_classic_calculation_mode": "vat_rate",
+        "vat_not_applicable_is_recoverable": false,
+        "commission_based_on": "purchase_price",
+        "project_global_supplements": {
+          "fees": 150,
+          "fees_type": "flat",
+          "discount": 0,
+          "discount_type": "flat"
+        },
+        "purchase_invoices_based_on": "total_forecast_purchase_price"
+      }
+    }
+  ]
+}
+```
+
+| Property     | Type  | Description                                                                          |
+| ------------ | ----- | ------------------------------------------------------------------------------------ |
+| currencies   | JSON  | Currency of the project and the exchange rates frozen on it                          |
+| alternatives | Array | Settings of each alternative, in the order and with the `reference` of `alternatives` in the project ([Alternatives](#nested-resources-alternatives)) |
+
+`currencies`:
+
+| Property  | Type   | Description                                                                                                  |
+| --------- | ------ | ------------------------------------------------------------------------------------------------------------ |
+| reference | String | Code of the reference currency, the one every rate is quoted against                                        |
+| projects  | String | Code of the sales currency of the project                                                                    |
+| library   | Array  | The reference first, then the rates frozen on the project in the order they were added, each shaped as a currency of [Account Currencies](#nested-resources-account-currencies). Only the reference when the project has no rate of its own |
+
+Each alternative:
+
+| Property          | Type    | Description                                              |
+| ----------------- | ------- | -------------------------------------------------------- |
+| reference         | String  | Reference of the alternative                             |
+| alternative_title | String  | Title of the alternative                                 |
+| is_main           | Boolean | Whether it is the main alternative                       |
+| default           | JSON    | Settings the alternative is priced with                  |
+
+`default` carries these keys of [Account Defaults](#nested-resources-account-defaults), with the same possible values:
+
+| Property                          | Set per alternative                                    |
+| --------------------------------- | ------------------------------------------------------ |
+| price_display                     | Yes                                                    |
+| margin_based_on                   | Yes                                                    |
+| margin_calculation                | Yes                                                    |
+| vat_regime                        | Yes                                                    |
+| vat_rate                          | Yes                                                    |
+| vat_rate_margin                   | No, always the account value                           |
+| vat_classic_calculation_mode      | Yes                                                    |
+| vat_not_applicable_is_recoverable | Yes                                                    |
+| commission_based_on               | No, always the account value                           |
+| project_global_supplements        | Yes, always the alternative value. A `flat` fee or discount is an amount in the currency of the project |
+| purchase_invoices_based_on        | Yes                                                    |
+
 ## Project Statuses
 
 The statuses a project of the account can take, in three groups. An account that never edited its statuses gets the Ezus default ones.

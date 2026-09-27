@@ -101,7 +101,7 @@ A JSON object containing the project information with properties like:
 
 ## GET project
 
-This API endpoint retrieves detailed information about a specific project in Ezus.
+This API endpoint retrieves detailed information about a specific project in Ezus. Add `include=config` to also receive the settings its prices are computed with.
 
 ```shell
 curl --location 'https://api.ezus.app/project?reference=project_reference' \
@@ -250,6 +250,7 @@ axios.get(baseUrl + "/project?reference=project_reference", headers);
 | Parameter | Type   | Description                                                                                        |
 | --------- | ------ | -------------------------------------------------------------------------------------------------- |
 | reference | String | <span class="label label-red float-right">Required</span> The reference of the project to retrieve |
+| include   | String | Comma-separated list of objects to add to the response. Possible values: `config`. Without it, the response carries no `config` object; any other value is refused with an error |
 
 ### Response
 
@@ -270,6 +271,7 @@ A JSON object containing the project information with properties like:
 | project_manager      | JSON   | JSON object representing the project manager ([User](#nested-resources-user))     |
 | alternatives         | Array  | Array of JSON alternatives ([Alternatives](#nested-resources-alternatives))       |
 | custom_fields        | Array  | Array of JSON custom fields ([Custom fields](#nested-resources-custom-fields))    |
+| config               | JSON   | Pricing settings of the project, only with `include=config` ([Project Config](#nested-resources-project-config)) |
 
 ## GET project-documents
 
