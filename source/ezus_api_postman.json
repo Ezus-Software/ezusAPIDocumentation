@@ -271,6 +271,11 @@
             {
               "key": "reference",
               "value": "project_reference"
+            },
+            {
+              "key": "include",
+              "value": "config",
+              "disabled": true
             }
           ]
         }
