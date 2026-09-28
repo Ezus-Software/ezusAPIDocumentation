@@ -14,6 +14,14 @@ Filtering on a linked-record field therefore narrows results to objects whose li
 
 Each endpoint indicates which of its filters are linked-record filters.
 
+## Unsupported Filters
+
+A query parameter that an endpoint does not list is ignored. The request still succeeds and returns the same results as without it, with one [warning](#warnings-ignored-query-parameters) per ignored parameter.
+
+This also applies to a listed filter with an operator that does not exist (e.g. `email_foo`) or that does not fit its type (e.g. `created_date_like`).
+
+`next_token` never raises a warning.
+
 ## Dynamic Filters
 
 Some filters can be marked as Dynamic filter.

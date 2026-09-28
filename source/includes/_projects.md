@@ -101,7 +101,7 @@ A JSON object containing the project information with properties like:
 
 ## GET project
 
-This API endpoint retrieves detailed information about a specific project in Ezus.
+This API endpoint retrieves detailed information about a specific project in Ezus. Add `include=config` to also receive the settings its prices are computed with.
 
 ```shell
 curl --location 'https://api.ezus.app/project?reference=project_reference' \
@@ -250,6 +250,7 @@ axios.get(baseUrl + "/project?reference=project_reference", headers);
 | Parameter | Type   | Description                                                                                        |
 | --------- | ------ | -------------------------------------------------------------------------------------------------- |
 | reference | String | <span class="label label-red float-right">Required</span> The reference of the project to retrieve |
+| include   | String | Comma-separated list of objects to add to the response. Possible values: `config`. Without it, the response carries no `config` object; any other value is refused with an error |
 
 ### Response
 
@@ -270,6 +271,7 @@ A JSON object containing the project information with properties like:
 | project_manager      | JSON   | JSON object representing the project manager ([User](#nested-resources-user))     |
 | alternatives         | Array  | Array of JSON alternatives ([Alternatives](#nested-resources-alternatives))       |
 | custom_fields        | Array  | Array of JSON custom fields ([Custom fields](#nested-resources-custom-fields))    |
+| config               | JSON   | Pricing settings of the project, only with `include=config` ([Project Config](#nested-resources-project-config)) |
 
 ## GET project-documents
 
@@ -564,6 +566,10 @@ A JSON object containing the project travellers information with properties like
 
 This API endpoint can create, duplicate, or update a project. If the provided `reference` matches an existing project, that project is updated. If no match is found, a new project is created using the provided `reference`, or a randomly generated one if none is supplied and `project_reference` is not provided. When `project_reference` is specified, a new project is created by duplicating the existing project identified by `project_reference` with the provided `reference` or a random one.
 
+### Error messages
+
+- Sales manager not found → `sales_manager_email must be the email of an active user of the account`
+
 ```shell
 curl --location 'https://api.ezus.app/projects-upsert' \
 --header 'x-api-key: <YOUR_API_KEY>' \
@@ -654,7 +660,7 @@ axios.post(baseUrl + "/projects-upsert", body, headers);
 | trip_date_out                 | Date   | Date of the project's end in "YYYY-MM-DD" format (only settable when creating a new project). If not provided or if not formatted correctly, or if duration > 40 days or if trip_date_in > trip_date_out, project will be set as 1 day and trip_date_out as today.                                                                                                                                               |
 | trip_budget                   | Number | Forecasted budget for the project                                                                                                                                                                                                                                                                                                                                                                                |
 | trip_people                   | Number | Number of people in the project (only settable when creating a new project)                                                                                                                                                                                                                                                                                                                                      |
-| sales_manager_email           | Email  | Email of the Ezus user to be set as the sales manager of the project                                                                                                                                                                                                                                                                                                                                             |
+| sales_manager_email           | Email  | Email of an active Ezus user of your account, set as the sales manager of the project. An unknown email, or the email of a deleted or deactivated user, is rejected.                                                                                                                                                                                                                                             |
 | client_reference              | String | Reference or email of an existing client in your Ezus account to link to the project (only settable when creating a new project)                                                                                                                                                                                                                                                                                 |
 | trip_destination_reference    | String | Reference of the destination to link to the project. To reset the destination, you can put `'0'`.                                                                                                                                                                                                                                                                                                                |
 | trip_subdestination_reference | String | Reference of the sub-destination to link to the project. To reset the sub-destination, you can put `'0'`. If the `trip_destination_reference` is not provided, the `trip_subdestination_reference` will be ignored.                                                                                                                                                                                              |
@@ -923,7 +929,7 @@ axios.post(baseUrl + "/project-steps-upsert", body, headers);
 | date_start         | String  | Start date and time of the step. Must be within the dates of the alternative where the step is created. This field is required to create a step. This field is ignored on step update. This field can be completed when updating a sample step, but both dates are required. The date format must be as follows, e.g.: `2024-10-01 12:00:00`. |
 | date_end           | String  | End date and time of the step. Must be within the dates of the alternative where the step is created. This field is required to create a step. This field is ignored on step update. This field can be completed when updating the sample step, but both dates are required. The date format must be as follows, e.g.: `2024-10-01 12:00:00`. |
 | address            | Object  | JSON object address ([Address](#nested-resources-address))                                                                                                                                                                                                                                                                                    |
-| description        | JSON    | JSON object representing the short and long description of the step. This field is ignored for sample steps.                                                                                                                                                                                                                                  |
+| description        | JSON    | JSON object representing the short and long description of the step.                                                                                                                                                                                                                                                                          |
 | custom_fields      | Array   | An array of JSON custom fields ([Custom fields](#nested-resources-custom-fields)) for the step.                                                                                                                                                                                                                                               |
 
 ### Response

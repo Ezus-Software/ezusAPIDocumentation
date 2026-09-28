@@ -2,6 +2,8 @@
 
 Public API documentation for Ezus, built with [Slate](https://github.com/slatedocs/slate) (Middleman + Ruby) and deployed to Netlify on every push.
 
+This file covers the toolchain. [`CLAUDE.md`](CLAUDE.md) covers how the documentation is written, and [`DEFINITION_OF_DONE.md`](DEFINITION_OF_DONE.md) the checks a change has to pass before it is committed.
+
 ---
 
 ## Requirements
@@ -66,8 +68,11 @@ Then open http://localhost:8000.
 
 | File / Folder               | Role                                       |
 | --------------------------- | ------------------------------------------ |
+| `CLAUDE.md`                 | Writing conventions for the documentation  |
+| `DEFINITION_OF_DONE.md`     | Checks to run before committing            |
 | `source/index.html.md`      | **Main doc content** (Markdown)            |
 | `source/includes/*.md`      | Included sections (e.g. `_errors.md`)      |
+| `source/ezus_api_postman.json` | Postman collection shipped with the doc |
 | `source/stylesheets/*.scss` | SCSS styles                                |
 | `source/javascripts/`       | Frontend scripts (search, toc, copy, lang) |
 | `source/layouts/layout.erb` | Global HTML layout                         |
